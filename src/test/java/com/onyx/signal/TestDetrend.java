@@ -1,11 +1,6 @@
 package com.onyx.signal;
-
-import org.apache.commons.math3.stat.regression.SimpleRegression;
-import com.onyx.signal.Detrend;
-
 import java.util.Arrays;
 
-import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

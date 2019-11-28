@@ -35,5 +35,12 @@ public class Convolution {
                 iterator++;
             }
         }
+        else {
+            throw new IllegalArgumentException("Mode can only be full, same or valid.");
+        }
+    }
+
+    public double[] getOutput() {
+        return this.output;
     }
 }
