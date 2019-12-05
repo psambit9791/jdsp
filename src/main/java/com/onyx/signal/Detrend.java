@@ -18,6 +18,12 @@ public class Detrend {
         this.trendLine = new double[signal.length];
     }
 
+    public Detrend(double[] signal) {
+        this.originalSignal = signal;
+        this.mode = "linear";
+        this.trendLine = new double[signal.length];
+    }
+
     public void detrendSignal() {
         if (this.mode.equals("constant")) {
             this.detrendedSignal = this.constantDetrend(this.originalSignal);
@@ -30,7 +36,7 @@ public class Detrend {
         }
     }
 
-    public double[] getDetrendedSignal() {
+    public double[] getOutput() {
         return this.detrendedSignal;
     }
 
