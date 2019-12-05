@@ -67,7 +67,7 @@ Input: {1.0, 2.0, 3.0, 4.0, 5.0}
 
 The output is shown as:
 
-![image](https://drive.google.com/file/d/1BzcTEdUTKjjKacMMPCeFkc5H68uJzs_N/view?usp=sharing)
+![image](https://i.imgur.com/xHABTBM.png)
 
 <!---
 ## Deployment
