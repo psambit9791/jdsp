@@ -47,7 +47,7 @@ results.
 double[] original = {1.0, 2.0, 3.0, 4.0, 5.0};
 Detrend d1 = new Detrend(original, "linear");
 d1.detrendSignal();
-double[] out = d1.getDetrendedSignal();
+double[] out = d1.getOutput();
 ```
 
 
