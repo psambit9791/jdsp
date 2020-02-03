@@ -15,7 +15,7 @@ public class TestConvolution {
         Convolution con1 = new Convolution(signal, kernel, "full");
         con1.convolve();
         double[] out = con1.getOutput();
-        assertTrue(Arrays.equals(out, result));
+        assertArrayEquals(out, result, 0.001);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class TestConvolution {
         Convolution con1 = new Convolution(signal, kernel, "same");
         con1.convolve();
         double[] out = con1.getOutput();
-        assertTrue(Arrays.equals(out, result));
+        assertArrayEquals(out, result, 0.001);
     }
 
     @Test
@@ -39,6 +39,6 @@ public class TestConvolution {
         Convolution con1 = new Convolution(signal, kernel, "valid");
         con1.convolve();
         double[] out = con1.getOutput();
-        assertTrue(Arrays.equals(out, result));
+        assertArrayEquals(out, result, 0.001);
     }
 }

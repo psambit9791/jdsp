@@ -2,6 +2,8 @@ package com.onyx.signal;
 
 import org.junit.Test;
 import java.util.Arrays;
+
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TestCrossCorrelation {
@@ -27,7 +29,7 @@ public class TestCrossCorrelation {
         CrossCorrelation cc1 = new CrossCorrelation(signal, kernel, "same");
         cc1.crossCorrelate();
         double[] out = cc1.getOutput();
-        assertTrue(Arrays.equals(out, result));
+        assertArrayEquals(out, result, 0.001);
     }
 
     @Test
@@ -39,6 +41,6 @@ public class TestCrossCorrelation {
         CrossCorrelation cc1 = new CrossCorrelation(signal, kernel, "valid");
         cc1.crossCorrelate();
         double[] out = cc1.getOutput();
-        assertTrue(Arrays.equals(out, result));
+        assertArrayEquals(out, result, 0.001);
     }
 }

@@ -15,7 +15,7 @@ public class TestDetrend {
         Detrend d1 = new Detrend(original, "linear");
         d1.detrendSignal();
         double[] out = d1.getOutput();
-        assertTrue(Arrays.equals(out, result));
+        assertArrayEquals(out, result, 0.001);
     }
 
     @Test
@@ -26,6 +26,6 @@ public class TestDetrend {
         Detrend d1 = new Detrend(original, "constant");
         d1.detrendSignal();
         double[] out = d1.getOutput();
-        assertTrue(Arrays.equals(out, result));
+        assertArrayEquals(out, result, 0.001);
     }
 }
