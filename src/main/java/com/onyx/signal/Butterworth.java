@@ -32,7 +32,9 @@ public class Butterworth {
         return this.output;
     }
 
-    public double[] band_pass_filter(int order, double centreFreq, double width) {
+    public double[] band_pass_filter(int order, double lowCutoff, double highCutoff) {
+        double centreFreq = (highCutoff + lowCutoff)/2.0;
+        double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];
         uk.me.berndporr.iirj.Butterworth bp = new uk.me.berndporr.iirj.Butterworth();
         bp.bandPass(order, this.samplingFreq, centreFreq, width);
@@ -42,7 +44,9 @@ public class Butterworth {
         return this.output;
     }
 
-    public double[] band_stop_filter(int order, double centreFreq, double width) {
+    public double[] band_stop_filter(int order, double lowCutoff, double highCutoff) {
+        double centreFreq = (highCutoff + lowCutoff)/2.0;
+        double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];
         uk.me.berndporr.iirj.Butterworth bs = new uk.me.berndporr.iirj.Butterworth();
         bs.bandStop(order, this.samplingFreq, centreFreq, width);

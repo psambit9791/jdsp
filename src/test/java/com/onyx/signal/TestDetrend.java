@@ -1,5 +1,4 @@
 package com.onyx.signal;
-import java.util.Arrays;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -7,12 +6,13 @@ import static org.junit.Assert.*;
 
 public class TestDetrend {
 
+    final double[] signal = {1.0, 2.0, 3.0, 4.0, 5.0};
+
     @Test
     public void linearDetrendTest() {
-        double[] original = {1.0, 2.0, 3.0, 4.0, 5.0};
         final double[] result = {0.0, 0.0, 0.0, 0.0, 0.0};
 
-        Detrend d1 = new Detrend(original, "linear");
+        Detrend d1 = new Detrend(this.signal, "linear");
         d1.detrendSignal();
         double[] out = d1.getOutput();
         assertArrayEquals(out, result, 0.001);
@@ -20,10 +20,9 @@ public class TestDetrend {
 
     @Test
     public void constantDetrendTest() {
-        double[] original = {1.0, 2.0, 3.0, 4.0, 5.0};
         final double[] result = {-2.0, -1.0, 0.0, 1.0, 2.0};
 
-        Detrend d1 = new Detrend(original, "constant");
+        Detrend d1 = new Detrend(this.signal, "constant");
         d1.detrendSignal();
         double[] out = d1.getOutput();
         assertArrayEquals(out, result, 0.001);
