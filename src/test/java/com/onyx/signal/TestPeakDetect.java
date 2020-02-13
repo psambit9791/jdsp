@@ -38,8 +38,8 @@ public class TestPeakDetect {
                 705, 728,747, 765, 771, 841, 884, 928, 945, 956, 965};
 
         FindPeak fp = new FindPeak(this.highResSignal);
-        PeakObject p = fp.detect_peaks();
+        int[] out = fp.detect_peaks();
 
-        assertArrayEquals(result, p.getMidpoints());
+        assertArrayEquals(result, out);
     }
 }

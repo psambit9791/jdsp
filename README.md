@@ -1,7 +1,7 @@
 jDSP - Digital Signal Processing for Java
 ==========================================
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=plastic)
 
 jDSP is a library of signal processing tools aiming to provide functionalities as available in scipy-signal package for 
 Python. The goal is to provide an easy-to-use APIs for performing complex operation on signals eliminating the necessity of
@@ -95,6 +95,47 @@ String mode = "rectangular"; //can be "rectangular", "triangular"
 Smooth s1 = new Smooth(signal, mode); //create smoothing object
 s1.smoothSignal(); //perform smoothing
 double[] out = s1.getOutput(); //get the result of the smoothing
+```
+
+#### Matlab style Filters
+
+##### Butterworth filter
+
+
+
+#### Peak Detection
+
+##### Find Relative Minima
+Calculates the relative minima of data.
+
+```
+FindPeak fp = new FindPeak(signal); //signal is a double[] array
+int[] out = fp.detect_relative_minima();
+```
+
+##### Find Relative Maxima
+Calculates the relative maxima of data.
+
+```
+FindPeak fp = new FindPeak(signal); //signal is a double[] array
+int[] out = fp.detect_relative_maxima();
+```
+
+##### Detect peaks (including flat peaks) based on Scipy Signal
+Finds peaks within the signal and generate properties for those peaks
+
+```
+FindPeak fp = new FindPeak(signal); //signal is a double[] array
+PeakObject p = fp.detect_peaks();
+int[] out = p.getMidpoints()
+```
+
+Find relative peak height based on neighbouring troughs
+
+```
+FindPeak fp = new FindPeak(signal); //signal is a double[] array
+PeakObject p = fp.detect_peaks();
+int[] out = p.getMidpoints()
 ```
 
 ## Running the tests
