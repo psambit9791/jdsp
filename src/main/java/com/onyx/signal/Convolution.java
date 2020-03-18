@@ -12,9 +12,10 @@ public class Convolution {
         this.signal = s;
         this.kernel = w;
         this.mode = mode;
+        this.output = null;
     }
 
-    public void convolve() {
+    public double[] convolve() {
         double[] temp = MathArrays.convolve(this.signal, this.kernel);
         if (this.mode.equals("full")) {
             this.output = temp;
@@ -38,9 +39,6 @@ public class Convolution {
         else {
             throw new IllegalArgumentException("Mode can only be full, same or valid.");
         }
-    }
-
-    public double[] getOutput() {
         return this.output;
     }
 }

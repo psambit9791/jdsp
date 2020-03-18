@@ -23,14 +23,10 @@ public class CrossCorrelation {
         return temp;
     }
 
-    public void crossCorrelate() {
+    public double[] crossCorrelate() {
         this.kernel = this.reverseArray(this.kernel);
         Convolution c1 = new Convolution(this.signal, this.kernel, this.mode);
-        c1.convolve();
-        this.output = c1.getOutput();
-    }
-
-    public double[] getOutput() {
+        this.output = c1.convolve();
         return this.output;
     }
 }
