@@ -72,14 +72,17 @@ double[] out = cc1.getOutput(); //get the result of the cross-correlation
 
 #### Detrending
 
-Detrending works in 2 modes:
+Detrending works in 3 modes:
 1. Linear: The result of a linear least-squares fit to data is subtracted from data
 2. Constant: The mean of the data is subtracted from data
+3. Polynomial: Removes a polynomial trend line (based on power) from signal
 
 ```
 double[] signal = {1.0, 2.0, 3.0, 4.0, 5.0}; //define the signal 
 String mode = "linear"; //can be "linear", "constant"
 Detrend d1 = new Detrend(signal, "linear"); //create detrending object
+//OR
+Detrend d1 = new Detrend(signal, 2); //create detrending object
 d1.detrendSignal(); //perform detrending
 double[] out = d1.getOutput(); //get the result of the detrending
 ```
@@ -100,9 +103,59 @@ double[] out = s1.getOutput(); //get the result of the smoothing
 
 #### Matlab style Filters
 
+This library presently supports Butterworth, Bessel and Chebyshev Type I and Type II filters. This provides an abstraction on top of this [filter design library](https://github.com/berndporr/iirj) for ease of use.
+Please refer to this [document](https://basedados.aeroubi.pt/pluginfile.php/610/mod_resource/content/0/ClassicFilters_BTTWRTH_BSSL_CHBCHV_LPTC.pdf) if you want to understand what each type of filter can be used for, or you can also use this [version](https://github.com/psambit9791/jDSP/blob/master/res/doc/filter_information.pdf) which is a duplicate kept within this repository for reference.
+
 ##### Butterworth filter
 
+The Butterworth filter is a type of signal processing filter designed to have a frequency response as flat as possible in the passband.
+This section implements 4 types of filters:
+1. Low-Pass
+2. High-Pass
+3. Band-Pass
+4. Band-Stop
 
+###### Low Pass Filter
+
+```
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 29; //Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
+double[] result = flt.low_pass_filter(order, cutOff); //get the result after filtering
+```
+
+###### High Pass Filter
+
+```
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 29; //Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
+double[] result = flt.high_pass_filter(order, cutOff); //get the result after filtering
+```
+
+###### Band Pass Filter
+
+```
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 12; //Lower Cut-off Frequency
+int highCutOff = 18; //Higher Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
+double[] result = flt.band_pass_filter(order, lowCutOff, highCutOff); //get the result after filtering
+```
+
+###### Band Stop Filter
+
+```
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 7; //Lower Cut-off Frequency
+int highCutOff = 28; //Higher Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
+double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff); //get the result after filtering
+```
 
 #### Peak Detection
 
