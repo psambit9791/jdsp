@@ -15,6 +15,7 @@ public class TestButterworth {
             2.127, 0.167, -0.0, -0.167, -2.127, -1.706, 0.588, 0.0, -1.314, -0.53, -0.951, -2.069};
 
     private Butterworth flt = new Butterworth(this.signal, 100);
+
     @Test
     public void LowPassTest() {
         final double[] out = {0.0, 0.007, 0.049, 0.161, 0.35, 0.575, 0.774, 0.881, 0.879, 0.822, 0.779, 0.763, 0.726, 0.598,

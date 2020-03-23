@@ -157,6 +157,123 @@ Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
 double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff); //get the result after filtering
 ```
 
+##### Chebyshev Type 1 and 2 filters
+
+Chebyshev filters are signal processing filters having a steeper roll-off than Butterworth filters, and have passband ripple (type 1) or stopband ripple (type 2).
+This section implements 4 types of filters:
+1. Low-Pass
+2. High-Pass
+3. Band-Pass
+4. Band-Stop
+
+###### Low Pass Filter
+
+```
+int filter_type = 1; //Can be 1 (for type 1) or 2 (for type 2)
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 29; //Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs, filter_type); //signal is of type double[]
+double ripple_factor = 1; //maximum ripple allowed below unity gain
+double[] result = flt.low_pass_filter(order, cutOff, ripple_factor); //get the result after filtering
+```
+
+###### High Pass Filter
+
+```
+int filter_type = 1; //Can be 1 (for type 1) or 2 (for type 2)
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 29; //Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs, filter_type); //signal is of type double[]
+double ripple_factor = 1; //maximum ripple allowed below unity gain
+double[] result = flt.high_pass_filter(order, cutOff, ripple_factor); //get the result after filtering
+```
+
+###### Band Pass Filter
+
+```
+int filter_type = 1; //Can be 1 (for type 1) or 2 (for type 2)
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 12; //Lower Cut-off Frequency
+int highCutOff = 18; //Higher Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs, filter_type); //signal is of type double[]
+double ripple_factor = 1; //maximum ripple allowed below unity gain
+double[] result = flt.band_pass_filter(order, lowCutOff, highCutOff, ripple_factor); //get the result after filtering
+```
+
+###### Band Stop Filter
+
+```
+int filter_type = 1; //Can be 1 (for type 1) or 2 (for type 2)
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 7; //Lower Cut-off Frequency
+int highCutOff = 28; //Higher Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs, filter_type); //signal is of type double[]
+double ripple_factor = 1; //maximum ripple allowed below unity gain
+double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff, ripple_factor); //get the result after filtering
+```
+
+##### Bessel filter
+
+The Bessel filter is a type of signal processing filter with a maximally flat group/phase delay (maximally linear phase response), which preserves the wave shape of filtered signals in the passband.
+From the [__scipy.signal__](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.bessel.html#scipy.signal.bessel) page, Bessel filter can be used under three norms:
+1. "phase": The filter is normalized such that the phase response reaches its midpoint at critical frequencies.
+2. "delay": The filter is normalized such that the group delay in the passband is inverse of the critical frequencies. This is the **natural** type.
+3. "mag": The filter is normalized such that the gain magnitude is -3 dB at critical frequencies.
+
+At the moment, only the "delay" norm has been implemented.
+
+This section implements 4 types of filters:
+1. Low-Pass
+2. High-Pass
+3. Band-Pass
+4. Band-Stop
+
+###### Low Pass Filter
+
+```
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 29; //Cut-off Frequency
+Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
+double[] result = flt.low_pass_filter(order, cutOff); //get the result after filtering
+```
+
+###### High Pass Filter
+
+```
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 29; //Cut-off Frequency
+Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
+double[] result = flt.high_pass_filter(order, cutOff); //get the result after filtering
+```
+
+###### Band Pass Filter
+
+```
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 12; //Lower Cut-off Frequency
+int highCutOff = 18; //Higher Cut-off Frequency
+Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
+double[] result = flt.band_pass_filter(order, lowCutOff, highCutOff); //get the result after filtering
+```
+
+###### Band Stop Filter
+
+```
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 7; //Lower Cut-off Frequency
+int highCutOff = 28; //Higher Cut-off Frequency
+Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
+double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff); //get the result after filtering
+```
+
 #### Peak Detection
 
 ##### Find Relative Minima
