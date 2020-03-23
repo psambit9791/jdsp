@@ -1,4 +1,4 @@
-jDSP - Digital Signal Processing for Java
+![jDSP Logo](https://github.com/psambit9791/jDSP/tree/master/res/img/jDSP_logo.png)
 ==========================================
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=plastic)
@@ -138,7 +138,7 @@ PeakObject p = fp.detect_peaks();
 int[] out = p.getMidpoints()
 ```
 
-## Running the tests
+## Running the tests (For Developers)
 
 Test Cases are organised in a similar structure as the classes.
 Each class has a test case for each functionality implemented within it.
@@ -154,7 +154,7 @@ Input: {1.0, 2.0, 3.0, 4.0, 5.0}
 
 The output is shown as:
 
-![image](https://i.imgur.com/xHABTBM.png)
+![image](https://github.com/psambit9791/jDSP/tree/master/res/img/SigTest.png)
 
 <!---
 ## Deployment

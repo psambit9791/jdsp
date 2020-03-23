@@ -42,4 +42,15 @@ public class TestPeakDetect {
 
         assertArrayEquals(result, out);
     }
+
+    @Test
+    public void troughDetectTest() {
+        int[] result = {7, 49, 93, 122, 175, 213, 257, 285, 333, 374, 415, 495, 500, 531, 535, 575, 595, 608, 663, 699,
+                705, 728,747, 765, 771, 841, 884, 928, 945, 956, 965};
+
+        FindPeak fp = new FindPeak(this.highResSignal);
+        int[] out = fp.detect_troughs();
+
+        assertArrayEquals(result, out);
+    }
 }

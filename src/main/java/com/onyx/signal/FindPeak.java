@@ -65,6 +65,7 @@ public class FindPeak {
         return this.trough_indices;
     }
 
+    // internal function for detecting peaks
     private PeakObject detect(double[] signal) {
         ArrayList<Integer> midpoints = new ArrayList<Integer>();
         ArrayList<Integer> left_edge = new ArrayList<Integer>();
@@ -100,7 +101,9 @@ public class FindPeak {
         double[] avg_spike = new double[this.peak_indices.length];
 
         if ((this.peak_indices == null) || (this.trough_indices == null)) {
-            throw new ExceptionInInitializerError("Peaks and Troughs not identified");
+            this.detect_peaks();
+            this.detect_troughs();
+            //throw new ExceptionInInitializerError("Peaks and Troughs not identified.");
         }
         else {
             int temp = 0;
@@ -206,13 +209,13 @@ class SpikeObject {
         this.max_spike = new double[l.length];
     }
 
-    public double[] getRightSpike() {
+    public double[] getRightChange() {
         return this.right_spike;
     }
-    public double[] getLeftSpike() {
+    public double[] getLeftChange() {
         return this.left_spike;
     }
-    public double[] getSpikeHeight() {
+    public double[] getAvgSpikeHeight() {
         for (int k=0; k<this.avg_spike.length; k++) {
             if (this.left_spike[k] < 0) {
                 this.avg_spike[k] = this.right_spike[k];
