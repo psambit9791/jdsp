@@ -1,4 +1,6 @@
-![jDSP Logo](https://github.com/psambit9791/jDSP/blob/master/res/img/jDSP_logo.png)
+<p align="center">
+  <img src="https://github.com/psambit9791/jDSP/blob/master/res/img/jDSP_logo.png" alt="jDSP Logo"/>
+</p>
 ==========================================
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=plastic)
