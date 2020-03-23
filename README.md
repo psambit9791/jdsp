@@ -1,4 +1,4 @@
-![jDSP Logo](https://github.com/psambit9791/jDSP/tree/master/res/img/jDSP_logo.png)
+![jDSP Logo](https://github.com/psambit9791/jDSP/blob/master/res/img/jDSP_logo.png)
 ==========================================
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=plastic)
@@ -154,7 +154,7 @@ Input: {1.0, 2.0, 3.0, 4.0, 5.0}
 
 The output is shown as:
 
-![image](https://github.com/psambit9791/jDSP/tree/master/res/img/SigTest.png)
+![image](https://github.com/psambit9791/jDSP/blob/master/res/img/SigTest.png)
 
 <!---
 ## Deployment
