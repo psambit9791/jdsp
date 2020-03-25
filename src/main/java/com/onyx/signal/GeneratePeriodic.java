@@ -7,23 +7,7 @@ public class GeneratePeriodic {
 
     public GeneratePeriodic(int samples, int samplingFreq) {
         this.Fs = samplingFreq;
-        this.time = this.linspace(0, 1, samplingFreq, samples);
-    }
-
-    public double[] linspace(int start, int stop, int Fs, int samples) {
-        double[] time = new double[samples*this.Fs];
-        double T = 1.0/Fs;
-        double i = start;
-
-        int index = 0;
-        time[index] = i;
-
-        while (i<=stop) {
-            i = i + T;
-            index++;
-            time[index] = i;
-        }
-        return time;
+        this.time = UtilMethods.linspace(0, 1, samplingFreq, samples);
     }
 
     public double[] generateSineWave(int waveFreq) {

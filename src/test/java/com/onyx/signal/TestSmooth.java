@@ -16,9 +16,7 @@ public class TestSmooth {
                 0.261, 0.271};
 
         Smooth s1 = new Smooth(this.signal, 7, "rectangular");
-        s1.smoothSignal();
-        double[] out = s1.getOutput();
-
+        double[] out = s1.smoothSignal();
         assertArrayEquals(out, result, 0.001);
     }
 
@@ -30,9 +28,7 @@ public class TestSmooth {
                 0.259, 0.265};
 
         Smooth s1 = new Smooth(this.signal, 7, "triangular");
-        s1.smoothSignal();
-        double[] out = s1.getOutput();
-
+        double[] out = s1.smoothSignal();
         assertArrayEquals(out, result, 0.001);
     }
 }

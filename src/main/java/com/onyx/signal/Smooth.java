@@ -45,7 +45,7 @@ public class Smooth {
         MathArrays.scaleInPlace(scaling_factor, this.smoothing_kernel);
     }
 
-    public void smoothSignal() {
+    public double[] smoothSignal() {
         if (!this.mode.equals("rectangular") && !this.mode.equals("triangular")) {
             throw new IllegalArgumentException("Mode can only be rectangular or triangular.");
         }
@@ -53,9 +53,6 @@ public class Smooth {
             CrossCorrelation c = new CrossCorrelation(this.signal, this.smoothing_kernel, "valid");
             this.output = c.crossCorrelate();
         }
-    }
-
-    public double[] getOutput() {
         return this.output;
     }
 

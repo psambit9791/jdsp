@@ -13,20 +13,10 @@ public class CrossCorrelation {
         this.mode = mode;
     }
 
-    private double[] reverseArray(double[] arr) {
-        double[] temp = new double[arr.length];
-        int iterator = 0;
-        for (int i=arr.length-1; i>=0; i--) {
-            temp[iterator] = arr[i];
-            iterator++;
-        }
-        return temp;
-    }
-
     public double[] crossCorrelate() {
-        this.kernel = this.reverseArray(this.kernel);
-        Convolution c1 = new Convolution(this.signal, this.kernel, this.mode);
-        this.output = c1.convolve();
+        this.kernel = UtilMethods.reverse(this.kernel);
+        Convolution c1 = new Convolution(this.signal, this.kernel);
+        this.output = c1.convolve(this.mode);
         return this.output;
     }
 }

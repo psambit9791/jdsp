@@ -11,8 +11,8 @@ public class TestConvolution {
     public void fullConvolutionTest() {
         final double[] result = {1.0, 2.0, 4.0, 6.5, 9.0, 5.5, 7.0, 2.5};
 
-        Convolution con1 = new Convolution(this.signal, this.kernel, "full");
-        double[] out = con1.convolve();
+        Convolution con1 = new Convolution(this.signal, this.kernel);
+        double[] out = con1.convolve("full");
         assertArrayEquals(out, result, 0.001);
     }
 
@@ -20,8 +20,8 @@ public class TestConvolution {
     public void sameConvolutionTest() {
         final double[] result = {2.0, 4.0, 6.5, 9.0, 5.5};
 
-        Convolution con1 = new Convolution(this.signal, this.kernel, "same");
-        double[] out = con1.convolve();
+        Convolution con1 = new Convolution(this.signal, this.kernel);
+        double[] out = con1.convolve("same");
         assertArrayEquals(out, result, 0.001);
     }
 
@@ -29,8 +29,8 @@ public class TestConvolution {
     public void validConvolutionTest() {
         final double[] result = {6.5, 9.0};
 
-        Convolution con1 = new Convolution(this.signal, this.kernel, "valid");
-        double[] out = con1.convolve();
+        Convolution con1 = new Convolution(this.signal, this.kernel);
+        double[] out = con1.convolve("valid");
         assertArrayEquals(out, result, 0.001);
     }
 }

@@ -49,10 +49,6 @@ public class Detrend {
         }
     }
 
-    public double[] getOutput() {
-        return this.detrendedSignal;
-    }
-
     private double[] linearDetrend(double[] y) {
         double[] out = new double[y.length];
         double[] x = this.generateX(y);
@@ -78,18 +74,7 @@ public class Detrend {
         OLSMultipleLinearRegression sr = new OLSMultipleLinearRegression();
         sr.setNoIntercept(true);
         sr.newSampleData(y, x);
-
-//        for (int i=0; i<x.length; i++) {
-//            for (int j=0; j<x[i].length; j++) {
-//                System.out.print(x[i][j]+" ");
-//            }
-//            System.out.println();
-//        }
-
         double[] params = sr.estimateRegressionParameters();
-//        for (int i=0; i<params.length; i++) {
-//            System.out.println(params[i]);
-//        }
 
         for (int i=0; i<y.length; i++) {
             for (int j=0; j<=power; j++) {

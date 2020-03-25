@@ -169,51 +169,51 @@ This section implements 4 types of filters:
 ###### Low Pass Filter
 
 ```
-int filter_type = 1; //Can be 1 (for type 1) or 2 (for type 2)
+int filterType = 1; //Can be 1 (for type 1) or 2 (for type 2)
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int cutOff = 29; //Cut-off Frequency
-Butterworth flt = new Butterworth(signal, Fs, filter_type); //signal is of type double[]
-double ripple_factor = 1; //maximum ripple allowed below unity gain
-double[] result = flt.low_pass_filter(order, cutOff, ripple_factor); //get the result after filtering
+Butterworth flt = new Butterworth(signal, Fs, filterType); //signal is of type double[]
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+double[] result = flt.low_pass_filter(order, cutOff, rippleFactor); //get the result after filtering
 ```
 
 ###### High Pass Filter
 
 ```
-int filter_type = 1; //Can be 1 (for type 1) or 2 (for type 2)
+int filterType = 1; //Can be 1 (for type 1) or 2 (for type 2)
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int cutOff = 29; //Cut-off Frequency
-Butterworth flt = new Butterworth(signal, Fs, filter_type); //signal is of type double[]
-double ripple_factor = 1; //maximum ripple allowed below unity gain
-double[] result = flt.high_pass_filter(order, cutOff, ripple_factor); //get the result after filtering
+Butterworth flt = new Butterworth(signal, Fs, filterType); //signal is of type double[]
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+double[] result = flt.high_pass_filter(order, cutOff, rippleFactor); //get the result after filtering
 ```
 
 ###### Band Pass Filter
 
 ```
-int filter_type = 1; //Can be 1 (for type 1) or 2 (for type 2)
+int filterType = 1; //Can be 1 (for type 1) or 2 (for type 2)
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int lowCutOff = 12; //Lower Cut-off Frequency
 int highCutOff = 18; //Higher Cut-off Frequency
-Butterworth flt = new Butterworth(signal, Fs, filter_type); //signal is of type double[]
-double ripple_factor = 1; //maximum ripple allowed below unity gain
-double[] result = flt.band_pass_filter(order, lowCutOff, highCutOff, ripple_factor); //get the result after filtering
+Butterworth flt = new Butterworth(signal, Fs, filterType); //signal is of type double[]
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+double[] result = flt.band_pass_filter(order, lowCutOff, highCutOff, rippleFactor); //get the result after filtering
 ```
 
 ###### Band Stop Filter
 
 ```
-int filter_type = 1; //Can be 1 (for type 1) or 2 (for type 2)
+int filterType = 1; //Can be 1 (for type 1) or 2 (for type 2)
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int lowCutOff = 7; //Lower Cut-off Frequency
 int highCutOff = 28; //Higher Cut-off Frequency
-Butterworth flt = new Butterworth(signal, Fs, filter_type); //signal is of type double[]
-double ripple_factor = 1; //maximum ripple allowed below unity gain
-double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff, ripple_factor); //get the result after filtering
+Butterworth flt = new Butterworth(signal, Fs, filterType); //signal is of type double[]
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff, rippleFactor); //get the result after filtering
 ```
 
 ##### Bessel filter
