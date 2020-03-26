@@ -1,7 +1,6 @@
 package com.onyx.signal;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class TestPeakDetect {

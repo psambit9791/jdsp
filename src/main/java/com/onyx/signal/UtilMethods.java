@@ -7,20 +7,52 @@ import org.apache.commons.math3.linear.SingularValueDecomposition;
 
 public class UtilMethods {
 
-    public static double[] linspace(int start, int stop, int Fs, int samples) {
-        double[] time = new double[samples*Fs];
-        double T = 1.0/Fs;
+    public static double[] linspace(int start, int stop, int samples, boolean includeEnd) {
+        double[] time = new double[samples];
+        double T;
+
+        double stopVal = (double) stop;
         double i = start;
+
+        if (includeEnd) {
+            T = 1.0/(samples-1);
+        }
+        else {
+            T = 1.0/samples;
+            stopVal = stopVal - T;
+        }
 
         int index = 0;
         time[index] = i;
 
-        while (i<=stop) {
+        while (i<stopVal) {
             i = i + T;
             index++;
             time[index] = i;
         }
         return time;
+    }
+
+    public static double[] linspace(int start, int stop, int samples, int repeats) {
+        double[] time = new double[samples];
+        double T = 1.0/(samples-1);
+
+        double i = start;
+
+        int index = 0;
+        time[index] = i;
+
+        while (i<stop) {
+            i = i + T;
+            index++;
+            time[index] = i;
+        }
+
+        double[] out = {};
+        for (int j = 0; j<repeats; j++) {
+            out = concatenateArray(out, time);
+        }
+        return out;
     }
 
     public static int[] arange(int start, int stop, int step) {
@@ -38,11 +70,11 @@ public class UtilMethods {
         return arr;
     }
 
-    public static double[] arange(double start, double stop, int step) {
+    public static double[] arange(double start, double stop, double step) {
         if (start > stop) {
             throw new IllegalArgumentException("start cannot be greater than stop");
         }
-        int size = (int)(stop-start)/step;
+        int size = (int)((stop-start)/step);
         double[] arr = new double[size];
 
         double temp = start;
@@ -78,14 +110,14 @@ public class UtilMethods {
     public static double[] concatenateArray(double[] arr1, double[] arr2) {
         double[] out = new double[arr1.length + arr2.length];
         System.arraycopy(arr1, 0, out, 0, arr1.length);
-        System.arraycopy(arr1, 0, out, arr1.length, arr2.length);
+        System.arraycopy(arr2, 0, out, arr1.length, arr2.length);
         return out;
     }
 
     public static int[] concatenateArray(int[] arr1, int[] arr2) {
         int[] out = new int[arr1.length + arr2.length];
         System.arraycopy(arr1, 0, out, 0, arr1.length);
-        System.arraycopy(arr1, 0, out, arr1.length, arr2.length);
+        System.arraycopy(arr2, 0, out, arr1.length, arr2.length);
         return out;
     }
 

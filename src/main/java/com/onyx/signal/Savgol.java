@@ -26,12 +26,15 @@ public class Savgol {
         this.polyOrder = polynomialOrder;
         this.deriv = 0;
         this.delta = 1;
-        this.mode = "interp";
+        this.mode = "nearest";
     }
 
     public Savgol(double[] s, int windowSize, int polynomialOrder, String mode) {
         if (polynomialOrder >= windowSize) {
             throw new IllegalArgumentException("polynomialOrder must be less that windowSize");
+        }
+        if (!mode.equals("nearest") && !mode.equals("constant") && !mode.equals("mirror") && !mode.equals("wrap")) {
+            throw new IllegalArgumentException("mode must be mirror, constant, nearest or wrap");
         }
         this.signal = s;
         this.windowSize = windowSize;
@@ -50,12 +53,15 @@ public class Savgol {
         this.polyOrder = polynomialOrder;
         this.deriv = deriv;
         this.delta = delta;
-        this.mode = "interp";
+        this.mode = "nearest";
     }
 
     public Savgol(double[] s, int windowSize, int polynomialOrder, int deriv, double delta, String mode) {
         if (polynomialOrder >= windowSize) {
             throw new IllegalArgumentException("polynomialOrder must be less that windowSize");
+        }
+        if (!mode.equals("nearest") && !mode.equals("constant") && !mode.equals("mirror") && !mode.equals("wrap")) {
+            throw new IllegalArgumentException("mode must be mirror, constant, nearest or wrap");
         }
         this.signal = s;
         this.windowSize = windowSize;
@@ -97,7 +103,10 @@ public class Savgol {
         return this.coeffs;
     }
 
-//    public double[] savgol_filter() {
-//
-//    }
+    public double[] savgol_filter() {
+        this.savgol_coeffs();
+        Convolution c = new Convolution(this.signal, this.coeffs);
+        this.output = c.convolve1d(this.mode);
+        return this.output;
+    }
 }
