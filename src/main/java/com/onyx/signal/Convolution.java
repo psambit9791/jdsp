@@ -64,16 +64,15 @@ public class Convolution {
         else {
             if (mode.equals("reflect") || mode.equals("constant") || mode.equals("nearest") ||
                     mode.equals("mirror") || mode.equals("wrap") || mode.equals("interp")) {
-                double[] newSignal = new double[this.signal.length*3];
-                newSignal = UtilMethods.padSignalforConvolution(this.signal, mode);
+                int startVal = this.signal.length + this.kernel.length/2;
+                double[] newSignal = UtilMethods.padSignal(this.signal, mode);
                 temp = this.convolve(newSignal, this.kernel);
-                // TODO: Process Signal -> split, concatenate
+                output = UtilMethods.splitByIndex(temp, startVal, startVal+this.signal.length);
             }
             else  {
                 throw new IllegalArgumentException("convolve1d modes can only be reflect, constant, nearest, mirror, " +
                         "wrap or interp (default)");
             }
-
         }
         return output;
     }

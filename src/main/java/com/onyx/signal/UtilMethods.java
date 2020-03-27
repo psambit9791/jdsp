@@ -5,6 +5,8 @@ import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.SingularValueDecomposition;
 
+import java.util.Arrays;
+
 public class UtilMethods {
 
     public static double[] linspace(int start, int stop, int samples, boolean includeEnd) {
@@ -55,21 +57,6 @@ public class UtilMethods {
         return out;
     }
 
-    public static int[] arange(int start, int stop, int step) {
-        if (start > stop) {
-            throw new IllegalArgumentException("start cannot be greater than stop");
-        }
-        int size = (stop - start)/step;
-        int[] arr = new int[size];
-
-        int temp = start;
-        for (int i=0; i<size; i++){
-            arr[i] = temp;
-            temp = temp + step;
-        }
-        return arr;
-    }
-
     public static double[] arange(double start, double stop, double step) {
         if (start > stop) {
             throw new IllegalArgumentException("start cannot be greater than stop");
@@ -78,6 +65,21 @@ public class UtilMethods {
         double[] arr = new double[size];
 
         double temp = start;
+        for (int i=0; i<size; i++){
+            arr[i] = temp;
+            temp = temp + step;
+        }
+        return arr;
+    }
+
+    public static int[] arange(int start, int stop, int step) {
+        if (start > stop) {
+            throw new IllegalArgumentException("start cannot be greater than stop");
+        }
+        int size = (stop - start)/step;
+        int[] arr = new int[size];
+
+        int temp = start;
         for (int i=0; i<size; i++){
             arr[i] = temp;
             temp = temp + step;
@@ -141,22 +143,60 @@ public class UtilMethods {
         return solver.getInverse().getData();
     }
 
-    public static double[] padSignalforConvolution(double[] signal, String mode) {
-        double[] newSignal = new double[signal.length];
+    public static double[] padSignal(double[] signal, String mode) {
+        double[] newSignal = {};
         if (mode.equals("reflect")) {
-
+            double[] revSig = reverse(signal);
+            double[] newSig = {};
+            newSig = concatenateArray(newSig, revSig);
+            newSig = concatenateArray(newSig, signal);
+            newSig = concatenateArray(newSig, revSig);
+            newSignal = newSig;
         }
         else if (mode.equals("constant")) {
-
+            double[] cons = new double[signal.length];
+            Arrays.fill(cons, 0);
+            double[] newSig = {};
+            newSig = concatenateArray(newSig, cons);
+            newSig = concatenateArray(newSig, signal);
+            newSig = concatenateArray(newSig, cons);
+            newSignal = newSig;
         }
         else if (mode.equals("nearest")) {
+            double[] left = new double[signal.length];
+            Arrays.fill(left, signal[0]);
+            double[] right = new double[signal.length];
+            Arrays.fill(right, signal[signal.length-1]);
 
+            double[] newSig = {};
+            newSig = concatenateArray(newSig, left);
+            newSig = concatenateArray(newSig, signal);
+            newSig = concatenateArray(newSig, right);
+            newSignal = newSig;
         }
         else if (mode.equals("mirror")) {
+            double[] temp = splitByIndex(signal, 1, signal.length);
+            temp = reverse(temp);
+            double[] val = new double[]{temp[1]};
+            double[] left = concatenateArray(val, temp);
 
+            temp = splitByIndex(signal, 0, signal.length-1);
+            temp = reverse(temp);
+            val = new double[]{temp[temp.length - 2]};
+            double[] right = concatenateArray(temp, val);
+
+            double[] newSig = {};
+            newSig = concatenateArray(newSig, left);
+            newSig = concatenateArray(newSig, signal);
+            newSig = concatenateArray(newSig, right);
+            newSignal = newSig;
         }
         else if (mode.equals("wrap")) {
-
+            double[] newSig = {};
+            newSig = concatenateArray(newSig, signal);
+            newSig = concatenateArray(newSig, signal);
+            newSig = concatenateArray(newSig, signal);
+            newSignal = newSig;
         }
         else {
             throw new IllegalArgumentException("padSignalforConvolution modes can only be reflect, constant, " +

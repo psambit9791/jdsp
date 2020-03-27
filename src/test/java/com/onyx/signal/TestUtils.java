@@ -100,4 +100,30 @@ public class TestUtils {
         assertArrayEquals(result[1], out[1], 0.001);
         assertArrayEquals(result[1], out[1], 0.001);
     }
+
+    @Test
+    public void padSignalTest() {
+        double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
+        double[] reflect = {0, 9, 9, 1, 4, 0, 8, 2, 2, 8, 0, 4, 1, 9, 9, 0, 0, 9, 9, 1, 4, 0, 8, 2};
+        double[] constant = {0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 0, 4, 1, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0.};
+        double[] nearest = {2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 0, 4, 1, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0.};
+        double[] mirror = {9, 0, 9, 9, 1, 4, 0, 8, 2, 8, 0, 4, 1, 9, 9, 0, 9, 9, 1, 4, 0, 8, 2, 8};
+        double[] wrap = {2, 8, 0, 4, 1, 9, 9, 0, 2, 8, 0, 4, 1, 9, 9, 0, 2, 8, 0, 4, 1, 9, 9, 0};
+
+        double[] out = UtilMethods.padSignal(signal, "reflect");
+        assertArrayEquals(reflect, out, 0.001);
+
+        out = UtilMethods.padSignal(signal, "constant");
+        assertArrayEquals(constant, out, 0.001);
+
+        out = UtilMethods.padSignal(signal, "nearest");
+        assertArrayEquals(nearest, out, 0.001);
+
+        out = UtilMethods.padSignal(signal, "mirror");
+        assertArrayEquals(mirror, out, 0.001);
+
+        out = UtilMethods.padSignal(signal, "wrap");
+        assertArrayEquals(wrap, out, 0.001);
+
+    }
 }
