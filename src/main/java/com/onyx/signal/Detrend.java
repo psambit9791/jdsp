@@ -3,6 +3,16 @@ package com.onyx.signal;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 
+/**
+ * <h1>Detrend</h1>
+ * The Detrend class implements different methods to remove trends in a signal and is based on
+ * numpy <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.convolve.html">detrend()</a> function
+ * but extends to additionally provide polynomial detrending.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class Detrend {
 
     private String mode;
@@ -12,18 +22,37 @@ public class Detrend {
     private double[] detrendedSignal;
     private double[] trendLine;
 
+    /**
+     * This constructor initialises the prerequisites required to perform detrending.
+     * For polynomial detrending, the default polynomial power is 2.
+     * @param signal Signal to be detrended
+     * @param mode_of_op Method of detrending to be used. Can be "constant", "linear", "poly".
+     */
     public Detrend(double[] signal, String mode_of_op) {
         this.originalSignal = signal;
         this.mode = mode_of_op;
+        if (this.mode.equals("poly")) {
+            this.power = 2;
+        }
         this.trendLine = new double[signal.length];
     }
 
+    /**
+     * This constructor initialises the prerequisites required to perform detrending.
+     * For deafult detrending mode is "linear"
+     * @param signal Signal to be detrended
+     */
     public Detrend(double[] signal) {
         this.originalSignal = signal;
         this.mode = "linear";
         this.trendLine = new double[signal.length];
     }
 
+    /**
+     * This constructor initialises the prerequisites required to perform detrending in polynomial mode.
+     * @param signal Signal to be detrended
+     * @param power Highest polynomial power in the trend of the signal
+     */
     public Detrend(double[] signal, int power) {
         this.originalSignal = signal;
         this.mode = "poly";
@@ -31,6 +60,10 @@ public class Detrend {
         this.trendLine = new double[signal.length];
     }
 
+    /**
+     * This method detrends the signal and returns it.
+     * @return double[] Detrended signal
+     */
     public double[] detrendSignal() {
         if (this.mode.equals("constant")) {
             this.detrendedSignal = this.constantDetrend(this.originalSignal);
@@ -45,8 +78,16 @@ public class Detrend {
             return this.detrendedSignal;
         }
         else {
-            throw new IllegalArgumentException("Mode can only be linear or constant.");
+            throw new IllegalArgumentException("Mode can only be linear, constant or poly.");
         }
+    }
+
+    /**
+     * This getter method to get the trendl line fo the signal.
+     * @return double[] Calculated trend line
+     */
+    public double[] getTrendLine() {
+        return this.trendLine;
     }
 
     private double[] linearDetrend(double[] y) {

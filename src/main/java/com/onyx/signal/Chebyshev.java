@@ -2,18 +2,52 @@ package com.onyx.signal;
 
 import uk.me.berndporr.iirj.*;
 
+/**
+ * <h1>Chebyshec</h1>
+ * The Chebyshev class implements low-pass, high-pass, band-pass and band-stop filter using the Chebyshev Type I and Type II equations.
+ * Reference <a href="https://en.wikipedia.org/wiki/Chebyshev_filter">article</a> for more information on Chebyshec Filters.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class Chebyshev {
     private double[] signal;
     private double samplingFreq;
     private double[] output;
     private int filterType;
 
+    /**
+     * This constructor initialises the prerequisites
+     * required to use Chebyshev filter.
+     * @param s Signal to be filtered
+     * @param Fs Sampling frequency of input signal
+     * @param filterType Type of Chebyshev filter. 1: Type I, 2: Type II
+     */
     public Chebyshev(double[] s, double Fs, int filterType) {
         this.signal = s;
         this.samplingFreq = Fs;
         this.filterType = filterType;
     }
 
+    /**
+     * This constructor initialises the prerequisites
+     * required to use Chebyshev filter. Default mode operation is of Type I.
+     * @param s Signal to be filtered
+     * @param Fs Sampling frequency of input signal
+     */
+    public Chebyshev(double[] s, double Fs) {
+        this.signal = s;
+        this.samplingFreq = Fs;
+        this.filterType = 1;
+    }
+
+    /**
+     * This method implements a low pass filter with given parameters, filters the signal and returns it.
+     * @param order Order of the filter
+     * @param cutoffFreq The cutoff frequency for the filter
+     * @return double[] Filtered signal
+     */
     public double[] low_pass_filter(int order, double cutoffFreq, double rippleFactor) {
         this.output = new double[this.signal.length];
         if (this.filterType == 1) {
@@ -36,6 +70,12 @@ public class Chebyshev {
         return this.output;
     }
 
+    /**
+     * This method implements a high pass filter with given parameters, filters the signal and returns it.
+     * @param order Order of the filter
+     * @param cutoffFreq The cutoff frequency for the filter
+     * @return double[] Filtered signal
+     */
     public double[] high_pass_filter(int order, double cutoffFreq, double rippleFactor) {
         this.output = new double[this.signal.length];
         if (this.filterType == 1) {
@@ -58,6 +98,13 @@ public class Chebyshev {
         return this.output;
     }
 
+    /**
+     * This method implements a pand pass filter with given parameters, filters the signal and returns it.
+     * @param order Order of the filter
+     * @param lowCutoff The lower cutoff frequency for the filter
+     * @param highCutoff The upper cutoff frequency for the filter
+     * @return double[] Filtered signal
+     */
     public double[] band_pass_filter(int order, double lowCutoff, double highCutoff, double rippleFactor) {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
@@ -82,6 +129,13 @@ public class Chebyshev {
         return this.output;
     }
 
+    /**
+     * This method implements a band stop filter with given parameters, filters the signal and returns it.
+     * @param order Order of the filter
+     * @param lowCutoff The lower cutoff frequency for the filter
+     * @param highCutoff The upper cutoff frequency for the filter
+     * @return double[] Filtered signal
+     */
     public double[] band_stop_filter(int order, double lowCutoff, double highCutoff, double rippleFactor) {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);

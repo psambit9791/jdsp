@@ -7,8 +7,27 @@ import org.apache.commons.math3.linear.SingularValueDecomposition;
 
 import java.util.Arrays;
 
+/**
+ * <h1>Utility Methods</h1>
+ * The UtilMethods class implements different utility functions to help with mathematical operations
+ *
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
+
 public class UtilMethods {
 
+    /**
+     * This function returns evenly spaced number over a specified interval such that there are specified number of samples.
+     * This is equivalent of the numpy <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html">linspace()</a> function.
+     * @param start Start value of the sequence
+     * @param stop Stop value of the sequence
+     * @param samples Number of samples to be generated
+     * @param includeEnd Include stop value in the sequence
+     * @return double[] Generated sequence
+     */
     public static double[] linspace(int start, int stop, int samples, boolean includeEnd) {
         double[] time = new double[samples];
         double T;
@@ -35,6 +54,16 @@ public class UtilMethods {
         return time;
     }
 
+    // Useful for repeated linspace() required in periodic signal generation
+    /**
+     * This function returns evenly spaced number over a specified interval such that there are specified number of samples
+     * with 'n' iterations of the same sequence. Useful for repeated linspace() required in periodic signal generation.
+     * @param start Start value of the sequence
+     * @param stop Stop value of the sequence
+     * @param samples Number of samples to be generated in each sequence
+     * @param repeats Number of time the sequence is concatenated together
+     * @return double[] Generated sequence
+     */
     public static double[] linspace(int start, int stop, int samples, int repeats) {
         double[] time = new double[samples];
         double T = 1.0/(samples-1);
@@ -57,6 +86,15 @@ public class UtilMethods {
         return out;
     }
 
+    // Same as numpy arange() for double
+    /**
+     * This function returns evenly spaced number over a specified interval with a specific step in between each element.
+     * This is equivalent of the numpy <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html">linspace()</a> function.
+     * @param start Start value of the sequence
+     * @param stop Stop value of the sequence
+     * @param step Spacing between elements
+     * @return double[] Generated sequence
+     */
     public static double[] arange(double start, double stop, double step) {
         if (start > stop) {
             throw new IllegalArgumentException("start cannot be greater than stop");
@@ -72,6 +110,15 @@ public class UtilMethods {
         return arr;
     }
 
+    // Same as numpy arange() for integer
+    /**
+     * This function returns evenly spaced number over a specified interval with a specific step in between each element.
+     * This is equivalent of the numpy <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html">linspace()</a> function.
+     * @param start Start value of the sequence
+     * @param stop Stop value of the sequence
+     * @param step Spacing between elements
+     * @return int[] Generated sequence
+     */
     public static int[] arange(int start, int stop, int step) {
         if (start > stop) {
             throw new IllegalArgumentException("start cannot be greater than stop");
@@ -88,6 +135,11 @@ public class UtilMethods {
     }
 
     // Reverse Array
+    /**
+     * This function returns the input array after reversing the order of the elements in it.
+     * @param arr Array to be reversed
+     * @return double[] Reversed array
+     */
     public static double[] reverse(double[] arr) {
         double[] inv = new double[arr.length];
         int index = 0;
@@ -98,6 +150,11 @@ public class UtilMethods {
         return inv;
     }
 
+    /**
+     * This function returns the input array after reversing the order of the elements in it.
+     * @param arr Array to be reversed
+     * @return int[] Reversed array
+     */
     public static int[] reverse(int[] arr) {
         int[] inv = new int[arr.length];
         int index = 0;
@@ -109,6 +166,12 @@ public class UtilMethods {
     }
 
     // Concatenate 2 arrays
+    /**
+     * This function returns the concatenation of the 2 input arrays.
+     * @param arr1 Array to be added first
+     * @param arr2 Array to be added second
+     * @return double[] Concatenated array
+     */
     public static double[] concatenateArray(double[] arr1, double[] arr2) {
         double[] out = new double[arr1.length + arr2.length];
         System.arraycopy(arr1, 0, out, 0, arr1.length);
@@ -116,6 +179,12 @@ public class UtilMethods {
         return out;
     }
 
+    /**
+     * This function returns the concatenation of the 2 input arrays.
+     * @param arr1 Array to be added first
+     * @param arr2 Array to be added second
+     * @return int[] Concatenated array
+     */
     public static int[] concatenateArray(int[] arr1, int[] arr2) {
         int[] out = new int[arr1.length + arr2.length];
         System.arraycopy(arr1, 0, out, 0, arr1.length);
@@ -124,25 +193,58 @@ public class UtilMethods {
     }
 
     // Split an array by indices
+    /**
+     * This function returns the concatenation of the 2 input arrays.
+     * @param arr Array to be manipulated
+     * @param start Start index for split
+     * @param end Stop index for split
+     * @return double[] Sub-array generated by splitting input array by start and end indices
+     */
     public static double[] splitByIndex(double[] arr, int start, int end) {
         double[] out = new double[end-start];
         System.arraycopy(arr, start, out, 0, out.length);
         return out;
     }
 
+    /**
+     * This function returns the concatenation of the 2 input arrays.
+     * @param arr Array to be manipulated
+     * @param start Start index for split
+     * @param end Stop index for split
+     * @return int[] Sub-array generated by splitting input array by start and end indices
+     */
     public static int[] splitByIndex(int[] arr, int start, int end) {
         int[] out = new int[end-start];
         System.arraycopy(arr, start, out, 0, out.length);
         return out;
     }
 
-    // Finc pseudo-inverse of a 2D array
+    // Find pseudo-inverse of a 2D array
+    /**
+     * This function returns the pseudo-inverse of a 2D matrix.
+     * @param mtrx 2D matrix
+     * @return double[][] Pseudo-inverse of the input matrix
+     */
     public static double[][] pseudoInverse(double[][] mtrx) {
         RealMatrix M = MatrixUtils.createRealMatrix(mtrx);
         DecompositionSolver solver = new SingularValueDecomposition(M).getSolver();
         return solver.getInverse().getData();
     }
 
+    // Different methods of padding a signal
+    /**
+     * This function returns the input signal by padding it.
+     * The output differs based on the mode of operation.
+     * @param signal Signal to be padded
+     * @param mode The mode in which padding will take place
+     * Mode outputs for signal [a b c d]:
+     * "reflect" : [d c b a | a b c d | d c b a]
+     * "constant" : [0 0 0 0 | a b c d | 0 0 0 0]
+     * "nearest" : [a a a a | a b c d | d d d d]
+     * "mirror" : [c d c b | a b c d | c b a b]
+     * "wrap" : [a b c d | a b c d | a b c d]
+     * @return double[][] Pseudo-inverse of the input matrix
+     */
     public static double[] padSignal(double[] signal, String mode) {
         double[] newSignal = {};
         if (mode.equals("reflect")) {
