@@ -2,9 +2,17 @@ package com.onyx.signal;
 
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.util.CombinatoricsUtils;
-
 import java.util.Arrays;
 
+/**
+ * <h1>Savitzky–Golay filter</h1>
+ * The Savgol class implements the Savitzky–Golay filter in 4 modes of operation: 'nearest', 'constant', 'mirror', 'wrap'
+ * Reference <a href="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter">article</a> for more information on Savitzky–Golay Filters.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class Savgol {
 
     private double[] signal;

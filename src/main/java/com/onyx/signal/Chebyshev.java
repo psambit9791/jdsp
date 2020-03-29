@@ -3,9 +3,9 @@ package com.onyx.signal;
 import uk.me.berndporr.iirj.*;
 
 /**
- * <h1>Chebyshec</h1>
+ * <h1>Chebyshev</h1>
  * The Chebyshev class implements low-pass, high-pass, band-pass and band-stop filter using the Chebyshev Type I and Type II equations.
- * Reference <a href="https://en.wikipedia.org/wiki/Chebyshev_filter">article</a> for more information on Chebyshec Filters.
+ * Reference <a href="https://en.wikipedia.org/wiki/Chebyshev_filter">article</a> for more information on Chebyshev Filters.
  * <p>
  *
  * @author  Sambit Paul
