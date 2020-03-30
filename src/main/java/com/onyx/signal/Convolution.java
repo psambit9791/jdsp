@@ -52,7 +52,7 @@ public class Convolution {
         }
         else if (mode.equals("same")) {
             this.output = new double[this.signal.length];
-            int iterator = 1;
+            int iterator = Math.abs(temp.length - this.signal.length)/2;
             for (int i=0; i<this.output.length; i++) {
                 this.output[i] = temp[iterator];
                 iterator++;
