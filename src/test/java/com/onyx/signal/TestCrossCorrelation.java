@@ -13,7 +13,7 @@ public class TestCrossCorrelation {
         final double[] result = {1.0, 2.0, 4.0, 6.5, 9.0, 5.5, 7.0, 2.5};
 
         CrossCorrelation cc1 = new CrossCorrelation(this.signal, this.kernel);
-        double[] out = cc1.crossCorrelate("full");
+        double[] out = cc1.cross_correlate("full");
         assertArrayEquals(out, result, 0.001);
     }
 
@@ -22,7 +22,7 @@ public class TestCrossCorrelation {
         final double[] result = {2.0, 4.0, 6.5, 9.0, 5.5};
 
         CrossCorrelation cc1 = new CrossCorrelation(this.signal, this.kernel);
-        double[] out = cc1.crossCorrelate("same");
+        double[] out = cc1.cross_correlate("same");
         assertArrayEquals(out, result, 0.001);
     }
 
@@ -31,7 +31,7 @@ public class TestCrossCorrelation {
         final double[] result = {6.5, 9.0};
 
         CrossCorrelation cc1 = new CrossCorrelation(this.signal, this.kernel);
-        double[] out = cc1.crossCorrelate("valid");
+        double[] out = cc1.cross_correlate("valid");
         assertArrayEquals(out, result, 0.001);
     }
 }

@@ -3,7 +3,7 @@ package com.onyx.signal;
 import org.junit.Test;
 import static org.junit.Assert.assertArrayEquals;
 
-public class TestFastFourier {
+public class TestDiscreteFourier {
 
     private double[] signal = {0.0,  0.684,  1.192,  1.401,  1.281,  0.894,  0.373, -0.133, -0.504, -0.688, -0.702,
             -0.615, -0.51, -0.44, -0.409, -0.372, -0.263, -0.033,  0.319,  0.726,  1.074,  1.236,  1.121,  0.714,
@@ -19,7 +19,7 @@ public class TestFastFourier {
                 1.148,  0.988,  0.877,  0.789, 0.726,  0.673,  0.628,  0.592,  0.557,  0.53 ,  0.506,  0.485, 0.473,
                 0.455,  0.444,  0.426,  0.422,  0.411,  0.397,  0.396, 0.387,  0.386,  0.38 ,  0.375,  0.369,  0.368,
                 0.366,  0.366};
-        FastFourier fft1 = new FastFourier(this.signal);
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal);
         fft1.fft();
         double[] out = fft1.returnAbsolute(true);
         assertArrayEquals(out, result, 0.001);
@@ -34,7 +34,7 @@ public class TestFastFourier {
                 0.411,  0.422,  0.426,  0.444,  0.455, 0.473,  0.485,  0.506,  0.53 ,  0.557,  0.592,  0.628,  0.673,
                 0.726,  0.789,  0.877,  0.988,  1.148,  1.4,  1.859,  3.176, 18.472,  0.154,  2.12 , 39.963,  2.397,
                 1.113,  0.59 ,  0.266};
-        FastFourier fft1 = new FastFourier(this.signal);
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal);
         fft1.fft();
         double[] out = fft1.returnAbsolute(false);
         assertArrayEquals(out, result, 0.001);
@@ -51,7 +51,7 @@ public class TestFastFourier {
                 1.023, 0.862, 0.748, 0.656, 0.587, 0.528, 0.478, 0.435, 0.394, 0.36, 0.328, 0.3, 0.278, 0.253, 0.232,
                 0.208, 0.192, 0.172, 0.152, 0.137, 0.12, 0.105, 0.089, 0.073, 0.058, 0.043, 0.029, 0.014};
 
-        FastFourier fft1 = new FastFourier(this.signal);
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal);
         fft1.fft();
         double[][] out = fft1.returnFull(true);
 
@@ -83,7 +83,7 @@ public class TestFastFourier {
                 -0.253, -0.278, -0.3, -0.328, -0.36, -0.394, -0.435, -0.478, -0.528, -0.587, -0.656, -0.748, -0.862,
                 -1.023, -1.271, -1.718, -2.98, 17.567, 0.148, -2.061, 39.196, 2.367, 1.105, 0.588, 0.266};
 
-        FastFourier fft1 = new FastFourier(this.signal);
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal);
         fft1.fft();
         double[][] out = fft1.returnFull(false);
 

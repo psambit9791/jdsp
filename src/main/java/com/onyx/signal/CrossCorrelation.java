@@ -32,7 +32,7 @@ public class CrossCorrelation {
      * This is the default cross-correlation procedure which works in "valid" mode.
      * @return double[] The result of correlation.
      */
-    public double[] crossCorrelate() {
+    public double[] cross_correlate() {
         this.kernel = UtilMethods.reverse(this.kernel);
         Convolution c1 = new Convolution(this.signal, this.kernel);
         this.output = c1.convolve("valid");
@@ -44,7 +44,7 @@ public class CrossCorrelation {
      * @param mode Mode in which correlation will work. Can be 'full', 'same' or 'valid'
      * @return double[] Result of cross-correlation.
      */
-    public double[] crossCorrelate(String mode) {
+    public double[] cross_correlate(String mode) {
         this.kernel = UtilMethods.reverse(this.kernel);
         Convolution c1 = new Convolution(this.signal, this.kernel);
         this.output = c1.convolve(mode);

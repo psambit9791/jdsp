@@ -42,7 +42,7 @@ public class Wiener {
         double[] signalSquare = MathArrays.ebeMultiply(this.signal, this.signal);
         double[] meanSquare = MathArrays.ebeMultiply(localMean, localMean);
         CrossCorrelation c2 = new CrossCorrelation(signalSquare, cons);
-        localVariance = c2.crossCorrelate("same");
+        localVariance = c2.cross_correlate("same");
         localVariance = MathArrays.scale((1.0/this.windowSize), localVariance);
         localVariance = MathArrays.ebeSubtract(localVariance, meanSquare);
 
