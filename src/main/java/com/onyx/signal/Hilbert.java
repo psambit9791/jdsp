@@ -1,11 +1,15 @@
 package com.onyx.signal;
 
+import org.apache.commons.math3.analysis.function.Atan2;
+import org.apache.commons.math3.complex.Complex;
+
 import java.util.Arrays;
 
 public class Hilbert {
 
     private double[] signal;
     private double[] h;
+    private Complex[] output;
 
     public Hilbert(double[] s) {
         this.signal = s;
@@ -29,7 +33,7 @@ public class Hilbert {
         }
     }
 
-    public double[] hilbert_transform() {
+    public void hilbert_transform() {
         DiscreteFourier dft = new DiscreteFourier(this.signal);
         dft.fft();
         double[][] dftOut = dft.returnFull(false);
@@ -42,8 +46,33 @@ public class Hilbert {
         }
 
         InverseDiscreteFourier idft = new InverseDiscreteFourier(modOut);
-        double[] hilbert_out = idft.ifft();
+        idft.ifft();
+        this.output = idft.get_as_complex();
+    }
 
-        return hilbert_out;
+    public double[] get_amplitude_envelope() {
+        double[] sig = new double[this.output.length];
+        for (int i=0; i<sig.length; i++) {
+            sig[i] = this.output[i].abs();
+        }
+        return sig;
+    }
+
+    public double[] get_instantaneous_phase() {
+        double[] sig = new double[this.output.length];
+        for (int i=0; i<sig.length; i++) {
+            sig[i] = new Atan2().value(this.output[i].getReal(), output[i].getImaginary());
+        }
+        return sig;
+    }
+
+    public double[] get_instantaneous_frequqncy(double Fs) {
+        double[] sig = new double[this.output.length-1];
+        double[] temp = this.get_instantaneous_phase();
+        double cons = 2 * Math.PI;
+        for (int i=0; i<sig.length; i++) {
+            sig[i] = ((temp[i+1] - temp[i])/(cons))*Fs;
+        }
+        return sig;
     }
 }
