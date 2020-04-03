@@ -1,5 +1,6 @@
 package com.onyx.signal;
 
+import org.apache.commons.math3.analysis.function.Atan;
 import org.apache.commons.math3.analysis.function.Atan2;
 import org.apache.commons.math3.complex.Complex;
 
@@ -50,6 +51,15 @@ public class Hilbert {
         this.output = idft.get_as_complex();
     }
 
+    public double[][] get_output() {
+        double[][] out = new double[this.output.length][2];
+        for (int i=0; i<out.length; i++) {
+            out[i][0] = this.output[i].getReal();
+            out[i][1] = this.output[i].getImaginary();
+        }
+        return out;
+    }
+
     public double[] get_amplitude_envelope() {
         double[] sig = new double[this.output.length];
         for (int i=0; i<sig.length; i++) {
@@ -60,18 +70,20 @@ public class Hilbert {
 
     public double[] get_instantaneous_phase() {
         double[] sig = new double[this.output.length];
+        Atan2 ang = new Atan2();
         for (int i=0; i<sig.length; i++) {
-            sig[i] = new Atan2().value(this.output[i].getReal(), output[i].getImaginary());
+            sig[i] = ang.value(this.output[i].getImaginary(), output[i].getReal());
         }
-        return sig;
+        double[] out = UtilMethods.unwrap(sig);
+        return out;
     }
 
     public double[] get_instantaneous_frequqncy(double Fs) {
-        double[] sig = new double[this.output.length-1];
         double[] temp = this.get_instantaneous_phase();
         double cons = 2 * Math.PI;
+        double[] sig = UtilMethods.diff(temp);
         for (int i=0; i<sig.length; i++) {
-            sig[i] = ((temp[i+1] - temp[i])/(cons))*Fs;
+            sig[i] = (sig[i]/cons)*Fs;
         }
         return sig;
     }

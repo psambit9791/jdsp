@@ -306,4 +306,29 @@ public class UtilMethods {
         }
         return newSignal;
     }
+
+    public static double[] diff(double[] arr) {
+        double[] sig = new double[arr.length-1];
+        for (int i=0; i<sig.length; i++) {
+            sig[i] = (arr[i+1] - arr[i]);
+        }
+        return sig;
+    }
+
+    public static double[] unwrap(double[] arr) {
+        double[] diff = UtilMethods.diff(arr);
+        double[] out = new double[arr.length];
+        for (int i=0; i<diff.length; i++) {
+            diff[i] = UtilMethods.modulo(diff[i]+Math.PI, 2*Math.PI) - Math.PI;
+        }
+        out[0] = arr[0];
+        for (int i=0; i<diff.length; i++){
+            out[i+1] = out[i] + diff[i];
+        }
+        return out;
+    }
+
+    public static double modulo(double dividend, double divisor) {
+        return (((dividend % divisor) + divisor) % divisor);
+    }
 }

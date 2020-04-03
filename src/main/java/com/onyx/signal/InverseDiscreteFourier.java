@@ -83,8 +83,9 @@ public class InverseDiscreteFourier {
             for (int m=0; m<out.length; m++) {
                 double angle = 2*Math.PI*t*m/out.length;
                 sigValR += (this.complex_sequence[m][0]*Math.cos(angle) - this.complex_sequence[m][1]*Math.sin(angle));
-                sigValR += (this.complex_sequence[m][0]*Math.sin(angle) + this.complex_sequence[m][1]*Math.cos(angle));
+                sigValI += (this.complex_sequence[m][0]*Math.sin(angle) + this.complex_sequence[m][1]*Math.cos(angle));
             }
+//            System.out.println(sigValR+","+sigValI);
             out[t] = Complex.valueOf(sigValR/out.length, sigValI/out.length);
         }
         this.signal = out;

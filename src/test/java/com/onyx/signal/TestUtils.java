@@ -126,4 +126,24 @@ public class TestUtils {
         assertArrayEquals(wrap, out, 0.001);
 
     }
+
+    @Test
+    public void diffTest() {
+        double[] seq = {1, 2, 3, 4, 6, -4};
+        double[] result = {1, 1, 1, 2, -10};
+        double[] out = UtilMethods.diff(seq);
+        assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void unwrapTest() {
+        double[] seq1 = {0.0 , 0.78539816, 1.57079633, 5.49778714, 6.28318531};
+        double[] seq2 = {-0.5836157665365642, 0.9228635199201507, 1.7407486118278503, 2.570531442761638, -2.710817667585861, -1.8187666240910918};
+        double[] result1 = {0.0,  0.785,  1.571, -0.785,  0.0};
+        double[] result2 = {-0.584,  0.923,  1.741,  2.571,  3.572,  4.464};
+        double[] out1 = UtilMethods.unwrap(seq1);
+        double[] out2 = UtilMethods.unwrap(seq2);
+        assertArrayEquals(result1, out1, 0.001);
+        assertArrayEquals(result2, out2, 0.001);
+    }
 }
