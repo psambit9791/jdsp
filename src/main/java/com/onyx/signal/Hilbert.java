@@ -78,7 +78,7 @@ public class Hilbert {
         return out;
     }
 
-    public double[] get_instantaneous_frequqncy(double Fs) {
+    public double[] get_instantaneous_frequency(double Fs) {
         double[] temp = this.get_instantaneous_phase();
         double cons = 2 * Math.PI;
         double[] sig = UtilMethods.diff(temp);
