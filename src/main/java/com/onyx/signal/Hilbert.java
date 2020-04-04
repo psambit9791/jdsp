@@ -1,6 +1,5 @@
 package com.onyx.signal;
 
-import org.apache.commons.math3.analysis.function.Atan;
 import org.apache.commons.math3.analysis.function.Atan2;
 import org.apache.commons.math3.complex.Complex;
 

@@ -50,8 +50,7 @@ double[] signal = {1.0, 2.0, 3.0, 4.0, 5.0}; //define the signal
 double[] kernel = {1.0, 0.0, 1.0, 0.5}; //define the convolution kernel
 String mode = "full"; //can be "full", "same", "valid"
 Convolution con1 = new Convolution(signal, kernel, mode); //create convolution object
-con1.convolve(); //perform convolution
-double[] out = con1.getOutput(); //get the result of the convolution
+double[] out = con1.convolve(); //perform convolution and get the result
 ```
 
 #### Cross Correlation
@@ -66,8 +65,7 @@ final double[] signal = {1.0, 2.0, 3.0, 4.0, 5.0}; //define the signal
 final double[] kernel = {1.0, 0.0, 1.0, 0.5}; //define the convolution kernel
 String mode = "full"; //can be "full", "same", "valid"
 CrossCorrelation cc1 = new CrossCorrelation(this.signal, this.kernel, mode); //create cross-correlation object
-cc1.crossCorrelate(); //perform cross-correlation
-double[] out = cc1.getOutput(); //get the result of the cross-correlation
+double[] out = cc1.cross_correlate(); //perform cross-correlation and get the result
 ```
 
 #### Detrending
@@ -83,8 +81,7 @@ String mode = "linear"; //can be "linear", "constant"
 Detrend d1 = new Detrend(signal, "linear"); //create detrending object
 //OR
 Detrend d1 = new Detrend(signal, 2); //create detrending object
-d1.detrendSignal(); //perform detrending
-double[] out = d1.getOutput(); //get the result of the detrending
+double[] out = d1.detrendSignal(); //perform detrending and get the detrended signal
 ```
 
 #### Smoothing
@@ -97,9 +94,20 @@ Smoothing works in 2 modes:
 double[] signal = {1.0, 2.0, 3.0, 4.0, 5.0}; //define the signal 
 String mode = "rectangular"; //can be "rectangular", "triangular"
 Smooth s1 = new Smooth(signal, mode); //create smoothing object
-s1.smoothSignal(); //perform smoothing
-double[] out = s1.getOutput(); //get the result of the smoothing
+double[] out = s1.smoothSignal(); //perform smoothing and get the smoothed signal
 ```
+
+#### Fourier Transform
+
+Fourier analysis is a method for expressing a function as a sum of periodic components, and for recovering the signal from those components. When both the function and its Fourier transform are replaced with discretized counterparts, it is called the discrete Fourier transform (DFT).
+The information for this section has been taken from [scipy.fft Tutorial](https://docs.scipy.org/doc/scipy/reference/tutorial/fft.html). Please refer to this for further information.
+
+##### Discrete Fourier Transform
+
+
+##### Inverse Discrete Fourier Transform
+
+
 
 #### Matlab style Filters
 
@@ -272,6 +280,61 @@ int lowCutOff = 7; //Lower Cut-off Frequency
 int highCutOff = 28; //Higher Cut-off Frequency
 Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
 double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff); //get the result after filtering
+```
+
+#### Savitzky–Golay Filter
+
+A Savitzky–Golay filter is a digital filter that can be applied to a set of digital data points for the purpose of smoothing the data, that is, to increase the precision of the data without distorting the signal tendency.
+Applies a Savitzky–Golay filter on the input signal. The filter works in 4 modes (which determine the way in wich the signal is padded before convolution):
+
+This is for a signal: [a b c d]
+1. nearest: [a a a a | a b c d | d d d d]
+2. constant: [0 0 0 0 | a b c d | 0 0 0 0]
+3. mirror: [c d c b | a b c d | c b a b]
+4. wrap: [a b c d | a b c d | a b c d]
+
+```
+int windowSize = 7; //length of the filter window
+int polyOrder = 2; //order of the polynomial used to fit the samples
+Savgol s1 = new Savgol(signal, windowSize, polyOrder); //signal is of type double[]
+double[] out = s1.savgol_filter(mode); //get the result after filtering, mode is of type String
+```
+
+#### Median Filter
+
+The Median Filter is a non-linear digital filtering technique, often used to remove noise from an image or signal as a pre-processing step.
+Applies a Median filter on the input signal.
+
+```
+int windowSize = 5; //can be anything less than length of signal
+MedianFilter mf = new MedianFilter(signal, windowSize); //signal is of type double[]
+double[] out = mf.median_filter(); //get the result after filtering
+```
+
+#### Wiener Filter
+
+The Wiener filter is a simple deblurring filter for denoising signals.
+Applies a Wiener filter on the input signal.
+
+```
+int windowSize = 5; //can be anything less than length of signal
+Wiener wf = new Wiener(signal, windowSize); //signal is of type double[]
+double[] out = wf.wiener_filter(); //get the result after filtering
+```
+
+#### Hilbert Transform
+
+The Hilbert transform constructs the complex-valued analytic signal from a real signal
+Applies the Hilbert Transform on the input real signal.
+
+```
+double Fs = 100.0; // Sampling Frequency in Hz
+Hilbert h = new Hilbert(signal); //signal is of type double[]
+h.hilbert_transform(); //perform the Hilbert Transform
+double[][] out = h.get_output() //returns the complex analytical signal corresponding to the input signal
+double[] ampOut = h.get_amplitude_envelope(); //returns the amplitude envelope of the input signal
+double[] phaseOut = h.get_instantaneous_phase(); //returns the instantaneous phase of the input signal
+double[] freqOut = h.get_instantaneous_frequency(Fs); //returns the instantaneous frequency of the input signal
 ```
 
 #### Peak Detection
