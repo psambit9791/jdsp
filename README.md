@@ -8,6 +8,52 @@ jDSP is a library of signal processing tools aiming to provide functionalities a
 Python. The goal is to provide an easy-to-use APIs for performing complex operation on signals eliminating the necessity of
 understanding the low-level complexities of the processing pipeline.
 
+## Table of Contents
+
+- [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Usage](#usage)
+    + [Convolution](#convolution)
+    + [Cross Correlation](#cross-correlation)
+    + [Detrending](#detrending)
+    + [Smoothing](#smoothing)
+    + [Fourier Transform](#fourier-transform)
+      - [Discrete Fourier Transform](#discrete-fourier-transform)
+      - [Inverse Discrete Fourier Transform](#inverse-discrete-fourier-transform)
+    + [Matlab style Filters](#matlab-style-filters)
+      - [Butterworth filter](#butterworth-filter)
+        * [Low Pass Filter](#low-pass-filter)
+        * [High Pass Filter](#high-pass-filter)
+        * [Band Pass Filter](#band-pass-filter)
+        * [Band Stop Filter](#band-stop-filter)
+      - [Chebyshev Type 1 and 2 filters](#chebyshev-type-1-and-2-filters)
+        * [Low Pass Filter](#low-pass-filter-1)
+        * [High Pass Filter](#high-pass-filter-1)
+        * [Band Pass Filter](#band-pass-filter-1)
+        * [Band Stop Filter](#band-stop-filter-1)
+      - [Bessel filter](#bessel-filter)
+        * [Low Pass Filter](#low-pass-filter-2)
+        * [High Pass Filter](#high-pass-filter-2)
+        * [Band Pass Filter](#band-pass-filter-2)
+        * [Band Stop Filter](#band-stop-filter-2)
+    + [Savitzky–Golay Filter](#savitzky-golay-filter)
+    + [Median Filter](#median-filter)
+    + [Wiener Filter](#wiener-filter)
+    + [Hilbert Transform](#hilbert-transform)
+    + [Peak Detection](#peak-detection)
+      - [Find Relative Minima](#find-relative-minima)
+      - [Find Relative Maxima](#find-relative-maxima)
+      - [Detect peaks (based on Scipy Signal)](#detect-peaks--based-on-scipy-signal-)
+- [Running the tests (For Developers)](#running-the-tests--for-developers-)
+- [Deployment](#deployment)
+- [Built With](#built-with)
+- [Contributing](#contributing)
+- [Versioning](#versioning)
+- [Authors](#authors)
+- [License](#license)
+
+<sub><sup><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></sup></sub>
+
 ## Getting Started
 
 To get a copy of this project, clone this project using:
@@ -115,10 +161,39 @@ The information for this section has been taken from [scipy.fft Tutorial](https:
 
 ##### Discrete Fourier Transform
 
+Discrete Fourier Transform performs fourier transform on a discrete signal to calculate the frequency components within the signal.
+It produces the frequency component in the complex number space and the [components are mirrored](https://dsp.stackexchange.com/a/4827).
+
+This class can return only the positive half of the components or the total analysis.
+It can also be used to receive the absolute values or the complex values.
+
+```
+DiscreteFourier fft1 = new DiscreteFourier(signal); //creates the DFT object with a signal of tye double[]
+fft1.fft(); //performs the fourier transform
+
+double[] outAbsPos = fft1.returnAbsolute(true); // returns the absolute values of the positive half of the FFT output
+double[] outAbsFull = fft1.returnAbsolute(false); // returns the absolute values of the complete FFT output
+
+double[][] outCmplxPos = fft1.returnFull(true); // returns the complex values of the positive half of the FFT output
+double[][] outCmplxFull = fft1.returnFull(false); // returns the complex values of the complete FFT output
+```
 
 ##### Inverse Discrete Fourier Transform
 
+Discrete Fourier Transform performs inverse fourier transform on a sequence to generate the original signal.
+It requires the full frequency response generated from DFT and does not work with only the positive/negative halves.
 
+This class generates output in both real and complex format and also takes real and complex values as input.
+It can be used to get only the real components, the absolute values or the full complex signal.
+
+```
+InverseDiscreteFourier transformer = new InverseDiscreteFourier(seq); //Creates the iDFT object with a sequence of type double[] or double[][]
+transformer.ifft(); //performs the inverse fourier transform
+
+double[] outReal = transformer.get_real_signal(); //returns only the real components of the generated complex signal
+double[] outAbsolute = transformer.get_absolute_signal(); //returns the absolute values of the generated complex signal
+double[][] out = transformer.get_complex_signal(); //returns the complex signal
+```
 
 #### Matlab style Filters
 
@@ -366,7 +441,7 @@ FindPeak fp = new FindPeak(signal); //signal is a double[] array
 int[] out = fp.detect_relative_maxima();
 ```
 
-##### Detect peaks (including flat peaks) based on Scipy Signal
+##### Detect peaks (based on Scipy Signal)
 Finds peaks within the signal and generate properties for those peaks
 
 ```
