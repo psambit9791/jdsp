@@ -29,11 +29,22 @@ sudo apt-get install openjdk-8-jdk
 java -version
 ```
 
-**Download Apache Math3 and IIRJ**
+**Dependencies are Apache Math3 and IIRJ**
+
+To download them separately and add using your IDE, use this method:
+
 ```
 wget http://apache.mirror.anlx.net//commons/math/binaries/commons-math3-3.6.1-bin.tar.gz
 
 wget https://search.maven.org/remotecontent?filepath=uk/me/berndporr/iirj/1.1/iirj-1.1.jar
+```
+
+To use maven to install, use this:
+
+```
+sudo apt install maven
+
+mvn install 
 ```
 
 ### Usage
