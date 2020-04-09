@@ -44,8 +44,8 @@ public class TestPeakDetect {
 
     @Test
     public void troughDetectTest() {
-        int[] result = {7, 49, 93, 122, 175, 213, 257, 285, 333, 374, 415, 495, 500, 531, 535, 575, 595, 608, 663, 699,
-                705, 728,747, 765, 771, 841, 884, 928, 945, 956, 965};
+        int[] result = {31,  78, 119, 125, 196, 242, 281, 301, 365, 400, 442, 498, 517, 532, 562, 589, 599, 611, 684,
+                701, 726, 733, 762, 767, 773, 864, 913, 943, 954, 960, 967};
 
         FindPeak fp = new FindPeak(this.highResSignal);
         int[] out = fp.detect_troughs();
