@@ -46,7 +46,7 @@ public class UtilMethods {
         int index = 0;
         time[index] = i;
 
-        while (i<stopVal) {
+        while (Math.abs(i-stopVal) > 0.00001) {
             i = i + T;
             index++;
             time[index] = i;
@@ -73,7 +73,7 @@ public class UtilMethods {
         int index = 0;
         time[index] = i;
 
-        while (i<stop) {
+        while (Math.abs(i-stop) > 0.00001) {
             i = i + T;
             index++;
             time[index] = i;
