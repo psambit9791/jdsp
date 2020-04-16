@@ -1,4 +1,6 @@
-package com.onyx.jdsp;
+package com.onyx.jdsp.signal;
+
+import com.onyx.jdsp.UtilMethods;
 
 public class GeneratePeriodic {
 

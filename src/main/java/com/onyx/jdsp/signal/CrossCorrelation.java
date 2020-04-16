@@ -1,4 +1,7 @@
-package com.onyx.jdsp;
+package com.onyx.jdsp.signal;
+
+import com.onyx.jdsp.UtilMethods;
+import com.onyx.jdsp.signal.Convolution;
 
 /**
  * <h1>Cross-Correlation</h1>

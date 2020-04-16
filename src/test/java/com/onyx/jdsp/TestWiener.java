@@ -1,5 +1,6 @@
 package com.onyx.jdsp;
 
+import com.onyx.jdsp.filter.Wiener;
 import org.junit.Test;
 import static org.junit.Assert.assertArrayEquals;
 

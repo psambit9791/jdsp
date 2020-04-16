@@ -1,4 +1,4 @@
-package com.onyx.jdsp;
+package com.onyx.jdsp.signal;
 
 import java.util.*;
 

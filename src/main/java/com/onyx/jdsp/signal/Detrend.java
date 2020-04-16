@@ -1,4 +1,4 @@
-package com.onyx.jdsp;
+package com.onyx.jdsp.signal;
 
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;

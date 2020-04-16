@@ -1,15 +1,16 @@
-package com.onyx.jdsp;
+package com.onyx.jdsp.filter;
 
+import com.onyx.jdsp.UtilMethods;
 import org.apache.commons.math3.stat.StatUtils;
 
 import java.util.Arrays;
 
-public class MedianFilter {
+public class Median {
 
     private double[] signal;
     private int windowSize;
 
-    public MedianFilter(double[] s) {
+    public Median(double[] s) {
         if (3 >= s.length) {
             throw new IllegalArgumentException("Signal Length has to be greater than 3.");
         }
@@ -17,7 +18,7 @@ public class MedianFilter {
         this.windowSize = 3;
     }
 
-    public MedianFilter(double[] s, int wsize) {
+    public Median(double[] s, int wsize) {
         if (wsize >= s.length) {
             throw new IllegalArgumentException("Window size cannot be greater than or equal to signal length");
         }

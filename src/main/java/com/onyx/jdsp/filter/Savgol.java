@@ -1,5 +1,7 @@
-package com.onyx.jdsp;
+package com.onyx.jdsp.filter;
 
+import com.onyx.jdsp.signal.Convolution;
+import com.onyx.jdsp.UtilMethods;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.util.CombinatoricsUtils;
 import java.util.Arrays;

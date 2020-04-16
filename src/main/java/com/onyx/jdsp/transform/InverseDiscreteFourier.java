@@ -1,4 +1,4 @@
-package com.onyx.jdsp;
+package com.onyx.jdsp.transform;
 
 import org.apache.commons.math3.complex.Complex;
 

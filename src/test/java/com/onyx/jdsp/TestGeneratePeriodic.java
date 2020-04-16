@@ -1,5 +1,6 @@
 package com.onyx.jdsp;
 
+import com.onyx.jdsp.signal.GeneratePeriodic;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

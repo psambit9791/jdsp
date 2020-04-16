@@ -1,5 +1,6 @@
 package com.onyx.jdsp;
 
+import com.onyx.jdsp.filter.Chebyshev;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

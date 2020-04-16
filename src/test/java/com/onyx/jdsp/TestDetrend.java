@@ -1,5 +1,6 @@
 package com.onyx.jdsp;
 
+import com.onyx.jdsp.signal.Detrend;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

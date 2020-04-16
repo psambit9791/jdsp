@@ -1,6 +1,8 @@
-package com.onyx.jdsp;
+package com.onyx.jdsp.signal;
 
 import java.util.Arrays;
+
+import com.onyx.jdsp.signal.CrossCorrelation;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.MathArrays;
 

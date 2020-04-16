@@ -1,26 +1,26 @@
-package com.onyx.jdsp;
+package com.onyx.jdsp.filter;
 
 /**
- * <h1>Butterworth</h1>
- * The Butterworth class implements low-pass, high-pass, band-pass and band-stop filter using the Butterworth polynomials.
- * Reference <a href="https://en.wikipedia.org/wiki/Butterworth_filter">article</a> for more information on Buttterworth Filters.
+ * <h1>Bessel</h1>
+ * The Bessel class implements low-pass, high-pass, band-pass and band-stop filter using the Bessel polynomials.
+ * Reference <a href="https://en.wikipedia.org/wiki/Bessel_filter">article</a> for more information on Bessel Filters.
  * <p>
  *
  * @author  Sambit Paul
  * @version 1.0
  */
-public class Butterworth {
+public class Bessel {
     private double[] signal;
     private double samplingFreq;
     private double[] output;
 
     /**
      * This constructor initialises the prerequisites
-     * required to use Butterworth filter.
+     * required to use Bessel filter.
      * @param s Signal to be filtered
-     * @param Fs Sampling frequency of input signal
+     * @param Fs Sampling frequency of input signal in Hz
      */
-    public Butterworth(double[] s, double Fs) {
+    public Bessel(double[] s, double Fs) {
         this.signal = s;
         this.samplingFreq = Fs;
     }
@@ -33,7 +33,7 @@ public class Butterworth {
      */
     public double[] low_pass_filter(int order, double cutoffFreq) {
         this.output = new double[this.signal.length];
-        uk.me.berndporr.iirj.Butterworth lp = new uk.me.berndporr.iirj.Butterworth();
+        uk.me.berndporr.iirj.Bessel lp = new uk.me.berndporr.iirj.Bessel();
         lp.lowPass(order, this.samplingFreq, cutoffFreq);
         for (int i =0; i<this.output.length; i++) {
             this.output[i] = lp.filter(this.signal[i]);
@@ -49,7 +49,7 @@ public class Butterworth {
      */
     public double[] high_pass_filter(int order, double cutoffFreq) {
         this.output = new double[this.signal.length];
-        uk.me.berndporr.iirj.Butterworth hp = new uk.me.berndporr.iirj.Butterworth();
+        uk.me.berndporr.iirj.Bessel hp = new uk.me.berndporr.iirj.Bessel();
         hp.highPass(order, this.samplingFreq, cutoffFreq);
         for (int i =0; i<this.output.length; i++) {
             this.output[i] = hp.filter(this.signal[i]);
@@ -68,7 +68,7 @@ public class Butterworth {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];
-        uk.me.berndporr.iirj.Butterworth bp = new uk.me.berndporr.iirj.Butterworth();
+        uk.me.berndporr.iirj.Bessel bp = new uk.me.berndporr.iirj.Bessel();
         bp.bandPass(order, this.samplingFreq, centreFreq, width);
         for (int i=0; i<this.output.length; i++) {
             this.output[i] = bp.filter(this.signal[i]);
@@ -87,7 +87,7 @@ public class Butterworth {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];
-        uk.me.berndporr.iirj.Butterworth bs = new uk.me.berndporr.iirj.Butterworth();
+        uk.me.berndporr.iirj.Bessel bs = new uk.me.berndporr.iirj.Bessel();
         bs.bandStop(order, this.samplingFreq, centreFreq, width);
         for (int i=0; i<this.output.length; i++) {
             this.output[i] = bs.filter(this.signal[i]);

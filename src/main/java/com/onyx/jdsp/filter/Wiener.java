@@ -1,5 +1,7 @@
-package com.onyx.jdsp;
+package com.onyx.jdsp.filter;
 
+import com.onyx.jdsp.signal.Convolution;
+import com.onyx.jdsp.signal.CrossCorrelation;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.MathArrays;
 
