@@ -79,7 +79,7 @@ To download them separately and add using your IDE, use this method:
   
 ```  
 wget http://apache.mirror.anlx.net//commons/math/binaries/commons-math3-3.6.1-bin.tar.gz  
-  
+wget https://repo1.maven.org/maven2/org/knowm/xchart/xchart/3.6.2/xchart-3.6.2.jar
 wget https://search.maven.org/remotecontent?filepath=uk/me/berndporr/iirj/1.1/iirj-1.1.jar  
 ```  
   
