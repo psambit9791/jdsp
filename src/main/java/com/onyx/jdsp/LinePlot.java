@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class LinePlot {
 
-    public XYChart figure;
-    public XYChartBuilder plot;
+    private XYChart figure;
+    private XYChartBuilder plot;
 
     public LinePlot() {
         this.plot = new XYChartBuilder().width(600).height(500).xAxisTitle("X").yAxisTitle("Y");
