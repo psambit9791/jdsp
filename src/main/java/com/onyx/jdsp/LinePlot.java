@@ -13,6 +13,7 @@ public class LinePlot {
     public LinePlot() {
         this.plot = new XYChartBuilder().width(600).height(500).xAxisTitle("X").yAxisTitle("Y");
     }
+
     public LinePlot(String title) {
         this.plot = new XYChartBuilder().width(600).height(500).title(title).xAxisTitle("X").yAxisTitle("Y");
     }
