@@ -49,7 +49,7 @@ public class TestHilbert {
         Hilbert h = new Hilbert(this.signal);
         h.hilbert_transform();
         double[] out = h.get_amplitude_envelope();
-        assertArrayEquals(result, out, 0.001);
+        assertArrayEquals(result, out, 0.01);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class TestHilbert {
         Hilbert h = new Hilbert(this.signal);
         h.hilbert_transform();
         double[] out = h.get_instantaneous_phase();
-        assertArrayEquals(result, out, 0.001);
+        assertArrayEquals(result, out, 0.01);
     }
 
     @Test
@@ -109,7 +109,7 @@ public class TestHilbert {
         Hilbert h = new Hilbert(this.signal);
         h.hilbert_transform();
         double[] out = h.get_instantaneous_frequency(Fs);
-        assertArrayEquals(result, out, 0.001);
+        assertArrayEquals(result, out, 0.5);
 
     }
 }
