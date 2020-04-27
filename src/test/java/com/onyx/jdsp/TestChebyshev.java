@@ -31,7 +31,7 @@ public class TestChebyshev {
                 -0.046, -0.366, -0.628, -0.804};
 
         double[] result = t1.low_pass_filter(4, 9, this.ripple_factor);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class TestChebyshev {
                 0.784, -0.834, -0.267, 0.989};
 
         double[] result = t1.high_pass_filter(4, 29, this.ripple_factor);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class TestChebyshev {
                 0.397, 0.896, 0.658, -0.124, -0.808, -0.829};
 
         double[] result = t1.band_pass_filter(4, 12, 18, this.ripple_factor);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class TestChebyshev {
                 -0.089, 0.259, 1.18, -0.389, -1.05, 0.228};
 
         double[] result = t1.band_stop_filter(4, 7, 28, this.ripple_factor);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     private Chebyshev t2 = new Chebyshev(this.signal, 100, 2);
@@ -93,7 +93,7 @@ public class TestChebyshev {
                 -0.014, -1.088, -2.103};
 
         double[] result = t2.low_pass_filter(4, 9, this.ripple_factor);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class TestChebyshev {
                 -0.637, -1.301};
 
         double[] result = t2.high_pass_filter(4, 29, this.ripple_factor);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class TestChebyshev {
                 -0.106, -0.854, -0.387, -1.391, -2.089};
 
         double[] result = t2.band_pass_filter(4, 12, 18, this.ripple_factor);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -138,6 +138,6 @@ public class TestChebyshev {
                 -0.36, -1.397, -2.228};
 
         double[] result = t2.band_stop_filter(4, 7, 28, this.ripple_factor);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 }

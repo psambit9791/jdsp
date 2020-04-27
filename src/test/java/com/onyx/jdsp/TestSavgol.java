@@ -40,7 +40,7 @@ public class TestSavgol {
 
         Savgol s1 = new Savgol(this.signal, 7, 2);
         double[] out = s1.savgol_filter("constant");
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class TestSavgol {
 
         Savgol s1 = new Savgol(this.signal, 7, 2);
         double[] out = s1.savgol_filter("mirror");
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -64,6 +64,6 @@ public class TestSavgol {
 
         Savgol s1 = new Savgol(this.signal, 7, 2);
         double[] out = s1.savgol_filter("wrap");
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 }

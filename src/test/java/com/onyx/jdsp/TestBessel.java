@@ -28,7 +28,7 @@ public class TestBessel {
                 -0.141, -0.676, -1.039};
 
         double[] result = flt.low_pass_filter(4, 9);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class TestBessel {
                 -1.245, -0.876, 0.735, 0.044, -0.187};
 
         double[] result = flt.high_pass_filter(4, 29);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class TestBessel {
                 0.723, -0.22, -1.102, -0.886};
 
         double[] result = flt.band_pass_filter(4, 12, 18);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -73,6 +73,6 @@ public class TestBessel {
                 -1.31, -0.026, -1.121, -1.615};
 
         double[] result = flt.band_stop_filter(4, 7, 28);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 }

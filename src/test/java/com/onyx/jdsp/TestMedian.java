@@ -14,6 +14,6 @@ public class TestMedian {
 
         Median mf = new Median(signal, wSize);
         double[] out = mf.median_filter();
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 }

@@ -14,6 +14,6 @@ public class TestWiener {
 
         Wiener wf = new Wiener(signal, wsize);
         double[] out = wf.wiener_filter();
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 }

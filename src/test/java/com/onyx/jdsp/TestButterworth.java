@@ -29,7 +29,7 @@ public class TestButterworth {
                 -0.463, -0.741, -0.879, -0.907};
 
         double[] result = flt.low_pass_filter(4, 9);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class TestButterworth {
                 0.814, -0.284, -0.61, 0.651};
 
         double[] result = flt.high_pass_filter(4, 29);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class TestButterworth {
                 0.983, 0.721, -0.134, -0.882, -0.904};
 
         double[] result = flt.band_pass_filter(4, 12, 18);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -74,6 +74,6 @@ public class TestButterworth {
                 -0.321, 0.759, -0.386, -1.511, -0.327};
 
         double[] result = flt.band_stop_filter(4, 7, 28);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 }

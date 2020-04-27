@@ -23,7 +23,7 @@ public class TestDiscreteFourier {
         DiscreteFourier fft1 = new DiscreteFourier(this.signal);
         fft1.fft();
         double[] out = fft1.returnAbsolute(true);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class TestDiscreteFourier {
         DiscreteFourier fft1 = new DiscreteFourier(this.signal);
         fft1.fft();
         double[] out = fft1.returnAbsolute(false);
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -63,8 +63,8 @@ public class TestDiscreteFourier {
             outReal[i] = out[i][0];
             outIm[i] = out[i][1];
         }
-        assertArrayEquals(outReal, resultReal, 0.001);
-        assertArrayEquals(outIm, resultIm, 0.001);
+        assertArrayEquals(resultReal, outReal, 0.001);
+        assertArrayEquals(resultIm, outIm, 0.001);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class TestDiscreteFourier {
             outReal[i] = out[i][0];
             outIm[i] = out[i][1];
         }
-        assertArrayEquals(outReal, resultReal, 0.001);
-        assertArrayEquals(outIm, resultIm, 0.001);
+        assertArrayEquals(resultReal, outReal, 0.001);
+        assertArrayEquals(resultIm, outIm, 0.001);
     }
 }

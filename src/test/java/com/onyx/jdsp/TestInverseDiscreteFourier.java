@@ -70,10 +70,10 @@ public class TestInverseDiscreteFourier {
             outI[i] = out[i][1];
         }
 
-        assertArrayEquals(outReal, resultReal, 0.001);
-        assertArrayEquals(outAbsolute, resultAbs, 0.001);
-        assertArrayEquals(outR, resultComplex[0], 0.001);
-        assertArrayEquals(outI, resultComplex[1], 0.001);
+        assertArrayEquals(resultReal, outReal, 0.001);
+        assertArrayEquals(resultAbs, outAbsolute, 0.001);
+        assertArrayEquals(resultComplex[0], outR, 0.001);
+        assertArrayEquals(resultComplex[1], outI, 0.001);
     }
 
     @Test
@@ -118,9 +118,9 @@ public class TestInverseDiscreteFourier {
             outI[i] = out[i][1];
         }
 
-        assertArrayEquals(outReal, resultReal, 0.001);
-        assertArrayEquals(outAbsolute, resultAbs, 0.001);
-        assertArrayEquals(outR, resultComplex[0], 0.001);
-        assertArrayEquals(outI, resultComplex[1], 0.001);
+        assertArrayEquals(resultReal, outReal, 0.001);
+        assertArrayEquals(resultAbs, outAbsolute, 0.001);
+        assertArrayEquals(resultComplex[0], outR, 0.001);
+        assertArrayEquals(resultComplex[1], outI, 0.001);
     }
 }

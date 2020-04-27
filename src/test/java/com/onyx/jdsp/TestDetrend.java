@@ -16,7 +16,7 @@ public class TestDetrend {
 
         Detrend d1 = new Detrend(this.signal, "linear");
         double[] out = d1.detrendSignal();
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class TestDetrend {
 
         Detrend d1 = new Detrend(this.signal, "constant");
         double[] out = d1.detrendSignal();
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -34,6 +34,6 @@ public class TestDetrend {
 
         Detrend d1 = new Detrend(this.polySignal, 2);
         double[] out = d1.detrendSignal();
-        assertArrayEquals(out, result, 0.001);
+        assertArrayEquals(result, out, 0.001);
     }
 }
