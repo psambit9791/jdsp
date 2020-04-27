@@ -22,7 +22,7 @@ public class Decimate {
     }
 
     public double[] decimate(int downSamplingFactor) {
-        double[] output = new double[signal.length/downSamplingFactor];
+        double[] output = new double[(int)Math.ceil(signal.length/(double)downSamplingFactor)];
 
         if (!this.zeroPhase) {
             int newSamplingFreq = this.samplingFreq/downSamplingFactor;
