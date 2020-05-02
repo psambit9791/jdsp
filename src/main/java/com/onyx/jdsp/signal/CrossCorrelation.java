@@ -36,6 +36,7 @@ public class CrossCorrelation {
      * @return double[] The result of correlation.
      */
     public double[] cross_correlate() {
+        //Works in "valid" mode
         this.kernel = UtilMethods.reverse(this.kernel);
         Convolution c1 = new Convolution(this.signal, this.kernel);
         this.output = c1.convolve("valid");

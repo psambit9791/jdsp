@@ -114,7 +114,7 @@ public class Convolution {
      * @return double[] Result of convolution with same length as input signal
      */
     public double[] convolve1d() {
-
+        // Works in "reflect" mode
         double[] output = new double[this.signal.length];
         double[] temp;
 

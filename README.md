@@ -73,7 +73,7 @@ sudo apt-get install openjdk-8-jdk
 java -version  
 ```  
   
-**Dependencies are Apache Math3 and IIRJ**  
+**Dependencies are Apache Math3, IIRJ and XChart**  
   
 To download them separately and add using your IDE, use this method:  
   
