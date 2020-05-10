@@ -4,6 +4,7 @@
 
 [![Build Status](https://travis-ci.com/psambit9791/jDSP.svg?branch=master)](https://travis-ci.com/psambit9791/jDSP)
 [![codecov](https://codecov.io/gh/psambit9791/jDSP/branch/master/graph/badge.svg)](https://codecov.io/gh/psambit9791/jDSP)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.psambit9791/jdsp/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.psambit9791/jdsp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?)](https://github.com/psambit9791/jDSP/blob/master/LICENSE)
 
 jDSP is a library of signal processing tools aiming to provide functionalities as available in scipy-signal package for   
