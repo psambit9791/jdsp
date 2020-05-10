@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Onyx</groupId>
-    <artifactId>jDSP</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>com.github.psambit9791</groupId>
+    <artifactId>jdsp</artifactId>
+    <version>0.1.0</version>
     <build>
         <plugins>
             <plugin>
@@ -29,6 +29,35 @@
                 </executions>
             </plugin></plugins>
     </build>
+
+    <name>jDSP - Digital Signal Processing for Java</name>
+    <description>DSP is a library of signal processing tools aiming to provide functionalities as available in
+        scipy-signal package for Python. The goal is to provide an easy-to-use APIs for performing complex operation on
+        signals eliminating the necessity of understanding the low-level complexities of the processing pipeline.</description>
+    <url>https://github.com/psambit9791/jDSP</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Sambit Paul</name>
+            <email>sambitpaul1992@gmail.com</email>
+            <organization>Onyx Tech Labs</organization>
+            <organizationUrl>https://sites.google.com/view/sambit-paul</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/psambit9791/jDSP.git</connection>
+        <developerConnection>scm:git:ssh://github.com:psambit9791/jDSP.git</developerConnection>
+        <url>http://github.com/psambit9791/jDSP/tree/master</url>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>org.knowm.xchart</groupId>
