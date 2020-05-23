@@ -1,8 +1,10 @@
 package com.github.psambit9791.jdsp.filter;
 
 /**
- * <h1>Bessel</h1>
+ * <h1>Bessel Filter</h1>
  * The Bessel class implements low-pass, high-pass, band-pass and band-stop filter using the Bessel polynomials.
+ * Has the worst roll-off rate amongst all filters but the best phase response.
+ * Use: The Bessel filter is ideal for applications that require minimal phase shift. Due to the gentle frequency response of the Bessel filter, it can only be used in applications where there is adequate space between the passband and stopband. <a href="https://blog.bliley.com/filter-typology-face-off-a-closer-look-at-the-top-4-filter-types">[ref]</a>
  * Reference <a href="https://en.wikipedia.org/wiki/Bessel_filter">article</a> for more information on Bessel Filters.
  * <p>
  *

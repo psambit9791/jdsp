@@ -7,11 +7,24 @@ import org.apache.commons.math3.util.MathArrays;
 
 import java.util.Arrays;
 
+/**
+ * <h1>Wiener Filter</h1>
+ * The Wiener class implements the Wiener filter which is usually used as a sharpening filter
+ * Reference <a href="http://www.owlnet.rice.edu/~elec539/Projects99/BACH/proj2/wiener.html">article</a> for more information on Wiener Filters.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class Wiener {
 
     private double[] signal;
     private int windowSize;
 
+    /**
+     * This constructor initialises the prerequisites required to use Wiener filter. Default window size set to 3.
+     * @param s Signal to be filtered
+     */
     public Wiener(double[] s) {
         if (3 >= s.length) {
             throw new IllegalArgumentException("Signal Length has to be greater than 3.");
@@ -20,6 +33,11 @@ public class Wiener {
         this.windowSize = 3;
     }
 
+    /**
+     * This constructor initialises the prerequisites required to use Wiener filter.
+     * @param s Signal to be filtered
+     * @param wsize Window size for the filter
+     */
     public Wiener(double[] s, int wsize) {
         if (wsize >= s.length) {
             throw new IllegalArgumentException("Window size cannot be greater than or equal to signal length");
@@ -28,6 +46,10 @@ public class Wiener {
         this.windowSize = wsize;
     }
 
+    /**
+     * This method implements a Wiener filter with given parameters, applies it on the signal and returns it.
+     * @return double[] Filtered signal
+     */
     public double[] wiener_filter() {
         double[] cons = new double[this.windowSize];
         Arrays.fill(cons, 1);
