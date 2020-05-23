@@ -57,7 +57,7 @@ public class TestInverseDiscreteFourier {
                 0.0, 0.0, -0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}};
 
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqComp);
-        transformer.ifft();
+        transformer.idft();
         double[] outReal = transformer.get_real_signal();
         double[] outAbsolute = transformer.get_absolute_signal();
 
@@ -105,7 +105,7 @@ public class TestInverseDiscreteFourier {
                 0.0, 0.0, 0.0, 0.0, 0.0}};
 
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqReal);
-        transformer.ifft();
+        transformer.idft();
         double[] outReal = transformer.get_real_signal();
         double[] outAbsolute = transformer.get_absolute_signal();
 

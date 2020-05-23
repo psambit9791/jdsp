@@ -164,7 +164,7 @@ It can also be used to receive the absolute values or the complex values.
   
 ```  
 DiscreteFourier fft1 = new DiscreteFourier(signal); //creates the DFT object with a signal of tye double[]  
-fft1.fft(); //performs the fourier transform  
+fft1.dft(); //performs the fourier transform  
   
 double[] outAbsPos = fft1.returnAbsolute(true); // returns the absolute values of the positive half of the FFT output  
 double[] outAbsFull = fft1.returnAbsolute(false); // returns the absolute values of the complete FFT output  
@@ -183,7 +183,7 @@ It can be used to get only the real components, the absolute values or the full 
   
 ```  
 InverseDiscreteFourier transformer = new InverseDiscreteFourier(seq); //Creates the iDFT object with a sequence of type double[] or double[][]  
-transformer.ifft(); //performs the inverse fourier transform  
+transformer.idft(); //performs the inverse fourier transform  
   
 double[] outReal = transformer.get_real_signal(); //returns only the real components of the generated complex signal  
 double[] outAbsolute = transformer.get_absolute_signal(); //returns the absolute values of the generated complex signal  
