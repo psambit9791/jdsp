@@ -3,24 +3,50 @@ package com.github.psambit9791.jdsp.signal;
 import com.github.psambit9791.jdsp.UtilMethods;
 import com.github.psambit9791.jdsp.filter.Chebyshev;
 
+
+/**
+ * <h1>Decimate</h1>
+ * Downsample the signal after applying an anti-aliasing filter.
+ * Reference <a href="https://dspguru.com/dsp/faqs/multirate/decimation/">article</a> for more information on decimation and its difference from down-sampling.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class Decimate {
 
     private double[] signal;
     private int samplingFreq;
     private boolean zeroPhase;
 
+    /**
+     * This constructor initialises the prerequisites required to use Decimate.
+     * @param s Signal to be filtered
+     * @param Fs Sampling Frequency
+     * @param zeroPhase If phase shift should be prevented. True implies no phase shift happens.
+     */
     public Decimate(double[] s, int Fs, boolean zeroPhase) {
         this.samplingFreq = Fs;
         this.signal = s;
         this.zeroPhase = zeroPhase;
     }
 
+    /**
+     * This constructor initialises the prerequisites required to use Decimate. zeroPhase is set to True by default.
+     * @param s Signal to be filtered
+     * @param Fs Sampling Frequency
+     */
     public Decimate(double[] s, int Fs) {
         this.samplingFreq = Fs;
         this.signal = s;
         this.zeroPhase = true;
     }
 
+    /**
+     * This method perform default convolution using padding in 'reflect' modes.
+     * @param downSamplingFactor Factor by which the signal needs to be downsamples
+     * @return double[] The decimated signal
+     */
     public double[] decimate(int downSamplingFactor) {
         double[] output = new double[(int)Math.ceil(signal.length/(double)downSamplingFactor)];
 
