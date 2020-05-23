@@ -10,7 +10,6 @@ import java.util.Arrays;
 /**
  * <h1>Utility Methods</h1>
  * The UtilMethods class implements different utility functions to help with mathematical operations
- *
  * <p>
  *
  * @author  Sambit Paul
@@ -307,6 +306,12 @@ public class UtilMethods {
         return newSignal;
     }
 
+    /**
+     * Implementation of the numpy version of diff()
+     * Calculate the first discrete difference in the array
+     * @param arr The array to be processed
+     * @return double[] The discrete difference array
+     */
     public static double[] diff(double[] arr) {
         double[] sig = new double[arr.length-1];
         for (int i=0; i<sig.length; i++) {
@@ -315,6 +320,13 @@ public class UtilMethods {
         return sig;
     }
 
+    /**
+     * Implementation of the numpy version of unwrap()
+     * Helps to unwrap a given array by changing deltas to values of 2*pi complement
+     * It unwraps radian phase p by changing absolute jumps greater than discont to their 2*pi complement along the given axis
+     * @param arr The array to be unwrapped
+     * @return double[] The unwrapped array
+     */
     public static double[] unwrap(double[] arr) {
         double[] diff = UtilMethods.diff(arr);
         double[] out = new double[arr.length];
@@ -328,6 +340,14 @@ public class UtilMethods {
         return out;
     }
 
+    /**
+     * Java provides a different implementation of modulo than Python.
+     * In Java, the result has the sign of the dividend, but in Python, the sign is from the divisor.
+     * This method implements the Python version of the modulo operation
+     * @param dividend The numerator
+     * @param divisor The denominator
+     * @return double Result of the modulo operation
+     */
     public static double modulo(double dividend, double divisor) {
         return (((dividend % divisor) + divisor) % divisor);
     }
