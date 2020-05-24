@@ -45,6 +45,7 @@ public class Chebyshev {
      * This method implements a low pass filter with given parameters, filters the signal and returns it.
      * @param order Order of the filter
      * @param cutoffFreq The cutoff frequency for the filter
+     * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @return double[] Filtered signal
      */
     public double[] low_pass_filter(int order, double cutoffFreq, double rippleFactor) {
@@ -73,6 +74,7 @@ public class Chebyshev {
      * This method implements a high pass filter with given parameters, filters the signal and returns it.
      * @param order Order of the filter
      * @param cutoffFreq The cutoff frequency for the filter
+     * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @return double[] Filtered signal
      */
     public double[] high_pass_filter(int order, double cutoffFreq, double rippleFactor) {
@@ -102,6 +104,7 @@ public class Chebyshev {
      * @param order Order of the filter
      * @param lowCutoff The lower cutoff frequency for the filter
      * @param highCutoff The upper cutoff frequency for the filter
+     * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @return double[] Filtered signal
      */
     public double[] band_pass_filter(int order, double lowCutoff, double highCutoff, double rippleFactor) {
@@ -133,6 +136,7 @@ public class Chebyshev {
      * @param order Order of the filter
      * @param lowCutoff The lower cutoff frequency for the filter
      * @param highCutoff The upper cutoff frequency for the filter
+     * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @return double[] Filtered signal
      */
     public double[] band_stop_filter(int order, double lowCutoff, double highCutoff, double rippleFactor) {

@@ -51,9 +51,10 @@ public class DiscreteFourier {
     /**
      * Returns the absolute value of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
+     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
      * @return double[] The decimated signal
      */
-    public double[] returnAbsolute(boolean onlyPositive) {
+    public double[] returnAbsolute(boolean onlyPositive) throws ExceptionInInitializerError{
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute dft() function before returning result");
         }
@@ -77,9 +78,10 @@ public class DiscreteFourier {
     /**
      * Returns the complex value of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
+     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
      * @return double[][] The decimated signal
      */
-    public double[][] returnFull(boolean onlyPositive) {
+    public double[][] returnFull(boolean onlyPositive) throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute dft() function before returning result");
         }

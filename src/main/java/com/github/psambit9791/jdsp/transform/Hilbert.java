@@ -110,6 +110,7 @@ public class Hilbert {
 
     /**
      * Returns the instantaneous frequency generated analytical signal.
+     * @param Fs Sampling Frequency to be used
      * @return double[] The decimated signal
      */
     public double[] get_instantaneous_frequency(double Fs) {

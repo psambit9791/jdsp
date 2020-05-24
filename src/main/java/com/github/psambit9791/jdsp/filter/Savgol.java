@@ -50,7 +50,7 @@ public class Savgol {
      * @param windowSize Size of the filter window/kernel
      * @param polynomialOrder The order of the polynomial used to fit the samples
      * @param deriv The order of the derivative to compute
-     * @param delta The spacing of the samples to which the filter will be applied. Used only if deriv > 0
+     * @param delta The spacing of the samples to which the filter will be applied. Used only if deriv greater than 0
      */
     public Savgol(double[] s, int windowSize, int polynomialOrder, int deriv, double delta) {
         if (polynomialOrder >= windowSize) {
@@ -65,8 +65,10 @@ public class Savgol {
 
     /**
      * Compute the coefficients for a 1-d Savitzky-Golay FIR filter based on the parameters provided.
+     * @throws java.lang.IllegalArgumentException if window size is even
+     * @return the coefficients for a 1-d Savitzky-Golay FIR filter
      */
-    public double[] savgol_coeffs() {
+    public double[] savgol_coeffs() throws IllegalArgumentException {
         int halflen = this.windowSize/2;
         int rem = this.windowSize%2;
 
@@ -112,9 +114,10 @@ public class Savgol {
      * Convolves the 1-d Savitzky-Golay coefficients with the signals
      * Operates in 4 modes of convolution for filtering: "nearest", "constant", "mirror", "wrap"
      * @param mode Mode of Filter operation
+     * @throws java.lang.IllegalArgumentException if mode is not nearest, constant, mirror or wrap
      * @return double[] Filtered signal
      */
-    public double[] savgol_filter(String mode) {
+    public double[] savgol_filter(String mode) throws IllegalArgumentException {
         if (!mode.equals("nearest") && !mode.equals("constant") && !mode.equals("mirror") && !mode.equals("wrap")) {
             throw new IllegalArgumentException("mode must be mirror, constant, nearest or wrap");
         }

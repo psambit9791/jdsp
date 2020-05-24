@@ -24,8 +24,9 @@ public class Wiener {
     /**
      * This constructor initialises the prerequisites required to use Wiener filter. Default window size set to 3.
      * @param s Signal to be filtered
+     * @throws java.lang.IllegalArgumentException if wsize (3) is greater than or equal to signal length
      */
-    public Wiener(double[] s) {
+    public Wiener(double[] s) throws IllegalArgumentException{
         if (3 >= s.length) {
             throw new IllegalArgumentException("Signal Length has to be greater than 3.");
         }
@@ -36,9 +37,10 @@ public class Wiener {
     /**
      * This constructor initialises the prerequisites required to use Wiener filter.
      * @param s Signal to be filtered
+     * @throws java.lang.IllegalArgumentException if wsize is greater than or equal to signal length
      * @param wsize Window size for the filter
      */
-    public Wiener(double[] s, int wsize) {
+    public Wiener(double[] s, int wsize) throws IllegalArgumentException{
         if (wsize >= s.length) {
             throw new IllegalArgumentException("Window size cannot be greater than or equal to signal length");
         }

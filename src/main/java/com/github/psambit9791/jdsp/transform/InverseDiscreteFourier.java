@@ -50,9 +50,10 @@ public class InverseDiscreteFourier {
 
     /**
      * This method returns the real part of the generated signal.
+     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
      * @return double[] The signal (real part)
      */
-    public double[] get_real_signal() {
+    public double[] get_real_signal() throws ExceptionInInitializerError {
         if (this.signal == null) {
             throw new ExceptionInInitializerError("Execute idft() function before returning result");
         }
@@ -65,9 +66,10 @@ public class InverseDiscreteFourier {
 
     /**
      * This method returns the absolute value of the generated signal.
+     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
      * @return double[] The signal (absolute)
      */
-    public double[] get_absolute_signal() {
+    public double[] get_absolute_signal() throws ExceptionInInitializerError {
         if (this.signal == null) {
             throw new ExceptionInInitializerError("Execute idft() function before returning result");
         }
@@ -80,9 +82,10 @@ public class InverseDiscreteFourier {
 
     /**
      * This method returns the complex value of the generated signal as a 2D matrix.
+     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
      * @return double[][] The signal (complex)
      */
-    public double[][] get_complex_signal() {
+    public double[][] get_complex_signal() throws ExceptionInInitializerError {
         if (this.signal == null) {
             throw new ExceptionInInitializerError("Execute idft() function before returning result");
         }
@@ -96,9 +99,10 @@ public class InverseDiscreteFourier {
 
     /**
      * This method returns the complex value of the generated signal as a Complex array.
+     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
      * @return double[] The signal (complex)
      */
-    protected Complex[] get_as_complex()
+    protected Complex[] get_as_complex() throws ExceptionInInitializerError
     {
         if (this.signal == null) {
             throw new ExceptionInInitializerError("Execute idft() function before returning result");

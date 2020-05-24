@@ -29,13 +29,14 @@ public class Smooth {
      * @param s Signal to be smoother
      * @param wsize Size of the window for smoothing
      * @param mode Method of smoothing to be used. Can be "rectangular" or "triangular"
+     * @throws java.lang.IllegalArgumentException if wsize is greater than signal
      */
-    public Smooth(double[] s, int wsize, String mode) {
+    public Smooth(double[] s, int wsize, String mode) throws IllegalArgumentException {
         this.signal = s;
         this.smoothing_kernel = new double[wsize];
         this.mode = mode;
         if (wsize > s.length) {
-            throw new ArithmeticException("Kernel cannot be greater than signal.");
+            throw new IllegalArgumentException("Kernel cannot be greater than signal.");
         }
         this.setKernel(this.mode);
     }
@@ -66,9 +67,10 @@ public class Smooth {
 
     /**
      * This method smooths the signal and returns it.
+     * @throws java.lang.IllegalArgumentException if mode is not rectangular or triangular
      * @return double[] Smoothed signal
      */
-    public double[] smoothSignal() {
+    public double[] smoothSignal() throws IllegalArgumentException{
         if (!this.mode.equals("rectangular") && !this.mode.equals("triangular")) {
             throw new IllegalArgumentException("Mode can only be rectangular or triangular.");
         }

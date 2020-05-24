@@ -62,9 +62,10 @@ public class Detrend {
 
     /**
      * This method detrends the signal and returns it.
+     * @throws java.lang.IllegalArgumentException if node is not linear, constant or poly
      * @return double[] Detrended signal
      */
-    public double[] detrendSignal() {
+    public double[] detrendSignal() throws IllegalArgumentException{
         if (this.mode.equals("constant")) {
             this.detrendedSignal = this.constantDetrend(this.originalSignal);
             return this.detrendedSignal;

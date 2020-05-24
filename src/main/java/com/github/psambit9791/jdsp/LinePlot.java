@@ -93,6 +93,7 @@ public class LinePlot {
     /**
      * This method saves the plot as a .png file
      * @param name Name of the file the plot is to be saved as
+     * @throws java.io.IOException if there is any error in saving
      */
     public void save_as_png(String name) throws IOException {
         BitmapEncoder.saveBitmapWithDPI(this.figure, "./"+name, BitmapEncoder.BitmapFormat.PNG, 300);

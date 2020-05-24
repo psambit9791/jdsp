@@ -44,6 +44,7 @@ public class Convolution {
     /**
      * This is the discrete linear convolution procedure which works in the specified mode.
      * @param mode Mode in which convolution will work. Can be 'full', 'same' or 'valid'
+     * @throws {@link java.lang.IllegalArgumentException} if mode is not full, same or valid
      * @return double[] Result of convolution.
      */
     public double[] convolve(String mode) {
@@ -83,6 +84,7 @@ public class Convolution {
     /**
      * This method perform convolution using padding in different modes.
      * @param mode Mode in which convolution will work. Can be 'reflect', 'constant' or 'nearest', 'mirror' or 'wrap'
+     * @throws {@link java.lang.IllegalArgumentException} if kernel size is greater than or equal to signal length
      * @return double[] Result of convolution with same length as input signal
      */
     public double[] convolve1d(String mode) {
@@ -111,9 +113,10 @@ public class Convolution {
 
     /**
      * This method perform default convolution using padding in 'reflect' modes.
+     * @throws {@link java.lang.IllegalArgumentException} if kernel size is greater than or equal to signal length
      * @return double[] Result of convolution with same length as input signal
      */
-    public double[] convolve1d() {
+    public double[] convolve1d() throws IllegalArgumentException {
         // Works in "reflect" mode
         double[] output = new double[this.signal.length];
         double[] temp;
