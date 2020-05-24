@@ -27,7 +27,7 @@ public class TestSavgol {
                 0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.27 , 0.289,  0.306};
 
         Savgol s1 = new Savgol(this.signal, 7, 2);
-        double[] out = s1.savgol_filter("nearest");
+        double[] out = s1.savgol_filter();
         assertArrayEquals(out, result, 0.001);
     }
 
@@ -38,7 +38,7 @@ public class TestSavgol {
                 0.231,  0.206,  0.162,  0.088,  0.009, -0.026,  0.002,  0.085, 0.173,  0.225,  0.243,  0.249,  0.246,
                 0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.299, 0.274,  0.202};
 
-        Savgol s1 = new Savgol(this.signal, 7, 2);
+        Savgol s1 = new Savgol(this.signal, 7, 2, 0, 1);
         double[] out = s1.savgol_filter("constant");
         assertArrayEquals(result, out, 0.001);
     }
