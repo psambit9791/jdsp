@@ -146,4 +146,13 @@ public class TestUtils {
         assertArrayEquals(result1, out1, 0.001);
         assertArrayEquals(result2, out2, 0.001);
     }
+
+    @Test
+    public void roundTest() {
+        double val = 123.45667;
+        double out1 = UtilMethods.round(val, 1);
+        assertEquals(123.5, out1, 0.00001);
+        double out2 = UtilMethods.round(val, 3);
+        assertEquals(123.457, out2, 0.00001);
+    }
 }

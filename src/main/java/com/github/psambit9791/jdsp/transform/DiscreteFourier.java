@@ -2,6 +2,7 @@ package com.github.psambit9791.jdsp.transform;
 
 import org.apache.commons.math3.complex.Complex;
 
+
 /**
  * <h1>Discrete Fourier Transform</h1>
  * The DiscreteFourier class applies the discrete fourier transform on the input signal and
@@ -36,7 +37,7 @@ public class DiscreteFourier {
             double real = 0;
             double imag = 0;
             for (int t=0; t<out.length; t++) {
-                double angle = 2*Math.PI*t*k/out.length;
+                double angle = (2*Math.PI*t*k)/out.length;
                 real += this.signal[t]*Math.cos(angle);
                 imag += -this.signal[t]*Math.sin(angle);
             }

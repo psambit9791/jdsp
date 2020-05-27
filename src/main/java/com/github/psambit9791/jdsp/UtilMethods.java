@@ -5,6 +5,8 @@ import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.SingularValueDecomposition;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 /**
@@ -350,5 +352,24 @@ public class UtilMethods {
      */
     public static double modulo(double dividend, double divisor) {
         return (((dividend % divisor) + divisor) % divisor);
+    }
+
+    /**
+     * Evenly rounds the number to the given number of decimals
+     * @param value Value to be rounded
+     * @param decimals Number of decimal places to round to
+     * @return double Result of the rounding operation
+     */
+    public static double round(double value, int decimals) {
+        String dPlaces = "#.";
+        for (int i=0; i<decimals; i++) {
+            dPlaces = dPlaces + "#";
+        }
+
+        DecimalFormat df = new DecimalFormat(dPlaces);
+        df.setRoundingMode(RoundingMode.CEILING);
+        Double d = value;
+        String temp = df.format(d);
+        return Double.parseDouble(temp);
     }
 }

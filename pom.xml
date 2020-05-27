@@ -6,7 +6,7 @@
 
     <groupId>com.github.psambit9791</groupId>
     <artifactId>jdsp</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1-SNAPSHOT</version>
 
     <distributionManagement>
         <snapshotRepository>
@@ -100,12 +100,20 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
+                </configuration>
+            </plugin>
 
         </plugins>
     </build>
 
     <name>jDSP - Digital Signal Processing for Java</name>
-    <description>DSP is a library of signal processing tools aiming to provide functionalities as available in
+    <description>jDSP is a library of signal processing tools aiming to provide functionalities as available in
         scipy-signal package for Python. The goal is to provide an easy-to-use APIs for performing complex operation on
         signals eliminating the necessity of understanding the low-level complexities of the processing pipeline.</description>
     <url>https://github.com/psambit9791/jDSP</url>

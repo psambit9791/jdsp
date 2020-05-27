@@ -21,7 +21,7 @@ public class Hilbert {
 
     private double[] signal;
     private double[] h;
-    private Complex[] output;
+    private Complex[] output = null;
 
     /**
      * This constructor initialises the prerequisites required to use Hilbert.
@@ -37,7 +37,7 @@ public class Hilbert {
     private void fillH() {
         this.h[0] = 1;
         if (this.h.length%2 == 0) {
-            for (int i=0; i<this.h.length/2; i++) {
+            for (int i=1; i<this.h.length/2; i++) {
                 this.h[i] = 2;
             }
             this.h[this.h.length/2] = 1;
@@ -71,9 +71,13 @@ public class Hilbert {
 
     /**
      * Returns the complex value of the generated analytical signal as a 2D matrix.
+     * @throws java.lang.ExceptionInInitializerError if called before executing hilbert_transform() method
      * @return double[][] The decimated signal
      */
-    public double[][] get_output() {
+    public double[][] get_output() throws ExceptionInInitializerError {
+        if (this.output == null) {
+            throw new ExceptionInInitializerError("Execute hilbert_transform() function before returning result");
+        }
         double[][] out = new double[this.output.length][2];
         for (int i=0; i<out.length; i++) {
             out[i][0] = this.output[i].getReal();
@@ -84,9 +88,13 @@ public class Hilbert {
 
     /**
      * Returns the amplitude envelope generated analytical signal.
+     * @throws java.lang.ExceptionInInitializerError if called before executing hilbert_transform() method
      * @return double[] The decimated signal
      */
-    public double[] get_amplitude_envelope() {
+    public double[] get_amplitude_envelope() throws ExceptionInInitializerError {
+        if (this.output == null) {
+            throw new ExceptionInInitializerError("Execute hilbert_transform() function before returning result");
+        }
         double[] sig = new double[this.output.length];
         for (int i=0; i<sig.length; i++) {
             sig[i] = this.output[i].abs();
@@ -96,13 +104,17 @@ public class Hilbert {
 
     /**
      * Returns the instantaneous phase generated analytical signal.
+     * @throws java.lang.ExceptionInInitializerError if called before executing hilbert_transform() method
      * @return double[] The decimated signal
      */
-    public double[] get_instantaneous_phase() {
+    public double[] get_instantaneous_phase() throws ExceptionInInitializerError {
+        if (this.output == null) {
+            throw new ExceptionInInitializerError("Execute hilbert_transform() function before returning result");
+        }
         double[] sig = new double[this.output.length];
         Atan2 ang = new Atan2();
         for (int i=0; i<sig.length; i++) {
-            sig[i] = ang.value(this.output[i].getImaginary(), output[i].getReal());
+            sig[i] = ang.value(this.output[i].getImaginary(), this.output[i].getReal());
         }
         double[] out = UtilMethods.unwrap(sig);
         return out;
@@ -111,9 +123,13 @@ public class Hilbert {
     /**
      * Returns the instantaneous frequency generated analytical signal.
      * @param Fs Sampling Frequency to be used
+     * @throws java.lang.ExceptionInInitializerError if called before executing hilbert_transform() method
      * @return double[] The decimated signal
      */
-    public double[] get_instantaneous_frequency(double Fs) {
+    public double[] get_instantaneous_frequency(double Fs) throws ExceptionInInitializerError {
+        if (this.output == null) {
+            throw new ExceptionInInitializerError("Execute hilbert_transform() function before returning result");
+        }
         double[] temp = this.get_instantaneous_phase();
         double cons = 2 * Math.PI;
         double[] sig = UtilMethods.diff(temp);

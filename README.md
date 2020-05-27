@@ -60,6 +60,22 @@ To get a copy of this project, clone this project using:
 ```  
 git clone https://github.com/psambit9791/jDSP.git  
 ```  
+
+To add this as a dependency in your project:
+
+For Maven:
+```
+<dependency>
+  <groupId>com.github.psambit9791</groupId>
+  <artifactId>jdsp</artifactId>
+  <version>0.2.0</version>
+</dependency>
+```
+
+For Gradle:
+```
+implementation 'com.github.psambit9791:jdsp:0.2.0'
+```
   
 ### Prerequisites  
   
