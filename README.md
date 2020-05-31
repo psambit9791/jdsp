@@ -55,24 +55,26 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 
 | **Class** 		| **Type**		    | **Description**	|
 | ------------- | ------------- | ------------- |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/filter/Butterworth.html">com.github.psambit9791.jdsp.filter.Butterworth</a> | Frequency-based Filter | Implements Butterworth Filter for low-pass, high-pass, band-pass and band-stop operation |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/filter/Chebyshev.html">com.github.psambit9791.jdsp.filter.Chebyshev</a> | Frequency-based **Filter** | Implements Chebyshev Filter (Type 1 and Type 2) for low-pass, high-pass, band-pass and band-stop operation |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/filter/Bessel.html">com.github.psambit9791.jdsp.filter.Bessel</a> | Frequency-based **Filter** | Implements Bessel Filter for low-pass, high-pass, band-pass and band-stop operation |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/filter/Median.html">com.github.psambit9791.jdsp.filter.Median</a> | Kernel-based **Filter** | Implements Median Filter for smoothing while maintaining the sharp edges |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/filter/Savgol.html">com.github.psambit9791.jdsp.filter.Savgol</a> | Kernel-based **Filter** | Implements Savitzky–Golay Filter for smoothing using Savitzky–Golay coefficients |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/filter/Median.html">com.github.psambit9791.jdsp.filter.Wiener</a> | Kernel-based **Filter** | Implements Wiener Filter for the sharpening operation |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/filter/Butterworth.html">com.github.psambit9791.jdsp.filter.Butterworth</a> | Frequency-based **Filter** | Implements Butterworth Filter for low-pass, high-pass, band-pass and band-stop operation |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/filter/Chebyshev.html">com.github.psambit9791.jdsp.filter.Chebyshev</a> | Frequency-based **Filter** | Implements Chebyshev Filter (Type 1 and Type 2) for low-pass, high-pass, band-pass and band-stop operation |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/filter/Bessel.html">com.github.psambit9791.jdsp.filter.Bessel</a> | Frequency-based **Filter** | Implements Bessel Filter for low-pass, high-pass, band-pass and band-stop operation |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/filter/Median.html">com.github.psambit9791.jdsp.filter.Median</a> | Kernel-based **Filter** | Implements Median Filter for smoothing while maintaining the sharp edges |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/filter/Savgol.html">com.github.psambit9791.jdsp.filter.Savgol</a> | Kernel-based **Filter** | Implements Savitzky–Golay Filter for smoothing using Savitzky–Golay coefficients |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/filter/Median.html">com.github.psambit9791.jdsp.filter.Wiener</a> | Kernel-based **Filter** | Implements Wiener Filter for the sharpening operation |
 ||||
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/signal/Convolution.html">com.github.psambit9791.jdsp.signal.Convolution </a> | **Signal** Operation | Implements the convolve() and convolve1d() operation |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/signal/CrossCorrelation.html">com.github.psambit9791.jdsp.signal.CrossCorrelation</a> | **Signal** Operation | Implements the cross-correlation operation |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/signal/Detrend.html">com.github.psambit9791.jdsp.signal.Detrend</a> | **Signal** Operation | Implements the detrend operaton to remove trends from a signal |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/signal/Smooth.html">com.github.psambit9791.jdsp.signal.Smooth</a> | **Signal** Operation | Implements convolutional smoothing with rectangular and triangular window |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/signal/Decimate.html">com.github.psambit9791.jdsp.signal.Decimate</a> | **Signal** Operation | Implements the decimation operation to downsample a signal after applying an anti-aliasing filter |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/signal/GeneratePeriodic.html">com.github.psambit9791.jdsp.signal.GeneratePeriodic</a> | **Signal** Operation | Helps to generate sin, cosine and square waves |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Convolution.html">com.github.psambit9791.jdsp.signal.Convolution </a> | **Signal** Operation | Implements the convolve() and convolve1d() operation |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/CrossCorrelation.html">com.github.psambit9791.jdsp.signal.CrossCorrelation</a> | **Signal** Operation | Implements the cross-correlation operation |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Detrend.html">com.github.psambit9791.jdsp.signal.Detrend</a> | **Signal** Operation | Implements the detrend operaton to remove trends from a signal |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Smooth.html">com.github.psambit9791.jdsp.signal.Smooth</a> | **Signal** Operation | Implements convolutional smoothing with rectangular and triangular window |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Decimate.html">com.github.psambit9791.jdsp.signal.Decimate</a> | **Signal** Operation | Implements the decimation operation to downsample a signal after applying an anti-aliasing filter |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/GeneratePeriodic.html">com.github.psambit9791.jdsp.signal.GeneratePeriodic</a> | **Signal** Operation | Helps to generate sin, cosine and square waves |
 ||||
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/transform/DiscreteFourier.html">com.github.psambit9791.jdsp.transform.DiscreteFourier</a> | **Transformation** | Applies the Discrete Fourier Transform on a signal |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/transform/InverseDiscreteFourier.html">com.github.psambit9791.jdsp.transform.InverseDiscreteFourier</a> | **Transformation** | Applies the Inverse Discrete Fourier Transform on a sequence and returns the original signal |
-| <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/transform/Hilbert.html">com.github.psambit9791.jdsp.transform.Hilbert</a> | **Transformation** | Applies the Hilbert Transform on a signal and provides funtions to return amplitude, phase and frequency information |
-
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/transform/DiscreteFourier.html">com.github.psambit9791.jdsp.transform.DiscreteFourier</a> | **Transformation** | Applies the Discrete Fourier Transform on a signal |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/transform/InverseDiscreteFourier.html">com.github.psambit9791.jdsp.transform.InverseDiscreteFourier</a> | **Transformation** | Applies the Inverse Discrete Fourier Transform on a sequence and returns the original signal |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/transform/Hilbert.html">com.github.psambit9791.jdsp.transform.Hilbert</a> | **Transformation** | Applies the Hilbert Transform on a signal and provides funtions to return amplitude, phase and frequency information |
+||||
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/LinePlot.html">com.github.psambit9791.jdsp.LinePlot</a> | **Utility** | Enables plotting of different signals as a line plot |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/UtilMethods.html">com.github.psambit9791.jdsp.UtilMethods</a> | **Utility** | Provides utility functions, details in Wiki |
 <br/>
 
 ## Authors  
@@ -85,7 +87,7 @@ Shout out to all the [contributors](https://github.com/psambit9791/jDSP/contribu
 
 ## Supporting jDSP 
 
-jDSP is an open source project. <br /> You can help by becoming a sponsor on <a href="https://patreon.com/sambitpaul">Patreon</a> or doing a one time donation on <a href="https://paypal.me/psambit9791">PayPal</a> <br />
+jDSP is an open source project. <br/> You can help by becoming a sponsor on <a href="https://patreon.com/sambitpaul">Patreon</a> or doing a one time donation on <a href="https://paypal.me/psambit9791">PayPal</a> <br />
 
 <a href="https://patreon.com/sambitpaul"><img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" /> </a>
 
