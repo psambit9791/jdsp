@@ -3,7 +3,7 @@ package com.github.psambit9791.jdsp.filter;
 /**
  * <h1>Chebyshev Filter</h1>
  * The Chebyshev class implements low-pass, high-pass, band-pass and band-stop filter using the Chebyshev Type I and Type II equations.
- * Has some pass-band ripple but a better (steeper) roll-off rate than Butterworth Filter
+ * Has some pass-band ripple but a better (steeper) roll-off rate than Butterworth Filter.
  * Reference <a href="https://en.wikipedia.org/wiki/Chebyshev_filter">article</a> for more information on Chebyshev Filters.
  * <p>
  *
@@ -100,7 +100,7 @@ public class Chebyshev {
     }
 
     /**
-     * This method implements a pand pass filter with given parameters, filters the signal and returns it.
+     * This method implements a band pass filter with given parameters, filters the signal and returns it.
      * @param order Order of the filter
      * @param lowCutoff The lower cutoff frequency for the filter
      * @param highCutoff The upper cutoff frequency for the filter

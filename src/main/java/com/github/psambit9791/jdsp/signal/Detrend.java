@@ -84,7 +84,7 @@ public class Detrend {
     }
 
     /**
-     * This getter method to get the trendl line fo the signal.
+     * This getter method to get the trend line fo the signal.
      * @return double[] Calculated trend line
      */
     public double[] getTrendLine() {

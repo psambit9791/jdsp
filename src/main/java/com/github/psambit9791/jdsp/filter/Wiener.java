@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 /**
  * <h1>Wiener Filter</h1>
- * The Wiener class implements the Wiener filter which is usually used as a sharpening filter
+ * The Wiener class implements the Wiener filter which is usually used as a sharpening filter.
  * Reference <a href="http://www.owlnet.rice.edu/~elec539/Projects99/BACH/proj2/wiener.html">article</a> for more information on Wiener Filters.
  * <p>
  *

@@ -60,7 +60,7 @@ public class Bessel {
     }
 
     /**
-     * This method implements a pand pass filter with given parameters, filters the signal and returns it.
+     * This method implements a band pass filter with given parameters, filters the signal and returns it.
      * @param order Order of the filter
      * @param lowCutoff The lower cutoff frequency for the filter
      * @param highCutoff The upper cutoff frequency for the filter

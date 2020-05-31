@@ -5,8 +5,8 @@ import org.apache.commons.math3.util.MathArrays;
 
 /**
  * <h1>Convolution</h1>
- * The Convolution class implements different variations
- * convolution as provided in numpy <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.convolve.html">convolve()</a> function
+ * The Convolution class implements different variations of convolution as provided in numpy
+ * <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.convolve.html">convolve()</a> function
  * and scipy.ndimage <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.convolve1d.html">convolve1d()</a> function
  * <p>
  *
@@ -20,8 +20,7 @@ public class Convolution {
     private double[] output;
 
     /**
-     * This constructor initialises the prerequisites
-     * required to perform convolution.
+     * This constructor initialises the prerequisites required to perform convolution.
      * @param s Signal to be convolved
      * @param w Kernel for convolution
      */
@@ -118,7 +117,7 @@ public class Convolution {
      */
     public double[] convolve1d() throws IllegalArgumentException {
         // Works in "reflect" mode
-        double[] output = new double[this.signal.length];
+        double[] output;
         double[] temp;
 
         if (this.signal.length <= this.kernel.length) {

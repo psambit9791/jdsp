@@ -3,7 +3,7 @@ package com.github.psambit9791.jdsp.filter;
 /**
  * <h1>Butterworth Filter</h1>
  * The Butterworth class implements low-pass, high-pass, band-pass and band-stop filter using the Butterworth polynomials.
- * Has the flattest pass-band but a poor roll-off rate
+ * Has the flattest pass-band but a poor roll-off rate.
  * Reference <a href="https://en.wikipedia.org/wiki/Butterworth_filter">article</a> for more information on Buttterworth Filters.
  * <p>
  *
@@ -59,7 +59,7 @@ public class Butterworth {
     }
 
     /**
-     * This method implements a pand pass filter with given parameters, filters the signal and returns it.
+     * This method implements a band pass filter with given parameters, filters the signal and returns it.
      * @param order Order of the filter
      * @param lowCutoff The lower cutoff frequency for the filter
      * @param highCutoff The upper cutoff frequency for the filter

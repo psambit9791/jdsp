@@ -20,8 +20,7 @@ public class CrossCorrelation {
     private double[] output;
 
     /**
-     * This constructor initialises the prerequisites
-     * required to perform cross-correlation.
+     * This constructor initialises the prerequisites required to perform cross-correlation.
      * @param s Signal to be convolved
      * @param w Kernel for convolution
      */
