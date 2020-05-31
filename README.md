@@ -43,7 +43,7 @@ git clone https://github.com/psambit9791/jDSP.git
 
 <br/>
 
-##Documentation
+## Documentation
 
 See the [**Wiki**](https://github.com/psambit9791/jDSP/wiki) for general use of jDSP.
 
@@ -53,7 +53,7 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 
 ## Usage
 
-| Class 		| Type		    | Description	|
+| **Class** 		| **Type**		    | **Description**	|
 | ------------- | ------------- | ------------- |
 | <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/filter/Butterworth.html">com.github.psambit9791.jdsp.filter.Butterworth</a> | Frequency-based Filter | Implements Butterworth Filter for low-pass, high-pass, band-pass and band-stop operation |
 | <a href="https://javadoc.io/static/com.github.psambit9791/jdsp/0.2.0/com/github/psambit9791/jdsp/filter/Chebyshev.html">com.github.psambit9791.jdsp.filter.Chebyshev</a> | Frequency-based **Filter** | Implements Chebyshev Filter (Type 1 and Type 2) for low-pass, high-pass, band-pass and band-stop operation |
