@@ -1,7 +1,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.signal.Decimate;
-import com.github.psambit9791.jdsp.signal.GeneratePeriodic;
+import com.github.psambit9791.jdsp.signal.Generate;
 import org.apache.commons.math3.util.MathArrays;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ public class TestDecimate {
 
     private int Fs = 100;
     private double[] signal;
-    private GeneratePeriodic gp = new GeneratePeriodic(this.Fs);
+    private Generate gp = new Generate(this.Fs);
 
     private double[] generateSignal() {
         double[] sin1 = this.gp.generateSineWave(10);

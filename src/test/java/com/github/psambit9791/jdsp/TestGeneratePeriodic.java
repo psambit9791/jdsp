@@ -1,6 +1,6 @@
 package com.github.psambit9791.jdsp;
 
-import com.github.psambit9791.jdsp.signal.GeneratePeriodic;
+import com.github.psambit9791.jdsp.signal.Generate;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class TestGeneratePeriodic {
 
     final private int Fs = 100;
-    private final GeneratePeriodic gp = new GeneratePeriodic(this.Fs);
+    private final Generate gp = new Generate(this.Fs);
 
     @Test
     public void TestSine() {

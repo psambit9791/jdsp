@@ -10,7 +10,7 @@ import com.github.psambit9791.jdsp.UtilMethods;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class GeneratePeriodic {
+public class Generate {
 
     private int Fs;
     private double[] time;
@@ -27,7 +27,7 @@ public class GeneratePeriodic {
      * required to generate different signals.
      * @param samplingFreq Sampling Frequency
      */
-    public GeneratePeriodic(int samplingFreq) {
+    public Generate(int samplingFreq) {
         this.Fs = samplingFreq;
         this.time = UtilMethods.linspace(0, 1, samplingFreq, true);
     }
