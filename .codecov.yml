@@ -6,4 +6,6 @@ coverage:
   round: down
   range: "60...100"
   status:
-    patch: off
+    patch:
+      default:
+        target: 80%
