@@ -2,6 +2,7 @@ package com.github.psambit9791.jdsp;
 
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
+import org.knowm.xchart.style.markers.SeriesMarkers;
 
 import java.io.IOException;
 
@@ -19,7 +20,7 @@ public class LinePlot {
     private XYChartBuilder plot;
 
     /**
-     * This constructor initialises the parameters required to generate the plot.
+     * This constructor initialises the parameters required to generate the plot. Marker is automatically set to True.
      */
     public LinePlot() {
         this.plot = new XYChartBuilder().width(600).height(500).xAxisTitle("X").yAxisTitle("Y");
@@ -69,18 +70,26 @@ public class LinePlot {
      * @param name Name of the curve being added (Used for the legend)
      * @param x Data to be plotted on the X-axis
      * @param y Data to be plotted on the Y-axis
+     * @param marker If the marker should be shown at datapoints
      */
-    public void add_signal(String name, double[] x, double[] y) {
-        this.figure.addSeries(name, x, y);
+    public void add_signal(String name, double[] x, double[] y, boolean marker) {
+        XYSeries s = this.figure.addSeries(name, x, y);
+        if (!marker) {
+            s.setMarker(SeriesMarkers.NONE);
+        }
     }
 
     /**
      * This method adds a curve to the plot
      * @param name Name of the curve being added (Used for the legend)
      * @param y Data to be plotted on the Y-axis
+     * @param marker If the marker should be shown at datapoints
      */
-    public void add_signal(String name, double[] y) {
-        this.figure.addSeries(name, y);
+    public void add_signal(String name, double[] y, boolean marker) {
+        XYSeries s = this.figure.addSeries(name, y);
+        if (!marker) {
+            s.setMarker(SeriesMarkers.NONE);
+        }
     }
 
     /**

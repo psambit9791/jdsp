@@ -18,8 +18,8 @@ public class TestLinePlot {
 
         LinePlot fig = new LinePlot("Sample Figure", "Signal", "Time");
         fig.initialise_plot();
-        fig.add_signal("Signal 1", time, signal1);
-        fig.add_signal("Signal 2", time, signal2);
+        fig.add_signal("Signal 1", time, signal1, true);
+        fig.add_signal("Signal 2", time, signal2, true);
         fig.save_as_png(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         assertTrue(fileExists);
@@ -35,8 +35,8 @@ public class TestLinePlot {
 
         LinePlot fig = new LinePlot();
         fig.initialise_plot();
-        fig.add_signal("Signal 1", signal1);
-        fig.add_signal("Signal 2", signal2);
+        fig.add_signal("Signal 1", signal1, false);
+        fig.add_signal("Signal 2", signal2, false);
         fig.save_as_png(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         assertTrue(fileExists);
@@ -51,8 +51,8 @@ public class TestLinePlot {
 
         LinePlot fig = new LinePlot(600, 500, "Sample Figure", "Signal", "Time");
         fig.initialise_plot();
-        fig.add_signal("Signal 1", signal1);
-        fig.add_signal("Signal 2", signal2);
+        fig.add_signal("Signal 1", signal1, true);
+        fig.add_signal("Signal 2", signal2, true);
         fig.save_as_png(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         assertTrue(fileExists);
