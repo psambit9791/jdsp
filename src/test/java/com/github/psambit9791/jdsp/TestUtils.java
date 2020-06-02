@@ -155,4 +155,12 @@ public class TestUtils {
         double out2 = UtilMethods.round(val, 3);
         assertEquals(123.457, out2, 0.00001);
     }
+
+    @Test
+    public void moduloTest() {
+        double divisor = -2;
+        double dividend = 4;
+        double out = UtilMethods.modulo(divisor, dividend);
+        assertEquals(2, out, 0.001);
+    }
 }
