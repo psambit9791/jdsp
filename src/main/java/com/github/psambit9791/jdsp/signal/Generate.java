@@ -34,6 +34,14 @@ public class Generate {
 
     /**
      * Generates a sine wave based on the provided parameters
+     * @return double[] Time points generated
+     */
+    public double[] getTimeArray() {
+        return this.time;
+    }
+
+    /**
+     * Generates a sine wave based on the provided parameters
      * @param waveFreq Frequency of the wave to be generated
      * @return double[] Smoothed signal
      */

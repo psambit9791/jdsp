@@ -3,15 +3,17 @@ package com.github.psambit9791.jdsp;
 import com.github.psambit9791.jdsp.signal.Generate;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
-public class TestGeneratePeriodic {
+public class TestGenerate {
 
     final private int Fs = 100;
     private final Generate gp = new Generate(this.Fs);
 
     @Test
-    public void TestSine() {
+    public void TestSine() throws IOException{
         int f1 = 10;
         double[] out1 = this.gp.generateSineWave(f1);
         double[] result1 = {0., 0.593, 0.955, 0.945, 0.567, -0.032, -0.618, -0.964, -0.934, -0.541, 0.063,
@@ -23,6 +25,8 @@ public class TestGeneratePeriodic {
                 -0.896, -0.985, -0.69, -0.127, 0.486, 0.91, 0.979, 0.667, 0.095, -0.514, -0.922, -0.972, -0.643,
                 -0.063, 0.541, 0.934, 0.964, 0.618, 0.032, -0.567, -0.945, -0.955, -0.593, -0.};
         assertArrayEquals(result1, out1, 0.001);
+        double[] t = this.gp.getTimeArray();
+        this.plot_now("Sine Wave", t, result1, "sine.png");
 
         int f2 = 20;
         double[] out2 = this.gp.generateSineWave(f2);
@@ -38,7 +42,7 @@ public class TestGeneratePeriodic {
     }
 
     @Test
-    public void TestCosine() {
+    public void TestCosine() throws IOException{
         int f1 = 10;
         double[] out1 = this.gp.generateCosineWave(f1);
         double[] result1 = {1., 0.805, 0.297, -0.327, -0.824, -0.999, -0.786, -0.266, 0.357, 0.841, 0.998, 0.766,
@@ -50,6 +54,8 @@ public class TestGeneratePeriodic {
                 0.174, 0.724, 0.992, 0.874, 0.415, -0.205, -0.745, -0.995, -0.858, -0.386, 0.236, 0.766, 0.998,
                 0.841, 0.357, -0.266, -0.786, -0.999, -0.824, -0.327, 0.297, 0.805, 1.};
         assertArrayEquals(result1, out1, 0.001);
+        double[] t = this.gp.getTimeArray();
+        this.plot_now("Cosine Wave", t, result1, "cosine.png");
 
         int f2 = 20;
         double[] out2 = this.gp.generateCosineWave(f2);
@@ -65,7 +71,7 @@ public class TestGeneratePeriodic {
     }
 
     @Test
-    public void TestSquare() {
+    public void TestSquare() throws IOException {
         int f1 = 10;
         double[] out1 = this.gp.generateSquareWave(f1);
         double[] result1 = {1., 1., 1., 1., 1., -1., -1., -1., -1., -1., 1., 1., 1., 1., 1., -1., -1., -1., -1.,
@@ -74,6 +80,8 @@ public class TestGeneratePeriodic {
                 1., 1., 1., 1., -1., -1., -1., -1., -1., 1., 1., 1., 1., 1., -1., -1., -1., -1., -1., 1., 1.,
                 1., 1., 1., -1., -1., -1., -1., -1., 1., 1., 1., 1., 1., -1., -1., -1., -1., 1.};
         assertArrayEquals(result1, out1, 0.001);
+        double[] t = this.gp.getTimeArray();
+        this.plot_now("Square Wave", t, result1, "square.png");
 
         int f2 = 20;
         double[] out2 = this.gp.generateSquareWave(f2);
@@ -83,5 +91,12 @@ public class TestGeneratePeriodic {
                 1.,  1., -1., -1., -1., 1.,  1., -1., -1., -1.,  1.,  1., -1., -1., -1.,  1.,  1., -1., -1., -1.,  1.,
                 1., -1., -1., -1.,  1.,  1., -1., -1., -1.,  1., 1., -1., -1., -1.,  1.,  1., -1., -1.,  1.};
         assertArrayEquals(result2, out2, 0.001);
+    }
+
+    public void plot_now(String title, double[] t, double[] signal, String fname) throws IOException {
+        LinePlot fig = new LinePlot(600, 300, title, "Signal", "Time");
+        fig.initialise_plot();
+        fig.add_signal(title, t, signal, false);
+        fig.save_as_png(fname);
     }
 }
