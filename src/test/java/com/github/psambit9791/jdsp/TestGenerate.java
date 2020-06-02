@@ -94,7 +94,7 @@ public class TestGenerate {
     }
 
     public void plot_now(String title, double[] t, double[] signal, String fname) throws IOException {
-        LinePlot fig = new LinePlot(600, 300, title, "Signal", "Time");
+        LinePlot fig = new LinePlot(600, 300, title, "Time", "Signal");
         fig.initialise_plot();
         fig.add_signal(title, t, signal, false);
         fig.save_as_png(fname);
