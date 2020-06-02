@@ -23,7 +23,7 @@ public class LinePlot {
      * This constructor initialises the parameters required to generate the plot. Marker is automatically set to True.
      */
     public LinePlot() {
-        this.plot = new XYChartBuilder().width(600).height(500).xAxisTitle("X").yAxisTitle("Y");
+        this.plot = new XYChartBuilder().width(600).height(500).theme(Styler.ChartTheme.Matlab).xAxisTitle("X").yAxisTitle("Y");
     }
 
     /**
@@ -31,7 +31,7 @@ public class LinePlot {
      * @param title Title of the plot
      */
     public LinePlot(String title) {
-        this.plot = new XYChartBuilder().width(600).height(500).title(title).xAxisTitle("X").yAxisTitle("Y");
+        this.plot = new XYChartBuilder().width(600).height(500).theme(Styler.ChartTheme.Matlab).title(title).xAxisTitle("X").yAxisTitle("Y");
     }
 
     /**
@@ -41,7 +41,7 @@ public class LinePlot {
      * @param y_axis Title of property plotted on the X-axis
      */
     public LinePlot(String title, String x_axis, String y_axis) {
-        this.plot = new XYChartBuilder().width(600).height(500).title(title).xAxisTitle(x_axis).yAxisTitle(y_axis);
+        this.plot = new XYChartBuilder().width(600).height(500).theme(Styler.ChartTheme.Matlab).title(title).xAxisTitle(x_axis).yAxisTitle(y_axis);
     }
 
     /**
@@ -53,7 +53,7 @@ public class LinePlot {
      * @param y_axis Title of property plotted on the X-axis
      */
     public LinePlot(int width, int height, String title, String x_axis, String y_axis) {
-        this.plot = new XYChartBuilder().width(width).height(height).title(title).xAxisTitle(x_axis).yAxisTitle(y_axis);
+        this.plot = new XYChartBuilder().width(width).height(height).theme(Styler.ChartTheme.Matlab).title(title).xAxisTitle(x_axis).yAxisTitle(y_axis);
     }
 
     /**

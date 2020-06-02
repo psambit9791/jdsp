@@ -16,7 +16,7 @@ public class TestLinePlot {
 
         String outputFileName = "temp1";
 
-        LinePlot fig = new LinePlot("Sample Figure", "Signal", "Time");
+        LinePlot fig = new LinePlot("Sample Figure", "Time", "Signal");
         fig.initialise_plot();
         fig.add_signal("Signal 1", time, signal1, true);
         fig.add_signal("Signal 2", time, signal2, true);
@@ -49,7 +49,7 @@ public class TestLinePlot {
 
         String outputFileName = "temp3";
 
-        LinePlot fig = new LinePlot(600, 500, "Sample Figure", "Signal", "Time");
+        LinePlot fig = new LinePlot(600, 500, "Sample Figure", "Time", "Signal");
         fig.initialise_plot();
         fig.add_signal("Signal 1", signal1, true);
         fig.add_signal("Signal 2", signal2, true);
