@@ -53,7 +53,6 @@ public class TestLinePlot {
         fig.initialise_plot();
         fig.add_signal("Signal 1", signal1, true);
         fig.add_signal("Signal 2", signal2, true);
-        fig.plot();
         fig.save_as_png(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         assertTrue(fileExists);
