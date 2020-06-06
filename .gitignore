@@ -73,3 +73,9 @@ fabric.properties
 
 # Test Images
 temp*.png
+sine.png
+cosine.png
+square.png
+
+# POM Backup
+pom.xml.versionsBackup

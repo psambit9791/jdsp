@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/psambit9791/jDSP/blob/master/res/img/jDSP_logo.png" alt="jDSP Logo"/>
+  <img src="https://github.com/psambit9791/jDSP/blob/master/res/img/jDSP-Logo.png" alt="jDSP Logo"/>
 </p>
 
 [![Build Status](https://travis-ci.com/psambit9791/jDSP.svg?branch=master)](https://travis-ci.com/psambit9791/jDSP)
@@ -8,9 +8,9 @@
 [![javadoc](https://javadoc.io/badge2/com.github.psambit9791/jdsp/javadoc.svg)](https://javadoc.io/doc/com.github.psambit9791/jdsp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?)](https://github.com/psambit9791/jDSP/blob/master/LICENSE)
 
-jDSP is a library of signal processing tools aiming to provide functionalities as available in scipy-signal package for 
-Python. The goal is to provide an easy-to-use APIs for performing complex operation on signals eliminating the necessity 
-of  understanding the low-level complexities of the processing pipeline.  
+jDSP is a library of signal processing tools aimed at providing functionalities as available in scipy-signal package for 
+Python. The goal is to provide easy-to-use APIs for performing complex operation on signals eliminating the necessity 
+of understanding the low-level complexities in the processing pipeline.  
 
 ## Quick Start
 
@@ -20,7 +20,7 @@ To get the latest stable release of jDSP:
 
 ### Gradle
 ```
-implementation 'com.github.psambit9791:jdsp:0.2.0'
+implementation 'com.github.psambit9791:jdsp:0.2.1'
 ```
 
 ### Maven
@@ -28,7 +28,7 @@ implementation 'com.github.psambit9791:jdsp:0.2.0'
 <dependency>
   <groupId>com.github.psambit9791</groupId>
   <artifactId>jdsp</artifactId>
-  <version>0.2.0</version>
+  <version>0.2.1</version>
 </dependency>
 ```
 
@@ -38,14 +38,14 @@ For the latest development version of jDSP (unreleased):
 
 ### Github
 ```  
-git clone https://github.com/psambit9791/jDSP.git  
+git clone --single-branch --branch master https://github.com/psambit9791/jDSP.git
 ``` 
 
 <br/>
 
 ## Documentation
 
-See the [**Wiki**](https://github.com/psambit9791/jDSP/wiki) for general use of jDSP.
+See the [**Wiki**](https://github.com/psambit9791/jDSP/wiki) for an introduction to the general use of jDSP.
 
 See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for more advanced documentation.
 
@@ -75,14 +75,6 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 ||||
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/UtilMethods.html">com.github.psambit9791.jdsp.UtilMethods</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Utilities"><strong>Utility</strong></a> | Provides utility functions, details in Wiki |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/LinePlot.html">com.github.psambit9791.jdsp.LinePlot</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Plotting"><strong>Utility</strong></a> | Enables plotting of different signals as a line plot |
-<br/>
-
-## Authors  
-  
-* [**Sambit Paul**](https://github.com/psambit9791)
-  
-Shout out to all the [contributors](https://github.com/psambit9791/jDSP/contributors) who participated in this project.
-
 <br/>
 
 ## Supporting jDSP 
