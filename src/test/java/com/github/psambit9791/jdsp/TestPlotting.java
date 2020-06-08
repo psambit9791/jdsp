@@ -1,12 +1,24 @@
 package com.github.psambit9791.jdsp;
 
-import org.junit.Test;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
 
 import java.io.File;
 import java.io.IOException;
 
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestPlotting {
+
+    @Test
+    @Order(1)
+    public void createTestOutputDirectory() {
+        String dirName = "./test_outputs/";
+        File directory = new File(dirName);
+        if (! directory.exists()){
+            directory.mkdir();
+        }
+    }
 
     @Test
     public void testPlotSave1() throws IOException {
@@ -22,7 +34,7 @@ public class TestPlotting {
         fig.add_signal("Signal 2", time, signal2, true);
         fig.save_as_png(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
-        assertTrue(fileExists);
+        Assertions.assertTrue(fileExists);
     }
 
     @Test
@@ -39,7 +51,7 @@ public class TestPlotting {
         fig.add_signal("Signal 2", signal2, false);
         fig.save_as_png(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
-        assertTrue(fileExists);
+        Assertions.assertTrue(fileExists);
     }
 
     @Test
@@ -55,7 +67,7 @@ public class TestPlotting {
         fig.add_signal("Signal 2", signal2, true);
         fig.save_as_png(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
-        assertTrue(fileExists);
+        Assertions.assertTrue(fileExists);
     }
 
     @Test
@@ -75,6 +87,6 @@ public class TestPlotting {
         fig.add_points("Points 2", time, points2);
         fig.save_as_png(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
-        assertTrue(fileExists);
+        Assertions.assertTrue(fileExists);
     }
 }

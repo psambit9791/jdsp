@@ -1,8 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.signal.CrossCorrelation;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestCrossCorrelation {
 
@@ -19,11 +19,11 @@ public class TestCrossCorrelation {
 
         CrossCorrelation cc1 = new CrossCorrelation(this.signal1, this.kernel1);
         double[] out = cc1.cross_correlate("full");
-        assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
 
         CrossCorrelation cc2 = new CrossCorrelation(this.signal2, this.kernel2);
         out = cc2.cross_correlate("full");
-        assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
     }
 
     @Test
@@ -33,11 +33,11 @@ public class TestCrossCorrelation {
 
         CrossCorrelation cc1 = new CrossCorrelation(this.signal1, this.kernel1);
         double[] out = cc1.cross_correlate("same");
-        assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
 
         CrossCorrelation cc2 = new CrossCorrelation(this.signal2, this.kernel2);
         out = cc2.cross_correlate("same");
-        assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
     }
 
     @Test
@@ -47,10 +47,10 @@ public class TestCrossCorrelation {
 
         CrossCorrelation cc1 = new CrossCorrelation(this.signal1, this.kernel1);
         double[] out = cc1.cross_correlate("valid");
-        assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
 
         CrossCorrelation cc2 = new CrossCorrelation(this.signal2, this.kernel2);
         out = cc2.cross_correlate();
-        assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
     }
 }

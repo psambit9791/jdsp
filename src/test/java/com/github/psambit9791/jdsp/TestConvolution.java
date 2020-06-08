@@ -1,8 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.signal.Convolution;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestConvolution {
 
@@ -11,6 +11,7 @@ public class TestConvolution {
 
     final double[] signal2 = {2, 8, 0, 4, 1, 9, 9, 0};
     final double[] kernel2 = {1, 3, 1, 3};
+
     @Test
     public void fullConvolutionTest() {
         final double[] result1 = {1.0, 2.0, 4.0, 6.5, 9.0, 5.5, 7.0, 2.5};
@@ -18,11 +19,11 @@ public class TestConvolution {
 
         Convolution con1 = new Convolution(this.signal1, this.kernel1);
         double[] out = con1.convolve("full");
-        assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
 
         Convolution con2 = new Convolution(this.signal2, this.kernel2);
         out = con2.convolve();
-        assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
     }
 
     @Test
@@ -32,11 +33,11 @@ public class TestConvolution {
 
         Convolution con1 = new Convolution(this.signal1, this.kernel1);
         double[] out = con1.convolve("same");
-        assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
 
         Convolution con2 = new Convolution(this.signal2, this.kernel2);
         out = con2.convolve("same");
-        assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
     }
 
     @Test
@@ -46,11 +47,11 @@ public class TestConvolution {
 
         Convolution con1 = new Convolution(this.signal1, this.kernel1);
         double[] out = con1.convolve("valid");
-        assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
 
         Convolution con2 = new Convolution(this.signal2, this.kernel2);
         out = con2.convolve("valid");
-        assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
     }
 
     @Test
@@ -60,11 +61,11 @@ public class TestConvolution {
 
         Convolution con1 = new Convolution(this.signal1, this.kernel1);
         double[] out = con1.convolve1d("reflect");
-        assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
 
         Convolution con2 = new Convolution(this.signal2, this.kernel2);
         out = con2.convolve1d();
-        assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
     }
 
     @Test
@@ -74,11 +75,11 @@ public class TestConvolution {
 
         Convolution con1 = new Convolution(this.signal1, this.kernel1);
         double[] out = con1.convolve1d("constant");
-        assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
 
         Convolution con2 = new Convolution(this.signal2, this.kernel2);
         out = con2.convolve1d("constant");
-        assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
     }
 
     @Test
@@ -88,11 +89,11 @@ public class TestConvolution {
 
         Convolution con1 = new Convolution(this.signal1, this.kernel1);
         double[] out = con1.convolve1d("nearest");
-        assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
 
         Convolution con2 = new Convolution(this.signal2, this.kernel2);
         out = con2.convolve1d("nearest");
-        assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
     }
 
     @Test
@@ -102,11 +103,11 @@ public class TestConvolution {
 
         Convolution con1 = new Convolution(this.signal1, this.kernel1);
         double[] out = con1.convolve1d("mirror");
-        assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
 
         Convolution con2 = new Convolution(this.signal2, this.kernel2);
         out = con2.convolve1d("mirror");
-        assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
     }
 
     @Test
@@ -116,10 +117,10 @@ public class TestConvolution {
 
         Convolution con1 = new Convolution(this.signal1, this.kernel1);
         double[] out = con1.convolve1d("wrap");
-        assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
 
         Convolution con2 = new Convolution(this.signal2, this.kernel2);
         out = con2.convolve1d("wrap");
-        assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
     }
 }

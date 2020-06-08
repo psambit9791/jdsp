@@ -1,8 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Median;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestMedian {
 
@@ -14,7 +14,7 @@ public class TestMedian {
 
         Median mf = new Median(signal, wSize);
         double[] out = mf.median_filter();
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -24,6 +24,6 @@ public class TestMedian {
 
         Median mf = new Median(signal);
         double[] out = mf.median_filter();
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 }

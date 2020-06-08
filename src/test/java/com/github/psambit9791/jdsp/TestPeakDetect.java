@@ -1,8 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.signal.FindPeak;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestPeakDetect {
 
@@ -19,7 +19,7 @@ public class TestPeakDetect {
         FindPeak fp = new FindPeak(this.signal);
         int[] out = fp.detect_relative_maxima();
 
-        assertArrayEquals(result, out);
+        Assertions.assertArrayEquals(result, out);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class TestPeakDetect {
         FindPeak fp = new FindPeak(this.signal);
         int[] out = fp.detect_relative_minima();
 
-        assertArrayEquals(result, out);
+        Assertions.assertArrayEquals(result, out);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class TestPeakDetect {
         FindPeak fp = new FindPeak(this.highResSignal);
         int[] out = fp.detect_peaks();
 
-        assertArrayEquals(result, out);
+        Assertions.assertArrayEquals(result, out);
     }
 
     @Test
@@ -51,6 +51,6 @@ public class TestPeakDetect {
         FindPeak fp = new FindPeak(this.highResSignal);
         int[] out = fp.detect_troughs();
 
-        assertArrayEquals(result, out);
+        Assertions.assertArrayEquals(result, out);
     }
 }

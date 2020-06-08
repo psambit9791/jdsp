@@ -1,8 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.transform.DiscreteFourier;
-import org.junit.Test;
-import static org.junit.Assert.assertArrayEquals;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestDiscreteFourier {
 
@@ -33,7 +33,7 @@ public class TestDiscreteFourier {
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
         double[] out = fft1.returnAbsolute(true);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class TestDiscreteFourier {
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
         double[] out = fft1.returnAbsolute(true);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class TestDiscreteFourier {
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
         double[] out = fft1.returnAbsolute(false);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class TestDiscreteFourier {
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
         double[] out = fft1.returnAbsolute(false);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -107,8 +107,8 @@ public class TestDiscreteFourier {
             outReal[i] = out[i][0];
             outIm[i] = out[i][1];
         }
-        assertArrayEquals(resultReal, outReal, 0.001);
-        assertArrayEquals(resultIm, outIm, 0.001);
+        Assertions.assertArrayEquals(resultReal, outReal, 0.001);
+        Assertions.assertArrayEquals(resultIm, outIm, 0.001);
     }
 
     @Test
@@ -139,8 +139,8 @@ public class TestDiscreteFourier {
             outReal[i] = out[i][0];
             outIm[i] = out[i][1];
         }
-        assertArrayEquals(resultReal, outReal, 0.001);
-        assertArrayEquals(resultIm, outIm, 0.001);
+        Assertions.assertArrayEquals(resultReal, outReal, 0.001);
+        Assertions.assertArrayEquals(resultIm, outIm, 0.001);
     }
 
     @Test
@@ -171,8 +171,8 @@ public class TestDiscreteFourier {
             outReal[i] = out[i][0];
             outIm[i] = out[i][1];
         }
-        assertArrayEquals(resultReal, outReal, 0.001);
-        assertArrayEquals(resultIm, outIm, 0.001);
+        Assertions.assertArrayEquals(resultReal, outReal, 0.001);
+        Assertions.assertArrayEquals(resultIm, outIm, 0.001);
     }
 
     @Test
@@ -216,7 +216,7 @@ public class TestDiscreteFourier {
             outReal[i] = out[i][0];
             outIm[i] = out[i][1];
         }
-        assertArrayEquals(resultReal, outReal, 0.001);
-        assertArrayEquals(resultIm, outIm, 0.001);
+        Assertions.assertArrayEquals(resultReal, outReal, 0.001);
+        Assertions.assertArrayEquals(resultIm, outIm, 0.001);
     }
 }

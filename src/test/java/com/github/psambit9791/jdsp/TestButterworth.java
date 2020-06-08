@@ -1,8 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Butterworth;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestButterworth {
 
@@ -40,7 +40,7 @@ public class TestButterworth {
                 -0.463, -0.741, -0.879, -0.907};
 
         double[] result = flt1.low_pass_filter(4, 9);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class TestButterworth {
                 -0.991, -0.969, -0.929};
 
         double[] result = flt2.low_pass_filter(4, 5);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class TestButterworth {
                 0.814, -0.284, -0.61, 0.651};
 
         double[] result = flt1.high_pass_filter(4, 29);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -85,7 +85,7 @@ public class TestButterworth {
                 0.533, -0.764, 0.927, -0.999};
 
         double[] result = flt2.high_pass_filter(4, 40);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class TestButterworth {
                 0.983, 0.721, -0.134, -0.882, -0.904};
 
         double[] result = flt1.band_pass_filter(4, 12, 18);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class TestButterworth {
                 0.535, -0.637, -0.93};
 
         double[] result = flt2.band_pass_filter(4, 12, 30);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -130,7 +130,7 @@ public class TestButterworth {
                 -0.321, 0.759, -0.386, -1.511, -0.327};
 
         double[] result = flt1.band_stop_filter(4, 7, 28);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -145,6 +145,6 @@ public class TestButterworth {
                 -1.716, 0.276, -1.602, 0.34, -1.076};
 
         double[] result = flt2.band_stop_filter(4, 12, 30);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 }

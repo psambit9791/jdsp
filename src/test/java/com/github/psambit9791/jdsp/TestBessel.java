@@ -1,8 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Bessel;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestBessel {
     // 5Hz Sine + 15Hz Sine + 30Hz Sine sampled @ 100Hz with Nyquist of 50Hz
@@ -39,7 +39,7 @@ public class TestBessel {
                 -0.141, -0.676, -1.039};
 
         double[] result = flt1.low_pass_filter(4, 9);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class TestBessel {
                 -0.836, -0.859, -0.639, -0.353};
 
         double[] result = flt2.low_pass_filter(4, 5);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class TestBessel {
                 -1.245, -0.876, 0.735, 0.044, -0.187};
 
         double[] result = flt1.high_pass_filter(4, 29);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class TestBessel {
                 0.771, -0.96, 1.089, -0.592};
 
         double[] result = flt2.high_pass_filter(4, 40);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class TestBessel {
                 0.723, -0.22, -1.102, -0.886};
 
         double[] result = flt1.band_pass_filter(4, 12, 18);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -114,7 +114,7 @@ public class TestBessel {
                 0.521, -0.58, -1.011};
 
         double[] result = flt2.band_pass_filter(4, 12, 30);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -129,7 +129,7 @@ public class TestBessel {
                 -1.31, -0.026, -1.121, -1.615};
 
         double[] result = flt1.band_stop_filter(4, 7, 28);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -144,6 +144,6 @@ public class TestBessel {
                 0.126, -1.661, 0.408, -1.361, 0.349, -0.69};
 
         double[] result = flt2.band_stop_filter(4, 12, 30);
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 }

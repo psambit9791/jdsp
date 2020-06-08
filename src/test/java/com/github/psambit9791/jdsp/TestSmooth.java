@@ -1,8 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.signal.Smooth;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestSmooth {
     private double[] signal = {0.425, 0.445, 0.445, 0.405, 0.4, 0.43, 0.44, 0.43, 0.435, 0.455, 0.465, 0.455, 0.44,
@@ -21,8 +21,8 @@ public class TestSmooth {
 
         Smooth s1 = new Smooth(this.signal, 7, "rectangular");
         double[] out = s1.smoothSignal();
-        assertArrayEquals(result1, out, 0.001);
-        assertArrayEquals(kernel1, s1.getKernel(), 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(kernel1, s1.getKernel(), 0.001);
 
         final double[] result2 = {0.424, 0.425, 0.424, 0.421, 0.427, 0.438, 0.445, 0.448, 0.45 , 0.45 , 0.445, 0.433,
                 0.417, 0.398, 0.375, 0.355, 0.341, 0.331, 0.32 , 0.309, 0.287, 0.26 , 0.23 , 0.195, 0.143, 0.085, 0.043,
@@ -32,8 +32,8 @@ public class TestSmooth {
 
         s1 = new Smooth(this.signal, 5, "rectangular");
         out = s1.smoothSignal();
-        assertArrayEquals(result2, out, 0.001);
-        assertArrayEquals(kernel2, s1.getKernel(), 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(kernel2, s1.getKernel(), 0.001);
 
         final double[] result3 = {0.438,  0.432,  0.417,  0.412,  0.423,  0.433,  0.435,  0.44 , 0.452,  0.458,  0.453,
                 0.443,  0.435,  0.423,  0.403,  0.375, 0.347,  0.332,  0.328,  0.33 ,  0.317,  0.293,  0.258,  0.228,
@@ -43,8 +43,8 @@ public class TestSmooth {
 
         s1 = new Smooth(this.signal, 3, "rectangular");
         out = s1.smoothSignal();
-        assertArrayEquals(result3, out, 0.001);
-        assertArrayEquals(kernel3, s1.getKernel(), 0.001);
+        Assertions.assertArrayEquals(result3, out, 0.001);
+        Assertions.assertArrayEquals(kernel3, s1.getKernel(), 0.001);
     }
 
     @Test
@@ -57,8 +57,8 @@ public class TestSmooth {
 
         Smooth s1 = new Smooth(this.signal, 7, "triangular");
         double[] out = s1.smoothSignal();
-        assertArrayEquals(result1, out, 0.001);
-        assertArrayEquals(kernel1, s1.getKernel(), 0.001);
+        Assertions.assertArrayEquals(result1, out, 0.001);
+        Assertions.assertArrayEquals(kernel1, s1.getKernel(), 0.001);
 
 
         final double[] result2 = {0.429, 0.42 , 0.417, 0.423, 0.431, 0.436, 0.442, 0.45 , 0.454, 0.452, 0.444, 0.434,
@@ -69,8 +69,8 @@ public class TestSmooth {
 
         s1 = new Smooth(this.signal, 5, "triangular");
         out = s1.smoothSignal();
-        assertArrayEquals(result2, out, 0.001);
-        assertArrayEquals(kernel2, s1.getKernel(), 0.001);
+        Assertions.assertArrayEquals(result2, out, 0.001);
+        Assertions.assertArrayEquals(kernel2, s1.getKernel(), 0.001);
 
 
         final double[] result3 = {0.44 ,  0.435,  0.414,  0.409,  0.425,  0.435,  0.434,  0.439, 0.452,  0.46 ,  0.454,
@@ -81,8 +81,8 @@ public class TestSmooth {
 
         s1 = new Smooth(this.signal, 3, "triangular");
         out = s1.smoothSignal();
-        assertArrayEquals(result3, out, 0.001);
-        assertArrayEquals(kernel3, s1.getKernel(), 0.001);
+        Assertions.assertArrayEquals(result3, out, 0.001);
+        Assertions.assertArrayEquals(kernel3, s1.getKernel(), 0.001);
 
     }
 }

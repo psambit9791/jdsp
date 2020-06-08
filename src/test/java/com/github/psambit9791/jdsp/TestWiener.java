@@ -1,8 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Wiener;
-import org.junit.Test;
-import static org.junit.Assert.assertArrayEquals;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestWiener {
 
@@ -14,7 +14,7 @@ public class TestWiener {
 
         Wiener wf = new Wiener(signal, wsize);
         double[] out = wf.wiener_filter();
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -24,6 +24,6 @@ public class TestWiener {
 
         Wiener wf = new Wiener(signal);
         double[] out = wf.wiener_filter();
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 }

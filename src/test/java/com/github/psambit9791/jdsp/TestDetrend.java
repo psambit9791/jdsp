@@ -1,8 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.signal.Detrend;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 
 public class TestDetrend {
@@ -16,7 +16,7 @@ public class TestDetrend {
 
         Detrend d1 = new Detrend(this.signal, "linear");
         double[] out = d1.detrendSignal();
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class TestDetrend {
 
         Detrend d1 = new Detrend(this.signal, "constant");
         double[] out = d1.detrendSignal();
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -34,6 +34,6 @@ public class TestDetrend {
 
         Detrend d1 = new Detrend(this.polySignal, 2);
         double[] out = d1.detrendSignal();
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 }

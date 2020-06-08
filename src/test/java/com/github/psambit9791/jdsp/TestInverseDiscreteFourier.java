@@ -1,8 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.transform.InverseDiscreteFourier;
-import org.junit.Test;
-import static org.junit.Assert.assertArrayEquals;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestInverseDiscreteFourier {
     private double[][] seqComp= {{0.0, 0.0}, {0.01, -0.266}, {0.046, -0.588}, {0.131, -1.105}, {0.375, -2.367},
@@ -70,10 +70,10 @@ public class TestInverseDiscreteFourier {
             outI[i] = out[i][1];
         }
 
-        assertArrayEquals(resultReal, outReal, 0.001);
-        assertArrayEquals(resultAbs, outAbsolute, 0.001);
-        assertArrayEquals(resultComplex[0], outR, 0.001);
-        assertArrayEquals(resultComplex[1], outI, 0.001);
+        Assertions.assertArrayEquals(resultReal, outReal, 0.001);
+        Assertions.assertArrayEquals(resultAbs, outAbsolute, 0.001);
+        Assertions.assertArrayEquals(resultComplex[0], outR, 0.001);
+        Assertions.assertArrayEquals(resultComplex[1], outI, 0.001);
     }
 
     @Test
@@ -118,9 +118,9 @@ public class TestInverseDiscreteFourier {
             outI[i] = out[i][1];
         }
 
-        assertArrayEquals(resultReal, outReal, 0.001);
-        assertArrayEquals(resultAbs, outAbsolute, 0.001);
-        assertArrayEquals(resultComplex[0], outR, 0.001);
-        assertArrayEquals(resultComplex[1], outI, 0.001);
+        Assertions.assertArrayEquals(resultReal, outReal, 0.001);
+        Assertions.assertArrayEquals(resultAbs, outAbsolute, 0.001);
+        Assertions.assertArrayEquals(resultComplex[0], outR, 0.001);
+        Assertions.assertArrayEquals(resultComplex[1], outI, 0.001);
     }
 }
