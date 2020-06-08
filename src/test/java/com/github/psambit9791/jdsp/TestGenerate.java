@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import static org.junit.Assert.*;
 
+// Make sure the test_outputs/ directory exists
+
 public class TestGenerate {
 
     final private int Fs = 100;
@@ -26,7 +28,7 @@ public class TestGenerate {
                 -0.063, 0.541, 0.934, 0.964, 0.618, 0.032, -0.567, -0.945, -0.955, -0.593, -0.};
         assertArrayEquals(result1, out1, 0.001);
         double[] t = this.gp.getTimeArray();
-        this.plot_now("Sine Wave", t, result1, "sine.png");
+        this.plot_now("Sine Wave", t, result1, "test_outputs/sine.png");
 
         int f2 = 20;
         double[] out2 = this.gp.generateSineWave(f2);
@@ -55,7 +57,7 @@ public class TestGenerate {
                 0.841, 0.357, -0.266, -0.786, -0.999, -0.824, -0.327, 0.297, 0.805, 1.};
         assertArrayEquals(result1, out1, 0.001);
         double[] t = this.gp.getTimeArray();
-        this.plot_now("Cosine Wave", t, result1, "cosine.png");
+        this.plot_now("Cosine Wave", t, result1, "test_outputs/cosine.png");
 
         int f2 = 20;
         double[] out2 = this.gp.generateCosineWave(f2);
@@ -81,7 +83,7 @@ public class TestGenerate {
                 1., 1., 1., -1., -1., -1., -1., -1., 1., 1., 1., 1., 1., -1., -1., -1., -1., 1.};
         assertArrayEquals(result1, out1, 0.001);
         double[] t = this.gp.getTimeArray();
-        this.plot_now("Square Wave", t, result1, "square.png");
+        this.plot_now("Square Wave", t, result1, "test_outputs/square.png");
 
         int f2 = 20;
         double[] out2 = this.gp.generateSquareWave(f2);
@@ -94,7 +96,7 @@ public class TestGenerate {
     }
 
     public void plot_now(String title, double[] t, double[] signal, String fname) throws IOException {
-        LinePlot fig = new LinePlot(600, 300, title, "Time", "Signal");
+        Plotting fig = new Plotting(600, 300, title, "Time", "Signal");
         fig.initialise_plot();
         fig.add_signal(title, t, signal, false);
         fig.save_as_png(fname);
