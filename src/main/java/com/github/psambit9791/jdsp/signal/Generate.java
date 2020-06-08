@@ -33,7 +33,7 @@ public class Generate {
     }
 
     /**
-     * Generates a sine wave based on the provided parameters
+     * Returns the array of time instants based on the sampling frequency
      * @return double[] Time points generated
      */
     public double[] getTimeArray() {
