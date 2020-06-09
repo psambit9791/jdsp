@@ -1,9 +1,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.transform.Hilbert;
-import org.junit.Test;
-
-import static org.junit.Assert.assertArrayEquals;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestHilbert {
 
@@ -73,7 +72,7 @@ public class TestHilbert {
         h.hilbert_transform();
         h.get_output();
         double[] out = h.get_amplitude_envelope();
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -101,7 +100,7 @@ public class TestHilbert {
         Hilbert h = new Hilbert(this.signal2);
         h.hilbert_transform();
         double[] out = h.get_amplitude_envelope();
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -132,7 +131,7 @@ public class TestHilbert {
         Hilbert h = new Hilbert(this.signal1);
         h.hilbert_transform();
         double[] out = h.get_instantaneous_phase();
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -160,7 +159,7 @@ public class TestHilbert {
         Hilbert h = new Hilbert(this.signal2);
         h.hilbert_transform();
         double[] out = h.get_instantaneous_phase();
-        assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
@@ -189,7 +188,7 @@ public class TestHilbert {
         Hilbert h = new Hilbert(this.signal1);
         h.hilbert_transform();
         double[] out = h.get_instantaneous_frequency(Fs);
-        assertArrayEquals(result, out, 0.05);
+        Assertions.assertArrayEquals(result, out, 0.05);
     }
 
     @Test
@@ -224,7 +223,6 @@ public class TestHilbert {
         Hilbert h = new Hilbert(this.signal2);
         h.hilbert_transform();
         double[] out = h.get_instantaneous_frequency(Fs);
-        assertArrayEquals(result, out, 0.05);
-
+        Assertions.assertArrayEquals(result, out, 0.05);
     }
 }

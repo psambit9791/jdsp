@@ -72,10 +72,7 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # Test Images
-temp*.png
-sine.png
-cosine.png
-square.png
+test_outputs/
 
 # POM Backup
 pom.xml.versionsBackup

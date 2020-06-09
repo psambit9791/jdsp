@@ -3,9 +3,9 @@ package com.github.psambit9791.jdsp;
 import com.github.psambit9791.jdsp.signal.Decimate;
 import com.github.psambit9791.jdsp.signal.Generate;
 import org.apache.commons.math3.util.MathArrays;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestDecimate {
 
@@ -32,7 +32,7 @@ public class TestDecimate {
 
         double[] out = d.decimate(factor);
 
-        assertArrayEquals(result1, out, 0.05);
+        Assertions.assertArrayEquals(result1, out, 0.05);
 
 
         // TEST 2
@@ -42,7 +42,7 @@ public class TestDecimate {
 
         out = d.decimate(factor);
 
-        assertArrayEquals(result2, out, 0.05);
+        Assertions.assertArrayEquals(result2, out, 0.05);
 
         // TEST 3
         double[] result3 = {0.   ,  0.004,  0.128,  0.588,  0.335, -0.843,  0.077,  0.929, -0.776, -0.379,  1.017,
@@ -52,7 +52,7 @@ public class TestDecimate {
 
         out = d.decimate(factor);
 
-        assertArrayEquals(result3, out, 0.1);
+        Assertions.assertArrayEquals(result3, out, 0.1);
     }
 
     // For this use-case, testing is done on all samples except the extremes, because the first and last
@@ -71,7 +71,7 @@ public class TestDecimate {
         double[] outTemp = UtilMethods.splitByIndex(out, 1, out.length-1);
         double[] resultTemp = UtilMethods.splitByIndex(result1, 1, result1.length-1);
 
-        assertArrayEquals(resultTemp, outTemp, 0.05);
+        Assertions.assertArrayEquals(resultTemp, outTemp, 0.05);
 
 
         // TEST 2
@@ -83,7 +83,7 @@ public class TestDecimate {
         outTemp = UtilMethods.splitByIndex(out, 1, out.length-1);
         resultTemp = UtilMethods.splitByIndex(result2, 1, result2.length-1);
 
-        assertArrayEquals(resultTemp, outTemp, 0.05);
+        Assertions.assertArrayEquals(resultTemp, outTemp, 0.05);
 
 
         // TEST 2
@@ -96,6 +96,6 @@ public class TestDecimate {
         outTemp = UtilMethods.splitByIndex(out, 1, out.length-1);
         resultTemp = UtilMethods.splitByIndex(result3, 1, result3.length-1);
 
-        assertArrayEquals(resultTemp, outTemp, 0.05);
+        Assertions.assertArrayEquals(resultTemp, outTemp, 0.05);
     }
 }

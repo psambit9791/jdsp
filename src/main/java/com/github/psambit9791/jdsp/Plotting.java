@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class LinePlot {
+public class Plotting {
 
     private XYChart figure;
     private XYChartBuilder plot;
@@ -22,7 +22,7 @@ public class LinePlot {
     /**
      * This constructor initialises the parameters required to generate the plot. Marker is automatically set to True.
      */
-    public LinePlot() {
+    public Plotting() {
         this.plot = new XYChartBuilder().width(600).height(500).theme(Styler.ChartTheme.Matlab).xAxisTitle("X").yAxisTitle("Y");
     }
 
@@ -30,7 +30,7 @@ public class LinePlot {
      * This constructor initialises the parameters required to generate the plot.
      * @param title Title of the plot
      */
-    public LinePlot(String title) {
+    public Plotting(String title) {
         this.plot = new XYChartBuilder().width(600).height(500).theme(Styler.ChartTheme.Matlab).title(title).xAxisTitle("X").yAxisTitle("Y");
     }
 
@@ -40,7 +40,7 @@ public class LinePlot {
      * @param x_axis Title of property plotted on the X-axis
      * @param y_axis Title of property plotted on the X-axis
      */
-    public LinePlot(String title, String x_axis, String y_axis) {
+    public Plotting(String title, String x_axis, String y_axis) {
         this.plot = new XYChartBuilder().width(600).height(500).theme(Styler.ChartTheme.Matlab).title(title).xAxisTitle(x_axis).yAxisTitle(y_axis);
     }
 
@@ -52,7 +52,7 @@ public class LinePlot {
      * @param x_axis Title of property plotted on the X-axis
      * @param y_axis Title of property plotted on the X-axis
      */
-    public LinePlot(int width, int height, String title, String x_axis, String y_axis) {
+    public Plotting(int width, int height, String title, String x_axis, String y_axis) {
         this.plot = new XYChartBuilder().width(width).height(height).theme(Styler.ChartTheme.Matlab).title(title).xAxisTitle(x_axis).yAxisTitle(y_axis);
     }
 
@@ -89,6 +89,48 @@ public class LinePlot {
         XYSeries s = this.figure.addSeries(name, y);
         if (!marker) {
             s.setMarker(SeriesMarkers.NONE);
+        }
+    }
+
+    /**
+     * This method adds points to the plot
+     * @param name Name of the curve being added (Used for the legend)
+     * @param x Data to be plotted on the X-axis
+     * @param y Data to be plotted on the Y-axis
+     */
+    public void add_points(String name, double[] x, double[] y) {
+        XYSeries s = this.figure.addSeries(name, x, y);
+        s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
+        s.setMarker(SeriesMarkers.CIRCLE);
+    }
+
+    /**
+     * This method adds points to the plot
+     * @param name Name of the curve being added (Used for the legend)
+     * @param x Data to be plotted on the X-axis
+     * @param y Data to be plotted on the Y-axis
+     * @param marker Type of Marker to be used ('x': CROSS, 'o': CIRCLE ,'*': DIAMOND, '+': PLUS, '#': SQUARE, '^': TRIANGLE_UP)
+     */
+    public void add_points(String name, double[] x, double[] y, char marker) {
+        XYSeries s = this.figure.addSeries(name, x, y);
+        s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
+        if (marker == 'x') {
+            s.setMarker(SeriesMarkers.CROSS);
+        }
+        else if (marker == 'o') {
+            s.setMarker(SeriesMarkers.CIRCLE);
+        }
+        else if (marker == '*') {
+            s.setMarker(SeriesMarkers.DIAMOND);
+        }
+        else if (marker == '+') {
+            s.setMarker(SeriesMarkers.PLUS);
+        }
+        else if (marker == '#') {
+            s.setMarker(SeriesMarkers.SQUARE);
+        }
+        else if (marker == '^') {
+            s.setMarker(SeriesMarkers.TRIANGLE_UP);
         }
     }
 
