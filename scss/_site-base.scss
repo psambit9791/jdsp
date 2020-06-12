@@ -1,0 +1,387 @@
+$font-family-serif: 'Hepta Slab', serif;
+html {
+	overflow-x: hidden;
+}
+// $font-family-sans-serif2: 'Noto Sans', sans-serif;
+
+@for $i from 10 through 30 {
+  .font-size-#{$i} { 
+  	font-size: #{$i}px; 
+	}
+}
+
+.serif {
+	font-family: $font-family-serif;
+}
+
+$graycolors: #f7f7f7, #e9e9e9, #d9d9d9, #c9c9c9, #b8b8b8, #a8a8a8, #939393, #7b7b7b, #636363
+#4d4d4d, #353535;
+
+@for $i from 1 through length($graycolors) {
+	.font-gray-#{$i} {
+		color: nth($graycolors, $i)
+	}
+}
+@for $i from 1 through length($graycolors) {
+	.border-gray-#{$i} {
+		border-color: nth($graycolors, $i)
+	}
+}
+@for $i from 1 through length($graycolors) {
+	.bg-gray-#{$i} {
+		border-color: nth($graycolors, $i)
+	}
+}
+
+$letterspacings: 0.1em, 0.2em;
+@for $i from 1 through length($letterspacings) {
+  .letter-spacing-#{$i} { 
+  	letter-spacing: nth($letterspacings,$i); 
+	}
+}
+
+@for $i from 1 through 5 {
+  .border-w-#{$i} { 
+  	border-width: #{$i}px ; 
+	}
+}
+
+.primary-black--hover {
+	background: $primary;
+	color: $white;
+	&:hover {
+		background: $black;
+		color: $white;
+	}
+}
+.primary-dark--hover {
+	background: $primary;
+	color: $white;
+	&:hover {
+		background: lighten($black, 50%);
+		color: $white;
+	}
+}
+
+.primary-primary-outline--hover {
+	background: $primary;
+	color: $white;
+	&:hover {
+		border-color: $primary;
+		background: transparent;
+	}
+}
+.primary-outline-primary--hover {
+	background: transparent;
+	border-color: $primary;
+	&:hover {
+		color: $white;
+		background: $primary;
+	}
+}
+
+body {
+	line-height: 1.7;
+	// @extend .font-gray-7;
+	color: #364d59!important;
+	font-weight: 300;
+	font-size: $font-size-base;
+	
+}
+::-moz-selection { 
+	background: $black;
+	color: $white;
+}
+::selection { 
+	background: $black;
+	color: $white;
+}
+a {
+	transition: .3s all ease;
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+h1, h2, h3, h4, h5,
+.h1, .h2, .h3, .h4, .h5 {
+	font-weight: 300;
+	color: #000;
+}
+
+.border-2 {
+	border-width: 2px;
+}
+
+
+.text-black {
+	color: $black!important;
+}
+.bg-black {
+	background: $black!important;
+}
+
+.color-black-opacity-5 {
+	color: rgba($black, .5);
+}
+.color-white-opacity-5 {
+	color: rgba($white, .5);
+}
+
+.offcanvas-menu .site-wrap {
+	// position: absolute;
+	// overflow: hidden;
+}
+
+.btn {
+	border-radius: 30px;
+	padding: 10px 20px;
+	text-decoration: none;
+	font-weight: bold;
+
+	&:active, &:focus {
+		outline: none;
+		box-shadow: none;
+	}
+	&.btn-outline-white {
+		border-color: $white;
+		background: transparent;
+		color: $white;
+		&:hover {
+			background: $white;
+			border-color: $white;
+			color: $black;
+		}
+	}
+}
+
+
+
+.line-height-1 {
+	line-height: 1!important;
+}
+.bg-black {
+	background: $black;
+}
+.form-control {
+	height: 55px;
+	// border-radius: 30px;
+	background: $white!important;
+	font-family: $font-family-sans-serif;
+	&:active, &:focus {
+		border-color: $primary;
+	}
+	&:hover, &:active, &:focus {
+		box-shadow: none!important;
+	}
+}
+
+.site-section {
+	padding: 2.5em 0;
+	@include media-breakpoint-up(md) {
+		padding: 5em 0;
+	}
+
+	&.site-section-sm {
+		padding: 4em 0;
+	}
+}
+
+
+.site-footer {
+	padding: 4em 0;
+	// background: lighten($black, 20%);
+	background: #efefef;
+	@include media-breakpoint-up(md) {
+		padding: 8em 0;	
+	}
+	.border-top {
+		border-top: 1px solid rgba(255,255,255,.1)!important;
+	}
+	p {
+		color: #777;
+	}
+	h2,h3,h4,h5 {
+		color: $black;
+	}
+	a {
+		color: $primary;
+		&:hover {
+			color: $black;
+		}
+	}
+	ul {
+		li {
+			margin-bottom: 10px;
+		}
+	}
+	.footer-heading {
+		font-size: 16px;
+		color: $black;
+	}
+}
+
+.bg-text-line {
+  display: inline;
+  background: $black;
+  box-shadow: 20px 0 0 $black, -20px 0 0 $black;
+}
+
+.text-white-opacity-05 {
+	color: rgba($white, .5);
+}
+.text-black-opacity-05 {
+	color: rgba($black, .5);
+}
+
+.hover-bg-enlarge {
+	overflow: hidden;
+	position: relative;
+	@include media-breakpoint-down(md) {
+		height: auto!important;
+	}
+	> div {
+		transform: scale(1.0);
+		transition: .8s all ease-in-out;
+	}
+	&:hover, &:focus, &:active {
+		> div {
+			transform: scale(1.2);
+		}
+	}
+
+	.bg-image-md-height {
+		@include media-breakpoint-down(md) {
+			height: 300px!important;
+		}
+	}
+
+}
+
+
+
+.bg-image {
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	&.overlay {
+		position: relative;
+		&:after {
+			position: absolute;
+			content: "";
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 0;
+			width: 100%;
+			background: rgba(0,0,0,.7);
+		}
+	}
+	> .container {
+		position: relative;
+		z-index: 1;
+	}
+}
+
+.img-md-fluid {
+	@include media-breakpoint-down(md) {
+		max-width: 100%;
+	}
+}
+
+.display-1, .display-3 {
+	@include media-breakpoint-down(md) {
+		font-size: 3rem;
+	}
+}
+
+.play-single-big {
+	width: 90px;
+	height: 90px;
+	display: inline-block;
+	border: 2px solid $white;
+	color: $white!important;
+	border-radius: 50%;
+	position: relative;
+	transition: .3s all ease-in-out;
+	> span {
+		font-size: 50px;	
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-40%, -50%);
+	}
+	&:hover {
+		width: 120px;
+		height: 120px;
+	}
+}
+
+.overlap-to-top {
+	margin-top: -150px;
+}
+
+.ul-check {
+	margin-bottom: 50px;
+	li {
+		position: relative;
+		padding-left: 35px;
+		margin-bottom: 15px;
+		line-height: 1.5;
+		&:before {
+			left: 0;
+			font-size: 20px;
+			top: -.3rem;
+			font-family: "icomoon";
+			content: "\e5ca";
+			position: absolute;
+		}
+	}
+	&.white {
+		li {
+			&:before {
+				color: $white;
+			}
+		}
+	}
+	&.success {
+		li {
+			&:before {
+				color: $success;
+			}
+		}
+	}
+	&.primary {
+		li {
+			&:before {
+				color: $primary;
+			}
+		}
+	}
+}
+
+.select-wrap, .wrap-icon {
+	position: relative;
+	.icon {
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		transform: translateY(-50%);
+		font-size: 22px;
+	}
+	select {
+		appearance: none;
+		width: 100%;
+	}
+}
+
+.top-bar {
+	border-bottom: 1px solid $gray-200!important;
+}
+
+
+
+
