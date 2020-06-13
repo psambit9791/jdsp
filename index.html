@@ -41,37 +41,40 @@
 
 
 
-      <header class="site-navbar site-navbar-target" role="banner">
+      <header class="site-navbar py-3 js-site-navbar site-navbar-target" role="banner" id="site-navbar">
 
         <div class="container">
-          <div class="row align-items-center position-relative">
+          <div class="row align-items-center">
 
-            <div class="col-3 ">
-              <div class="site-logo">
-                <a href="index.html" class="font-weight-bold"><img src="res/logos/jDSP-Logo-NoText-Transparent.png" alt="Image" class="img-fluid" style="width: auto; height: 24px;"></a>
-              </div>
+            <div class="col-11 col-xl-2 site-logo">
+              <a href="index.html" class="font-weight-bold"><img src="res/logos/jDSP-Logo-NoText-Transparent.png" alt="Image" class="img-fluid" style="width: auto; height: 24px;"></a>
             </div>
+            <div class="col-12 col-md-10 d-none d-xl-block">
+              <nav class="site-navigation position-relative text-right" role="navigation">
 
-            <div class="col-9  text-right">
-              
-
-              <span class="d-inline-block d-lg-block"><a href="#" class="text-white site-menu-toggle js-menu-toggle py-5"><span class="icon-menu h3 text-white"></span></a></span>
-
-              
-
-              <nav class="site-navigation text-right ml-auto d-none d-lg-none" role="navigation">
-                <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                  <li class="active"><a href="index.html" class="nav-link">Home</a></li>
-                  <li><a href="#" class="nav-link">Pre-Processing</a></li>
-                  <li><a href="#" class="nav-link">Filters</a></li>
-                  <li><a href="#" class="nav-link">Transforms</a></li>
-                  <li><a href="#" class="nav-link">Utilities</a></li>
+                <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
+                  <li><a href="index.html" class="nav-link">Home</a></li>
+                  <li class="has-children">
+                    <a href="#section-features" class="nav-link">Features</a>
+                    <ul class="dropdown">
+                      <li><a href="usage.html" class="nav-link">Usage</a></li>
+                      <li><a href="preprocess.html" class="nav-link">Pre-Processing</a></li>
+                      <li><a href="filters.html" class="nav-link">Filters</a></li>
+                      <li><a href="transforms.html" class="nav-link">Transformation</a></li>
+                      <li><a href="utils.html" class="nav-link">Utilities</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="https://javadoc.io/doc/com.github.psambit9791/jdsp" target="_blank" class="nav-link">Documentation</a></li>
+                  <li><a href="https://github.com/psambit9791/jDSP/tree/master" target="_blank" class="nav-link">Source Code</a></li>
                 </ul>
               </nav>
             </div>
 
-            
+
+            <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="text-white site-menu-toggle js-menu-toggle"><span class="text-white icon-menu h3"></span></a></div>
+
           </div>
+
         </div>
 
       </header>
@@ -159,12 +162,12 @@
     </div>
 
 
-    <div class="site-section bg-black">
+    <div class="site-section bg-black" id="section-features">
 
         <div class="row">
           <div class="col-md-4 col-lg-4 mb-4">
             <div class="item web">
-              <a href="#" class="item-wrap">
+              <a href="usage.html" class="item-wrap">
                 <div class="container" style="text-align: center;">
                   <img class="img-fluid" src="res/icons/usage.png" style="padding: 10px; width: auto; height: 96px; filter: invert(100%)">
                   <h4 class="text-light">Usage</h4>
@@ -175,7 +178,7 @@
 
           <div class="col-md-4 col-lg-4 mb-4">
             <div class="item web">
-              <a href="#" class="item-wrap">
+              <a href="preprocess.html" class="item-wrap">
                 <div class="container" style="text-align: center;">
                   <img class="img-fluid" src="res/icons/preprocess.png" style="padding: 10px; width: auto; height: 96px; filter: invert(100%)">
                   <h4 class="text-light">Pre-Processing</h4>
@@ -186,7 +189,7 @@
 
           <div class="col-md-4 col-lg-4mb-4">
             <div class="item web">
-              <a href="#" class="item-wrap">
+              <a href="filters.html" class="item-wrap">
                 <div class="container" style="text-align: center;">
                   <img class="img-fluid" src="res/icons/filter.png" style="padding: 10px; width: auto; height: 96px; filter: invert(100%)">
                   <h4 class="text-light">Filters</h4>
@@ -201,7 +204,7 @@
         <div class="row">
           <div class="col-md-4 col-lg-4 mb-4">
             <div class="item web">
-              <a href="#" class="item-wrap">
+              <a href="transforms.html" class="item-wrap">
                 <div class="container" style="text-align: center;">
                   <img class="img-fluid" src="res/icons/transform.png" style="padding: 10px; width: auto; height: 96px; filter: invert(100%)">
                   <h4 class="text-light">Transformations</h4>
@@ -224,7 +227,7 @@
 
           <div class="col-md-4 col-lg-4 mb-4">
             <div class="item web">
-              <a href="#" class="item-wrap">
+              <a href="utils.html" class="item-wrap">
                 <div class="container" style="text-align: center;">
                   <img class="img-fluid" src="res/icons/utility.png" style="padding: 10px; width: auto; height: 96px; filter: invert(100%)">
                   <h4 class="text-light">Utilities</h4>

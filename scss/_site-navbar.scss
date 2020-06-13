@@ -42,12 +42,15 @@
 			margin-bottom: 0;
 			.active {
 				color: $primary!important;
-				// display: inline-block;
-				// border-bottom: 2px solid $primary;
 			}
 			a {
 				text-decoration: none!important;
 				display: inline-block;
+			}
+			a {
+				&.active {
+					color: $primary;
+				}
 			}
 			> li {
 				display: inline-block;
