@@ -105,7 +105,7 @@
             <h2 class="h4 mb-4 text-white">What is JDSP?</h2>
             <p class="text-white">jDSP is a library of signal processing tools written in Java aimed at providing functionalities as available in scipy-signal package for Python. The goal is to provide easy-to-use APIs for performing complex operation on signals eliminating the necessity of understanding the low-level complexities in the processing pipeline.  </p>
             <p class="text-white"> This is an open-source project under the <a href="https://opensource.org/licenses/MIT">MIT License</a> and is free to use in commercial applications.</p>
-            <br>
+            <br><br>
             <p><a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/index.html" target="_blank" class="btn btn-outline-white text-white px-5">Documentation</a></p>
           </div>
 
@@ -117,19 +117,9 @@
     <div class="site-section bg-light">
       <div class="container">
         <div class="row" style="padding: 15px">
-          <div class="col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
-            <img class="img-fluid" src="res/logos/opensource.png" style="width: auto; height: 128px;">
-          </div>
-          <div class="col-md-8 col-lg-8 justify-content-center">
-            <h2>Open Source</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-          </div>
-        </div>
-        <br><br>
-        <div class="row" style="padding: 15px">
           <div class="col-md-8 col-lg-8 justify-content-center">
             <h2>Written in JAVA</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <p>JDSP is written purely in Java. It has dependencies on 2 core libraries: <a href="http://commons.apache.org/proper/commons-math/" target="_blank">Apache Commons Math</a> and <a href="https://www.berndporr.me.uk/iir/site/" target="_blank">IIRJ</a> both of which are also open source projects. As privacy concerns grow with time, the need for edge-processing becomes paramount. Java as a programming language is one of the most popular among  both enterprises and hobbyists. Additionally, the Android OS supports Java and holds more than 80% market share. Hence, if any signal processing task needs to be done on-device, there is a need for a library which can perform such tasks. JDSP is the only library which has a comprehensive list of tools (close equivalent of scipy-signal from which it is inspired) capable of handling digital signal processing tasks in Java.</p>
           </div>
           <div class="col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
             <img class="img-fluid" src="res/logos/java.png" style="width: auto; height: 128px;">
@@ -142,20 +132,29 @@
           </div>
           <div class="col-md-8 col-lg-8 justify-content-center">
             <h2>Matlab-style APIs</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <p>Matlab is a programming language designed for engineers and scientists. However, most often, Matlab is used as a testing ground for operations, and not in production. Matlab as a tool is extremely user-friendly and very intuitive and easy to use. It has simple one-line calls for complex operations like filtering  and signal transformations. Although Matlab supports OOP, it is often not used during tests and research for convenience. Java strictly follows OOP and therefore the method calls in JDSP are slightly more verbose compared to Matlab. But most operations can be completed within 3 lines of code: creating the object, performing the operation, getting results. Further details for the usage is provided in the website and also in the <a href="https://github.com/psambit9791/jDSP/wiki/" target="_blank">Github Wiki</a>.</p>
           </div>
         </div>
         <br><br>
         <div class="row" style="padding: 15px">
           <div class="col-md-8 col-lg-8 justify-content-center">
             <h2>Hosted on Maven Central</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <p>JDSP binaries are hosted on <a href="https://search.maven.org/artifact/com.github.psambit9791/jdsp/" target="_blank">Maven Central Repository</a> and the documentation is hosted on <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp" target="_blank">javadoc.io</a>. All of this is managed through the Nexus Repository OSS by Sonatype. Nexus is an open source tool for managing  binaries and build artifacts. It also hosts these binaries for open source projects and creates a proxy repository which points to Maven Central. Since JDSP is hosted on maven, it can be pulled in as a dependency for Maven, Gradle Scala-SBT to name a few.</p>
           </div>
           <div class="col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
             <img class="img-fluid" src="res/logos/sonatype.png" style="width: auto; height: 128px;">
           </div>
         </div>
         <br><br>
+        <div class="row" style="padding: 15px">
+          <div class="col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
+            <img class="img-fluid" src="res/logos/opensource.png" style="width: auto; height: 128px;">
+          </div>
+          <div class="col-md-8 col-lg-8 justify-content-center">
+            <h2>Open Source</h2>
+            <p>JDSP is an open source project. Open source is an important way for helping build and support a community, while building quality code for software people love. This project opens up all source code and allows redistribution in the form of source code as well as compiled form. The project is available under the MIT License.</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -261,7 +260,7 @@
                 <ul class="list-unstyled">
                   <li><a href="https://github.com/psambit9791/jDSP" target="_blank">Github</a></li>
                   <li><a href="index.html" target="_blank">JDSP Home</a></li>
-                  <li><a href="https://search.maven.org/artifact/com.github.psambit9791/jdsp/0.2.1/jar" target="_blank">Maven Central</a></li>
+                  <li><a href="https://search.maven.org/artifact/com.github.psambit9791/jdsp/" target="_blank">Maven Central</a></li>
                   <li><a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/index.html" target="_blank">Documentation</a></li>
                   <li><a href="https://github.com/psambit9791/jDSP/blob/master/LICENSE" target="_blank">License</a></li>
                 </ul>
