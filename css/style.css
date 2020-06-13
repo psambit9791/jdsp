@@ -1821,3 +1821,21 @@ h1, h2, h3, h4, h5,
 .person-pic-39219 img {
   border-radius: 50%;
   width: 70px; }
+
+.support-image-1 {
+  width: auto;
+  height: 34px;
+}
+
+.support-image-1:hover {
+  filter: brightness(50%);
+}
+
+.support-image-2 {
+  width: auto;
+  height: 28px;
+}
+
+.support-image-2:hover {
+  filter: brightness(50%);
+}
