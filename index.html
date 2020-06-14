@@ -80,14 +80,14 @@
 
       </header>
 
-    <div class="ftco-blocks-cover-1">
-      <div class="site-section-cover overlay" style="background-image: url('res/images/jDSP-Logo-Black.png')">
+    <div class="ftco-blocks-cover-1 bg-black">
+      <div class="site-section-cover overlay" style="background-image: url('res/images/jDSP-Logo-Black.png'); background-size:contain; background-position:center;">
         <div class="container">
           <div class="row align-items-end justify-content-center" style="padding-bottom: 40px">
-            <div class="col-md-6 text-left">
+            <div class="col-md-6 col-6 col-lg-6 d-flex justify-content-center">
               <p><a href="https://github.com/psambit9791/jDSP/archive/v0.2.1.zip" class="btn btn-primary py-3 px-5">Download <i class="fa fa-download fa-fw" aria-hidden="true"></i></a></p>
             </div>
-            <div class="col-md-6 text-right">
+            <div class="col-md-6 col-6 col-lg-6 d-flex justify-content-center">
               <p><a href="https://github.com/psambit9791/jDSP" target="_blank" class="btn btn-primary btn-outline-white py-3 px-5">Star JDSP on  <i class="fa fa-github fa-fw" style="font-size:24px"></i></a></p>
             </div>
           </div>
@@ -98,14 +98,14 @@
 
     <div class="site-section bg-black" style="padding-left:25px; padding-right:25px;">
         <div class="row align-items-center">
-          <div class="col-md-6 justify-content-left">
-            <img src="res/images/wave-1817646_1920.png" alt="Image" class="img-fluid">
+          <div class="col-md-6 col-lg-6 justify-content-left">
+            <img src="res/images/wave-1817646_1920.png" alt="Image" class="img-fluid" style="padding-bottom:40px">
           </div>
 
-          <div class="col-md-2 justify-content-left">
+          <div class="col-md-2 col-lg-2 justify-content-left">
           </div>
             
-          <div class="col-md-4 justify-content-left">
+          <div class="col-md-4 col-lg-4 justify-content-left">
             <h2 class="h4 mb-4 text-white">What is JDSP?</h2>
             <p class="text-white">jDSP is a library of digital signal processing tools written in Java aimed at providing functionalities as available in scipy-signal package for Python. The goal is to provide easy-to-use APIs for performing complex operation on signals eliminating the necessity of understanding the low-level complexities in the processing pipeline.  </p>
             <p class="text-white"> This is an open-source project under the <a href="https://opensource.org/licenses/MIT">MIT License</a> and is free to use in commercial applications.</p>
@@ -121,40 +121,40 @@
     <div class="site-section bg-light" id="section-features">
       <div class="container">
         <div class="row" style="padding: 15px">
-          <div class="col-md-8 col-lg-8 justify-content-center">
+          <div class="col-8 col-md-8 col-lg-8 justify-content-center">
             <h2>Written in JAVA</h2>
             <p>JDSP is written purely in Java. It has dependencies on 2 core libraries: <a href="http://commons.apache.org/proper/commons-math/" target="_blank">Apache Commons Math</a> and <a href="https://www.berndporr.me.uk/iir/site/" target="_blank">IIRJ</a> both of which are also open source projects. As privacy concerns grow with time, the need for edge-processing becomes paramount. Java as a programming language is one of the most popular among  both enterprises and hobbyists. Additionally, the Android OS supports Java and holds more than 80% market share. Hence, if any signal processing task needs to be done on-device, there is a need for a library which can perform such tasks. JDSP is the only library which has a comprehensive list of tools (close equivalent of scipy-signal from which it is inspired) capable of handling digital signal processing tasks in Java.</p>
           </div>
-          <div class="col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
+          <div class="col-4 col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
             <img class="img-fluid" src="res/logos/java.png" style="width: auto; height: 128px;">
           </div>
         </div>
         <br><br>
         <div class="row" style="padding: 15px">
-          <div class="col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
+          <div class="col-4 col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
             <img class="img-fluid" src="res/logos/matlab.png" style="width: auto; height: 128px;">
           </div>
-          <div class="col-md-8 col-lg-8 justify-content-center">
+          <div class="col-8 col-md-8 col-lg-8 justify-content-center">
             <h2>Matlab-style APIs</h2>
             <p>Matlab is a programming language designed for engineers and scientists. However, most often, Matlab is used as a testing ground for operations, and not in production. Matlab as a tool is extremely user-friendly and very intuitive and easy to use. It has simple one-line calls for complex operations like filtering  and signal transformations. Although Matlab supports OOP, it is often not used during tests and research for convenience. Java strictly follows OOP and therefore the method calls in JDSP are slightly more verbose compared to Matlab. But most operations can be completed within 3 lines of code: creating the object, performing the operation, getting results. Further details for the usage is provided in the website and also in the <a href="https://github.com/psambit9791/jDSP/wiki/" target="_blank">Github Wiki</a>.</p>
           </div>
         </div>
         <br><br>
         <div class="row" style="padding: 15px">
-          <div class="col-md-8 col-lg-8 justify-content-center">
+          <div class="col-8 col-md-8 col-lg-8 justify-content-center">
             <h2>Hosted on Maven Central</h2>
             <p>JDSP binaries are hosted on <a href="https://search.maven.org/artifact/com.github.psambit9791/jdsp/" target="_blank">Maven Central Repository</a> and the documentation is hosted on <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp" target="_blank">javadoc.io</a>. All of this is managed through the Nexus Repository OSS by Sonatype. Nexus is an open source tool for managing  binaries and build artifacts. It also hosts these binaries for open source projects and creates a proxy repository which points to Maven Central. Since JDSP is hosted on maven, it can be pulled in as a dependency for Maven, Gradle Scala-SBT to name a few.</p>
           </div>
-          <div class="col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
+          <div class="col-4 col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
             <img class="img-fluid" src="res/logos/sonatype.png" style="width: auto; height: 128px;">
           </div>
         </div>
         <br><br>
         <div class="row" style="padding: 15px">
-          <div class="col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
+          <div class="col-4 col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
             <img class="img-fluid" src="res/logos/opensource.png" style="width: auto; height: 128px;">
           </div>
-          <div class="col-md-8 col-lg-8 justify-content-center">
+          <div class="col-8 col-md-8 col-lg-8 justify-content-center">
             <h2>Open Source</h2>
             <p>JDSP is an open source project. Open source is an important way for helping build and support a community, while building quality code for software people love. This project opens up all source code and allows redistribution in the form of source code as well as compiled form. The project is available under the MIT License.</p>
           </div>
@@ -166,7 +166,7 @@
     <div class="site-section bg-black" id="section-toolkit">
 
         <div class="row">
-          <div class="col-md-4 col-lg-4 mb-4">
+          <div class="col-4 col-md-4 col-lg-4 mb-4">
             <div class="item web">
               <a href="usage.html" class="item-wrap">
                 <div class="container" style="text-align: center;">
@@ -177,7 +177,7 @@
             </div>
           </div>
 
-          <div class="col-md-4 col-lg-4 mb-4">
+          <div class="col-4 col-md-4 col-lg-4 mb-4">
             <div class="item web">
               <a href="preprocess.html" class="item-wrap">
                 <div class="container" style="text-align: center;">
@@ -188,7 +188,7 @@
             </div>
           </div>
 
-          <div class="col-md-4 col-lg-4mb-4">
+          <div class="col-4 col-md-4 col-lg-4mb-4">
             <div class="item web">
               <a href="filters.html" class="item-wrap">
                 <div class="container" style="text-align: center;">
@@ -203,7 +203,7 @@
         <br><br>
 
         <div class="row">
-          <div class="col-md-4 col-lg-4 mb-4">
+          <div class="col-4 col-md-4 col-lg-4 mb-4">
             <div class="item web">
               <a href="transforms.html" class="item-wrap">
                 <div class="container" style="text-align: center;">
@@ -214,7 +214,7 @@
             </div>
           </div>
 
-          <div class="col-md-4 col-lg-4 mb-4">
+          <div class="col-4 col-md-4 col-lg-4 mb-4">
             <div class="item web">
               <a class="item-wrap">
                 <div class="container" style="text-align: center;">
@@ -226,7 +226,7 @@
             </div>
           </div>
 
-          <div class="col-md-4 col-lg-4 mb-4">
+          <div class="col-4 col-md-4 col-lg-4 mb-4">
             <div class="item web">
               <a href="utils.html" class="item-wrap">
                 <div class="container" style="text-align: center;">
@@ -243,23 +243,23 @@
     <footer class="site-footer">
       <div class="container">
         <div class="row d-flex justify-content-around">
-          <div class="col-md-3">
+          <div class="col-3 col-md-3 col-lg-3 justify-content-center">
             <h2 class="footer-heading mb-3">Support</h2>
               <p>JDSP is a labour of love and requires time and effort to maintain and develop. Financial
                 contributions towards JDSP enhances the tool and also quickens development. You can help by becoming
                 a supporter.</p>
             <div class="row" style="padding: 15px">
-              <div class="col-md-6 align-text-center">
+              <div class="col-6 col-md-6 col-lg-6 align-text-center">
                 <a href="https://www.patreon.com/sambitpaul"><img src="res/logos/patreon.png" alt="Image" class="img-fluid support-image-1"></a>
               </div>
-              <div class="col-md-6 align-text-center">
+              <div class="col-6 col-md-6 col-lg-6 align-text-center">
                 <a href="https://paypal.me/psambit9791"><img src="res/logos/paypal.png" alt="Image" class="img-fluid support-image-2"></a>
               </div>
             </div>
           </div>
-          <div class="col-md-6 align-text-center">
+          <div class="col-6 col-md-6 col-lg-6 align-text-center">
             <div class="row d-flex justify-content-center">
-              <div class="col-lg-6 align-text-center">
+              <div class="col-6 col-md-6 col-lg-6 align-text-center">
                 <h2 class="footer-heading mb-4">Quick Links</h2>
                 <ul class="list-unstyled">
                   <li><a href="https://github.com/psambit9791/jDSP" target="_blank">Github</a></li>
@@ -271,7 +271,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-3 col-md-3 col-lg-3">
             <h2 class="footer-heading mb-4">Connect</h2>
             <div class="social_29128 white mb-5">
               <a href="https://www.linkedin.com/in/sambit-paul/" target="_blank"><span class="fa fa-linkedin"></span></a>
@@ -281,7 +281,7 @@
           </div>
         </div>
         <div class="row pt-5 mt-5 text-center">
-          <div class="col-md-12">
+          <div class="col-12 col-md-12 col-mlg-12">
             <div class="border-top pt-5">
               <p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
