@@ -343,7 +343,7 @@ double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff, rippleFacto
             </div>
             <!-- END OF CHEBYSHEV TYPE 2 FILTER-->
 
-            <!--  START OF BESSEL TYPE 2 FILTER  -->
+            <!--  START OF BESSEL FILTER  -->
             <div class="bg-light" style="padding-top:30px;">
               <div class="row mb-5">
                 <div class="col-md-7 mx-auto text-center">
@@ -420,11 +420,143 @@ double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff); //get the 
           </div>
 
           <div id="kernel-filter">
-            <div class="row mb-5">
-              <div class="col-md-7 mx-auto text-center">
-                <h2 class="heading-29190">Median Filter</h2>
+
+              <!--  START OF MEDIAN FILTER  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Median Filter</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/filters/median/median.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 9; //Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
+double[] result = flt.low_pass_filter(order, cutOff); //get the result after filtering
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
               </div>
-            </div>
+              <!-- END OF MEDIAN FILTER-->
+
+              <!--  START OF Savitzky–Golay FILTER  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Savitzky–Golay Filter</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/filters/savgol/savgol.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Mirror Mode</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Constant Mode</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+String mode = "mirror" //can be any of the operating modes described above
+int windowSize = 5; //can be anything less than length of signal
+int polyOrder = 2; //Order of the polynomial used to generate coefficients
+int deriv = 0; // Order of derivative
+int delta = 1; // Spacing of samples to which filter is applied
+Savgol s1 = new Savgol(signal, windowSize, polyOrder, deriv, delta); //signal is of type double[]
+// ALSO: Savgol s1 = new Savgol(signal, windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
+double[] out = s1.savgol_filter(mode); //get the result after filtering
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+String mode = "constant" //can be any of the operating modes described above
+int windowSize = 5; //can be anything less than length of signal
+int polyOrder = 2; //Order of the polynomial used to generate coefficients
+int deriv = 0; // Order of derivative
+int delta = 1; // Spacing of samples to which filter is applied
+Savgol s1 = new Savgol(signal, windowSize, polyOrder, deriv, delta); //signal is of type double[]
+// ALSO: Savgol s1 = new Savgol(signal, windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
+double[] out = s1.savgol_filter(mode); //get the result after filtering
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Nearest Mode</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Wrap Mode</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+String mode = "nearest" //can be any of the operating modes described above
+int windowSize = 5; //can be anything less than length of signal
+int polyOrder = 2; //Order of the polynomial used to generate coefficients
+int deriv = 0; // Order of derivative
+int delta = 1; // Spacing of samples to which filter is applied
+Savgol s1 = new Savgol(signal, windowSize, polyOrder, deriv, delta); //signal is of type double[]
+// ALSO: Savgol s1 = new Savgol(signal, windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
+double[] out = s1.savgol_filter(mode); //get the result after filtering
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+String mode = "wrap" //can be any of the operating modes described above
+int windowSize = 5; //can be anything less than length of signal
+int polyOrder = 2; //Order of the polynomial used to generate coefficients
+int deriv = 0; // Order of derivative
+int delta = 1; // Spacing of samples to which filter is applied
+Savgol s1 = new Savgol(signal, windowSize, polyOrder, deriv, delta); //signal is of type double[]
+// ALSO: Savgol s1 = new Savgol(signal, windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
+double[] out = s1.savgol_filter(mode); //get the result after filtering
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF Savitzky–Golay FILTER-->
+
+              <!--  START OF WIENER FILTER  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Wiener Filter</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/filters/wiener/wiener.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int windowSize = 7; //can be anything less than length of signal
+Wiener wf = new Wiener(signal, windowSize); //signal is of type double[]
+double[] out = wf.wiener_filter(); //get the result after filtering
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF WIENER FILTER-->
+
           </div>
 
         </div>
