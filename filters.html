@@ -94,7 +94,6 @@
         </div>
       </div>
 
-    <!--  BUTTERWORTH FILTER  -->
     <div class="site-section bg-black">
 
         <!--  TABS  -->
@@ -105,11 +104,319 @@
           </ul>
 
           <div id="frequency-filter">
-            <div class="row mb-5">
-              <div class="col-md-7 mx-auto text-center">
-                <h2 class="heading-29190">Butterworth Filter</h2>
+
+            <!--  START OF BUTTERWORTH FILTER  -->
+            <div class="bg-white" style="padding-top:30px;">
+              <div class="row mb-5">
+                <div class="col-md-7 mx-auto text-center">
+                  <h2 class="heading-29190">Butterworth Filter</h2>
+                </div>
               </div>
+              <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                <img src="res/signal/filters/butterworth/butter.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+              </div>
+              <div class="row">
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Low Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>High Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 9; //Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
+double[] result = flt.low_pass_filter(order, cutOff); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 29; //Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
+double[] result = flt.high_pass_filter(order, cutOff); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Band Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Band Stop Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 12; //Lower Cut-off Frequency
+int highCutOff = 18; //Higher Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
+double[] result = flt.band_pass_filter(order, lowCutOff, highCutOff); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 7; //Lower Cut-off Frequency
+int highCutOff = 28; //Higher Cut-off Frequency
+Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
+double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+              </div>
+              <div class="container" style="padding-bottom:50px;"></div>
             </div>
+            <!-- END OF BUTTERWORTH FILTER-->
+
+            <!--  START OF CHEBYSHEV TYPE 1 FILTER  -->
+            <div class="bg-light" style="padding-top:30px;">
+              <div class="row mb-5">
+                <div class="col-md-7 mx-auto text-center">
+                  <h2 class="heading-29190">Chebyshev Type I Filter</h2>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                <img src="res/signal/filters/chebyshev1/cheby1.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+              </div>
+              <div class="row">
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Low Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>High Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int filterType = 1; //Can be 1 (for type 1) or 2 (for type 2)
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 9; //Cut-off Frequency
+Chebyshev flt = new Chebyshev(signal, Fs, filterType); //signal is of type double[]
+double[] result = flt.low_pass_filter(order, cutOff, rippleFactor); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int filterType = 1; //Can be 1 (for type 1) or 2 (for type 2)
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 29; //Cut-off Frequency
+Chebyshev flt = new Chebyshev(signal, Fs, filterType); //signal is of type double[]
+double[] result = flt.high_pass_filter(order, cutOff, rippleFactor); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Band Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Band Stop Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int filterType = 1; //Can be 1 (for type 1) or 2 (for type 2)
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 12; //Lower Cut-off Frequency
+int highCutOff = 18; //Higher Cut-off Frequency
+Chebyshev flt = new Chebyshev(signal, Fs, filterType); //signal is of type double[]
+double[] result = flt.band_pass_filter(order, lowCutOff, highCutOff, rippleFactor); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int filterType = 1; //Can be 1 (for type 1) or 2 (for type 2)
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 7; //Lower Cut-off Frequency
+int highCutOff = 28; //Higher Cut-off Frequency
+Chebyshev flt = new Chebyshev(signal, Fs, filterType); //signal is of type double[]
+double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff, rippleFactor); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+              </div>
+              <div class="container" style="padding-bottom:50px;"></div>
+            </div>
+            <!-- END OF CHEBYSHEV TYPE 1 FILTER-->
+
+            <!--  START OF CHEBYSHEV TYPE 2 FILTER  -->
+            <div class="bg-white" style="padding-top:30px;">
+              <div class="row mb-5">
+                <div class="col-md-7 mx-auto text-center">
+                  <h2 class="heading-29190">Chebyshev Type II Filter</h2>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                <img src="res/signal/filters/chebyshev2/cheby2.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+              </div>
+              <div class="row">
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Low Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>High Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int filterType = 2; //Can be 1 (for type 1) or 2 (for type 2)
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 9; //Cut-off Frequency
+Chebyshev flt = new Chebyshev(signal, Fs, filterType); //signal is of type double[]
+double[] result = flt.low_pass_filter(order, cutOff, rippleFactor); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int filterType = 2; //Can be 1 (for type 1) or 2 (for type 2)
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 29; //Cut-off Frequency
+Chebyshev flt = new Chebyshev(signal, Fs, filterType); //signal is of type double[]
+double[] result = flt.high_pass_filter(order, cutOff, rippleFactor); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Band Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Band Stop Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int filterType = 2; //Can be 1 (for type 1) or 2 (for type 2)
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 12; //Lower Cut-off Frequency
+int highCutOff = 18; //Higher Cut-off Frequency
+Chebyshev flt = new Chebyshev(signal, Fs, filterType); //signal is of type double[]
+double[] result = flt.band_pass_filter(order, lowCutOff, highCutOff, rippleFactor); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int filterType = 2; //Can be 1 (for type 1) or 2 (for type 2)
+double rippleFactor = 1; //maximum ripple allowed below unity gain
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 7; //Lower Cut-off Frequency
+int highCutOff = 28; //Higher Cut-off Frequency
+Chebyshev flt = new Chebyshev(signal, Fs, filterType); //signal is of type double[]
+double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff, rippleFactor); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+              </div>
+              <div class="container" style="padding-bottom:50px;"></div>
+            </div>
+            <!-- END OF CHEBYSHEV TYPE 2 FILTER-->
+
+            <!--  START OF BESSEL TYPE 2 FILTER  -->
+            <div class="bg-light" style="padding-top:30px;">
+              <div class="row mb-5">
+                <div class="col-md-7 mx-auto text-center">
+                  <h2 class="heading-29190">Bessel Filter</h2>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                <img src="res/signal/filters/bessel/bessel.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+              </div>
+              <div class="row">
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Low Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>High Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 9; //Cut-off Frequency
+Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
+double[] result = flt.low_pass_filter(order, cutOff); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int cutOff = 29; //Cut-off Frequency
+Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
+double[] result = flt.high_pass_filter(order, cutOff); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Band Pass Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                  <h4>Band Stop Filter</h4>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 12; //Lower Cut-off Frequency
+int highCutOff = 18; //Higher Cut-off Frequency
+Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
+double[] result = flt.band_pass_filter(order, lowCutOff, highCutOff); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100; //Sampling Frequency in Hz
+int order = 4; //order of the filter
+int lowCutOff = 7; //Lower Cut-off Frequency
+int highCutOff = 28; //Higher Cut-off Frequency
+Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
+double[] result = flt.band_stop_filter(order, lowCutOff, highCutOff); //get the result after filtering
+                    </code>
+                  </pre>
+                </div>
+              </div>
+              <div class="container" style="padding-bottom:50px;"></div>
+            </div>
+            <!-- END OF BESSEL FILTER-->
+
           </div>
 
           <div id="kernel-filter">
@@ -119,11 +426,10 @@
               </div>
             </div>
           </div>
-        </div>
-        
-    </div>
-    <!-- END Butterworth Section -->
 
+        </div>
+        <!-- END OF TABS-->
+    </div>
 
     <footer class="site-footer">
       <div class="container">
