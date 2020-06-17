@@ -86,31 +86,356 @@
           <div class="container">
             <div class="row align-items-center justify-content-center">
               <div class="col-md-7 text-center">
-                <h1 class="mb-4 text-white">Transforms</h1>
-                <p class="mb-4">Provides a demonstration of using Fourier Transforms and Hilbert Transform through JDSP.</p>
+                <h1 class="mb-4 text-white">Pre-processing & Synthesis</h1>
+                <p class="mb-4">Provides a demonstration of using the pre-processing and signal generation tools in JDSP</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-    <!--  BUTTERWORTH FILTER  -->
+
     <div class="site-section bg-black">
 
         <!--  TABS  -->
         <div id="tabs">
           <ul>
-            <li><a href="#preprocess">Pre-Process Signal</a> </li>
+            <li><a href="#preprocess">Pre-process Signal</a> </li>
             <li><a href="#synthesis">Generate Signal</a> </li>
           </ul>
 
           <div id="preprocess">
+
+              <!--  START OF DETREND  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Detrend</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/signal/detrend/detrend.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Constant</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Linear</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+Detrend d1 = new Detrend(signal, "constant");
+double[] out = d1.detrendSignal();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+Detrend d1 = new Detrend(signal, "linear");
+double[] out = d1.detrendSignal();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Polynomial (Power 2)</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Polynomial (Power 5)</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int power = 2;
+Detrend d1 = new Detrend(signal, power);
+double[] out = d1.detrendSignal();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int power = 5;
+Detrend d1 = new Detrend(signal, power);
+double[] out = d1.detrendSignal();
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF DETREND-->
+
+
+              <!--  START OF SMOOTH  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Smoothing</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/signal/smooth/smooth.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Rectangular Smoothing</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Triangular Smoothing</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+String mode = "rectangular";
+int wsize = 11;
+Smooth s1 = new Smooth(signal, wsize, mode);
+double[] out = s1.smoothSignal();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+String mode = "triangular";
+int wsize = 11;
+Smooth s1 = new Smooth(signal, wsize, mode);
+double[] out = s1.smoothSignal();
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF SMOOTH-->
+
+              <!--  START OF DECIMATE  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Decimate</h2>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Non-Zero Phase Shift</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Zero Phase Shift</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center" style="padding-bottom: 50px">
+                          <img src="res/signal/signal/smooth/smooth.png" alt="Image" class="img-fluid" style="padding: 25px">
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center" style="padding-bottom: 50px">
+                          <img src="res/signal/signal/smooth/smooth.png" alt="Image" class="img-fluid" style="padding: 25px">
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100;
+int factor = 5;
+boolean zero = false;
+Decimate d = new Decimate(signal, Fs, zero);
+double[] out = d.decimate(factor);
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100;
+int factor = 5;
+boolean zero = true;
+Decimate d = new Decimate(signal, Fs, zero);
+double[] out = d.decimate(factor);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF DECIMATE-->
+
+              <!--  START OF CONVOLVE  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Convolution</h2>
+                      </div>
+                  </div>
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Code</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
+double[] kernel = {1, 3, 1, 3};
+Convolution con = new Convolution(signal, kernel);
+double[] full = con.convolve("full");
+double[] same = con.convolve("same");
+double[] valid = con.convolve("valid");
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Output</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+full: [2, 14, 26, 18, 37, 16, 49, 39, 36, 27,  0]
+same: [14, 26, 18, 37, 16, 49, 39, 36]
+valid: [18, 37, 16, 49, 39]
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF CONVOLVE-->
+
+              <!--  START OF CROSS-CORRELATION  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Cross-Correlation</h2>
+                      </div>
+                  </div>
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Code</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
+double[] kernel = {1, 3, 1, 3};
+CrossCorrelation cc = new CrossCorrelation(signal, kernel);
+double[] full = cc.cross_correlate("full");
+double[] same = cc.cross_correlate("same");
+double[] valid = cc.cross_correlate("valid");
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Output</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+full: [6, 26, 14, 38, 15, 40, 43, 37, 36,  9,  0]
+same: [26, 14, 38, 15, 40, 43, 37, 36]
+valid: [38, 15, 40, 43, 37]
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF CROSS-CORRELATION-->
 
 
           </div>
 
           <div id="synthesis">
 
+              <!--  START OF SINE  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Sine Wave</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/signal/generate/sine.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100;
+Generate gp = new Generate(Fs);
+int f1 = 10;
+double[] out = gp.generateSineWave(f1);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF SINE-->
+
+              <!--  START OF COSINE  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Cosine Wave</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/signal/generate/cosine.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100;
+Generate gp = new Generate(Fs);
+int f1 = 10;
+double[] out = gp.generateCosineWave(f1);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF COSINE-->
+
+              <!--  START OF SQUARE  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Square Wave</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/signal/generate/square.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100;
+Generate gp = new Generate(Fs);
+int f1 = 10;
+double[] out = gp.generateSquareWave(f1);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF SQUARE-->
 
           </div>
         </div>
