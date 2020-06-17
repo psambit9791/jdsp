@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <title>JDSP - Digital Signal Processing in Java</title>
+    <link rel="icon" type="image/png" href="res/logos/favicon.png"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+    
+    <div class="site-wrap" id="home-section">
+
+      <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+          <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+          </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+      </div>
+
+
+
+      <header class="site-navbar py-3 js-site-navbar site-navbar-target" role="banner" id="site-navbar">
+
+        <div class="container">
+          <div class="row align-items-center">
+
+            <div class="col-11 col-xl-2 site-logo">
+              <a href="index.html" class="font-weight-bold"><img src="res/logos/jDSP-Logo-NoText-Transparent.png" alt="Image" class="img-fluid" style="width: auto; height: 24px;"></a>
+            </div>
+            <div class="col-12 col-md-10 d-none d-xl-block">
+              <nav class="site-navigation position-relative text-right" role="navigation">
+
+                <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
+                  <li><a href="index.html" class="nav-link">Home</a></li>
+                  <li><a href="https://psambit9791.github.io/jDSP/index.html#section-features" class="nav-link">Features</a></li>
+                  <li class="has-children">
+                    <a class="nav-link">Toolkit</a>
+                    <ul class="dropdown">
+                      <li><a href="get_started.html" class="nav-link">Get Started</a></li>
+                      <li><a href="preprocess.html" class="nav-link">Pre-processing & Synthesis</a></li>
+                      <li><a href="filters.html" class="nav-link">Filters</a></li>
+                      <li><a href="transforms.html" class="nav-link">Transforms</a></li>
+                      <li class="active"><a href="utils.html" class="nav-link">Utilities</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="https://javadoc.io/doc/com.github.psambit9791/jdsp" target="_blank" class="nav-link">Documentation</a></li>
+                  <li><a href="https://github.com/psambit9791/jDSP/tree/master" target="_blank" class="nav-link">Source Code</a></li>
+                </ul>
+              </nav>
+            </div>
+
+
+            <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="text-white site-menu-toggle js-menu-toggle"><span class="text-white icon-menu h3"></span></a></div>
+
+          </div>
+
+        </div>
+
+      </header>
+
+      <div class="ftco-blocks-cover-1">
+        <div class="site-section-cover overlay" style="background-image: url('res/images/abstract-258338_1920.png')">
+          <div class="container">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-md-7 text-center">
+                <h1 class="mb-4 text-white">Utilities</h1>
+                <p class="mb-4">Provides a demonstration on plotting charts and usage of other mathematical helper functions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!--  BUTTERWORTH FILTER  -->
+    <div class="site-section bg-black">
+
+        <!--  TABS  -->
+        <div id="tabs">
+          <ul>
+            <li><a href="#plotting">Plotting</a> </li>
+            <li><a href="#linspace">Linspace</a> </li>
+            <li><a href="#arange">Arange</a> </li>
+            <li><a href="#arrayop">Array Operations</a> </li>
+            <li><a href="#matrixop">Matrix Operation</a> </li>
+            <li><a href="#helper">Helper Functions</a> </li>
+          </ul>
+
+          <div id="plotting">
+
+              <!--  START OF PLOTTING  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Plotting</h2>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                          <h4 class="text-dark" style="text-align: left; padding-right:20px">Initialising Plot</h4>
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left bg-light">
+int width = 600;
+int height = 500;
+String title = "Sample Figure";
+String x_axis = "Time";
+String y_axis = "Signal";
+Plotting fig = new Plotting(width, height, title, x_axis, y_axis);
+fig.initialise_plot();
+                    </code>
+                  </pre>
+                      </div>
+
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                          <h4 class="text-dark" style="text-align: left; padding-right:20px">Add Signals to Plot</h4>
+                          <pre class="d-flex align-items-center">
+                    <code class="container align-text-left bg-light">
+int double[] signal1 = {2.0, 4.0, 2.0, 3.0, 1.0};
+double[] signal2 = {3.4, 6.7, 2.2, 1.6, 3.6};
+double[] time = {0.0, 1.0, 2.0, 3.0, 4.0};
+fig.add_signal("Signal 1", time, signal1, true);
+fig.add_signal("Signal 2", time, signal2, true);
+                    </code>
+                  </pre>
+                      </div>
+
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                          <h4 class="text-dark" style="text-align: left; padding-right:20px">Displaying & Saving the Plot</h4>
+                          <pre class="d-flex align-items-center">
+                    <code class="container align-text-left bg-light">
+String outputFileName = "signal";
+// To plot on a window
+fig.plot();
+// TO save as an image
+fig.save_as_png(outputFileName);
+                    </code>
+                  </pre>
+                      </div>
+
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-top: 50px; padding-bottom: 50px">
+                      <img src="res/signal/signal.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF PLOTTING-->
+
+          </div>
+
+          <div id="linspace">
+
+              <!--  START OF LINSPACE 1  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Linspace</h2>
+                      </div>
+                  </div>
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Code</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int start = 2;
+int stop = 3;
+int samples = 5;
+boolean includeEnd = true;
+double[] out1 = UtilMethods.linspace(start, stop, samples, includeEnd);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Output</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[2.0, 2.25, 2.50, 2.75, 3.0]
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF LINSPACE 1-->
+
+
+              <!--  START OF LINSPACE 2  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Linspace with Repeated Elements</h2>
+                      </div>
+                  </div>
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Code</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int start = 2;
+int stop = 3;
+int samples = 5;
+int repeats = 2;
+double[] out = UtilMethods.linspace(start, stop, samples, repeats);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Output</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[2.0, 2.25, 2.50, 2.75, 3.0, 2.0, 2.25, 2.50, 2.75, 3.0]
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF LINSPACE 2-->
+
+          </div>
+
+          <div id="arange">
+              <!--  START OF ARANGE  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Arange</h2>
+                      </div>
+                  </div>
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Code</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double start = 3.0; //Can be int
+double stop = 9.0; //Can be int
+double step = 0.5; //Can be int
+double[] out = UtilMethods.arange(start, stop, step);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Output</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5]
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF ARANGE-->
+          </div>
+
+            <div id="arrayop">
+
+                <!--  START OF REVERSE  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Reverse Array</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] arr = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0}; //Can be int[]
+double[] out = UtilMethods.reverse(arr);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[6.0, 5.0, 4.0, 3.0, 2.0, 1.0]
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF REVERSE-->
+
+
+                <!--  START OF CONCATENATE  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Concatenate Arrays</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] arr1 = {1.0, 2.0}; //Can be int[]
+double[] arr2 = {3.0, 4.0, 5.0, 6.0}; //Can be int[]
+
+double[] out = UtilMethods.concatenateArray(arr1, arr2);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF CONCATENATE-->
+
+                <!--  START OF SPLIT  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Split Arrays by Index</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] signal = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0}; //Can be int[]
+int start = 2;
+int stop = 5;
+double[] out = UtilMethods.splitByIndex(signal, start, stop);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[3.0, 4.0, 5.0]
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF SPLIT-->
+
+                <!--  START OF PADDING  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Padding an Array</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
+double[] reflect = UtilMethods.padSignal(signal, "reflect");
+double[] constant = UtilMethods.padSignal(signal, "constant");
+double[] nearest = UtilMethods.padSignal(signal, "nearest");
+double[] mirror = UtilMethods.padSignal(signal, "mirror");
+double[] wrap = UtilMethods.padSignal(signal, "wrap");
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+reflect: [0, 9, 9, 1, 4, 0, 8, 2, 2, 8, 0, 4, 1, 9, 9, 0, 0, 9, 9, 1, 4, 0, 8, 2]
+constant: [0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 0, 4, 1, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+nearest: [2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 0, 4, 1, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+mirror: [9, 0, 9, 9, 1, 4, 0, 8, 2, 8, 0, 4, 1, 9, 9, 0, 9, 9, 1, 4, 0, 8, 2, 8]
+wrap: [2, 8, 0, 4, 1, 9, 9, 0, 2, 8, 0, 4, 1, 9, 9, 0, 2, 8, 0, 4, 1, 9, 9, 0]
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF PADDING-->
+
+                <!--  START OF DIFF  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">N<sup>th</sup> Discrete Difference</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] seq = {1, 2, 3, 4, 6, -4};
+double[] out = UtilMethods.diff(seq);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[1, 1, 1, 2, -10]
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF DIFF-->
+
+                <!--  START OF UNWRAP  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Unwrap</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] seq = {0.0 , 0.78539816, 1.57079633, 5.49778714, 6.28318531};
+double[] out = UtilMethods.unwrap(seq);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[0.0, 0.785, 1.571, -0.785, 0.0]
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF UNWRAP-->
+
+            </div>
+
+            <div id="matrixop">
+                <!--  START OF PSEUDO-INVERSE  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2>Pseudo-inverse of array</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[][] matrix = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+double[][] out = UtilMethods.pseudoInverse(matrix);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                                <img src="res/signal/pseudo-inv.svg" alt="Image" class="img-fluid" style="width: auto; height: 64px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF PSEUDO-INVERSE-->
+            </div>
+
+            <div id="helper">
+                <!--  START OF ROUND  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2>Rounding to n<sup>th</sup> Decimal</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double val = 123.45667;
+double out = UtilMethods.round(val, 1);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-center">
+       123.5
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF ROUND-->
+
+                <!--  START OF MODULO  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2>Modulus Operation (Python)</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double divisor = -2;
+double dividend = 4;
+double out = UtilMethods.modulo(divisor, dividend);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-center">
+          2
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF MODULO-->
+            </div>
+        </div>
+        
+    </div>
+    <!-- END Section -->
+
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row d-flex justify-content-around">
+          <div class="col-3 col-md-3 col-lg-3 justify-content-center">
+            <h2 class="footer-heading mb-3">Support</h2>
+            <p>JDSP is a labour of love and requires time and effort to maintain and develop. Financial
+              contributions towards JDSP enhances the tool and also quickens development. You can help by becoming
+              a supporter.</p>
+            <div class="row" style="padding: 15px">
+              <div class="col-6 col-md-6 col-lg-6 align-text-center">
+                <a href="https://www.patreon.com/sambitpaul"><img src="res/logos/patreon.png" alt="Image" class="img-fluid support-image-1"></a>
+              </div>
+              <div class="col-6 col-md-6 col-lg-6 align-text-center">
+                <a href="https://paypal.me/psambit9791"><img src="res/logos/paypal.png" alt="Image" class="img-fluid support-image-2"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-6 col-lg-6 align-text-center">
+            <div class="row d-flex justify-content-center">
+              <div class="col-6 col-md-6 col-lg-6 align-text-center">
+                <h2 class="footer-heading mb-4">Quick Links</h2>
+                <ul class="list-unstyled">
+                  <li><a href="https://github.com/psambit9791/jDSP" target="_blank">Github</a></li>
+                  <li><a href="index.html" target="_blank">JDSP Home</a></li>
+                  <li><a href="https://search.maven.org/artifact/com.github.psambit9791/jdsp/" target="_blank">Maven Central</a></li>
+                  <li><a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/index.html" target="_blank">Documentation</a></li>
+                  <li><a href="https://github.com/psambit9791/jDSP/blob/master/LICENSE" target="_blank">License</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 col-md-3 col-lg-3">
+            <h2 class="footer-heading mb-4">Connect</h2>
+            <div class="social_29128 white mb-5">
+              <a href="https://www.linkedin.com/in/sambit-paul/" target="_blank"><span class="fa fa-linkedin"></span></a>
+              <a href="https://github.com/psambit9791" target="_blank"><span class="fa fa-github"></span></a>
+              <a href="https://twitter.com/psambit9791" target="_blank"><span class="fa fa-twitter"></span></a>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-12 col-md-12 col-mlg-12">
+            <div class="border-top pt-5">
+              <p>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+    </div>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-migrate-3.0.0.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/jquery.fancybox.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+
+    <script src="js/main.js"></script>
+
+    <script type="text/javascript">
+      $('#tabs').tabs()
+    </script>
+
+  </body>
+
+</html>
+
