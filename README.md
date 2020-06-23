@@ -7,6 +7,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.psambit9791/jdsp.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.psambit9791%22%20AND%20a:%22jdsp%22)
 [![javadoc](https://javadoc.io/badge2/com.github.psambit9791/jdsp/javadoc.svg)](https://javadoc.io/doc/com.github.psambit9791/jdsp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?)](https://github.com/psambit9791/jDSP/blob/master/LICENSE)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3903922.svg)](https://doi.org/10.5281/zenodo.3903922)
 
 jDSP is a library of signal processing tools aimed at providing functionalities as available in scipy-signal package for 
 Python. The goal is to provide easy-to-use APIs for performing complex operation on signals eliminating the necessity 
