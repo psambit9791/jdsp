@@ -78,6 +78,22 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/LinePlot.html">com.github.psambit9791.jdsp.Plotting</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Plotting"><strong>Utility</strong></a> | Enables plotting of different signals as a line plot |
 <br/>
 
+## Citation
+
+If you are using this software in your research, please use the following citation:
+
+```
+@software{sambit_paul_2020_3903922,
+  author       = {Sambit Paul},
+  title        = {JDSP},
+  month        = jun,
+  year         = 2020,
+  publisher    = {Zenodo},
+  version      = {v0.2.1-zenodo},
+  doi          = {10.5281/zenodo.3903922},
+  url          = {https://doi.org/10.5281/zenodo.3903922}
+}
+```
 ## Supporting jDSP 
 
 jDSP is an open source project. <br/> You can help by becoming a sponsor on <a href="https://patreon.com/sambitpaul">Patreon</a> or doing a one time donation on <a href="https://paypal.me/psambit9791">PayPal</a> <br />
