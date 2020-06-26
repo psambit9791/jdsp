@@ -164,4 +164,36 @@ public class TestUtils {
         double out = UtilMethods.modulo(divisor, dividend);
         Assertions.assertEquals(2, out, 0.001);
     }
+
+    @Test
+    public void rescaleTest() {
+        double[] arr1 = {12, 14, 15, 15, 16};
+        double[] result1 = {10, 15, 17.5, 17.5, 20};
+        double[] out1 = UtilMethods.rescale(arr1, 10, 20);
+        Assertions.assertArrayEquals(result1, out1, 0.001);
+    }
+
+    @Test
+    public void standardizeTest() {
+        double[] arr1 = {12, 14, 15, 15, 16};
+        double[] result1 = {0, 0.5, 0.75, 0.75, 1};
+        double[] out1 = UtilMethods.standardize(arr1);
+        Assertions.assertArrayEquals(result1, out1, 0.001);
+    }
+
+    @Test
+    public void normalizeTest() {
+        double[] arr1 = {12, 14, 15, 15, 16};
+        double[] result1 = {-1.583, -0.264, 0.396, 0.396, 1.055};
+        double[] out1 = UtilMethods.normalize(arr1);
+        Assertions.assertArrayEquals(result1, out1, 0.001);
+    }
+
+    @Test
+    public void zeroCentreTest() {
+        double[] arr1 = {12, 14, 15, 15, 16};
+        double[] result1 = {-2.4, -0.4, 0.6, 0.6, 1.6};
+        double[] out1 = UtilMethods.zeroCenter(arr1);
+        Assertions.assertArrayEquals(result1, out1, 0.001);
+    }
 }

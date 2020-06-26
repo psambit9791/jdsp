@@ -4,10 +4,12 @@ import org.apache.commons.math3.linear.DecompositionSolver;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.SingularValueDecomposition;
+import org.apache.commons.math3.stat.StatUtils;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+
 
 /**
  * <h1>Utility Methods</h1>
@@ -371,5 +373,60 @@ public class UtilMethods {
         Double d = value;
         String temp = df.format(d);
         return Double.parseDouble(temp);
+    }
+
+    /**
+     * Scales the input array between the new limits provided in the arguments
+     * @param arr Array to be modified
+     * @param min_value Minimum value for the rescaling range
+     * @param max_value Maximum value for the rescaling range
+     * @return double[] Rescaled array
+     */
+    public static double[] rescale(double[] arr, int min_value, int max_value) {
+        double[] newArr = new double[arr.length];
+        double minArr = StatUtils.min(arr);
+        double maxArr = StatUtils.max(arr);
+        for (int i=0; i<arr.length; i++) {
+            newArr[i] = ((arr[i] - minArr)/(maxArr - minArr))*(max_value - min_value) + min_value;
+        }
+        return newArr;
+    }
+
+    /**
+     * Standardizes the input array between the range 0 and 1
+     * @param arr Array to be modified
+     * @return double[] Standardized array
+     */
+    public static double[] standardize(double[] arr) {
+        double[] newArr = new double[arr.length];
+        double minArr = StatUtils.min(arr);
+        double maxArr = StatUtils.max(arr);
+        for (int i=0; i<arr.length; i++) {
+            newArr[i] = ((arr[i] - minArr)/(maxArr - minArr));
+        }
+        return newArr;
+    }
+
+    /**
+     * Normalizes the input array with the mean and standard deviation
+     * @param arr Array to be modified
+     * @return double[] Standardized array
+     */
+    public static double[] normalize(double[] arr) {
+        return StatUtils.normalize(arr);
+    }
+
+    /**
+     * Zero-Centres the input array
+     * @param arr Array to be modified
+     * @return double[] Standardized array
+     */
+    public static double[] zeroCenter(double[] arr) {
+        double[] newArr = new double[arr.length];
+        double mean = StatUtils.mean(arr);
+        for (int i=0; i<arr.length; i++) {
+            newArr[i] = arr[i] - mean;
+        }
+        return newArr;
     }
 }
