@@ -1,10 +1,13 @@
 package com.github.psambit9791.jdsp;
 
-import com.github.psambit9791.jdsp.signal.FindPeak;
+import com.github.psambit9791.jdsp.signal.peaks.FindPeak;
+import com.github.psambit9791.jdsp.signal.peaks.PeakObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class TestPeakDetect {
+import java.io.IOException;
+
+public class TestFindPeak {
 
     private double[] signal = {0.228, 0.423, 0.304, 0.16, 0.241, 0.265, 0.168, 0.038, -0.017, 0.54, 0.234, -0.069,
             -0.094, -0.086, -0.04, 0.007, 0.056, 0.129, 0.112, 0.003, -0.008, 0.051, 0.013, -0.129, -0.221, 0.214,
@@ -33,24 +36,38 @@ public class TestPeakDetect {
     }
 
     @Test
-    public void peakDetectTest() {
-        int[] result = {7, 49, 93, 122, 175, 213, 257, 285, 333, 374, 415, 495, 500, 531, 535, 575, 595, 608, 663, 699,
+    public void peakDetectTest() throws IOException {
+        int[] resultPeaks = {7, 49, 93, 122, 175, 213, 257, 285, 333, 374, 415, 495, 500, 531, 535, 575, 595, 608, 663, 699,
                 705, 728,747, 765, 771, 841, 884, 928, 945, 956, 965};
 
         FindPeak fp = new FindPeak(this.highResSignal);
-        int[] out = fp.detect_peaks();
+        PeakObject out = fp.detect_peaks();
 
-        Assertions.assertArrayEquals(result, out);
+//        String outputFileName = "test_outputs/temp_peak";
+//        Plotting fig = new Plotting("Peak Detection", "Time", "Signal");
+//        fig.initialise_plot();
+//        fig.add_signal("Signal", this.highResSignal, false);
+//        fig.add_points("Peaks", out.getPeaks(), out.getHeights(), 'o');
+//        fig.save_as_png(outputFileName);
+
+        Assertions.assertArrayEquals(resultPeaks, out.getPeaks());
     }
 
     @Test
-    public void troughDetectTest() {
-        int[] result = {31,  78, 119, 125, 196, 242, 281, 301, 365, 400, 442, 498, 517, 532, 562, 589, 599, 611, 684,
+    public void troughDetectTest() throws IOException{
+        int[] resultTroughs = {31,  78, 119, 125, 196, 242, 281, 301, 365, 400, 442, 498, 517, 532, 562, 589, 599, 611, 684,
                 701, 726, 733, 762, 767, 773, 864, 913, 943, 954, 960, 967};
 
         FindPeak fp = new FindPeak(this.highResSignal);
-        int[] out = fp.detect_troughs();
+        PeakObject out = fp.detect_troughs();
 
-        Assertions.assertArrayEquals(result, out);
+//        String outputFileName = "test_outputs/temp_trough";
+//        Plotting fig = new Plotting("Trough Detection", "Time", "Signal");
+//        fig.initialise_plot();
+//        fig.add_signal("Signal", this.highResSignal, false);
+//        fig.add_points("Troughs", out.getPeaks(), out.getHeights(), 'x');
+//        fig.save_as_png(outputFileName);
+
+        Assertions.assertArrayEquals(resultTroughs, out.getPeaks());
     }
 }

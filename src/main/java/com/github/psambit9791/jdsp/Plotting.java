@@ -109,10 +109,60 @@ public class Plotting {
      * @param name Name of the curve being added (Used for the legend)
      * @param x Data to be plotted on the X-axis
      * @param y Data to be plotted on the Y-axis
+     */
+    public void add_points(String name, int[] x, double[] y) {
+        double[] x_new = new double[x.length];
+        for (int i=0; i<x.length; i++) {
+            x_new[i] = (double)x[i];
+        }
+        XYSeries s = this.figure.addSeries(name, x_new, y);
+        s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
+        s.setMarker(SeriesMarkers.CIRCLE);
+    }
+
+    /**
+     * This method adds points to the plot
+     * @param name Name of the curve being added (Used for the legend)
+     * @param x Data to be plotted on the X-axis
+     * @param y Data to be plotted on the Y-axis
      * @param marker Type of Marker to be used ('x': CROSS, 'o': CIRCLE ,'*': DIAMOND, '+': PLUS, '#': SQUARE, '^': TRIANGLE_UP)
      */
     public void add_points(String name, double[] x, double[] y, char marker) {
         XYSeries s = this.figure.addSeries(name, x, y);
+        s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
+        if (marker == 'x') {
+            s.setMarker(SeriesMarkers.CROSS);
+        }
+        else if (marker == 'o') {
+            s.setMarker(SeriesMarkers.CIRCLE);
+        }
+        else if (marker == '*') {
+            s.setMarker(SeriesMarkers.DIAMOND);
+        }
+        else if (marker == '+') {
+            s.setMarker(SeriesMarkers.PLUS);
+        }
+        else if (marker == '#') {
+            s.setMarker(SeriesMarkers.SQUARE);
+        }
+        else if (marker == '^') {
+            s.setMarker(SeriesMarkers.TRIANGLE_UP);
+        }
+    }
+
+    /**
+     * This method adds points to the plot
+     * @param name Name of the curve being added (Used for the legend)
+     * @param x Data to be plotted on the X-axis
+     * @param y Data to be plotted on the Y-axis
+     * @param marker Type of Marker to be used ('x': CROSS, 'o': CIRCLE ,'*': DIAMOND, '+': PLUS, '#': SQUARE, '^': TRIANGLE_UP)
+     */
+    public void add_points(String name, int[] x, double[] y, char marker) {
+        double[] x_new = new double[x.length];
+        for (int i=0; i<x.length; i++) {
+            x_new[i] = (double)x[i];
+        }
+        XYSeries s = this.figure.addSeries(name, x_new, y);
         s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
         if (marker == 'x') {
             s.setMarker(SeriesMarkers.CROSS);
