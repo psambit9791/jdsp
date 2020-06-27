@@ -39,6 +39,9 @@ public class PeakObject {
 
         // Peak Prominence Information
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
+
+        // Peak Width Information
+        // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
     }
 
     /**
@@ -48,6 +51,7 @@ public class PeakObject {
     public int[] getPeaks() {
         return this.midpoints;
     }
+
     /**
      * This method returns the heights of the peaks in the signal
      * @return double[] The list of all the heights of peaks
@@ -55,6 +59,31 @@ public class PeakObject {
     public double[] getHeights() {
         return this.height;
     }
+
+    /**
+     * This method returns the heights of the peaks in the signal
+     * @param peaks List of selected peaks
+     * @return double[] The list of all the heights of peaks
+     */
+    public double[] getHeights(int[] peaks) {
+        double[] newHeight = new double[peaks.length];
+        int[] indices = new int[peaks.length];
+        int new_start_point = 0;
+        for (int i=0; i<peaks.length; i++) {
+            for (int j=new_start_point; j<this.midpoints.length; j++) {
+                if (peaks[i] == this.midpoints[j]) {
+                    new_start_point = j;
+                    indices[i] = j;
+                    break;
+                }
+            }
+        }
+        for (int i=0; i<indices.length; i++) {
+            newHeight[i] = this.height[indices[i]];
+        }
+        return newHeight;
+    }
+
     /**
      * This method returns the plateau size of the peaks in the signal
      * @return double[] The list of all the plateau size of peaks
@@ -88,13 +117,13 @@ public class PeakObject {
      * @return double[] The list of filtered peaks
      */
     public int[] filterByHeight(double lower_threshold, double upper_threshold) {
-        ArrayList<Integer> holder = new ArrayList<Integer>();
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
         for (int i=0; i<this.height.length; i++) {
             if (this.height[i] >= lower_threshold && this.height[i] <= upper_threshold) {
-                holder.add(this.midpoints[i]);
+                newPeaks.add(this.midpoints[i]);
             }
         }
-        return this.convertToPrimitive(holder);
+        return this.convertToPrimitive(newPeaks);
     }
 
     /**
@@ -104,24 +133,24 @@ public class PeakObject {
      * @return double[] The list of filtered peaks
      */
     public int[] filterByHeight(double threshold, String mode) {
-        ArrayList<Integer> holder = new ArrayList<Integer>();
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
         if (mode.equals("upper")) {
             for (int i=0; i<this.height.length; i++) {
                 if (this.height[i] <= threshold) {
-                    holder.add(this.midpoints[i]);
+                    newPeaks.add(this.midpoints[i]);
                 }
             }
         }
         else if (mode.equals("lower")) {
             for (int i=0; i<this.height.length; i++) {
                 if (this.height[i] >= threshold) {
-                    holder.add(this.midpoints[i]);
+                    newPeaks.add(this.midpoints[i]);
                 }
             }
         }
         else {
             throw new IllegalArgumentException("Mode must either be lower or upper");
         }
-        return this.convertToPrimitive(holder);
+        return this.convertToPrimitive(newPeaks);
     }
 }
