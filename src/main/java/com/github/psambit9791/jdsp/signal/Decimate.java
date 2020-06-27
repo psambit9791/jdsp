@@ -43,7 +43,7 @@ public class Decimate {
     }
 
     /**
-     * This method perform default convolution using padding in 'reflect' modes.
+     * This method performs default convolution using padding in 'reflect' modes.
      * @param downSamplingFactor Factor by which the signal needs to be downsamples
      * @return double[] The decimated signal
      */
