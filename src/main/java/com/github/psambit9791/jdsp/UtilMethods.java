@@ -445,8 +445,11 @@ public class UtilMethods {
         for (int i=0; i<arr.length; i++) {
             if (min == arr[i]) {
                 index = i;
+                break;
             }
-            break;
+        }
+        if (reverse) {
+            index = (arr.length - 1) - index;
         }
         return index;
     }
@@ -466,8 +469,11 @@ public class UtilMethods {
         for (int i=0; i<arr.length; i++) {
             if (max == arr[i]) {
                 index = i;
+                break;
             }
-            break;
+        }
+        if (reverse) {
+            index = (arr.length - 1) - index;
         }
         return index;
     }

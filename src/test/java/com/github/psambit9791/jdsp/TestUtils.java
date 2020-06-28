@@ -196,4 +196,26 @@ public class TestUtils {
         double[] out1 = UtilMethods.zeroCenter(arr1);
         Assertions.assertArrayEquals(result1, out1, 0.001);
     }
+
+    @Test
+    public void argminTest() {
+        double[] arr = {1, 2, 5, 3, 4, 6, 1, 6};
+        int index = 0;
+        int indexRev = 6;
+        int out = UtilMethods.argmin(arr, false);
+        Assertions.assertEquals(index, out);
+        out = UtilMethods.argmin(arr, true);
+        Assertions.assertEquals(indexRev, out);
+    }
+
+    @Test
+    public void argmaxTest() {
+        double[] arr = {1, 2, 5, 3, 4, 6, 1, 6};
+        int index = 5;
+        int indexRev = 7;
+        int out = UtilMethods.argmax(arr, false);
+        Assertions.assertEquals(index, out);
+        out = UtilMethods.argmax(arr, true);
+        Assertions.assertEquals(indexRev, out);
+    }
 }
