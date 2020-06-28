@@ -3,6 +3,8 @@ package com.github.psambit9791.jdsp;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javax.rmi.CORBA.Util;
+
 
 public class TestUtils {
 
@@ -217,5 +219,13 @@ public class TestUtils {
         Assertions.assertEquals(index, out);
         out = UtilMethods.argmax(arr, true);
         Assertions.assertEquals(indexRev, out);
+    }
+
+    @Test
+    public void almostEqualsTest() {
+        double[] test1 = {1.23320, 1.23321};
+        double[] test2 = {1.23310, 1.23320};
+        Assertions.assertTrue(UtilMethods.almostEquals(test1[0], test1[1], 0.0001));
+        Assertions.assertFalse(UtilMethods.almostEquals(test2[0], test2[1], 0.00001));
     }
 }

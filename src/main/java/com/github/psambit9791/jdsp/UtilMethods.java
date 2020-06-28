@@ -477,4 +477,8 @@ public class UtilMethods {
         }
         return index;
     }
+
+    public static boolean almostEquals(double num1, double num2, double epsilon) {
+        return Math.abs(num1 - num2) <= epsilon;
+    }
 }
