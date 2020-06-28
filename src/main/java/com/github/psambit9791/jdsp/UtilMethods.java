@@ -429,4 +429,46 @@ public class UtilMethods {
         }
         return newArr;
     }
+
+    /**
+     * Returns the index of the smallest element in the input array
+     * @param arr Input array
+     * @param reverse If true, checking is done from end to start. Otherwise checked from start to end.
+     * @return int The index
+     */
+    public static int argmin(double[] arr, boolean reverse) {
+        double min = StatUtils.min(arr);
+        if (reverse) {
+            arr = UtilMethods.reverse(arr);
+        }
+        int index = -1;
+        for (int i=0; i<arr.length; i++) {
+            if (min == arr[i]) {
+                index = i;
+            }
+            break;
+        }
+        return index;
+    }
+
+    /**
+     * Returns the index of the largest element in the input array
+     * @param arr Input array
+     * @param reverse If true, checking is done from end to start. Otherwise checked from start to end.
+     * @return int The index
+     */
+    public static int argmax(double[] arr, boolean reverse) {
+        double max = StatUtils.max(arr);
+        if (reverse) {
+            arr = UtilMethods.reverse(arr);
+        }
+        int index = -1;
+        for (int i=0; i<arr.length; i++) {
+            if (max == arr[i]) {
+                index = i;
+            }
+            break;
+        }
+        return index;
+    }
 }
