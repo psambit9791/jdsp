@@ -1,5 +1,8 @@
 package com.github.psambit9791.jdsp.signal.peaks;
 
+import com.github.psambit9791.jdsp.UtilMethods;
+import org.apache.commons.math3.stat.StatUtils;
+
 import java.util.*;
 
 /**
@@ -12,6 +15,7 @@ import java.util.*;
  * @version 1.0
  */
 public class PeakObject {
+    private double[] signal;
     private int[] midpoints;
     private double[] height;
     private int[] plateau_size;
@@ -19,6 +23,8 @@ public class PeakObject {
     private double[] prominence;
 
     public PeakObject(double[] s, int[] m, int[] l, int[] r, String mode) {
+
+        this.signal = s;
 
         // Peak Information
         this.midpoints = m;
@@ -40,8 +46,55 @@ public class PeakObject {
         // Peak Prominence Information
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
 
+        this.prominence = new double[m.length];
+
+        for (int i=0; i<m.length; i++) {
+            double leftProm = 0;
+            double rightProm = 0;
+            double threshold = this.signal[this.midpoints[i]];
+
+            ArrayList<Double> temp = new ArrayList<Double>();
+            // Calculate left prominence
+            for (int j=this.midpoints[i]-1; j>=0; j--) {
+                temp.add(this.signal[j]);
+                if (this.signal[j] > threshold) {
+                    break;
+                }
+                double[] partSignal = UtilMethods.reverse(this.convertToPrimitiveDouble(temp));
+                leftProm = threshold - StatUtils.min(partSignal);
+            }
+
+            temp.clear();
+            // Calculate right prominence
+            for (int j=this.midpoints[i]+1; j<this.signal.length; j++) {
+                temp.add(this.signal[j]);
+                if (this.signal[j] > threshold) {
+                    break;
+                }
+                double[] partSignal = this.convertToPrimitiveDouble(temp);
+                rightProm = threshold - StatUtils.min(partSignal);
+            }
+            this.prominence[i] = Math.min(leftProm, rightProm);
+        }
+
+
         // Peak Width Information
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
+    }
+
+    private int[] getIndexFromPeak(int[] peaks) {
+        int[] indices = new int[peaks.length];
+        int new_start_point = 0;
+        for (int i=0; i<peaks.length; i++) {
+            for (int j=new_start_point; j<this.midpoints.length; j++) {
+                if (peaks[i] == this.midpoints[j]) {
+                    new_start_point = j;
+                    indices[i] = j;
+                    break;
+                }
+            }
+        }
+        return indices;
     }
 
     /**
@@ -67,19 +120,8 @@ public class PeakObject {
      */
     public double[] getHeights(int[] peaks) {
         double[] newHeight = new double[peaks.length];
-        int[] indices = new int[peaks.length];
-        int new_start_point = 0;
         for (int i=0; i<peaks.length; i++) {
-            for (int j=new_start_point; j<this.midpoints.length; j++) {
-                if (peaks[i] == this.midpoints[j]) {
-                    new_start_point = j;
-                    indices[i] = j;
-                    break;
-                }
-            }
-        }
-        for (int i=0; i<indices.length; i++) {
-            newHeight[i] = this.height[indices[i]];
+            newHeight[i] = this.signal[peaks[i]];
         }
         return newHeight;
     }
@@ -110,10 +152,18 @@ public class PeakObject {
         return ret;
     }
 
+    private double[] convertToPrimitiveDouble(ArrayList<Double> l) {
+        double[] ret = new double[l.size()];
+        for (int i=0; i<ret.length; i++) {
+            ret[i] = l.get(i).doubleValue();
+        }
+        return ret;
+    }
+
     /**
-     * This method allows filtering the list of peaks using both the upper and lower threshold
-     * @param lower_threshold The lower threshold to check against
-     * @param upper_threshold The upper threshold to check against
+     * This method allows filtering the list of peaks by height using both the upper and lower threshold
+     * @param lower_threshold The lower threshold of height to check against
+     * @param upper_threshold The upper threshold of height to check against
      * @return double[] The list of filtered peaks
      */
     public int[] filterByHeight(double lower_threshold, double upper_threshold) {
@@ -127,8 +177,8 @@ public class PeakObject {
     }
 
     /**
-     * This method allows filtering the list of peaks using either the upper or the lower threshold
-     * @param threshold The threshold to check against
+     * This method allows filtering the list of peaks by height using either the upper or the lower threshold
+     * @param threshold The threshold of height to check against
      * @param mode Can be "upper" or "lower" to select which thresholding to use
      * @return double[] The list of filtered peaks
      */
@@ -144,6 +194,94 @@ public class PeakObject {
         else if (mode.equals("lower")) {
             for (int i=0; i<this.height.length; i++) {
                 if (this.height[i] >= threshold) {
+                    newPeaks.add(this.midpoints[i]);
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Mode must either be lower or upper");
+        }
+        return this.convertToPrimitive(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by width using both the upper and lower threshold
+     * @param lower_threshold The lower threshold of width to check against
+     * @param upper_threshold The upper threshold of width to check against
+     * @return double[] The list of filtered peaks
+     */
+    public int[] filterByWidth(double lower_threshold, double upper_threshold) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        for (int i=0; i<this.width.length; i++) {
+            if (this.width[i] >= lower_threshold && this.width[i] <= upper_threshold) {
+                newPeaks.add(this.midpoints[i]);
+            }
+        }
+        return this.convertToPrimitive(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by width using either the upper or the lower threshold
+     * @param threshold The threshold of width to check against
+     * @param mode Can be "upper" or "lower" to select which thresholding to use
+     * @return double[] The list of filtered peaks
+     */
+    public int[] filterByWidth(double threshold, String mode) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        if (mode.equals("upper")) {
+            for (int i=0; i<this.width.length; i++) {
+                if (this.width[i] <= threshold) {
+                    newPeaks.add(this.midpoints[i]);
+                }
+            }
+        }
+        else if (mode.equals("lower")) {
+            for (int i=0; i<this.width.length; i++) {
+                if (this.width[i] >= threshold) {
+                    newPeaks.add(this.midpoints[i]);
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Mode must either be lower or upper");
+        }
+        return this.convertToPrimitive(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by prominence using both the upper and lower threshold
+     * @param lower_threshold The lower threshold of prominence to check against
+     * @param upper_threshold The upper threshold of prominence to check against
+     * @return double[] The list of filtered peaks
+     */
+    public int[] filterByProminence(double lower_threshold, double upper_threshold) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        for (int i=0; i<this.prominence.length; i++) {
+            if (this.prominence[i] >= lower_threshold && this.prominence[i] <= upper_threshold) {
+                newPeaks.add(this.midpoints[i]);
+            }
+        }
+        return this.convertToPrimitive(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by prominence using either the upper or the lower threshold
+     * @param threshold The threshold of prominence to check against
+     * @param mode Can be "upper" or "lower" to select which thresholding to use
+     * @return double[] The list of filtered peaks
+     */
+    public int[] filterByProminence(double threshold, String mode) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        if (mode.equals("upper")) {
+            for (int i=0; i<this.prominence.length; i++) {
+                if (this.prominence[i] <= threshold) {
+                    newPeaks.add(this.midpoints[i]);
+                }
+            }
+        }
+        else if (mode.equals("lower")) {
+            for (int i=0; i<this.prominence.length; i++) {
+                if (this.prominence[i] >= threshold) {
                     newPeaks.add(this.midpoints[i]);
                 }
             }

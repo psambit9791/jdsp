@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class TestFindPeak {
 
@@ -51,10 +52,6 @@ public class TestFindPeak {
     public void peakDetectTest() throws IOException {
         int[] resultPeaks = {7, 49, 93, 122, 175, 213, 257, 285, 333, 374, 415, 495, 500, 531, 535, 575, 595, 608, 663, 699,
                 705, 728,747, 765, 771, 841, 884, 928, 945, 956, 965};
-        int[] resultFilteredPeaks1 = {7,  49,  93, 175, 213, 257, 928};
-        int[] resultFilteredPeaks2 = {7,  49,  93, 175, 213, 257, 928};
-        int[] resultFilteredPeaks3 = {122, 285, 333, 374, 415, 495, 500, 531, 535, 575, 595, 608, 663, 699, 705, 728,
-                747, 765, 771, 841, 884, 945, 956, 965};
 
         // Detection Tests
         FindPeak fp = new FindPeak(this.highResSignal);
@@ -62,12 +59,36 @@ public class TestFindPeak {
         Assertions.assertArrayEquals(resultPeaks, out.getPeaks());
 
         // Height Filtering Test
+        int[] resultFilteredPeaks1 = {7,  49,  93, 175, 213, 257, 928};
+        int[] resultFilteredPeaks2 = {7,  49,  93, 175, 213, 257, 928};
+        int[] resultFilteredPeaks3 = {122, 285, 333, 374, 415, 495, 500, 531, 535, 575, 595, 608, 663, 699, 705, 728,
+                747, 765, 771, 841, 884, 945, 956, 965};
         int[] filteredPeaks1 = out.filterByHeight(0.02, 1.0);
         int[] filteredPeaks2 = out.filterByHeight(0, "lower");
         int[] filteredPeaks3 = out.filterByHeight(0, "upper");
         Assertions.assertArrayEquals(resultFilteredPeaks1, filteredPeaks1);
         Assertions.assertArrayEquals(resultFilteredPeaks2, filteredPeaks2);
         Assertions.assertArrayEquals(resultFilteredPeaks3, filteredPeaks3);
+
+        // Prominence Test
+        double[] resultProminence = {0.208, 0.107, 0.598, 0.003, 0.24 , 0.08 , 0.629, 0.016, 0.215, 0.056, 0.651, 0.323,
+                0.004, 0.001, 0.076, 0.558, 0.007, 0.004, 0.248, 0.003, 0.093, 0.004, 0.689, 0.004, 0.006, 0.334, 0.086,
+                0.838, 0.003, 0.001, 0.002};
+        double[] outProminence = out.getProminence();
+        Assertions.assertArrayEquals(resultProminence, outProminence, 0.001);
+
+        // Prominence Filtering Test
+        int[] resultFilteredProm1 = {7,  93, 175, 333, 495, 575, 663, 841};
+        int[] resultFilteredProm2 = {7,  93, 175, 257, 333, 415, 495, 575, 663, 747, 841, 928};
+        int[] resultFilteredProm3 = {7,  49,  93, 122, 175, 213, 285, 333, 374, 495, 500, 531, 535, 575, 595, 608, 663,
+                699, 705, 728, 765, 771, 841, 884, 945, 956, 965};
+        int[] filteredProm1 = out.filterByProminence(0.2, 0.6);
+        int[] filteredProm2 = out.filterByProminence(0.2, "lower");
+        int[] filteredProm3 = out.filterByProminence(0.6, "upper");
+        Assertions.assertArrayEquals(resultFilteredProm1, filteredProm1);
+        Assertions.assertArrayEquals(resultFilteredProm2, filteredProm2);
+        Assertions.assertArrayEquals(resultFilteredProm3, filteredProm3);
+
     }
 
     @Test
