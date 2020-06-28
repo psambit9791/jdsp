@@ -1,5 +1,7 @@
 package com.github.psambit9791.jdsp;
 
+import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
+import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
 import org.apache.commons.math3.linear.DecompositionSolver;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -478,7 +480,27 @@ public class UtilMethods {
         return index;
     }
 
+    /**
+     * Returns the index of the largest element in the input array
+     * @param num1 First number for comparison
+     * @param num2 Second number for comparison
+     * @param epsilon The tolerance against which the check is performed
+     * @return boolean Whether they are almost equal or not
+     */
     public static boolean almostEquals(double num1, double num2, double epsilon) {
         return Math.abs(num1 - num2) <= epsilon;
+    }
+
+    /**
+     * Returns the linear interpolation function for a set of X and Y values
+     * Reference <a href="https://stackoverflow.com/a/36523685/7153489">Stackoverflow answer</a> helped implement this function.
+     * @param x The abscissa (horizontal axis)
+     * @param y The ordinate (vertical axis)
+     * @return PolynomialSplineFunction The interpolation function
+     */
+    protected static PolynomialSplineFunction linearInterp(double[] x, double[] y) {
+        LinearInterpolator li = new LinearInterpolator();
+        PolynomialSplineFunction psf = li.interpolate(x, y);
+        return psf;
     }
 }

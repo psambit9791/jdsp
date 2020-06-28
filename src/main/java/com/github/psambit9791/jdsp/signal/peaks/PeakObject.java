@@ -46,16 +46,28 @@ public class PeakObject {
         // Peak Prominence Information
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
 
-        this.prominence = new double[m.length];
+        this.prominence = this.findPeakProminence(this.midpoints);
 
-        for (int i=0; i<m.length; i++) {
+        // Peak Width Information
+        // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
+        this.width = this.findPeakWidth(this.midpoints);
+    }
+
+    /**
+     * This method calculates the prominence of the peaks provided as an argument
+     * @param peaks Peaks for which prominence needs to be calculated
+     * @return double[] The prominence of the input peaks
+     */
+    public double[] findPeakProminence(int[] peaks) {
+        double[] prominence = new double[peaks.length];
+        for (int i=0; i<peaks.length; i++) {
             double leftProm = 0;
             double rightProm = 0;
-            double threshold = this.signal[this.midpoints[i]];
+            double threshold = this.signal[peaks[i]];
 
             ArrayList<Double> temp = new ArrayList<Double>();
             // Calculate left prominence
-            for (int j=this.midpoints[i]-1; j>=0; j--) {
+            for (int j=peaks[i]-1; j>=0; j--) {
                 temp.add(this.signal[j]);
                 if (this.signal[j] > threshold) {
                     break;
@@ -66,7 +78,7 @@ public class PeakObject {
 
             temp.clear();
             // Calculate right prominence
-            for (int j=this.midpoints[i]+1; j<this.signal.length; j++) {
+            for (int j=peaks[i]+1; j<this.signal.length; j++) {
                 temp.add(this.signal[j]);
                 if (this.signal[j] > threshold) {
                     break;
@@ -74,28 +86,53 @@ public class PeakObject {
                 double[] partSignal = this.convertToPrimitiveDouble(temp);
                 rightProm = threshold - StatUtils.min(partSignal);
             }
-            this.prominence[i] = Math.min(leftProm, rightProm);
+            prominence[i] = Math.min(leftProm, rightProm);
         }
-
-
-        // Peak Width Information
-        // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
+        return prominence;
     }
 
-    private int[] getIndexFromPeak(int[] peaks) {
-        int[] indices = new int[peaks.length];
-        int new_start_point = 0;
+    /**
+     * This method calculates the width of the peaks provided as an argument
+     * @param peaks Peaks for which prominence needs to be calculated
+     * @return double[] The width of the input peaks
+     */
+    public int[] findPeakWidth(int[] peaks) {
+        int[] width = new int[peaks.length];
+        double[] prominence = this.findPeakProminence(peaks);
+
         for (int i=0; i<peaks.length; i++) {
-            for (int j=new_start_point; j<this.midpoints.length; j++) {
-                if (peaks[i] == this.midpoints[j]) {
-                    new_start_point = j;
-                    indices[i] = j;
-                    break;
-                }
+            double halfHeight = this.signal[peaks[i]] - prominence[i]/2;
+            int leftPoint = 0;
+            int rightPoint = this.signal.length-1;
+
+            // Calculate left point of half width
+            for (int j=peaks[i]-1; j>=0; j--) {
+
             }
+
+            // Calculate right point of half width
+            for (int j=peaks[i]+1; j<this.signal.length; j++) {
+
+            }
+            width[i] = rightPoint - leftPoint;
         }
-        return indices;
+        return width;
     }
+
+//    private int[] getIndexFromPeak(int[] peaks) {
+//        int[] indices = new int[peaks.length];
+//        int new_start_point = 0;
+//        for (int i=0; i<peaks.length; i++) {
+//            for (int j=new_start_point; j<this.midpoints.length; j++) {
+//                if (peaks[i] == this.midpoints[j]) {
+//                    new_start_point = j;
+//                    indices[i] = j;
+//                    break;
+//                }
+//            }
+//        }
+//        return indices;
+//    }
 
     /**
      * This method returns the indices of the signal where the peaks are located
