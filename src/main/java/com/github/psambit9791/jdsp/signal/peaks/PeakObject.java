@@ -48,7 +48,7 @@ public class PeakObject {
         // Peak Prominence Information
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
 
-        this.promData = this.findPeakProminence(this.midpoints);
+        this.promData = this.findPeakProminence(this.midpoints, 0.5);
         this.prominence = promData[0];
 
         // Peak Width Information
