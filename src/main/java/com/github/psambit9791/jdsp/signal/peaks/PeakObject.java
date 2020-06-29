@@ -19,10 +19,11 @@ public class PeakObject {
     private int[] midpoints;
     private double[] height;
     private int[] plateau_size;
-    private int[] width;
+    private double[] width;
     private double[] prominence;
 
-    private double[][] promData;
+    private double[][] prominenceData;
+    private double[][] widthData;
 
     public PeakObject(double[] s, int[] m, int[] l, int[] r, String mode) {
 
@@ -48,24 +49,21 @@ public class PeakObject {
         // Peak Prominence Information
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
 
-        this.promData = this.findPeakProminence(this.midpoints, 0.5);
-        this.prominence = promData[0];
+        this.prominenceData = this.findPeakProminence(this.midpoints);
+        this.prominence = prominenceData[0];
 
         // Peak Width Information
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
-        this.width = this.findPeakWidth(this.midpoints);
+        this.widthData = this.findPeakWidth(this.midpoints, 0.5);
+        this.width = widthData[0];
     }
 
     /**
      * This method calculates the prominence of the peaks provided as an argument
      * @param peaks Peaks for which prominence needs to be calculated
-     * @throws java.lang.IllegalArgumentException if rel_height is not between 0.0 and 1.0
      * @return double[][] The prominence of the input peaks. 0: Contains the prominence, 1: Contains the Left Bases, 2: Contains the Right Bases
      */
-    public double[][] findPeakProminence(int[] peaks, double rel_height) throws IllegalArgumentException {
-        if (rel_height > 1.0 || rel_height < 0.0) {
-            throw new IllegalArgumentException("rel_height can be between 0.0 and 1.0");
-        }
+    public double[][] findPeakProminence(int[] peaks) throws IllegalArgumentException {
         double[] prominence = new double[peaks.length];
         double[] left_base = new double[peaks.length];
         double[] right_base = new double[peaks.length];
@@ -111,32 +109,56 @@ public class PeakObject {
     /**
      * This method calculates the width of the peaks provided as an argument
      * @param peaks Peaks for which prominence needs to be calculated
-     * @return double[] The width of the input peaks
+     * @throws java.lang.IllegalArgumentException if rel_height is not between 0.0 and 1.0
+     * @return double[][] The width of the input peaks. 0: Contains the widths, 1: Contains the Left Intersection Points, 2: Contains the Right Intersection Points
      */
-    public int[] findPeakWidth(int[] peaks) {
-        int[] width = new int[peaks.length];
-        double[][] promData = this.findPeakProminence(peaks, 0.5);
+    public double[][] findPeakWidth(int[] peaks, double rel_height) throws IllegalArgumentException {
+        if (rel_height > 1.0 || rel_height < 0.0) {
+            throw new IllegalArgumentException("rel_height can be between 0.0 and 1.0");
+        }
+        double[] width = new double[peaks.length];
+        double[][] promData = this.findPeakProminence(peaks);
         double[] prominence = promData[0];
-        double[] left = promData[1];
-        double[] right = promData[2];
+        double[] left_bases = promData[1];
+        double[] right_bases = promData[2];
+
+        double[] widthHeight = new double[peaks.length];
+        double[] leftIntersectPoint = new double[peaks.length];
+        double[] rightIntersectPoint = new double[peaks.length];
 
         for (int i=0; i<peaks.length; i++) {
-            double halfHeight = this.signal[peaks[i]] - prominence[i]/2;
-            int leftPoint = 0;
-            int rightPoint = this.signal.length-1;
+            widthHeight[i] = this.signal[peaks[i]] - prominence[i]*rel_height;
 
-            // Calculate left point of half width
-            for (int j=peaks[i]-1; j>=0; j--) {
-
+            // Calculate left intersection point of half width
+            int j = peaks[i];
+            while (left_bases[i] < j && widthHeight[i] < this.signal[j]) {
+                j--;
+            }
+            leftIntersectPoint[i] = j;
+            if (this.signal[j] < widthHeight[i]) {
+                leftIntersectPoint[i] += (widthHeight[i] - this.signal[j])/(this.signal[j+1] - this.signal[j]);
             }
 
             // Calculate right point of half width
-            for (int j=peaks[i]+1; j<this.signal.length; j++) {
-
+            j = peaks[i];
+            while (j < right_bases[i] && widthHeight[i] < this.signal[j]) {
+                j++;
             }
-            width[i] = rightPoint - leftPoint;
+            rightIntersectPoint[i] = j;
+            if (this.signal[j] < widthHeight[i]) {
+                rightIntersectPoint[i] -= (widthHeight[i] - this.signal[j])/(this.signal[j-1] - this.signal[j]);
+            }
+
+            width[i] = rightIntersectPoint[i] - leftIntersectPoint[i];
         }
-        return width;
+
+        double[][] wData = new double[4][peaks.length];
+        wData[0] = width;
+        wData[1] = widthHeight;
+        wData[2] = leftIntersectPoint;
+        wData[3] = rightIntersectPoint;
+
+        return wData;
     }
 
     /**
@@ -180,7 +202,13 @@ public class PeakObject {
      * This method returns the half-width of the peaks in the signal
      * @return double[] The list of all the half width of peaks
      */
-    public int[] getWidth() { return this.width; }
+    public double[] getWidth() { return this.width; }
+
+    /**
+     * This method returns the half-width of the peaks in the signal along with other properties
+     * @return double[][] The list of all the prominence of peaks with the width height, the left and right bases
+     */
+    public double[][] getWidthData() { return this.widthData; }
 
     /**
      * This method returns the prominence of the peaks in the signal
@@ -189,10 +217,10 @@ public class PeakObject {
     public double[] getProminence() { return this.prominence; }
 
     /**
-     * This method returns the prominence of the peaks in the signal
-     * @return double[][] The list of all the prominence of peaks and the lef and right bases
+     * This method returns the prominence of the peaks in the signal along with other properties
+     * @return double[][] The list of all the prominence of peaks and the left and right bases
      */
-    public double[][] getProminenceData() { return this.promData; }
+    public double[][] getProminenceData() { return this.prominenceData; }
 
     private int[] convertToPrimitive(ArrayList<Integer> l) {
         int[] ret = new int[l.size()];
@@ -255,50 +283,6 @@ public class PeakObject {
     }
 
     /**
-     * This method allows filtering the list of peaks by width using both the upper and lower threshold
-     * @param lower_threshold The lower threshold of width to check against
-     * @param upper_threshold The upper threshold of width to check against
-     * @return double[] The list of filtered peaks
-     */
-    public int[] filterByWidth(double lower_threshold, double upper_threshold) {
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        for (int i=0; i<this.width.length; i++) {
-            if (this.width[i] >= lower_threshold && this.width[i] <= upper_threshold) {
-                newPeaks.add(this.midpoints[i]);
-            }
-        }
-        return this.convertToPrimitive(newPeaks);
-    }
-
-    /**
-     * This method allows filtering the list of peaks by width using either the upper or the lower threshold
-     * @param threshold The threshold of width to check against
-     * @param mode Can be "upper" or "lower" to select which thresholding to use
-     * @return double[] The list of filtered peaks
-     */
-    public int[] filterByWidth(double threshold, String mode) {
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        if (mode.equals("upper")) {
-            for (int i=0; i<this.width.length; i++) {
-                if (this.width[i] <= threshold) {
-                    newPeaks.add(this.midpoints[i]);
-                }
-            }
-        }
-        else if (mode.equals("lower")) {
-            for (int i=0; i<this.width.length; i++) {
-                if (this.width[i] >= threshold) {
-                    newPeaks.add(this.midpoints[i]);
-                }
-            }
-        }
-        else {
-            throw new IllegalArgumentException("Mode must either be lower or upper");
-        }
-        return this.convertToPrimitive(newPeaks);
-    }
-
-    /**
      * This method allows filtering the list of peaks by prominence using both the upper and lower threshold
      * @param lower_threshold The lower threshold of prominence to check against
      * @param upper_threshold The upper threshold of prominence to check against
@@ -332,6 +316,50 @@ public class PeakObject {
         else if (mode.equals("lower")) {
             for (int i=0; i<this.prominence.length; i++) {
                 if (this.prominence[i] >= threshold) {
+                    newPeaks.add(this.midpoints[i]);
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Mode must either be lower or upper");
+        }
+        return this.convertToPrimitive(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by width using both the upper and lower threshold
+     * @param lower_threshold The lower threshold of width to check against
+     * @param upper_threshold The upper threshold of width to check against
+     * @return double[] The list of filtered peaks
+     */
+    public int[] filterByWidth(double lower_threshold, double upper_threshold) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        for (int i=0; i<this.width.length; i++) {
+            if (this.width[i] >= lower_threshold && this.width[i] <= upper_threshold) {
+                newPeaks.add(this.midpoints[i]);
+            }
+        }
+        return this.convertToPrimitive(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by width using either the upper or the lower threshold
+     * @param threshold The threshold of width to check against
+     * @param mode Can be "upper" or "lower" to select which thresholding to use
+     * @return double[] The list of filtered peaks
+     */
+    public int[] filterByWidth(double threshold, String mode) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        if (mode.equals("upper")) {
+            for (int i=0; i<this.width.length; i++) {
+                if (this.width[i] <= threshold) {
+                    newPeaks.add(this.midpoints[i]);
+                }
+            }
+        }
+        else if (mode.equals("lower")) {
+            for (int i=0; i<this.width.length; i++) {
+                if (this.width[i] >= threshold) {
                     newPeaks.add(this.midpoints[i]);
                 }
             }

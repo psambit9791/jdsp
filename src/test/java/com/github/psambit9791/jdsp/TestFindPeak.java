@@ -98,6 +98,40 @@ public class TestFindPeak {
         Assertions.assertArrayEquals(resultFilteredProm2, filteredProm2);
         Assertions.assertArrayEquals(resultFilteredProm3, filteredProm3);
 
+        // Width Test
+        double[] resultWidth = {15.233, 19.82 , 14.765,  2.25 , 33.015, 14.671, 15.017,  4.19 , 30.576, 10. , 14.787,
+                42.581,  1.333,  1.   , 13.879, 14.984, 5.875,  2.167, 37.336,  2.   , 18.307,  2.125, 15.2  ,  2.333,
+                3.   , 53.649, 16.2  , 14.894,  2.5  ,  1.667,  1.5};
+        double[] outWidth = out.getWidth();
+        Assertions.assertArrayEquals(resultWidth, outWidth, 0.001);
+
+        double[][] outWidthData = out.getWidthData();
+        double[] resultWidthHeight = {0.332,  0.212,  0.265, -0.09 ,  0.024,  0.019,  0.085, -0.284, -0.23 , -0.358,
+                -0.328, -0.544, -0.387, -0.5  , -0.536, -0.462, -0.732, -0.717, -0.532, -0.474, -0.516, -0.629, -0.396,
+                -0.762, -0.76 , -0.57 , -0.56 , -0.31 , -0.716, -0.724, -0.723};
+        double[] resultLeftIP = {3.452,  37.147,  84.912, 121.25 , 155.167, 204.9  , 248.467, 283.143, 318.833, 370.   ,
+                406.468, 470.611, 499.333, 530.5  , 525.667, 568.756, 591.625, 607.333, 642.3  , 698.25 , 693.318,
+                727.   , 740.052, 763.667, 769.   , 803.636, 874.   , 921.5  , 944.25 , 955.5  , 964.5};
+        double[] resultRightIP = {18.684,  56.967,  99.677, 123.5  , 188.182, 219.571, 263.484, 287.333, 349.409, 380.   ,
+                421.255, 513.192, 500.667, 531.5  , 539.545, 583.739, 597.5  , 609.5  , 679.636, 700.25 , 711.625,
+                729.125, 755.253, 766.   , 772.   , 857.286, 890.2  , 936.394, 946.75 , 957.167, 966.};
+        Assertions.assertArrayEquals(resultWidth, outWidthData[0], 0.001);
+        Assertions.assertArrayEquals(resultWidthHeight, outWidthData[1], 0.001);
+        Assertions.assertArrayEquals(resultLeftIP, outWidthData[2], 0.001);
+        Assertions.assertArrayEquals(resultRightIP, outWidthData[3], 0.001);
+
+        // Width Filtering Test
+        int[] resultFilteredWidth1 = {7,  49,  93, 213, 257, 374, 415, 535, 575, 595, 705, 747, 884, 928};
+        int[] resultFilteredWidth2 = {7,  49,  93, 175, 213, 257, 333, 374, 415, 495, 535, 575, 595, 663, 705, 747, 841,
+                884, 928};
+        int[] resultFilteredWidth3 = {7,  49,  93, 122, 213, 257, 285, 374, 415, 500, 531, 535, 575, 595, 608, 699, 705,
+                728, 747, 765, 771, 884, 928, 945, 956, 965};
+        int[] filteredWidth1 = out.filterByWidth(5, 20);
+        int[] filteredWidth2 = out.filterByWidth(5, "lower");
+        int[] filteredWidth3 = out.filterByWidth(20, "upper");
+        Assertions.assertArrayEquals(resultFilteredWidth1, filteredWidth1);
+        Assertions.assertArrayEquals(resultFilteredWidth2, filteredWidth2);
+        Assertions.assertArrayEquals(resultFilteredWidth3, filteredWidth3);
     }
 
     @Test
