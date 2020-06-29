@@ -22,6 +22,8 @@ public class PeakObject {
     private int[] width;
     private double[] prominence;
 
+    private double[][] promData;
+
     public PeakObject(double[] s, int[] m, int[] l, int[] r, String mode) {
 
         this.signal = s;
@@ -46,7 +48,8 @@ public class PeakObject {
         // Peak Prominence Information
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
 
-        this.prominence = this.findPeakProminence(this.midpoints);
+        this.promData = this.findPeakProminence(this.midpoints);
+        this.prominence = promData[0];
 
         // Peak Width Information
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
@@ -56,10 +59,16 @@ public class PeakObject {
     /**
      * This method calculates the prominence of the peaks provided as an argument
      * @param peaks Peaks for which prominence needs to be calculated
-     * @return double[] The prominence of the input peaks
+     * @throws java.lang.IllegalArgumentException if rel_height is not between 0.0 and 1.0
+     * @return double[][] The prominence of the input peaks. 0: Contains the prominence, 1: Contains the Left Bases, 2: Contains the Right Bases
      */
-    public double[] findPeakProminence(int[] peaks) {
+    public double[][] findPeakProminence(int[] peaks, double rel_height) throws IllegalArgumentException {
+        if (rel_height > 1.0 || rel_height < 0.0) {
+            throw new IllegalArgumentException("rel_height can be between 0.0 and 1.0");
+        }
         double[] prominence = new double[peaks.length];
+        double[] left_base = new double[peaks.length];
+        double[] right_base = new double[peaks.length];
         for (int i=0; i<peaks.length; i++) {
             double leftProm = 0;
             double rightProm = 0;
@@ -67,14 +76,16 @@ public class PeakObject {
 
             ArrayList<Double> temp = new ArrayList<Double>();
             // Calculate left prominence
+            double[] partSignal = new double[0];
             for (int j=peaks[i]-1; j>=0; j--) {
                 temp.add(this.signal[j]);
                 if (this.signal[j] > threshold) {
                     break;
                 }
-                double[] partSignal = UtilMethods.reverse(this.convertToPrimitiveDouble(temp));
-                leftProm = threshold - StatUtils.min(partSignal);
+                partSignal = UtilMethods.reverse(this.convertToPrimitiveDouble(temp));
             }
+            leftProm = threshold - StatUtils.min(partSignal);
+            left_base[i] = peaks[i] - (partSignal.length - UtilMethods.argmin(partSignal, true));
 
             temp.clear();
             // Calculate right prominence
@@ -83,12 +94,18 @@ public class PeakObject {
                 if (this.signal[j] > threshold) {
                     break;
                 }
-                double[] partSignal = this.convertToPrimitiveDouble(temp);
-                rightProm = threshold - StatUtils.min(partSignal);
+                partSignal = this.convertToPrimitiveDouble(temp);
             }
+            rightProm = threshold - StatUtils.min(partSignal);
+            right_base[i] = peaks[i] + UtilMethods.argmin(partSignal, false) + 1;
             prominence[i] = Math.min(leftProm, rightProm);
         }
-        return prominence;
+
+        double[][] promData = new double[3][peaks.length];
+        promData[0] = prominence;
+        promData[1] = left_base;
+        promData[2] = right_base;
+        return promData;
     }
 
     /**
@@ -98,7 +115,10 @@ public class PeakObject {
      */
     public int[] findPeakWidth(int[] peaks) {
         int[] width = new int[peaks.length];
-        double[] prominence = this.findPeakProminence(peaks);
+        double[][] promData = this.findPeakProminence(peaks, 0.5);
+        double[] prominence = promData[0];
+        double[] left = promData[1];
+        double[] right = promData[2];
 
         for (int i=0; i<peaks.length; i++) {
             double halfHeight = this.signal[peaks[i]] - prominence[i]/2;
@@ -118,21 +138,6 @@ public class PeakObject {
         }
         return width;
     }
-
-//    private int[] getIndexFromPeak(int[] peaks) {
-//        int[] indices = new int[peaks.length];
-//        int new_start_point = 0;
-//        for (int i=0; i<peaks.length; i++) {
-//            for (int j=new_start_point; j<this.midpoints.length; j++) {
-//                if (peaks[i] == this.midpoints[j]) {
-//                    new_start_point = j;
-//                    indices[i] = j;
-//                    break;
-//                }
-//            }
-//        }
-//        return indices;
-//    }
 
     /**
      * This method returns the indices of the signal where the peaks are located
@@ -170,16 +175,24 @@ public class PeakObject {
     public int[] getPlateauSize() {
         return this.plateau_size;
     }
+
     /**
      * This method returns the half-width of the peaks in the signal
      * @return double[] The list of all the half width of peaks
      */
     public int[] getWidth() { return this.width; }
+
     /**
      * This method returns the prominence of the peaks in the signal
      * @return double[] The list of all the prominence of peaks
      */
     public double[] getProminence() { return this.prominence; }
+
+    /**
+     * This method returns the prominence of the peaks in the signal
+     * @return double[][] The list of all the prominence of peaks and the lef and right bases
+     */
+    public double[][] getProminenceData() { return this.promData; }
 
     private int[] convertToPrimitive(ArrayList<Integer> l) {
         int[] ret = new int[l.size()];

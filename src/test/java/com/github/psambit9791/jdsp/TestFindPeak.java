@@ -77,6 +77,15 @@ public class TestFindPeak {
         double[] outProminence = out.getProminence();
         Assertions.assertArrayEquals(resultProminence, outProminence, 0.001);
 
+        double[][] outPromData = out.getProminenceData();
+        double[] resultLeftBase = {0,  32,  78, 119, 119, 197, 242, 281, 301, 365, 400, 443, 498, 517, 517, 563, 589,
+                589, 589, 684, 684, 726, 589, 762, 762, 762, 864, 762, 943, 955, 960};
+        double[] resultRightBase = {78,  78, 762, 125, 242, 242, 762, 301, 400, 400, 762, 562, 562, 532, 562, 589, 599,
+                611, 733, 701, 733, 733, 762, 767, 773, 913, 913, 960, 960, 960, 967};
+        Assertions.assertArrayEquals(resultProminence, outPromData[0], 0.001);
+        Assertions.assertArrayEquals(resultLeftBase, outPromData[1], 0.001);
+        Assertions.assertArrayEquals(resultRightBase, outPromData[2], 0.001);
+
         // Prominence Filtering Test
         int[] resultFilteredProm1 = {7,  93, 175, 333, 495, 575, 663, 841};
         int[] resultFilteredProm2 = {7,  93, 175, 257, 333, 415, 495, 575, 663, 747, 841, 928};
