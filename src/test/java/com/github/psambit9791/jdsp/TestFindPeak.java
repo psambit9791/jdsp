@@ -58,6 +58,14 @@ public class TestFindPeak {
         PeakObject out = fp.detect_peaks();
         Assertions.assertArrayEquals(resultPeaks, out.getPeaks());
 
+        // Height Test
+        double[] resultHeight = {0.436,  0.265,  0.564, -0.089,  0.144,  0.059,  0.399, -0.276, -0.123, -0.33 , -0.002,
+                -0.382, -0.385, -0.5  , -0.498, -0.183, -0.729, -0.715, -0.408, -0.472, -0.469, -0.627, -0.052, -0.76 ,
+                -0.757, -0.403, -0.517,  0.109, -0.714, -0.724, -0.722};
+        double[] outHeight = out.getHeights();
+        Assertions.assertArrayEquals(resultHeight, outHeight, 0.001);
+
+
         // Height Filtering Test
         int[] resultFilteredPeaks1 = {7,  49,  93, 175, 213, 257, 928};
         int[] resultFilteredPeaks2 = {7,  49,  93, 175, 213, 257, 928};
@@ -69,6 +77,24 @@ public class TestFindPeak {
         Assertions.assertArrayEquals(resultFilteredPeaks1, filteredPeaks1);
         Assertions.assertArrayEquals(resultFilteredPeaks2, filteredPeaks2);
         Assertions.assertArrayEquals(resultFilteredPeaks3, filteredPeaks3);
+
+        // Plateau Size Test
+        int[] resultPlateau = {1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1};
+        int[] outPlateau = out.getPlateauSize();
+        Assertions.assertArrayEquals(resultPlateau, outPlateau);
+
+        // Plateau Size Filtering Test
+        int[] resultFilteredPS1 = {49, 175, 495, 575, 595, 663, 945, 956};
+        int[] resultFilteredPS2 = {49, 175, 495, 575, 595, 663, 945, 956};
+        int[] resultFilteredPS3 = {7,  93, 122, 213, 257, 285, 333, 374, 415, 500, 531, 535, 608, 699, 705, 728, 747,
+                765, 771, 841, 884, 928, 965};
+        int[] outFilteredPS1 = out.filterByPlateauSize(2, 4);
+        int[] outFilteredPS2 = out.filterByPlateauSize(2, "lower");
+        int[] outFilteredPS3 = out.filterByPlateauSize(1, "upper");
+        Assertions.assertArrayEquals(resultFilteredPS1, outFilteredPS1);
+        Assertions.assertArrayEquals(resultFilteredPS2, outFilteredPS2);
+        Assertions.assertArrayEquals(resultFilteredPS3, outFilteredPS3);
+
 
         // Prominence Test
         double[] resultProminence = {0.208, 0.107, 0.598, 0.003, 0.24 , 0.08 , 0.629, 0.016, 0.215, 0.056, 0.651, 0.323,

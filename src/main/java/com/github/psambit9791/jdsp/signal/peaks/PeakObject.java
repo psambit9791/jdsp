@@ -43,7 +43,7 @@ public class PeakObject {
             else if (mode.equals("trough")) {
                 this.height[i] = 0 - s[this.midpoints[i]];
             }
-            this.plateau_size[i] = Math.abs(r[i] - l[i]);
+            this.plateau_size[i] = Math.abs(r[i] - l[i] + 1);
         }
 
         // Peak Prominence Information
@@ -272,6 +272,50 @@ public class PeakObject {
         else if (mode.equals("lower")) {
             for (int i=0; i<this.height.length; i++) {
                 if (this.height[i] >= threshold) {
+                    newPeaks.add(this.midpoints[i]);
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Mode must either be lower or upper");
+        }
+        return this.convertToPrimitive(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by plateau size using both the upper and lower threshold
+     * @param lower_threshold The lower threshold of plateau size to check against
+     * @param upper_threshold The upper threshold of plateau size to check against
+     * @return double[] The list of filtered peaks
+     */
+    public int[] filterByPlateauSize(double lower_threshold, double upper_threshold) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        for (int i=0; i<this.plateau_size.length; i++) {
+            if (this.plateau_size[i] >= lower_threshold && this.plateau_size[i] <= upper_threshold) {
+                newPeaks.add(this.midpoints[i]);
+            }
+        }
+        return this.convertToPrimitive(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by plateau size using either the upper or the lower threshold
+     * @param threshold The threshold of plateau size to check against
+     * @param mode Can be "upper" or "lower" to select which thresholding to use
+     * @return double[] The list of filtered peaks
+     */
+    public int[] filterByPlateauSize(double threshold, String mode) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        if (mode.equals("upper")) {
+            for (int i=0; i<this.plateau_size.length; i++) {
+                if (this.plateau_size[i] <= threshold) {
+                    newPeaks.add(this.midpoints[i]);
+                }
+            }
+        }
+        else if (mode.equals("lower")) {
+            for (int i=0; i<this.plateau_size.length; i++) {
+                if (this.plateau_size[i] >= threshold) {
                     newPeaks.add(this.midpoints[i]);
                 }
             }
