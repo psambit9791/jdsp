@@ -228,4 +228,14 @@ public class TestUtils {
         Assertions.assertTrue(UtilMethods.almostEquals(test1[0], test1[1], 0.0001));
         Assertions.assertFalse(UtilMethods.almostEquals(test2[0], test2[1], 0.00001));
     }
+
+    @Test
+    public void argSortTest() {
+        double[] test1 = {3, 1, 2};
+        int[] res1 = {1, 2, 0};
+        double[] test2 = {1.23, 4.55, -1.33, 2.45, 6.78, 1.29};
+        int[] res2 = {2, 0, 5, 3, 1, 4};
+        Assertions.assertArrayEquals(res1, UtilMethods.argsort(test1, true));
+        Assertions.assertArrayEquals(res2, UtilMethods.argsort(test2, true));
+    }
 }

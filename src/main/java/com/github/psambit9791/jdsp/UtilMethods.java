@@ -1,5 +1,6 @@
 package com.github.psambit9791.jdsp;
 
+import com.sun.deploy.util.ArrayUtil;
 import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
 import org.apache.commons.math3.linear.DecompositionSolver;
@@ -10,7 +11,9 @@ import org.apache.commons.math3.stat.StatUtils;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 
 /**
@@ -498,9 +501,59 @@ public class UtilMethods {
      * @param y The ordinate (vertical axis)
      * @return PolynomialSplineFunction The interpolation function
      */
-    protected static PolynomialSplineFunction linearInterp(double[] x, double[] y) {
+    private static PolynomialSplineFunction linearInterp(double[] x, double[] y) {
         LinearInterpolator li = new LinearInterpolator();
         PolynomialSplineFunction psf = li.interpolate(x, y);
         return psf;
+    }
+
+    /**
+     * Converts an Integer ArrayList to int[] array
+     * @param l The Integer ArrayList
+     * @return int[] The primitive array
+     */
+    public static int[] convertToPrimitiveInt(ArrayList<Integer> l) {
+        int[] ret = new int[l.size()];
+        for (int i=0; i<ret.length; i++) {
+            ret[i] = l.get(i).intValue();
+        }
+        return ret;
+    }
+
+    /**
+     * Converts an Double ArrayList to double[] array
+     * @param l The Double ArrayList
+     * @return double[] The primitive array
+     */
+    public static double[] convertToPrimitiveDouble(ArrayList<Double> l) {
+        double[] ret = new double[l.size()];
+        for (int i=0; i<ret.length; i++) {
+            ret[i] = l.get(i).doubleValue();
+        }
+        return ret;
+    }
+
+    /**
+     * Returns the indices that would sort an array.
+     * @param arr The array which is to be sorted
+     * @param ascending Whether sorting is to be in ascending or descending order
+     * @return int[] Array of indices which sorts the array
+     */
+    public static int[] argsort(final double[] arr, final boolean ascending) {
+        Integer[] indexes = new Integer[arr.length];
+        int[] argsArray = new int[arr.length];
+        for (int i=0; i<indexes.length; i++) {
+            indexes[i] = i;
+        }
+        Arrays.sort(indexes, new Comparator<Integer>() {
+            @Override
+            public int compare(final Integer i1, final Integer i2) {
+                return (ascending ? 1 : -1) * Double.compare(arr[i1], arr[i2]);
+            }
+        });
+        for (int i=0; i<indexes.length; i++) {
+            argsArray[i] = indexes[i];
+        }
+        return argsArray;
     }
 }
