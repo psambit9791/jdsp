@@ -330,6 +330,20 @@ public class UtilMethods {
     }
 
     /**
+     * Implementation of the numpy version of diff()
+     * Calculate the first discrete difference in the array
+     * @param arr The array to be processed
+     * @return int[] The discrete difference array
+     */
+    public static int[] diff(int[] arr) {
+        int[] sig = new int[arr.length-1];
+        for (int i=0; i<sig.length; i++) {
+            sig[i] = (arr[i+1] - arr[i]);
+        }
+        return sig;
+    }
+
+    /**
      * Implementation of the numpy version of unwrap()
      * Helps to unwrap a given array by changing deltas to values of 2*pi complement
      * It unwraps radian phase p by changing absolute jumps greater than discont to their 2*pi complement along the given axis

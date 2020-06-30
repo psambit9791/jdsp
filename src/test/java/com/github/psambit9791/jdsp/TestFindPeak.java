@@ -95,6 +95,22 @@ public class TestFindPeak {
         Assertions.assertArrayEquals(resultFilteredPS2, outFilteredPS2);
         Assertions.assertArrayEquals(resultFilteredPS3, outFilteredPS3);
 
+        // Distance Test
+        int[] resultDistance = {42, 44, 29, 53, 38, 44, 28, 48, 41, 41, 80,  5, 31,  4, 40, 20, 13, 55, 36,  6, 23, 19,
+                18,  6, 70, 43, 44, 17, 11,  9};
+        int[] outDistance = out.getPeakDistance();
+        Assertions.assertArrayEquals(resultDistance, outDistance);
+
+        // Distance Filtering Test
+        int[] resultFilteredDistance1 = {7,  49,  93, 122, 175, 213, 257, 285, 333, 374, 415, 495, 535, 575, 595, 608,
+                663, 705, 728, 747, 771, 841, 884, 928, 945, 965};
+        int[] resultFilteredDistance2 = {7,  49,  93, 175, 257, 333, 374, 415, 495, 535, 575, 663, 705, 747, 841, 884,
+                928};
+        int[] outFilteredDistance1 = out.filterByPeakDistance(12);
+        int[] outFilteredDistance2 = out.filterByPeakDistance(40);
+        Assertions.assertArrayEquals(resultFilteredDistance1, outFilteredDistance1);
+        Assertions.assertArrayEquals(resultFilteredDistance2, outFilteredDistance2);
+
 
         // Prominence Test
         double[] resultProminence = {0.208, 0.107, 0.598, 0.003, 0.24 , 0.08 , 0.629, 0.016, 0.215, 0.056, 0.651, 0.323,
