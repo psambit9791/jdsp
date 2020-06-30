@@ -1,6 +1,5 @@
 package com.github.psambit9791.jdsp;
 
-import com.sun.deploy.util.ArrayUtil;
 import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
 import org.apache.commons.math3.linear.DecompositionSolver;
