@@ -2,6 +2,7 @@ package com.github.psambit9791.jdsp.signal.peaks;
 
 import com.github.psambit9791.jdsp.UtilMethods;
 import org.apache.commons.math3.stat.StatUtils;
+import org.apache.commons.math3.util.MathArrays;
 
 import java.util.*;
 
@@ -22,6 +23,7 @@ public class PeakObject {
     private double[] width;
     private double[] prominence;
     private int[] distance;
+    private double[][] sharpness;
 
     private double[][] prominenceData;
     private double[][] widthData;
@@ -57,7 +59,11 @@ public class PeakObject {
             this.plateau_size[i] = Math.abs(r[i] - l[i] + 1);
         }
 
+        // Peak Distance Information
         this.distance = this.findPeakDistance(this.midpoints);
+
+        // Peak Sharpness Information
+        this.sharpness = this.findPeakSharpness(this.midpoints);
 
         // Peak Prominence Information
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
@@ -66,9 +72,23 @@ public class PeakObject {
         this.prominence = prominenceData[0];
 
         // Peak Width Information
-        // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
+        // Refer to https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_widths.html
         this.widthData = this.findPeakWidth(this.midpoints, 0.5);
         this.width = widthData[0];
+    }
+
+    /**
+     * This method calculates the vertical distance to its neighboring samples
+     * @param peaks Peaks for which distance needs to be calculated
+     * @return int[][] The vertical distance between the preceding and following samples of peak. 0: Vertical distance from preceding peak, 1: Vertical distance from following peak
+     */
+    public double[][] findPeakSharpness(int[] peaks) {
+        double[][] sharpness = new double[2][peaks.length];
+        for (int i=0; i<peaks.length; i++) {
+            sharpness[0][i] = this.signal[peaks[i]] - this.signal[peaks[i]-1];
+            sharpness[1][i] = this.signal[peaks[i]] - this.signal[peaks[i]+1];
+        }
+        return sharpness;
     }
 
     /**
@@ -211,6 +231,14 @@ public class PeakObject {
             newHeight[i] = this.signal[peaks[i]];
         }
         return newHeight;
+    }
+
+    /**
+     * This method returns the heights of the peaks in the signal
+     * @return double[] The list of all the heights of peaks
+     */
+    public double[][] getPeakSharpness() {
+        return this.sharpness;
     }
 
     /**
@@ -462,6 +490,75 @@ public class PeakObject {
         for (int i=0; i<keep.length; i++) {
             if(keep[i] == 1) {
                 newPeaks.add(peaks[i]);
+            }
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by sharpness using both the upper and lower threshold
+     * @param lower_threshold The lower threshold of sharpness to check against
+     * @param upper_threshold The upper threshold of sharpness to check against
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterBySharpness(double lower_threshold, double upper_threshold) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        int[] keep = new int[this.midpoints.length];
+        Arrays.fill(keep, 1);
+
+        for (int i=0; i<this.sharpness[0].length; i++) {
+            double minVal = Math.min(this.sharpness[0][i], this.sharpness[1][i]);
+            if (minVal < lower_threshold) {
+                keep[i] = 0;
+            }
+        }
+        for (int i=0; i<this.sharpness[0].length; i++) {
+            double maxVal = Math.max(this.sharpness[0][i], this.sharpness[1][i]);
+            if (maxVal > upper_threshold) {
+                keep[i] = 0;
+            }
+        }
+        for (int i=0; i<keep.length; i++) {
+            if(keep[i] == 1) {
+                newPeaks.add(this.midpoints[i]);
+            }
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by sharpness using either the upper or the lower threshold
+     * @param threshold The threshold of sharpness to check against
+     * @param mode Can be "upper" or "lower" to select which thresholding to use
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterBySharpness(double threshold, String mode) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        int[] keep = new int[this.midpoints.length];
+        Arrays.fill(keep, 1);
+
+        if (mode.equals("upper")) {
+            for (int i=0; i<this.sharpness[0].length; i++) {
+                double maxVal = Math.max(this.sharpness[0][i], this.sharpness[1][i]);
+                if (maxVal > threshold) {
+                    keep[i] = 0;
+                }
+            }
+        }
+        else if (mode.equals("lower")) {
+            for (int i=0; i<this.sharpness[0].length; i++) {
+                double minVal = Math.min(this.sharpness[0][i], this.sharpness[1][i]);
+                if (minVal < threshold) {
+                    keep[i] = 0;
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Mode must either be lower or upper");
+        }
+        for (int i=0; i<keep.length; i++) {
+            if(keep[i] == 1) {
+                newPeaks.add(this.midpoints[i]);
             }
         }
         return UtilMethods.convertToPrimitiveInt(newPeaks);

@@ -111,6 +111,29 @@ public class TestFindPeak {
         Assertions.assertArrayEquals(resultFilteredDistance1, outFilteredDistance1);
         Assertions.assertArrayEquals(resultFilteredDistance2, outFilteredDistance2);
 
+        // Sharpness Test
+        double[][] resultSharpness = {{0.029, 0.002, 0.003, 0.002, 0.002, 0.001, 0.004, 0.002, 0.001, 0.005, 0.008,
+                0.004, 0.003, 0.001, 0.001, 0.004, 0.001, 0.003, 0.002, 0.002, 0.001, 0.002, 0.002, 0.001, 0.001, 0.001,
+                0.002, 0.011, 0.002, 0.001, 0.002}, {0.002, 0.   , 0.008, 0.001, 0.   , 0.003, 0.004, 0.001, 0.002,
+                0.003, 0.008, 0.   , 0.003, 0.001, 0.001, 0.   , 0.   , 0.001, 0.   , 0.001, 0.001, 0.001, 0.008, 0.002,
+                0.003, 0.003, 0.003, 0.005, 0.   , 0.   , 0.001}};
+        double[][] outSharpness = out.getPeakSharpness();
+        for (int i=0; i<resultSharpness.length; i++) {
+            Assertions.assertArrayEquals(resultSharpness[i], outSharpness[i], 0.001);
+        }
+
+        // Sharpness Filtering Test
+        int[] resultFilteredSharp1 = {257, 500, 884};
+        int[] resultFilteredSharp2 = {7,  93, 257, 374, 415, 500, 747, 884, 928};
+        int[] resultFilteredSharp3 = {49, 122, 175, 213, 257, 285, 333, 495, 500, 531, 535, 575, 595, 608, 663, 699,
+                705, 728, 765, 771, 841, 884, 945, 956, 965};
+        int[] filteredSharp1 = out.filterBySharpness(0.002, 0.005);
+        int[] filteredSharp2 = out.filterBySharpness(0.002, "lower");
+        int[] filteredSharp3 = out.filterBySharpness(0.005, "upper");
+        Assertions.assertArrayEquals(resultFilteredSharp1, filteredSharp1);
+        Assertions.assertArrayEquals(resultFilteredSharp2, filteredSharp2);
+        Assertions.assertArrayEquals(resultFilteredSharp3, filteredSharp3);
+
 
         // Prominence Test
         double[] resultProminence = {0.208, 0.107, 0.598, 0.003, 0.24 , 0.08 , 0.629, 0.016, 0.215, 0.056, 0.651, 0.323,
