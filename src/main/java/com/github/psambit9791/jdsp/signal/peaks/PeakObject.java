@@ -37,6 +37,8 @@ public class PeakObject {
 
         // Peak Height and Plateau Information
         this.height = new double[m.length];
+
+        //(Equivalent to scipy.signal.find_peaks() plateau_size parameter)
         this.plateau_size = new int[m.length];
 
         for (int i=0; i<m.length; i++) {
@@ -59,19 +61,19 @@ public class PeakObject {
             this.plateau_size[i] = Math.abs(r[i] - l[i] + 1);
         }
 
-        // Peak Distance Information
+        // Peak Distance Information (Equivalent to scipy.signal.find_peaks() distance parameter)
         this.distance = this.findPeakDistance(this.midpoints);
 
-        // Peak Sharpness Information
+        // Peak Sharpness Information (Equivalent to scipy.signal.find_peaks() threshold parameter)
         this.sharpness = this.findPeakSharpness(this.midpoints);
 
-        // Peak Prominence Information
+        // Peak Prominence Information (Equivalent to scipy.signal.find_peaks() prominence parameter)
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
 
         this.prominenceData = this.findPeakProminence(this.midpoints);
         this.prominence = prominenceData[0];
 
-        // Peak Width Information
+        // Peak Width Information (Equivalent to scipy.signal.find_peaks() width parameter)
         // Refer to https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_widths.html
         this.widthData = this.findPeakWidth(this.midpoints, 0.5);
         this.width = widthData[0];
@@ -79,6 +81,7 @@ public class PeakObject {
 
     /**
      * This method calculates the vertical distance to its neighboring samples
+     * (Equivalent to scipy.signal.find_peaks() threshold parameter)
      * @param peaks Peaks for which distance needs to be calculated
      * @return int[][] The vertical distance between the preceding and following samples of peak. 0: Vertical distance from preceding peak, 1: Vertical distance from following peak
      */
@@ -93,6 +96,7 @@ public class PeakObject {
 
     /**
      * This method calculates the distance between peaks
+     * (Equivalent to scipy.signal.find_peaks() distance parameter)
      * @param peaks Peaks for which distance needs to be calculated
      * @return int[] An array of distances between peaks
      */
@@ -103,6 +107,7 @@ public class PeakObject {
 
     /**
      * This method calculates the prominence of the peaks provided as an argument
+     * (Equivalent to scipy.signal.find_peaks() prominence parameter)
      * @param peaks Peaks for which prominence needs to be calculated
      * @return double[][] The prominence of the input peaks. 0: Contains the prominence, 1: Contains the Left Bases, 2: Contains the Right Bases
      */
@@ -151,6 +156,7 @@ public class PeakObject {
 
     /**
      * This method calculates the width of the peaks provided as an argument
+     * (Equivalent to scipy.signal.find_peaks() width parameter)
      * @param peaks Peaks for which prominence needs to be calculated
      * @throws java.lang.IllegalArgumentException if rel_height is not between 0.0 and 1.0
      * @return double[][] The width of the input peaks. 0: Contains the widths, 1: Contains the Left Intersection Points, 2: Contains the Right Intersection Points
@@ -225,7 +231,7 @@ public class PeakObject {
      * @param peaks List of selected peaks
      * @return double[] The list of all the heights of peaks
      */
-    public double[] getHeights(int[] peaks) {
+    public double[] findPeakHeights(int[] peaks) {
         double[] newHeight = new double[peaks.length];
         for (int i=0; i<peaks.length; i++) {
             newHeight[i] = this.signal[peaks[i]];

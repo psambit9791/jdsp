@@ -224,7 +224,7 @@ public class TestFindPeak {
 
         // Plot Filtered peak points
         int[] filteredPeaks = out.filterByHeight(0.02, 1.0);
-        double[] filteredHeights = out.getHeights(filteredPeaks);
+        double[] filteredHeights = out.findPeakHeights(filteredPeaks);
         fig.add_points("Filtered Peaks", filteredPeaks, filteredHeights, '^');
 
         FindPeak ft = new FindPeak(this.highResSignal);
