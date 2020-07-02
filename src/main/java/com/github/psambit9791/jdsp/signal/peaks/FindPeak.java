@@ -1,5 +1,7 @@
 package com.github.psambit9791.jdsp.signal.peaks;
 
+import com.github.psambit9791.jdsp.UtilMethods;
+
 import java.util.*;
 
 /**
@@ -46,7 +48,7 @@ public class FindPeak {
                 this.maxima_indices.add(i);
             }
         }
-        return this.convertToPrimitive(this.maxima_indices);
+        return UtilMethods.convertToPrimitiveInt(this.maxima_indices);
     }
 
     /**
@@ -60,7 +62,7 @@ public class FindPeak {
                 this.minima_indices.add(i);
             }
         }
-        return this.convertToPrimitive(this.minima_indices);
+        return UtilMethods.convertToPrimitiveInt(this.minima_indices);
     }
 
     /**
@@ -114,8 +116,32 @@ public class FindPeak {
             }
             i++;
         }
-        PeakObject pObj = new PeakObject(signal, this.convertToPrimitive(midpoints), this.convertToPrimitive(left_edge), this.convertToPrimitive(right_edge), mode);
+        PeakObject pObj = new PeakObject(signal,
+                UtilMethods.convertToPrimitiveInt(midpoints),
+                UtilMethods.convertToPrimitiveInt(left_edge),
+                UtilMethods.convertToPrimitiveInt(right_edge),
+                mode);
         return pObj;
+    }
+
+    /**
+     * This method identifies all the spikes in the signal.
+     * Spikes properties are different from peaks such that, the spike height and width are dependent on their neighbouring troughs.
+     * @param signal The signal whose spikes need to be detected
+     * @param peaks The peaks that are to be used in this signal
+     * @param troughs The troughs that are to be used in this signal
+     * @return SpikeObject The list of all the troughs as PeakObject
+     */
+    public SpikeObject get_spikes(double[] signal, int[] peaks, int[] troughs) {
+        int[] left_trough = new int[peaks.length];
+        int[] right_trough = new int[peaks.length];
+
+        for (int i=0; i<peaks.length; i++) {
+            left_trough[i] = this.getClosest(troughs, peaks[i], "left");
+            right_trough[i] = this.getClosest(troughs, peaks[i], "right");
+        }
+        SpikeObject sObj = new SpikeObject(signal, peaks, left_trough, right_trough);
+        return sObj;
     }
 
     private int getClosest(int[] arr, int val, String mode) {
@@ -144,39 +170,6 @@ public class FindPeak {
     /**
      * This method identifies all the spikes in the signal.
      * Spikes properties are different from peaks such that, the spike height and width are dependent on their neighbouring troughs.
-     * @param signal The signal whose spikes need to be detected
-     * @param peaks The peaks that are to be used in this signal
-     * @param troughs The troughs that are to be used in this signal
-     * @return SpikeObject The list of all the troughs as PeakObject
-     */
-    public SpikeObject get_spikes(double[] signal, int[] peaks, int[] troughs) {
-        double[] left_spike = new double[peaks.length];
-        double[] right_spike = new double[peaks.length];
-
-        int temp = 0;
-        for (int i=0; i<peaks.length; i++) {
-            temp = this.getClosest(troughs, peaks[i], "left");
-            if (temp != -1) {
-                left_spike[i] = Math.abs(signal[i] - signal[temp]);
-            }
-            else {
-                left_spike[i] = -1;
-            }
-            temp = this.getClosest(troughs, peaks[i], "right");
-            if (temp != -1) {
-                right_spike[i] = Math.abs(signal[i] - signal[temp]);
-            }
-            else {
-                right_spike[i] = -1;
-            }
-        }
-        SpikeObject sObj = new SpikeObject(left_spike, right_spike);
-        return sObj;
-    }
-
-    /**
-     * This method identifies all the spikes in the signal.
-     * Spikes properties are different from peaks such that, the spike height and width are dependent on their neighbouring troughs.
      * @return SpikeObject The list of all the troughs as PeakObject
      */
     public SpikeObject get_spikes() {
@@ -185,14 +178,6 @@ public class FindPeak {
             this.detect_troughs();
         }
         return this.get_spikes(this.signal, this.peak_indices, this.trough_indices);
-    }
-
-    private int[] convertToPrimitive(ArrayList<Integer> l) {
-        int[] ret = new int[l.size()];
-        for (int i=0; i<ret.length; i++) {
-            ret[i] = l.get(i).intValue();
-        }
-        return ret;
     }
 
     private ArrayList<Integer> removeDuplicates(ArrayList<Integer> list) {
