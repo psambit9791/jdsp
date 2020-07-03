@@ -1,5 +1,7 @@
 package com.github.psambit9791.jdsp.signal.peaks;
 
+import com.github.psambit9791.jdsp.UtilMethods;
+
 import java.util.*;
 
 /**
@@ -30,6 +32,17 @@ public class SpikeObject {
         this.right_spike = this.calculateRightSpike(this.peaks, this.right_trough);
         this.mean_spike = this.calculateMeanSpikeHeight(this.left_spike, this.right_spike);
         this.max_spike = this.calculateMaxSpikeHeight(this.left_spike, this.right_spike);
+    }
+
+    /**
+     * This method returns indices of the left and right troughs identified
+     * @return int[][] Returns the left and right troughs. 0: Left Trough indices, 1: Right Trough indices
+     */
+    public int[][] getAllTroughs() {
+        int[][] troughData = new int[2][this.peaks.length];
+        troughData[0] = this.left_trough;
+        troughData[1] = this.right_trough;
+        return troughData;
     }
 
     /**
@@ -67,7 +80,7 @@ public class SpikeObject {
     }
 
     /**
-     * This method returns the height of the peaks as a mean of the left and right troughs
+     * This method returns the height of the peaks as a mean of the left and right troughs. If either value is NaN, only other value is considered
      * @return double[] The list of all the spike heights taken as an average of the neighbouring troughs
      */
     public double[] calculateMeanSpikeHeight(double[] left_spike, double[] right_spike) {
@@ -87,13 +100,21 @@ public class SpikeObject {
     }
 
     /**
-     * This method returns the height of the peaks as the maximum of the left or right troughs
+     * This method returns the height of the peaks as the maximum of the left or right troughs. If either value is NaN, other value is considered
      * @return double[] The list of all the spike heights taken as an maximum between the neighbouring troughs
      */
     public double[] calculateMaxSpikeHeight(double[] left_spike, double[] right_spike) {
         double[] max_spike = new double[left_spike.length];
         for (int k=0; k<max_spike.length; k++) {
-            max_spike[k] = Math.max(left_spike[k], right_spike[k]);
+            if (Double.isNaN(left_spike[k])) {
+                max_spike[k] = right_spike[k];
+            }
+            else if (Double.isNaN(right_spike[k])) {
+                max_spike[k] = left_spike[k];
+            }
+            else {
+                max_spike[k] = Math.max(left_spike[k], right_spike[k]);
+            }
         }
         return max_spike;
     }
@@ -128,5 +149,97 @@ public class SpikeObject {
      */
     public double[] getMaxSpike() {
         return this.max_spike;
+    }
+
+    /**
+     * This method returns the peaks with matching spike property
+     * @param lower_threshold The lower threshold of sharpness to check against
+     * @param upper_threshold The upper threshold of sharpness to check against
+     * @param spikeType What kind of spike to be compared against. Options are 'left', 'right', 'mean', 'max'
+     * @throws java.lang.IllegalArgumentException if spikeType is incorrect. Can be left, right, mean and max.
+     * @return double[] The list of all the maximum spike heights
+     */
+    public int[] filterByProperty(double lower_threshold, double upper_threshold, String spikeType) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        double[] spikeList;
+        if (spikeType.equals("left")) {
+            spikeList = this.left_spike;
+        }
+        else if (spikeType.equals("right")) {
+            spikeList = this.right_spike;
+        }
+        else if (spikeType.equals("mean")) {
+            spikeList = this.mean_spike;
+        }
+        else if (spikeType.equals("max")) {
+            spikeList = this.max_spike;
+        }
+        else {
+            throw new IllegalArgumentException("spikeType Can only be 'left', 'right', 'mean' and 'max'");
+        }
+
+        for (int i=0; i<spikeList.length; i++) {
+            if (Double.isNaN(spikeList[i])) {
+                continue;
+            }
+            if (spikeList[i] > lower_threshold && spikeList[i] < upper_threshold) {
+                newPeaks.add(this.peaks[i]);
+            }
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method returns the peaks with matching spike property
+     * @param threshold The threshold of sharpness to check against
+     * @param mode Can be "upper" or "lower" to select which thresholding to use
+     * @param spikeType What kind of spike to be compared against. Options are 'left', 'right', 'mean', 'max'
+     * @throws java.lang.IllegalArgumentException if spikeType is incorrect. Can be left, right, mean and max.
+     * @throws java.lang.IllegalArgumentException if mode is incorrect. Can be upper or lower.
+     * @return double[] The list of all the maximum spike heights
+     */
+    public int[] filterByProperty(double threshold, String mode, String spikeType) throws IllegalArgumentException {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        double[] spikeList;
+        if (spikeType.equals("left")) {
+            spikeList = this.left_spike;
+        }
+        else if (spikeType.equals("right")) {
+            spikeList = this.right_spike;
+        }
+        else if (spikeType.equals("mean")) {
+            spikeList = this.mean_spike;
+        }
+        else if (spikeType.equals("max")) {
+            spikeList = this.max_spike;
+        }
+        else {
+            throw new IllegalArgumentException("spikeType Can only be 'left', 'right', 'mean' and 'max'");
+        }
+
+        if (mode.equals("upper")) {
+            for (int i=0; i<spikeList.length; i++) {
+                if (Double.isNaN(spikeList[i])) {
+                    continue;
+                }
+                if (spikeList[i] < threshold) {
+                    newPeaks.add(this.peaks[i]);
+                }
+            }
+        }
+        else if (mode.equals("lower")) {
+            for (int i=0; i<spikeList.length; i++) {
+                if (Double.isNaN(spikeList[i])) {
+                    continue;
+                }
+                if (spikeList[i] > threshold) {
+                    newPeaks.add(this.peaks[i]);
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Mode must either be lower or upper");
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
     }
 }
