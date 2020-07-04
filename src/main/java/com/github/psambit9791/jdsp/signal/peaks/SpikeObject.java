@@ -22,6 +22,7 @@ public class SpikeObject {
     private double[] right_spike;
     private double[] mean_spike;
     private double[] max_spike;
+    private double[] min_spike;
 
     public SpikeObject(double[] signal, int[] peaks, int[] left, int[] right) {
         this.signal = signal;
@@ -32,6 +33,7 @@ public class SpikeObject {
         this.right_spike = this.calculateRightSpike(this.peaks, this.right_trough);
         this.mean_spike = this.calculateMeanSpikeHeight(this.left_spike, this.right_spike);
         this.max_spike = this.calculateMaxSpikeHeight(this.left_spike, this.right_spike);
+        this.min_spike = this.calculateMinSpikeHeight(this.left_spike, this.right_spike);
     }
 
     /**
@@ -120,6 +122,26 @@ public class SpikeObject {
     }
 
     /**
+     * This method returns the height of the peaks as the minimum of the left or right troughs. If either value is NaN, other value is considered
+     * @return double[] The list of all the spike heights taken as an minimum between the neighbouring troughs
+     */
+    public double[] calculateMinSpikeHeight(double[] left_spike, double[] right_spike) {
+        double[] max_spike = new double[left_spike.length];
+        for (int k=0; k<max_spike.length; k++) {
+            if (Double.isNaN(left_spike[k])) {
+                max_spike[k] = right_spike[k];
+            }
+            else if (Double.isNaN(right_spike[k])) {
+                max_spike[k] = left_spike[k];
+            }
+            else {
+                max_spike[k] = Math.min(left_spike[k], right_spike[k]);
+            }
+        }
+        return max_spike;
+    }
+
+    /**
      * This method returns the left spike height of the peaks in the signal
      * @return double[] The list of all the left spike heights
      */
@@ -152,11 +174,19 @@ public class SpikeObject {
     }
 
     /**
+     * This method returns the minimum spike height of the peaks in the signal
+     * @return double[] The list of all the minimum spike heights
+     */
+    public double[] getMinSpike() {
+        return this.min_spike;
+    }
+
+    /**
      * This method returns the peaks with matching spike property
      * @param lower_threshold The lower threshold of sharpness to check against
      * @param upper_threshold The upper threshold of sharpness to check against
-     * @param spikeType What kind of spike to be compared against. Options are 'left', 'right', 'mean', 'max'
-     * @throws java.lang.IllegalArgumentException if spikeType is incorrect. Can be left, right, mean and max.
+     * @param spikeType What kind of spike to be compared against. Options are 'left', 'right', 'mean', 'max', 'min'
+     * @throws java.lang.IllegalArgumentException if spikeType is incorrect. Can be left, right, mean, max and min.
      * @return double[] The list of all the maximum spike heights
      */
     public int[] filterByProperty(double lower_threshold, double upper_threshold, String spikeType) {
@@ -173,6 +203,9 @@ public class SpikeObject {
         }
         else if (spikeType.equals("max")) {
             spikeList = this.max_spike;
+        }
+        else if (spikeType.equals("min")) {
+            spikeList = this.min_spike;
         }
         else {
             throw new IllegalArgumentException("spikeType Can only be 'left', 'right', 'mean' and 'max'");
@@ -193,8 +226,8 @@ public class SpikeObject {
      * This method returns the peaks with matching spike property
      * @param threshold The threshold of sharpness to check against
      * @param mode Can be "upper" or "lower" to select which thresholding to use
-     * @param spikeType What kind of spike to be compared against. Options are 'left', 'right', 'mean', 'max'
-     * @throws java.lang.IllegalArgumentException if spikeType is incorrect. Can be left, right, mean and max.
+     * @param spikeType What kind of spike to be compared against. Options are 'left', 'right', 'mean', 'max', 'min'
+     * @throws java.lang.IllegalArgumentException if spikeType is incorrect. Can be left, right, mean, max and min.
      * @throws java.lang.IllegalArgumentException if mode is incorrect. Can be upper or lower.
      * @return double[] The list of all the maximum spike heights
      */
@@ -212,6 +245,9 @@ public class SpikeObject {
         }
         else if (spikeType.equals("max")) {
             spikeList = this.max_spike;
+        }
+        else if (spikeType.equals("min")) {
+            spikeList = this.min_spike;
         }
         else {
             throw new IllegalArgumentException("spikeType Can only be 'left', 'right', 'mean' and 'max'");
