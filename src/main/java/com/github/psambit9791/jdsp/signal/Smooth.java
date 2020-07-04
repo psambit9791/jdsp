@@ -82,6 +82,27 @@ public class Smooth {
     }
 
     /**
+     * This method smooths the signal in a specific correlation mode and returns it.
+     * @param correlation_mode The mode in which cross-correlation is performed
+     * @throws java.lang.IllegalArgumentException if mode is not rectangular or triangular
+     * @throws java.lang.IllegalArgumentException if correlation_mode is not same, valid or full
+     * @return double[] Smoothed signal
+     */
+    public double[] smoothSignal(String correlation_mode) throws IllegalArgumentException{
+        if (!this.mode.equals("rectangular") && !this.mode.equals("triangular")) {
+            throw new IllegalArgumentException("Mode can only be rectangular or triangular.");
+        }
+        else if (!correlation_mode.equals("same") && !correlation_mode.equals("valid") && !correlation_mode.equals("full")) {
+            throw new IllegalArgumentException("Mode can only be same, valid or full.");
+        }
+        else {
+            CrossCorrelation c = new CrossCorrelation(this.signal, this.smoothing_kernel);
+            this.output = c.cross_correlate(correlation_mode);
+        }
+        return this.output;
+    }
+
+    /**
      * This getter method to get the kernel used for smoothing.
      * @return double[] Smoothing kernel
      */
