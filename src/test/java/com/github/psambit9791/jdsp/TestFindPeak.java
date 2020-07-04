@@ -372,6 +372,9 @@ public class TestFindPeak {
         fig.add_points("Troughs", out2.getPeaks(), out2.getHeights(), '+');
 
         fig.save_as_png(outputFileName);
+
+        boolean fileExists = new File("./"+outputFileName+".png").exists();
+        Assertions.assertTrue(fileExists);
     }
 
     @Test
@@ -560,5 +563,30 @@ public class TestFindPeak {
         Assertions.assertArrayEquals(resultMeanFilter2, outMeanFilter2);
         Assertions.assertArrayEquals(resultMaxFilter2, outMaxFilter2);
         Assertions.assertArrayEquals(resultMinFilter2, outMinFilter2);
+    }
+
+    @Test
+    public void spikePlot() throws IOException{
+        FindPeak fp = new FindPeak(this.highResSignal);
+        SpikeObject out = fp.get_spikes();
+
+        int[] peaks = out.getPeaks();
+
+        String outputFileName = "test_outputs/spike_test";
+        Plotting fig = new Plotting("Spike Detection", "Time", "Signal");
+        fig.initialise_plot();
+        // Plot all detected peaks
+        fig.add_signal("Signal", this.highResSignal, false);
+        fig.add_points("Spikes", peaks, out.findPeakHeights(peaks), 'x');
+
+        // Plot Filtered peak points
+        int[] filteredPeaks = out.filterByProperty(0.5, 5, "mean");
+        double[] filteredHeights = out.findPeakHeights(filteredPeaks);
+        fig.add_points("Filtered Spikes", filteredPeaks, filteredHeights, 'o');
+
+        fig.save_as_png(outputFileName);
+
+        boolean fileExists = new File("./"+outputFileName+".png").exists();
+        Assertions.assertTrue(fileExists);
     }
 }

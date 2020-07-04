@@ -29,8 +29,8 @@ public class SpikeObject {
         this.peaks = peaks;
         this.left_trough = left;
         this.right_trough = right;
-        this.left_spike = this.calculateLeftSpike(this.peaks, this.left_trough);
-        this.right_spike = this.calculateRightSpike(this.peaks, this.right_trough);
+        this.left_spike = this.calculateLeftSpikeHeight(this.peaks, this.left_trough);
+        this.right_spike = this.calculateRightSpikeHeight(this.peaks, this.right_trough);
         this.mean_spike = this.calculateMeanSpikeHeight(this.left_spike, this.right_spike);
         this.max_spike = this.calculateMaxSpikeHeight(this.left_spike, this.right_spike);
         this.min_spike = this.calculateMinSpikeHeight(this.left_spike, this.right_spike);
@@ -51,7 +51,7 @@ public class SpikeObject {
      * This method calculates the height of the spike with respect to the left trough
      * @return double[] The list of all the right spike heights
      */
-    public double[] calculateLeftSpike(int[] peaks, int[] left_trough) {
+    public double[] calculateLeftSpikeHeight(int[] peaks, int[] left_trough) {
         double[] left_spike = new double[peaks.length];
         for (int i=0; i<peaks.length; i++) {
             if (left_trough[i] != -1) {
@@ -68,7 +68,7 @@ public class SpikeObject {
      * This method calculates the height of the spike with respect to the left trough
      * @return double[] The list of all the right spike heights
      */
-    public double[] calculateRightSpike(int[] peaks, int[] right_trough) {
+    public double[] calculateRightSpikeHeight(int[] peaks, int[] right_trough) {
         double[] right_spike = new double[peaks.length];
         for (int i=0; i<this.peaks.length; i++) {
             if (right_trough[i] != -1) {
@@ -139,6 +139,14 @@ public class SpikeObject {
             }
         }
         return max_spike;
+    }
+
+    /**
+     * This method returns the indices of the signal where the peaks are located
+     * @return int[] The list of all the indices of peaks
+     */
+    public int[] getPeaks() {
+        return this.peaks;
     }
 
     /**
@@ -277,5 +285,18 @@ public class SpikeObject {
             throw new IllegalArgumentException("Mode must either be lower or upper");
         }
         return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method returns the heights of the peaks in the signal
+     * @param peaks List of selected peaks
+     * @return double[] The list of all the heights of peaks
+     */
+    public double[] findPeakHeights(int[] peaks) {
+        double[] newHeight = new double[peaks.length];
+        for (int i=0; i<peaks.length; i++) {
+            newHeight[i] = this.signal[peaks[i]];
+        }
+        return newHeight;
     }
 }

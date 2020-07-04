@@ -80,6 +80,19 @@ public class PeakObject {
     }
 
     /**
+     * This method returns the heights of the peaks in the signal
+     * @param peaks List of selected peaks
+     * @return double[] The list of all the heights of peaks
+     */
+    public double[] findPeakHeights(int[] peaks) {
+        double[] newHeight = new double[peaks.length];
+        for (int i=0; i<peaks.length; i++) {
+            newHeight[i] = this.signal[peaks[i]];
+        }
+        return newHeight;
+    }
+
+    /**
      * This method calculates the vertical distance to its neighboring samples
      * (Equivalent to scipy.signal.find_peaks() threshold parameter)
      * @param peaks Peaks for which distance needs to be calculated
@@ -224,19 +237,6 @@ public class PeakObject {
      */
     public double[] getHeights() {
         return this.height;
-    }
-
-    /**
-     * This method returns the heights of the peaks in the signal
-     * @param peaks List of selected peaks
-     * @return double[] The list of all the heights of peaks
-     */
-    public double[] findPeakHeights(int[] peaks) {
-        double[] newHeight = new double[peaks.length];
-        for (int i=0; i<peaks.length; i++) {
-            newHeight[i] = this.signal[peaks[i]];
-        }
-        return newHeight;
     }
 
     /**
