@@ -1,5 +1,6 @@
 package com.github.psambit9791.jdsp;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.signal.Decimate;
 import com.github.psambit9791.jdsp.signal.Generate;
 import org.apache.commons.math3.util.MathArrays;

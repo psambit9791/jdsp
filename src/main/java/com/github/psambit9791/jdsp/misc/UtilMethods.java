@@ -1,4 +1,4 @@
-package com.github.psambit9791.jdsp;
+package com.github.psambit9791.jdsp.misc;
 
 import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
@@ -8,11 +8,16 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.SingularValueDecomposition;
 import org.apache.commons.math3.stat.StatUtils;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Scanner;
 
 
 /**
@@ -568,5 +573,19 @@ public class UtilMethods {
             argsArray[i] = indexes[i];
         }
         return argsArray;
+    }
+
+    /**
+     * Returns an electrocardiogram as an example for a 1-D signal.
+     * @return double[] The ECG data
+     */
+    public static double[] electrocardiogram() throws FileNotFoundException, IOException {
+        double[] data = new double[108000];
+        BufferedReader br = new BufferedReader(new FileReader("./src/main/java/com/github/psambit9791/jdsp/misc/ecg.txt"));
+        String[] line = br.readLine().trim().split(" ");
+        for (int i=0; i<line.length; i++) {
+            data[i] = Double.parseDouble(line[i]);
+        }
+        return data;
     }
 }

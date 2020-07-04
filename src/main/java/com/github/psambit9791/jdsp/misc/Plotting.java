@@ -1,4 +1,4 @@
-package com.github.psambit9791.jdsp;
+package com.github.psambit9791.jdsp.misc;
 
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;

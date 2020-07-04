@@ -1,5 +1,6 @@
 package com.github.psambit9791.jdsp;
 
+import com.github.psambit9791.jdsp.misc.Plotting;
 import com.github.psambit9791.jdsp.signal.peaks.FindPeak;
 import com.github.psambit9791.jdsp.signal.peaks.PeakObject;
 import com.github.psambit9791.jdsp.signal.peaks.SpikeObject;
@@ -9,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class TestFindPeak {
 

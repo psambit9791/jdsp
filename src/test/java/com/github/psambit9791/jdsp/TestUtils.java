@@ -1,9 +1,11 @@
 package com.github.psambit9791.jdsp;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.rmi.CORBA.Util;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class TestUtils {
@@ -237,5 +239,12 @@ public class TestUtils {
         int[] res2 = {2, 0, 5, 3, 1, 4};
         Assertions.assertArrayEquals(res1, UtilMethods.argsort(test1, true));
         Assertions.assertArrayEquals(res2, UtilMethods.argsort(test2, true));
+    }
+
+    @Test
+    public void ecgTest() throws Exception {
+        int resultLength = 108000;
+        double[] data = UtilMethods.electrocardiogram();
+        Assertions.assertEquals(resultLength, data.length);
     }
 }

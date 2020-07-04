@@ -1,6 +1,6 @@
 package com.github.psambit9791.jdsp.filter;
 
-import com.github.psambit9791.jdsp.UtilMethods;
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.signal.Convolution;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.util.CombinatoricsUtils;

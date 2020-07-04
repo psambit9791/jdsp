@@ -74,8 +74,8 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/transform/InverseDiscreteFourier.html">com.github.psambit9791.jdsp.transform.InverseDiscreteFourier</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Fourier-Transforms"><strong>Transformation</strong></a> | Applies the Inverse Discrete Fourier Transform on a sequence and returns the original signal |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/transform/Hilbert.html">com.github.psambit9791.jdsp.transform.Hilbert</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Hilbert-Transform"><strong>Transformation</strong></a> | Applies the Hilbert Transform on a signal and provides funtions to return amplitude, phase and frequency information |
 ||||
-| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/UtilMethods.html">com.github.psambit9791.jdsp.UtilMethods</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Utilities"><strong>Utility</strong></a> | Provides utility functions, details in Wiki |
-| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/LinePlot.html">com.github.psambit9791.jdsp.Plotting</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Plotting"><strong>Utility</strong></a> | Enables plotting of different signals as a line plot |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/UtilMethods.html">com.github.psambit9791.jdsp.misc.UtilMethods</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Utilities"><strong>Utility</strong></a> | Provides utility functions, details in Wiki |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/LinePlot.html">com.github.psambit9791.jdsp.misc.Plotting</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Plotting"><strong>Utility</strong></a> | Enables plotting of different signals as a line plot |
 <br/>
 
 ## Citation

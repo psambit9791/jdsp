@@ -1,6 +1,6 @@
 package com.github.psambit9791.jdsp.signal;
 
-import com.github.psambit9791.jdsp.UtilMethods;
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.filter.Chebyshev;
 
 

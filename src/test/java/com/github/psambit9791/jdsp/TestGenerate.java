@@ -1,5 +1,6 @@
 package com.github.psambit9791.jdsp;
 
+import com.github.psambit9791.jdsp.misc.Plotting;
 import com.github.psambit9791.jdsp.signal.Generate;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Assertions;
