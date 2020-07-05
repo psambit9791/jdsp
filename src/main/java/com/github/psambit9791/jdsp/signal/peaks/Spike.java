@@ -13,7 +13,7 @@ import java.util.*;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class SpikeObject {
+public class Spike {
     private double[] signal;
     private int[] peaks;
     private int[] left_trough;
@@ -24,7 +24,7 @@ public class SpikeObject {
     private double[] max_spike;
     private double[] min_spike;
 
-    public SpikeObject(double[] signal, int[] peaks, int[] left, int[] right) {
+    public Spike(double[] signal, int[] peaks, int[] left, int[] right) {
         this.signal = signal;
         this.peaks = peaks;
         this.left_trough = left;

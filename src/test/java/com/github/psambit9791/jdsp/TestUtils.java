@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class TestUtils {
@@ -190,9 +192,9 @@ public class TestUtils {
 
     @Test
     public void normalizeTest() {
-        double[] arr1 = {12, 14, 15, 15, 16};
-        double[] result1 = {-1.583, -0.264, 0.396, 0.396, 1.055};
-        double[] out1 = UtilMethods.normalize(arr1);
+            double[] arr1 = {12, 14, 15, 15, 16};
+            double[] result1 = {-1.583, -0.264, 0.396, 0.396, 1.055};
+            double[] out1 = UtilMethods.normalize(arr1);
         Assertions.assertArrayEquals(result1, out1, 0.001);
     }
 
@@ -202,6 +204,32 @@ public class TestUtils {
         double[] result1 = {-2.4, -0.4, 0.6, 0.6, 1.6};
         double[] out1 = UtilMethods.zeroCenter(arr1);
         Assertions.assertArrayEquals(result1, out1, 0.001);
+    }
+
+    @Test
+    public void almostEqualsTest() {
+        double[] test1 = {1.23320, 1.23321};
+        double[] test2 = {1.23310, 1.23320};
+        Assertions.assertTrue(UtilMethods.almostEquals(test1[0], test1[1], 0.0001));
+        Assertions.assertFalse(UtilMethods.almostEquals(test2[0], test2[1], 0.00001));
+    }
+
+    @Test
+    public void convertToPrimitiveIntTest() {
+        ArrayList<Integer> numbers = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5));
+        int[] nums = {1, 2, 3, 4, 5};
+        int[] out = UtilMethods.convertToPrimitiveInt(numbers);
+        Assertions.assertTrue(out instanceof int[]);
+        Assertions.assertArrayEquals(nums, out);
+    }
+
+    @Test
+    public void convertToPrimitiveDoubleTest() {
+        ArrayList<Double> numbers = new ArrayList<Double>(Arrays.asList(1.1, 2.22, 3.3, 4.4, 5.55));
+        double[] nums = {1.1, 2.22, 3.3, 4.4, 5.55};
+        double[] out = UtilMethods.convertToPrimitiveDouble(numbers);
+        Assertions.assertTrue(out instanceof double[]);
+        Assertions.assertArrayEquals(nums, out, 0.001);
     }
 
     @Test
@@ -224,14 +252,6 @@ public class TestUtils {
         Assertions.assertEquals(index, out);
         out = UtilMethods.argmax(arr, true);
         Assertions.assertEquals(indexRev, out);
-    }
-
-    @Test
-    public void almostEqualsTest() {
-        double[] test1 = {1.23320, 1.23321};
-        double[] test2 = {1.23310, 1.23320};
-        Assertions.assertTrue(UtilMethods.almostEquals(test1[0], test1[1], 0.0001));
-        Assertions.assertFalse(UtilMethods.almostEquals(test2[0], test2[1], 0.00001));
     }
 
     @Test

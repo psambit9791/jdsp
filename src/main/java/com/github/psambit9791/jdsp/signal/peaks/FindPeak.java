@@ -69,8 +69,8 @@ public class FindPeak {
      * This method identifies all the peaks within the signal.
      * @return PeakObject The list of all the peaks as PeakObject
      */
-    public PeakObject detect_peaks() {
-        PeakObject p = this.detect(this.signal, "peak");
+    public Peak detect_peaks() {
+        Peak p = this.detect(this.signal, "peak");
         this.peak_indices = p.getPeaks();
         return p;
     }
@@ -79,19 +79,19 @@ public class FindPeak {
      * This method identifies all the troughs within the signal.
      * @return PeakObject The list of all the troughs as PeakObject
      */
-    public PeakObject detect_troughs() {
+    public Peak detect_troughs() {
         double[] reverse_signal = new double[this.signal.length];
         for (int i=0; i<reverse_signal.length; i++) {
             reverse_signal[i] = 0 - this.signal[i];
         }
-        PeakObject p = this.detect(reverse_signal, "trough");
+        Peak p = this.detect(reverse_signal, "trough");
         this.trough_indices = p.getPeaks();
         return p;
     }
 
 
     // internal function for detecting peaks
-    private PeakObject detect(double[] signal, String mode) {
+    private Peak detect(double[] signal, String mode) {
         ArrayList<Integer> midpoints = new ArrayList<Integer>();
         ArrayList<Integer> left_edge = new ArrayList<Integer>();
         ArrayList<Integer> right_edge = new ArrayList<Integer>();
@@ -116,7 +116,7 @@ public class FindPeak {
             }
             i++;
         }
-        PeakObject pObj = new PeakObject(signal,
+        Peak pObj = new Peak(signal,
                 UtilMethods.convertToPrimitiveInt(midpoints),
                 UtilMethods.convertToPrimitiveInt(left_edge),
                 UtilMethods.convertToPrimitiveInt(right_edge),
@@ -132,7 +132,7 @@ public class FindPeak {
      * @param troughs The troughs that are to be used in this signal
      * @return SpikeObject The list of all the troughs as PeakObject
      */
-    public SpikeObject get_spikes(double[] signal, int[] peaks, int[] troughs) {
+    public Spike get_spikes(double[] signal, int[] peaks, int[] troughs) {
         int[] left_trough = new int[peaks.length];
         int[] right_trough = new int[peaks.length];
 
@@ -140,7 +140,7 @@ public class FindPeak {
             left_trough[i] = this.getClosest(troughs, peaks[i], "left");
             right_trough[i] = this.getClosest(troughs, peaks[i], "right");
         }
-        SpikeObject sObj = new SpikeObject(signal, peaks, left_trough, right_trough);
+        Spike sObj = new Spike(signal, peaks, left_trough, right_trough);
         return sObj;
     }
 
@@ -172,7 +172,7 @@ public class FindPeak {
      * Spikes properties are different from peaks such that, the spike height and width are dependent on their neighbouring troughs.
      * @return SpikeObject The list of all the troughs as PeakObject
      */
-    public SpikeObject get_spikes() {
+    public Spike get_spikes() {
         if ((this.peak_indices == null) || (this.trough_indices == null)) {
             this.detect_peaks();
             this.detect_troughs();

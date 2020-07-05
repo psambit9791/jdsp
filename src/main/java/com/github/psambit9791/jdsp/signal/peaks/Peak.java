@@ -14,7 +14,7 @@ import java.util.*;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class PeakObject {
+public class Peak {
     private double[] signal;
     private int[] midpoints;
     private double[] height;
@@ -27,7 +27,7 @@ public class PeakObject {
     private double[][] prominenceData;
     private double[][] widthData;
 
-    public PeakObject(double[] s, int[] m, int[] l, int[] r, String mode) {
+    public Peak(double[] s, int[] m, int[] l, int[] r, String mode) {
 
         this.signal = s;
 
@@ -89,6 +89,19 @@ public class PeakObject {
             newHeight[i] = this.signal[peaks[i]];
         }
         return newHeight;
+    }
+
+    /**
+     * This method returns the heights of the peaks in the signal
+     * @param peaks List of selected peaks
+     * @return double[] The list of all the heights of peaks
+     */
+    public int[] findPlateauSize(int[] peaks) {
+        int[] newPS = new int[peaks.length];
+        for (int i=0; i<peaks.length; i++) {
+            newPS[i] = this.plateau_size[peaks[i]];
+        }
+        return newPS;
     }
 
     /**

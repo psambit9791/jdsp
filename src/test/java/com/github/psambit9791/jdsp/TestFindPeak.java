@@ -2,8 +2,8 @@ package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.misc.Plotting;
 import com.github.psambit9791.jdsp.signal.peaks.FindPeak;
-import com.github.psambit9791.jdsp.signal.peaks.PeakObject;
-import com.github.psambit9791.jdsp.signal.peaks.SpikeObject;
+import com.github.psambit9791.jdsp.signal.peaks.Peak;
+import com.github.psambit9791.jdsp.signal.peaks.Spike;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -71,8 +71,8 @@ public class TestFindPeak {
 
         // Detection Tests
         FindPeak fp = new FindPeak(this.simpleSignal);
-        PeakObject out = fp.detect_peaks();
-        Assertions.assertTrue(out instanceof PeakObject);
+        Peak out = fp.detect_peaks();
+        Assertions.assertTrue(out instanceof Peak);
         Assertions.assertArrayEquals(resultPeaks, out.getPeaks());
 
         // Height Test
@@ -194,8 +194,8 @@ public class TestFindPeak {
 
         // Detection Tests
         FindPeak fp = new FindPeak(this.highResSignal);
-        PeakObject out = fp.detect_peaks();
-        Assertions.assertTrue(out instanceof PeakObject);
+        Peak out = fp.detect_peaks();
+        Assertions.assertTrue(out instanceof Peak);
         Assertions.assertArrayEquals(resultPeaks, out.getPeaks());
 
         // Height Test
@@ -222,6 +222,9 @@ public class TestFindPeak {
         int[] resultPlateau = {1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1};
         int[] outPlateau = out.getPlateauSize();
         Assertions.assertArrayEquals(resultPlateau, outPlateau);
+        int[] resultPlateau1 = {1, 2, 1, 1, 2};
+        int[] outPlateau1 = out.findPlateauSize(new int[]{0, 1, 2, 3, 4});
+        Assertions.assertArrayEquals(resultPlateau1, outPlateau1);
 
         // Plateau Size Filtering Test
         int[] resultFilteredPS1 = {49, 175, 495, 575, 595, 663, 945, 956};
@@ -345,7 +348,7 @@ public class TestFindPeak {
                 701, 726, 733, 762, 767, 773, 864, 913, 943, 954, 960, 967};
 
         FindPeak fp = new FindPeak(this.highResSignal);
-        PeakObject out = fp.detect_troughs();
+        Peak out = fp.detect_troughs();
 
         Assertions.assertArrayEquals(resultTroughs, out.getPeaks());
     }
@@ -353,7 +356,7 @@ public class TestFindPeak {
     @Test
     public void peakPlot() throws IOException{
         FindPeak fp = new FindPeak(this.highResSignal);
-        PeakObject out = fp.detect_peaks();
+        Peak out = fp.detect_peaks();
 
         String outputFileName = "test_outputs/peak_test";
         Plotting fig = new Plotting("Peak Detection", "Time", "Signal");
@@ -368,7 +371,7 @@ public class TestFindPeak {
         fig.add_points("Filtered Peaks", filteredPeaks, filteredHeights, '^');
 
         FindPeak ft = new FindPeak(this.highResSignal);
-        PeakObject out2 = ft.detect_troughs();
+        Peak out2 = ft.detect_troughs();
         fig.add_points("Troughs", out2.getPeaks(), out2.getHeights(), '+');
 
         fig.save_as_png(outputFileName);
@@ -380,7 +383,7 @@ public class TestFindPeak {
     @Test
     public void spikeDetectTest() {
         FindPeak fp = new FindPeak(this.simpleSignal);
-        SpikeObject out = fp.get_spikes();
+        Spike out = fp.get_spikes();
 
         int[] resultLeftTroughs = {-1, 25, 57, 84, 123, 150, 182, 218};
         int[] resultRightTroughs = {25, 57, 84, 123, 150, 182, 218, 244};
@@ -466,7 +469,7 @@ public class TestFindPeak {
     @Test
     public void spikeDetectHighResTest() {
         FindPeak fp = new FindPeak(this.highResSignal);
-        SpikeObject out = fp.get_spikes();
+        Spike out = fp.get_spikes();
 
         int[] resultLeftTroughs = {-1, 31, 78, 119, 125, 196, 242, 281, 301, 365, 400, 442, 498, 517, 532, 562, 589, 599, 611, 684, 701, 726, 733, 762, 767, 773, 864, 913, 943, 954, 960};
         int[] resultRightTroughs = {31, 78, 119, 125, 196, 242, 281, 301, 365, 400, 442, 498, 517, 532, 562, 589, 599, 611, 684, 701, 726, 733, 762, 767, 773, 864, 913, 943, 954, 960, 967};
@@ -568,7 +571,7 @@ public class TestFindPeak {
     @Test
     public void spikePlot() throws IOException{
         FindPeak fp = new FindPeak(this.highResSignal);
-        SpikeObject out = fp.get_spikes();
+        Spike out = fp.get_spikes();
 
         int[] peaks = out.getPeaks();
 
