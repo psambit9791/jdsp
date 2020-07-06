@@ -91,7 +91,8 @@ public class TestPlotting {
 
     @Test
     public void testPlotSave5() throws IOException {
-        final double[] signal = {2.0, 4.0, 2.0, 3.0, 1.0};
+        final double[] signal1 = {2.0, 4.0, 2.0, 3.0, 1.0};
+        final double[] signal2 = {3.4, 6.7, 2.2, 1.6, 3.6};
         final double[] points1 = {3.4, 6.7, 2.2, 1.6, 3.6};
         final double[] points2 = {1.6, 2.0, 5.3, -1.3, 2.2};
 
@@ -101,7 +102,8 @@ public class TestPlotting {
 
         Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
         fig.initialise_plot();
-        fig.add_signal("Signal", time, signal, true);
+        fig.add_signal("Signal 1", time, signal1, true);
+        fig.add_signal("Signal 2", time, signal2, false);
         fig.add_points("Points 1", time, points1, 'x');
         fig.add_points("Points 2", time, points2);
         fig.save_as_png(outputFileName);
