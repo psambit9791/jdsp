@@ -613,7 +613,7 @@ double[] out = UtilMethods.unwrap(seq);
                 <div class="bg-white" style="padding-top:30px;">
                     <div class="row mb-5">
                         <div class="col-md-7 mx-auto text-center">
-                            <h2>Pseudo-inverse of array</h2>
+                            <h2 class="heading-29190">Pseudo-inverse of array</h2>
                         </div>
                     </div>
                     <div class="row mb-5">
@@ -650,12 +650,315 @@ double[][] out = UtilMethods.pseudoInverse(matrix);
                 <!-- END OF PSEUDO-INVERSE-->
             </div>
 
+            <div id="argsop">
+                <!--  START OF ARGMIN  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Argument of the Minimum</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[][] matrix = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+double[][] out = UtilMethods.pseudoInverse(matrix);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-center">
+       min1 = 0
+       min2 = 6
+                    </code>
+                </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF ARGMIN-->
+
+                <!--  START OF ARGMAX  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Argument of the Maximum</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] arr = {1, 2, 5, 3, 4, 6, 1, 6};
+int max1 = UtilMethods.argmax(arr, false); //Returns the last occurrence index if more than 1 max value
+int max2 = UtilMethods.argmax(arr, true); //Returns the first occurrence index if more than 1 max value
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-center">
+       max1 = 5
+       max2 = 7
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF ARGMAX-->
+
+                <!--  START OF ARGSORT  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Indices to sort array</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] test1 = {1.23, 4.55, -1.33, 2.45, 6.78, 1.29};
+int[] sortedIndices = UtilMethods.argsort(test1, true); //In ascending order
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-center">
+[2, 0, 5, 3, 1, 4]
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF ARGSORT-->
+            </div>
+
+
+            <div id="featscale">
+                <!--  START OF RESCALE  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Rescale</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] arr1 = {12, 14, 15, 15, 16};
+double[] out1 = UtilMethods.rescale(arr1, 10, 20);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-center">
+[10, 15, 17.5, 17.5, 20]
+                    </code>
+                </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF RESCALE-->
+
+                <!--  START OF STANDARDIZE  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Standardize</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] arr1 = {12, 14, 15, 15, 16};
+double[] out1 = UtilMethods.standardize(arr1);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-center">
+[0, 0.5, 0.75, 0.75, 1]
+                    </code>
+                </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF STANDARDIZE-->
+
+                <!--  START OF NORMALIZE -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Normalize</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] arr1 = {12, 14, 15, 15, 16};
+double[] out1 = UtilMethods.normalize(arr1);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-center">
+[-1.583, -0.264, 0.396, 0.396, 1.055]
+                    </code>
+                </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF NORMALIZE-->
+
+                <!--  START OF ZERO-CENTER -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Zero Center</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] arr1 = {12, 14, 15, 15, 16};
+double[] out1 = UtilMethods.zeroCenter(arr1);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-center">
+[-2.4, -0.4, 0.6, 0.6, 1.6]
+                    </code>
+                </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF NORMALIZE-->
+            </div>
+
+
             <div id="helper">
                 <!--  START OF ROUND  -->
                 <div class="bg-white" style="padding-top:30px;">
                     <div class="row mb-5">
                         <div class="col-md-7 mx-auto text-center">
-                            <h2>Rounding to n<sup>th</sup> Decimal</h2>
+                            <h2 class="heading-29190">Rounding to n<sup>th</sup> Decimal</h2>
                         </div>
                     </div>
                     <div class="row mb-5">
@@ -697,7 +1000,7 @@ double out = UtilMethods.round(val, 1);
                 <div class="bg-light" style="padding-top:30px;">
                     <div class="row mb-5">
                         <div class="col-md-7 mx-auto text-center">
-                            <h2>Modulus Operation (Python)</h2>
+                            <h2 class="heading-29190">Modulus Operation (Python)</h2>
                         </div>
                     </div>
                     <div class="row mb-5">
@@ -735,6 +1038,61 @@ double out = UtilMethods.modulo(divisor, dividend);
                     <div class="container" style="padding-bottom:50px;"></div>
                 </div>
                 <!-- END OF MODULO-->
+
+                <!--  START OF INT  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Convert Integer ArrayList to Primitive int[]</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+ArrayList<Integer> integers = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5));double[] test2 = {1.23310, 1.23320};
+int[] out1 = UtilMethods.convertToPrimitiveInt(integers)
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF INT-->
+
+                <!--  START OF DOUBLE  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Convert Integer ArrayList to Primitive double[]</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+ArrayList<Double> numbers = new ArrayList<Double>(Arrays.asList(1.1, 2.22, 3.3, 4.4, 5.55));
+double[] out2 = UtilMethods.convertToPrimitiveDouble(numbers);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF DOUBLE-->
+
             </div>
         </div>
         
