@@ -117,340 +117,273 @@
             <li><a href="#spike">Spike Detection and Filtering</a> </li>
           </ul>
 
-          <div id="peak">
+            <div id="peak">
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/peaks/signal.png" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <h5>Signal Used for this Demo</h5>
+                    </div>
+                </div>
 
-              <!--  START OF DETREND  -->
-              <div class="bg-white" style="padding-top:30px;">
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h2 class="heading-29190">Detrend</h2>
-                      </div>
-                  </div>
-                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
-                      <img src="res/signal/signal/detrend/detrend.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
-                  </div>
-                  <div class="row">
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
-                          <h4>Constant</h4>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
-                          <h4>Linear</h4>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <!--  START OF Detection  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Peak Detection</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/peaks/peaks_all.png" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <h5>All Detected Peaks</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-Detrend d1 = new Detrend(signal, "constant");
-double[] out = d1.detrendSignal();
+FindPeak fp = new FindPeak(this.highResSignal);
+
+Peak out = fp.detect_peaks();
+int[] peaks = out.getPeaks();
+
+Peak out2 = fp.detect_troughs();
+int[] troughs = out2.getPeaks();
                     </code>
                   </pre>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF Detection-->
+
+                <!--  START OF Filtering  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Peak Filtering</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/peaks/filtered_peaks.png" alt="Image" class="img-fluid" style="width: auto; height: 576px; padding-bottom: 30px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Height Filtered</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Plateau Size Filtered</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-Detrend d1 = new Detrend(signal, "linear");
-double[] out = d1.detrendSignal();
+double[] outHeight = out.getHeights(); //To get height of all peaks
+double[] height = out.findPeakHeights(peaks); //To calculate height of specific peaks
+int[] filteredPeaks1 = out.filterByHeight(0.02, 1.0); //To filter peaks by height
                     </code>
                   </pre>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
-                          <h4>Polynomial (Power 2)</h4>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
-                          <h4>Polynomial (Power 5)</h4>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-int power = 2;
-Detrend d1 = new Detrend(signal, power);
-double[] out = d1.detrendSignal();
+int[] outPlateau = out.getPlateauSize(); //To get plateau size of all peaks
+int[] outPlateau = out.findPlateauSize(peaks); //To calculate plateau size of specific peaks
+int[] outFilteredPS1 = out.filterByPlateauSize(2, 4); //To filter peaks by plateau size
                     </code>
                   </pre>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Distance Filtered</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Sharpness Filtered</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-int power = 5;
-Detrend d1 = new Detrend(signal, power);
-double[] out = d1.detrendSignal();
+int[] outDistance = out.getPeakDistance(); //To get distance of all peaks
+int[] distance = out.findPeakDistance(peaks); //To calculate distance of specific peaks
+int[] outFilteredDistance1 = out.filterByPeakDistance(12); //To filter peaks by distance
                     </code>
                   </pre>
-                      </div>
-                  </div>
-                  <div class="container" style="padding-bottom:50px;"></div>
-              </div>
-              <!-- END OF DETREND-->
-
-
-              <!--  START OF SMOOTH  -->
-              <div class="bg-light" style="padding-top:30px;">
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h2 class="heading-29190">Smoothing</h2>
-                      </div>
-                  </div>
-                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
-                      <img src="res/signal/signal/smooth/smooth.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
-                  </div>
-                  <div class="row">
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
-                          <h4>Rectangular Smoothing</h4>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
-                          <h4>Triangular Smoothing</h4>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-String mode = "rectangular";
-int wsize = 11;
-Smooth s1 = new Smooth(signal, wsize, mode);
-double[] out = s1.smoothSignal();
+double[][] outSharpness = out.getPeakSharpness(); //To get sharpness of all peaks
+double[][] sharpness = out.findPeakSharpness(peaks); //To calculate sharpness of specific peaks
+int[] filteredSharp1 = out.filterBySharpness(0.002, 0.005); //To filter peaks by sharpness
                     </code>
                   </pre>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Prominence Filtered</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Width Filtered</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-String mode = "triangular";
-int wsize = 11;
-Smooth s1 = new Smooth(signal, wsize, mode);
-double[] out = s1.smoothSignal();
+double[][] outPromData = out.getProminenceData(); // To get the prominence, left base and right base
+double[] outProminence = out.getProminence(); //To get only prominence of all peaks
+
+double[][] promData = out.findPeakProminence(peaks); // To get the prominence, left base and right base
+double[] prominence = promData[0]; //To calculate only prominence of specific peaks
+
+int[] filteredProm1 = out.filterByProminence(0.2, 0.6); //To filter peaks by prominence
                     </code>
                   </pre>
-                      </div>
-                  </div>
-                  <div class="container" style="padding-bottom:50px;"></div>
-              </div>
-              <!-- END OF SMOOTH-->
-
-              <!--  START OF DECIMATE  -->
-              <div class="bg-white" style="padding-top:30px;">
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h2 class="heading-29190">Decimate</h2>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
-                          <h4>Non-Zero Phase Shift</h4>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
-                          <h4>Zero Phase Shift</h4>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center" style="padding-bottom: 50px">
-                          <img src="res/signal/signal/decimate/decimate_nzp.png" alt="Image" class="img-fluid" style="padding: 25px">
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center" style="padding-bottom: 50px">
-                          <img src="res/signal/signal/decimate/decimate_zp.png" alt="Image" class="img-fluid" style="padding: 25px">
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-int Fs = 100;
-int factor = 5;
-boolean zero = false;
-Decimate d = new Decimate(signal, Fs, zero);
-double[] out = d.decimate(factor);
+double[][] outWidthData = out.getWidthData(); // To get the width, left base and right base at a relative height of 0.5
+double[] outWidth = out.getWidth(); //To get width of all peaks
+
+double[][] widthData = out.findPeakWidth(peaks, 0.5); // To get the width, left base and right base at a relative height of 0.5
+double[] width = widthData[0]; //To calculate width of specific peaks
+
+int[] filteredWidth1 = out.filterByWidth(5, 20); //To filter peaks by width
                     </code>
                   </pre>
-                      </div>
-                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF Filtering-->
+
+            </div>
+
+            <div id="spike">
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/peaks/signal.png" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <h5>Signal Used for this Demo</h5>
+                    </div>
+                </div>
+
+                <!--  START OF Detection  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Spike Detection (Check <a style="color:blue" target="_blank" href="https://github.com/psambit9791/jDSP/wiki/Spike-Detection-and-Filtering">Wiki</a>)</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/peaks/peaks_all.png" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <h5>All Detected Spikes</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-int Fs = 100;
-int factor = 5;
-boolean zero = true;
-Decimate d = new Decimate(signal, Fs, zero);
-double[] out = d.decimate(factor);
+FindPeak fp = new FindPeak(this.highResSignal);
+Spike out = fp.get_spikes();
+
+double[] outLeftSpike = out.getLeftSpike();
+double[] outRightSpike = out.getRightSpike();
+double[] outMeanSpike = out.getMeanSpike();
+double[] outMaxSpike = out.getMaxSpike();
+double[] outMinSpike = out.getMinSpike();
                     </code>
                   </pre>
-                      </div>
-                  </div>
-                  <div class="container" style="padding-bottom:50px;"></div>
-              </div>
-              <!-- END OF DECIMATE-->
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF Detection-->
 
-              <!--  START OF CONVOLVE  -->
-              <div class="bg-light" style="padding-top:30px;">
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h2 class="heading-29190">Convolution</h2>
-                      </div>
-                  </div>
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h4>Code</h4>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+
+                <!--  START OF Filtering  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Spike Filtering</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/peaks/filtered_spike_1.png" alt="Image" class="img-fluid" style="width: auto; height: 576px; padding-bottom: 30px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Left-Spike Filtered</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Right-Spike Filtered</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
-double[] kernel = {1, 3, 1, 3};
-Convolution con = new Convolution(signal, kernel);
-double[] full = con.convolve("full");
-double[] same = con.convolve("same");
-double[] valid = con.convolve("valid");
+int[] outLeftFilter = out.filterByProperty(0.5, 5, "left");
                     </code>
                   </pre>
-                      </div>
-                  </div>
-
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h4>Output</h4>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-full: [2, 14, 26, 18, 37, 16, 49, 39, 36, 27,  0]
-same: [14, 26, 18, 37, 16, 49, 39, 36]
-valid: [18, 37, 16, 49, 39]
+int[] outRightFilter = out.filterByProperty(0.5, 5, "right");
                     </code>
                   </pre>
-                      </div>
-                  </div>
 
-                  <div class="container" style="padding-bottom:50px;"></div>
-              </div>
-              <!-- END OF CONVOLVE-->
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
 
-              <!--  START OF CROSS-CORRELATION  -->
-              <div class="bg-white" style="padding-top:30px;">
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h2 class="heading-29190">Cross-Correlation</h2>
-                      </div>
-                  </div>
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h4>Code</h4>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
-                <pre class="d-flex align-items-center">
-                    <code class="container align-text-left">
-double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
-double[] kernel = {1, 3, 1, 3};
-CrossCorrelation cc = new CrossCorrelation(signal, kernel);
-double[] full = cc.cross_correlate("full");
-double[] same = cc.cross_correlate("same");
-double[] valid = cc.cross_correlate("valid");
-                    </code>
-                  </pre>
-                      </div>
-                  </div>
+                <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                    <img src="res/signal/peaks/filtered_spike_2.png" alt="Image" class="img-fluid" style="width: auto; height: 576px; padding-bottom: 30px;">
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                        <h4>Mean Filtered</h4>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+            <pre class="d-flex align-items-center">
+                <code class="container align-text-left">
+int[] outMeanFilter = out.filterByProperty(0.5, 5, "mean");
+                </code>
+              </pre>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
 
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h4>Output</h4>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
-                <pre class="d-flex align-items-center">
-                    <code class="container align-text-left">
-full: [6, 26, 14, 38, 15, 40, 43, 37, 36,  9,  0]
-same: [26, 14, 38, 15, 40, 43, 37, 36]
-valid: [38, 15, 40, 43, 37]
-                    </code>
-                  </pre>
-                      </div>
-                  </div>
+                <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                    <img src="res/signal/peaks/filtered_spike_3.png" alt="Image" class="img-fluid" style="width: auto; height: 576px; padding-bottom: 30px;">
+                </div>
+                <div class="row">
+                    <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                        <h4>Max-Spike Filtered</h4>
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                        <h4>Min-Spike Filtered</h4>
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+            <pre class="d-flex align-items-center">
+                <code class="container align-text-left">
+int[] outMaxFilter = out.filterByProperty(0.5, 5, "max");
+                </code>
+              </pre>
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+            <pre class="d-flex align-items-center">
+                <code class="container align-text-left">
+int[] outMinFilter = out.filterByProperty(0.5, 5, "min");
+                </code>
+              </pre>
 
-                  <div class="container" style="padding-bottom:50px;"></div>
-              </div>
-              <!-- END OF CROSS-CORRELATION-->
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF Filtering-->
 
 
-          </div>
-
-          <div id="spike">
-
-              <!--  START OF SINE  -->
-              <div class="bg-white" style="padding-top:30px;">
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h2 class="heading-29190">Sine Wave</h2>
-                      </div>
-                  </div>
-                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
-                      <img src="res/signal/signal/generate/sine.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
-                  </div>
-                  <div class="row">
-                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
-                <pre class="d-flex align-items-center">
-                    <code class="container align-text-left">
-int Fs = 100;
-Generate gp = new Generate(Fs);
-int f1 = 10;
-double[] out = gp.generateSineWave(f1);
-                    </code>
-                  </pre>
-                      </div>
-                  </div>
-                  <div class="container" style="padding-bottom:50px;"></div>
-              </div>
-              <!-- END OF SINE-->
-
-              <!--  START OF COSINE  -->
-              <div class="bg-light" style="padding-top:30px;">
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h2 class="heading-29190">Cosine Wave</h2>
-                      </div>
-                  </div>
-                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
-                      <img src="res/signal/signal/generate/cosine.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
-                  </div>
-                  <div class="row">
-                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
-                <pre class="d-flex align-items-center">
-                    <code class="container align-text-left">
-int Fs = 100;
-Generate gp = new Generate(Fs);
-int f1 = 10;
-double[] out = gp.generateCosineWave(f1);
-                    </code>
-                  </pre>
-                      </div>
-                  </div>
-                  <div class="container" style="padding-bottom:50px;"></div>
-              </div>
-              <!-- END OF COSINE-->
-
-              <!--  START OF SQUARE  -->
-              <div class="bg-white" style="padding-top:30px;">
-                  <div class="row mb-5">
-                      <div class="col-md-7 mx-auto text-center">
-                          <h2 class="heading-29190">Square Wave</h2>
-                      </div>
-                  </div>
-                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
-                      <img src="res/signal/signal/generate/square.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
-                  </div>
-                  <div class="row">
-                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
-                <pre class="d-flex align-items-center">
-                    <code class="container align-text-left">
-int Fs = 100;
-Generate gp = new Generate(Fs);
-int f1 = 10;
-double[] out = gp.generateSquareWave(f1);
-                    </code>
-                  </pre>
-                      </div>
-                  </div>
-                  <div class="container" style="padding-bottom:50px;"></div>
-              </div>
-              <!-- END OF SQUARE-->
-
-          </div>
+            </div>
         </div>
         
     </div>
