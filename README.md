@@ -102,7 +102,8 @@ If you are using this software in your research, please use the following citati
 
 jDSP is an open source project. <br/> You can help by becoming a sponsor on <a href="https://patreon.com/sambitpaul">Patreon</a> or doing a one time donation on <a href="https://paypal.me/psambit9791">PayPal</a> <br />
 
-<a href="https://patreon.com/sambitpaul"><img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" /> </a>
+<a href="https://patreon.com/sambitpaul" target="_blank"><img src="https://github.com/psambit9791/jDSP/blob/master/res/button/patron-button.png" alt="Become a Patron" /> </a>
+<a href="https://paypal.me/psambit9791" target="_blank"><img src="https://github.com/psambit9791/jDSP/blob/master/res/button/paypal-button.png" alt="Become a Patron" /> </a>
 
 <br/>
 
