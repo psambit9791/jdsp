@@ -125,11 +125,7 @@ public class TestGenerate {
         double[] data = UtilMethods.splitByIndex(UtilMethods.electrocardiogram(), 3200, 4200);
         Smooth sObj = new Smooth(data, 15, "rectangular");
         double[] ecgSignal = sObj.smoothSignal("same");
-        int[] temp = UtilMethods.arange(0, ecgSignal.length, 1);
-        double[] t = new double[temp.length];
-        for (int i=0; i<temp.length; i++) {
-            t[i] = temp[i];
-        }
+        double[] t = UtilMethods.arange(0, (double)ecgSignal.length, 1);
         this.plot_now("ECG Wave", t, ecgSignal, "test_outputs/ecg.png");
         Assertions.assertArrayEquals(highResSignal, ecgSignal, 0.001);
     }
