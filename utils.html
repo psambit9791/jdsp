@@ -980,7 +980,7 @@ double[] rawData = UtilMethods.electrocardiogram();
 double[] data = UtilMethods.splitByIndex(rawData, 3200, 4200);
 Smooth sObj = new Smooth(data, 15, "rectangular");
 double[] ecgSignal = sObj.smoothSignal("same");
-double[] time = UtilMethods.arange(0, ecgSignal.length, 1);
+double[] time = UtilMethods.arange(0, (double)ecgSignal.length, 1);
                     </code>
                   </pre>
                         </div>
