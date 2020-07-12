@@ -168,12 +168,23 @@ public class TestUtils {
     }
 
     @Test
-    public void roundTest() {
+    public void roundTest1() {
         double val = 123.45667;
         double out1 = UtilMethods.round(val, 1);
         Assertions.assertEquals(123.5, out1, 0.00001);
         double out2 = UtilMethods.round(val, 3);
         Assertions.assertEquals(123.457, out2, 0.00001);
+    }
+
+    @Test
+    public void roundTest2() {
+        double[] arr = {7.40241449, -14.34767505,  12.88704602,   5.81646305};
+        double[] res1 = {7.4, -14.3,  12.9,   5.8};
+        double[] out1 = UtilMethods.round(arr, 1);
+        Assertions.assertArrayEquals(res1, out1, 0.00001);
+        double[] res2 = {7.402, -14.348,  12.887,   5.816};
+        double[] out2 = UtilMethods.round(arr, 3);
+        Assertions.assertArrayEquals(res2, out2, 0.00001);
     }
 
     @Test

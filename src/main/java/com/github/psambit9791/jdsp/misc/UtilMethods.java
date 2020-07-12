@@ -402,10 +402,32 @@ public class UtilMethods {
         }
 
         DecimalFormat df = new DecimalFormat(dPlaces);
-        df.setRoundingMode(RoundingMode.CEILING);
+        df.setRoundingMode(RoundingMode.HALF_EVEN);
         Double d = value;
         String temp = df.format(d);
         return Double.parseDouble(temp);
+    }
+
+    /**
+     * Evenly rounds the the elements of a double array to the given number of decimals
+     * @param arr Value to be rounded
+     * @param decimals Number of decimal places to round to
+     * @return double The rounded double array
+     */
+    public static double[] round(double[] arr, int decimals) {
+        double[] rounded = new double[arr.length];
+        String dPlaces = "#.";
+        for (int i=0; i<decimals; i++) {
+            dPlaces = dPlaces + "#";
+        }
+
+        DecimalFormat df = new DecimalFormat(dPlaces);
+            df.setRoundingMode(RoundingMode.HALF_EVEN);
+        for (int i=0; i<rounded.length; i++) {
+            Double d = arr[i];
+            rounded[i] = Double.parseDouble(df.format(d));
+        }
+        return rounded;
     }
 
     /**
