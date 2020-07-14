@@ -146,7 +146,7 @@ String title = "Sample Figure";
 String x_axis = "Time";
 String y_axis = "Signal";
 Plotting fig = new Plotting(width, height, title, x_axis, y_axis);
-fig.initialise_plot();
+fig.initialisePlot();
                     </code>
                   </pre>
                       </div>
@@ -158,8 +158,8 @@ fig.initialise_plot();
 double[] signal1 = {2.0, 4.0, 2.0, 3.0, 1.0};
 double[] signal2 = {3.4, 6.7, 2.2, 1.6, 3.6};
 double[] time = {0.0, 1.0, 2.0, 3.0, 4.0};
-fig.add_signal("Signal 1", time, signal1, true);
-fig.add_signal("Signal 2", time, signal2, false);
+fig.addSignal("Signal 1", time, signal1, true);
+fig.addSignal("Signal 2", time, signal2, false);
                     </code>
                   </pre>
                       </div>
@@ -171,8 +171,8 @@ fig.add_signal("Signal 2", time, signal2, false);
 final double[] points1 = {3.4, 6.7, 2.2, 1.6, 3.6};
 final double[] points2 = {1.6, 2.0, 5.3, -1.3, 2.2};
 
-fig.add_points("Points 1", time, points1, 'x');
-fig.add_points("Points 2", time, points2);
+fig.addPoints("Points 1", time, points1, 'x');
+fig.addPoints("Points 2", time, points2);
                     </code>
                   </pre>
                       </div>
@@ -207,7 +207,7 @@ String outputFileName = "signal";
 // To plot on a window
 fig.plot();
 // TO save as an image
-fig.save_as_png(outputFileName);
+fig.saveAsPng(outputFileName);
                     </code>
                   </pre>
                       </div>

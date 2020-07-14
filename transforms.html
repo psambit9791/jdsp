@@ -216,9 +216,9 @@ double[] out = fft.returnFull(onlyPositive); //Full Complex
 // Automatically detects real and complex sequence and performs IDFT accordingly
 InverseDiscreteFourier transformer = new InverseDiscreteFourier(complexSequence);
 transformer.idft();
-double[] outReal = transformer.get_real_signal(); //To get only the real component
-double[] outAbsolute = transformer.get_absolute_signal(); //To get the absolute value of the complex signal
-double[][] out = transformer.get_complex_signal(); // To get the complex signal
+double[] outReal = transformer.getRealSignal(); //To get only the real component
+double[] outAbsolute = transformer.getAbsoluteSignal(); //To get the absolute value of the complex signal
+double[][] out = transformer.getComplexSignal(); // To get the complex signal
                     </code>
                   </pre>
                 </div>
@@ -256,8 +256,8 @@ double[][] out = transformer.get_complex_signal(); // To get the complex signal
                     <code class="container align-text-left">
 Hilbert h = new Hilbert(signal);
 h.hilbert_transform();
-double[][] analytical_signal = h.get_output(); //Returns the analytical signal
-double[] envelope = h.get_amplitude_envelope();
+double[][] analytical_signal = h.getOutput(); //Returns the analytical signal
+double[] envelope = h.getAmplitudeEnvelope();
                     </code>
                   </pre>
                 </div>
@@ -275,9 +275,9 @@ double[] envelope = h.get_amplitude_envelope();
                     <code class="container align-text-left">
 Hilbert h = new Hilbert(signal);
 h.hilbert_transform();
-double[] phase = h.get_instantaneous_phase();
+double[] phase = h.getInstantaneousPhase();
 int Fs = 150; //Sampling Frequency of the original signal
-double[] frequency = h.get_instantaneous_frequency(Fs);
+double[] frequency = h.getInstantaneousFrequency(Fs);
                     </code>
                   </pre>
                 </div>
