@@ -178,6 +178,28 @@ fig.add_points("Points 2", time, points2);
                       </div>
 
                       <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                          <h4 class="text-dark" style="text-align: left; padding-right:20px">Add Horizontal/Vertical Line</h4>
+                          <pre class="d-flex align-items-center">
+                    <code class="container align-text-left bg-light">
+// For vertical lines
+double[][] verLines = {{0.0, 2.0, 3.4},
+                        {1.0, 4.0, 6.7},
+                        {2.0, 2.0, 2.2},
+                        {3.0, 3.0, 1.6},
+                        {4.0, 1.0, 3.6}};
+
+for (int i=0; i<=verLines.length-1; i++) {
+    fig.vline(verLines[i][0], verLines[i][1], verLines[i][2]);
+}
+
+// For horizontal lines
+fig.hline(0.0, 4.0, 4.0);
+fig.hline(0.0, 4.0, 6.7);
+                    </code>
+                  </pre>
+                      </div>
+
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
                           <h4 class="text-dark" style="text-align: left; padding-right:20px">Displaying & Saving the Plot</h4>
                           <pre class="d-flex align-items-center">
                     <code class="container align-text-left bg-light">
