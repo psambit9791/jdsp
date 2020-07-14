@@ -120,4 +120,25 @@ public class TestPlotting {
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         Assertions.assertTrue(fileExists);
     }
+
+    @Test
+    public void testPlotSave6() throws IOException {
+        double[] plotHor1 = {2, 6, 4};
+        double[] plotHor2 = {-4, 4, -9};
+        double[] plotVer1 = {3, 1, 6};
+        double[] plotVer2 = {6, 9, -1};
+
+        String outputFileName = "test_outputs/temp6";
+
+        Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
+        fig.initialise_plot();
+        fig.hline(plotHor1[0], plotHor1[1], plotHor1[2]);
+        fig.vline(plotVer1[0], plotVer1[1], plotVer1[2]);
+        fig.hline(plotHor2[0], plotHor2[1], plotHor2[2]);
+        fig.vline(plotVer2[0], plotVer2[1], plotVer2[2]);
+
+        fig.save_as_png(outputFileName);
+        boolean fileExists = new File("./"+outputFileName+".png").exists();
+        Assertions.assertTrue(fileExists);
+    }
 }

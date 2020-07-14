@@ -12,6 +12,7 @@ package com.github.psambit9791.jdsp.misc;
 
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
+import org.knowm.xchart.style.colors.XChartSeriesColors;
 import org.knowm.xchart.style.markers.SeriesMarkers;
 
 import java.io.IOException;
@@ -28,6 +29,8 @@ public class Plotting {
 
     private XYChart figure;
     private XYChartBuilder plot;
+    private int hlineCount = 1;
+    private int vlineCount = 1;
 
     /**
      * This constructor initialises the parameters required to generate the plot. Marker is automatically set to True.
@@ -192,6 +195,40 @@ public class Plotting {
         else if (marker == '^') {
             s.setMarker(SeriesMarkers.TRIANGLE_UP);
         }
+    }
+
+    /**
+     * This method plot a horizontal line on the graph
+     * @param x_min Starting point of the line
+     * @param x_max Ending point of the line
+     * @param y Position where the line is drawn on y-axis
+     */
+    public void hline(double x_min, double x_max, double y) {
+        double[] x_plot = {x_min, x_max};
+        double[] y_plot = {y, y};
+        XYSeries s = this.figure.addSeries("Horizontal"+this.hlineCount, x_plot, y_plot);
+        this.hlineCount++;
+        s.setLineColor(XChartSeriesColors.BLACK);
+        s.setMarker(SeriesMarkers.NONE);
+        s.setShowInLegend(false);
+        s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
+    }
+
+    /**
+     * This method plot a vertical line on the graph
+     * @param x Position where the line is drawn on x-axis
+     * @param y_min Top point of the line
+     * @param y_max Bottom point of the line
+     */
+    public void vline(double x, double y_min, double y_max) {
+        double[] x_plot = {x, x};
+        double[] y_plot = {y_min, y_max};
+        XYSeries s = this.figure.addSeries("Vertical"+this.vlineCount, x_plot, y_plot);
+        this.vlineCount++;
+        s.setLineColor(XChartSeriesColors.BLACK);
+        s.setMarker(SeriesMarkers.NONE);
+        s.setShowInLegend(false);
+        s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
     }
 
     /**
