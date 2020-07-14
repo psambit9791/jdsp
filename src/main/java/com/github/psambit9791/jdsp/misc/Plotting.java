@@ -13,6 +13,7 @@ package com.github.psambit9791.jdsp.misc;
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
 import org.knowm.xchart.style.colors.XChartSeriesColors;
+import org.knowm.xchart.style.lines.SeriesLines;
 import org.knowm.xchart.style.markers.SeriesMarkers;
 
 import java.io.IOException;
@@ -210,6 +211,7 @@ public class Plotting {
         this.hlineCount++;
         s.setLineColor(XChartSeriesColors.BLACK);
         s.setMarker(SeriesMarkers.NONE);
+        s.setLineStyle(SeriesLines.DASH_DASH);
         s.setShowInLegend(false);
         s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
     }
@@ -227,6 +229,7 @@ public class Plotting {
         this.vlineCount++;
         s.setLineColor(XChartSeriesColors.BLACK);
         s.setMarker(SeriesMarkers.NONE);
+        s.setLineStyle(SeriesLines.DASH_DASH);
         s.setShowInLegend(false);
         s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
     }

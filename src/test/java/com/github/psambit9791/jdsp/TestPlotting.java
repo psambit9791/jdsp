@@ -11,6 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.misc.Plotting;
+import org.apache.commons.math3.stat.StatUtils;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Assertions;
 
@@ -101,34 +102,12 @@ public class TestPlotting {
 
     @Test
     public void testPlotSave5() throws IOException {
-        final double[] signal1 = {2.0, 4.0, 2.0, 3.0, 1.0};
-        final double[] signal2 = {3.4, 6.7, 2.2, 1.6, 3.6};
-        final double[] points1 = {3.4, 6.7, 2.2, 1.6, 3.6};
-        final double[] points2 = {1.6, 2.0, 5.3, -1.3, 2.2};
-
-        final double[] time = {0.0, 1.0, 2.0, 3.0, 4.0};
-
-        String outputFileName = "test_outputs/temp5";
-
-        Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
-        fig.initialise_plot();
-        fig.add_signal("Signal 1", time, signal1, true);
-        fig.add_signal("Signal 2", time, signal2, false);
-        fig.add_points("Points 1", time, points1, 'x');
-        fig.add_points("Points 2", time, points2);
-        fig.save_as_png(outputFileName);
-        boolean fileExists = new File("./"+outputFileName+".png").exists();
-        Assertions.assertTrue(fileExists);
-    }
-
-    @Test
-    public void testPlotSave6() throws IOException {
         double[] plotHor1 = {2, 6, 4};
         double[] plotHor2 = {-4, 4, -9};
         double[] plotVer1 = {3, 1, 6};
         double[] plotVer2 = {6, 9, -1};
 
-        String outputFileName = "test_outputs/temp6";
+        String outputFileName = "test_outputs/temp5";
 
         Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
         fig.initialise_plot();
@@ -137,6 +116,39 @@ public class TestPlotting {
         fig.hline(plotHor2[0], plotHor2[1], plotHor2[2]);
         fig.vline(plotVer2[0], plotVer2[1], plotVer2[2]);
 
+        fig.save_as_png(outputFileName);
+        boolean fileExists = new File("./"+outputFileName+".png").exists();
+        Assertions.assertTrue(fileExists);
+    }
+
+    @Test
+    public void testPlotSave6() throws IOException {
+        final double[] signal1 = {2.0, 4.0, 2.0, 3.0, 1.0};
+        final double[] signal2 = {3.4, 6.7, 2.2, 1.6, 3.6};
+        final double[] points1 = {3.4, 6.7, 2.2, 1.6, 3.6};
+        final double[] points2 = {1.6, 2.0, 5.3, -1.3, 2.2};
+        final double[] time = {0.0, 1.0, 2.0, 3.0, 4.0};
+
+        double[][] verLines = new double[signal1.length][3];
+        for (int i=0; i<verLines.length; i++) {
+            verLines[i][0] = time[i];
+            verLines[i][1] = signal1[i];
+            verLines[i][2] = signal2[i];
+        }
+
+        String outputFileName = "test_outputs/temp6";
+
+        Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
+        fig.initialise_plot();
+        fig.add_signal("Signal 1", time, signal1, true);
+        fig.add_signal("Signal 2", time, signal2, false);
+        fig.add_points("Points 1", time, points1, 'x');
+        fig.add_points("Points 2", time, points2);
+        for (int i=0; i<verLines.length; i++) {
+            fig.vline(verLines[i][0], verLines[i][1], verLines[i][2]);
+        }
+        fig.hline(time[0], time[time.length-1], StatUtils.max(signal1));
+        fig.hline(time[0], time[time.length-1], StatUtils.max(signal2));
         fig.save_as_png(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         Assertions.assertTrue(fileExists);
