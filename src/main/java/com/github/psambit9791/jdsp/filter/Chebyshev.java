@@ -58,7 +58,7 @@ public class Chebyshev {
      * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @return double[] Filtered signal
      */
-    public double[] low_pass_filter(int order, double cutoffFreq, double rippleFactor) {
+    public double[] lowPassFilter(int order, double cutoffFreq, double rippleFactor) {
         this.output = new double[this.signal.length];
         if (this.filterType == 1) {
             uk.me.berndporr.iirj.ChebyshevI lp = new uk.me.berndporr.iirj.ChebyshevI();
@@ -87,7 +87,7 @@ public class Chebyshev {
      * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @return double[] Filtered signal
      */
-    public double[] high_pass_filter(int order, double cutoffFreq, double rippleFactor) {
+    public double[] highPassFilter(int order, double cutoffFreq, double rippleFactor) {
         this.output = new double[this.signal.length];
         if (this.filterType == 1) {
             uk.me.berndporr.iirj.ChebyshevI hp = new uk.me.berndporr.iirj.ChebyshevI();
@@ -117,7 +117,7 @@ public class Chebyshev {
      * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @return double[] Filtered signal
      */
-    public double[] band_pass_filter(int order, double lowCutoff, double highCutoff, double rippleFactor) {
+    public double[] bandPassFilter(int order, double lowCutoff, double highCutoff, double rippleFactor) {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];
@@ -149,7 +149,7 @@ public class Chebyshev {
      * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @return double[] Filtered signal
      */
-    public double[] band_stop_filter(int order, double lowCutoff, double highCutoff, double rippleFactor) {
+    public double[] bandStopFilter(int order, double lowCutoff, double highCutoff, double rippleFactor) {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];

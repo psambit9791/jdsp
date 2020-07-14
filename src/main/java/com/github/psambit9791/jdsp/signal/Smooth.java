@@ -86,7 +86,7 @@ public class Smooth {
         }
         else {
             CrossCorrelation c = new CrossCorrelation(this.signal, this.smoothing_kernel);
-            this.output = c.cross_correlate("valid");
+            this.output = c.crossCorrelate("valid");
         }
         return this.output;
     }
@@ -107,7 +107,7 @@ public class Smooth {
         }
         else {
             CrossCorrelation c = new CrossCorrelation(this.signal, this.smoothing_kernel);
-            this.output = c.cross_correlate(correlation_mode);
+            this.output = c.crossCorrelate(correlation_mode);
         }
         return this.output;
     }

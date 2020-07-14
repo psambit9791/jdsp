@@ -64,7 +64,7 @@ public class Median {
      * This method implements a median filter with given parameters, applies it on the signal and returns it.
      * @return double[] Filtered signal
      */
-    public double[] median_filter() {
+    public double[] medianFilter() {
         int paddingSize = (this.windowSize - 1)/2;
         double[] cons = new double[paddingSize];
         double[] newSignal = new double[this.signal.length];

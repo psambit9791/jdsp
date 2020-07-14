@@ -26,7 +26,7 @@ public class TestSavgol {
         double[] coeffs = {-0.086, 0.343, 0.486, 0.343, -0.086};
 
         Savgol s1 = new Savgol(this.signal, 5, 2);
-        double[] out = s1.savgol_coeffs();
+        double[] out = s1.savgolCoeffs();
         Assertions.assertArrayEquals(out, coeffs, 0.001);
     }
 
@@ -38,7 +38,7 @@ public class TestSavgol {
                 0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.27 , 0.289,  0.306};
 
         Savgol s1 = new Savgol(this.signal, 7, 2);
-        double[] out = s1.savgol_filter();
+        double[] out = s1.savgolFilter();
         Assertions.assertArrayEquals(out, result, 0.001);
     }
 
@@ -50,7 +50,7 @@ public class TestSavgol {
                 0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.299, 0.274,  0.202};
 
         Savgol s1 = new Savgol(this.signal, 7, 2, 0, 1);
-        double[] out = s1.savgol_filter("constant");
+        double[] out = s1.savgolFilter("constant");
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -62,7 +62,7 @@ public class TestSavgol {
                 0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.271, 0.292,  0.301};
 
         Savgol s1 = new Savgol(this.signal, 7, 2);
-        double[] out = s1.savgol_filter("mirror");
+        double[] out = s1.savgolFilter("mirror");
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -74,7 +74,7 @@ public class TestSavgol {
                 0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.259, 0.293,  0.345};
 
         Savgol s1 = new Savgol(this.signal, 7, 2);
-        double[] out = s1.savgol_filter("wrap");
+        double[] out = s1.savgolFilter("wrap");
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 }

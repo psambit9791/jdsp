@@ -23,7 +23,7 @@ public class TestWiener {
         double[] result = {1.8, 2.0, 3.0, 3.6, 3.336, 3.883, 3.685, 3.367, 2.385};
 
         Wiener wf = new Wiener(signal, wsize);
-        double[] out = wf.wiener_filter();
+        double[] out = wf.wienerFilter();
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -33,7 +33,7 @@ public class TestWiener {
         double[] result = {2.333, 3.0, 2.333, 2.667, 4.164, 4.679, 2.09, 3.164, 3.328};
 
         Wiener wf = new Wiener(signal);
-        double[] out = wf.wiener_filter();
+        double[] out = wf.wienerFilter();
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 }

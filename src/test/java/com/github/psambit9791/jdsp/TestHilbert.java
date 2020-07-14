@@ -79,9 +79,9 @@ public class TestHilbert {
                 0.548 , 0.6863, 0.8547, 1.0855, 0.9561, 0.7818};
 
         Hilbert h = new Hilbert(this.signal1);
-        h.hilbert_transform();
-        h.get_output();
-        double[] out = h.get_amplitude_envelope();
+        h.hilbertTransform();
+        h.getOutput();
+        double[] out = h.getAmplitudeEnvelope();
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -108,8 +108,8 @@ public class TestHilbert {
                 0.    , 0.    , 0.    , 0.    , 0.    , 0.};
 
         Hilbert h = new Hilbert(this.signal2);
-        h.hilbert_transform();
-        double[] out = h.get_amplitude_envelope();
+        h.hilbertTransform();
+        double[] out = h.getAmplitudeEnvelope();
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -139,8 +139,8 @@ public class TestHilbert {
                 318.759, 321.014, 323.832};
 
         Hilbert h = new Hilbert(this.signal1);
-        h.hilbert_transform();
-        double[] out = h.get_instantaneous_phase();
+        h.hilbertTransform();
+        double[] out = h.getInstantaneousPhase();
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -167,8 +167,8 @@ public class TestHilbert {
                 36.128, 36.128, 36.128, 36.128, 36.128, 36.128};
 
         Hilbert h = new Hilbert(this.signal2);
-        h.hilbert_transform();
-        double[] out = h.get_instantaneous_phase();
+        h.hilbertTransform();
+        double[] out = h.getInstantaneousPhase();
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -196,8 +196,8 @@ public class TestHilbert {
                 48.057, 55.434, 55.028, 53.834, 67.275};
 
         Hilbert h = new Hilbert(this.signal1);
-        h.hilbert_transform();
-        double[] out = h.get_instantaneous_frequency(Fs);
+        h.hilbertTransform();
+        double[] out = h.getInstantaneousFrequency(Fs);
         Assertions.assertArrayEquals(result, out, 0.05);
     }
 
@@ -231,8 +231,8 @@ public class TestHilbert {
                 0.    ,   0.    ,   0.    ,   0.    ,   0.};
 
         Hilbert h = new Hilbert(this.signal2);
-        h.hilbert_transform();
-        double[] out = h.get_instantaneous_frequency(Fs);
+        h.hilbertTransform();
+        double[] out = h.getInstantaneousFrequency(Fs);
         Assertions.assertArrayEquals(result, out, 0.05);
     }
 }

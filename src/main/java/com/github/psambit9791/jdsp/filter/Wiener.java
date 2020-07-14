@@ -62,7 +62,7 @@ public class Wiener {
      * This method implements a Wiener filter with given parameters, applies it on the signal and returns it.
      * @return double[] Filtered signal
      */
-    public double[] wiener_filter() {
+    public double[] wienerFilter() {
         double[] cons = new double[this.windowSize];
         Arrays.fill(cons, 1);
 
@@ -78,7 +78,7 @@ public class Wiener {
         double[] signalSquare = MathArrays.ebeMultiply(this.signal, this.signal);
         double[] meanSquare = MathArrays.ebeMultiply(localMean, localMean);
         CrossCorrelation c2 = new CrossCorrelation(signalSquare, cons);
-        localVariance = c2.cross_correlate("same");
+        localVariance = c2.crossCorrelate("same");
         localVariance = MathArrays.scale((1.0/this.windowSize), localVariance);
         localVariance = MathArrays.ebeSubtract(localVariance, meanSquare);
 

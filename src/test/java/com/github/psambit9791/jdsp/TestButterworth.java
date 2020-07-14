@@ -49,7 +49,7 @@ public class TestButterworth {
                 -0.795, -0.625, -0.32, 0.072, 0.46, 0.745, 0.879, 0.903, 0.889, 0.862, 0.792, 0.625, 0.324, -0.074,
                 -0.463, -0.741, -0.879, -0.907};
 
-        double[] result = flt1.low_pass_filter(4, 9);
+        double[] result = flt1.lowPassFilter(4, 9);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -64,7 +64,7 @@ public class TestButterworth {
                 -0.069, -0.191, -0.311, -0.43, -0.542, -0.642, -0.731, -0.809, -0.878, -0.933, -0.971, -0.991, -0.997,
                 -0.991, -0.969, -0.929};
 
-        double[] result = flt2.low_pass_filter(4, 5);
+        double[] result = flt2.lowPassFilter(4, 5);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -79,7 +79,7 @@ public class TestButterworth {
                 0.318, 0.629, -0.663, -0.2, 0.766, -0.316,-0.6, 0.696, 0.21, -0.788, 0.282, 0.581, -0.684, -0.177,
                 0.814, -0.284, -0.61, 0.651};
 
-        double[] result = flt1.high_pass_filter(4, 29);
+        double[] result = flt1.highPassFilter(4, 29);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -94,7 +94,7 @@ public class TestButterworth {
                 0.643, -0.371, 0.064, 0.243, -0.53, 0.77, -0.927, 0.993, -0.97, 0.847, -0.637, 0.371, -0.07, -0.246,
                 0.533, -0.764, 0.927, -0.999};
 
-        double[] result = flt2.high_pass_filter(4, 40);
+        double[] result = flt2.highPassFilter(4, 40);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -109,7 +109,7 @@ public class TestButterworth {
                 0.689, 0.987, 0.473, -0.43, -0.981, -0.721, 0.137, 0.88, 0.898, 0.178, -0.69, -0.992, -0.473, 0.436,
                 0.983, 0.721, -0.134, -0.882, -0.904};
 
-        double[] result = flt1.band_pass_filter(4, 12, 18);
+        double[] result = flt1.bandPassFilter(4, 12, 18);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -124,7 +124,7 @@ public class TestButterworth {
                 -0.637, -0.931, 0.063, 0.968, 0.536, -0.638, -0.93, 0.062, 0.969, 0.536, -0.638, -0.929, 0.062, 0.969,
                 0.535, -0.637, -0.93};
 
-        double[] result = flt2.band_pass_filter(4, 12, 30);
+        double[] result = flt2.bandPassFilter(4, 12, 30);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -139,7 +139,7 @@ public class TestButterworth {
                 -1.835, -0.912, 0.118, -1.024, -0.748, 0.947, 0.401, -0.204, 1.373, 1.498, 0.129, 0.898, 1.597, -0.022,
                 -0.321, 0.759, -0.386, -1.511, -0.327};
 
-        double[] result = flt1.band_stop_filter(4, 7, 28);
+        double[] result = flt1.bandStopFilter(4, 7, 28);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -154,7 +154,7 @@ public class TestButterworth {
                 -0.763, -0.144, -1.487, 0.098, -1.879, 0.041, -1.835, -0.329, -1.401, -0.891, -0.751, -1.429, -0.122,
                 -1.716, 0.276, -1.602, 0.34, -1.076};
 
-        double[] result = flt2.band_stop_filter(4, 12, 30);
+        double[] result = flt2.bandStopFilter(4, 12, 30);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 }

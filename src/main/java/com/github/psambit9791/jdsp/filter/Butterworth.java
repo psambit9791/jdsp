@@ -42,7 +42,7 @@ public class Butterworth {
      * @param cutoffFreq The cutoff frequency for the filter in Hz
      * @return double[] Filtered signal
      */
-    public double[] low_pass_filter(int order, double cutoffFreq) {
+    public double[] lowPassFilter(int order, double cutoffFreq) {
         this.output = new double[this.signal.length];
         uk.me.berndporr.iirj.Butterworth lp = new uk.me.berndporr.iirj.Butterworth();
         lp.lowPass(order, this.samplingFreq, cutoffFreq);
@@ -58,7 +58,7 @@ public class Butterworth {
      * @param cutoffFreq The cutoff frequency for the filter in Hz
      * @return double[] Filtered signal
      */
-    public double[] high_pass_filter(int order, double cutoffFreq) {
+    public double[] highPassFilter(int order, double cutoffFreq) {
         this.output = new double[this.signal.length];
         uk.me.berndporr.iirj.Butterworth hp = new uk.me.berndporr.iirj.Butterworth();
         hp.highPass(order, this.samplingFreq, cutoffFreq);
@@ -75,7 +75,7 @@ public class Butterworth {
      * @param highCutoff The upper cutoff frequency for the filter in Hz
      * @return double[] Filtered signal
      */
-    public double[] band_pass_filter(int order, double lowCutoff, double highCutoff) {
+    public double[] bandPassFilter(int order, double lowCutoff, double highCutoff) {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];
@@ -94,7 +94,7 @@ public class Butterworth {
      * @param highCutoff The upper cutoff frequency for the filter in Hz
      * @return double[] Filtered signal
      */
-    public double[] band_stop_filter(int order, double lowCutoff, double highCutoff) {
+    public double[] bandStopFilter(int order, double lowCutoff, double highCutoff) {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];

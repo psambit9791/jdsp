@@ -73,7 +73,7 @@ public class Plotting {
     /**
      * This method creates the plot with the provided properties
      */
-    public void initialise_plot() {
+    public void initialisePlot() {
         this.figure = this.plot.build();
         this.figure.getStyler().setDefaultSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
         this.figure.getStyler().setLegendPosition(Styler.LegendPosition.OutsideS);
@@ -86,7 +86,7 @@ public class Plotting {
      * @param y Data to be plotted on the Y-axis
      * @param marker If the marker should be shown at datapoints
      */
-    public void add_signal(String name, double[] x, double[] y, boolean marker) {
+    public void addSignal(String name, double[] x, double[] y, boolean marker) {
         XYSeries s = this.figure.addSeries(name, x, y);
         if (!marker) {
             s.setMarker(SeriesMarkers.NONE);
@@ -99,7 +99,7 @@ public class Plotting {
      * @param y Data to be plotted on the Y-axis
      * @param marker If the marker should be shown at datapoints
      */
-    public void add_signal(String name, double[] y, boolean marker) {
+    public void addSignal(String name, double[] y, boolean marker) {
         XYSeries s = this.figure.addSeries(name, y);
         if (!marker) {
             s.setMarker(SeriesMarkers.NONE);
@@ -112,7 +112,7 @@ public class Plotting {
      * @param x Data to be plotted on the X-axis
      * @param y Data to be plotted on the Y-axis
      */
-    public void add_points(String name, double[] x, double[] y) {
+    public void addPoints(String name, double[] x, double[] y) {
         XYSeries s = this.figure.addSeries(name, x, y);
         s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
         s.setMarker(SeriesMarkers.CIRCLE);
@@ -124,7 +124,7 @@ public class Plotting {
      * @param x Data to be plotted on the X-axis
      * @param y Data to be plotted on the Y-axis
      */
-    public void add_points(String name, int[] x, double[] y) {
+    public void addPoints(String name, int[] x, double[] y) {
         double[] x_new = new double[x.length];
         for (int i=0; i<x.length; i++) {
             x_new[i] = (double)x[i];
@@ -141,7 +141,7 @@ public class Plotting {
      * @param y Data to be plotted on the Y-axis
      * @param marker Type of Marker to be used ('x': CROSS, 'o': CIRCLE ,'*': DIAMOND, '+': PLUS, '#': SQUARE, '^': TRIANGLE_UP)
      */
-    public void add_points(String name, double[] x, double[] y, char marker) {
+    public void addPoints(String name, double[] x, double[] y, char marker) {
         XYSeries s = this.figure.addSeries(name, x, y);
         s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
         if (marker == 'x') {
@@ -171,7 +171,7 @@ public class Plotting {
      * @param y Data to be plotted on the Y-axis
      * @param marker Type of Marker to be used ('x': CROSS, 'o': CIRCLE ,'*': DIAMOND, '+': PLUS, '#': SQUARE, '^': TRIANGLE_UP)
      */
-    public void add_points(String name, int[] x, double[] y, char marker) {
+    public void addPoints(String name, int[] x, double[] y, char marker) {
         double[] x_new = new double[x.length];
         for (int i=0; i<x.length; i++) {
             x_new[i] = (double)x[i];
@@ -246,7 +246,7 @@ public class Plotting {
      * @param name Name of the file the plot is to be saved as
      * @throws java.io.IOException if there is any error in saving
      */
-    public void save_as_png(String name) throws IOException {
+    public void saveAsPNG(String name) throws IOException {
         BitmapEncoder.saveBitmapWithDPI(this.figure, "./"+name, BitmapEncoder.BitmapFormat.PNG, 300);
     }
 }

@@ -42,10 +42,10 @@ public class TestPlotting {
         String outputFileName = "test_outputs/temp1";
 
         Plotting fig = new Plotting("Sample Figure", "Time", "Signal");
-        fig.initialise_plot();
-        fig.add_signal("Signal 1", time1, signal1, true);
-        fig.add_signal("Signal 2", time2, signal2, true);
-        fig.save_as_png(outputFileName);
+        fig.initialisePlot();
+        fig.addSignal("Signal 1", time1, signal1, true);
+        fig.addSignal("Signal 2", time2, signal2, true);
+        fig.saveAsPNG(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         Assertions.assertTrue(fileExists);
     }
@@ -59,10 +59,10 @@ public class TestPlotting {
         String outputFileName = "test_outputs/temp2";
 
         Plotting fig = new Plotting("Sample Figure", "Time", "Signal");
-        fig.initialise_plot();
-        fig.add_signal("Signal 1", time, signal1, true);
-        fig.add_signal("Signal 2", time, signal2, true);
-        fig.save_as_png(outputFileName);
+        fig.initialisePlot();
+        fig.addSignal("Signal 1", time, signal1, true);
+        fig.addSignal("Signal 2", time, signal2, true);
+        fig.saveAsPNG(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         Assertions.assertTrue(fileExists);
     }
@@ -76,10 +76,10 @@ public class TestPlotting {
         String outputFileName = "test_outputs/temp3";
 
         Plotting fig = new Plotting();
-        fig.initialise_plot();
-        fig.add_signal("Signal 1", signal1, false);
-        fig.add_signal("Signal 2", signal2, false);
-        fig.save_as_png(outputFileName);
+        fig.initialisePlot();
+        fig.addSignal("Signal 1", signal1, false);
+        fig.addSignal("Signal 2", signal2, false);
+        fig.saveAsPNG(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         Assertions.assertTrue(fileExists);
     }
@@ -92,10 +92,10 @@ public class TestPlotting {
         String outputFileName = "test_outputs/temp4";
 
         Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
-        fig.initialise_plot();
-        fig.add_signal("Signal 1", signal1, true);
-        fig.add_signal("Signal 2", signal2, true);
-        fig.save_as_png(outputFileName);
+        fig.initialisePlot();
+        fig.addSignal("Signal 1", signal1, true);
+        fig.addSignal("Signal 2", signal2, true);
+        fig.saveAsPNG(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         Assertions.assertTrue(fileExists);
     }
@@ -110,13 +110,13 @@ public class TestPlotting {
         String outputFileName = "test_outputs/temp5";
 
         Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
-        fig.initialise_plot();
+        fig.initialisePlot();
         fig.hline(plotHor1[0], plotHor1[1], plotHor1[2]);
         fig.vline(plotVer1[0], plotVer1[1], plotVer1[2]);
         fig.hline(plotHor2[0], plotHor2[1], plotHor2[2]);
         fig.vline(plotVer2[0], plotVer2[1], plotVer2[2]);
 
-        fig.save_as_png(outputFileName);
+        fig.saveAsPNG(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         Assertions.assertTrue(fileExists);
     }
@@ -139,17 +139,17 @@ public class TestPlotting {
         String outputFileName = "test_outputs/temp6";
 
         Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
-        fig.initialise_plot();
-        fig.add_signal("Signal 1", time, signal1, true);
-        fig.add_signal("Signal 2", time, signal2, false);
-        fig.add_points("Points 1", time, points1, 'x');
-        fig.add_points("Points 2", time, points2);
+        fig.initialisePlot();
+        fig.addSignal("Signal 1", time, signal1, true);
+        fig.addSignal("Signal 2", time, signal2, false);
+        fig.addPoints("Points 1", time, points1, 'x');
+        fig.addPoints("Points 2", time, points2);
         for (int i=0; i<verLines.length; i++) {
             fig.vline(verLines[i][0], verLines[i][1], verLines[i][2]);
         }
         fig.hline(time[0], time[time.length-1], StatUtils.max(signal1));
         fig.hline(time[0], time[time.length-1], StatUtils.max(signal2));
-        fig.save_as_png(outputFileName);
+        fig.saveAsPNG(outputFileName);
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         Assertions.assertTrue(fileExists);
     }

@@ -370,21 +370,21 @@ public class TestFindPeak {
 
         String outputFileName = "test_outputs/peak_test";
         Plotting fig = new Plotting("Peak Detection", "Time", "Signal");
-        fig.initialise_plot();
+        fig.initialisePlot();
         // Plot all detected peaks
-        fig.add_signal("Signal", this.highResSignal, false);
-        fig.add_points("Peaks", out.getPeaks(), out.getHeights(), 'o');
+        fig.addSignal("Signal", this.highResSignal, false);
+        fig.addPoints("Peaks", out.getPeaks(), out.getHeights(), 'o');
 
         // Plot Filtered peak points
         int[] filteredPeaks = out.filterByHeight(0.02, 1.0);
         double[] filteredHeights = out.findPeakHeights(filteredPeaks);
-        fig.add_points("Filtered Peaks", filteredPeaks, filteredHeights, '^');
+        fig.addPoints("Filtered Peaks", filteredPeaks, filteredHeights, '^');
 
         FindPeak ft = new FindPeak(this.highResSignal);
         Peak out2 = ft.detect_troughs();
-        fig.add_points("Troughs", out2.getPeaks(), out2.getHeights(), '+');
+        fig.addPoints("Troughs", out2.getPeaks(), out2.getHeights(), '+');
 
-        fig.save_as_png(outputFileName);
+        fig.saveAsPNG(outputFileName);
 
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         Assertions.assertTrue(fileExists);
@@ -587,17 +587,17 @@ public class TestFindPeak {
 
         String outputFileName = "test_outputs/spike_test";
         Plotting fig = new Plotting("Spike Detection", "Time", "Signal");
-        fig.initialise_plot();
+        fig.initialisePlot();
         // Plot all detected peaks
-        fig.add_signal("Signal", this.highResSignal, false);
-        fig.add_points("Spikes", peaks, out.findPeakHeights(peaks), 'x');
+        fig.addSignal("Signal", this.highResSignal, false);
+        fig.addPoints("Spikes", peaks, out.findPeakHeights(peaks), 'x');
 
         // Plot Filtered peak points
         int[] filteredPeaks = out.filterByProperty(0.5, 5, "mean");
         double[] filteredHeights = out.findPeakHeights(filteredPeaks);
-        fig.add_points("Filtered Spikes", filteredPeaks, filteredHeights, 'o');
+        fig.addPoints("Filtered Spikes", filteredPeaks, filteredHeights, 'o');
 
-        fig.save_as_png(outputFileName);
+        fig.saveAsPNG(outputFileName);
 
         boolean fileExists = new File("./"+outputFileName+".png").exists();
         Assertions.assertTrue(fileExists);

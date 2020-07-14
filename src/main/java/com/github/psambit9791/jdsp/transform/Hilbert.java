@@ -62,7 +62,7 @@ public class Hilbert {
     /**
      * This function performs the hilbert transform on the input signal
      */
-    public void hilbert_transform() {
+    public void hilbertTransform() {
         DiscreteFourier dft = new DiscreteFourier(this.signal);
         dft.dft();
         double[][] dftOut = dft.returnFull(false);
@@ -76,7 +76,7 @@ public class Hilbert {
 
         InverseDiscreteFourier idft = new InverseDiscreteFourier(modOut);
         idft.idft();
-        this.output = idft.get_as_complex();
+        this.output = idft.getAsComplex();
     }
 
     /**
@@ -84,7 +84,7 @@ public class Hilbert {
      * @throws java.lang.ExceptionInInitializerError if called before executing hilbert_transform() method
      * @return double[][] The decimated signal
      */
-    public double[][] get_output() throws ExceptionInInitializerError {
+    public double[][] getOutput() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute hilbert_transform() function before returning result");
         }
@@ -101,7 +101,7 @@ public class Hilbert {
      * @throws java.lang.ExceptionInInitializerError if called before executing hilbert_transform() method
      * @return double[] The decimated signal
      */
-    public double[] get_amplitude_envelope() throws ExceptionInInitializerError {
+    public double[] getAmplitudeEnvelope() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute hilbert_transform() function before returning result");
         }
@@ -117,7 +117,7 @@ public class Hilbert {
      * @throws java.lang.ExceptionInInitializerError if called before executing hilbert_transform() method
      * @return double[] The decimated signal
      */
-    public double[] get_instantaneous_phase() throws ExceptionInInitializerError {
+    public double[] getInstantaneousPhase() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute hilbert_transform() function before returning result");
         }
@@ -136,11 +136,11 @@ public class Hilbert {
      * @throws java.lang.ExceptionInInitializerError if called before executing hilbert_transform() method
      * @return double[] The decimated signal
      */
-    public double[] get_instantaneous_frequency(double Fs) throws ExceptionInInitializerError {
+    public double[] getInstantaneousFrequency(double Fs) throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute hilbert_transform() function before returning result");
         }
-        double[] temp = this.get_instantaneous_phase();
+        double[] temp = this.getInstantaneousPhase();
         double cons = 2 * Math.PI;
         double[] sig = UtilMethods.diff(temp);
         for (int i=0; i<sig.length; i++) {

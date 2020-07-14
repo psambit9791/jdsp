@@ -28,11 +28,11 @@ public class TestCrossCorrelation {
         final double[] result2 = {6, 26, 14, 38, 15, 40, 43, 37, 36,  9,  0};
 
         CrossCorrelation cc1 = new CrossCorrelation(this.signal1, this.kernel1);
-        double[] out = cc1.cross_correlate("full");
+        double[] out = cc1.crossCorrelate("full");
         Assertions.assertArrayEquals(result1, out, 0.001);
 
         CrossCorrelation cc2 = new CrossCorrelation(this.signal2, this.kernel2);
-        out = cc2.cross_correlate("full");
+        out = cc2.crossCorrelate("full");
         Assertions.assertArrayEquals(result2, out, 0.001);
     }
 
@@ -42,11 +42,11 @@ public class TestCrossCorrelation {
         final double[] result2 = {26, 14, 38, 15, 40, 43, 37, 36};
 
         CrossCorrelation cc1 = new CrossCorrelation(this.signal1, this.kernel1);
-        double[] out = cc1.cross_correlate("same");
+        double[] out = cc1.crossCorrelate("same");
         Assertions.assertArrayEquals(result1, out, 0.001);
 
         CrossCorrelation cc2 = new CrossCorrelation(this.signal2, this.kernel2);
-        out = cc2.cross_correlate("same");
+        out = cc2.crossCorrelate("same");
         Assertions.assertArrayEquals(result2, out, 0.001);
     }
 
@@ -56,11 +56,11 @@ public class TestCrossCorrelation {
         final double[] result2 = {38, 15, 40, 43, 37};
 
         CrossCorrelation cc1 = new CrossCorrelation(this.signal1, this.kernel1);
-        double[] out = cc1.cross_correlate("valid");
+        double[] out = cc1.crossCorrelate("valid");
         Assertions.assertArrayEquals(result1, out, 0.001);
 
         CrossCorrelation cc2 = new CrossCorrelation(this.signal2, this.kernel2);
-        out = cc2.cross_correlate();
+        out = cc2.crossCorrelate();
         Assertions.assertArrayEquals(result2, out, 0.001);
     }
 }

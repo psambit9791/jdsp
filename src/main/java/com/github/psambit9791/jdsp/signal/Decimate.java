@@ -66,7 +66,7 @@ public class Decimate {
 
             // Refer to this document: http://matlab.izmiran.ru/help/toolbox/signal/decimate.html
             Chebyshev f = new Chebyshev(this.signal, (double)this.samplingFreq);
-            double[] lowPassOutput = f.low_pass_filter(8, nyquistFreq*0.8, 0.05);
+            double[] lowPassOutput = f.lowPassFilter(8, nyquistFreq*0.8, 0.05);
 
             int index = 0;
             for (int i=0; i<output.length; i++) {
@@ -81,10 +81,10 @@ public class Decimate {
             double nyquistFreq = newSamplingFreq/2.0;
 
             Chebyshev f1 = new Chebyshev(this.signal, (double)this.samplingFreq);
-            double[] lowPassOutput = f1.low_pass_filter(4, nyquistFreq*0.8, 0.05);
+            double[] lowPassOutput = f1.lowPassFilter(4, nyquistFreq*0.8, 0.05);
             lowPassOutput = UtilMethods.reverse(lowPassOutput);
             Chebyshev f2 = new Chebyshev(lowPassOutput, (double)this.samplingFreq);
-            lowPassOutput = f2.low_pass_filter(4, nyquistFreq*0.8, 0.05);
+            lowPassOutput = f2.lowPassFilter(4, nyquistFreq*0.8, 0.05);
             lowPassOutput = UtilMethods.reverse(lowPassOutput);
 
             int index = 0;

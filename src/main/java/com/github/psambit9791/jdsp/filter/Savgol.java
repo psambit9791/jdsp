@@ -78,7 +78,7 @@ public class Savgol {
      * @throws java.lang.IllegalArgumentException if window size is even
      * @return the coefficients for a 1-d Savitzky-Golay FIR filter
      */
-    public double[] savgol_coeffs() throws IllegalArgumentException {
+    public double[] savgolCoeffs() throws IllegalArgumentException {
         int halflen = this.windowSize/2;
         int rem = this.windowSize%2;
 
@@ -113,8 +113,8 @@ public class Savgol {
      * Convolves the 1-d Savitzky-Golay coefficients with the signals in "nearest" mode
      * @return double[] Filtered signal
      */
-    public double[] savgol_filter() {
-        this.savgol_coeffs();
+    public double[] savgolFilter() {
+        this.savgolCoeffs();
         Convolution c = new Convolution(this.signal, this.coeffs);
         this.output = c.convolve1d("nearest");
         return this.output;
@@ -127,11 +127,11 @@ public class Savgol {
      * @throws java.lang.IllegalArgumentException if mode is not nearest, constant, mirror or wrap
      * @return double[] Filtered signal
      */
-    public double[] savgol_filter(String mode) throws IllegalArgumentException {
+    public double[] savgolFilter(String mode) throws IllegalArgumentException {
         if (!mode.equals("nearest") && !mode.equals("constant") && !mode.equals("mirror") && !mode.equals("wrap")) {
             throw new IllegalArgumentException("mode must be mirror, constant, nearest or wrap");
         }
-        this.savgol_coeffs();
+        this.savgolCoeffs();
         Convolution c = new Convolution(this.signal, this.coeffs);
         this.output = c.convolve1d(mode);
         return this.output;

@@ -25,13 +25,6 @@ public class Generate {
     private int Fs;
     private double[] time;
 
-    // Use for multiple samples concatenated one after the other
-//    public GeneratePeriodic(int samplingFreq, int samples) {
-//        this.Fs = samplingFreq;
-//        this.time = UtilMethods.linspace(0, 1, samplingFreq, samples);
-//    }
-
-    // Use for single sample
     /**
      * This constructor initialises the prerequisites
      * required to generate different signals.

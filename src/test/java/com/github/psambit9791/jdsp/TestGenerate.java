@@ -132,8 +132,8 @@ public class TestGenerate {
 
     private void plot_now(String title, double[] t, double[] signal, String fname) throws IOException {
         Plotting fig = new Plotting(600, 300, title, "Time", "Signal");
-        fig.initialise_plot();
-        fig.add_signal(title, t, signal, false);
-        fig.save_as_png(fname);
+        fig.initialisePlot();
+        fig.addSignal(title, t, signal, false);
+        fig.saveAsPNG(fname);
     }
 }
