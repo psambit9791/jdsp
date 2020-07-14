@@ -51,7 +51,7 @@ public class FindPeak {
      * This method identifies all the maxima within the signal.
      * @return int[] The list of relative maxima identified
      */
-    public int[] detect_relative_maxima() {
+    public int[] detectRelativeMaxima() {
         this.reset_indices();
         for (int i = 1; i<this.signal.length-1; i++) {
             if ((this.signal[i-1] < this.signal[i]) && (this.signal[i+1] < this.signal[i])) {
@@ -65,7 +65,7 @@ public class FindPeak {
      * This method identifies all the minima within the signal.
      * @return int[] The list of relative minima identified
      */
-    public int[] detect_relative_minima() {
+    public int[] detectRelativeMinima() {
         this.reset_indices();
         for (int i = 1; i<this.signal.length-1; i++) {
             if ((this.signal[i-1] > this.signal[i]) && (this.signal[i+1] > this.signal[i])) {
@@ -79,7 +79,7 @@ public class FindPeak {
      * This method identifies all the peaks within the signal.
      * @return PeakObject The list of all the peaks as PeakObject
      */
-    public Peak detect_peaks() {
+    public Peak detectPeaks() {
         Peak p = this.detect(this.signal, "peak");
         this.peak_indices = p.getPeaks();
         return p;
@@ -89,7 +89,7 @@ public class FindPeak {
      * This method identifies all the troughs within the signal.
      * @return PeakObject The list of all the troughs as PeakObject
      */
-    public Peak detect_troughs() {
+    public Peak detectTroughs() {
         double[] reverse_signal = new double[this.signal.length];
         for (int i=0; i<reverse_signal.length; i++) {
             reverse_signal[i] = 0 - this.signal[i];
@@ -184,8 +184,8 @@ public class FindPeak {
      */
     public Spike get_spikes() {
         if ((this.peak_indices == null) || (this.trough_indices == null)) {
-            this.detect_peaks();
-            this.detect_troughs();
+            this.detectPeaks();
+            this.detectTroughs();
         }
         return this.get_spikes(this.signal, this.peak_indices, this.trough_indices);
     }

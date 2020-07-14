@@ -60,7 +60,7 @@ public class TestFindPeak {
         int[] result = {1, 5, 9, 17, 21, 26};
 
         FindPeak fp = new FindPeak(this.signal);
-        int[] out = fp.detect_relative_maxima();
+        int[] out = fp.detectRelativeMaxima();
 
         Assertions.assertArrayEquals(result, out);
     }
@@ -70,7 +70,7 @@ public class TestFindPeak {
         int[] result = {3, 8, 12, 20, 24};
 
         FindPeak fp = new FindPeak(this.signal);
-        int[] out = fp.detect_relative_minima();
+        int[] out = fp.detectRelativeMinima();
 
         Assertions.assertArrayEquals(result, out);
     }
@@ -81,7 +81,7 @@ public class TestFindPeak {
 
         // Detection Tests
         FindPeak fp = new FindPeak(this.simpleSignal);
-        Peak out = fp.detect_peaks();
+        Peak out = fp.detectPeaks();
         Assertions.assertTrue(out instanceof Peak);
         Assertions.assertArrayEquals(resultPeaks, out.getPeaks());
 
@@ -204,7 +204,7 @@ public class TestFindPeak {
 
         // Detection Tests
         FindPeak fp = new FindPeak(this.highResSignal);
-        Peak out = fp.detect_peaks();
+        Peak out = fp.detectPeaks();
         Assertions.assertTrue(out instanceof Peak);
         Assertions.assertArrayEquals(resultPeaks, out.getPeaks());
 
@@ -358,7 +358,7 @@ public class TestFindPeak {
                 701, 726, 733, 762, 767, 773, 864, 913, 943, 954, 960, 967};
 
         FindPeak fp = new FindPeak(this.highResSignal);
-        Peak out = fp.detect_troughs();
+        Peak out = fp.detectTroughs();
 
         Assertions.assertArrayEquals(resultTroughs, out.getPeaks());
     }
@@ -366,7 +366,7 @@ public class TestFindPeak {
     @Test
     public void peakPlot() throws IOException{
         FindPeak fp = new FindPeak(this.highResSignal);
-        Peak out = fp.detect_peaks();
+        Peak out = fp.detectPeaks();
 
         String outputFileName = "test_outputs/peak_test";
         Plotting fig = new Plotting("Peak Detection", "Time", "Signal");
@@ -381,7 +381,7 @@ public class TestFindPeak {
         fig.addPoints("Filtered Peaks", filteredPeaks, filteredHeights, '^');
 
         FindPeak ft = new FindPeak(this.highResSignal);
-        Peak out2 = ft.detect_troughs();
+        Peak out2 = ft.detectTroughs();
         fig.addPoints("Troughs", out2.getPeaks(), out2.getHeights(), '+');
 
         fig.saveAsPNG(outputFileName);
