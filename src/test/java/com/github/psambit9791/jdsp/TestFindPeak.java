@@ -393,7 +393,7 @@ public class TestFindPeak {
     @Test
     public void spikeDetectTest() {
         FindPeak fp = new FindPeak(this.simpleSignal);
-        Spike out = fp.get_spikes();
+        Spike out = fp.getSpikes();
 
         int[] resultLeftTroughs = {-1, 25, 57, 84, 123, 150, 182, 218};
         int[] resultRightTroughs = {25, 57, 84, 123, 150, 182, 218, 244};
@@ -479,7 +479,7 @@ public class TestFindPeak {
     @Test
     public void spikeDetectHighResTest() {
         FindPeak fp = new FindPeak(this.highResSignal);
-        Spike out = fp.get_spikes();
+        Spike out = fp.getSpikes();
 
         int[] resultLeftTroughs = {-1, 31, 78, 119, 125, 196, 242, 281, 301, 365, 400, 442, 498, 517, 532, 562, 589, 599, 611, 684, 701, 726, 733, 762, 767, 773, 864, 913, 943, 954, 960};
         int[] resultRightTroughs = {31, 78, 119, 125, 196, 242, 281, 301, 365, 400, 442, 498, 517, 532, 562, 589, 599, 611, 684, 701, 726, 733, 762, 767, 773, 864, 913, 943, 954, 960, 967};
@@ -581,7 +581,7 @@ public class TestFindPeak {
     @Test
     public void spikePlot() throws IOException{
         FindPeak fp = new FindPeak(this.highResSignal);
-        Spike out = fp.get_spikes();
+        Spike out = fp.getSpikes();
 
         int[] peaks = out.getPeaks();
 
