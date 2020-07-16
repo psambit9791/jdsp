@@ -129,9 +129,7 @@ public class Plotting {
         for (int i=0; i<x.length; i++) {
             x_new[i] = (double)x[i];
         }
-        XYSeries s = this.figure.addSeries(name, x_new, y);
-        s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
-        s.setMarker(SeriesMarkers.CIRCLE);
+        this.addPoints(name, x_new, y);
     }
 
     /**
@@ -176,26 +174,7 @@ public class Plotting {
         for (int i=0; i<x.length; i++) {
             x_new[i] = (double)x[i];
         }
-        XYSeries s = this.figure.addSeries(name, x_new, y);
-        s.setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
-        if (marker == 'x') {
-            s.setMarker(SeriesMarkers.CROSS);
-        }
-        else if (marker == 'o') {
-            s.setMarker(SeriesMarkers.CIRCLE);
-        }
-        else if (marker == '*') {
-            s.setMarker(SeriesMarkers.DIAMOND);
-        }
-        else if (marker == '+') {
-            s.setMarker(SeriesMarkers.PLUS);
-        }
-        else if (marker == '#') {
-            s.setMarker(SeriesMarkers.SQUARE);
-        }
-        else if (marker == '^') {
-            s.setMarker(SeriesMarkers.TRIANGLE_UP);
-        }
+        this.addPoints(name, x_new, y, marker);
     }
 
     /**
