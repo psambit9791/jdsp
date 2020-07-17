@@ -128,6 +128,7 @@ public class TestPlotting {
         final double[] points1 = {3.4, 6.7, 2.2, 1.6, 3.6};
         final double[] points2 = {1.6, 2.0, 5.3, -1.3, 2.2};
         final double[] time = {0.0, 1.0, 2.0, 3.0, 4.0};
+        final double[] timeInt = {0, 1, 2, 3, 4};
 
         double[][] verLines = new double[signal1.length][3];
         for (int i=0; i<verLines.length; i++) {
@@ -143,7 +144,7 @@ public class TestPlotting {
         fig.addSignal("Signal 1", time, signal1, true);
         fig.addSignal("Signal 2", time, signal2, false);
         fig.addPoints("Points 1", time, points1, 'x');
-        fig.addPoints("Points 2", time, points2);
+        fig.addPoints("Points 2", timeInt, points2);
         for (int i=0; i<verLines.length; i++) {
             fig.vline(verLines[i][0], verLines[i][1], verLines[i][2]);
         }
