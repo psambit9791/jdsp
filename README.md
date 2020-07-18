@@ -7,7 +7,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.psambit9791/jdsp.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.psambit9791%22%20AND%20a:%22jdsp%22)
 [![javadoc](https://javadoc.io/badge2/com.github.psambit9791/jdsp/javadoc.svg)](https://javadoc.io/doc/com.github.psambit9791/jdsp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?)](https://github.com/psambit9791/jDSP/blob/master/LICENSE)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3903922.svg)](https://doi.org/10.5281/zenodo.3903922)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3903921.svg)](https://doi.org/10.5281/zenodo.3903921)
 
 jDSP is a library of signal processing tools aimed at providing functionalities as available in scipy-signal package for 
 Python. The goal is to provide easy-to-use APIs for performing complex operation on signals eliminating the necessity 
@@ -61,7 +61,7 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/filter/Bessel.html">com.github.psambit9791.jdsp.filter.Bessel</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Frequency-Based-Filter">Frequency-based <strong>Filter</strong></a> | Implements Bessel Filter for low-pass, high-pass, band-pass and band-stop operation |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/filter/Median.html">com.github.psambit9791.jdsp.filter.Median</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Kernel-Based-Filter">Kernel-based <strong>Filter</strong></a> | Implements Median Filter for smoothing while maintaining the sharp edges |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/filter/Savgol.html">com.github.psambit9791.jdsp.filter.Savgol</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Kernel-Based-Filter">Kernel-based <strong>Filter</strong></a> | Implements Savitzky–Golay Filter for smoothing using Savitzky–Golay coefficients |
-| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/filter/Median.html">com.github.psambit9791.jdsp.filter.Wiener</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Kernel-Based-Filter">Kernel-based <strong>Filter</strong></a> | Implements Wiener Filter for the sharpening operation |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/filter/Wiener.html">com.github.psambit9791.jdsp.filter.Wiener</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Kernel-Based-Filter">Kernel-based <strong>Filter</strong></a> | Implements Wiener Filter for the sharpening operation |
 ||||
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Convolution.html">com.github.psambit9791.jdsp.signal.Convolution </a> | <a href="https://github.com/psambit9791/jDSP/wiki/Convolution-&-Cross-Correlation"><strong>Signal</strong> Operation</a> | Implements the convolve() and convolve1d() operation |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/CrossCorrelation.html">com.github.psambit9791.jdsp.signal.CrossCorrelation</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Convolution-&-Cross-Correlation"><strong>Signal</strong> Operation</a> | Implements the cross-correlation operation |
@@ -74,12 +74,12 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/peaks/Peak.html">com.github.psambit9791.jdsp.signal.peaks.Peak</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Peak-&-Trough-Detection-and-Filtering"><strong>Peak</strong> Detection</a> | Calculates peak properties and allows filtering with them |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/peaks/Spike.html">com.github.psambit9791.jdsp.signal.peaks.Spike</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Spike-Detection-and-Filtering"><strong>Peak</strong> Detection</a> | Calculates spike properties and allows filtering with them |
 ||||
-| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/transform//DiscreteFourier.html">com.github.psambit9791.jdsp.transform.DiscreteFourier</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Fourier-Transforms"><strong>Transformation</strong></a> | Applies the Discrete Fourier Transform on a signal |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/transform/DiscreteFourier.html>com.github.psambit9791.jdsp.transform.DiscreteFourier</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Fourier-Transforms"><strong>Transformation</strong></a> | Applies the Discrete Fourier Transform on a signal |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/transform/InverseDiscreteFourier.html">com.github.psambit9791.jdsp.transform.InverseDiscreteFourier</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Fourier-Transforms"><strong>Transformation</strong></a> | Applies the Inverse Discrete Fourier Transform on a sequence and returns the original signal |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/transform/Hilbert.html">com.github.psambit9791.jdsp.transform.Hilbert</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Hilbert-Transform"><strong>Transformation</strong></a> | Applies the Hilbert Transform on a signal and provides funtions to return amplitude, phase and frequency information |
 ||||
-| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/UtilMethods.html">com.github.psambit9791.jdsp.misc.UtilMethods</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Utilities"><strong>Miscellaneous</strong></a> | Provides utility functions, details in Wiki |
-| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/LinePlot.html">com.github.psambit9791.jdsp.misc.Plotting</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Plotting"><strong>Miscellaneous</strong></a> | Enables plotting of different signals as a line plot |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/misc/UtilMethods.html">com.github.psambit9791.jdsp.misc.UtilMethods</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Utilities"><strong>Miscellaneous</strong></a> | Provides utility functions, details in Wiki |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/misc/Plotting.html">com.github.psambit9791.jdsp.misc.Plotting</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Plotting"><strong>Miscellaneous</strong></a> | Enables plotting of different signals as a line plot |
 <br/>
 
 ## Citation
@@ -87,15 +87,15 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 If you are using this software in your research, please use the following citation:
 
 ```
-@software{sambit_paul_2020_3903922,
+@software{sambit_paul_2020_3951042,
   author       = {Sambit Paul},
-  title        = {JDSP},
-  month        = jun,
+  title        = {psambit9791/jDSP: v0.3.0 (July 18, 2020)},
+  month        = jul,
   year         = 2020,
   publisher    = {Zenodo},
-  version      = {v0.2.1-zenodo},
-  doi          = {10.5281/zenodo.3903922},
-  url          = {https://doi.org/10.5281/zenodo.3903922}
+  version      = {v0.3.0},
+  doi          = {10.5281/zenodo.3951042},
+  url          = {https://doi.org/10.5281/zenodo.3951042}
 }
 ```
 ## Supporting jDSP 
