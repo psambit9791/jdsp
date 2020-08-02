@@ -620,4 +620,32 @@ public class UtilMethods {
         }
         return data;
     }
+
+    /**
+     * Returns the absolute value of the matrix.
+     * @param m The matrix to be processed
+     * @return double[][] The absolute value of the matrix
+     */
+    public static double[][] absoluteArray(double[][] m) {
+        double[][] out = new double [m.length][m[0].length];
+        for (int i=0; i<m.length; i++) {
+            for (int j=0; j<m[0].length; j++) {
+                out[i][j] = Math.abs(m[i][j]);
+            }
+        }
+        return out;
+    }
+
+    /**
+     * Returns the absolute value of the matrix.
+     * @param m The array to be processed
+     * @return double[] The absolute value of the array
+     */
+    public static double[] absoluteArray(double[] m) {
+        double[] out = new double [m.length];
+        for (int i=0; i<m.length; i++) {
+            out[i] = Math.abs(m[i]);
+        }
+        return out;
+    }
 }
