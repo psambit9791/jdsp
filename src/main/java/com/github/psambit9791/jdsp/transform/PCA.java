@@ -17,6 +17,8 @@ import org.apache.commons.math3.linear.SingularValueDecomposition;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.MathArrays;
 
+import java.util.Arrays;
+
 /**
  * <h1>Principal Component Analysis (PCA)</h1>
  * The PCA class reduces the dimensionality of the input multi-channel input and
@@ -33,14 +35,16 @@ public class PCA {
     private double[][] output;
     private int n_components;
     private int n_samples;
-    public double[] explained_variance;
-    public double[] explained_variance_ratio;
+    public double[] explained_variance_;
+    public double[] explained_variance_ratio_;
+    public double[] singular_values_;
+
 
     /**
      * This constructor initialises the prerequisites required to use PCA.
      * @throws java.lang.ExceptionInInitializerError if n_components less than 1 or greater than total channels in signal
      * @throws java.lang.IllegalArgumentException if signal length is less than the number of channels
-     * @param signal Multi-dimensional signal to be transformed. Dimension 1: Channel Data, Dimension 2: Channels
+     * @param signal Multi-dimensional signal to be transformed. Dimension 1: Samples, Dimension 2: Channels
      * @param n_components Number of components to keep. Must be greater than 0 and less than the original number of channels in the signal
      */
     public PCA(double[][] signal, int n_components) throws ExceptionInInitializerError, IllegalArgumentException {
@@ -57,10 +61,14 @@ public class PCA {
     }
 
     public void fit() {
+        double[][] sigT = this.transpose(this.signal);
+
         double[][] mod_signal = new double[this.signal.length][this.signal[0].length];
-        for (int i=0; i<this.signal.length; i++) {
-            mod_signal[i] = UtilMethods.zeroCenter(this.signal[i]);
+        mod_signal = this.transpose(mod_signal);
+        for (int i=0; i<sigT.length; i++) {
+            mod_signal[i] = UtilMethods.zeroCenter(sigT[i]);
         }
+        mod_signal = this.transpose(mod_signal);
 
         RealMatrix m = MatrixUtils.createRealMatrix(mod_signal);
         SingularValueDecomposition svdM = new SingularValueDecomposition(m);
@@ -69,23 +77,22 @@ public class PCA {
         double[][] S = svdM.getS().getData();
         double[][] V = svdM.getV().getData();
 
-        double[] singular_values = svdM.getSingularValues();
-
-        this.explained_variance = MathArrays.ebeMultiply(singular_values, singular_values);
-        for (int i=0; i<this.explained_variance.length; i++) {
-            this.explained_variance[i] = this.explained_variance[i]/(n_samples - 1);
-        }
-        double total_var = StatUtils.sum(this.explained_variance);
-
-        this.explained_variance_ratio = new double[S.length];
-        for (int i=0; i< this.explained_variance.length; i++) {
-            this.explained_variance_ratio[i] = this.explained_variance[i]/total_var;
-        }
+        this.singular_values_ = svdM.getSingularValues();
 
         double[][][] temp2 = this.svd_flip(U, V);
         U = temp2[0];
         V = temp2[1];
 
+        this.explained_variance_ = MathArrays.ebeMultiply(this.singular_values_, this.singular_values_);
+        for (int i=0; i<this.explained_variance_.length; i++) {
+            this.explained_variance_[i] = this.explained_variance_[i]/(n_samples - 1);
+        }
+        double total_var = StatUtils.sum(this.explained_variance_);
+
+        this.explained_variance_ratio_ = new double[S.length];
+        for (int i=0; i< this.explained_variance_.length; i++) {
+            this.explained_variance_ratio_[i] = this.explained_variance_[i]/total_var;
+        }
 
     }
 
@@ -107,7 +114,7 @@ public class PCA {
         }
 
         for (int i=0; i< max_abs_cols.length; i++) {
-            signs[i] = Math.signum(U[i][max_abs_cols[i]]);
+            signs[i] = Math.signum(U[max_abs_cols[i]][i]);
         }
 
         for (int i=0; i<U.length; i++) {
