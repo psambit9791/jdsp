@@ -17,8 +17,6 @@ import org.apache.commons.math3.linear.SingularValueDecomposition;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.MathArrays;
 
-import java.util.Arrays;
-
 
 /**
  * <h1>Principal Component Analysis (PCA)</h1>
@@ -89,7 +87,7 @@ public class PCA {
 
         double[][] U = svdM.getU().getData();
         double[][] S = svdM.getS().getData();
-        double[][] V = svdM.getV().getData();
+        double[][] V = svdM.getVT().getData();
 
         double[][][] temp2 = this.svdFlip(U, V);
         U = temp2[0];
@@ -123,6 +121,7 @@ public class PCA {
     }
 
     //flip eigenvectors' sign to enforce deterministic output
+    // Use reference to understand: https://prod-ng.sandia.gov/techlib-noauth/access-control.cgi/2007/076422.pdf
     private double[][][] svdFlip(double[][] U, double[][] V) {
         double[][] U_new = UtilMethods.absoluteArray(U);
         int[] max_abs_cols = new int[U[0].length];
@@ -145,6 +144,10 @@ public class PCA {
         }
 
         V = UtilMethods.transpose(V);
+//        for (int i=0; i<V.length; i++) {
+////            Assertions.assertArrayEquals(V[i], usv[2][i], 0.001);
+//            System.out.println(Arrays.toString(V[i]));
+//        }
         for (int i=0; i<V.length; i++) {
             V[i] = MathArrays.ebeMultiply(V[i], signs);
         }

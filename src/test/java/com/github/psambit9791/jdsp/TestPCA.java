@@ -31,6 +31,22 @@ public class TestPCA {
         Assertions.assertArrayEquals(explained_variance, p1.explained_variance_, 0.0001);
         Assertions.assertArrayEquals(explained_variance_ratio, p1.explained_variance_ratio_, 0.0001);
         Assertions.assertArrayEquals(singular_values, p1.singular_values_, 0.0001);
+
+        double[][][] usv = p1.getUSV();
+
+        final double[][] U = {{-0.2629, -0.465 }, { 0.597 ,  0.0655}, {-0.5209,  0.7207}, { 0.4714,  0.1623}, {-0.2845, -0.4835}};
+        final double[][] S = {{0.5823, 0}, {0, 0.3506}};
+        final double[][] V = {{ 0.9522,  0.3053}, {-0.3053,  0.9522}};
+
+        for (int i=0; i<U.length; i++) {
+            Assertions.assertArrayEquals(U[i], usv[0][i], 0.001);
+        }
+        for (int i=0; i<S.length; i++) {
+            Assertions.assertArrayEquals(S[i], usv[1][i], 0.001);
+        }
+        for (int i=0; i<V.length; i++) {
+            Assertions.assertArrayEquals(V[i], usv[2][i], 0.001);
+        }
     }
 
     @Test
