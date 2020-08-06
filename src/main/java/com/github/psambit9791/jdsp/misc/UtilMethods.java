@@ -648,4 +648,19 @@ public class UtilMethods {
         }
         return out;
     }
+
+    /**
+     * Returns the transpose of the matrix.
+     * @param m The matrix to be transposed
+     * @return double[][] The transpose of the matrix
+     */
+    public static double[][] transpose(double[][] m) {
+        double[][] m_t = new double[m[0].length][m.length];
+        for (int i=0; i<m_t.length; i++) {
+            for (int j=0; j<m_t[0].length; j++) {
+                m_t[i][j] = m[j][i];
+            }
+        }
+        return m_t;
+    }
 }

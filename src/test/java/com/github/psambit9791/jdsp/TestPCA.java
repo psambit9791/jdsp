@@ -14,7 +14,6 @@ import com.github.psambit9791.jdsp.transform.PCA;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 
 public class TestPCA {
 
@@ -27,6 +26,20 @@ public class TestPCA {
         final double[] singular_values = {0.5823, 0.3506};
 
         PCA p1 = new PCA(this.signal, 2);
+        p1.fit();
+
+        Assertions.assertArrayEquals(explained_variance, p1.explained_variance_, 0.0001);
+        Assertions.assertArrayEquals(explained_variance_ratio, p1.explained_variance_ratio_, 0.0001);
+        Assertions.assertArrayEquals(singular_values, p1.singular_values_, 0.0001);
+    }
+
+    @Test
+    public void PCATest2() {
+        final double[] explained_variance = {0.0848};
+        final double[] explained_variance_ratio = {0.7339};
+        final double[] singular_values = {0.5823};
+
+        PCA p1 = new PCA(this.signal, 1);
         p1.fit();
 
         Assertions.assertArrayEquals(explained_variance, p1.explained_variance_, 0.0001);

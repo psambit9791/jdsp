@@ -19,6 +19,7 @@ import org.apache.commons.math3.util.MathArrays;
 
 import java.util.Arrays;
 
+
 /**
  * <h1>Principal Component Analysis (PCA)</h1>
  * The PCA class reduces the dimensionality of the input multi-channel input and
@@ -35,6 +36,11 @@ public class PCA {
     private double[][] output;
     private int n_components;
     private int n_samples;
+
+    private double[][] U;
+    private double[][] S;
+    private double[][] V;
+
     public double[] explained_variance_;
     public double[] explained_variance_ratio_;
     public double[] singular_values_;
@@ -60,15 +66,23 @@ public class PCA {
         this.output = new double[n_components][signal.length];
     }
 
+    public double[][][] getUSV() {
+        if (this.singular_values_ == null) {
+            throw new ExceptionInInitializerError("Execute fit() before calling this function");
+        }
+        double[][][] usv = {this.U, this.S, this.V};
+        return usv;
+    }
+
     public void fit() {
-        double[][] sigT = this.transpose(this.signal);
+        double[][] sigT = UtilMethods.transpose(this.signal);
 
         double[][] mod_signal = new double[this.signal.length][this.signal[0].length];
-        mod_signal = this.transpose(mod_signal);
+        mod_signal = UtilMethods.transpose(mod_signal);
         for (int i=0; i<sigT.length; i++) {
             mod_signal[i] = UtilMethods.zeroCenter(sigT[i]);
         }
-        mod_signal = this.transpose(mod_signal);
+        mod_signal = UtilMethods.transpose(mod_signal);
 
         RealMatrix m = MatrixUtils.createRealMatrix(mod_signal);
         SingularValueDecomposition svdM = new SingularValueDecomposition(m);
@@ -77,11 +91,11 @@ public class PCA {
         double[][] S = svdM.getS().getData();
         double[][] V = svdM.getV().getData();
 
-        this.singular_values_ = svdM.getSingularValues();
-
-        double[][][] temp2 = this.svd_flip(U, V);
+        double[][][] temp2 = this.svdFlip(U, V);
         U = temp2[0];
         V = temp2[1];
+
+        this.singular_values_ = svdM.getSingularValues();
 
         this.explained_variance_ = MathArrays.ebeMultiply(this.singular_values_, this.singular_values_);
         for (int i=0; i<this.explained_variance_.length; i++) {
@@ -94,13 +108,22 @@ public class PCA {
             this.explained_variance_ratio_[i] = this.explained_variance_[i]/total_var;
         }
 
+        this.singular_values_ = UtilMethods.splitByIndex(this.singular_values_, 0, this.n_components);
+        this.explained_variance_ = UtilMethods.splitByIndex(this.explained_variance_, 0, this.n_components);
+        this.explained_variance_ratio_ = UtilMethods.splitByIndex(this.explained_variance_ratio_, 0, this.n_components);
+
+        this.U = U;
+        this.S = S;
+        this.V = V;
+
     }
 
     public double[][] transform() {
         return this.output;
     }
 
-    private double[][][] svd_flip(double[][] U, double[][] V) {
+    //flip eigenvectors' sign to enforce deterministic output
+    private double[][][] svdFlip(double[][] U, double[][] V) {
         double[][] U_new = UtilMethods.absoluteArray(U);
         int[] max_abs_cols = new int[U[0].length];
         double[] signs = new double[U[0].length];
@@ -121,23 +144,13 @@ public class PCA {
             U[i] = MathArrays.ebeMultiply(U[i], signs);
         }
 
-        V = this.transpose(V);
+        V = UtilMethods.transpose(V);
         for (int i=0; i<V.length; i++) {
             V[i] = MathArrays.ebeMultiply(V[i], signs);
         }
-        V = this.transpose(V);
+        V = UtilMethods.transpose(V);
 
         double[][][] out = {U, V};
         return out;
-    }
-
-    private double[][] transpose(double[][] m) {
-        double[][] m_t = new double[m[0].length][m.length];
-        for (int i=0; i<m_t.length; i++) {
-            for (int j=0; j<m_t[0].length; j++) {
-                m_t[i][j] = m[j][i];
-            }
-        }
-        return m_t;
     }
 }
