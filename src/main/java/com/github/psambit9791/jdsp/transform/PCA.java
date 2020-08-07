@@ -31,6 +31,7 @@ import org.apache.commons.math3.util.MathArrays;
 public class PCA {
 
     private double[][] signal;
+    private double[][] zm_signal;
     private double[][] output;
     private int n_components;
     private int n_samples;
@@ -64,7 +65,7 @@ public class PCA {
         this.output = new double[n_components][signal.length];
     }
 
-    public double[][][] getUSV() {
+    public double[][][] getUSV() throws ExceptionInInitializerError {
         if (this.singular_values_ == null) {
             throw new ExceptionInInitializerError("Execute fit() before calling this function");
         }
@@ -75,14 +76,14 @@ public class PCA {
     public void fit() {
         double[][] sigT = UtilMethods.transpose(this.signal);
 
-        double[][] mod_signal = new double[this.signal.length][this.signal[0].length];
-        mod_signal = UtilMethods.transpose(mod_signal);
+        this.zm_signal = new double[this.signal.length][this.signal[0].length];
+        this.zm_signal = UtilMethods.transpose(this.zm_signal);
         for (int i=0; i<sigT.length; i++) {
-            mod_signal[i] = UtilMethods.zeroCenter(sigT[i]);
+            this.zm_signal[i] = UtilMethods.zeroCenter(sigT[i]);
         }
-        mod_signal = UtilMethods.transpose(mod_signal);
+        this.zm_signal = UtilMethods.transpose(this.zm_signal);
 
-        RealMatrix m = MatrixUtils.createRealMatrix(mod_signal);
+        RealMatrix m = MatrixUtils.createRealMatrix(this.zm_signal);
         SingularValueDecomposition svdM = new SingularValueDecomposition(m);
 
         double[][] U = svdM.getU().getData();
@@ -116,11 +117,22 @@ public class PCA {
 
     }
 
-    public double[][] transform() {
+    public double[][] transform() throws ExceptionInInitializerError{
+        if (this.singular_values_ == null) {
+            throw new ExceptionInInitializerError("Execute fit() before calling this function");
+        }
+
+        double[][] components = new double[this.n_components][this.n_samples];
+        for (int i=0; i<this.n_components; i++) {
+            components[i] = this.V[i];
+        }
+
+        double[][] components_T = UtilMethods.transpose(components);
+        this.output = UtilMethods.matrixMultiply(this.zm_signal, components_T);
         return this.output;
     }
 
-    //flip eigenvectors' sign to enforce deterministic output
+    // Flip eigenvectors' sign to enforce deterministic output
     // Use reference to understand: https://prod-ng.sandia.gov/techlib-noauth/access-control.cgi/2007/076422.pdf
     private double[][][] svdFlip(double[][] U, double[][] V) {
         double[][] U_new = UtilMethods.absoluteArray(U);
@@ -144,10 +156,6 @@ public class PCA {
         }
 
         V = UtilMethods.transpose(V);
-//        for (int i=0; i<V.length; i++) {
-////            Assertions.assertArrayEquals(V[i], usv[2][i], 0.001);
-//            System.out.println(Arrays.toString(V[i]));
-//        }
         for (int i=0; i<V.length; i++) {
             V[i] = MathArrays.ebeMultiply(V[i], signs);
         }

@@ -11,14 +11,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
-import com.github.psambit9791.jdsp.signal.Smooth;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -290,5 +284,40 @@ public class TestUtils {
         int resultLength = 108000;
         double[] data = UtilMethods.electrocardiogram();
         Assertions.assertEquals(resultLength, data.length);
+    }
+
+    @Test
+    public void absoluteTest() throws Exception {
+        double[][] test1 = {{1.22, -3.41, -0.22}, {-0.89, 1.6, 7.65}};
+        double[][] res1 = {{1.22, 3.41, 0.22}, {0.89, 1.6, 7.65}};
+        double[][] out1 = UtilMethods.absoluteArray(test1);
+
+        double[] test2 = {1.22, -3.41, -0.22, 5.44, -9.28};
+        double[] res2 = {1.22, 3.41, 0.22, 5.44, 9.28};
+        double[] out2 = UtilMethods.absoluteArray(test2);
+
+        for (int i=0; i<res1.length; i++) {
+            Assertions.assertArrayEquals(res1[i], out1[i], 0.001);
+        }
+        Assertions.assertArrayEquals(res2, out2, 0.001);
+    }
+
+    @Test
+    public void transposeTest() throws Exception {
+        double[][] test1 = {{1, 2}, {3, 4}};
+        double[][] res1 = {{1, 3}, {2, 4}};
+        double[][] out1 = UtilMethods.transpose(test1);
+
+        for (int i=0; i<res1.length; i++) {
+            Assertions.assertArrayEquals(res1[i], out1[i], 0.001);
+        }
+
+        double[][] test2 = {{1.45, 2.09, 0.85}, {-3.08, 4.56, 7.45}};
+        double[][] res2 = {{1.45, -3.08}, {2.09, 4.56}, {0.85, 7.45}};
+        double[][] out2 = UtilMethods.transpose(test2);
+
+        for (int i=0; i<res2.length; i++) {
+            Assertions.assertArrayEquals(res2[i], out2[i], 0.001);
+        }
     }
 }

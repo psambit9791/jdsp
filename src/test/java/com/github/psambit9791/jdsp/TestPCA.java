@@ -24,6 +24,7 @@ public class TestPCA {
         final double[] explained_variance = {0.0848, 0.0307};
         final double[] explained_variance_ratio = {0.7339, 0.2661};
         final double[] singular_values = {0.5823, 0.3506};
+        double[][] result = {{-0.1531, -0.163 }, { 0.3476,  0.023 }, {-0.3033,  0.2527}, { 0.2745,  0.0569}, {-0.1657, -0.1695}};
 
         PCA p1 = new PCA(this.signal, 2);
         p1.fit();
@@ -47,6 +48,11 @@ public class TestPCA {
         for (int i=0; i<V.length; i++) {
             Assertions.assertArrayEquals(V[i], usv[2][i], 0.001);
         }
+
+        double[][] newSignal = p1.transform();
+        for (int i=0; i<result.length; i++) {
+            Assertions.assertArrayEquals(result[i], newSignal[i], 0.001);
+        }
     }
 
     @Test
@@ -54,6 +60,7 @@ public class TestPCA {
         final double[] explained_variance = {0.0848};
         final double[] explained_variance_ratio = {0.7339};
         final double[] singular_values = {0.5823};
+        double[][] result = {{-0.1531}, { 0.3476}, {-0.3033}, { 0.2745}, {-0.1657}};
 
         PCA p1 = new PCA(this.signal, 1);
         p1.fit();
@@ -61,5 +68,10 @@ public class TestPCA {
         Assertions.assertArrayEquals(explained_variance, p1.explained_variance_, 0.0001);
         Assertions.assertArrayEquals(explained_variance_ratio, p1.explained_variance_ratio_, 0.0001);
         Assertions.assertArrayEquals(singular_values, p1.singular_values_, 0.0001);
+
+        double[][] newSignal = p1.transform();
+        for (int i=0; i<result.length; i++) {
+            Assertions.assertArrayEquals(result[i], newSignal[i], 0.001);
+        }
     }
 }

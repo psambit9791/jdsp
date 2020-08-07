@@ -27,7 +27,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Scanner;
 
 
 /**
@@ -655,12 +654,25 @@ public class UtilMethods {
      * @return double[][] The transpose of the matrix
      */
     public static double[][] transpose(double[][] m) {
-        double[][] m_t = new double[m[0].length][m.length];
-        for (int i=0; i<m_t.length; i++) {
-            for (int j=0; j<m_t[0].length; j++) {
-                m_t[i][j] = m[j][i];
-            }
-        }
+        RealMatrix m1 = MatrixUtils.createRealMatrix(m);
+        double[][] m_t = m1.transpose().getData();
         return m_t;
+    }
+
+    /**
+     * Returns the multiplication of 2 matrices
+     * @param a Multiplier Matrix
+     * @param b Multiplicand Matrix
+     * @throws java.lang.ArithmeticException if column size of a not equal to row size of b
+     * @return double[][] The result of the matrix multiplication
+     */
+    public static double[][] matrixMultiply(double[][] a, double[][] b) throws ArithmeticException {
+        if (a[0].length != b.length) {
+            throw new ArithmeticException("Columns in multiplier must be equal to Rows in Multiplicand");
+        }
+        RealMatrix m1 = MatrixUtils.createRealMatrix(a);
+        RealMatrix m2= MatrixUtils.createRealMatrix(b);
+        RealMatrix m = m1.multiply(m2);
+        return m.getData();
     }
 }
