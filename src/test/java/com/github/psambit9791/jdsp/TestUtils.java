@@ -303,7 +303,7 @@ public class TestUtils {
     }
 
     @Test
-    public void transposeTest() throws Exception {
+    public void transposeTest() {
         double[][] test1 = {{1, 2}, {3, 4}};
         double[][] res1 = {{1, 3}, {2, 4}};
         double[][] out1 = UtilMethods.transpose(test1);
@@ -319,5 +319,24 @@ public class TestUtils {
         for (int i=0; i<res2.length; i++) {
             Assertions.assertArrayEquals(res2[i], out2[i], 0.001);
         }
+    }
+
+    @Test
+    public void scalarOperationTest() {
+        double[] arr = {1.23, 6.54, 4.56, 9.04, 2.88};
+        double[] resAdd = {2.25,  7.56,  5.58, 10.06,  3.9};
+        double[] resSub = {0.21, 5.52, 3.54, 8.02, 1.86};
+        double[] resMul = {1.2546, 6.6708, 4.6512, 9.2208, 2.9376};
+        double[] resDiv = {1.2059, 6.4118, 4.4706, 8.8627, 2.8235};
+
+        double[] arrAdd = UtilMethods.scalarArithmetic(arr, 1.02, "add");
+        double[] arrSub = UtilMethods.scalarArithmetic(arr, 1.02, "sub");
+        double[] arrMul = UtilMethods.scalarArithmetic(arr, 1.02, "mul");
+        double[] arrDiv = UtilMethods.scalarArithmetic(arr, 1.02, "div");
+
+        Assertions.assertArrayEquals(resAdd, arrAdd, 0.001);
+        Assertions.assertArrayEquals(resSub, arrSub, 0.001);
+        Assertions.assertArrayEquals(resMul, arrMul, 0.001);
+        Assertions.assertArrayEquals(resDiv, arrDiv, 0.001);
     }
 }

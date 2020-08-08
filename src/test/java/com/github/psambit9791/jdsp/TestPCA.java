@@ -14,9 +14,6 @@ import com.github.psambit9791.jdsp.transform.PCA;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
-
 public class TestPCA {
 
     final double[][] signal = {{0.38, 0.53}, {0.80, 0.86}, {0.11, 0.88}, {0.72, 0.87}, {0.37, 0.52}};

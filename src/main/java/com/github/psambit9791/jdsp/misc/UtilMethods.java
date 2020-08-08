@@ -681,7 +681,7 @@ public class UtilMethods {
      * @param arr Array to be processed
      * @param val Value with which arithmetic operation is performed
      * @throws java.lang.IllegalArgumentException if action is not "add", "sub", "mul", "div"
-     * @return double[][] The result of the opration
+     * @return double[][] The result of the operation
      */
     public static double[] scalarArithmetic(double[] arr, double val, String action) throws IllegalArgumentException {
         if (!action.equals("add") && !action.equals("sub") && !action.equals("mul") && !action.equals("div")) {

@@ -66,6 +66,11 @@ public class PCA {
         this.output = new double[n_components][signal.length];
     }
 
+    /**
+     * Returns the U, S, V matrices after performing the PCA fit()
+     * @throws java.lang.ExceptionInInitializerError if called before executing fit()
+     * @return double[][][] The U, S, V matrices in the same order
+     */
     public double[][][] getUSV() throws ExceptionInInitializerError {
         if (this.singular_values_ == null) {
             throw new ExceptionInInitializerError("Execute fit() before calling this function");
@@ -74,6 +79,9 @@ public class PCA {
         return usv;
     }
 
+    /**
+     * Performs PCA and fits the model with the input signals
+     */
     public void fit() {
         double[][] sigT = UtilMethods.transpose(this.signal);
 
@@ -120,6 +128,11 @@ public class PCA {
 
     }
 
+    /**
+     * Applies dimensionality reduction on the original signal
+     * @throws java.lang.ExceptionInInitializerError if called before executing fit()
+     * @return double[][] The signal with reduced dimensions
+     */
     public double[][] transform() throws ExceptionInInitializerError{
         if (this.singular_values_ == null) {
             throw new ExceptionInInitializerError("Execute fit() before calling this function");
@@ -135,6 +148,12 @@ public class PCA {
         return this.output;
     }
 
+    /**
+     * Applies dimensionality reduction on the input signal
+     * @throws java.lang.ExceptionInInitializerError if called before executing fit()
+     * @throws java.lang.ArithmeticException if number of channels in input signal is different from the original signal
+     * @return double[][] The signal with reduced dimensions
+     */
     public double[][] transform(double[][] x) throws ExceptionInInitializerError, ArithmeticException{
         if (this.singular_values_ == null) {
             throw new ExceptionInInitializerError("Execute fit() before calling this function");
