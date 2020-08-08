@@ -107,6 +107,59 @@ public class Plotting {
     }
 
     /**
+     * This method adds a curve to the plot
+     * @param name Name of the curve being added (Used for the legend)
+     * @param y Data to be plotted on the Y-axis
+     * @param marker If the marker should be shown at datapoints
+     * @param line_type Type of Line to be used ("-": SOLID, ".": DOTTED, "--": DASHED, "-.": DASH-DOT)
+     */
+    public void addSignal(String name, double[] y, boolean marker, String line_type) {
+        XYSeries s = this.figure.addSeries(name, y);
+        if (!marker) {
+            s.setMarker(SeriesMarkers.NONE);
+        }
+        if (line_type.equals("-")) {
+            s.setLineStyle(SeriesLines.SOLID);
+        }
+        else if (line_type.equals(".")) {
+            s.setLineStyle(SeriesLines.DOT_DOT);
+        }
+        else if (line_type.equals("--")) {
+            s.setLineStyle(SeriesLines.DASH_DASH);
+        }
+        else if (line_type.equals("-.")) {
+            s.setLineStyle(SeriesLines.DASH_DOT);
+        }
+    }
+
+    /**
+     * This method adds a curve to the plot
+     * @param name Name of the curve being added (Used for the legend)
+     * @param x Data to be plotted on the X-axis
+     * @param y Data to be plotted on the Y-axis
+     * @param marker If the marker should be shown at datapoints
+     * @param line_type Type of Line to be used ("-": SOLID, ".": DOTTED, "--": DASHED, "-.": DASH-DOT)
+     */
+    public void addSignal(String name, double[] x, double[] y, boolean marker, String line_type) {
+        XYSeries s = this.figure.addSeries(name, x, y);
+        if (!marker) {
+            s.setMarker(SeriesMarkers.NONE);
+        }
+        if (line_type.equals("-")) {
+            s.setLineStyle(SeriesLines.SOLID);
+        }
+        else if (line_type.equals(".")) {
+            s.setLineStyle(SeriesLines.DOT_DOT);
+        }
+        else if (line_type.equals("--")) {
+            s.setLineStyle(SeriesLines.DASH_DASH);
+        }
+        else if (line_type.equals("-.")) {
+            s.setLineStyle(SeriesLines.DASH_DOT);
+        }
+    }
+
+    /**
      * This method adds points to the plot
      * @param name Name of the curve being added (Used for the legend)
      * @param x Data to be plotted on the X-axis
@@ -137,7 +190,7 @@ public class Plotting {
      * @param name Name of the curve being added (Used for the legend)
      * @param x Data to be plotted on the X-axis
      * @param y Data to be plotted on the Y-axis
-     * @param marker Type of Marker to be used ('x': CROSS, 'o': CIRCLE ,'*': DIAMOND, '+': PLUS, '#': SQUARE, '^': TRIANGLE_UP)
+     * @param marker Type of Marker to be used ('x': CROSS, 'o': CIRCLE, '*': DIAMOND, '+': PLUS, '#': SQUARE, '^': TRIANGLE_UP)
      */
     public void addPoints(String name, double[] x, double[] y, char marker) {
         XYSeries s = this.figure.addSeries(name, x, y);
