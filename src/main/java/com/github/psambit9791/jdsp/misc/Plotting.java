@@ -88,6 +88,7 @@ public class Plotting {
      */
     public void addSignal(String name, double[] x, double[] y, boolean marker) {
         XYSeries s = this.figure.addSeries(name, x, y);
+        s.setLineWidth(0.75f);
         if (!marker) {
             s.setMarker(SeriesMarkers.NONE);
         }
@@ -101,6 +102,7 @@ public class Plotting {
      */
     public void addSignal(String name, double[] y, boolean marker) {
         XYSeries s = this.figure.addSeries(name, y);
+        s.setLineWidth(0.75f);
         if (!marker) {
             s.setMarker(SeriesMarkers.NONE);
         }
@@ -115,6 +117,7 @@ public class Plotting {
      */
     public void addSignal(String name, double[] y, boolean marker, String line_type) {
         XYSeries s = this.figure.addSeries(name, y);
+        s.setLineWidth(0.5f);
         if (!marker) {
             s.setMarker(SeriesMarkers.NONE);
         }
@@ -142,6 +145,7 @@ public class Plotting {
      */
     public void addSignal(String name, double[] x, double[] y, boolean marker, String line_type) {
         XYSeries s = this.figure.addSeries(name, x, y);
+        s.setLineWidth(0.75f);
         if (!marker) {
             s.setMarker(SeriesMarkers.NONE);
         }
