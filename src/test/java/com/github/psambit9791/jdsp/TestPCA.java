@@ -14,6 +14,8 @@ import com.github.psambit9791.jdsp.transform.PCA;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 
 public class TestPCA {
 
@@ -60,7 +62,8 @@ public class TestPCA {
         final double[] explained_variance = {0.0848};
         final double[] explained_variance_ratio = {0.7339};
         final double[] singular_values = {0.5823};
-        double[][] result = {{-0.1531}, { 0.3476}, {-0.3033}, { 0.2745}, {-0.1657}};
+        double[][] result1 = {{-0.1531}, { 0.3476}, {-0.3033}, { 0.2745}, {-0.1657}};
+        double[][] result2 = {{-0.4617}, {-0.4375}, { 0.0507}, { 0.2745}, {-0.1315}};
 
         PCA p1 = new PCA(this.signal, 1);
         p1.fit();
@@ -70,8 +73,14 @@ public class TestPCA {
         Assertions.assertArrayEquals(singular_values, p1.singular_values_, 0.0001);
 
         double[][] newSignal = p1.transform();
-        for (int i=0; i<result.length; i++) {
-            Assertions.assertArrayEquals(result[i], newSignal[i], 0.001);
+        for (int i=0; i<result1.length; i++) {
+            Assertions.assertArrayEquals(result1[i], newSignal[i], 0.001);
+        }
+
+        double[][] signal2 = {{0.12, 0.33}, {0.20, 0.16}, {0.61, 0.48}, {0.72, 0.87}, {0.47, 0.32}};
+        double[][] newSignal2 = p1.transform(signal2);
+        for (int i=0; i<result2.length; i++) {
+            Assertions.assertArrayEquals(result2[i], newSignal2[i], 0.001);
         }
     }
 }

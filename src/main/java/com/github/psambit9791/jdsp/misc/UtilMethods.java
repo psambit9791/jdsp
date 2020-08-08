@@ -675,4 +675,39 @@ public class UtilMethods {
         RealMatrix m = m1.multiply(m2);
         return m.getData();
     }
+
+    /**
+     * Performs scalar arithmetic operation
+     * @param arr Array to be processed
+     * @param val Value with which arithmetic operation is performed
+     * @throws java.lang.IllegalArgumentException if action is not "add", "sub", "mul", "div"
+     * @return double[][] The result of the opration
+     */
+    public static double[] scalarArithmetic(double[] arr, double val, String action) throws IllegalArgumentException {
+        if (!action.equals("add") && !action.equals("sub") && !action.equals("mul") && !action.equals("div")) {
+            throw new ArithmeticException("action must be 'add', 'sub', 'mul', or 'div'");
+        }
+        double[] out = new double[arr.length];
+        if (action.equals("add")) {
+            for (int i=0; i<arr.length; i++) {
+                out[i] = arr[i] + val;
+            }
+        }
+        else if (action.equals("sub")) {
+            for (int i=0; i<arr.length; i++) {
+                out[i] = arr[i] - val;
+            }
+        }
+        else if (action.equals("mul")) {
+            for (int i=0; i<arr.length; i++) {
+                out[i] = arr[i] * val;
+            }
+        }
+        else if (action.equals("div")) {
+            for (int i=0; i<arr.length; i++) {
+                out[i] = arr[i] / val;
+            }
+        }
+        return out;
+    }
 }

@@ -43,6 +43,7 @@ public class PCA {
     public double[] explained_variance_;
     public double[] explained_variance_ratio_;
     public double[] singular_values_;
+    private double[] mean_;
 
 
     /**
@@ -78,7 +79,9 @@ public class PCA {
 
         this.zm_signal = new double[this.signal.length][this.signal[0].length];
         this.zm_signal = UtilMethods.transpose(this.zm_signal);
+        this.mean_ = new double[sigT.length];
         for (int i=0; i<sigT.length; i++) {
+            this.mean_[i] = StatUtils.mean(sigT[i]);
             this.zm_signal[i] = UtilMethods.zeroCenter(sigT[i]);
         }
         this.zm_signal = UtilMethods.transpose(this.zm_signal);
@@ -130,6 +133,33 @@ public class PCA {
         double[][] components_T = UtilMethods.transpose(components);
         this.output = UtilMethods.matrixMultiply(this.zm_signal, components_T);
         return this.output;
+    }
+
+    public double[][] transform(double[][] x) throws ExceptionInInitializerError, ArithmeticException{
+        if (this.singular_values_ == null) {
+            throw new ExceptionInInitializerError("Execute fit() before calling this function");
+        }
+        if (x[0].length != this.signal[0].length) {
+            throw new ArithmeticException("Number of channels has to be same as original signal");
+        }
+
+        double[][] xT = UtilMethods.transpose(x);
+
+        double[][] zm_x = new double[x.length][x[0].length];
+        zm_x = UtilMethods.transpose(zm_x);
+        for (int i=0; i<xT.length; i++) {
+            zm_x[i] = UtilMethods.scalarArithmetic(xT[i], this.mean_[i], "sub");
+        }
+        zm_x = UtilMethods.transpose(zm_x);
+
+        double[][] components = new double[this.n_components][this.n_samples];
+        for (int i=0; i<this.n_components; i++) {
+            components[i] = this.V[i];
+        }
+
+        double[][] components_T = UtilMethods.transpose(components);
+        double[][] out = UtilMethods.matrixMultiply(zm_x, components_T);
+        return out;
     }
 
     // Flip eigenvectors' sign to enforce deterministic output
