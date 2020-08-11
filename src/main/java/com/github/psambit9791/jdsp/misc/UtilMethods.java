@@ -53,14 +53,16 @@ public class UtilMethods {
         double[] time = new double[samples];
         double T;
 
+        double span = stop - start;
+
         double stopVal = (double) stop;
         double i = start;
 
         if (includeEnd) {
-            T = 1.0/(samples-1);
+            T = span/(samples-1);
         }
         else {
-            T = 1.0/samples;
+            T = span/samples;
             stopVal = stopVal - T;
         }
 
@@ -70,7 +72,6 @@ public class UtilMethods {
         for (index=1; index<time.length; index++) {
             i = i + T;
             time[index] = i;
-            System.out.println(index+" "+i);
         }
         return time;
     }
