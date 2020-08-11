@@ -67,10 +67,10 @@ public class UtilMethods {
         int index = 0;
         time[index] = i;
 
-        while (Math.abs(i-stopVal) > 0.00001) {
+        for (index=1; index<time.length; index++) {
             i = i + T;
-            index++;
             time[index] = i;
+            System.out.println(index+" "+i);
         }
         return time;
     }
