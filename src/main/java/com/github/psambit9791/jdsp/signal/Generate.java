@@ -30,9 +30,14 @@ public class Generate {
      * required to generate different signals.
      * @param samplingFreq Sampling Frequency
      */
-    public Generate(int samplingFreq) {
+    public Generate(int samplingFreq, boolean positive) {
         this.Fs = samplingFreq;
-        this.time = UtilMethods.linspace(0, 1, samplingFreq, true);
+        if (positive) {
+            this.time = UtilMethods.linspace(0, 1, samplingFreq, true);
+        }
+        else {
+            this.time = UtilMethods.linspace(-1, 1, 2*samplingFreq, true);
+        }
     }
 
     /**
@@ -77,6 +82,45 @@ public class Generate {
      * @return double[] Smoothed signal
      */
     public double[] generateSquareWave(int waveFreq) {
+        double[] square = new double[this.time.length];
+        for (int i=0; i<this.time.length; i++) {
+            double temp = 2*Math.PI*waveFreq*this.time[i];
+            square[i] = Math.signum(Math.sin(temp));
+            if ((Math.abs(Math.sin(temp))-0) < 0.000001) {
+                square[i] = 1;
+            }
+        }
+        return square;
+    }
+
+    /**
+     * Generates a square wave based on the provided parameters
+     * @param centralFreq Frequency of the wave to be generated
+     * @return double[][] The generated gaussian pulse signal and its envelope.
+     */
+    public double[][] generateGaussianPulse(int centralFreq) {
+        double bw = 0.5; // Fractional bandwidth in frequency domain of pulse
+        double bwr = -6; // Reference level at which fractional bandwidth is calculated
+
+        double ref = Math.pow(10.0, bwr/20);
+        double a = (Math.pow((Math.PI * centralFreq * bw), 2) * -1)/(4.0 * Math.log(ref));
+
+        double[] gauss_env = new double[this.time.length];
+        double[] gauss_pulse = new double[this.time.length];
+        for (int i=0; i<this.time.length; i++) {
+            gauss_env[i] = Math.exp(-a * this.time[i] * this.time[i]);
+            gauss_pulse[i] = gauss_env[i] * Math.cos(2 * Math.PI * centralFreq * this.time[i]);
+        }
+        double[][] out = {gauss_pulse, gauss_env};
+        return out;
+    }
+
+    /**
+     * Generates a square wave based on the provided parameters
+     * @param waveFreq Frequency of the wave to be generated
+     * @return double[] Smoothed signal
+     */
+    public double[] generateSawtooth(int waveFreq) {
         double[] square = new double[this.time.length];
         for (int i=0; i<this.time.length; i++) {
             double temp = 2*Math.PI*waveFreq*this.time[i];
