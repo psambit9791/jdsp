@@ -94,8 +94,8 @@ public class Generate {
     }
 
     /**
-     * Generates a square wave based on the provided parameters
-     * @param centralFreq Frequency of the wave to be generated
+     * Generates a gaussian pulse signal based on the provided parameters
+     * @param centralFreq Central Frequency of the wave to be generated
      * @return double[][] The generated gaussian pulse signal and its envelope.
      */
     public double[][] generateGaussianPulse(int centralFreq) {
