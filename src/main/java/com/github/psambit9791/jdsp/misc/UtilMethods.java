@@ -18,10 +18,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.SingularValueDecomposition;
 import org.apache.commons.math3.stat.StatUtils;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -115,6 +112,7 @@ public class UtilMethods {
      * @param start Start value of the sequence
      * @param stop Stop value of the sequence
      * @param step Spacing between elements
+     * @throws java.lang.IllegalArgumentException If start value is greater than stop value
      * @return double[] Generated sequence
      */
     public static double[] arange(double start, double stop, double step) {
@@ -139,6 +137,7 @@ public class UtilMethods {
      * @param start Start value of the sequence
      * @param stop Stop value of the sequence
      * @param step Spacing between elements
+     * @throws java.lang.IllegalArgumentException If start value is greater than stop value
      * @return int[] Generated sequence
      */
     public static int[] arange(int start, int stop, int step) {
@@ -259,6 +258,7 @@ public class UtilMethods {
      * The output differs based on the mode of operation.
      * @param signal Signal to be padded
      * @param mode The mode in which padding will take place
+     * @throws java.lang.IllegalArgumentException If string mode is not "reflect", "constant", "nearest", "mirror" or "wrap"
      * Mode outputs for signal [a b c d]:
      * "reflect" : [d c b a | a b c d | d c b a]
      * "constant" : [0 0 0 0 | a b c d | 0 0 0 0]
@@ -613,7 +613,9 @@ public class UtilMethods {
      */
     public static double[] electrocardiogram() throws FileNotFoundException, IOException {
         double[] data = new double[108000];
-        BufferedReader br = new BufferedReader(new FileReader("./src/main/java/com/github/psambit9791/jdsp/misc/ecg.txt"));
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream is = classLoader.getResourceAsStream("ecg.txt");
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String[] line = br.readLine().trim().split(" ");
         for (int i=0; i<line.length; i++) {
             data[i] = Double.parseDouble(line[i]);
@@ -704,7 +706,7 @@ public class UtilMethods {
                 out[i] = arr[i] * val;
             }
         }
-        else if (action.equals("div")) {
+        else {
             for (int i=0; i<arr.length; i++) {
                 out[i] = arr[i] / val;
             }
