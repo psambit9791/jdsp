@@ -22,7 +22,7 @@ public class TestDecimate {
 
     private int Fs = 100;
     private double[] signal;
-    private Generate gp = new Generate(this.Fs, true);
+    private Generate gp = new Generate(0, 1, this.Fs);
 
     private double[] generateSignal() {
         double[] sin1 = this.gp.generateSineWave(10);

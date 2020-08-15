@@ -12,6 +12,9 @@ package com.github.psambit9791.jdsp.signal;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * <h1>Generate Periodic Signal</h1>
  * The GeneratePeriodic class implements methods to generate sin(), cos(), and square() wave based on sampling frequency and wave frequency
@@ -30,14 +33,9 @@ public class Generate {
      * required to generate different signals.
      * @param samplingFreq Sampling Frequency
      */
-    public Generate(int samplingFreq, boolean positive) {
+    public Generate(int start, int stop, int samplingFreq) {
         this.Fs = samplingFreq;
-        if (positive) {
-            this.time = UtilMethods.linspace(0, 1, samplingFreq, true);
-        }
-        else {
-            this.time = UtilMethods.linspace(-1, 1, 2*samplingFreq, true);
-        }
+        this.time = UtilMethods.linspace(start, stop, samplingFreq, true);
     }
 
     /**
@@ -51,7 +49,7 @@ public class Generate {
     /**
      * Generates a sine wave based on the provided parameters
      * @param waveFreq Frequency of the wave to be generated
-     * @return double[] Smoothed signal
+     * @return double[] Sine wave
      */
     public double[] generateSineWave(int waveFreq) {
         double[] sine = new double[this.time.length];
@@ -65,7 +63,7 @@ public class Generate {
     /**
      * Generates a cosine wave based on the provided parameters
      * @param waveFreq Frequency of the wave to be generated
-     * @return double[] Smoothed signal
+     * @return double[] Cosine wave
      */
     public double[] generateCosineWave(int waveFreq) {
         double[] cosine = new double[this.time.length];
@@ -79,7 +77,7 @@ public class Generate {
     /**
      * Generates a square wave based on the provided parameters
      * @param waveFreq Frequency of the wave to be generated
-     * @return double[] Smoothed signal
+     * @return double[] Square wave
      */
     public double[] generateSquareWave(int waveFreq) {
         double[] square = new double[this.time.length];
@@ -116,19 +114,70 @@ public class Generate {
     }
 
     /**
-     * Generates a square wave based on the provided parameters
-     * @param waveFreq Frequency of the wave to be generated
-     * @return double[] Smoothed signal
+     * Generates a unit impulse signal wat the given time point
+     * @param time Time point at which impulse happens
+     * @throws java.lang.IllegalArgumentException If provided time point is more than time length
+     * @return double[] Impulse signal
      */
-    public double[] generateSawtooth(int waveFreq) {
-        double[] square = new double[this.time.length];
+    public double[] generateUnitImpulse(double time) {
+        int index = (int)(time*this.Fs);
+        if (index >= this.time.length) {
+            throw new IllegalArgumentException("Time must not be more than time length");
+        }
+
+        double[] imp = new double[this.time.length];
+        Arrays.fill(imp, 0);
+        imp[index] = 1;
+
+        return imp;
+    }
+
+    /**
+     * Generates a sawtooth wave based on the provided parameters
+     * @param waveFreq Frequency of the wave to be generated
+     * @throws java.lang.IllegalArgumentException If width value is less than 0 or greater than 1
+     * @return double[] Sawtooth signal
+     */
+    public double[] generateSawtooth(int waveFreq, double width) {
+        if (width<0 || width>1) {
+            throw new IllegalArgumentException("Width must be between 0 and 1");
+        }
+
+        double[] sawtooth = new double[this.time.length];
+        double[] t = new double[this.time.length];
+        double[] tmod = new double[this.time.length];
+
         for (int i=0; i<this.time.length; i++) {
-            double temp = 2*Math.PI*waveFreq*this.time[i];
-            square[i] = Math.signum(Math.sin(temp));
-            if ((Math.abs(Math.sin(temp))-0) < 0.000001) {
-                square[i] = 1;
+            t[i] = 2 * Math.PI * waveFreq * this.time[i];
+            tmod[i] = UtilMethods.modulo(t[i], 2*Math.PI);
+        }
+
+        double[] w = new double[this.time.length];
+        Arrays.fill(w, width);
+
+        boolean[] mask2 = new boolean[this.time.length];
+        double threshold = width*2*Math.PI;
+        for (int i=0; i<mask2.length ; i++) {
+            mask2[i] = tmod[i] < threshold;
+        }
+
+        for (int i=0; i<sawtooth.length; i++) {
+            if (mask2[i]) {
+                sawtooth[i] = (tmod[i]/(Math.PI*w[i])) - 1;
             }
         }
-        return square;
+
+        boolean[] mask3 = new boolean[this.time.length];
+        for (int i=0; i< mask3.length; i++) {
+            mask3[i] = !mask2[i];
+        }
+
+        for (int i=0; i<sawtooth.length; i++) {
+            if (mask3[i]) {
+                sawtooth[i] = (Math.PI * (w[i]+1) - tmod[i]) / (Math.PI * (1 - w[i])) ;
+            }
+        }
+
+        return sawtooth;
     }
 }

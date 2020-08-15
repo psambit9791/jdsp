@@ -70,6 +70,9 @@ public class UtilMethods {
             i = i + T;
             time[index] = i;
         }
+        if (includeEnd) {
+            time[time.length-1] = stop;
+        }
         return time;
     }
 
@@ -611,7 +614,7 @@ public class UtilMethods {
      * Returns an electrocardiogram as an example for a 1-D signal.
      * @return double[] The ECG data
      */
-    public static double[] electrocardiogram() throws FileNotFoundException, IOException {
+    public static double[] electrocardiogram() throws IOException {
         double[] data = new double[108000];
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream is = classLoader.getResourceAsStream("ecg.txt");
