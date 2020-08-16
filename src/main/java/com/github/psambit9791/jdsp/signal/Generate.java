@@ -11,8 +11,6 @@
 package com.github.psambit9791.jdsp.signal;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**

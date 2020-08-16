@@ -19,9 +19,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestGenerate {
@@ -157,8 +155,7 @@ public class TestGenerate {
                 0.919,  0.818,  0.717,  0.616,  0.515,  0.414,  0.313,  0.212,
                 0.111,  0.01 , -0.091, -0.192, -0.293, -0.394, -0.495, -0.596,
                 -0.697, -0.798, -0.899,  1.};
-//        System.out.println(Arrays.toString(out1));
-//        Assertions.assertArrayEquals(result1, out1, 0.001);
+        Assertions.assertArrayEquals(result1, out1, 0.001);
         double[] out2 = this.gp.generateSawtooth(f1, 0.5);
         double[] result2 = {-1.   , -0.798, -0.596, -0.394, -0.192,  0.01 ,  0.212,  0.414,
                 0.616,  0.818,  0.98 ,  0.778,  0.576,  0.374,  0.172, -0.03 ,
@@ -173,7 +170,6 @@ public class TestGenerate {
                 -0.838, -0.636, -0.434, -0.232, -0.03 ,  0.172,  0.374,  0.576,
                 0.778,  0.98 ,  0.818,  0.616,  0.414,  0.212,  0.01 , -0.192,
                 -0.394, -0.596, -0.798, -1.};
-//        System.out.println(Arrays.toString(out2));
         Assertions.assertArrayEquals(result2, out2, 0.001);
         double[] out3 = this.gp.generateSawtooth(f1, 1);
         double[] result3 = {-1.   , -0.899, -0.798, -0.697, -0.596, -0.495, -0.394, -0.293,
@@ -189,7 +185,6 @@ public class TestGenerate {
                 -0.919, -0.818, -0.717, -0.616, -0.515, -0.414, -0.313, -0.212,
                 -0.111, -0.01 ,  0.091,  0.192,  0.293,  0.394,  0.495,  0.596,
                 0.697,  0.798,  0.899, -1.};
-//        System.out.println(Arrays.toString(out3));
         Assertions.assertArrayEquals(result3, out3, 0.001);
         double[] t = this.gp.getTimeArray();
         this.plot_now("Inverse Sawtooth", t, new double[][]{out1}, "test_outputs/sawtooth_inverse.png");
