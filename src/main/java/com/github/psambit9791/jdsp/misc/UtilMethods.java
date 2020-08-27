@@ -683,7 +683,7 @@ public class UtilMethods {
     }
 
     /**
-     * Performs scalar arithmetic operation
+     * Performs scalar arithmetic operation with a specific value on the input array
      * @param arr Array to be processed
      * @param val Value with which arithmetic operation is performed
      * @throws java.lang.IllegalArgumentException if action is not "add", "sub", "mul", "div"
