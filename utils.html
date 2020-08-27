@@ -629,6 +629,97 @@ double[] out = UtilMethods.unwrap(seq);
                 </div>
                 <!-- END OF UNWRAP-->
 
+                <!--  START OF ARRAY ABSOLUTE  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Absolute Value of Array</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] a = {1.22, -3.41, -0.22, 5.44, -9.28};
+double[] out = UtilMethods.unwrap(a);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[1.22, 3.41, 0.22, 5.44, 9.28]
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF ARRAY ABSOLUTE-->
+
+
+                <!--  START OF ARRAY ARITHMETICS  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Scalar Arithmetic on Array</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] signal = {1.23, 6.54, 4.56, 9.04, 2.88};
+double[] addArr = UtilMethods.scalarArithmetic(signal, 1.02, "add");
+double[] subArr = UtilMethods.scalarArithmetic(signal, 1.02, "sub");
+double[] mulArr = UtilMethods.scalarArithmetic(signal, 1.02, "mul");
+double[] divArr = UtilMethods.scalarArithmetic(signal, 1.02, "div");
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+addArr: [2.25,  7.56,  5.58, 10.06,  3.9]
+subArr: [0.21, 5.52, 3.54, 8.02, 1.86]
+mulArr: [1.2546, 6.6708, 4.6512, 9.2208, 2.9376]
+divArr: [1.2059, 6.4118, 4.4706, 8.8627, 2.8235]
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF ARRAY ARITHMETIC-->
+
             </div>
 
             <div id="matrixop">
@@ -752,6 +843,47 @@ double[][] out = UtilMethods.transpose(matrix);
                     <div class="container" style="padding-bottom:50px;"></div>
                 </div>
                 <!-- END OF MATRIX TRANSPOSE-->
+
+                <!--  START OF MATRIX ABSOLUTE VALUE  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Absolute Value of Matrix</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[][] m1 = {{1.22, -3.41, -0.22}, {-0.89, 1.6, 7.65}};
+double[][] res1 = {{1.22, 3.41, 0.22}, {0.89, 1.6, 7.65}};
+double[][] out = UtilMethods.absoluteArray(m1);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                                <img src="res/signal/matrix-absolute.svg" alt="Image" class="img-fluid" style="width: auto; height: 64px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF MATRIX ABSOLUTE VALUE-->
             </div>
 
             <div id="argsop">
