@@ -21,7 +21,7 @@ To get the latest stable release of jDSP:
 
 ### Gradle
 ```
-implementation 'com.github.psambit9791:jdsp:0.2.1'
+implementation 'com.github.psambit9791:jdsp:0.3.0'
 ```
 
 ### Maven
@@ -29,7 +29,7 @@ implementation 'com.github.psambit9791:jdsp:0.2.1'
 <dependency>
   <groupId>com.github.psambit9791</groupId>
   <artifactId>jdsp</artifactId>
-  <version>0.2.1</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 
