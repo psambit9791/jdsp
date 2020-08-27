@@ -386,7 +386,7 @@ valid: [38, 15, 40, 43, 37]
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
 int Fs = 100;
-Generate gp = new Generate(Fs);
+Generate gp = new Generate(0, 1, Fs);
 int f1 = 10;
 double[] out = gp.generateSineWave(f1);
                     </code>
@@ -412,7 +412,7 @@ double[] out = gp.generateSineWave(f1);
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
 int Fs = 100;
-Generate gp = new Generate(Fs);
+Generate gp = new Generate(0, 1, Fs);
 int f1 = 10;
 double[] out = gp.generateCosineWave(f1);
                     </code>
@@ -438,7 +438,7 @@ double[] out = gp.generateCosineWave(f1);
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
 int Fs = 100;
-Generate gp = new Generate(Fs);
+Generate gp = new Generate(0, 1, Fs);
 int f1 = 10;
 double[] out = gp.generateSquareWave(f1);
                     </code>
@@ -448,6 +448,85 @@ double[] out = gp.generateSquareWave(f1);
                   <div class="container" style="padding-bottom:50px;"></div>
               </div>
               <!-- END OF SQUARE-->
+
+              <!--  START OF SAWTOOTH  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Sawtooth Signal</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/signal/generate/sawtooth_set.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100;
+Generate gp = new Generate(0, 1, Fs);
+int f1 = 5;
+double width = 1; //1 for pure sawtooth, 0.5 for triangular, 0 for inverse sawtooth
+double[] out = gp.generateSawtooth(f1, width);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF SAWTOOTH-->
+
+              <!--  START OF GAUSSIAN PULSE  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Gaussian Pulse</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/signal/generate/gauss_pulse.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100;
+Generate gp = new Generate(-1, 1, 2*Fs);
+int f1 = 10;
+double[] out = gp.generateGaussianPulse(f1);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF GAUSSIAN PULSE-->
+
+              <!--  START OF SAWTOOTH  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Unit Impulse</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/signal/generate/unit_impulse.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100;
+Generate gp = new Generate(0, 1, Fs);
+double position = 0.5; //middle of the signal
+double[] out = gp.generateUnitImpulse(position);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF SAWTOOTH-->
 
           </div>
         </div>
