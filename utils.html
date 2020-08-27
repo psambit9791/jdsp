@@ -636,7 +636,7 @@ double[] out = UtilMethods.unwrap(seq);
                 <div class="bg-white" style="padding-top:30px;">
                     <div class="row mb-5">
                         <div class="col-md-7 mx-auto text-center">
-                            <h2 class="heading-29190">Pseudo-inverse of array</h2>
+                            <h2 class="heading-29190">Pseudo-inverse of Matrix</h2>
                         </div>
                     </div>
                     <div class="row mb-5">
@@ -671,6 +671,87 @@ double[][] out = UtilMethods.pseudoInverse(matrix);
                     <div class="container" style="padding-bottom:50px;"></div>
                 </div>
                 <!-- END OF PSEUDO-INVERSE-->
+
+                <!--  START OF MATRIX MULTIPLICATION  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Matrix Multiplication</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[][] m1 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+double[][] m2 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+double[][] out = UtilMethods.matrixMultiply(m1, m2);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                                <img src="res/signal/matrix-mul.svg" alt="Image" class="img-fluid" style="width: auto; height: 64px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF MATRIX MULTIPLICATION-->
+
+                <!--  START OF MATRIX TRANSPOSE  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Matrix Transpose</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[][] matrix = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+double[][] out = UtilMethods.transpose(matrix);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                                <img src="res/signal/matrix-transpose.svg" alt="Image" class="img-fluid" style="width: auto; height: 64px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF MATRIX TRANSPOSE-->
             </div>
 
             <div id="argsop">
