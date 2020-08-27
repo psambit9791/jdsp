@@ -115,6 +115,7 @@
           <ul>
             <li><a href="#fourier">Fourier Transforms</a> </li>
             <li><a href="#hilbert">Hilbert Transform</a> </li>
+            <li><a href="#pca">Principal Component Analysis</a> </li>
           </ul>
 
           <div id="fourier">
@@ -288,6 +289,47 @@ double[] frequency = h.getInstantaneousFrequency(Fs);
             <!-- END OF HILBERT TRANSFORM-->
 
           </div>
+
+
+            <div id="pca">
+
+                <!--  START OF PCA TRANSFORM  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Principal Component Analysis</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/transforms/pca/signal.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <h5>Signal Used for this Demo</h5>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/transforms/pca/pca.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <h5>1-D Signal after PCA</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int dimensions = 1;
+PCA p1 = new PCA(signal, dimensions);
+p1.fit();
+double[][] newSignal = p1.transform(signal); //Returns the reduced signal
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF PCA TRANSFORM-->
+
+            </div>
         </div>
         
     </div>
