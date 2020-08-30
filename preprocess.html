@@ -466,7 +466,7 @@ double[] out = gp.generateSquareWave(f1);
 int Fs = 100;
 Generate gp = new Generate(0, 1, Fs);
 int f1 = 5;
-double width = 1; //1 for pure sawtooth, 0.5 for triangular, 0 for inverse sawtooth
+double width = 1; //1 for pure sawtooth, 0.5 for triangular, 0 for reverse sawtooth
 double[] out = gp.generateSawtooth(f1, width);
                     </code>
                   </pre>
@@ -502,7 +502,7 @@ double[] out = gp.generateGaussianPulse(f1);
               </div>
               <!-- END OF GAUSSIAN PULSE-->
 
-              <!--  START OF SAWTOOTH  -->
+              <!--  START OF UNIT IMPULSE  -->
               <div class="bg-light" style="padding-top:30px;">
                   <div class="row mb-5">
                       <div class="col-md-7 mx-auto text-center">
@@ -526,7 +526,7 @@ double[] out = gp.generateUnitImpulse(position);
                   </div>
                   <div class="container" style="padding-bottom:50px;"></div>
               </div>
-              <!-- END OF SAWTOOTH-->
+              <!-- END OF UNIT IMPULSE-->
 
           </div>
         </div>
