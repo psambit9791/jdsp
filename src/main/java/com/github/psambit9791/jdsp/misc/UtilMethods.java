@@ -618,7 +618,7 @@ public class UtilMethods {
     public static double[] electrocardiogram() throws IOException {
         double[] data = new double[108000];
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classLoader.getResourceAsStream("ecg.txt");
+        InputStream is = classLoader.getResourceAsStream("ecg.dat");
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String[] line = br.readLine().trim().split(" ");
         for (int i=0; i<line.length; i++) {
