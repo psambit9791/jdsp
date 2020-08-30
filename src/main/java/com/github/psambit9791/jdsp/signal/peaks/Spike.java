@@ -59,6 +59,8 @@ public class Spike {
 
     /**
      * This method calculates the height of the spike with respect to the left trough
+     * @param peaks List of all the identified peaks
+     * @param left_trough List of the troughs on left of given peaks
      * @return double[] The list of all the right spike heights
      */
     public double[] calculateLeftSpikeHeight(int[] peaks, int[] left_trough) {
@@ -76,6 +78,8 @@ public class Spike {
 
     /**
      * This method calculates the height of the spike with respect to the left trough
+     * @param peaks List of all the identified peaks
+     * @param right_trough List of the troughs on right of given peaks
      * @return double[] The list of all the right spike heights
      */
     public double[] calculateRightSpikeHeight(int[] peaks, int[] right_trough) {
@@ -93,6 +97,8 @@ public class Spike {
 
     /**
      * This method returns the height of the peaks as a mean of the left and right troughs. If either value is NaN, only other value is considered
+     * @param left_spike List of left spike heights of peaks
+     * @param right_spike List of right spike heights of peaks
      * @return double[] The list of all the spike heights taken as an average of the neighbouring troughs
      */
     public double[] calculateMeanSpikeHeight(double[] left_spike, double[] right_spike) {
@@ -113,6 +119,8 @@ public class Spike {
 
     /**
      * This method returns the height of the peaks as the maximum of the left or right troughs. If either value is NaN, other value is considered
+     * @param left_spike List of left spike heights of peaks
+     * @param right_spike List of right spike heights of peaks
      * @return double[] The list of all the spike heights taken as an maximum between the neighbouring troughs
      */
     public double[] calculateMaxSpikeHeight(double[] left_spike, double[] right_spike) {
@@ -133,6 +141,8 @@ public class Spike {
 
     /**
      * This method returns the height of the peaks as the minimum of the left or right troughs. If either value is NaN, other value is considered
+     * @param left_spike List of left spike heights of peaks
+     * @param right_spike List of right spike heights of peaks
      * @return double[] The list of all the spike heights taken as an minimum between the neighbouring troughs
      */
     public double[] calculateMinSpikeHeight(double[] left_spike, double[] right_spike) {

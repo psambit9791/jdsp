@@ -150,6 +150,7 @@ public class PCA {
 
     /**
      * Applies dimensionality reduction on the input signal
+     * @param x The signal to be processed
      * @throws java.lang.ExceptionInInitializerError if called before executing fit()
      * @throws java.lang.ArithmeticException if number of channels in input signal is different from the original signal
      * @return double[][] The signal with reduced dimensions

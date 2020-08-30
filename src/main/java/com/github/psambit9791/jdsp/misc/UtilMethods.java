@@ -612,6 +612,7 @@ public class UtilMethods {
 
     /**
      * Returns an electrocardiogram as an example for a 1-D signal.
+     * @throws java.io.IOException To handle missing Input Output Streams
      * @return double[] The ECG data
      */
     public static double[] electrocardiogram() throws IOException {
@@ -686,6 +687,7 @@ public class UtilMethods {
      * Performs scalar arithmetic operation with a specific value on the input array
      * @param arr Array to be processed
      * @param val Value with which arithmetic operation is performed
+     * @param action What action needs to be performed. Can be addition, subtraction, multiplication and division.
      * @throws java.lang.IllegalArgumentException if action is not "add", "sub", "mul", "div"
      * @return double[][] The result of the operation
      */

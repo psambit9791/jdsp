@@ -193,6 +193,7 @@ public class Peak {
      * This method calculates the width of the peaks provided as an argument
      * (Equivalent to scipy.signal.find_peaks() width parameter)
      * @param peaks Peaks for which prominence needs to be calculated
+     * @param rel_height the relative height at which the peak width is measured as a percentage of its prominence
      * @throws java.lang.IllegalArgumentException if rel_height is not between 0.0 and 1.0
      * @return double[][] The width of the input peaks. 0: Contains the widths, 1: Contains the Left Intersection Points, 2: Contains the Right Intersection Points
      */

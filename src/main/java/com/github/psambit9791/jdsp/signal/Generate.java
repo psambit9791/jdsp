@@ -29,6 +29,8 @@ public class Generate {
     /**
      * This constructor initialises the prerequisites
      * required to generate different signals.
+     * @param start The starting timepoint
+     * @param stop The ending timepoint
      * @param samplingFreq Sampling Frequency
      */
     public Generate(int start, int stop, int samplingFreq) {
@@ -133,6 +135,7 @@ public class Generate {
     /**
      * Generates a sawtooth wave based on the provided parameters
      * @param waveFreq Frequency of the wave to be generated
+     * @param width Determines the shape of the sawtooth
      * @throws java.lang.IllegalArgumentException If width value is less than 0 or greater than 1
      * @return double[] Sawtooth signal
      */
