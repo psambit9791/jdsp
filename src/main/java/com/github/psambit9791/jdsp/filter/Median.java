@@ -18,7 +18,7 @@ import java.util.Arrays;
 /**
  * <h1>Median Filter</h1>
  * The Median class implements median filter which can be applied on the input signal using a window based on the kernel size.
- * Use: Unlike an averaging filter, he median filter can preserve sharp edges while completely suppressing isolated out-of-range noise.
+ * Use: Unlike an averaging filter, the median filter can preserve sharp edges while completely suppressing isolated out-of-range noise.
  * Reference <a href="http://fourier.eng.hmc.edu/e161/lectures/smooth_sharpen/node2.html">article</a> for more information on 1-D Median Filter.
  * <p>
  *
@@ -32,8 +32,7 @@ public class Median {
     private int windowSize;
 
     /**
-     * This constructor initialises the prerequisites
-     * required to use Median filter.
+     * This constructor initialises the prerequisites required to use Median filter.
      * @throws java.lang.IllegalArgumentException if wsize (3) is greater than or equal to signal length
      * @param s Signal to be filtered
      */
@@ -46,8 +45,7 @@ public class Median {
     }
 
     /**
-     * This constructor initialises the prerequisites
-     * required to use Bessel filter.
+     * This constructor initialises the prerequisites required to use Median filter.
      * @param s Signal to be filtered
      * @throws java.lang.IllegalArgumentException if wsize is greater than or equal to signal length
      * @param wsize Window or kernel size
