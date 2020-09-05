@@ -1,4 +1,4 @@
-package com.github.psambit9791.jdsp_test;
+package com.github.psambit9791.jdsp.io;
 
 public class WavFileException extends Exception
 {
