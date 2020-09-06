@@ -14,10 +14,8 @@ import com.github.psambit9791.jdsp.io.WavFile;
 import com.github.psambit9791.jdsp.io.WavFileException;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 
-import javax.rmi.CORBA.Util;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Hashtable;
 
 public class Wav {
@@ -116,36 +114,66 @@ public class Wav {
         return signal;
     }
 
-    private int[][] toInt(double[][] a) {
-        int[][] out = new int[a.length][a[0].length];
-        for (int i=0; i<out.length; i++) {
-            for (int j=0; j<out[0].length; j++) {
-                out[i][j] = (int)a[i][j];
-            }
-        }
-        return out;
+    public void putData(double[][] signal, long samplingRate, String filename, String type) throws IOException, WavFileException, IllegalArgumentException {
+        this.putData(signal, samplingRate, 16, filename, type);
     }
 
-    private long[][] toLong(double[][] a) {
-        long[][] out = new long[a.length][a[0].length];
-        for (int i=0; i<out.length; i++) {
-            for (int j=0; j<out[0].length; j++) {
-                out[i][j] = (long)a[i][j];
-            }
-        }
-        return out;
-    }
-
-    public void putData(double[][] signal, String filename, String type) throws IOException, WavFileException, IllegalArgumentException {
+    public void putData(double[][] signal, long samplingRate, int validBits, String filename, String type) throws IOException, WavFileException, IllegalArgumentException {
         signal = UtilMethods.transpose(signal);
+        int channels = signal.length;
+        long frames = (long)signal[0].length;
+        File f = new File(filename);
+        this.wf = WavFile.newWavFile(f, channels, frames, 16, samplingRate);
         if (type.equals("int")) {
-            int[][] sig = this.toInt(signal);
+            int[][] buffer = new int[channels][100];
+            long frameCounter = 0;
+            while (frameCounter < frames)
+            {
+                long remaining = this.wf.getFramesRemaining();
+                int toWrite = (remaining > 100) ? 100 : (int) remaining;
+                for (int s=0 ; s<toWrite ; s++, frameCounter++)
+                {
+                    for (int c=0; c<channels; c++) {
+                        buffer[c][s] = (int)signal[c][s];
+                    }
+                }
+                wf.writeFrames(buffer, toWrite);
+            }
+            this.wf.close();
         }
         else if (type.equals("long")) {
-            long[][] sig = this.toLong(signal);
+            long[][] buffer = new long[channels][100];
+            long frameCounter = 0;
+            while (frameCounter < frames)
+            {
+                long remaining = this.wf.getFramesRemaining();
+                int toWrite = (remaining > 100) ? 100 : (int) remaining;
+                for (int s=0 ; s<toWrite ; s++, frameCounter++)
+                {
+                    for (int c=0; c<channels; c++) {
+                        buffer[c][s] = (long)signal[c][s];
+                    }
+                }
+                wf.writeFrames(buffer, toWrite);
+            }
+            this.wf.close();
         }
         else if (type.equals("double")) {
-            double[][] sig = signal;
+            double[][] buffer = new double[channels][100];
+            long frameCounter = 0;
+            while (frameCounter < frames)
+            {
+                long remaining = this.wf.getFramesRemaining();
+                int toWrite = (remaining > 100) ? 100 : (int) remaining;
+                for (int s=0 ; s<toWrite ; s++, frameCounter++)
+                {
+                    for (int c=0; c<channels; c++) {
+                        buffer[c][s] = signal[c][s];
+                    }
+                }
+                wf.writeFrames(buffer, toWrite);
+            }
+            this.wf.close();
 
         }
         else {
