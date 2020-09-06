@@ -22,7 +22,7 @@ import java.util.Hashtable;
 
 public class Wav {
     private WavFile wf;
-    private Hashtable<String, Long> props;
+    public Hashtable<String, Long> props;
     private double[][] data;
 
     public void readTemplate() throws WavFileException, IOException {
@@ -114,5 +114,42 @@ public class Wav {
         }
         signal = UtilMethods.transpose(signal);
         return signal;
+    }
+
+    private int[][] toInt(double[][] a) {
+        int[][] out = new int[a.length][a[0].length];
+        for (int i=0; i<out.length; i++) {
+            for (int j=0; j<out[0].length; j++) {
+                out[i][j] = (int)a[i][j];
+            }
+        }
+        return out;
+    }
+
+    private long[][] toLong(double[][] a) {
+        long[][] out = new long[a.length][a[0].length];
+        for (int i=0; i<out.length; i++) {
+            for (int j=0; j<out[0].length; j++) {
+                out[i][j] = (long)a[i][j];
+            }
+        }
+        return out;
+    }
+
+    public void putData(double[][] signal, String filename, String type) throws IOException, WavFileException, IllegalArgumentException {
+        signal = UtilMethods.transpose(signal);
+        if (type.equals("int")) {
+            int[][] sig = this.toInt(signal);
+        }
+        else if (type.equals("long")) {
+            long[][] sig = this.toLong(signal);
+        }
+        else if (type.equals("double")) {
+            double[][] sig = signal;
+
+        }
+        else {
+            throw new IllegalArgumentException("Type must be int, long or double");
+        }
     }
 }
