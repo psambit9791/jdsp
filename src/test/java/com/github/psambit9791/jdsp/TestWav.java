@@ -67,6 +67,54 @@ public class TestWav {
     }
 
     @Test
+    public void wavTestTemplateLong() throws WavFileException, IOException {
+        Wav objRead = new Wav();
+        objRead.readTemplate();
+        double[][] signal = objRead.getData("long");
+
+        Hashtable<String, Long> propsOut = objRead.getProperties();
+
+        Wav objWrite = new Wav();
+        String outputFileName = "test_outputs/sampleLong.wav";
+        objWrite.putData(signal, propsOut.get("Channels"), "long", outputFileName);
+        boolean fileExists = new File("./"+outputFileName).exists();
+        Assertions.assertTrue(fileExists);
+
+        Wav objRead2 = new Wav();
+        objRead2.readWav(outputFileName);
+        double[][] signalWritten = objRead2.getData("long");
+        double[][] signalT = UtilMethods.transpose(signal);
+        double[][] signalWrittenT = UtilMethods.transpose(signalWritten);
+        for (int i=0; i<signalT.length; i++) {
+            Assertions.assertArrayEquals(signalT[i], signalWrittenT[i]);
+        }
+    }
+
+    @Test
+    public void wavTestTemplateDouble() throws WavFileException, IOException {
+        Wav objRead = new Wav();
+        objRead.readTemplate();
+        double[][] signal = objRead.getData("double");
+
+        Hashtable<String, Long> propsOut = objRead.getProperties();
+
+        Wav objWrite = new Wav();
+        String outputFileName = "test_outputs/sampleLong.wav";
+        objWrite.putData(signal, propsOut.get("Channels"), "double", outputFileName);
+        boolean fileExists = new File("./"+outputFileName).exists();
+        Assertions.assertTrue(fileExists);
+
+        Wav objRead2 = new Wav();
+        objRead2.readWav(outputFileName);
+        double[][] signalWritten = objRead2.getData("double");
+        double[][] signalT = UtilMethods.transpose(signal);
+        double[][] signalWrittenT = UtilMethods.transpose(signalWritten);
+        for (int i=0; i<signalT.length; i++) {
+            Assertions.assertArrayEquals(signalT[i], signalWrittenT[i], 0.0001);
+        }
+    }
+
+    @Test
     public void wavTestCustomInt() throws WavFileException, IOException {
         Wav objRead1 = new Wav();
         String inputFilename = "test_inputs/guitar.wav";
@@ -87,6 +135,54 @@ public class TestWav {
         double[][] signalWrittenT = UtilMethods.transpose(signalWritten);
         for (int i=0; i<signalT.length; i++) {
             Assertions.assertArrayEquals(signalT[i], signalWrittenT[i]);
+        }
+    }
+
+    @Test
+    public void wavTestCustomLong() throws WavFileException, IOException {
+        Wav objRead1 = new Wav();
+        String inputFilename = "test_inputs/guitar.wav";
+        objRead1.readWav(inputFilename);
+        Hashtable<String, Long> propsOut = objRead1.getProperties();
+        double[][] signal = objRead1.getData("long");
+
+        Wav objWrite = new Wav();
+        String outputFileName = "test_outputs/guitarLong.wav";
+        objWrite.putData(signal, propsOut.get("Channels"), "long", outputFileName);
+        boolean fileExists = new File("./"+outputFileName).exists();
+        Assertions.assertTrue(fileExists);
+
+        Wav objRead2 = new Wav();
+        objRead2.readWav(outputFileName);
+        double[][] signalWritten = objRead2.getData("long");
+        double[][] signalT = UtilMethods.transpose(signal);
+        double[][] signalWrittenT = UtilMethods.transpose(signalWritten);
+        for (int i=0; i<signalT.length; i++) {
+            Assertions.assertArrayEquals(signalT[i], signalWrittenT[i]);
+        }
+    }
+
+    @Test
+    public void wavTestCustomDouble() throws WavFileException, IOException {
+        Wav objRead1 = new Wav();
+        String inputFilename = "test_inputs/guitar.wav";
+        objRead1.readWav(inputFilename);
+        Hashtable<String, Long> propsOut = objRead1.getProperties();
+        double[][] signal = objRead1.getData("double");
+
+        Wav objWrite = new Wav();
+        String outputFileName = "test_outputs/guitarLong.wav";
+        objWrite.putData(signal, propsOut.get("Channels"), "double", outputFileName);
+        boolean fileExists = new File("./"+outputFileName).exists();
+        Assertions.assertTrue(fileExists);
+
+        Wav objRead2 = new Wav();
+        objRead2.readWav(outputFileName);
+        double[][] signalWritten = objRead2.getData("double");
+        double[][] signalT = UtilMethods.transpose(signal);
+        double[][] signalWrittenT = UtilMethods.transpose(signalWritten);
+        for (int i=0; i<signalT.length; i++) {
+            Assertions.assertArrayEquals(signalT[i], signalWrittenT[i], 0.0001);
         }
     }
 }

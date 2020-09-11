@@ -16,14 +16,32 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Hashtable;
 
+/**
+ * <h1>Read and Write WAV Files</h1>
+ * This class provides methods; to read WAV files including their properties and their content as a 2-D matrix;
+ * and to write 2-D matrices into WAV files. For all the matrices, the first dimension is considered the number of frames
+ * and the second dimension is considered the number of channels.
+ * For example, a matrix denoted as <pre>double[][] signal = new double[16000][2]</pre> translates to a wav file with 2
+ * channels and 16000 frames. At a sampling rate of 8kHz, this interprets to 2 seconds of stereo sound.
+ *
+ * This class is supported largely by the classes provided <a href="http://www.labbookpages.co.uk/audio/javaWavFiles.html">here</a>.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class Wav {
     private WavFile wf;
     public Hashtable<String, Long> props;
     private double[][] data;
 
+    /**
+     * This reads a sample file from the res folder called "sample.wav"
+     * @throws com.github.psambit9791.jdsp.io.WavFileException if error occurs in WavFile class
+     * @throws java.io.IOException if sample file does not exist
+     */
     public void readTemplate() throws WavFileException, IOException {
         File f = null;
         try {
@@ -54,6 +72,9 @@ public class Wav {
         }
     }
 
+    /**
+     * Compute properties of the WAV File
+     */
     private void computeProperties() {
         int bytesPerSample = (this.wf.getValidBits() + 7)/8;
         this.props = new Hashtable<String, Long>();
@@ -65,9 +86,14 @@ public class Wav {
         this.props.put("BytesPerSample", (long)bytesPerSample);
     }
 
+    /**
+     * Returns the properties of the WAV file
+     * @return HashTable A hashtable with the following properties: Channels, Frames, SampleRate, BlockAlign, ValidBits, BytesPerSample
+     */
     public Hashtable getProperties() {
         return this.props;
     }
+
 
     private double[][] toDouble(int[][] a) {
         double[][] out = new double[a.length][a[0].length];
@@ -89,6 +115,17 @@ public class Wav {
         return out;
     }
 
+    /**
+     * Returns the wav file content as a 2-D array
+     * @throws java.io.IOException In case any error occurs while reading the frames
+     * @throws com.github.psambit9791.jdsp.io.WavFileException if error occurs in WavFile class
+     * @throws java.lang.IllegalArgumentException if type is anything other than "int", "long", "double"
+     * @param type Can be "int", "long" and "double"
+     *             "int" - Up to 32 bit unsigned
+     *             "long" - Up to 64 bit unsigned
+     *             "double" - Scales the value between -1 and 1.
+     * @return doubel[][] The content of the wav file
+     */
     public double[][] getData(String type) throws IOException, WavFileException, IllegalArgumentException {
         int channels = this.props.get("Channels").intValue();
         int frames = this.props.get("Frames").intValue();
@@ -115,10 +152,31 @@ public class Wav {
         return signal;
     }
 
+    /**
+     * Returns the wav file content as a 2-D array. Assumes validBits is 16.
+     * @throws com.github.psambit9791.jdsp.io.WavFileException if error occurs in WavFile class
+     * @throws java.io.IOException if there is an issue in writing to the file
+     * @throws java.lang.IllegalArgumentException if type is anything other than "int", "long", "double"
+     * @param signal The 2-D array that needs to be saved as a wav file
+     * @param samplingRate The sampling rate at which the audio was captured
+     * @param type Can be "int", "long" and "double". Depends on what the content of the signal parameter is.
+     * @param filename The name of the file the signal will be saved as
+     */
     public void putData(double[][] signal, long samplingRate, String type, String filename) throws IOException, WavFileException, IllegalArgumentException {
         this.putData(signal, samplingRate, 16, type, filename);
     }
 
+    /**
+     * Returns the wav file content as a 2-D array
+     * @throws com.github.psambit9791.jdsp.io.WavFileException if error occurs in WavFile class
+     * @throws java.io.IOException if there is an issue in writing to the file
+     * @throws java.lang.IllegalArgumentException if type is anything other than "int", "long", "double"
+     * @param signal The 2-D array that needs to be saved as a wav file
+     * @param samplingRate The sampling rate at which the audio was captured
+     * @param validBits The number of valid bits used for storing a single sample
+     * @param type Can be "int", "long" and "double". Depends on what the content of the signal parameter is.
+     * @param filename The name of the file the signal will be saved as
+     */
     public void putData(double[][] signal, long samplingRate, int validBits, String type, String filename) throws IOException, WavFileException, IllegalArgumentException {
         signal = UtilMethods.transpose(signal);
         int channels = signal.length;
@@ -152,7 +210,7 @@ public class Wav {
                 for (int s=0 ; s<toWrite ; s++, frameCounter++)
                 {
                     for (int c=0; c<channels; c++) {
-                        buffer[c][s] = (long)signal[c][s];
+                        buffer[c][s] = (long)signal[c][(int)frameCounter];
                     }
                 }
                 this.wf.writeFrames(buffer, toWrite);
@@ -169,7 +227,7 @@ public class Wav {
                 for (int s=0 ; s<toWrite ; s++, frameCounter++)
                 {
                     for (int c=0; c<channels; c++) {
-                        buffer[c][s] = signal[c][s];
+                        buffer[c][s] = signal[c][(int)frameCounter];
                     }
                 }
                 this.wf.writeFrames(buffer, toWrite);
