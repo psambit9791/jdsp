@@ -73,7 +73,7 @@ fabric.properties
 
 # Test Files
 test_outputs/
-test_inputs/
+#test_inputs/
 
 # POM Backup
 pom.xml.versionsBackup

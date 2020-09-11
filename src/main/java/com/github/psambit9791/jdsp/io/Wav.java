@@ -16,6 +16,7 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Hashtable;
 
 public class Wav {
@@ -114,16 +115,16 @@ public class Wav {
         return signal;
     }
 
-    public void putData(double[][] signal, long samplingRate, String filename, String type) throws IOException, WavFileException, IllegalArgumentException {
-        this.putData(signal, samplingRate, 16, filename, type);
+    public void putData(double[][] signal, long samplingRate, String type, String filename) throws IOException, WavFileException, IllegalArgumentException {
+        this.putData(signal, samplingRate, 16, type, filename);
     }
 
-    public void putData(double[][] signal, long samplingRate, int validBits, String filename, String type) throws IOException, WavFileException, IllegalArgumentException {
+    public void putData(double[][] signal, long samplingRate, int validBits, String type, String filename) throws IOException, WavFileException, IllegalArgumentException {
         signal = UtilMethods.transpose(signal);
         int channels = signal.length;
         long frames = (long)signal[0].length;
         File f = new File(filename);
-        this.wf = WavFile.newWavFile(f, channels, frames, 16, samplingRate);
+        this.wf = WavFile.newWavFile(f, channels, frames, validBits, samplingRate);
         if (type.equals("int")) {
             int[][] buffer = new int[channels][100];
             long frameCounter = 0;
@@ -134,10 +135,10 @@ public class Wav {
                 for (int s=0 ; s<toWrite ; s++, frameCounter++)
                 {
                     for (int c=0; c<channels; c++) {
-                        buffer[c][s] = (int)signal[c][s];
+                        buffer[c][s] = (int)signal[c][(int)frameCounter];
                     }
                 }
-                wf.writeFrames(buffer, toWrite);
+                this.wf.writeFrames(buffer, toWrite);
             }
             this.wf.close();
         }
@@ -154,7 +155,7 @@ public class Wav {
                         buffer[c][s] = (long)signal[c][s];
                     }
                 }
-                wf.writeFrames(buffer, toWrite);
+                this.wf.writeFrames(buffer, toWrite);
             }
             this.wf.close();
         }
@@ -171,7 +172,7 @@ public class Wav {
                         buffer[c][s] = signal[c][s];
                     }
                 }
-                wf.writeFrames(buffer, toWrite);
+                this.wf.writeFrames(buffer, toWrite);
             }
             this.wf.close();
 
