@@ -41,14 +41,6 @@ public class TestWav {
         double[][] signal = objRead.getData("int");
 
         Hashtable<String, Long> propsOut = objRead.getProperties();
-        Hashtable<String, Long> propsResult = new Hashtable<String, Long>();
-        propsResult.put("Channels", (long)2);
-        propsResult.put("Frames", (long)268237);
-        propsResult.put("SampleRate", (long)8000);
-        propsResult.put("BlockAlign", (long)4);
-        propsResult.put("ValidBits", (long)16);
-        propsResult.put("BytesPerSample", (long)2);
-        Assertions.assertEquals(propsResult, propsOut);
 
         Wav objWrite = new Wav();
         String outputFileName = "test_outputs/sampleInt.wav";
@@ -99,7 +91,7 @@ public class TestWav {
         Hashtable<String, Long> propsOut = objRead.getProperties();
 
         Wav objWrite = new Wav();
-        String outputFileName = "test_outputs/sampleLong.wav";
+        String outputFileName = "test_outputs/sampleDouble.wav";
         objWrite.putData(signal, propsOut.get("Channels"), "double", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
@@ -117,13 +109,13 @@ public class TestWav {
     @Test
     public void wavTestCustomInt() throws WavFileException, IOException {
         Wav objRead1 = new Wav();
-        String inputFilename = "test_inputs/guitar.wav";
+        String inputFilename = "test_inputs/music.wav";
         objRead1.readWav(inputFilename);
         Hashtable<String, Long> propsOut = objRead1.getProperties();
         double[][] signal = objRead1.getData("int");
 
         Wav objWrite = new Wav();
-        String outputFileName = "test_outputs/guitarInt.wav";
+        String outputFileName = "test_outputs/musicInt.wav";
         objWrite.putData(signal, propsOut.get("Channels"), "int", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
@@ -141,13 +133,13 @@ public class TestWav {
     @Test
     public void wavTestCustomLong() throws WavFileException, IOException {
         Wav objRead1 = new Wav();
-        String inputFilename = "test_inputs/guitar.wav";
+        String inputFilename = "test_inputs/music.wav";
         objRead1.readWav(inputFilename);
         Hashtable<String, Long> propsOut = objRead1.getProperties();
         double[][] signal = objRead1.getData("long");
 
         Wav objWrite = new Wav();
-        String outputFileName = "test_outputs/guitarLong.wav";
+        String outputFileName = "test_outputs/musicLong.wav";
         objWrite.putData(signal, propsOut.get("Channels"), "long", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
@@ -165,13 +157,13 @@ public class TestWav {
     @Test
     public void wavTestCustomDouble() throws WavFileException, IOException {
         Wav objRead1 = new Wav();
-        String inputFilename = "test_inputs/guitar.wav";
+        String inputFilename = "test_inputs/music.wav";
         objRead1.readWav(inputFilename);
         Hashtable<String, Long> propsOut = objRead1.getProperties();
         double[][] signal = objRead1.getData("double");
 
         Wav objWrite = new Wav();
-        String outputFileName = "test_outputs/guitarLong.wav";
+        String outputFileName = "test_outputs/musicDouble.wav";
         objWrite.putData(signal, propsOut.get("Channels"), "double", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
