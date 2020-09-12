@@ -10,8 +10,8 @@
 
 package com.github.psambit9791.jdsp.io;
 
-import com.github.psambit9791.jdsp.io.WavFile;
-import com.github.psambit9791.jdsp.io.WavFileException;
+import com.github.psambit9791.wavfile.WavFile;
+import com.github.psambit9791.wavfile.WavFileException;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 
 import java.io.File;

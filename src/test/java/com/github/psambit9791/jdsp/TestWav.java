@@ -11,7 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.io.Wav;
-import com.github.psambit9791.jdsp.io.WavFileException;
+import com.github.psambit9791.wavfile.WavFileException;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Hashtable;
 
 public class TestWav {
