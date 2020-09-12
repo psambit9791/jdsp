@@ -2,6 +2,14 @@ package com.github.psambit9791.jdsp.windows;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 
+/**
+ * <h1>_Window Class</h1>
+ * This is an abstract class providing specific methods and abstract methods required to build any Window object.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 abstract class _Window {
 
     boolean extendVal;
@@ -46,5 +54,9 @@ abstract class _Window {
         }
     }
 
+    /**
+     * This method computes the window and returns it
+     * @return double[] The generated window
+     */
     public abstract double[] getWindow();
 }
