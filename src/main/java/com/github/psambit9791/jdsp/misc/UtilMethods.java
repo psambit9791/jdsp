@@ -76,6 +76,45 @@ public class UtilMethods {
         return time;
     }
 
+    /**
+     * This function returns evenly spaced number over a specified interval such that there are specified number of samples.
+     * This is equivalent of the numpy <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html">linspace()</a> function.
+     * @param start Start value of the sequence
+     * @param stop Stop value of the sequence
+     * @param samples Number of samples to be generated
+     * @param includeEnd Include stop value in the sequence
+     * @return double[] Generated sequence
+     */
+    public static double[] linspace(double start, double stop, int samples, boolean includeEnd) {
+        double[] time = new double[samples];
+        double T;
+
+        double span = stop - start;
+
+        double stopVal = (double) stop;
+        double i = start;
+
+        if (includeEnd) {
+            T = span/(samples-1);
+        }
+        else {
+            T = span/samples;
+            stopVal = stopVal - T;
+        }
+
+        int index = 0;
+        time[index] = i;
+
+        for (index=1; index<time.length; index++) {
+            i = i + T;
+            time[index] = i;
+        }
+        if (includeEnd) {
+            time[time.length-1] = stop;
+        }
+        return time;
+    }
+
     // Useful for repeated linspace() required in periodic signal generation
     /**
      * This function returns evenly spaced number over a specified interval such that there are specified number of samples
