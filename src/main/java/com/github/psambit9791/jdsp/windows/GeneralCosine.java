@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * <h1>General Cosine Window</h1>
- * Generic weighted sum of cosine terms window
+ * Generic weighted sum of cosine terms window.
  * <p>
  *
  * @author  Sambit Paul
