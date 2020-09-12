@@ -4,14 +4,12 @@ import com.github.psambit9791.jdsp.windows.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 public class TestWindows {
 
     @Test
     public void BoxCarSymTest() {
         int len = 10;
-        double[] result = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        double[] result = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
         BoxCar w1 = new BoxCar(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
@@ -20,7 +18,7 @@ public class TestWindows {
     @Test
     public void BoxCarASymTest() {
         int len = 10;
-        double[] result = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        double[] result = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
         BoxCar w2 = new BoxCar(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
@@ -114,6 +112,24 @@ public class TestWindows {
         int len = 10;
         double[] result = {0.0001, 0.011, 0.103, 0.3859, 0.7938, 1.0, 0.7938, 0.3859, 0.103, 0.011};
         BlackmanHarris w2 = new BlackmanHarris(len, false);
+        double[] out = w2.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void PoissonSymTest() {
+        int len = 10;
+        double[] result = {0.0111, 0.0302, 0.0821, 0.2231, 0.6065, 0.6065, 0.2231, 0.0821, 0.0302, 0.0111};
+        Poisson w1 = new Poisson(len);
+        double[] out = w1.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void PoissonASymTest() {
+        int len = 10;
+        double[] result = {0.0067, 0.0183, 0.0498, 0.1353, 0.3679, 1.0, 0.3679, 0.1353, 0.0498, 0.0183};
+        Poisson w2 = new Poisson(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.001);
     }
