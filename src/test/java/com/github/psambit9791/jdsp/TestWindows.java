@@ -4,6 +4,8 @@ import com.github.psambit9791.jdsp.windows.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class TestWindows {
 
     @Test
@@ -186,6 +188,98 @@ public class TestWindows {
         double std = 2.0;
         double[] result = {0.0439, 0.1353, 0.3247, 0.6065, 0.8825, 1.0, 0.8825, 0.6065, 0.3247, 0.1353};
         Gaussian w2 = new Gaussian(len, std,false);
+        double[] out = w2.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void TukeySymTest() {
+        int len = 10;
+        double alpha = 0.5;
+        double[] result = {0.0, 0.4132, 0.9698, 1.0, 1.0, 1.0, 1.0, 0.9698, 0.4132, 0.0};
+        Tukey w1 = new Tukey(len, alpha);
+        double[] out = w1.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void TukeyASymTest() {
+        int len = 10;
+        double alpha = 0.5;
+        double[] result = {0.0, 0.3455, 0.9045, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9045, 0.3455};
+        Tukey w2 = new Tukey(len, alpha,false);
+        double[] out = w2.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void TriangularEvenSymTest() {
+        int len = 10;
+        double[] result = {0.1, 0.3, 0.5, 0.7, 0.9, 0.9, 0.7, 0.5, 0.3, 0.1};
+        Triangular w1 = new Triangular(len);
+        double[] out = w1.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void TriangularEvenASymTest() {
+        int len = 10;
+        double[] result = {0.1667, 0.3333, 0.5, 0.6667, 0.8333, 1.0, 0.8333, 0.6667, 0.5, 0.3333};
+        Triangular w2 = new Triangular(len,false);
+        double[] out = w2.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void TriangularOddSymTest() {
+        int len = 13;
+        double[] result = {0.1429, 0.2857, 0.4286, 0.5714, 0.7143, 0.8571, 1.0, 0.8571, 0.7143, 0.5714, 0.4286, 0.2857, 0.1429};
+        Triangular w1 = new Triangular(len);
+        double[] out = w1.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void TriangularOddASymTest() {
+        int len = 13;
+        double[] result = {0.0714, 0.2143, 0.3571, 0.5, 0.6429, 0.7857, 0.9286, 0.9286, 0.7857, 0.6429, 0.5, 0.3571, 0.2143};
+        Triangular w2 = new Triangular(len,false);
+        double[] out = w2.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void BartlettSymTest() {
+        int len = 10;
+        double[] result = {0.0, 0.2222, 0.4444, 0.6667, 0.8889, 0.8889, 0.6667, 0.4444, 0.2222, 0.0};
+        Bartlett w1 = new Bartlett(len);
+        double[] out = w1.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void BartlettASymTest() {
+        int len = 10;
+        double[] result = {0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 0.8, 0.6, 0.4, 0.2};
+        Bartlett w2 = new Bartlett(len,false);
+        double[] out = w2.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void BartlettHannSymTest() {
+        int len = 10;
+        double[] result = {0.0, 0.1422, 0.4207, 0.73, 0.9504, 0.9504, 0.73, 0.4207, 0.1422, 0.0};
+        BartlettHann w1 = new BartlettHann(len);
+        double[] out = w1.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void BartlettHannASymTest() {
+        int len = 10;
+        double[] result = {0.0, 0.1206, 0.3586, 0.6414, 0.8794, 1.0, 0.8794, 0.6414, 0.3586, 0.1206};
+        BartlettHann w2 = new BartlettHann(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
     }
