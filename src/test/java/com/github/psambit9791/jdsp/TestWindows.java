@@ -283,4 +283,22 @@ public class TestWindows {
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
     }
+
+    @Test
+    public void BohmanSymTest() {
+        int len = 10;
+        double[] result = {0.0, 0.0344, 0.2363, 0.609, 0.9442, 0.9442, 0.609, 0.2363, 0.0344, 0.0};
+        Bohman w1 = new Bohman(len);
+        double[] out = w1.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void BohmanASymTest() {
+        int len = 10;
+        double[] result = {0.0, 0.0253, 0.1791, 0.4881, 0.8343, 1.0, 0.8343, 0.4881, 0.1791, 0.0253};
+        Bohman w2 = new Bohman(len, false);
+        double[] out = w2.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
 }
