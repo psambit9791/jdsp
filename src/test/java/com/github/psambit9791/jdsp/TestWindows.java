@@ -59,7 +59,7 @@ public class TestWindows {
         double[] result = {0.08, 0.1679, 0.3979, 0.6821, 0.9121, 1.0, 0.9121, 0.6821, 0.3979, 0.1679};
         Hamming w2 = new Hamming(len, false);
         double[] out = w2.getWindow();
-        Assertions.assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.0001);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class TestWindows {
         double[] result = {0.0, 0.0955, 0.3455, 0.6545, 0.9045, 1.0, 0.9045, 0.6545, 0.3455, 0.0955};
         Hanning w2 = new Hanning(len, false);
         double[] out = w2.getWindow();
-        Assertions.assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.0001);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class TestWindows {
         double[] result = {-0.0, 0.0402, 0.2008, 0.5098, 0.8492, 1.0, 0.8492, 0.5098, 0.2008, 0.0402};
         Blackman w2 = new Blackman(len, false);
         double[] out = w2.getWindow();
-        Assertions.assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.0001);
     }
 
     @Test
@@ -113,7 +113,7 @@ public class TestWindows {
         double[] result = {0.0001, 0.011, 0.103, 0.3859, 0.7938, 1.0, 0.7938, 0.3859, 0.103, 0.011};
         BlackmanHarris w2 = new BlackmanHarris(len, false);
         double[] out = w2.getWindow();
-        Assertions.assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.0001);
     }
 
     @Test
@@ -131,6 +131,62 @@ public class TestWindows {
         double[] result = {0.0067, 0.0183, 0.0498, 0.1353, 0.3679, 1.0, 0.3679, 0.1353, 0.0498, 0.0183};
         Poisson w2 = new Poisson(len, false);
         double[] out = w2.getWindow();
-        Assertions.assertArrayEquals(result, out, 0.001);
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void FlatTopSymTest() {
+        int len = 10;
+        double[] result = {-0.0004, -0.0202, -0.0702, 0.1982, 0.8625, 0.8625, 0.1982, -0.0702, -0.0202, -0.0004};
+        FlatTop w1 = new FlatTop(len);
+        double[] out = w1.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void FlatTopASymTest() {
+        int len = 10;
+        double[] result = {-0.0004, -0.0156, -0.0677, 0.0545, 0.6069, 1.0, 0.6069, 0.0545, -0.0677, -0.0156};
+        FlatTop w2 = new FlatTop(len, false);
+        double[] out = w2.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void NuttallSymTest() {
+        int len = 10;
+        double[] result = {0.0004, 0.0179, 0.1556, 0.5292, 0.9332, 0.9332, 0.5292, 0.1556, 0.0179, 0.0004};
+        Nuttall w1 = new Nuttall(len);
+        double[] out = w1.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void NuttallASymTest() {
+        int len = 10;
+        double[] result = {0.0004, 0.0133, 0.1105, 0.3956, 0.7983, 1.0, 0.7983, 0.3956, 0.1105, 0.0133};
+        Nuttall w2 = new Nuttall(len, false);
+        double[] out = w2.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void GaussianSymTest() {
+        int len = 10;
+        double std = 2.0;
+        double[] result = {0.0796, 0.2163, 0.4578, 0.7548, 0.9692, 0.9692, 0.7548, 0.4578, 0.2163, 0.0796};
+        Gaussian w1 = new Gaussian(len, std);
+        double[] out = w1.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void GaussianASymTest() {
+        int len = 10;
+        double std = 2.0;
+        double[] result = {0.0439, 0.1353, 0.3247, 0.6065, 0.8825, 1.0, 0.8825, 0.6065, 0.3247, 0.1353};
+        Gaussian w2 = new Gaussian(len, std,false);
+        double[] out = w2.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
     }
 }

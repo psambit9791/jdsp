@@ -22,21 +22,21 @@ public class BlackmanHarris extends _Window{
      * @param sym Whether the window is symmetric
      */
     public BlackmanHarris(int len, boolean sym) throws IllegalArgumentException {
-        this.sym = sym;
         this.len = len;
+        this.sym = sym;
         if (lenGuard(len)) {
             throw new IllegalArgumentException("Window Length must be greater than 0");
         }
     }
 
     /**
-     * This constructor initialises the BlackmanHarris class.
-     * @throws java.lang.IllegalArgumentException if window length is less than 1. Symmetricity is set to True.
+     * This constructor initialises the BlackmanHarris class. Symmetricity is set to True.
+     * @throws java.lang.IllegalArgumentException if window length is less than 1.
      * @param len Length of the window
      */
     public BlackmanHarris(int len) throws IllegalArgumentException {
-        this.sym = true;
         this.len = len;
+        this.sym = true;
         if (lenGuard(len)) {
             throw new IllegalArgumentException("Window Length must be greater than 0");
         }
