@@ -4,8 +4,6 @@ import com.github.psambit9791.jdsp.windows.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 public class TestWindows {
 
     @Test
