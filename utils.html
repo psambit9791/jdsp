@@ -76,6 +76,7 @@
                       <li><a href="filters.html" class="nav-link">Filters</a></li>
                       <li><a href="transforms.html" class="nav-link">Transforms</a></li>
                       <li><a href="peaks.html" class="nav-link">Peak Detection</a></li>
+                      <li><a href="windowing.html" class="nav-link">Windowing</a></li>
                       <li class="active"><a href="utils.html" class="nav-link">Utilities</a></li>
                     </ul>
                   </li>
@@ -123,6 +124,7 @@
             <li><a href="#featscale">Feature Scaling</a> </li>
             <li><a href="#ecg">Sample ECG Data</a> </li>
             <li><a href="#helper">Helper Functions</a> </li>
+            <li><a href="#io">Input/Output</a> </li>
           </ul>
 
           <div id="plotting">
@@ -1386,7 +1388,7 @@ double out = UtilMethods.modulo(divisor, dividend);
                         <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-ArrayList<Integer> integers = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5));double[] test2 = {1.23310, 1.23320};
+ArrayList< Integer > integers = new ArrayList< Integer >(Arrays.asList(1, 2, 3, 4, 5));double[] test2 = {1.23310, 1.23320};
 int[] out1 = UtilMethods.convertToPrimitiveInt(integers)
                     </code>
                   </pre>
@@ -1413,7 +1415,7 @@ int[] out1 = UtilMethods.convertToPrimitiveInt(integers)
                         <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-ArrayList<Double> numbers = new ArrayList<Double>(Arrays.asList(1.1, 2.22, 3.3, 4.4, 5.55));
+ArrayList< Double > numbers = new ArrayList< Double >(Arrays.asList(1.1, 2.22, 3.3, 4.4, 5.55));
 double[] out2 = UtilMethods.convertToPrimitiveDouble(numbers);
                     </code>
                   </pre>
@@ -1424,6 +1426,62 @@ double[] out2 = UtilMethods.convertToPrimitiveDouble(numbers);
                 </div>
                 <!-- END OF DOUBLE-->
 
+            </div>
+
+            <div id="io">
+
+                <!--  START OF WAV  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">WAV File Read/Write</h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                            <h4 class="text-dark" style="text-align: left; padding-right:20px">Reading from a File</h4>
+                            <pre class="d-flex align-items-center">
+                    <code class="container align-text-left bg-light">
+inputFilename = "sample.wav";
+Wav objRead1 = new Wav();
+objRead1.readWav(inputFilename);
+Hashtable< String, Long> propsOut = objRead1.getProperties(); // Gets the WAV file properties
+double[][] signal = objRead1.getData("int"); // Can be 'int', 'long' 'double'
+                    </code>
+                  </pre>
+                        </div>
+
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                            <h4 class="text-dark" style="text-align: left; padding-right:20px">Sample File Properties</h4>
+                            <pre class="d-flex align-items-center">
+                    <code class="container align-text-left bg-light">
+System.out.println(objRead1.getProperties());
+OUTPUT: {Channels=2, Frames=268237, ValidBits=16, BlockAlign=4, SampleRate=8000, BytesPerSample=2}
+                    </code>
+                  </pre>
+                        </div>
+
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                            <h4 class="text-dark" style="text-align: left; padding-right:20px">Writing to a File</h4>
+                            <pre class="d-flex align-items-center">
+                    <code class="container align-text-left bg-light">
+outputFilename = "sample.wav";
+Wav objWrite = new Wav();
+int channels = 2;
+objWrite.putData(signal, channels, "int", outputFileName);
+// Can be "int", "long" or "double' depending on the content of signal
+                    </code>
+                  </pre>
+                        </div>
+
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-top: 50px; padding-bottom: 50px">
+                        <img src="res/signal/ecg.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF WAV-->
             </div>
         </div>
         
