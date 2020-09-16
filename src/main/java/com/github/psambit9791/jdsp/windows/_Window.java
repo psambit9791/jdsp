@@ -17,6 +17,7 @@ abstract class _Window {
     /**
      * Handles window length if it is less than or equal to 0
      * @param length Input length of the window
+     * @return boolean False if length more than 0, otherwise True
      */
     public boolean lenGuard(int length) {
         if (length > 0) {
@@ -29,6 +30,7 @@ abstract class _Window {
      * Increases window length by if required
      * @param length Length of the window
      * @param sym Determines if window is symmetric
+     * @return int Returns the updated window length
      */
     public int extend(int length, boolean sym) {
         if (!sym) {
@@ -44,6 +46,7 @@ abstract class _Window {
     /**
      * Removes the last element if required
      * @param arr The array to be truncated
+     * @return double[] Returns the truncated window
      */
     public double[] truncate(double[] arr) {
         if (this.extendVal) {

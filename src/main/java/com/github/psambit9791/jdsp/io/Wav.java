@@ -39,7 +39,7 @@ public class Wav {
 
     /**
      * This reads a sample file from the res folder called "sample.wav"
-     * @throws com.github.psambit9791.jdsp.io.WavFileException if error occurs in WavFile class
+     * @throws com.github.psambit9791.wavfile.WavFileException if error occurs in WavFile class
      * @throws java.io.IOException if sample file does not exist
      */
     public void readTemplate() throws WavFileException, IOException {
@@ -118,13 +118,13 @@ public class Wav {
     /**
      * Returns the wav file content as a 2-D array
      * @throws java.io.IOException In case any error occurs while reading the frames
-     * @throws com.github.psambit9791.jdsp.io.WavFileException if error occurs in WavFile class
+     * @throws com.github.psambit9791.wavfile.WavFileException if error occurs in WavFile class
      * @throws java.lang.IllegalArgumentException if type is anything other than "int", "long", "double"
      * @param type Can be "int", "long" and "double"
      *             "int" - Up to 32 bit unsigned
      *             "long" - Up to 64 bit unsigned
      *             "double" - Scales the value between -1 and 1.
-     * @return doubel[][] The content of the wav file
+     * @return double[][] The content of the wav file
      */
     public double[][] getData(String type) throws IOException, WavFileException, IllegalArgumentException {
         int channels = this.props.get("Channels").intValue();
@@ -154,7 +154,7 @@ public class Wav {
 
     /**
      * Returns the wav file content as a 2-D array. Assumes validBits is 16.
-     * @throws com.github.psambit9791.jdsp.io.WavFileException if error occurs in WavFile class
+     * @throws com.github.psambit9791.wavfile.WavFileException if error occurs in WavFile class
      * @throws java.io.IOException if there is an issue in writing to the file
      * @throws java.lang.IllegalArgumentException if type is anything other than "int", "long", "double"
      * @param signal The 2-D array that needs to be saved as a wav file
@@ -168,7 +168,7 @@ public class Wav {
 
     /**
      * Returns the wav file content as a 2-D array
-     * @throws com.github.psambit9791.jdsp.io.WavFileException if error occurs in WavFile class
+     * @throws com.github.psambit9791.wavfile.WavFileException if error occurs in WavFile class
      * @throws java.io.IOException if there is an issue in writing to the file
      * @throws java.lang.IllegalArgumentException if type is anything other than "int", "long", "double"
      * @param signal The 2-D array that needs to be saved as a wav file

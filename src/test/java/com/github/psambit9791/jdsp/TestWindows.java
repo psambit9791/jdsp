@@ -10,7 +10,7 @@ public class TestWindows {
     public void BoxCarSymTest() {
         int len = 10;
         double[] result = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
-        BoxCar w1 = new BoxCar(len);
+        Boxcar w1 = new Boxcar(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
     }
@@ -19,7 +19,7 @@ public class TestWindows {
     public void BoxCarASymTest() {
         int len = 10;
         double[] result = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
-        BoxCar w2 = new BoxCar(len, false);
+        Boxcar w2 = new Boxcar(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
     }
