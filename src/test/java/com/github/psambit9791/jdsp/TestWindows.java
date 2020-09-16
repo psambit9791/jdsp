@@ -13,6 +13,7 @@ public class TestWindows {
         Boxcar w1 = new Boxcar(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Boxcar w0 = new Boxcar(-2);});
     }
 
     @Test
@@ -22,6 +23,7 @@ public class TestWindows {
         Boxcar w2 = new Boxcar(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Boxcar w0 = new Boxcar(-2, false);});
     }
 
     @Test
@@ -32,6 +34,7 @@ public class TestWindows {
         GeneralCosine w1 = new GeneralCosine(len, weights);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {GeneralCosine w0 = new GeneralCosine(-2, weights);});
     }
 
     @Test
@@ -42,6 +45,7 @@ public class TestWindows {
         GeneralCosine w2 = new GeneralCosine(len, weights, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {GeneralCosine w0 = new GeneralCosine(-2, weights, false);});
     }
 
     @Test
@@ -51,6 +55,8 @@ public class TestWindows {
         Hamming w1 = new Hamming(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Hamming w0 = new Hamming(-2);});
+
     }
 
     @Test
@@ -60,6 +66,7 @@ public class TestWindows {
         Hamming w2 = new Hamming(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Hamming w0 = new Hamming(-2, false);});
     }
 
     @Test
@@ -69,6 +76,7 @@ public class TestWindows {
         Hanning w1 = new Hanning(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Hanning w0 = new Hanning(-2);});
     }
 
     @Test
@@ -78,6 +86,7 @@ public class TestWindows {
         Hanning w2 = new Hanning(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Hanning w0 = new Hanning(-2, false);});
     }
 
     @Test
@@ -87,6 +96,7 @@ public class TestWindows {
         Blackman w1 = new Blackman(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Blackman w0 = new Blackman(-2);});
     }
 
     @Test
@@ -96,6 +106,7 @@ public class TestWindows {
         Blackman w2 = new Blackman(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Blackman w0 = new Blackman(-2, false);});
     }
 
     @Test
@@ -105,6 +116,7 @@ public class TestWindows {
         BlackmanHarris w1 = new BlackmanHarris(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {BlackmanHarris w0 = new BlackmanHarris(-2);});
     }
 
     @Test
@@ -114,6 +126,7 @@ public class TestWindows {
         BlackmanHarris w2 = new BlackmanHarris(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {BlackmanHarris w0 = new BlackmanHarris(-2, false);});
     }
 
     @Test
@@ -123,6 +136,7 @@ public class TestWindows {
         Poisson w1 = new Poisson(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Poisson w0 = new Poisson(-2);});
     }
 
     @Test
@@ -132,6 +146,7 @@ public class TestWindows {
         Poisson w2 = new Poisson(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Poisson w0 = new Poisson(-2, false);});
     }
 
     @Test
@@ -141,6 +156,7 @@ public class TestWindows {
         FlatTop w1 = new FlatTop(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {FlatTop w0 = new FlatTop(-2);});
     }
 
     @Test
@@ -150,6 +166,7 @@ public class TestWindows {
         FlatTop w2 = new FlatTop(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {FlatTop w0 = new FlatTop(-2, false);});
     }
 
     @Test
@@ -159,6 +176,7 @@ public class TestWindows {
         Nuttall w1 = new Nuttall(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Nuttall w0 = new Nuttall(-2);});
     }
 
     @Test
@@ -168,6 +186,7 @@ public class TestWindows {
         Nuttall w2 = new Nuttall(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Nuttall w0 = new Nuttall(-2, false);});
     }
 
     @Test
@@ -178,6 +197,7 @@ public class TestWindows {
         Gaussian w1 = new Gaussian(len, std);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Gaussian w0 = new Gaussian(-2, std);});
     }
 
     @Test
@@ -188,6 +208,7 @@ public class TestWindows {
         Gaussian w2 = new Gaussian(len, std,false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Gaussian w0 = new Gaussian(-2, std, false);});
     }
 
     @Test
@@ -198,6 +219,7 @@ public class TestWindows {
         Tukey w1 = new Tukey(len, alpha);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Tukey w0 = new Tukey(-2, alpha);});
     }
 
     @Test
@@ -208,6 +230,7 @@ public class TestWindows {
         Tukey w2 = new Tukey(len, alpha,false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Tukey w0 = new Tukey(-2, alpha, false);});
     }
 
     @Test
@@ -217,6 +240,7 @@ public class TestWindows {
         Triangular w1 = new Triangular(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Triangular w0 = new Triangular(-2);});
     }
 
     @Test
@@ -226,6 +250,7 @@ public class TestWindows {
         Triangular w2 = new Triangular(len,false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Triangular w0 = new Triangular(-2, false);});
     }
 
     @Test
@@ -253,6 +278,7 @@ public class TestWindows {
         Bartlett w1 = new Bartlett(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Bartlett w0 = new Bartlett(-2);});
     }
 
     @Test
@@ -262,6 +288,7 @@ public class TestWindows {
         Bartlett w2 = new Bartlett(len,false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Bartlett w0 = new Bartlett(-2, false);});
     }
 
     @Test
@@ -271,6 +298,7 @@ public class TestWindows {
         BartlettHann w1 = new BartlettHann(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {BartlettHann w0 = new BartlettHann(-2);});
     }
 
     @Test
@@ -280,6 +308,7 @@ public class TestWindows {
         BartlettHann w2 = new BartlettHann(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {BartlettHann w0 = new BartlettHann(-2, false);});
     }
 
     @Test
@@ -289,6 +318,7 @@ public class TestWindows {
         Bohman w1 = new Bohman(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Bohman w0 = new Bohman(-2);});
     }
 
     @Test
@@ -298,5 +328,6 @@ public class TestWindows {
         Bohman w2 = new Bohman(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Bohman w0 = new Bohman(-2, false);});
     }
 }

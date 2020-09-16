@@ -13,6 +13,7 @@ language: java
 # https://docs.travis-ci.com/user/reference/xenial/#jvm-clojure-groovy-java-scala-support
 jdk:
   - openjdk8
+  - oraclejdk8
 
 before_install:
   - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
