@@ -21,7 +21,7 @@ import org.apache.commons.math3.util.MathArrays;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
+ * @version 1.1
  */
 
 public class Convolution {
@@ -33,8 +33,12 @@ public class Convolution {
      * This constructor initialises the prerequisites required to perform convolution.
      * @param s Signal to be convolved
      * @param w Kernel for convolution
+     * @throws java.lang.IllegalArgumentException if kernel size is greater than or equal to signal length
      */
     public Convolution(double[] s, double[] w) {
+        if (s.length <= w.length) {
+            throw new IllegalArgumentException("Weight Size should be less than Signal Length");
+        }
         this.signal = s;
         this.kernel = w;
         this.output = null;
@@ -101,28 +105,22 @@ public class Convolution {
         double[] output = new double[this.signal.length];
         double[] temp;
 
-        if (this.signal.length <= this.kernel.length) {
-            throw new IllegalArgumentException("Weight Size should be less than Signal Length");
+        if (mode.equals("reflect") || mode.equals("constant") || mode.equals("nearest") ||
+                mode.equals("mirror") || mode.equals("wrap")) {
+            int startVal = this.signal.length + this.kernel.length/2;
+            double[] newSignal = UtilMethods.padSignal(this.signal, mode);
+            temp = this.convolve(newSignal, this.kernel);
+            output = UtilMethods.splitByIndex(temp, startVal, startVal+this.signal.length);
         }
-        else {
-            if (mode.equals("reflect") || mode.equals("constant") || mode.equals("nearest") ||
-                    mode.equals("mirror") || mode.equals("wrap") || mode.equals("interp")) {
-                int startVal = this.signal.length + this.kernel.length/2;
-                double[] newSignal = UtilMethods.padSignal(this.signal, mode);
-                temp = this.convolve(newSignal, this.kernel);
-                output = UtilMethods.splitByIndex(temp, startVal, startVal+this.signal.length);
-            }
-            else  {
-                throw new IllegalArgumentException("convolve1d modes can only be reflect, constant, nearest, mirror, " +
-                        "wrap or interp (default)");
-            }
+        else  {
+            throw new IllegalArgumentException("convolve1d modes can only be reflect, constant, nearest mirror, " +
+                    "or wrap");
         }
         return output;
     }
 
     /**
      * This method perform default convolution using padding in 'reflect' modes.
-     * @throws java.lang.IllegalArgumentException if kernel size is greater than or equal to signal length
      * @return double[] Result of convolution with same length as input signal
      */
     public double[] convolve1d() throws IllegalArgumentException {
@@ -130,15 +128,10 @@ public class Convolution {
         double[] output;
         double[] temp;
 
-        if (this.signal.length <= this.kernel.length) {
-            throw new IllegalArgumentException("Weight Size should be less than Signal Length");
-        }
-        else {
-            int startVal = this.signal.length + this.kernel.length/2;
-            double[] newSignal = UtilMethods.padSignal(this.signal, "reflect");
-            temp = this.convolve(newSignal, this.kernel);
-            output = UtilMethods.splitByIndex(temp, startVal, startVal+this.signal.length);
-        }
+        int startVal = this.signal.length + this.kernel.length/2;
+        double[] newSignal = UtilMethods.padSignal(this.signal, "reflect");
+        temp = this.convolve(newSignal, this.kernel);
+        output = UtilMethods.splitByIndex(temp, startVal, startVal+this.signal.length);
         return output;
     }
 }

@@ -11,6 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.signal.Convolution;
+import com.github.psambit9791.jdsp.signal.Smooth;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -132,5 +133,15 @@ public class TestConvolution {
         Convolution con2 = new Convolution(this.signal2, this.kernel2);
         out = con2.convolve1d("wrap");
         Assertions.assertArrayEquals(result2, out, 0.001);
+    }
+
+    @Test
+    public void convolve1DExceptionTest() {
+        double[] s = {1,2,3,4,5};
+        double[] w = {1,2,3,1,2,3,4};
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Convolution c0 = new Convolution(s, w);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Convolution c0 = new Convolution(this.signal1, this.kernel1); double[] out = c0.convolve("f");});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Convolution c0 = new Convolution(this.signal1, this.kernel1); double[] out = c0.convolve1d("f");});
     }
 }

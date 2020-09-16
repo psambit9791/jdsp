@@ -55,6 +55,9 @@ public class TestSmooth {
         out = s1.smoothSignal();
         Assertions.assertArrayEquals(result3, out, 0.001);
         Assertions.assertArrayEquals(kernel3, s1.getKernel(), 0.001);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Smooth s0 = new Smooth(this.signal, this.signal.length+2, "rectangular");});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Smooth s0 = new Smooth(this.signal, 2, "rect");});
     }
 
     @Test
@@ -93,6 +96,7 @@ public class TestSmooth {
         out = s1.smoothSignal();
         Assertions.assertArrayEquals(result3, out, 0.001);
         Assertions.assertArrayEquals(kernel3, s1.getKernel(), 0.001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Smooth s0 = new Smooth(this.signal, 3, "triangular"); double[] temp = s0.smoothSignal("abc");});
 
     }
 }

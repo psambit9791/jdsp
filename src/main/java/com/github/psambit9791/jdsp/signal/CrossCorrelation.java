@@ -20,7 +20,7 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
+ * @version 1.1
  */
 
 public class CrossCorrelation {
@@ -33,8 +33,12 @@ public class CrossCorrelation {
      * This constructor initialises the prerequisites required to perform cross-correlation.
      * @param s Signal to be convolved
      * @param w Kernel for convolution
+     * @throws java.lang.IllegalArgumentException if kernel size is greater than or equal to signal length
      */
     public CrossCorrelation(double[] s, double[] w) {
+        if (s.length <= w.length) {
+            throw new IllegalArgumentException("Weight Size should be less than Signal Length");
+        }
         this.signal = s;
         this.kernel = w;
     }
