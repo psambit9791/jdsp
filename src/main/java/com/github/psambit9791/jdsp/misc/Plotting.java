@@ -289,6 +289,6 @@ public class Plotting {
             throw new IllegalArgumentException("Filename must have PNG exception");
         }
         String filename = name.substring(0, name.length()-4);
-        BitmapEncoder.saveBitmapWithDPI(this.figure, "./"+filename, BitmapEncoder.BitmapFormat.PNG, 300);
+        BitmapEncoder.saveBitmapWithDPI(this.figure, filename, BitmapEncoder.BitmapFormat.PNG, 300);
     }
 }
