@@ -368,7 +368,7 @@ public class TestFindPeak {
         FindPeak fp = new FindPeak(this.highResSignal);
         Peak out = fp.detectPeaks();
 
-        String outputFileName = "test_outputs/peak_test";
+        String outputFileName = "test_outputs/peak_test.png";
         Plotting fig = new Plotting("Peak Detection", "Time", "Signal");
         fig.initialisePlot();
         // Plot all detected peaks
@@ -386,7 +386,7 @@ public class TestFindPeak {
 
         fig.saveAsPNG(outputFileName);
 
-        boolean fileExists = new File("./"+outputFileName+".png").exists();
+        boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
     }
 
@@ -585,7 +585,7 @@ public class TestFindPeak {
 
         int[] peaks = out.getPeaks();
 
-        String outputFileName = "test_outputs/spike_test";
+        String outputFileName = "test_outputs/spike_test.png";
         Plotting fig = new Plotting("Spike Detection", "Time", "Signal");
         fig.initialisePlot();
         // Plot all detected peaks
@@ -599,7 +599,7 @@ public class TestFindPeak {
 
         fig.saveAsPNG(outputFileName);
 
-        boolean fileExists = new File("./"+outputFileName+".png").exists();
+        boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
     }
 }

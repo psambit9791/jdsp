@@ -24,7 +24,7 @@ import java.io.IOException;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
+ * @version 1.1
  */
 public class Plotting {
 
@@ -281,8 +281,14 @@ public class Plotting {
      * This method saves the plot as a .png file
      * @param name Name of the file the plot is to be saved as
      * @throws java.io.IOException if there is any error in saving
+     * @throws java.lang.IllegalArgumentException if file extension is not png
      */
-    public void saveAsPNG(String name) throws IOException {
-        BitmapEncoder.saveBitmapWithDPI(this.figure, "./"+name, BitmapEncoder.BitmapFormat.PNG, 300);
+    public void saveAsPNG(String name) throws IOException, IllegalArgumentException {
+        String extension = name.substring(name.length()-4);
+        if (!extension.equals(".png")) {
+            throw new IllegalArgumentException("Filename must have PNG exception");
+        }
+        String filename = name.substring(0, name.length()-4);
+        BitmapEncoder.saveBitmapWithDPI(this.figure, "./"+filename, BitmapEncoder.BitmapFormat.PNG, 300);
     }
 }

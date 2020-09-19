@@ -128,9 +128,9 @@ public class TestPCA {
         }
         fig.addSignal("PCA", t, one_dim, false, "-");
 
-        String outputFileName = "test_outputs/pca";
+        String outputFileName = "test_outputs/pca.png";
         fig.saveAsPNG(outputFileName);
-        boolean fileExists = new File("./"+outputFileName+".png").exists();
+        boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
     }
 }
