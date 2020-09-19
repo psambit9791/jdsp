@@ -117,11 +117,14 @@ If you are using this software in your research, please use the following citati
 ```
 ## Supporting jDSP 
 
-jDSP is an open source project. <br/> You can help by becoming a sponsor on <a href="https://patreon.com/sambitpaul">Patreon</a> or doing a one time donation on <a href="https://paypal.me/psambit9791">PayPal</a> <br />
+jDSP is an open source project. <br/> You can help by becoming a sponsor on <a href="https://patreon.com/sambitpaul">Patreon</a> or doing a one time donation on <a href="https://paypal.me/psambit9791">PayPal</a>. <br />
+You can also show me your appreciation on <a href="https://ko-fi.com/sambitpaul">Ko-Fi</a>.<br />
 
 <a href="https://patreon.com/sambitpaul" target="_blank"><img src="https://github.com/psambit9791/jDSP/blob/master/res/button/patron-button.png" alt="Become a Patron" /> </a>
 &emsp;
-<a href="https://paypal.me/psambit9791" target="_blank"><img src="https://github.com/psambit9791/jDSP/blob/master/res/button/paypal-button.png" alt="Become a Patron" /> </a>
+<a href="https://paypal.me/psambit9791" target="_blank"><img src="https://github.com/psambit9791/jDSP/blob/master/res/button/paypal-button.png" alt="Donate on Paypal" /> </a>
+&emsp;
+<a href="https://ko-fi.com/sambitpaul" target="_blank"><img src="https://github.com/psambit9791/jDSP/blob/master/res/button/kofi-button.png" alt="Support on Kofi" /> </a>
 
 <br/>
 
