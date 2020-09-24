@@ -11,6 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Chebyshev;
+import com.github.psambit9791.jdsp.signal.Convolution;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -281,5 +282,25 @@ public class TestChebyshev {
 
         double[] result = t2_2.bandStopFilter(4, 12, 30, this.ripple_factor);
         Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void TestExceptionsType1() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            double[] result = t2_1.bandStopFilter(4, 30, 12, this.ripple_factor);;
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            double[] result = t2_1.bandPassFilter(4, 30, 12, this.ripple_factor);;
+        });
+    }
+
+    @Test
+    public void TestExceptionsType2() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            double[] result = t2_2.bandStopFilter(4, 30, 12, this.ripple_factor);;
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            double[] result = t2_2.bandPassFilter(4, 30, 12, this.ripple_factor);;
+        });
     }
 }

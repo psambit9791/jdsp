@@ -19,7 +19,7 @@ package com.github.psambit9791.jdsp.filter;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
+ * @version 1.1
  */
 public class Bessel {
     private double[] signal;
@@ -74,9 +74,13 @@ public class Bessel {
      * @param order Order of the filter
      * @param lowCutoff The lower cutoff frequency for the filter
      * @param highCutoff The upper cutoff frequency for the filter
+     * @throws java.lang.IllegalArgumentException The lower cutoff frequency is greater than the higher cutoff frequency
      * @return double[] Filtered signal
      */
-    public double[] bandPassFilter(int order, double lowCutoff, double highCutoff) {
+    public double[] bandPassFilter(int order, double lowCutoff, double highCutoff) throws IllegalArgumentException {
+        if (lowCutoff >= highCutoff) {
+            throw new IllegalArgumentException("Lower Cutoff Frequency cannot be more than the Higher Cutoff Frequency");
+        }
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];
@@ -93,9 +97,13 @@ public class Bessel {
      * @param order Order of the filter
      * @param lowCutoff The lower cutoff frequency for the filter
      * @param highCutoff The upper cutoff frequency for the filter
+     * @throws java.lang.IllegalArgumentException The lower cutoff frequency is greater than the higher cutoff frequency
      * @return double[] Filtered signal
      */
-    public double[] bandStopFilter(int order, double lowCutoff, double highCutoff) {
+    public double[] bandStopFilter(int order, double lowCutoff, double highCutoff) throws IllegalArgumentException{
+        if (lowCutoff >= highCutoff) {
+            throw new IllegalArgumentException("Lower Cutoff Frequency cannot be more than the Higher Cutoff Frequency");
+        }
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];

@@ -156,4 +156,14 @@ public class TestBessel {
         double[] result = flt2.bandStopFilter(4, 12, 30);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
+
+    @Test
+    public void TestExceptions() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            double[] result = flt2.bandStopFilter(4, 30, 12);;
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            double[] result = flt2.bandPassFilter(4, 30, 12);;
+        });
+    }
 }
