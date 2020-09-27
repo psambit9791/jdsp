@@ -11,6 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Median;
+import com.github.psambit9791.jdsp.filter._KernelFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,7 @@ public class TestMedian {
         double[] result = {2.0, 2.0, 3.0, 4.0, 2.0, 4.0, 5.0, 4.0, 0.0};
 
         Median mf = new Median(signal, wSize);
-        double[] out = mf.medianFilter();
+        double[] out = mf.filter();
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -33,7 +34,17 @@ public class TestMedian {
         double[] result = {3.0, 3.0, 2.0, 2.0, 5.0, 5.0, 4.0, 4.0, 4.0};
 
         Median mf = new Median(signal);
-        double[] out = mf.medianFilter();
+        double[] out = mf.filter();
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void medianInterfaceTest1() {
+        double[] signal = {3.0, 4.0, 2.0, 1.0, 5.0, 6.0, 0.0, 4.0, 5.0};
+        double[] result = {3.0, 3.0, 2.0, 2.0, 5.0, 5.0, 4.0, 4.0, 4.0};
+
+        _KernelFilter mf = new Median(signal);
+        double[] out = mf.filter();
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 }

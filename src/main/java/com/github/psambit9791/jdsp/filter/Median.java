@@ -26,7 +26,7 @@ import java.util.Arrays;
  * @version 1.0
  */
 
-public class Median {
+public class Median implements _KernelFilter {
 
     private double[] signal;
     private int windowSize;
@@ -62,7 +62,7 @@ public class Median {
      * This method implements a median filter with given parameters, applies it on the signal and returns it.
      * @return double[] Filtered signal
      */
-    public double[] medianFilter() {
+    public double[] filter() {
         int paddingSize = (this.windowSize - 1)/2;
         double[] cons = new double[paddingSize];
         double[] newSignal = new double[this.signal.length];

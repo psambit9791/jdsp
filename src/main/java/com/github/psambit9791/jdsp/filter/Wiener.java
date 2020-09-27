@@ -26,7 +26,7 @@ import java.util.Arrays;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class Wiener {
+public class Wiener implements _KernelFilter {
 
     private double[] signal;
     private int windowSize;
@@ -62,7 +62,7 @@ public class Wiener {
      * This method implements a Wiener filter with given parameters, applies it on the signal and returns it.
      * @return double[] Filtered signal
      */
-    public double[] wienerFilter() {
+    public double[] filter() {
         double[] cons = new double[this.windowSize];
         Arrays.fill(cons, 1);
 

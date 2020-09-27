@@ -12,7 +12,7 @@ package com.github.psambit9791.jdsp.filter;
 
 /**
  * <h1>Frequency Filter Interface</h1>
- * The Frequency Filter interface is implemented by all frequency filter classes - Bessel, Butterworth and Chebyshev.
+ * The Frequency Filter interface is implemented by all frequency-based filter classes - Bessel, Butterworth and Chebyshev.
  * The user of this interface has control over implementing the low pass, high pass, band pass and band stop filter for a specific filter class.
  * <p>
  *

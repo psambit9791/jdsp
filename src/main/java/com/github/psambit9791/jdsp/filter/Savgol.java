@@ -25,7 +25,7 @@ import java.util.Arrays;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class Savgol {
+public class Savgol implements _KernelFilter{
 
     private double[] signal;
     private int windowSize;
@@ -113,7 +113,7 @@ public class Savgol {
      * Convolves the 1-d Savitzky-Golay coefficients with the signals in "nearest" mode
      * @return double[] Filtered signal
      */
-    public double[] savgolFilter() {
+    public double[] filter() {
         this.savgolCoeffs();
         Convolution c = new Convolution(this.signal, this.coeffs);
         this.output = c.convolve1d("nearest");
@@ -127,7 +127,7 @@ public class Savgol {
      * @throws java.lang.IllegalArgumentException if mode is not nearest, constant, mirror or wrap
      * @return double[] Filtered signal
      */
-    public double[] savgolFilter(String mode) throws IllegalArgumentException {
+    public double[] filter(String mode) throws IllegalArgumentException {
         if (!mode.equals("nearest") && !mode.equals("constant") && !mode.equals("mirror") && !mode.equals("wrap")) {
             throw new IllegalArgumentException("mode must be mirror, constant, nearest or wrap");
         }

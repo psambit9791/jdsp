@@ -11,6 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Savgol;
+import com.github.psambit9791.jdsp.filter._KernelFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +39,19 @@ public class TestSavgol {
                 0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.27 , 0.289,  0.306};
 
         Savgol s1 = new Savgol(this.signal, 7, 2);
-        double[] out = s1.savgolFilter();
+        double[] out = s1.filter();
+        Assertions.assertArrayEquals(out, result, 0.001);
+    }
+
+    @Test
+    public void savgolInterfaceTest() {
+        final double[] result = {0.435,  0.437,  0.428,  0.419,  0.415,  0.419,  0.43 ,  0.437, 0.443,  0.451,  0.458,
+                0.455,  0.447,  0.436,  0.424,  0.404, 0.374,  0.346,  0.331,  0.33 ,  0.328,  0.32 ,  0.294,  0.26 ,
+                0.231,  0.206,  0.162,  0.088,  0.009, -0.026,  0.002,  0.085, 0.173,  0.225,  0.243,  0.249,  0.246,
+                0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.27 , 0.289,  0.306};
+
+        _KernelFilter s1 = new Savgol(this.signal, 7, 2);
+        double[] out = s1.filter();
         Assertions.assertArrayEquals(out, result, 0.001);
     }
 
@@ -50,7 +63,7 @@ public class TestSavgol {
                 0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.299, 0.274,  0.202};
 
         Savgol s1 = new Savgol(this.signal, 7, 2, 0, 1);
-        double[] out = s1.savgolFilter("constant");
+        double[] out = s1.filter("constant");
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -62,7 +75,7 @@ public class TestSavgol {
                 0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.271, 0.292,  0.301};
 
         Savgol s1 = new Savgol(this.signal, 7, 2);
-        double[] out = s1.savgolFilter("mirror");
+        double[] out = s1.filter("mirror");
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -74,7 +87,7 @@ public class TestSavgol {
                 0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.259, 0.293,  0.345};
 
         Savgol s1 = new Savgol(this.signal, 7, 2);
-        double[] out = s1.savgolFilter("wrap");
+        double[] out = s1.filter("wrap");
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 }
