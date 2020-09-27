@@ -11,6 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Butterworth;
+import com.github.psambit9791.jdsp.filter._FrequencyFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -155,6 +156,22 @@ public class TestButterworth {
                 -1.716, 0.276, -1.602, 0.34, -1.076};
 
         double[] result = flt2.bandStopFilter(4, 12, 30);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void InterfaceTest1() {
+        _FrequencyFilter interfaceFF = new Butterworth(this.signal2, 100);
+        final double[] out = {0.0, 0.285, -0.192, 0.881, -0.32, 1.281, -0.466, 1.531, -0.354, 1.314, 0.402, 0.963, 1.174,
+                0.543, 1.781, 0.073, 1.968, -0.035, 1.758, 0.198, 1.217, 0.634, 0.421, 1.034, -0.34, 1.2, -0.83, 1.023,
+                -0.94, 0.466, -0.721, -0.34, -0.337, -1.157, 0.005, -1.735, 0.111, -1.911, -0.108, -1.658, -0.599,
+                -1.089, -1.179, -0.419, -1.616, 0.117, -1.713, 0.352, -1.386, 0.253, -0.696, -0.073, 0.167, -0.427,
+                0.95, -0.592, 1.435, -0.428, 1.512, 0.075, 1.219, 0.785, 0.722, 1.477, 0.247, 1.915, -0.005, 1.941,
+                0.061, 1.533, 0.399, 0.817, 0.839, 0.018, 1.159, -0.622, 1.167, -0.93, 0.785, -0.868, 0.077, -0.538,
+                -0.763, -0.144, -1.487, 0.098, -1.879, 0.041, -1.835, -0.329, -1.401, -0.891, -0.751, -1.429, -0.122,
+                -1.716, 0.276, -1.602, 0.34, -1.076};
+
+        double[] result = interfaceFF.bandStopFilter(4, 12, 30);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 

@@ -20,22 +20,25 @@ package com.github.psambit9791.jdsp.filter;
  * @author  Sambit Paul
  * @version 1.1
  */
-public class Chebyshev {
+public class Chebyshev implements _FrequencyFilter{
     private double[] signal;
     private double samplingFreq;
     private double[] output;
     private int filterType;
+    private double rippleFactor;
 
     /**
      * This constructor initialises the prerequisites
      * required to use Chebyshev filter.
      * @param s Signal to be filtered
      * @param Fs Sampling frequency of input signal
+     * @param rf The maximum ripple allowed below unity gain in the pass band
      * @param filterType Type of Chebyshev filter. 1: Type I, 2: Type II
      */
-    public Chebyshev(double[] s, double Fs, int filterType) {
+    public Chebyshev(double[] s, double Fs, double rf, int filterType) {
         this.signal = s;
         this.samplingFreq = Fs;
+        this.rippleFactor = rf;
         this.filterType = filterType;
     }
 
@@ -44,10 +47,12 @@ public class Chebyshev {
      * required to use Chebyshev filter. Default mode operation is of Type I.
      * @param s Signal to be filtered
      * @param Fs Sampling frequency of input signal
+     * @param rf The maximum ripple allowed below unity gain in the pass band
      */
-    public Chebyshev(double[] s, double Fs) {
+    public Chebyshev(double[] s, double Fs, double rf) {
         this.signal = s;
         this.samplingFreq = Fs;
+        this.rippleFactor = rf;
         this.filterType = 1;
     }
 
@@ -55,10 +60,9 @@ public class Chebyshev {
      * This method implements a low pass filter with given parameters, filters the signal and returns it.
      * @param order Order of the filter
      * @param cutoffFreq The cutoff frequency for the filter
-     * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @return double[] Filtered signal
      */
-    public double[] lowPassFilter(int order, double cutoffFreq, double rippleFactor) {
+    public double[] lowPassFilter(int order, double cutoffFreq) {
         this.output = new double[this.signal.length];
         if (this.filterType == 1) {
             uk.me.berndporr.iirj.ChebyshevI lp = new uk.me.berndporr.iirj.ChebyshevI();
@@ -84,10 +88,9 @@ public class Chebyshev {
      * This method implements a high pass filter with given parameters, filters the signal and returns it.
      * @param order Order of the filter
      * @param cutoffFreq The cutoff frequency for the filter
-     * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @return double[] Filtered signal
      */
-    public double[] highPassFilter(int order, double cutoffFreq, double rippleFactor) {
+    public double[] highPassFilter(int order, double cutoffFreq) {
         this.output = new double[this.signal.length];
         if (this.filterType == 1) {
             uk.me.berndporr.iirj.ChebyshevI hp = new uk.me.berndporr.iirj.ChebyshevI();
@@ -114,11 +117,10 @@ public class Chebyshev {
      * @param order Order of the filter
      * @param lowCutoff The lower cutoff frequency for the filter
      * @param highCutoff The upper cutoff frequency for the filter
-     * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @throws java.lang.IllegalArgumentException The lower cutoff frequency is greater than the higher cutoff frequency
      * @return double[] Filtered signal
      */
-    public double[] bandPassFilter(int order, double lowCutoff, double highCutoff, double rippleFactor) throws IllegalArgumentException {
+    public double[] bandPassFilter(int order, double lowCutoff, double highCutoff) throws IllegalArgumentException {
         if (lowCutoff >= highCutoff) {
             throw new IllegalArgumentException("Lower Cutoff Frequency cannot be more than the Higher Cutoff Frequency");
         }
@@ -150,11 +152,10 @@ public class Chebyshev {
      * @param order Order of the filter
      * @param lowCutoff The lower cutoff frequency for the filter
      * @param highCutoff The upper cutoff frequency for the filter
-     * @param rippleFactor The maximum ripple allowed below unity gain in the passband
      * @throws java.lang.IllegalArgumentException The lower cutoff frequency is greater than the higher cutoff frequency
      * @return double[] Filtered signal
      */
-    public double[] bandStopFilter(int order, double lowCutoff, double highCutoff, double rippleFactor) throws IllegalArgumentException {
+    public double[] bandStopFilter(int order, double lowCutoff, double highCutoff) throws IllegalArgumentException {
         if (lowCutoff >= highCutoff) {
             throw new IllegalArgumentException("Lower Cutoff Frequency cannot be more than the Higher Cutoff Frequency");
         }

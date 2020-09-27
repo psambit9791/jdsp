@@ -11,6 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Bessel;
+import com.github.psambit9791.jdsp.filter._FrequencyFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -154,6 +155,22 @@ public class TestBessel {
                 0.126, -1.661, 0.408, -1.361, 0.349, -0.69};
 
         double[] result = flt2.bandStopFilter(4, 12, 30);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void InterfaceTest1() {
+        _FrequencyFilter interfaceFF = new Bessel(this.signal2, 100);
+        final double[] out = {0.0, 0.756, -0.121, 1.048, -0.357, 1.404, -0.682, 1.462, 0.243, 1.482, 0.745, 0.71, 1.394,
+                0.274, 1.873, 0.035, 2.012, 0.019, 1.454, 0.237, 0.874, 0.824, 0.036, 1.001, -0.701, 1.115, -0.958,
+                0.766, -0.979, 0.061, -0.655, -0.754, -0.232, -1.468, 0.044, -1.91, 0.016, -1.869, -0.272, -1.441,
+                -0.835, -0.806, -1.35, -0.119, -1.646, 0.305, -1.572, 0.418, -1.058, 0.22, -0.271, -0.146, 0.588,
+                -0.446, 1.269, -0.493, 1.583, -0.198, 1.482, 0.396, 1.067, 1.11, 0.53, 1.702, 0.107, 1.966, -0.039,
+                1.788, 0.131, 1.216, 0.519, 0.423, 0.924, -0.349, 1.126, -0.872, 0.974, -1.026, 0.447, -0.832, -0.335,
+                -0.441, -1.146, -0.071, -1.739, 0.077, -1.94, -0.094, -1.704, -0.542, -1.136, -1.102, -0.446, -1.543,
+                0.126, -1.661, 0.408, -1.361, 0.349, -0.69};
+
+        double[] result = interfaceFF.bandStopFilter(4, 12, 30);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
