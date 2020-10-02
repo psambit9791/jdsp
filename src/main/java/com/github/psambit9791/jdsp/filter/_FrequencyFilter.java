@@ -20,6 +20,7 @@ package com.github.psambit9791.jdsp.filter;
  * @version 1.1
  */
 public interface _FrequencyFilter {
+
     /**
      * This method implements a low pass filter with given parameters, filters the signal and returns it.
      * @param order Order of the filter

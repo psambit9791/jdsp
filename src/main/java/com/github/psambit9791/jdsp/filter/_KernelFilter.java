@@ -22,7 +22,7 @@ package com.github.psambit9791.jdsp.filter;
  */
 public interface _KernelFilter {
     /**
-     * This method implements a filter with given parameters, applies it on the signal and returns it.
+     * This method implements a kernel filter with given parameters, applies it on the signal and returns it.
      * @return double[] Filtered signal
      */
     public double[] filter();
