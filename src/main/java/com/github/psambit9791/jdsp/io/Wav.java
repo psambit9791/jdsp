@@ -153,7 +153,7 @@ public class Wav {
     }
 
     /**
-     * Returns the wav file content as a 2-D array. Assumes validBits is 16.
+     * Puts the 2-D array data into a WAV file. Assumes validBits is 16.
      * @throws com.github.psambit9791.wavfile.WavFileException if error occurs in WavFile class
      * @throws java.io.IOException if there is an issue in writing to the file
      * @throws java.lang.IllegalArgumentException if type is anything other than "int", "long", "double"
@@ -167,7 +167,7 @@ public class Wav {
     }
 
     /**
-     * Returns the wav file content as a 2-D array
+     * Puts the 2-D array data into a WAV file.
      * @throws com.github.psambit9791.wavfile.WavFileException if error occurs in WavFile class
      * @throws java.io.IOException if there is an issue in writing to the file
      * @throws java.lang.IllegalArgumentException if type is anything other than "int", "long", "double"
