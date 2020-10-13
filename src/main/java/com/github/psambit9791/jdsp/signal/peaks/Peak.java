@@ -89,6 +89,31 @@ public class Peak {
     }
 
     /**
+     * This method returns the indices of the peaks from this.midpoints
+     * @throws java.lang.IllegalArgumentException If argument peaks has a peak value not present in the actual signal peaks
+     * @param peaks List of selected peaks
+     * @return int[] The corresponding indices from this.midpoints
+     */
+    private int[] getIndexFromPeak(int[] peaks) {
+        int[] indices = new int[peaks.length];
+        for (int i=0; i<indices.length; i++) {
+            for (int j=0; j<this.midpoints.length; j++) {
+                if (peaks[i] == this.midpoints[j]) {
+                    indices[i] = j;
+                    break;
+                }
+            }
+        }
+        for (int i=0; i<indices.length; i++) {
+            if (indices[i] == 0) {
+                throw new IllegalArgumentException("Peaks provided in argument does not exist in signal");
+            }
+        }
+        return indices;
+    }
+
+
+    /**
      * This method returns the heights of the peaks in the signal
      * @param peaks List of selected peaks
      * @return double[] The list of all the heights of peaks
