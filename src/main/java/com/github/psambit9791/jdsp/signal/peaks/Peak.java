@@ -289,6 +289,19 @@ public class Peak {
 
     /**
      * This method returns the heights of the peaks in the signal
+     * @param peaks List of peaks indices
+     * @return double[] The list of all the heights of peaks
+     */
+    public double[] getHeights(int[] peaks) {
+        double[] height = new double[peaks.length];
+        for (int i=0; i<height.length; i++) {
+            height[i] = this.height[peaks[i]];
+        }
+        return height;
+    }
+
+    /**
+     * This method returns the heights of the peaks in the signal
      * @return double[] The list of all the heights of peaks
      */
     public double[][] getPeakSharpness() {
@@ -336,7 +349,7 @@ public class Peak {
     public double[][] getProminenceData() { return this.prominenceData; }
 
     /**
-     * This method allows filtering the list of peaks by height using both the upper and lower threshold
+     * This method allows filtering all the peaks by height using both the upper and lower threshold
      * @param lower_threshold The lower threshold of height to check against
      * @param upper_threshold The upper threshold of height to check against
      * @return int[] The list of filtered peaks
@@ -352,7 +365,25 @@ public class Peak {
     }
 
     /**
-     * This method allows filtering the list of peaks by height using either the upper or the lower threshold
+     * This method allows filtering the list of peaks by height using both the upper and lower threshold
+     * @param peaks List of peaks to be filtered
+     * @param lower_threshold The lower threshold of height to check against
+     * @param upper_threshold The upper threshold of height to check against
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterByHeight(int[] peaks, double lower_threshold, double upper_threshold) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        double[] height = getHeights(peaks);
+        for (int i=0; i<height.length; i++) {
+            if (height[i] >= lower_threshold && height[i] <= upper_threshold) {
+                newPeaks.add(peaks[i]);
+            }
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering all the peaks by height using either the upper or the lower threshold
      * @param threshold The threshold of height to check against
      * @param mode Can be "upper" or "lower" to select which thresholding to use
      * @throws java.lang.IllegalArgumentException if mode is not upper or lower
@@ -371,6 +402,37 @@ public class Peak {
             for (int i=0; i<this.height.length; i++) {
                 if (this.height[i] >= threshold) {
                     newPeaks.add(this.midpoints[i]);
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Mode must either be lower or upper");
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by height using either the upper or the lower threshold
+     * @param peaks List of peaks to be filtered
+     * @param threshold The threshold of height to check against
+     * @param mode Can be "upper" or "lower" to select which thresholding to use
+     * @throws java.lang.IllegalArgumentException if mode is not upper or lower
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterByHeight(int[] peaks, double threshold, String mode) throws IllegalArgumentException {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        double[] height = this.getHeights(peaks);
+        if (mode.equals("upper")) {
+            for (int i=0; i<height.length; i++) {
+                if (height[i] <= threshold) {
+                    newPeaks.add(peaks[i]);
+                }
+            }
+        }
+        else if (mode.equals("lower")) {
+            for (int i=0; i<height.length; i++) {
+                if (height[i] >= threshold) {
+                    newPeaks.add(peaks[i]);
                 }
             }
         }
