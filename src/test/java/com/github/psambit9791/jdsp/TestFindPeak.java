@@ -232,8 +232,8 @@ public class TestFindPeak {
         int[] resultPlateau = {1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1};
         int[] outPlateau = out.getPlateauSize();
         Assertions.assertArrayEquals(resultPlateau, outPlateau);
-        int[] resultPlateau1 = {1, 2, 1, 1, 2};
-        int[] outPlateau1 = out.findPlateauSize(new int[]{0, 1, 2, 3, 4});
+        int[] resultPlateau1 = {1, 2, 1, 2, 1};
+        int[] outPlateau1 = out.findPlateauSize(new int[]{7, 49, 122, 175, 213});
         Assertions.assertArrayEquals(resultPlateau1, outPlateau1);
 
         // Plateau Size Filtering Test

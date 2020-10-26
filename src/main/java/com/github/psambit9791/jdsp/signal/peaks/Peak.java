@@ -97,16 +97,16 @@ public class Peak {
     private int[] getIndexFromPeak(int[] peaks) {
         int[] indices = new int[peaks.length];
         for (int i=0; i<indices.length; i++) {
+            boolean exists = false;
             for (int j=0; j<this.midpoints.length; j++) {
                 if (peaks[i] == this.midpoints[j]) {
                     indices[i] = j;
+                    exists = true;
                     break;
                 }
             }
-        }
-        for (int i=0; i<indices.length; i++) {
-            if (indices[i] == 0) {
-                throw new IllegalArgumentException("Peaks provided in argument does not exist in signal");
+            if (!exists) {
+                throw new IllegalArgumentException("Peaks in argument does not exist in the original peak list");
             }
         }
         return indices;
@@ -119,6 +119,7 @@ public class Peak {
      * @return double[] The list of all the heights of peaks
      */
     public double[] findPeakHeights(int[] peaks) {
+        getIndexFromPeak(peaks);
         double[] newHeight = new double[peaks.length];
         for (int i=0; i<peaks.length; i++) {
             newHeight[i] = this.signal[peaks[i]];
@@ -127,14 +128,16 @@ public class Peak {
     }
 
     /**
-     * This method returns the heights of the peaks in the signal
+     * This method returns the spread of the peak in the signal
      * @param peaks List of selected peaks
-     * @return double[] The list of all the heights of peaks
+     * @return double[] The list of all the spreads of peaks
      */
     public int[] findPlateauSize(int[] peaks) {
+        getIndexFromPeak(peaks);
+        int[] peak_indices = this.getIndexFromPeak(peaks);
         int[] newPS = new int[peaks.length];
-        for (int i=0; i<peaks.length; i++) {
-            newPS[i] = this.plateau_size[peaks[i]];
+        for (int i=0; i<peak_indices.length; i++) {
+            newPS[i] = this.plateau_size[peak_indices[i]];
         }
         return newPS;
     }
@@ -146,6 +149,7 @@ public class Peak {
      * @return int[][] The vertical distance between the preceding and following samples of peak. 0: Vertical distance from preceding peak, 1: Vertical distance from following peak
      */
     public double[][] findPeakSharpness(int[] peaks) {
+        getIndexFromPeak(peaks);
         double[][] sharpness = new double[2][peaks.length];
         for (int i=0; i<peaks.length; i++) {
             sharpness[0][i] = this.signal[peaks[i]] - this.signal[peaks[i]-1];
@@ -161,6 +165,7 @@ public class Peak {
      * @return int[] An array of distances between peaks
      */
     public int[] findPeakDistance(int[] peaks) {
+        getIndexFromPeak(peaks);
         Arrays.sort(peaks);
         return UtilMethods.diff(peaks);
     }
@@ -172,6 +177,7 @@ public class Peak {
      * @return double[][] The prominence of the input peaks. 0: Contains the prominence, 1: Contains the Left Bases, 2: Contains the Right Bases
      */
     public double[][] findPeakProminence(int[] peaks) {
+        getIndexFromPeak(peaks);
         double[] prominence = new double[peaks.length];
         double[] left_base = new double[peaks.length];
         double[] right_base = new double[peaks.length];
@@ -223,6 +229,8 @@ public class Peak {
      * @return double[][] The width of the input peaks. 0: Contains the widths, 1: Contains the Left Intersection Points, 2: Contains the Right Intersection Points
      */
     public double[][] findPeakWidth(int[] peaks, double rel_height) throws IllegalArgumentException {
+        getIndexFromPeak(peaks);
+
         if (rel_height > 1.0 || rel_height < 0.0) {
             throw new IllegalArgumentException("rel_height can be between 0.0 and 1.0");
         }
@@ -285,19 +293,6 @@ public class Peak {
      */
     public double[] getHeights() {
         return this.height;
-    }
-
-    /**
-     * This method returns the heights of the peaks in the signal
-     * @param peaks List of peaks indices
-     * @return double[] The list of all the heights of peaks
-     */
-    public double[] getHeights(int[] peaks) {
-        double[] height = new double[peaks.length];
-        for (int i=0; i<height.length; i++) {
-            height[i] = this.height[peaks[i]];
-        }
-        return height;
     }
 
     /**
@@ -373,7 +368,7 @@ public class Peak {
      */
     public int[] filterByHeight(int[] peaks, double lower_threshold, double upper_threshold) {
         ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        double[] height = getHeights(peaks);
+        double[] height = this.findPeakHeights(peaks);
         for (int i=0; i<height.length; i++) {
             if (height[i] >= lower_threshold && height[i] <= upper_threshold) {
                 newPeaks.add(peaks[i]);
@@ -421,7 +416,7 @@ public class Peak {
      */
     public int[] filterByHeight(int[] peaks, double threshold, String mode) throws IllegalArgumentException {
         ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        double[] height = this.getHeights(peaks);
+        double[] height = this.findPeakHeights(peaks);
         if (mode.equals("upper")) {
             for (int i=0; i<height.length; i++) {
                 if (height[i] <= threshold) {
