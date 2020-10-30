@@ -13,6 +13,8 @@ package com.github.psambit9791.jdsp;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -280,7 +282,7 @@ public class TestUtils {
     }
 
     @Test
-    public void ecgTest() throws Exception {
+    public void ecgTest() throws IOException {
         int resultLength = 108000;
         double[] data = UtilMethods.electrocardiogram();
         Assertions.assertEquals(resultLength, data.length);
