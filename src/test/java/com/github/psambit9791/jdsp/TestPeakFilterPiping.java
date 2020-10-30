@@ -16,7 +16,6 @@ import com.github.psambit9791.jdsp.signal.peaks.Peak;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class TestPeakFilterPiping {
 
@@ -36,6 +35,21 @@ public class TestPeakFilterPiping {
         int[] results = {49, 691};
         int[] filteredPeaks = out.filterByProminence(peaks, 1, "lower");
         filteredPeaks = out.filterByWidth(filteredPeaks, 20, "lower");
+
+        Assertions.assertArrayEquals(results, filteredPeaks);
+    }
+
+    @Test
+    public void PeakPipelineTest2() {
+        double[] ecgPart = UtilMethods.splitByIndex(this.ecg, 2000, 6000);
+        FindPeak fp = new FindPeak(ecgPart);
+        Peak out = fp.detectPeaks();
+
+        int[] peaks = out.getPeaks();
+        int[] results = {956, 3856};
+        int[] filteredPeaks = out.filterByHeight(peaks, 0.5, "lower");
+        filteredPeaks = out.filterByPeakDistance(filteredPeaks, 150);
+        filteredPeaks = out.filterByWidth(filteredPeaks, 20 ,"lower");
 
         Assertions.assertArrayEquals(results, filteredPeaks);
     }
