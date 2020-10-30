@@ -37,6 +37,8 @@ public class Peak {
     private double[][] prominenceData;
     private double[][] widthData;
 
+    private double relative_height;
+
     public Peak(double[] s, int[] m, int[] l, int[] r, String mode) {
 
         this.signal = s;
@@ -84,7 +86,60 @@ public class Peak {
 
         // Peak Width Information (Equivalent to scipy.signal.find_peaks() width parameter)
         // Refer to https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_widths.html
-        this.widthData = this.findPeakWidth(this.midpoints, 0.5);
+        this.relative_height = 0.5;
+        this.widthData = this.findPeakWidth(this.midpoints, this.relative_height);
+        this.width = widthData[0];
+    }
+
+    public Peak(double[] s, int[] m, int[] l, int[] r, double rel_height, String mode) {
+
+        this.signal = s;
+
+        // Peak Information
+        this.midpoints = m;
+
+        // Peak Height and Plateau Information
+        this.height = new double[m.length];
+
+        //(Equivalent to scipy.signal.find_peaks() plateau_size parameter)
+        this.plateau_size = new int[m.length];
+
+        for (int i=0; i<m.length; i++) {
+            if (mode.equals("peak")) {
+                this.height[i] = s[this.midpoints[i]];
+            }
+            else if (mode.equals("trough")) {
+                this.height[i] = 0 - s[this.midpoints[i]];
+            }
+            this.plateau_size[i] = Math.abs(r[i] - l[i] + 1);
+        }
+
+        for (int i=0; i<m.length; i++) {
+            if (mode.equals("peak")) {
+                this.height[i] = s[this.midpoints[i]];
+            }
+            else if (mode.equals("trough")) {
+                this.height[i] = 0 - s[this.midpoints[i]];
+            }
+            this.plateau_size[i] = Math.abs(r[i] - l[i] + 1);
+        }
+
+        // Peak Distance Information (Equivalent to scipy.signal.find_peaks() distance parameter)
+        this.distance = this.findPeakDistance(this.midpoints);
+
+        // Peak Sharpness Information (Equivalent to scipy.signal.find_peaks() threshold parameter)
+        this.sharpness = this.findPeakSharpness(this.midpoints);
+
+        // Peak Prominence Information (Equivalent to scipy.signal.find_peaks() prominence parameter)
+        // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
+
+        this.prominenceData = this.findPeakProminence(this.midpoints);
+        this.prominence = prominenceData[0];
+
+        // Peak Width Information (Equivalent to scipy.signal.find_peaks() width parameter)
+        // Refer to https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_widths.html
+        this.relative_height = rel_height;
+        this.widthData = this.findPeakWidth(this.midpoints, this.relative_height);
         this.width = widthData[0];
     }
 
@@ -133,7 +188,6 @@ public class Peak {
      * @return double[] The list of all the spreads of peaks
      */
     public int[] findPlateauSize(int[] peaks) {
-        getIndexFromPeak(peaks);
         int[] peak_indices = this.getIndexFromPeak(peaks);
         int[] newPS = new int[peaks.length];
         for (int i=0; i<peak_indices.length; i++) {
@@ -407,7 +461,7 @@ public class Peak {
     }
 
     /**
-     * This method allows filtering the list of peaks by height using either the upper or the lower threshold
+     * This method allows filtering all the peaks by height using either the upper or the lower threshold
      * @param peaks List of peaks to be filtered
      * @param threshold The threshold of height to check against
      * @param mode Can be "upper" or "lower" to select which thresholding to use
@@ -438,7 +492,7 @@ public class Peak {
     }
 
     /**
-     * This method allows filtering the list of peaks by plateau size using both the upper and lower threshold
+     * This method allows filtering the total peaks by plateau size using both the upper and lower threshold
      * @param lower_threshold The lower threshold of plateau size to check against
      * @param upper_threshold The upper threshold of plateau size to check against
      * @return int[] The list of filtered peaks
@@ -454,7 +508,25 @@ public class Peak {
     }
 
     /**
-     * This method allows filtering the list of peaks by plateau size using either the upper or the lower threshold
+     * This method allows filtering all the peaks by plateau size using both the upper and lower threshold
+     * @param peaks List of peaks to be filtered
+     * @param lower_threshold The lower threshold of plateau size to check against
+     * @param upper_threshold The upper threshold of plateau size to check against
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterByPlateauSize(int[] peaks, double lower_threshold, double upper_threshold) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        int[] plateau_size = this.findPlateauSize(peaks);
+        for (int i=0; i<plateau_size.length; i++) {
+            if (plateau_size[i] >= lower_threshold && plateau_size[i] <= upper_threshold) {
+                newPeaks.add(peaks[i]);
+            }
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the total peaks by plateau size using either the upper or the lower threshold
      * @param threshold The threshold of plateau size to check against
      * @param mode Can be "upper" or "lower" to select which thresholding to use
      * @throws java.lang.IllegalArgumentException if mode is not upper or lower
@@ -483,7 +555,38 @@ public class Peak {
     }
 
     /**
-     * This method allows filtering the list of peaks by prominence using both the upper and lower threshold
+     * This method allows filtering all the peaks by plateau size using either the upper or the lower threshold
+     * @param peaks List of peaks to be filtered
+     * @param threshold The threshold of plateau size to check against
+     * @param mode Can be "upper" or "lower" to select which thresholding to use
+     * @throws java.lang.IllegalArgumentException if mode is not upper or lower
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterByPlateauSize(int[] peaks, double threshold, String mode) throws IllegalArgumentException {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        int[] plateau_size = this.findPlateauSize(peaks);
+        if (mode.equals("upper")) {
+            for (int i=0; i<plateau_size.length; i++) {
+                if (plateau_size[i] <= threshold) {
+                    newPeaks.add(peaks[i]);
+                }
+            }
+        }
+        else if (mode.equals("lower")) {
+            for (int i=0; i<plateau_size.length; i++) {
+                if (plateau_size[i] >= threshold) {
+                    newPeaks.add(peaks[i]);
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Mode must either be lower or upper");
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering all the peaks by prominence using both the upper and lower threshold
      * @param lower_threshold The lower threshold of prominence to check against
      * @param upper_threshold The upper threshold of prominence to check against
      * @return int[] The list of filtered peaks
@@ -499,7 +602,25 @@ public class Peak {
     }
 
     /**
-     * This method allows filtering the list of peaks by prominence using either the upper or the lower threshold
+     * This method allows filtering the list of peaks by prominence using both the upper and lower threshold
+     * @param peaks List of peaks to be filtered
+     * @param lower_threshold The lower threshold of prominence to check against
+     * @param upper_threshold The upper threshold of prominence to check against
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterByProminence(int[] peaks, double lower_threshold, double upper_threshold) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        double[] prominence = this.findPeakProminence(peaks)[0];
+        for (int i=0; i<prominence.length; i++) {
+            if (prominence[i] >= lower_threshold && prominence[i] <= upper_threshold) {
+                newPeaks.add(peaks[i]);
+            }
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering all the peaks by prominence using either the upper or the lower threshold
      * @param threshold The threshold of prominence to check against
      * @param mode Can be "upper" or "lower" to select which thresholding to use
      * @throws java.lang.IllegalArgumentException if mode is not upper or lower
@@ -528,7 +649,38 @@ public class Peak {
     }
 
     /**
-     * This method allows filtering the list of peaks by width using both the upper and lower threshold
+     * This method allows filtering the list of peaks by prominence using either the upper or the lower threshold
+     * @param peaks List of peaks to be filtered
+     * @param threshold The threshold of prominence to check against
+     * @param mode Can be "upper" or "lower" to select which thresholding to use
+     * @throws java.lang.IllegalArgumentException if mode is not upper or lower
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterByProminence(int[] peaks, double threshold, String mode) throws IllegalArgumentException{
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        double[] prominence = this.findPeakProminence(peaks)[0];
+        if (mode.equals("upper")) {
+            for (int i=0; i<prominence.length; i++) {
+                if (prominence[i] <= threshold) {
+                    newPeaks.add(peaks[i]);
+                }
+            }
+        }
+        else if (mode.equals("lower")) {
+            for (int i=0; i<prominence.length; i++) {
+                if (prominence[i] >= threshold) {
+                    newPeaks.add(peaks[i]);
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Mode must either be lower or upper");
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering all the peaks by width using both the upper and lower threshold
      * @param lower_threshold The lower threshold of width to check against
      * @param upper_threshold The upper threshold of width to check against
      * @return int[] The list of filtered peaks
@@ -544,7 +696,25 @@ public class Peak {
     }
 
     /**
-     * This method allows filtering the list of peaks by width using either the upper or the lower threshold
+     * This method allows filtering the list of peaks by width using both the upper and lower threshold
+     * @param peaks List of peaks to be filtered
+     * @param lower_threshold The lower threshold of width to check against
+     * @param upper_threshold The upper threshold of width to check against
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterByWidth(int[] peaks, double lower_threshold, double upper_threshold) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        double[] width = this.findPeakWidth(peaks, this.relative_height)[0];
+        for (int i=0; i<width.length; i++) {
+            if (width[i] >= lower_threshold && width[i] <= upper_threshold) {
+                newPeaks.add(peaks[i]);
+            }
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering all the peaks by width using either the upper or the lower threshold
      * @param threshold The threshold of width to check against
      * @param mode Can be "upper" or "lower" to select which thresholding to use
      * @throws java.lang.IllegalArgumentException if mode is not upper or lower
@@ -573,7 +743,38 @@ public class Peak {
     }
 
     /**
-     * This method allows filtering the list of peaks by distance
+     * This method allows filtering the list of peaks by width using either the upper or the lower threshold
+     * @param peaks List of peaks to be filtered
+     * @param threshold The threshold of width to check against
+     * @param mode Can be "upper" or "lower" to select which thresholding to use
+     * @throws java.lang.IllegalArgumentException if mode is not upper or lower
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterByWidth(int[] peaks, double threshold, String mode) throws IllegalArgumentException {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        double[] width = this.findPeakWidth(peaks, this.relative_height)[0];
+        if (mode.equals("upper")) {
+            for (int i=0; i<width.length; i++) {
+                if (width[i] <= threshold) {
+                    newPeaks.add(peaks[i]);
+                }
+            }
+        }
+        else if (mode.equals("lower")) {
+            for (int i=0; i<width.length; i++) {
+                if (width[i] >= threshold) {
+                    newPeaks.add(peaks[i]);
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Mode must either be lower or upper");
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering all the peaks by distance
      * @param distance The threshold of distance to check against
      * @return int[] The list of filtered peaks
      */
@@ -611,7 +812,45 @@ public class Peak {
     }
 
     /**
-     * This method allows filtering the list of peaks by sharpness using both the upper and lower threshold
+     * This method allows filtering the list of peaks by distance
+     * @param peaks List of peaks to be filtered
+     * @param distance The threshold of distance to check against
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterByPeakDistance(int[] peaks, int distance) {
+        int[] keep = new int[peaks.length];
+        Arrays.fill(keep, 1);
+        double[] heights = this.findPeakHeights(peaks);
+        int[] priority = UtilMethods.argsort(heights, true);
+        for (int i=peaks.length-1; i>=0; i--) {
+            int j = priority[i];
+            if (keep[j] == 0) {
+                continue;
+            }
+
+            int k = j - 1;
+            while (0 <= k && peaks[j] - peaks[k] < distance) {
+                keep[k] = 0;
+                k--;
+            }
+
+            k = j + 1;
+            while (k < peaks.length && peaks[k] - peaks[j] < distance) {
+                keep[k] = 0;
+                k++;
+            }
+        }
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        for (int i=0; i<keep.length; i++) {
+            if(keep[i] == 1) {
+                newPeaks.add(peaks[i]);
+            }
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering all the peaks by sharpness using both the upper and lower threshold
      * @param lower_threshold The lower threshold of sharpness to check against
      * @param upper_threshold The upper threshold of sharpness to check against
      * @return int[] The list of filtered peaks
@@ -642,7 +881,40 @@ public class Peak {
     }
 
     /**
-     * This method allows filtering the list of peaks by sharpness using either the upper or the lower threshold
+     * This method allows filtering the list of peaks by sharpness using both the upper and lower threshold
+     * @param peaks List of peaks to be filtered
+     * @param lower_threshold The lower threshold of sharpness to check against
+     * @param upper_threshold The upper threshold of sharpness to check against
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterBySharpness(int[] peaks, double lower_threshold, double upper_threshold) {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        double[][] sharpness = this.findPeakSharpness(peaks);
+        int[] keep = new int[peaks.length];
+        Arrays.fill(keep, 1);
+
+        for (int i=0; i<sharpness[0].length; i++) {
+            double minVal = Math.min(sharpness[0][i], sharpness[1][i]);
+            if (minVal < lower_threshold) {
+                keep[i] = 0;
+            }
+        }
+        for (int i=0; i<sharpness[0].length; i++) {
+            double maxVal = Math.max(sharpness[0][i], sharpness[1][i]);
+            if (maxVal > upper_threshold) {
+                keep[i] = 0;
+            }
+        }
+        for (int i=0; i<keep.length; i++) {
+            if(keep[i] == 1) {
+                newPeaks.add(peaks[i]);
+            }
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering all the peaks by sharpness using either the upper or the lower threshold
      * @param threshold The threshold of sharpness to check against
      * @param mode Can be "upper" or "lower" to select which thresholding to use
      * @throws java.lang.IllegalArgumentException if mode is not upper or lower
@@ -664,6 +936,47 @@ public class Peak {
         else if (mode.equals("lower")) {
             for (int i=0; i<this.sharpness[0].length; i++) {
                 double minVal = Math.min(this.sharpness[0][i], this.sharpness[1][i]);
+                if (minVal < threshold) {
+                    keep[i] = 0;
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Mode must either be lower or upper");
+        }
+        for (int i=0; i<keep.length; i++) {
+            if(keep[i] == 1) {
+                newPeaks.add(this.midpoints[i]);
+            }
+        }
+        return UtilMethods.convertToPrimitiveInt(newPeaks);
+    }
+
+    /**
+     * This method allows filtering the list of peaks by sharpness using either the upper or the lower threshold
+     * @param peaks List of peaks to be filtered
+     * @param threshold The threshold of sharpness to check against
+     * @param mode Can be "upper" or "lower" to select which thresholding to use
+     * @throws java.lang.IllegalArgumentException if mode is not upper or lower
+     * @return int[] The list of filtered peaks
+     */
+    public int[] filterBySharpness(int[] peaks, double threshold, String mode) throws IllegalArgumentException {
+        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
+        double[][] sharpness = this.findPeakSharpness(peaks);
+        int[] keep = new int[peaks.length];
+        Arrays.fill(keep, 1);
+
+        if (mode.equals("upper")) {
+            for (int i=0; i<sharpness[0].length; i++) {
+                double maxVal = Math.max(sharpness[0][i], sharpness[1][i]);
+                if (maxVal > threshold) {
+                    keep[i] = 0;
+                }
+            }
+        }
+        else if (mode.equals("lower")) {
+            for (int i=0; i<sharpness[0].length; i++) {
+                double minVal = Math.min(sharpness[0][i], sharpness[1][i]);
                 if (minVal < threshold) {
                     keep[i] = 0;
                 }
