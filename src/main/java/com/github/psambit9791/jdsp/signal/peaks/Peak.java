@@ -404,13 +404,7 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterByHeight(double lower_threshold, double upper_threshold) {
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        for (int i=0; i<this.height.length; i++) {
-            if (this.height[i] >= lower_threshold && this.height[i] <= upper_threshold) {
-                newPeaks.add(this.midpoints[i]);
-            }
-        }
-        return UtilMethods.convertToPrimitiveInt(newPeaks);
+        return this.filterByHeight(this.midpoints, lower_threshold, upper_threshold);
     }
 
     /**
@@ -439,25 +433,7 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterByHeight(double threshold, String mode) throws IllegalArgumentException {
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        if (mode.equals("upper")) {
-            for (int i=0; i<this.height.length; i++) {
-                if (this.height[i] <= threshold) {
-                    newPeaks.add(this.midpoints[i]);
-                }
-            }
-        }
-        else if (mode.equals("lower")) {
-            for (int i=0; i<this.height.length; i++) {
-                if (this.height[i] >= threshold) {
-                    newPeaks.add(this.midpoints[i]);
-                }
-            }
-        }
-        else {
-            throw new IllegalArgumentException("Mode must either be lower or upper");
-        }
-        return UtilMethods.convertToPrimitiveInt(newPeaks);
+        return this.filterByHeight(this.midpoints, threshold, mode);
     }
 
     /**
@@ -498,13 +474,7 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterByPlateauSize(double lower_threshold, double upper_threshold) {
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        for (int i=0; i<this.plateau_size.length; i++) {
-            if (this.plateau_size[i] >= lower_threshold && this.plateau_size[i] <= upper_threshold) {
-                newPeaks.add(this.midpoints[i]);
-            }
-        }
-        return UtilMethods.convertToPrimitiveInt(newPeaks);
+        return this.filterByPlateauSize(this.midpoints, lower_threshold, upper_threshold);
     }
 
     /**
@@ -533,25 +503,7 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterByPlateauSize(double threshold, String mode) throws IllegalArgumentException {
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        if (mode.equals("upper")) {
-            for (int i=0; i<this.plateau_size.length; i++) {
-                if (this.plateau_size[i] <= threshold) {
-                    newPeaks.add(this.midpoints[i]);
-                }
-            }
-        }
-        else if (mode.equals("lower")) {
-            for (int i=0; i<this.plateau_size.length; i++) {
-                if (this.plateau_size[i] >= threshold) {
-                    newPeaks.add(this.midpoints[i]);
-                }
-            }
-        }
-        else {
-            throw new IllegalArgumentException("Mode must either be lower or upper");
-        }
-        return UtilMethods.convertToPrimitiveInt(newPeaks);
+        return this.filterByPlateauSize(this.midpoints, threshold, mode);
     }
 
     /**
@@ -592,13 +544,7 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterByProminence(double lower_threshold, double upper_threshold) {
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        for (int i=0; i<this.prominence.length; i++) {
-            if (this.prominence[i] >= lower_threshold && this.prominence[i] <= upper_threshold) {
-                newPeaks.add(this.midpoints[i]);
-            }
-        }
-        return UtilMethods.convertToPrimitiveInt(newPeaks);
+        return this.filterByProminence(this.midpoints, lower_threshold, upper_threshold);
     }
 
     /**
@@ -627,25 +573,7 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterByProminence(double threshold, String mode) throws IllegalArgumentException{
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        if (mode.equals("upper")) {
-            for (int i=0; i<this.prominence.length; i++) {
-                if (this.prominence[i] <= threshold) {
-                    newPeaks.add(this.midpoints[i]);
-                }
-            }
-        }
-        else if (mode.equals("lower")) {
-            for (int i=0; i<this.prominence.length; i++) {
-                if (this.prominence[i] >= threshold) {
-                    newPeaks.add(this.midpoints[i]);
-                }
-            }
-        }
-        else {
-            throw new IllegalArgumentException("Mode must either be lower or upper");
-        }
-        return UtilMethods.convertToPrimitiveInt(newPeaks);
+        return this.filterByProminence(this.midpoints, threshold, mode);
     }
 
     /**
@@ -686,13 +614,7 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterByWidth(double lower_threshold, double upper_threshold) {
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        for (int i=0; i<this.width.length; i++) {
-            if (this.width[i] >= lower_threshold && this.width[i] <= upper_threshold) {
-                newPeaks.add(this.midpoints[i]);
-            }
-        }
-        return UtilMethods.convertToPrimitiveInt(newPeaks);
+        return this.filterByWidth(this.midpoints, lower_threshold, upper_threshold);
     }
 
     /**
@@ -721,25 +643,7 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterByWidth(double threshold, String mode) throws IllegalArgumentException {
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        if (mode.equals("upper")) {
-            for (int i=0; i<this.width.length; i++) {
-                if (this.width[i] <= threshold) {
-                    newPeaks.add(this.midpoints[i]);
-                }
-            }
-        }
-        else if (mode.equals("lower")) {
-            for (int i=0; i<this.width.length; i++) {
-                if (this.width[i] >= threshold) {
-                    newPeaks.add(this.midpoints[i]);
-                }
-            }
-        }
-        else {
-            throw new IllegalArgumentException("Mode must either be lower or upper");
-        }
-        return UtilMethods.convertToPrimitiveInt(newPeaks);
+        return this.filterByWidth(this.midpoints, threshold, mode);
     }
 
     /**
@@ -779,36 +683,7 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterByPeakDistance(int distance) {
-        int[] peaks = this.midpoints;
-        int[] keep = new int[peaks.length];
-        Arrays.fill(keep, 1);
-        double[] heights = this.getHeights();
-        int[] priority = UtilMethods.argsort(heights, true);
-        for (int i=peaks.length-1; i>=0; i--) {
-            int j = priority[i];
-            if (keep[j] == 0) {
-                continue;
-            }
-
-            int k = j - 1;
-            while (0 <= k && peaks[j] - peaks[k] < distance) {
-                keep[k] = 0;
-                k--;
-            }
-
-            k = j + 1;
-            while (k < peaks.length && peaks[k] - peaks[j] < distance) {
-                keep[k] = 0;
-                k++;
-            }
-        }
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        for (int i=0; i<keep.length; i++) {
-            if(keep[i] == 1) {
-                newPeaks.add(peaks[i]);
-            }
-        }
-        return UtilMethods.convertToPrimitiveInt(newPeaks);
+        return this.filterByPeakDistance(this.midpoints, distance);
     }
 
     /**
@@ -856,28 +731,7 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterBySharpness(double lower_threshold, double upper_threshold) {
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        int[] keep = new int[this.midpoints.length];
-        Arrays.fill(keep, 1);
-
-        for (int i=0; i<this.sharpness[0].length; i++) {
-            double minVal = Math.min(this.sharpness[0][i], this.sharpness[1][i]);
-            if (minVal < lower_threshold) {
-                keep[i] = 0;
-            }
-        }
-        for (int i=0; i<this.sharpness[0].length; i++) {
-            double maxVal = Math.max(this.sharpness[0][i], this.sharpness[1][i]);
-            if (maxVal > upper_threshold) {
-                keep[i] = 0;
-            }
-        }
-        for (int i=0; i<keep.length; i++) {
-            if(keep[i] == 1) {
-                newPeaks.add(this.midpoints[i]);
-            }
-        }
-        return UtilMethods.convertToPrimitiveInt(newPeaks);
+        return this.filterBySharpness(this.midpoints, lower_threshold, upper_threshold);
     }
 
     /**
@@ -921,35 +775,7 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterBySharpness(double threshold, String mode) throws IllegalArgumentException {
-        ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        int[] keep = new int[this.midpoints.length];
-        Arrays.fill(keep, 1);
-
-        if (mode.equals("upper")) {
-            for (int i=0; i<this.sharpness[0].length; i++) {
-                double maxVal = Math.max(this.sharpness[0][i], this.sharpness[1][i]);
-                if (maxVal > threshold) {
-                    keep[i] = 0;
-                }
-            }
-        }
-        else if (mode.equals("lower")) {
-            for (int i=0; i<this.sharpness[0].length; i++) {
-                double minVal = Math.min(this.sharpness[0][i], this.sharpness[1][i]);
-                if (minVal < threshold) {
-                    keep[i] = 0;
-                }
-            }
-        }
-        else {
-            throw new IllegalArgumentException("Mode must either be lower or upper");
-        }
-        for (int i=0; i<keep.length; i++) {
-            if(keep[i] == 1) {
-                newPeaks.add(this.midpoints[i]);
-            }
-        }
-        return UtilMethods.convertToPrimitiveInt(newPeaks);
+        return this.filterBySharpness(this.midpoints, threshold, mode);
     }
 
     /**
