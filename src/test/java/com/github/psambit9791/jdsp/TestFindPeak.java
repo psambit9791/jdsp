@@ -96,8 +96,8 @@ public class TestFindPeak {
         int[] resultFilteredPeaks2 = {10, 37, 104, 171, 197};
         int[] resultFilteredPeaks3 = {75, 133, 232};
         int[] filteredPeaks1 = out.filterByHeight(0.5, 1.5);
-        int[] filteredPeaks2 = out.filterByHeight(0, "lower");
-        int[] filteredPeaks3 = out.filterByHeight(0, "upper");
+        int[] filteredPeaks2 = out.filterByHeight(0.0, null);
+        int[] filteredPeaks3 = out.filterByHeight(null, 0.0);
         Assertions.assertArrayEquals(resultFilteredPeaks1, filteredPeaks1);
         Assertions.assertArrayEquals(resultFilteredPeaks2, filteredPeaks2);
         Assertions.assertArrayEquals(resultFilteredPeaks3, filteredPeaks3);
@@ -111,9 +111,9 @@ public class TestFindPeak {
         int[] resultFilteredPS1 = {10,  37,  75, 104, 133, 171, 197};
         int[] resultFilteredPS2 = {232};
         int[] resultFilteredPS3 = {10,  37,  75, 104, 133, 171, 197};
-        int[] outFilteredPS1 = out.filterByPlateauSize(0, 1);
-        int[] outFilteredPS2 = out.filterByPlateauSize(2, "lower");
-        int[] outFilteredPS3 = out.filterByPlateauSize(1, "upper");
+        int[] outFilteredPS1 = out.filterByPlateauSize(0.0, 1.0);
+        int[] outFilteredPS2 = out.filterByPlateauSize(2.0, null);
+        int[] outFilteredPS3 = out.filterByPlateauSize(null, 1.0);
         Assertions.assertArrayEquals(resultFilteredPS1, outFilteredPS1);
         Assertions.assertArrayEquals(resultFilteredPS2, outFilteredPS2);
         Assertions.assertArrayEquals(resultFilteredPS3, outFilteredPS3);
@@ -141,8 +141,8 @@ public class TestFindPeak {
         int[] resultFilteredSharp2 = {104, 133, 171, 197};
         int[] resultFilteredSharp3 = {10,  37,  75, 104, 133, 171, 197, 232};
         int[] filteredSharp1 = out.filterBySharpness(0.001, 0.02);
-        int[] filteredSharp2 = out.filterBySharpness(0.005, "lower");
-        int[] filteredSharp3 = out.filterBySharpness(0.05, "upper");
+        int[] filteredSharp2 = out.filterBySharpness(0.005, null);
+        int[] filteredSharp3 = out.filterBySharpness(null, 0.05);
         Assertions.assertArrayEquals(resultFilteredSharp1, filteredSharp1);
         Assertions.assertArrayEquals(resultFilteredSharp2, filteredSharp2);
         Assertions.assertArrayEquals(resultFilteredSharp3, filteredSharp3);
@@ -165,8 +165,8 @@ public class TestFindPeak {
         int[] resultFilteredProm2 = {10, 104, 197};
         int[] resultFilteredProm3 = {37,  75, 133, 171, 232};
         int[] filteredProm1 = out.filterByProminence(0.4,  1.5);
-        int[] filteredProm2 = out.filterByProminence(1, "lower");
-        int[] filteredProm3 = out.filterByProminence(1, "upper");
+        int[] filteredProm2 = out.filterByProminence(1.0, null);
+        int[] filteredProm3 = out.filterByProminence(null, 1.0);
         Assertions.assertArrayEquals(resultFilteredProm1, filteredProm1);
         Assertions.assertArrayEquals(resultFilteredProm2, filteredProm2);
         Assertions.assertArrayEquals(resultFilteredProm3, filteredProm3);
@@ -189,9 +189,9 @@ public class TestFindPeak {
         int[] resultFilteredWidth1 = {37, 171, 232};
         int[] resultFilteredWidth2 = {10,  37, 104, 171, 197, 232};
         int[] resultFilteredWidth3 = {75, 133};
-        int[] filteredWidth1 = out.filterByWidth(10, 15);
-        int[] filteredWidth2 = out.filterByWidth(10, "lower");
-        int[] filteredWidth3 = out.filterByWidth(10, "upper");
+        int[] filteredWidth1 = out.filterByWidth(10.0, 15.0);
+        int[] filteredWidth2 = out.filterByWidth(10.0, null);
+        int[] filteredWidth3 = out.filterByWidth(null, 10.0);
         Assertions.assertArrayEquals(resultFilteredWidth1, filteredWidth1);
         Assertions.assertArrayEquals(resultFilteredWidth2, filteredWidth2);
         Assertions.assertArrayEquals(resultFilteredWidth3, filteredWidth3);
@@ -222,8 +222,8 @@ public class TestFindPeak {
         int[] resultFilteredPeaks3 = {122, 285, 333, 374, 415, 495, 500, 531, 535, 575, 595, 608, 663, 699, 705, 728,
                 747, 765, 771, 841, 884, 945, 956, 965};
         int[] filteredPeaks1 = out.filterByHeight(0.02, 1.0);
-        int[] filteredPeaks2 = out.filterByHeight(0, "lower");
-        int[] filteredPeaks3 = out.filterByHeight(0, "upper");
+        int[] filteredPeaks2 = out.filterByHeight(0.0, null);
+        int[] filteredPeaks3 = out.filterByHeight(null, 0.0);
         Assertions.assertArrayEquals(resultFilteredPeaks1, filteredPeaks1);
         Assertions.assertArrayEquals(resultFilteredPeaks2, filteredPeaks2);
         Assertions.assertArrayEquals(resultFilteredPeaks3, filteredPeaks3);
@@ -241,9 +241,9 @@ public class TestFindPeak {
         int[] resultFilteredPS2 = {49, 175, 495, 575, 595, 663, 945, 956};
         int[] resultFilteredPS3 = {7,  93, 122, 213, 257, 285, 333, 374, 415, 500, 531, 535, 608, 699, 705, 728, 747,
                 765, 771, 841, 884, 928, 965};
-        int[] outFilteredPS1 = out.filterByPlateauSize(2, 4);
-        int[] outFilteredPS2 = out.filterByPlateauSize(2, "lower");
-        int[] outFilteredPS3 = out.filterByPlateauSize(1, "upper");
+        int[] outFilteredPS1 = out.filterByPlateauSize(2.0, 4.0);
+        int[] outFilteredPS2 = out.filterByPlateauSize(2.0, null);
+        int[] outFilteredPS3 = out.filterByPlateauSize(null, 1.0);
         Assertions.assertArrayEquals(resultFilteredPS1, outFilteredPS1);
         Assertions.assertArrayEquals(resultFilteredPS2, outFilteredPS2);
         Assertions.assertArrayEquals(resultFilteredPS3, outFilteredPS3);
@@ -281,8 +281,8 @@ public class TestFindPeak {
         int[] resultFilteredSharp3 = {49, 122, 175, 213, 257, 285, 333, 495, 500, 531, 535, 575, 595, 608, 663, 699,
                 705, 728, 765, 771, 841, 884, 945, 956, 965};
         int[] filteredSharp1 = out.filterBySharpness(0.002, 0.005);
-        int[] filteredSharp2 = out.filterBySharpness(0.002, "lower");
-        int[] filteredSharp3 = out.filterBySharpness(0.005, "upper");
+        int[] filteredSharp2 = out.filterBySharpness(0.002, null);
+        int[] filteredSharp3 = out.filterBySharpness(null, 0.005);
         Assertions.assertArrayEquals(resultFilteredSharp1, filteredSharp1);
         Assertions.assertArrayEquals(resultFilteredSharp2, filteredSharp2);
         Assertions.assertArrayEquals(resultFilteredSharp3, filteredSharp3);
@@ -310,8 +310,8 @@ public class TestFindPeak {
         int[] resultFilteredProm3 = {7,  49,  93, 122, 175, 213, 285, 333, 374, 495, 500, 531, 535, 575, 595, 608, 663,
                 699, 705, 728, 765, 771, 841, 884, 945, 956, 965};
         int[] filteredProm1 = out.filterByProminence(0.2, 0.6);
-        int[] filteredProm2 = out.filterByProminence(0.2, "lower");
-        int[] filteredProm3 = out.filterByProminence(0.6, "upper");
+        int[] filteredProm2 = out.filterByProminence(0.2, null);
+        int[] filteredProm3 = out.filterByProminence(null, 0.6);
         Assertions.assertArrayEquals(resultFilteredProm1, filteredProm1);
         Assertions.assertArrayEquals(resultFilteredProm2, filteredProm2);
         Assertions.assertArrayEquals(resultFilteredProm3, filteredProm3);
@@ -344,9 +344,9 @@ public class TestFindPeak {
                 884, 928};
         int[] resultFilteredWidth3 = {7,  49,  93, 122, 213, 257, 285, 374, 415, 500, 531, 535, 575, 595, 608, 699, 705,
                 728, 747, 765, 771, 884, 928, 945, 956, 965};
-        int[] filteredWidth1 = out.filterByWidth(5, 20);
-        int[] filteredWidth2 = out.filterByWidth(5, "lower");
-        int[] filteredWidth3 = out.filterByWidth(20, "upper");
+        int[] filteredWidth1 = out.filterByWidth(5.0, 20.0);
+        int[] filteredWidth2 = out.filterByWidth(5.0, null);
+        int[] filteredWidth3 = out.filterByWidth(null, 20.0);
         Assertions.assertArrayEquals(resultFilteredWidth1, filteredWidth1);
         Assertions.assertArrayEquals(resultFilteredWidth2, filteredWidth2);
         Assertions.assertArrayEquals(resultFilteredWidth3, filteredWidth3);

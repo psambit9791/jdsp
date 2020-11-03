@@ -33,8 +33,8 @@ public class TestPeakFilterPiping {
 
         int[] peaks = out.getPeaks();
         int[] results = {49, 691};
-        int[] filteredPeaks = out.filterByProminence(peaks, 1, "lower");
-        filteredPeaks = out.filterByWidth(filteredPeaks, 20, "lower");
+        int[] filteredPeaks = out.filterByProminence(peaks, 1.0, null);
+        filteredPeaks = out.filterByWidth(filteredPeaks, 20.0, null);
 
         Assertions.assertArrayEquals(results, filteredPeaks);
     }
@@ -47,9 +47,9 @@ public class TestPeakFilterPiping {
 
         int[] peaks = out.getPeaks();
         int[] results = {956, 3856};
-        int[] filteredPeaks = out.filterByHeight(peaks, 0.5, "lower");
+        int[] filteredPeaks = out.filterByHeight(peaks, 0.5, null);
         filteredPeaks = out.filterByPeakDistance(filteredPeaks, 150);
-        filteredPeaks = out.filterByWidth(filteredPeaks, 20 ,"lower");
+        filteredPeaks = out.filterByWidth(filteredPeaks, 20.0 ,null);
 
         Assertions.assertArrayEquals(results, filteredPeaks);
     }
