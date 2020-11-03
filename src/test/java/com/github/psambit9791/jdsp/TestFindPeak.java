@@ -428,11 +428,11 @@ public class TestFindPeak {
         int[] resultMaxFilter = {37, 75, 104, 133, 171, 197};
         int[] resultMinFilter = {104};
 
-        int[] outLeftFilter = out.filterByProperty(1, 4, "left");
-        int[] outRightFilter = out.filterByProperty(1, 4, "right");
-        int[] outMeanFilter = out.filterByProperty(1, 4, "mean");
-        int[] outMaxFilter = out.filterByProperty(1, 4, "max");
-        int[] outMinFilter = out.filterByProperty(1, 4, "min");
+        int[] outLeftFilter = out.filterByProperty(1.0, 4.0, "left");
+        int[] outRightFilter = out.filterByProperty(1.0, 4.0, "right");
+        int[] outMeanFilter = out.filterByProperty(1.0, 4.0, "mean");
+        int[] outMaxFilter = out.filterByProperty(1.0, 4.0, "max");
+        int[] outMinFilter = out.filterByProperty(1.0, 4.0, "min");
         Assertions.assertArrayEquals(resultLeftFilter, outLeftFilter);
         Assertions.assertArrayEquals(resultRightFilter, outRightFilter);
         Assertions.assertArrayEquals(resultMeanFilter, outMeanFilter);
@@ -446,11 +446,11 @@ public class TestFindPeak {
         int[] resultMaxFilter1 = {37, 104, 171, 197};
         int[] resultMinFilter1 = {104};
 
-        int[] outLeftFilter1 = out.filterByProperty(1.5, "lower", "left");
-        int[] outRightFilter1 = out.filterByProperty(1.5, "lower", "right");
-        int[] outMeanFilter1 = out.filterByProperty(1.5, "lower", "mean");
-        int[] outMaxFilter1 = out.filterByProperty(1.5, "lower", "max");
-        int[] outMinFilter1 = out.filterByProperty(1.5, "lower", "min");
+        int[] outLeftFilter1 = out.filterByProperty(1.5, null, "left");
+        int[] outRightFilter1 = out.filterByProperty(1.5, null, "right");
+        int[] outMeanFilter1 = out.filterByProperty(1.5, null, "mean");
+        int[] outMaxFilter1 = out.filterByProperty(1.5, null, "max");
+        int[] outMinFilter1 = out.filterByProperty(1.5, null, "min");
         Assertions.assertArrayEquals(resultLeftFilter1, outLeftFilter1);
         Assertions.assertArrayEquals(resultRightFilter1, outRightFilter1);
         Assertions.assertArrayEquals(resultMeanFilter1, outMeanFilter1);
@@ -464,11 +464,11 @@ public class TestFindPeak {
         int[] resultMaxFilter2 = {10, 232};
         int[] resultMinFilter2 = {10, 37, 75, 133, 171, 197, 232};
 
-        int[] outLeftFilter2 = out.filterByProperty(1, "upper", "left");
-        int[] outRightFilter2 = out.filterByProperty(1, "upper", "right");
-        int[] outMeanFilter2 = out.filterByProperty(1, "upper", "mean");
-        int[] outMaxFilter2 = out.filterByProperty(1, "upper", "max");
-        int[] outMinFilter2 = out.filterByProperty(1, "upper", "min");
+        int[] outLeftFilter2 = out.filterByProperty(null, 1.0, "left");
+        int[] outRightFilter2 = out.filterByProperty(null, 1.0, "right");
+        int[] outMeanFilter2 = out.filterByProperty(null, 1.0, "mean");
+        int[] outMaxFilter2 = out.filterByProperty(null, 1.0, "max");
+        int[] outMinFilter2 = out.filterByProperty(null, 1.0, "min");
         Assertions.assertArrayEquals(resultLeftFilter2, outLeftFilter2);
         Assertions.assertArrayEquals(resultRightFilter2, outRightFilter2);
         Assertions.assertArrayEquals(resultMeanFilter2, outMeanFilter2);
@@ -547,11 +547,11 @@ public class TestFindPeak {
         int[] resultMaxFilter1 = {7, 49, 93, 175, 213, 257, 333, 374, 415, 495, 535, 575, 663, 747, 841, 884, 928};
         int[] resultMinFilter1 = {7, 93, 257, 333, 415, 575, 747, 928};
 
-        int[] outLeftFilter1 = out.filterByProperty(0.2, "lower", "left");
-        int[] outRightFilter1 = out.filterByProperty(0.2, "lower", "right");
-        int[] outMeanFilter1 = out.filterByProperty(0.2, "lower", "mean");
-        int[] outMaxFilter1 = out.filterByProperty(0.2, "lower", "max");
-        int[] outMinFilter1 = out.filterByProperty(0.2, "lower", "min");
+        int[] outLeftFilter1 = out.filterByProperty(0.2, null, "left");
+        int[] outRightFilter1 = out.filterByProperty(0.2, null, "right");
+        int[] outMeanFilter1 = out.filterByProperty(0.2, null, "mean");
+        int[] outMaxFilter1 = out.filterByProperty(0.2, null, "max");
+        int[] outMinFilter1 = out.filterByProperty(0.2, null, "min");
         Assertions.assertArrayEquals(resultLeftFilter1, outLeftFilter1);
         Assertions.assertArrayEquals(resultRightFilter1, outRightFilter1);
         Assertions.assertArrayEquals(resultMeanFilter1, outMeanFilter1);
@@ -566,11 +566,11 @@ public class TestFindPeak {
         int[] resultMinFilter2 = {122, 213, 285, 374, 495, 500, 531, 535, 595, 608, 699, 705, 728, 765, 771, 884, 945, 956, 965};
 
 
-        int[] outLeftFilter2 = out.filterByProperty(0.1, "upper", "left");
-        int[] outRightFilter2 = out.filterByProperty(0.1, "upper", "right");
-        int[] outMeanFilter2 = out.filterByProperty(0.1, "upper", "mean");
-        int[] outMaxFilter2 = out.filterByProperty(0.1, "upper", "max");
-        int[] outMinFilter2 = out.filterByProperty(0.1, "upper", "min");
+        int[] outLeftFilter2 = out.filterByProperty(null, 0.1, "left");
+        int[] outRightFilter2 = out.filterByProperty(null, 0.1, "right");
+        int[] outMeanFilter2 = out.filterByProperty(null, 0.1, "mean");
+        int[] outMaxFilter2 = out.filterByProperty(null, 0.1, "max");
+        int[] outMinFilter2 = out.filterByProperty(null, 0.1, "min");
         Assertions.assertArrayEquals(resultLeftFilter2, outLeftFilter2);
         Assertions.assertArrayEquals(resultRightFilter2, outRightFilter2);
         Assertions.assertArrayEquals(resultMeanFilter2, outMeanFilter2);
@@ -593,7 +593,7 @@ public class TestFindPeak {
         fig.addPoints("Spikes", peaks, out.findPeakHeights(peaks), 'x');
 
         // Plot Filtered peak points
-        int[] filteredPeaks = out.filterByProperty(0.5, 5, "mean");
+        int[] filteredPeaks = out.filterByProperty(0.5, 5.0, "mean");
         double[] filteredHeights = out.findPeakHeights(filteredPeaks);
         fig.addPoints("Filtered Spikes", filteredPeaks, filteredHeights, 'o');
 
