@@ -399,8 +399,8 @@ public class Peak {
 
     /**
      * This method allows filtering all the peaks by height using both the upper and lower threshold
-     * @param lower_threshold The lower threshold of height to check against
-     * @param upper_threshold The upper threshold of height to check against
+     * @param lower_threshold The lower threshold of height to check against. Use null to omit.
+     * @param upper_threshold The upper threshold of height to check against. Use null to omit.
      * @return int[] The list of filtered peaks
      */
     public int[] filterByHeight(Double lower_threshold, Double upper_threshold) {
@@ -411,8 +411,8 @@ public class Peak {
      * This method allows filtering the list of peaks by height using both the upper and lower threshold
      * @throws java.lang.IllegalArgumentException If both upper and lower threshold is null
      * @param peaks List of peaks to be filtered
-     * @param lower_threshold The lower threshold of height to check against
-     * @param upper_threshold The upper threshold of height to check against
+     * @param lower_threshold The lower threshold of height to check against. Use null to omit.
+     * @param upper_threshold The upper threshold of height to check against. Use null to omit.
      * @return int[] The list of filtered peaks
      */
     public int[] filterByHeight(int[] peaks, Double lower_threshold, Double upper_threshold) {
@@ -447,8 +447,8 @@ public class Peak {
 
     /**
      * This method allows filtering the total peaks by plateau size using both the upper and lower threshold
-     * @param lower_threshold The lower threshold of plateau size to check against
-     * @param upper_threshold The upper threshold of plateau size to check against
+     * @param lower_threshold The lower threshold of plateau size to check against. Use null to omit.
+     * @param upper_threshold The upper threshold of plateau size to check against. Use null to omit.
      * @return int[] The list of filtered peaks
      */
     public int[] filterByPlateauSize(Double lower_threshold, Double upper_threshold) {
@@ -459,8 +459,8 @@ public class Peak {
      * This method allows filtering all the peaks by plateau size using both the upper and lower threshold
      * @throws java.lang.IllegalArgumentException If both upper and lower threshold is null
      * @param peaks List of peaks to be filtered
-     * @param lower_threshold The lower threshold of plateau size to check against
-     * @param upper_threshold The upper threshold of plateau size to check against
+     * @param lower_threshold The lower threshold of plateau size to check against. Use null to omit.
+     * @param upper_threshold The upper threshold of plateau size to check against. Use null to omit.
      * @return int[] The list of filtered peaks
      */
     public int[] filterByPlateauSize(int[] peaks, Double lower_threshold, Double upper_threshold) {
@@ -495,8 +495,8 @@ public class Peak {
 
     /**
      * This method allows filtering all the peaks by prominence using both the upper and lower threshold
-     * @param lower_threshold The lower threshold of prominence to check against
-     * @param upper_threshold The upper threshold of prominence to check against
+     * @param lower_threshold The lower threshold of prominence to check against. Use null to omit.
+     * @param upper_threshold The upper threshold of prominence to check against. Use null to omit.
      * @return int[] The list of filtered peaks
      */
     public int[] filterByProminence(Double lower_threshold, Double upper_threshold) {
@@ -507,8 +507,8 @@ public class Peak {
      * This method allows filtering the list of peaks by prominence using both the upper and lower threshold
      * @throws java.lang.IllegalArgumentException If both upper and lower threshold is null
      * @param peaks List of peaks to be filtered
-     * @param lower_threshold The lower threshold of prominence to check against
-     * @param upper_threshold The upper threshold of prominence to check against
+     * @param lower_threshold The lower threshold of prominence to check against. Use null to omit.
+     * @param upper_threshold The upper threshold of prominence to check against. Use null to omit.
      * @return int[] The list of filtered peaks
      */
     public int[] filterByProminence(int[] peaks, Double lower_threshold, Double upper_threshold) {
@@ -543,8 +543,8 @@ public class Peak {
 
     /**
      * This method allows filtering all the peaks by width using both the upper and lower threshold
-     * @param lower_threshold The lower threshold of width to check against
-     * @param upper_threshold The upper threshold of width to check against
+     * @param lower_threshold The lower threshold of width to check against. Use null to omit.
+     * @param upper_threshold The upper threshold of width to check against. Use null to omit.
      * @return int[] The list of filtered peaks
      */
     public int[] filterByWidth(Double lower_threshold, Double upper_threshold) {
@@ -555,8 +555,8 @@ public class Peak {
      * This method allows filtering the list of peaks by width using both the upper and lower threshold
      * @throws java.lang.IllegalArgumentException If both upper and lower threshold is null
      * @param peaks List of peaks to be filtered
-     * @param lower_threshold The lower threshold of width to check against
-     * @param upper_threshold The upper threshold of width to check against
+     * @param lower_threshold The lower threshold of width to check against. Use null to omit.
+     * @param upper_threshold The upper threshold of width to check against. Use null to omit.
      * @return int[] The list of filtered peaks
      */
     public int[] filterByWidth(int[] peaks, Double lower_threshold, Double upper_threshold) {
@@ -638,8 +638,8 @@ public class Peak {
 
     /**
      * This method allows filtering all the peaks by sharpness using both the upper and lower threshold
-     * @param lower_threshold The lower threshold of sharpness to check against
-     * @param upper_threshold The upper threshold of sharpness to check against
+     * @param lower_threshold The lower threshold of sharpness to check against. Use null to omit.
+     * @param upper_threshold The upper threshold of sharpness to check against. Use null to omit.
      * @return int[] The list of filtered peaks
      */
     public int[] filterBySharpness(Double lower_threshold, Double upper_threshold) {
@@ -650,8 +650,8 @@ public class Peak {
      * This method allows filtering the list of peaks by sharpness using both the upper and lower threshold
      * @throws java.lang.IllegalArgumentException If both upper and lower threshold is null
      * @param peaks List of peaks to be filtered
-     * @param lower_threshold The lower threshold of sharpness to check against
-     * @param upper_threshold The upper threshold of sharpness to check against
+     * @param lower_threshold The lower threshold of sharpness to check against. Use null to omit.
+     * @param upper_threshold The upper threshold of sharpness to check against. Use null to omit.
      * @return int[] The list of filtered peaks
      */
     public int[] filterBySharpness(int[] peaks, Double lower_threshold, Double upper_threshold) {
