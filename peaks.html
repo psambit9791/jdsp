@@ -192,7 +192,7 @@ int[] filteredPeaks1 = out.filterByHeight(0.02, 1.0); //To filter peaks by heigh
                     <code class="container align-text-left">
 int[] outPlateau = out.getPlateauSize(); //To get plateau size of all peaks
 int[] outPlateau = out.findPlateauSize(peaks); //To calculate plateau size of specific peaks
-int[] outFilteredPS1 = out.filterByPlateauSize(2, 4); //To filter peaks by plateau size
+int[] outFilteredPS1 = out.filterByPlateauSize(2.0, 4.0); //To filter peaks by plateau size
                     </code>
                   </pre>
                         </div>
@@ -248,7 +248,7 @@ double[] outWidth = out.getWidth(); //To get width of all peaks
 double[][] widthData = out.findPeakWidth(peaks, 0.5); // To get the width, left base and right base at a relative height of 0.5
 double[] width = widthData[0]; //To calculate width of specific peaks
 
-int[] filteredWidth1 = out.filterByWidth(5, 20); //To filter peaks by width
+int[] filteredWidth1 = out.filterByWidth(5.0, 20.0); //To filter peaks by width
                     </code>
                   </pre>
                         </div>
@@ -323,14 +323,14 @@ double[] outMinSpike = out.getMinSpike();
                         <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-int[] outLeftFilter = out.filterByProperty(0.5, 5, "left");
+int[] outLeftFilter = out.filterByProperty(0.5, 5.0, "left");
                     </code>
                   </pre>
                         </div>
                         <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-int[] outRightFilter = out.filterByProperty(0.5, 5, "right");
+int[] outRightFilter = out.filterByProperty(0.5, 5.0, "right");
                     </code>
                   </pre>
 
@@ -348,7 +348,7 @@ int[] outRightFilter = out.filterByProperty(0.5, 5, "right");
                     <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
             <pre class="d-flex align-items-center">
                 <code class="container align-text-left">
-int[] outMeanFilter = out.filterByProperty(0.5, 5, "mean");
+int[] outMeanFilter = out.filterByProperty(0.5, 5.0, "mean");
                 </code>
               </pre>
                     </div>
@@ -368,14 +368,14 @@ int[] outMeanFilter = out.filterByProperty(0.5, 5, "mean");
                     <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
             <pre class="d-flex align-items-center">
                 <code class="container align-text-left">
-int[] outMaxFilter = out.filterByProperty(0.5, 5, "max");
+int[] outMaxFilter = out.filterByProperty(0.5, 5.0, "max");
                 </code>
               </pre>
                     </div>
                     <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
             <pre class="d-flex align-items-center">
                 <code class="container align-text-left">
-int[] outMinFilter = out.filterByProperty(0.5, 5, "min");
+int[] outMinFilter = out.filterByProperty(0.5, 5.0, "min");
                 </code>
               </pre>
 
