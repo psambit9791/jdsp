@@ -39,11 +39,23 @@ public class Csv {
      * @param separator The character separating the columns
      * @param columnDatatypes The datatype of the content of each column
      */
-    public Csv(char separator, char delimiter, dataType[] columnDatatypes) {
+    public Csv(char separator, dataType[] columnDatatypes) {
         this.sep = separator+"";
         this.colTypes = columnDatatypes;
     }
 
+    /**
+     * This constructor initialises the prerequisites required to read and write CSV files.
+     * @param separator The character separating the columns
+     */
+    public Csv(char separator) {
+        this.sep = separator+"";
+    }
+
+    /**
+     * This function initialises the HashMap with the column names as the keys.
+     * @param colNames The columns names in the CSV which will act as keys for the HashMap
+     */
     private void initialiseHashMap(String[] colNames) {
         this.keyList = colNames;
         for (int i=0; i<this.keyList.length; i++) {
@@ -51,14 +63,30 @@ public class Csv {
         }
     }
 
+    /**
+     * Adds each item in the row to their corresponding keys in the HashMap
+     * @param data Array of items in the row split by separator
+     */
     private void addRecordToHashmap(String[] data) {
         for (int i=0; i<this.keyList.length; i++) {
             this.content.get(this.keyList[i]).add(data[i]);
         }
     }
 
-    public HashMap<String, ArrayList<Object>> readCSV(String pathToCsv, String[] colNames) throws IOException {
+    /**
+     * The function takes the path of the file, the columns names and if the CSV file has column names in first row to
+     * generate the HashMap
+     * @param pathToCsv The path to the CSV file to be read
+     * @param colNames Custom names of the columns to be used as keys
+     * @param hasColNames If the first row of the CSV has column names. If column names are provided, then it is overridden with colNames
+     * @return HashMap A hashmap which contains the column names as keys and the contents of each column as an ArrayList
+     * @throws java.io.IOException If error occurs during file read
+     */
+    public HashMap<String, ArrayList<Object>> readCSV(String pathToCsv, String[] colNames, boolean hasColNames) throws IOException {
         BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv));
+        if (hasColNames) {
+            csvReader.readLine();
+        }
         String row = "";
         this.initialiseHashMap(colNames);
         while ((row = csvReader.readLine()) != null) {
@@ -68,6 +96,14 @@ public class Csv {
         return this.content;
     }
 
+    /**
+     * The function takes the path of the file, the columns names and if the CSV file has column names in first row to
+     * generate the HashMap
+     * @param pathToCsv The path to the CSV file to be read
+     * @param hasColNames If the first row of the CSV has column names. If column names are not present, X0 to XN are issued as standard names.
+     * @return HashMap A hashmap which contains the column names as keys and the contents of each column as an ArrayList
+     * @throws java.io.IOException If error occurs during file read
+     */
     public HashMap<String, ArrayList<Object>> readCSV(String pathToCsv, boolean hasColNames) throws IOException {
         BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv));
         if (!hasColNames) {
@@ -80,11 +116,7 @@ public class Csv {
             this.initialiseHashMap(colNames);
         }
         else {
-            int totalCols = csvReader.readLine().split(this.sep).length;
-            String[] colNames = new String[totalCols];
-            for (int i=0; i<totalCols; i++) {
-                colNames[i] = "X"+i;
-            }
+            String[] colNames = csvReader.readLine().split(this.sep);
             this.initialiseHashMap(colNames);
         }
         String row = "";

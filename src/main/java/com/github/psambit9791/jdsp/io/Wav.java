@@ -54,6 +54,12 @@ public class Wav {
         this.computeProperties();
     }
 
+    /**
+     * This reads a file from the filepath provided
+     * @param filename The path to the file to be read
+     * @throws com.github.psambit9791.wavfile.WavFileException if error occurs in WavFile class
+     * @throws java.io.IOException if sample file does not exist
+     */
     public void readWav(String filename) throws WavFileException, IOException{
         String ext = filename.substring(filename.lastIndexOf(".")+1, filename.length());
         if (!ext.equals("wav")) {
