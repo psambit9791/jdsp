@@ -6,7 +6,7 @@
 
     <groupId>com.github.psambit9791</groupId>
     <artifactId>jdsp</artifactId>
-    <version>0.5.1</version>
+    <version>0.5e.1</version>
 
     <distributionManagement>
         <snapshotRepository>
