@@ -10,6 +10,10 @@
 
 package com.github.psambit9791.jdsp.io;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,28 +30,68 @@ import java.util.HashMap;
 public class Csv {
     private HashMap<String, ArrayList<Object>> content = new HashMap<String, ArrayList<Object>>();
     private enum dataType {DOUBLE, FLOAT, LONG, INTEGER, STRING}
-    private char sep;
-    private char delimiter;
+    private String sep;
+    private String[] keyList;
+    private dataType[] colTypes;
 
     /**
      * This constructor initialises the prerequisites required to read and write CSV files.
      * @param separator The character separating the columns
-     * @param delimiter The character specifying the end of line for each row
+     * @param columnDatatypes The datatype of the content of each column
      */
-    public Csv(char separator, char delimiter) {
-        this.sep = separator;
-        this.delimiter = delimiter;
+    public Csv(char separator, char delimiter, dataType[] columnDatatypes) {
+        this.sep = separator+"";
+        this.colTypes = columnDatatypes;
     }
 
-    private void addToHashMap(String key, String[] data, dataType value) {
-
+    private void initialiseHashMap(String[] colNames) {
+        this.keyList = colNames;
+        for (int i=0; i<this.keyList.length; i++) {
+            this.content.put(this.keyList[i], new ArrayList<>());
+        }
     }
 
-    public HashMap<String, ArrayList<Object>> readCSV(String filename, String[] colNames) {
+    private void addRecordToHashmap(String[] data) {
+        for (int i=0; i<this.keyList.length; i++) {
+            this.content.get(this.keyList[i]).add(data[i]);
+        }
+    }
+
+    public HashMap<String, ArrayList<Object>> readCSV(String pathToCsv, String[] colNames) throws IOException {
+        BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv));
+        String row = "";
+        this.initialiseHashMap(colNames);
+        while ((row = csvReader.readLine()) != null) {
+            String[] data = row.split(this.sep);
+            this.addRecordToHashmap(data);
+        }
         return this.content;
     }
 
-    public HashMap<String, ArrayList<Object>> readCSV(String filename, boolean hasColNames) {
+    public HashMap<String, ArrayList<Object>> readCSV(String pathToCsv, boolean hasColNames) throws IOException {
+        BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv));
+        if (!hasColNames) {
+            BufferedReader test = new BufferedReader(new FileReader(pathToCsv));
+            int totalCols = test.readLine().split(this.sep).length;
+            String[] colNames = new String[totalCols];
+            for (int i=0; i<totalCols; i++) {
+                colNames[i] = "X"+i;
+            }
+            this.initialiseHashMap(colNames);
+        }
+        else {
+            int totalCols = csvReader.readLine().split(this.sep).length;
+            String[] colNames = new String[totalCols];
+            for (int i=0; i<totalCols; i++) {
+                colNames[i] = "X"+i;
+            }
+            this.initialiseHashMap(colNames);
+        }
+        String row = "";
+        while ((row = csvReader.readLine()) != null) {
+            String[] data = row.split(this.sep);
+            this.addRecordToHashmap(data);
+        }
         return this.content;
     }
 
