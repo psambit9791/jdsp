@@ -44,6 +44,16 @@ public class TestCsv {
 
     @Test
     @Order(1)
+    public void createTestInputDirectory() {
+        String dirName = "./test_outputs/";
+        File directory = new File(dirName);
+        if (! directory.exists()){
+            directory.mkdir();
+        }
+    }
+
+    @Test
+    @Order(1)
     public void createTestOutputDirectory() {
         String dirName = "./test_outputs/";
         File directory = new File(dirName);
@@ -86,5 +96,13 @@ public class TestCsv {
         String inputFilename = "test_inputs/sheet_nocolumn.csv";
         HashMap<String, ArrayList<Object>> out = readObj.readCSV(inputFilename, new String[]{"Time", "Difference", "X-Axis", "Y-Axis", "Z-Axis"}, false);
         Assertions.assertTrue(out.equals(this.result));
+    }
+
+    @Test
+    public void csvWrite() throws IOException {
+        this.generateResultHashMap(new String[]{"t", "diff", "x", "y", "z"});
+        String outputFilename = "test_outputs/sheet.csv";
+        Csv writeObj = new Csv(',');
+        writeObj.writeCSV(outputFilename, this.result);
     }
 }

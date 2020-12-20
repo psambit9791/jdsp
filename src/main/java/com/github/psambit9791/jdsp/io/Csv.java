@@ -10,12 +10,10 @@
 
 package com.github.psambit9791.jdsp.io;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * <h1>Read and Write CSV Files</h1>
@@ -127,7 +125,59 @@ public class Csv {
         return this.content;
     }
 
-    public void writeCSV(String filename, HashMap<String, ArrayList<Object>> data) {
+    /**
+     * The function takes the path of the file and a HashMap and writes it to the file. They keys are used as columns name
+     * and the contents of the keys (ArrayLists) are rendered as items in the columns.
+     * @param pathToCsv The path to the CSV file to be written to
+     * @param data A hashmap which contains the column names as keys and the contents of each column as an ArrayList
+     * @throws java.io.IOException If error occurs during file write
+     * @throws java.lang.IllegalArgumentException If the number of value for all the keys is not same
+     */
+    public void writeCSV(String pathToCsv, HashMap<String, ArrayList<Object>> data) throws IOException, IllegalArgumentException {
+        FileWriter csvWriter = new FileWriter(pathToCsv);
+        Set<String> setOfString = data.keySet();
+        String[] keyList = new String[setOfString.size()];
 
+        int index = 0;
+        for (String str : setOfString)
+            keyList[index++] = str;
+
+        int[] row_length = new int[keyList.length];
+        for (int i=0; i<keyList.length; i++) {
+            row_length[i] = data.get(keyList[i]).size();
+        }
+        boolean flag = true;
+        int base_length = row_length[0];
+        for (int i=0; i<row_length.length; i++) {
+            flag = (base_length == row_length[i]) && flag;
+            if (!flag) {
+                throw new IllegalArgumentException("Columns have different number of items. Please check the Hashmap being used");
+            }
+        }
+
+        for (int i=0; i<keyList.length; i++) {
+            csvWriter.append(keyList[i]);
+            if (i==keyList.length-1) {
+                csvWriter.append("\n");
+            }
+            else {
+                csvWriter.append(",");
+            }
+        }
+
+        for (int i=0; i<base_length; i++) {
+            for (int j=0; j<keyList.length; j++) {
+                csvWriter.append(data.get(keyList[j]).get(i).toString());
+                if (j==keyList.length-1) {
+                    csvWriter.append("\n");
+                }
+                else {
+                    csvWriter.append(",");
+                }
+            }
+        }
+
+        csvWriter.flush();
+        csvWriter.close();
     }
 }

@@ -99,6 +99,7 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/misc/Plotting.html">com.github.psambit9791.jdsp.misc.Plotting</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Plotting"><strong>Miscellaneous</strong></a> | Enables plotting of different signals and points using line and scatter plots |
 ||||
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/io/Wav.html">com.github.psambit9791.jdsp.io.Wav</a> | <a href="https://github.com/psambit9791/jDSP/wiki/WAV-File-IO"><strong>Input/Output</strong></a> | Provides methods to read from and write to WAV files |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/io/Csv.html">com.github.psambit9791.jdsp.io.Csv</a> | <a href="https://github.com/psambit9791/jDSP/wiki/CSV-File-IO"><strong>Input/Output</strong></a> | Provides methods to read from and write to CSV files |
 <br/>
 
 ## Citation
