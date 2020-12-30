@@ -19,22 +19,22 @@ import org.apache.commons.math3.complex.Complex;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
+ * @version 1.1
  */
 public class InverseDiscreteFourier {
 
     private double[][] complex_sequence;
     private double[] real_sequence;
-    private String seqType;
+    private boolean isComplex;
     private Complex[] signal = null;
 
     /**
      * This constructor initialises the prerequisites required to use InverseDiscreteFourier.
-     * @param seq Signal to be transformed (complex)
+     * @param seq Signal to be transformed (complex). Dimension 1: Length, Dimension 2: Real part, complex part
      */
     public InverseDiscreteFourier(double[][] seq) {
         this.complex_sequence = seq;
-        this.seqType = "complex";
+        this.isComplex = true;
     }
 
     /**
@@ -43,17 +43,17 @@ public class InverseDiscreteFourier {
      */
     public InverseDiscreteFourier(double[] seq) {
         this.real_sequence = seq;
-        this.seqType = "real";
+        this.isComplex = false;
     }
 
     /**
      * This function performs the inverse discrete fourier transform on the input sequence
      */
     public void idft() {
-        if (this.seqType.equals("complex")) {
+        if (this.isComplex) {
             this.idftComplex();
         }
-        else if (this.seqType.equals("real")) {
+        else {
             this.idftReal();
         }
     }

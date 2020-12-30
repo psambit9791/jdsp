@@ -22,7 +22,7 @@ import org.apache.commons.math3.complex.Complex;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
+ * @version 1.1
  */
 public class DiscreteFourier {
 
@@ -63,7 +63,7 @@ public class DiscreteFourier {
      * Returns the absolute value of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
      * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
-     * @return double[] The decimated signal
+     * @return double[] The absolute DFT output
      */
     public double[] returnAbsolute(boolean onlyPositive) throws ExceptionInInitializerError{
         if (this.output == null) {
@@ -72,7 +72,8 @@ public class DiscreteFourier {
         double[] dftout;
 
         if (onlyPositive) {
-            dftout = new double[this.output.length/2];
+            int numBins = this.output.length/2+1;
+            dftout = new double[numBins];
             for (int i=0; i<dftout.length; i++) {
                 dftout[i] = this.output[i].abs();
             }
@@ -90,7 +91,7 @@ public class DiscreteFourier {
      * Returns the complex value of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
      * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
-     * @return double[][] The decimated signal
+     * @return double[][] The complex DFT output
      */
     public double[][] returnFull(boolean onlyPositive) throws ExceptionInInitializerError {
         if (this.output == null) {
@@ -99,7 +100,8 @@ public class DiscreteFourier {
         double[][] dftout;
 
         if (onlyPositive) {
-            dftout = new double[this.output.length/2][2];
+            int numBins = this.output.length/2+1;
+            dftout = new double[numBins][2];
             for (int i=0; i<dftout.length; i++) {
                 dftout[i][0] = this.output[i].getReal();
                 dftout[i][1] = this.output[i].getImaginary();
