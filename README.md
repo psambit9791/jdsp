@@ -9,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?)](https://github.com/psambit9791/jDSP/blob/master/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3903921.svg)](https://doi.org/10.5281/zenodo.3903921)
 
-jDSP is a library of signal processing tools aimed at providing functionalities as available in scipy-signal package for 
+JDSP is a library of signal processing tools aimed at providing functionalities as available in scipy-signal package for 
 Python. The goal is to provide easy-to-use APIs for performing complex operation on signals eliminating the necessity 
 of understanding the low-level complexities in the processing pipeline.  
 
@@ -17,7 +17,7 @@ of understanding the low-level complexities in the processing pipeline.
 
 <br/>
 
-To get the latest stable release of jDSP:
+To get the latest stable release of JDSP:
 
 ### Gradle
 ```
@@ -35,7 +35,7 @@ implementation 'com.github.psambit9791:jdsp:0.5.1'
 
 <br/>
 
-For the latest development version of jDSP (unreleased):
+For the latest development version of JDSP (unreleased):
 
 ### Github
 ```  
@@ -70,7 +70,6 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Decimate.html">com.github.psambit9791.jdsp.signal.Decimate</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Decimate"><strong>Signal</strong> Operation</a> | Implements the decimation operation to downsample a signal after applying an anti-aliasing filter |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Resample.html">com.github.psambit9791.jdsp.signal.Resample</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Resample"><strong>Signal</strong> Operation</a> | Implements the resampling operation to change the number of samples in a signal using Fourier method |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Generate.html">com.github.psambit9791.jdsp.signal.Generate</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Generate"><strong>Signal</strong> Operation</a> | Helps to generate sin, cosine and square waves |
-
 ||||
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/peaks/FindPeak.html">com.github.psambit9791.jdsp.signal.peaks.FindPeak</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Peak-&-Trough-Detection-and-Filtering"><strong>Peak</strong> Detection</a> | Identifies peaks in the signal |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/peaks/Peak.html">com.github.psambit9791.jdsp.signal.peaks.Peak</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Peak-&-Trough-Detection-and-Filtering"><strong>Peak</strong> Detection</a> | Calculates peak properties and allows filtering with them |
@@ -122,7 +121,7 @@ If you are using this software in your research, please use the following citati
 ```
 ## Supporting jDSP 
 
-jDSP is an open source project. <br/> You can help by becoming a sponsor on <a href="https://patreon.com/sambitpaul">Patreon</a> or doing a one time donation on <a href="https://paypal.me/psambit9791">PayPal</a>. <br />
+JDSP is an open source project. <br/> You can help by becoming a sponsor on <a href="https://patreon.com/sambitpaul">Patreon</a> or doing a one time donation on <a href="https://paypal.me/psambit9791">PayPal</a>. <br />
 You can also show your appreciation on <a href="https://ko-fi.com/sambitpaul">Ko-Fi</a>.<br />
 
 <a href="https://patreon.com/sambitpaul" target="_blank"><img src="https://github.com/psambit9791/jDSP/blob/master/res/button/patron-button.png" alt="Become a Patron" /> </a>
