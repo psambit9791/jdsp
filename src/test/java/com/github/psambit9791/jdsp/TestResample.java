@@ -16,8 +16,6 @@ import com.github.psambit9791.jdsp.signal.Resample;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 public class TestResample {
 
     private double[] input_signal_1 = {1.   ,  0.999,  0.986,  0.931,  0.786,  0.505,  0.071, -0.454, -0.889, -0.973, -0.519,

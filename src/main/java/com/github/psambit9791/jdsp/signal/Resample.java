@@ -32,12 +32,21 @@ public class Resample {
     private int num;
     private boolean isComplex;
 
+    /**
+     * This constructor initialises the prerequisites required to use Resample.
+     * @param signal Signal to be resampled
+     * @param num The number of samples required after resampling
+     */
     public Resample(double[] signal, int num) {
         this.signal = signal;
         this.num = num;
         this.isComplex = false;
     }
 
+    /**
+     * This method using the Fourier method to change the number of samples to the given number of samples.
+      * @return double[] The resampled signal with 'num' samples
+     */
     public double[] resampleSignal() {
         int Nx = this.signal.length;
 
