@@ -104,5 +104,7 @@ public class TestCsv {
         String outputFilename = "test_outputs/sheet.csv";
         Csv writeObj = new Csv(',');
         writeObj.writeCSV(outputFilename, this.result);
+        boolean fileExists = new File("./"+outputFilename).exists();
+        Assertions.assertTrue(fileExists);
     }
 }

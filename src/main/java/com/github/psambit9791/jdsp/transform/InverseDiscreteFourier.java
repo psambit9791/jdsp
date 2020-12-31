@@ -27,23 +27,29 @@ public class InverseDiscreteFourier {
     private double[] real_sequence;
     private boolean isComplex;
     private Complex[] signal = null;
+    private boolean onlyPositive;
 
     /**
      * This constructor initialises the prerequisites required to use InverseDiscreteFourier.
-     * @param seq Signal to be transformed (complex). Dimension 1: Length, Dimension 2: Real part, complex part
+     * @param seq Sequence to be transformed (complex). [The FFT output is complex]
+     *            Dimension 1: Length, Dimension 2: Real part, complex part
+     * @param onlyPositive Only the first half of the FFT output is provided. Used for real signals where the last half
+     *                     are mirrored complex conjugates of the first half.
      */
-    public InverseDiscreteFourier(double[][] seq) {
+    public InverseDiscreteFourier(double[][] seq, boolean onlyPositive) {
         this.complex_sequence = seq;
         this.isComplex = true;
+        this.onlyPositive = onlyPositive;
     }
 
     /**
      * This constructor initialises the prerequisites required to use InverseDiscreteFourier.
-     * @param seq Signal to be transformed (real)
+     * @param seq Sequence to be transformed (real) [The FFT output has only real numbers]
      */
-    public InverseDiscreteFourier(double[] seq) {
+    public InverseDiscreteFourier(double[] seq, boolean onlyPositive) {
         this.real_sequence = seq;
         this.isComplex = false;
+        this.onlyPositive = onlyPositive;
     }
 
     /**
@@ -51,10 +57,20 @@ public class InverseDiscreteFourier {
      */
     public void idft() {
         if (this.isComplex) {
-            this.idftComplex();
+            if (this.onlyPositive) {
+                this.idftComplexMirror();
+            }
+            else {
+                this.idftComplexFull();
+            }
         }
         else {
-            this.idftReal();
+            if (this.onlyPositive) {
+                this.idftRealMirror();
+            }
+            else {
+                this.idftRealFull();
+            }
         }
     }
 
@@ -121,7 +137,7 @@ public class InverseDiscreteFourier {
     }
 
 
-    private void idftReal() {
+    private void idftRealFull() {
         Complex[] out = new Complex[this.real_sequence.length];
 
         for (int t=0; t<out.length; t++) {
@@ -137,7 +153,7 @@ public class InverseDiscreteFourier {
         this.signal = out;
     }
 
-    private void idftComplex() {
+    private void idftComplexFull() {
         Complex[] out = new Complex[this.complex_sequence.length];
 
         for (int t=0; t<out.length; t++) {
@@ -147,6 +163,64 @@ public class InverseDiscreteFourier {
                 double angle = (2*Math.PI*t*m)/out.length;
                 sigValR += (this.complex_sequence[m][0]*Math.cos(angle) - this.complex_sequence[m][1]*Math.sin(angle));
                 sigValI += (this.complex_sequence[m][0]*Math.sin(angle) + this.complex_sequence[m][1]*Math.cos(angle));
+            }
+            out[t] = Complex.valueOf(sigValR/out.length, sigValI/out.length);
+        }
+        this.signal = out;
+    }
+
+    private void idftRealMirror() {
+        int size = (this.real_sequence.length-1)*2;
+        Complex[] out = new Complex[size];
+        double[] full_real = new double[size];
+
+        int index = 0;
+        for (int i=0; i<this.real_sequence.length; i++) {
+            full_real[index] = this.real_sequence[i];
+            index++;
+        }
+        for (int i=this.real_sequence.length-2; i>0; i--) {
+            full_real[index] = this.real_sequence[i];
+            index++;
+        }
+
+        for (int t=0; t<out.length; t++) {
+            double sigValR = 0;
+            double sigValI = 0;
+            for (int m=0; m<out.length; m++) {
+                double angle = 2*Math.PI*t*m/out.length;
+                sigValR += full_real[m]*Math.cos(angle);
+                sigValI += full_real[m]*Math.sin(angle);
+            }
+            out[t] = Complex.valueOf(sigValR/out.length, sigValI/out.length);
+        }
+        this.signal = out;
+    }
+
+    private void idftComplexMirror() {
+        int size = (this.complex_sequence.length-1)*2;
+        Complex[] out = new Complex[size];
+        double[][] full_cplx = new double[size][2];
+
+        int index = 0;
+        for (int i=0; i<this.complex_sequence.length; i++) {
+            full_cplx[index][0] = this.complex_sequence[i][0];
+            full_cplx[index][1] = this.complex_sequence[i][1];
+            index++;
+        }
+        for (int i=this.complex_sequence.length-2; i>0; i--) {
+            full_cplx[index][0] = this.complex_sequence[i][0];
+            full_cplx[index][1] = -this.complex_sequence[i][1];
+            index++;
+        }
+
+        for (int t=0; t<out.length; t++) {
+            double sigValR = 0;
+            double sigValI = 0;
+            for (int m=0; m<out.length; m++) {
+                double angle = (2*Math.PI*t*m)/out.length;
+                sigValR += (full_cplx[m][0]*Math.cos(angle) - full_cplx[m][1]*Math.sin(angle));
+                sigValI += (full_cplx[m][0]*Math.sin(angle) + full_cplx[m][1]*Math.cos(angle));
             }
             out[t] = Complex.valueOf(sigValR/out.length, sigValI/out.length);
         }

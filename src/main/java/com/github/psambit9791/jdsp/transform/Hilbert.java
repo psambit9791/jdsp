@@ -74,7 +74,7 @@ public class Hilbert {
             modOut[i][1] = dftOut[i][1] * this.h[i];
         }
 
-        InverseDiscreteFourier idft = new InverseDiscreteFourier(modOut);
+        InverseDiscreteFourier idft = new InverseDiscreteFourier(modOut, false);
         idft.idft();
         this.output = idft.getAsComplex();
     }
