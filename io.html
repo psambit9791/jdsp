@@ -158,7 +158,8 @@ double[][] signal = objRead1.getData("int"); // Can be 'int', 'long' 'double'
                     <code class="container align-text-left">
 Wav objWrite = new Wav();
 int channels = 2;
-objWrite.putData(signal, channels, "int", outputFileName); // Can be "int", "long" or "double' depending on the content of signal
+objWrite.putData(signal, channels, "int", outputFileName);
+// Can be "int", "long" or "double' depending on the content of signal
                     </code>
                   </pre>
                         </div>
@@ -168,7 +169,6 @@ objWrite.putData(signal, channels, "int", outputFileName); // Can be "int", "lon
                 <!-- END OF WRITE-->
 
             </div>
-
 
 
             <div id="csv">
@@ -209,7 +209,7 @@ HashMap< String, ArrayList< Object>> result = new HashMap< String, ArrayList< Ob
 //Fill the result variable with the key and ArrayList
 Csv writeObj = new Csv(',');
 // outputFilename holds the path to the CSV file to be written to
-writeObj.writeCSV(outputFilename, this.result);
+writeObj.writeCSV(outputFilename, result);
                     </code>
                   </pre>
                         </div>
