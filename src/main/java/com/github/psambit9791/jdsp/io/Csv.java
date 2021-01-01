@@ -27,20 +27,20 @@ import java.util.Set;
  */
 public class Csv {
     private HashMap<String, ArrayList<Object>> content = new HashMap<String, ArrayList<Object>>();
-    private enum dataType {DOUBLE, FLOAT, LONG, INTEGER, STRING}
+//    private enum dataType {DOUBLE, FLOAT, LONG, INTEGER, STRING}
     private String sep;
     private String[] keyList;
-    private dataType[] colTypes;
+//    private dataType[] colTypes;
 
-    /**
-     * This constructor initialises the prerequisites required to read and write CSV files.
-     * @param separator The character separating the columns
-     * @param columnDatatypes The datatype of the content of each column
-     */
-    public Csv(char separator, dataType[] columnDatatypes) {
-        this.sep = separator+"";
-        this.colTypes = columnDatatypes;
-    }
+//    /**
+//     * This constructor initialises the prerequisites required to read and write CSV files.
+//     * @param separator The character separating the columns
+//     * @param columnDatatypes The datatype of the content of each column
+//     */
+//    public Csv(char separator, dataType[] columnDatatypes) {
+//        this.sep = separator+"";
+//        this.colTypes = columnDatatypes;
+//    }
 
     /**
      * This constructor initialises the prerequisites required to read and write CSV files.
