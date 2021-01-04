@@ -73,7 +73,7 @@ public class Csv {
 
     /**
      * The function takes the path of the file, the columns names and if the CSV file has column names in first row to
-     * generate the HashMap
+     * generate the HashMap. The column names wither override the existing column names or are used in stead of random names.
      * @param pathToCsv The path to the CSV file to be read
      * @param colNames Custom names of the columns to be used as keys
      * @param hasColNames If the first row of the CSV has column names. If column names are provided, then it is overridden with colNames
@@ -95,8 +95,8 @@ public class Csv {
     }
 
     /**
-     * The function takes the path of the file, the columns names and if the CSV file has column names in first row to
-     * generate the HashMap
+     * The function takes the path of the file and if the CSV file has column names in first row to generate the HashMap.
+     * If there are no column names, then column names are auto-generated.
      * @param pathToCsv The path to the CSV file to be read
      * @param hasColNames If the first row of the CSV has column names. If column names are not present, X0 to XN are issued as standard names.
      * @return HashMap A hashmap which contains the column names as keys and the contents of each column as an ArrayList
@@ -126,7 +126,7 @@ public class Csv {
     }
 
     /**
-     * The function takes the path of the file and a HashMap and writes it to the file. They keys are used as columns name
+     * The function takes the path of the file and a HashMap and writes it to the file. They keys are used as column names
      * and the contents of the keys (ArrayLists) are rendered as items in the columns.
      * @param pathToCsv The path to the CSV file to be written to
      * @param data A hashmap which contains the column names as keys and the contents of each column as an ArrayList

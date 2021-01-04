@@ -34,7 +34,7 @@ public class InverseDiscreteFourier {
      * @param seq Sequence to be transformed (complex). [The FFT output is complex]
      *            Dimension 1: Length, Dimension 2: Real part, complex part
      * @param onlyPositive Only the first half of the FFT output is provided. Used for real signals where the last half
-     *                     are mirrored complex conjugates of the first half.
+     *                     are complex conjugates of the first half.
      */
     public InverseDiscreteFourier(double[][] seq, boolean onlyPositive) {
         this.complex_sequence = seq;
