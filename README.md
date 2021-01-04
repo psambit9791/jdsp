@@ -21,7 +21,7 @@ To get the latest stable release of JDSP:
 
 ### Gradle
 ```
-implementation 'com.github.psambit9791:jdsp:0.5.1'
+implementation 'com.github.psambit9791:jdsp:0.6.0'
 ```
 
 ### Maven
@@ -29,7 +29,7 @@ implementation 'com.github.psambit9791:jdsp:0.5.1'
 <dependency>
   <groupId>com.github.psambit9791</groupId>
   <artifactId>jdsp</artifactId>
-  <version>0.5.1</version>
+  <version>0.6.0</version>
 </dependency>
 ```
 
@@ -108,15 +108,15 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 If you are using this software in your research, please use the following citation:
 
 ```
-@software{sambit_paul_2020_4264051,
+@software{sambit_paul_2021_4416029,
   author       = {Sambit Paul},
-  title        = {psambit9791/jDSP: v0.5.1 (November 9, 2020)},
-  month        = nov,
-  year         = 2020,
+  title        = {psambit9791/jDSP: v0.6.0 (January 4, 2021)},
+  month        = jan,
+  year         = 2021,
   publisher    = {Zenodo},
-  version      = {v0.5.1},
-  doi          = {10.5281/zenodo.4264051},
-  url          = {https://doi.org/10.5281/zenodo.4264051}
+  version      = {v0.6.0},
+  doi          = {10.5281/zenodo.4416029},
+  url          = {https://doi.org/10.5281/zenodo.4416029}
 }
 ```
 ## Supporting jDSP 
