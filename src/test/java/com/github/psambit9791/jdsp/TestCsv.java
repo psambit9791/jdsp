@@ -45,7 +45,7 @@ public class TestCsv {
     @Test
     @Order(1)
     public void createTestInputDirectory() {
-        String dirName = "./test_outputs/";
+        String dirName = "./test_inputs/";
         File directory = new File(dirName);
         if (! directory.exists()){
             directory.mkdir();
