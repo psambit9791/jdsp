@@ -53,7 +53,7 @@ public class TestCsv {
     }
 
     @Test
-    @Order(1)
+    @Order(2)
     public void createTestOutputDirectory() {
         String dirName = "./test_outputs/";
         File directory = new File(dirName);
