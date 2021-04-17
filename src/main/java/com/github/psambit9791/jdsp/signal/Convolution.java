@@ -36,7 +36,7 @@ public class Convolution {
      * @throws java.lang.IllegalArgumentException if kernel size is greater than or equal to signal length
      */
     public Convolution(double[] s, double[] w) {
-        if (s.length <= w.length) {
+        if (s.length < w.length) {
             throw new IllegalArgumentException("Weight Size should be less than Signal Length");
         }
         this.signal = s;

@@ -11,7 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Butterworth;
-import com.github.psambit9791.jdsp.filter._FrequencyFilter;
+import com.github.psambit9791.jdsp.filter._IIRFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -161,7 +161,7 @@ public class TestButterworth {
 
     @Test
     public void InterfaceTest1() {
-        _FrequencyFilter interfaceFF = new Butterworth(this.signal2, 100);
+        _IIRFilter interfaceFF = new Butterworth(this.signal2, 100);
         final double[] out = {0.0, 0.285, -0.192, 0.881, -0.32, 1.281, -0.466, 1.531, -0.354, 1.314, 0.402, 0.963, 1.174,
                 0.543, 1.781, 0.073, 1.968, -0.035, 1.758, 0.198, 1.217, 0.634, 0.421, 1.034, -0.34, 1.2, -0.83, 1.023,
                 -0.94, 0.466, -0.721, -0.34, -0.337, -1.157, 0.005, -1.735, 0.111, -1.911, -0.108, -1.658, -0.599,

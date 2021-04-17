@@ -20,7 +20,7 @@ package com.github.psambit9791.jdsp.filter;
  * @author  Sambit Paul
  * @version 1.1
  */
-public class Butterworth implements _FrequencyFilter{
+public class Butterworth implements _IIRFilter {
     private double[] signal;
     private double samplingFreq;
     private double[] output;

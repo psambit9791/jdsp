@@ -17,9 +17,9 @@ package com.github.psambit9791.jdsp.filter;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.1
+ * @version 1.2
  */
-public interface _FrequencyFilter {
+public interface _IIRFilter {
 
     /**
      * This method implements a low pass filter with given parameters, filters the signal and returns it.

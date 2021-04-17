@@ -11,7 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Bessel;
-import com.github.psambit9791.jdsp.filter._FrequencyFilter;
+import com.github.psambit9791.jdsp.filter._IIRFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -160,7 +160,7 @@ public class TestBessel {
 
     @Test
     public void InterfaceTest1() {
-        _FrequencyFilter interfaceFF = new Bessel(this.signal2, 100);
+        _IIRFilter interfaceFF = new Bessel(this.signal2, 100);
         final double[] out = {0.0, 0.756, -0.121, 1.048, -0.357, 1.404, -0.682, 1.462, 0.243, 1.482, 0.745, 0.71, 1.394,
                 0.274, 1.873, 0.035, 2.012, 0.019, 1.454, 0.237, 0.874, 0.824, 0.036, 1.001, -0.701, 1.115, -0.958,
                 0.766, -0.979, 0.061, -0.655, -0.754, -0.232, -1.468, 0.044, -1.91, 0.016, -1.869, -0.272, -1.441,

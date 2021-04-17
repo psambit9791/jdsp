@@ -28,6 +28,7 @@ public class CrossCorrelation {
     private double[] signal;
     private double[] kernel;
     private double[] output;
+    private boolean autocorr;
 
     /**
      * This constructor initialises the prerequisites required to perform cross-correlation.
@@ -36,11 +37,22 @@ public class CrossCorrelation {
      * @throws java.lang.IllegalArgumentException if kernel size is greater than or equal to signal length
      */
     public CrossCorrelation(double[] s, double[] w) {
-        if (s.length <= w.length) {
+        if (s.length < w.length) {
             throw new IllegalArgumentException("Weight Size should be less than Signal Length");
         }
         this.signal = s;
         this.kernel = w;
+        this.autocorr = false;
+    }
+
+    /**
+     * This constructor initialises the prerequisites required to perform autocorrelation
+     * @param s Signal to be convolved
+     */
+    public CrossCorrelation(double[] s) {
+        this.signal = s;
+        this.kernel = s;
+        this.autocorr = true;
     }
 
     /**
@@ -49,9 +61,13 @@ public class CrossCorrelation {
      */
     public double[] crossCorrelate() {
         //Works in "valid" mode
+        String mode = "valid";
+        if (autocorr) {
+            mode = "full";
+        }
         this.kernel = UtilMethods.reverse(this.kernel);
         Convolution c1 = new Convolution(this.signal, this.kernel);
-        this.output = c1.convolve("valid");
+        this.output = c1.convolve(mode);
         return this.output;
     }
 

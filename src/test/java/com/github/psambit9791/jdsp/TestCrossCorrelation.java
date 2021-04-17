@@ -14,13 +14,30 @@ import com.github.psambit9791.jdsp.signal.CrossCorrelation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class TestCrossCorrelation {
 
     final double[] signal1 = {1.0, 2.0, 3.0, 4.0, 5.0};
     final double[] kernel1 = {0.5, 1.0, 0.0, 1.0};
 
     final double[] signal2 = {2, 8, 0, 4, 1, 9, 9, 0};
+//    final double[] kernel2 = {2, 8, 0, 4, 1, 9, 9, 0};
     final double[] kernel2 = {1, 3, 1, 3};
+
+    @Test
+    public void autocorrelationTest() {
+        final double[] result1 = {5.0, 14.0, 26.0, 40.0, 55.0, 40.0, 26.0, 14.0, 5.0};
+        final double[] result2 = {0, 18, 90, 74, 52, 77, 110, 247, 110, 77, 52, 74, 90, 18, 0};
+
+        CrossCorrelation cc1 = new CrossCorrelation(this.signal1);
+        double[] out = cc1.crossCorrelate();
+        Assertions.assertArrayEquals(result1, out, 0.001);
+
+        CrossCorrelation cc2 = new CrossCorrelation(this.signal2);
+        out = cc2.crossCorrelate();
+        Assertions.assertArrayEquals(result2, out, 0.001);
+    }
 
     @Test
     public void fullCrossCorrelationTest() {

@@ -11,7 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.Chebyshev;
-import com.github.psambit9791.jdsp.filter._FrequencyFilter;
+import com.github.psambit9791.jdsp.filter._IIRFilter;
 import com.github.psambit9791.jdsp.signal.Convolution;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -287,7 +287,7 @@ public class TestChebyshev {
 
     @Test
     public void Type2InterfaceTest1() {
-        _FrequencyFilter interfaceFF = new Chebyshev(this.signal2, 100, this.ripple_factor, 2);
+        _IIRFilter interfaceFF = new Chebyshev(this.signal2, 100, this.ripple_factor, 2);
         final double[] out = {0.0, 1.157, 0.111, 0.768, -1.04, 1.526, 0.225, 1.943, -0.178, 0.613, 0.904, 1.418, 1.981,
                 -0.262, 1.128, 0.001, 2.789, 0.524, 0.739, -0.577, 0.81, 1.788, 0.359, 0.418, -1.676, 1.048, -0.183,
                 1.169, -1.467, -0.919, -0.603, -0.109, 0.275, -2.115, -0.758, -1.933, 0.818, -1.309, -0.891, -2.19,

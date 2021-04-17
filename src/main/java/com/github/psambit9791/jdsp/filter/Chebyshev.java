@@ -20,7 +20,7 @@ package com.github.psambit9791.jdsp.filter;
  * @author  Sambit Paul
  * @version 1.1
  */
-public class Chebyshev implements _FrequencyFilter{
+public class Chebyshev implements _IIRFilter {
     private double[] signal;
     private double samplingFreq;
     private double[] output;

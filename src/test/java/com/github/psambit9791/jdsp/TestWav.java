@@ -43,7 +43,7 @@ public class TestWav {
 
         Wav objWrite = new Wav();
         String outputFileName = "test_outputs/sampleInt.wav";
-        objWrite.putData(signal, propsOut.get("Channels"), "int", outputFileName);
+        objWrite.putData(signal, propsOut.get("SampleRate"), "int", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
@@ -65,9 +65,11 @@ public class TestWav {
 
         Hashtable<String, Long> propsOut = objRead.getProperties();
 
+        System.out.println(propsOut);
+
         Wav objWrite = new Wav();
         String outputFileName = "test_outputs/sampleLong.wav";
-        objWrite.putData(signal, propsOut.get("Channels"), "long", outputFileName);
+        objWrite.putData(signal, propsOut.get("SampleRate"), "long", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
@@ -91,7 +93,7 @@ public class TestWav {
 
         Wav objWrite = new Wav();
         String outputFileName = "test_outputs/sampleDouble.wav";
-        objWrite.putData(signal, propsOut.get("Channels"), "double", outputFileName);
+        objWrite.putData(signal, propsOut.get("SampleRate"), "double", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
@@ -115,7 +117,7 @@ public class TestWav {
 
         Wav objWrite = new Wav();
         String outputFileName = "test_outputs/musicInt.wav";
-        objWrite.putData(signal, propsOut.get("Channels"), "int", outputFileName);
+        objWrite.putData(signal, propsOut.get("SampleRate"), "int", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
@@ -139,7 +141,7 @@ public class TestWav {
 
         Wav objWrite = new Wav();
         String outputFileName = "test_outputs/musicLong.wav";
-        objWrite.putData(signal, propsOut.get("Channels"), "long", outputFileName);
+        objWrite.putData(signal, propsOut.get("SampleRate"), "long", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
@@ -163,7 +165,7 @@ public class TestWav {
 
         Wav objWrite = new Wav();
         String outputFileName = "test_outputs/musicDouble.wav";
-        objWrite.putData(signal, propsOut.get("Channels"), "double", outputFileName);
+        objWrite.putData(signal, propsOut.get("SampleRate"), "double", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
