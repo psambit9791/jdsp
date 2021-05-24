@@ -57,9 +57,9 @@ abstract class _Window {
         }
     }
 
-    /**
-     * This method computes the window and returns it
-     * @return double[] The generated window
-     */
-    public abstract double[] getWindow();
+//    /**
+//     * This method computes the window and returns it
+//     * @return double[] The generated window
+//     */
+//    public abstract double[] getWindow();
 }

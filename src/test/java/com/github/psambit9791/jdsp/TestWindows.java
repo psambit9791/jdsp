@@ -4,6 +4,8 @@ import com.github.psambit9791.jdsp.windows.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class TestWindows {
 
     @Test
@@ -329,5 +331,26 @@ public class TestWindows {
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {Bohman w0 = new Bohman(-2, false);});
+    }
+
+    @Test
+    public void KaiserSymTest() {
+        int len = 10;
+        double[] result = {0.0 , 0.007 , 0.1038, 0.4627, 0.9199, 0.9199, 0.4627, 0.1038, 0.007 , 0.0};
+        Kaiser w1 = new Kaiser(len);
+        double[] out = w1.getWindow(14);
+        System.out.println(Arrays.toString(out));
+        Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Kaiser w0 = new Kaiser(-2);});
+    }
+
+    @Test
+    public void KaiserASymTest() {
+        int len = 10;
+        double[] result = {0.0, 0.0048, 0.0682, 0.3249, 0.7615, 1.0, 0.7615, 0.3249, 0.0682, 0.0048};
+        Kaiser w2 = new Kaiser(len, false);
+        double[] out = w2.getWindow(14);
+        Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Kaiser w0 = new Kaiser(-2, false);});
     }
 }

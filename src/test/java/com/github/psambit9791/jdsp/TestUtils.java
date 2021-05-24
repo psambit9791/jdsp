@@ -340,29 +340,78 @@ public class TestUtils {
         double[] arr = {1.23, 6.54, 4.56, 9.04, 2.88};
         double[] resAdd = {2.25,  7.56,  5.58, 10.06,  3.9};
         double[] resSub = {0.21, 5.52, 3.54, 8.02, 1.86};
+        double[] resRevSub = {-0.21, -5.52, -3.54, -8.02, -1.86};
         double[] resMul = {1.2546, 6.6708, 4.6512, 9.2208, 2.9376};
         double[] resDiv = {1.2059, 6.4118, 4.4706, 8.8627, 2.8235};
+        double[] resPow = {1.23510311, 6.79030533, 4.70050089, 9.44695397, 2.94157779};
 
         double[] arrAdd = UtilMethods.scalarArithmetic(arr, 1.02, "add");
         double[] arrSub = UtilMethods.scalarArithmetic(arr, 1.02, "sub");
+        double[] arrRevSub = UtilMethods.scalarArithmetic(arr, 1.02, "reverse_sub");
         double[] arrMul = UtilMethods.scalarArithmetic(arr, 1.02, "mul");
         double[] arrDiv = UtilMethods.scalarArithmetic(arr, 1.02, "div");
+        double[] arrPow = UtilMethods.scalarArithmetic(arr, 1.02, "pow");
 
         Assertions.assertArrayEquals(resAdd, arrAdd, 0.001);
         Assertions.assertArrayEquals(resSub, arrSub, 0.001);
+        Assertions.assertArrayEquals(resRevSub, arrRevSub, 0.001);
         Assertions.assertArrayEquals(resMul, arrMul, 0.001);
         Assertions.assertArrayEquals(resDiv, arrDiv, 0.001);
+        Assertions.assertArrayEquals(resPow, arrPow, 0.001);
     }
 
     @Test
     public void chebyEvalTest() {
         double[] arr = {1000.0, 2.0, 3.4, 17.0, 50.0};
+
         double[] x = {1.0, 2.0, 3.0, 4.0, 5.0};
-
         double[] res = {-470.2, 1047.4, 23580.4,  97134.8, 263716.6};
-
         double[] out = UtilMethods.chebyEval(x, arr);
-        System.out.println(Arrays.toString(out));
         Assertions.assertArrayEquals(res, out, 0.001);
+
+        double x1 = 2.0;
+        double res1 = 1047.4;
+        double out1 = UtilMethods.chebyEval(x1, arr);
+        Assertions.assertEquals(res1, out1, 0.001);
+        double x2 = 5.0;
+        double res2 = 263716.6;
+        double out2 = UtilMethods.chebyEval(x2, arr);
+        Assertions.assertEquals(res2, out2, 0.001);
+    }
+
+    @Test
+    public void i0Test() {
+        double[] x1 = {0.0, 1.0, 2.0, 3.0};
+        double[] res1 = {1.0, 1.26606588, 2.2795853 , 4.88079259};
+        double[] out1 = UtilMethods.i0(x1);
+        Assertions.assertArrayEquals(res1, out1, 0.001);
+
+        double[] x2 = {-20.0, -10.0, 0.0, 10.0, 20.0};
+        double[] res2 = {4.35582826e+07, 2.81571663e+03, 1.00000000e+00, 2.81571663e+03, 4.35582826e+07};
+        double[] out2 = UtilMethods.i0(x2);
+        Assertions.assertArrayEquals(res2, out2, 0.00001E7);
+
+        double x3 = -10;
+        double res3 = 2.81571663e+03;
+        double out3 = UtilMethods.i0(x3);
+        Assertions.assertEquals(res3, out3, 0.001);
+
+        double x4 = 20;
+        double res4 = 2.81571663e+03;
+        double out4 = UtilMethods.i0(x3);
+        Assertions.assertEquals(res3, out3, 0.001);
+    }
+
+    @Test
+    public void i0eTest() {
+        double[] x1 = {0.0, 1.0, 2.0, 3.0};
+        double[] res1 = {1.0, 0.46575961, 0.30850832, 0.24300035};
+        double[] out1 = UtilMethods.i0e(x1);
+        Assertions.assertArrayEquals(res1, out1, 0.001);
+
+        double[] x2 = {-20.0, -10.0, 0.0, 10.0, 20.0};
+        double[] res2 = {0.08978031, 0.12783334, 1.0, 0.12783334, 0.08978031};
+        double[] out2 = UtilMethods.i0e(x2);
+        Assertions.assertArrayEquals(res2, out2, 0.001);
     }
 }

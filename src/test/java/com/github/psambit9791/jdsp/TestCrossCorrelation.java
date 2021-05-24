@@ -22,7 +22,6 @@ public class TestCrossCorrelation {
     final double[] kernel1 = {0.5, 1.0, 0.0, 1.0};
 
     final double[] signal2 = {2, 8, 0, 4, 1, 9, 9, 0};
-//    final double[] kernel2 = {2, 8, 0, 4, 1, 9, 9, 0};
     final double[] kernel2 = {1, 3, 1, 3};
 
     @Test
