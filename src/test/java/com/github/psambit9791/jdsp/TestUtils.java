@@ -14,6 +14,7 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -209,9 +210,9 @@ public class TestUtils {
 
     @Test
     public void normalizeTest() {
-            double[] arr1 = {12, 14, 15, 15, 16};
-            double[] result1 = {-1.583, -0.264, 0.396, 0.396, 1.055};
-            double[] out1 = UtilMethods.normalize(arr1);
+        double[] arr1 = {12, 14, 15, 15, 16};
+        double[] result1 = {-1.583, -0.264, 0.396, 0.396, 1.055};
+        double[] out1 = UtilMethods.normalize(arr1);
         Assertions.assertArrayEquals(result1, out1, 0.001);
     }
 
@@ -351,5 +352,17 @@ public class TestUtils {
         Assertions.assertArrayEquals(resSub, arrSub, 0.001);
         Assertions.assertArrayEquals(resMul, arrMul, 0.001);
         Assertions.assertArrayEquals(resDiv, arrDiv, 0.001);
+    }
+
+    @Test
+    public void chebyEvalTest() {
+        double[] arr = {1000.0, 2.0, 3.4, 17.0, 50.0};
+        double[] x = {1.0, 2.0, 3.0, 4.0, 5.0};
+
+        double[] res = {-470.2, 1047.4, 23580.4,  97134.8, 263716.6};
+
+        double[] out = UtilMethods.chebyEval(x, arr);
+        System.out.println(Arrays.toString(out));
+        Assertions.assertArrayEquals(res, out, 0.001);
     }
 }
