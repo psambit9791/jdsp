@@ -824,6 +824,11 @@ public class UtilMethods {
         return 0.5 * (b0 - b2);
     }
 
+    /**
+     * Compute the modified Bessel function (0 order) of the first kind
+     * @param x Array of all the points to compute for
+     * @return double Array of values of the modified Bessel function
+     */
     public static double[] i0(double[] x) {
         double[] A = {-4.41534164647933937950E-18, 3.33079451882223809783E-17, -2.43127984654795469359E-16,
                 1.71539128555513303061E-15, -1.16853328779934516808E-14, 7.67618549860493561688E-14,
@@ -860,6 +865,11 @@ public class UtilMethods {
         return out;
     }
 
+    /**
+     * Compute the modified Bessel function (0 order) of the first kind
+     * @param x Array of all the points to compute for
+     * @return double Value of the modified Bessel function
+     */
     public static double i0(double x) {
         double[] A = {-4.41534164647933937950E-18, 3.33079451882223809783E-17, -2.43127984654795469359E-16,
                 1.71539128555513303061E-15, -1.16853328779934516808E-14, 7.67618549860493561688E-14,
@@ -893,6 +903,11 @@ public class UtilMethods {
         return out;
     }
 
+    /**
+     * Compute the modified Bessel function (0 order) of the first kind, exponentially scaled
+     * @param x Single point to compute for
+     * @return double Array of values of the exponentially scaled modified Bessel function
+     */
     public static double[] i0e(double[] x) {
         double[] A = {-4.41534164647933937950E-18, 3.33079451882223809783E-17, -2.43127984654795469359E-16,
                 1.71539128555513303061E-15, -1.16853328779934516808E-14, 7.67618549860493561688E-14,
@@ -928,6 +943,11 @@ public class UtilMethods {
         return out;
     }
 
+    /**
+     * Compute the modified Bessel function (0 order) of the first kind, exponentially scaled
+     * @param x Single point to compute for
+     * @return double Value of the exponentially scaled modified Bessel function
+     */
     public static double i0e(double x) {
         double[] A = {-4.41534164647933937950E-18, 3.33079451882223809783E-17, -2.43127984654795469359E-16,
                 1.71539128555513303061E-15, -1.16853328779934516808E-14, 7.67618549860493561688E-14,
@@ -960,5 +980,25 @@ public class UtilMethods {
         }
 
         return out;
+    }
+
+    public static double sinc(double x) {
+        double y;
+        if (x==0) {
+            y = 1.0E-20;
+        }
+        else {
+            y = x;
+        }
+        y = Math.PI * y;
+        return Math.sin(y)/y;
+    }
+
+    public static double[] sinc(double[] x) {
+        double[] y = new double[x.length];
+        for (int i=0; i<y.length; i++) {
+            y[i] = UtilMethods.sinc(x[i]);
+        }
+        return y;
     }
 }

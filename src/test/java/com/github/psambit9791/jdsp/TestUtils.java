@@ -414,4 +414,31 @@ public class TestUtils {
         double[] out2 = UtilMethods.i0e(x2);
         Assertions.assertArrayEquals(res2, out2, 0.001);
     }
+
+    @Test
+    public void sincSingleTest() {
+        double x1 = 0.23;
+        double res1 = 0.9152265417;
+        double out1 = UtilMethods.sinc(x1);
+        Assertions.assertEquals(res1, out1, 0.001);
+
+        double x2 = 0.5;
+        double res2 = 0.63661977237;
+        double out2 = UtilMethods.sinc(x2);
+        Assertions.assertEquals(res2, out2, 0.001);
+    }
+
+    @Test
+    public void sincArrTest() {
+        double[] x1 = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
+        double[] res1 = {0.98363164, 0.93548928, 0.85839369, 0.75682673, 0.63661977, 0.50455115, 0.36788301, 0.23387232,
+                0.1092924};
+        double[] out1 = UtilMethods.sinc(x1);
+        Assertions.assertArrayEquals(res1, out1, 0.001);
+
+        double[] x2 = {0.01, 0.2, 0.65, 0.23, 0.06};
+        double[] res2 = {0.99983551, 0.93548928, 0.43633259, 0.91522654, 0.99408875};
+        double[] out2 = UtilMethods.sinc(x2);
+        Assertions.assertArrayEquals(res2, out2, 0.001);
+    }
 }
