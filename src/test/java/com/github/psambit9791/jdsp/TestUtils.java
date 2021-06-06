@@ -14,7 +14,6 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -361,6 +360,33 @@ public class TestUtils {
     }
 
     @Test
+    public void trigonometricOperationTest() {
+        double[] arr1 = {1.23, 6.54, 4.56, 9.04, 2.88};
+        double[] resSin = {0.9424888 ,  0.254001  , -0.98841125,  0.37535334,  0.25861935};
+        double[] resCos = {0.33423773,  0.96720395, -0.15179986, -0.9268818 , -0.96597931};
+        double[] resTan = {2.81981573,  0.26261369,  6.51127914, -0.40496355, -0.26772763};
+
+        double[] arr2 = {-0.92, -0.38, 0.25, 0.55, 0.98};
+        double[] resAsin = {-1.16808049, -0.3897963 ,  0.25268026,  0.58236424,  1.37046148};
+        double[] resAcos = {2.73887681, 1.96059262, 1.31811607, 0.98843209, 0.20033484};
+        double[] resAtan = {-0.74375558, -0.36314701,  0.24497866,  0.50284321,  0.7752975};
+
+        double[] outSin = UtilMethods.trigonometricArithmetic(arr1, "sin");
+        double[] outCos = UtilMethods.trigonometricArithmetic(arr1, "cos");
+        double[] outTan = UtilMethods.trigonometricArithmetic(arr1, "tan");
+        double[] outAsin = UtilMethods.trigonometricArithmetic(arr2, "asin");
+        double[] outAcos = UtilMethods.trigonometricArithmetic(arr2, "acos");
+        double[] outAtan = UtilMethods.trigonometricArithmetic(arr2, "atan");
+
+        Assertions.assertArrayEquals(resSin, outSin, 0.001);
+        Assertions.assertArrayEquals(resCos, outCos, 0.001);
+        Assertions.assertArrayEquals(resTan, outTan, 0.001);
+        Assertions.assertArrayEquals(resAsin, outAsin, 0.001);
+        Assertions.assertArrayEquals(resAcos, outAcos, 0.001);
+        Assertions.assertArrayEquals(resAtan, outAtan, 0.001);
+    }
+
+    @Test
     public void chebyEvalTest() {
         double[] arr = {1000.0, 2.0, 3.4, 17.0, 50.0};
 
@@ -397,9 +423,9 @@ public class TestUtils {
         Assertions.assertEquals(res3, out3, 0.001);
 
         double x4 = 20;
-        double res4 = 2.81571663e+03;
-        double out4 = UtilMethods.i0(x3);
-        Assertions.assertEquals(res3, out3, 0.001);
+        double res4 = 4.35582826e+07;
+        double out4 = UtilMethods.i0(x4);
+        Assertions.assertEquals(res4, out4, 0.00001E7);
     }
 
     @Test

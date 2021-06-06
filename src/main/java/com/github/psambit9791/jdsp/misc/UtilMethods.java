@@ -772,6 +772,52 @@ public class UtilMethods {
     }
 
     /**
+     * Performs scalar arithmetic operation with a specific value on the input array
+     * @param arr Array to be processed
+     * @param function What action needs to be performed. Can be addition, subtraction (2 modes), multiplication, division and raising to power.
+     * @throws java.lang.IllegalArgumentException if action is not "add", "sub", "reverse_sub", "mul", "div", "pow"
+     * @return double[][] The result of the operation
+     */
+    public static double[] trigonometricArithmetic(double[] arr, String function) throws IllegalArgumentException {
+        if (!function.equals("sin") && !function.equals("cos") && !function.equals("tan") && !function.equals("asin") &&
+                !function.equals("acos") && !function.equals("atan")) {
+            throw new ArithmeticException("action must be 'sin', 'cos', 'tan', 'asin', 'acos' or 'atan'");
+        }
+        double[] out = new double[arr.length];
+        if (function.equals("sin")) {
+            for (int i=0; i<arr.length; i++) {
+                out[i] = Math.sin(arr[i]);
+            }
+        }
+        else if (function.equals("cos")) {
+            for (int i=0; i<arr.length; i++) {
+                out[i] = Math.cos(arr[i]);
+            }
+        }
+        else if (function.equals("tan")) {
+            for (int i=0; i<arr.length; i++) {
+                out[i] = Math.tan(arr[i]);
+            }
+        }
+        else if (function.equals("asin")) {
+            for (int i=0; i<arr.length; i++) {
+                out[i] = Math.asin(arr[i]);
+            }
+        }
+        else if (function.equals("acos")) {
+            for (int i=0; i<arr.length; i++) {
+                out[i] = Math.acos(arr[i]);
+            }
+        }
+        else {
+            for (int i=0; i<arr.length; i++) {
+                out[i] = Math.atan(arr[i]);
+            }
+        }
+        return out;
+    }
+
+    /**
      * Chebyshev Series Evaluation
      * @param x Points at which the Chebyshev series needs to be evaluated
      * @param arr The Chebyshev series coefficients
