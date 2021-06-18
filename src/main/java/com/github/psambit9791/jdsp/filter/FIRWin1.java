@@ -45,7 +45,7 @@ public class FIRWin1 extends _FIRFilter {
     public FIRWin1(int numTaps, double width, int samplingFreq) {
         this.nyquistF = (int)(samplingFreq * 0.5);
         this.numTaps = numTaps;
-        this.width = width;
+        this.width = width/this.nyquistF;
         this.kaiser_attenutation();
         this.kaiser_beta();
     }
@@ -59,8 +59,35 @@ public class FIRWin1 extends _FIRFilter {
      */
     public FIRWin1(double ripple, double width, int samplingFreq) {
         this.nyquistF = (int)(samplingFreq * 0.5);
+        this.width = width/this.nyquistF;
+        this.kaiser_order(ripple, this.width);
+    }
+
+    /**
+     * FIRWin1 constructor for generating a filter using the number of coefficients in the filter. The Nyquist frequency
+     * is set to 1.
+     * @param numTaps Number of coefficients in the filter
+     * @param width Width of the Kaiser window to be used
+     */
+    public FIRWin1(int numTaps, double width) {
+        this.nyquistF = 1;
+        this.numTaps = numTaps;
         this.width = width;
-        this.kaiser_order(ripple, width);
+        this.kaiser_attenutation();
+        this.kaiser_beta();
+    }
+
+    /**
+     * FIRWin1 constructor for generating a filter using the ripple factor of the filter. The Nyquist frequency
+     * is set to 1.
+     * @param ripple Upper bound for the deviation (in dB) of the magnitude of the filter's frequency response from that
+     *               of the desired filter
+     * @param width Width of the Kaiser window to be used
+     */
+    public FIRWin1(double ripple, double width) {
+        this.nyquistF = 1;
+        this.width = width;
+        this.kaiser_order(ripple, this.width);
     }
 
     /**
@@ -68,10 +95,10 @@ public class FIRWin1 extends _FIRFilter {
      */
     private void kaiser_beta() {
         if (this.attenuation > 50) {
-            this.beta = 0.1102 * (this.attenuation - 0.7);
+            this.beta = 0.1102 * (this.attenuation - 8.7);
         }
         else if( this.attenuation > 21) {
-            this.beta = (0.5842 * Math.pow((this.attenuation - 21), 0.4)) + 0.07866 * (this.attenuation - 21);
+            this.beta = (0.5842 * Math.pow((this.attenuation - 21), 0.4)) + 0.07886 * (this.attenuation - 21);
         }
         else {
             this.beta = 0.0;
@@ -82,7 +109,7 @@ public class FIRWin1 extends _FIRFilter {
      * Computes the attenuation factor of a Kaiser FIR filter
      */
     private void kaiser_attenutation() {
-        this.attenuation = 2.285 * (this.numTaps - 1) * Math.PI * (float)(this.width/this.nyquistF) + 7.95;
+        this.attenuation = 2.285 * (this.numTaps - 1) * Math.PI * (float)(this.width) + 7.95;
     }
 
     /**
@@ -95,8 +122,8 @@ public class FIRWin1 extends _FIRFilter {
         if (this.attenuation < 8) {
             throw new IllegalArgumentException("Maximum ripple attenuation too small for Kaiser function");
         }
-        this.kaiser_beta();
         this.width = width;
+        this.kaiser_beta();
         this.numTaps = (int) Math.ceil((((this.attenuation - 7.95) / 2.285) / (Math.PI * this.width)) + 1);
     }
 
@@ -104,7 +131,7 @@ public class FIRWin1 extends _FIRFilter {
      * This method computes the coefficients of a finite impulse response filter using a Kaiser window. The filter will
      * have linear phase; it will be Type I if `numtaps` is odd and Type II if `numtaps` is even.
      * @param cutoff The cutoff frequencies for the filter
-     * @param filterType This can be 'lowpass', 'bandpass', 'highpass' or 'bandpass'
+     * @param filterType This can be 'lowpass', 'bandstop', 'multibandstop' 'highpass', 'bandpass' or 'multibandpass'
      * @param scale Scale the coefficients so that the frequency response is exactly unity at either 0, the Nyquist
      *              Frequency or the centre of the first passband.
      * @return double[] Filtered signal
@@ -139,6 +166,12 @@ public class FIRWin1 extends _FIRFilter {
             }
             passZero = true;
         }
+        else if (filterType.equals("multibandstop")) {
+            if (cutoff.length < 3) {
+                throw new IllegalArgumentException("For multibandstop, cutoff must have at least three frequencies");
+            }
+            passZero = true;
+        }
         else if (filterType.equals("highpass")) {
             if (cutoff.length < 1) {
                 throw new IllegalArgumentException("For highpass, cutoff must have only one frequency");
@@ -151,11 +184,17 @@ public class FIRWin1 extends _FIRFilter {
             }
             passZero = false;
         }
+        else if (filterType.equals("multibandpass")) {
+            if (cutoff.length < 3) {
+                throw new IllegalArgumentException("For multibandpass, cutoff must have at least three frequencies");
+            }
+            passZero = false;
+        }
         else {
-            throw new IllegalArgumentException("filterType must be one of 'lowpass', 'bandpass', 'highpass' or 'bandpass'");
+            throw new IllegalArgumentException("filterType must be one of 'lowpass', 'bandstop', 'multibandstop' 'highpass', 'bandpass' or 'multibandpass'");
         }
 
-        boolean passNyquist = ((cutoff.length & 1) == 1) | passZero;
+        boolean passNyquist = ((cutoff.length & 1) == 1) ^ passZero;
         if (passNyquist && this.numTaps%2 == 0) {
             throw new ArithmeticException("A filter with an even number of coefficients must have zero response at the Nyquist frequency");
         }

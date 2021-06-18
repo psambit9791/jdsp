@@ -339,7 +339,6 @@ public class TestWindows {
         double[] result = {0.0 , 0.007 , 0.1038, 0.4627, 0.9199, 0.9199, 0.4627, 0.1038, 0.007 , 0.0};
         Kaiser w1 = new Kaiser(len);
         double[] out = w1.getWindow(14);
-        System.out.println(Arrays.toString(out));
         Assertions.assertArrayEquals(result, out, 0.0001);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {Kaiser w0 = new Kaiser(-2);});
     }
