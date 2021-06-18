@@ -817,6 +817,68 @@ public class UtilMethods {
         return out;
     }
 
+
+    /**
+     * Checks if input array is sorted in given order
+     * @param arr Array to be checked
+     * @param descending If array to be checked for descending or ascending order
+     * @return boolean The evaluation output
+     */
+    public static boolean isSorted(double[] arr, boolean descending) {
+        if (descending) {
+            for (int i = 0; i < arr.length - 1; i++) {
+                if (arr[i] < arr[i + 1]) {
+                    return false;
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < arr.length - 1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Performs linear interpolation to compute value of a point given a list of x and y coordinates
+     * @param point Point at which the interpolation value is needed
+     * @param x X-coordinates of the data points (must be increasing)
+     * @param y Y-coordinates of the data points
+     * @return double The evaluation output
+     */
+    public static double interpolate(double point, double[] x, double[] y) {
+        if (!isSorted(x, false)) {
+            throw new IllegalArgumentException("X-coordinates must be increasing");
+        }
+        LinearInterpolator li = new LinearInterpolator();
+        PolynomialSplineFunction psf = li.interpolate(x, y);
+        double out = psf.value(point);
+        return out;
+    }
+
+    /**
+     * Performs linear interpolation to compute values of a list of points given a list of x and y coordinates
+     * @param points Points at which the interpolation values are needed
+     * @param x X-coordinates of the data points (must be increasing)
+     * @param y Y-coordinates of the data points
+     * @return double The evaluation output
+     */
+    public static double[] interpolate(double[] points, double[] x, double[] y) {
+        if (!isSorted(x, false)) {
+            throw new IllegalArgumentException("X-coordinates must be increasing");
+        }
+        LinearInterpolator li = new LinearInterpolator();
+        PolynomialSplineFunction psf = li.interpolate(x, y);
+        double[] out = new double[points.length];
+        for (int i=0; i<points.length; i++) {
+            out[i] = psf.value(points[i]);
+        }
+        return out;
+    }
+
     /**
      * Chebyshev Series Evaluation
      * @param x Points at which the Chebyshev series needs to be evaluated
@@ -1028,6 +1090,11 @@ public class UtilMethods {
         return out;
     }
 
+    /**
+     * Compute the normalised sinc function
+     * @param x Single point to compute sinc for
+     * @return double The computed sinc value
+     */
     public static double sinc(double x) {
         double y;
         if (x==0) {
@@ -1040,6 +1107,11 @@ public class UtilMethods {
         return Math.sin(y)/y;
     }
 
+    /**
+     * Compute the normalised sinc function
+     * @param x Array of point to compute sinc for
+     * @return double The computed sinc values for all the inputs
+     */
     public static double[] sinc(double[] x) {
         double[] y = new double[x.length];
         for (int i=0; i<y.length; i++) {

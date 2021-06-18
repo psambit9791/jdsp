@@ -387,6 +387,41 @@ public class TestUtils {
     }
 
     @Test
+    public void sortedAscendTest() {
+        double[] arr = {1, 2, 3, 4, 5};
+        Assertions.assertTrue(UtilMethods.isSorted(arr, false));
+        Assertions.assertFalse(UtilMethods.isSorted(arr, true));
+    }
+
+    @Test
+    public void sortedDescendTest() {
+        double[] arr = {5, 4, 3, 2, 1};
+        Assertions.assertTrue(UtilMethods.isSorted(arr, true));
+        Assertions.assertFalse(UtilMethods.isSorted(arr, false));
+    }
+
+    @Test
+    public void interpolationSingleTest() {
+        double[] xp = {1, 2, 3};
+        double[] yp = {3, 2, 0};
+
+        double out = UtilMethods.interpolate(2.5, xp, yp);
+        double res = 1.0;
+        Assertions.assertEquals(res, out, 0.0001);
+    }
+
+    @Test
+    public void interpolationMultiTest() {
+        double[] xp = {1, 2, 3};
+        double[] yp = {3, 2, 0};
+        double[] inputs = {1.25, 1.5, 1.75, 2.25, 2.5, 2.75};
+
+        double[] out = UtilMethods.interpolate(inputs, xp, yp);
+        double[] res = {2.75, 2.5 , 2.25, 1.5 , 1.  , 0.5 };
+        Assertions.assertArrayEquals(res, out, 0.0001);
+    }
+
+    @Test
     public void chebyEvalTest() {
         double[] arr = {1000.0, 2.0, 3.4, 17.0, 50.0};
 
