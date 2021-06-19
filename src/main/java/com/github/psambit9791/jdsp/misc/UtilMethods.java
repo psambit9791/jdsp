@@ -1119,4 +1119,47 @@ public class UtilMethods {
         }
         return y;
     }
+
+    /**
+     * Constructs a Toeplitz matrix from the input vector and returns it
+     * @param x First column of the matrix
+     * @return double[][] The square Toeplitz matrix
+     */
+    public static double[][] toeplitz(double[] x) {
+        double[][] matrix = new double[x.length][x.length];
+
+        for (int i=0; i<x.length; i++) {
+            int index = 0;
+            for (int j=i; j<x.length; j++) {
+                matrix[i][j] = x[index];
+                index++;
+            }
+            index = 0;
+            for (int j=i-1; j>=0; j--) {
+                ++index;
+                matrix[i][j] = x[index];
+            }
+        }
+        return matrix;
+    }
+
+    /**
+     * Constructs a Hankel matrix from the input vector and returns it
+     * @param x First column of the matrix
+     * @return double[][] The square Hankel matrix
+     */
+    public static double[][] hankel(double[] x) {
+        double[][] matrix = new double[x.length][x.length];
+        for (double[] row: matrix)
+            Arrays.fill(row, 0.0);
+
+        for (int i=0; i<x.length; i++) {
+            int index = i;
+            for (int j=0; j<x.length-i; j++) {
+                matrix[i][j] = x[index];
+                index++;
+            }
+        }
+        return matrix;
+    }
 }

@@ -502,4 +502,24 @@ public class TestUtils {
         double[] out2 = UtilMethods.sinc(x2);
         Assertions.assertArrayEquals(res2, out2, 0.001);
     }
+
+    @Test
+    public void toeplitzTest() {
+        double[] c = {1,2,3,4};
+        double[][] output = UtilMethods.toeplitz(c);
+        double[][] result = {{1, 2, 3, 4}, {2, 1, 2, 3}, {3, 2, 1, 2}, {4, 3, 2, 1}};
+        for (int i=0; i<result.length; i++) {
+            Assertions.assertArrayEquals(result[i], output[i], 0.0001);
+        }
+    }
+
+    @Test
+    public void hankelTest() {
+        double[] c = {1,2,3,4};
+        double[][] output = UtilMethods.hankel(c);
+        double[][] result = {{1, 2, 3, 4}, {2, 3, 4, 0}, {3, 4, 0, 0}, {4, 0, 0, 0}};
+        for (int i=0; i<result.length; i++) {
+            Assertions.assertArrayEquals(result[i], output[i], 0.0001);
+        }
+    }
 }
