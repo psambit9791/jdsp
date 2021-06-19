@@ -1131,13 +1131,11 @@ public class UtilMethods {
         for (int i=0; i<x.length; i++) {
             int index = 0;
             for (int j=i; j<x.length; j++) {
-                matrix[i][j] = x[index];
-                index++;
+                matrix[i][j] = x[index++];
             }
             index = 0;
             for (int j=i-1; j>=0; j--) {
-                ++index;
-                matrix[i][j] = x[index];
+                matrix[i][j] = x[++index];
             }
         }
         return matrix;
@@ -1156,8 +1154,7 @@ public class UtilMethods {
         for (int i=0; i<x.length; i++) {
             int index = i;
             for (int j=0; j<x.length-i; j++) {
-                matrix[i][j] = x[index];
-                index++;
+                matrix[i][j] = x[index++];
             }
         }
         return matrix;
