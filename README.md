@@ -46,7 +46,7 @@ git clone --single-branch --branch master https://github.com/psambit9791/jDSP.gi
 
 ## Documentation
 
-See the [**Wiki**](https://github.com/psambit9791/jDSP/wiki) for an introduction to the general use of jDSP.
+See the [**Wiki**](https://github.com/psambit9791/jDSP/wiki) for an introduction to the general use of JDSP.
 
 See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for more advanced documentation.
 
@@ -120,7 +120,7 @@ If you are using this software in your research, please use the following citati
   url          = {https://doi.org/10.5281/zenodo.4416029}
 }
 ```
-## Supporting jDSP 
+## Supporting JDSP 
 
 JDSP is an open source project. <br/> You can help by becoming a sponsor on <a href="https://patreon.com/sambitpaul">Patreon</a> or doing a one time donation on <a href="https://paypal.me/psambit9791">PayPal</a>. <br />
 You can also show your appreciation on <a href="https://ko-fi.com/sambitpaul">Ko-Fi</a>.<br />

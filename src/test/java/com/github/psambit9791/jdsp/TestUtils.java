@@ -335,6 +335,28 @@ public class TestUtils {
     }
 
     @Test
+    public void matrixAdditionTest() {
+        double[][] m1 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+        double[][] m2 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+        double[][] result = {{2.0, 4.0, 6.0}, {8.0, 10.0, 12.0}, {14.0, 16.0, 18.0}};
+        double[][] out = UtilMethods.matrixAddition(m1, m2);
+        for (int i=0; i<result.length; i++) {
+            Assertions.assertArrayEquals(result[i], out[i], 0.001);
+        }
+    }
+
+    @Test
+    public void matrixSubtractionTest() {
+        double[][] m1 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+        double[][] m2 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+        double[][] result = {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}};
+        double[][] out = UtilMethods.matrixSubtraction(m1, m2);
+        for (int i=0; i<result.length; i++) {
+            Assertions.assertArrayEquals(result[i], out[i], 0.001);
+        }
+    }
+
+    @Test
     public void scalarOperationTest() {
         double[] arr = {1.23, 6.54, 4.56, 9.04, 2.88};
         double[] resAdd = {2.25,  7.56,  5.58, 10.06,  3.9};

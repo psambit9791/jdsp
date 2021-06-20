@@ -725,6 +725,40 @@ public class UtilMethods {
     }
 
     /**
+     * Returns the multiplication of 2 matrices
+     * @param a Addend Matrix 1
+     * @param b Addend Matrix 2
+     * @throws java.lang.ArithmeticException if column size of a not equal to row size of b
+     * @return double[][] The result of the matrix multiplication
+     */
+    public static double[][] matrixAddition(double[][] a, double[][] b) throws ArithmeticException {
+        if (a[0].length != b.length) {
+            throw new ArithmeticException("Columns in multiplier must be equal to Rows in Multiplicand");
+        }
+        RealMatrix m1 = MatrixUtils.createRealMatrix(a);
+        RealMatrix m2= MatrixUtils.createRealMatrix(b);
+        RealMatrix m = m1.add(m2);
+        return m.getData();
+    }
+
+    /**
+     * Returns the subtraction of 2 matrices
+     * @param a Minuend Matrix
+     * @param b Subtrahend Matrix
+     * @throws java.lang.ArithmeticException if column size of a not equal to row size of b
+     * @return double[][] The result of the matrix subtraction
+     */
+    public static double[][] matrixSubtraction(double[][] a, double[][] b) throws ArithmeticException {
+        if (a[0].length != b.length) {
+            throw new ArithmeticException("Columns in multiplier must be equal to Rows in Multiplicand");
+        }
+        RealMatrix m1 = MatrixUtils.createRealMatrix(a);
+        RealMatrix m2= MatrixUtils.createRealMatrix(b);
+        RealMatrix m = m1.subtract(m2);
+        return m.getData();
+    }
+
+    /**
      * Performs scalar arithmetic operation with a specific value on the input array
      * @param arr Array to be processed
      * @param val Value with which arithmetic operation is performed
