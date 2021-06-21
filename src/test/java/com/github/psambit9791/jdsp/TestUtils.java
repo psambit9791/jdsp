@@ -544,4 +544,34 @@ public class TestUtils {
             Assertions.assertArrayEquals(result[i], output[i], 0.0001);
         }
     }
+
+    @Test
+    public void logTest() {
+        int base = 2;
+        int input_val = 256;
+        double result = 8.0;
+        double out = UtilMethods.log(input_val, base);
+        Assertions.assertEquals(result, out, 0.0001);
+
+        base = 10;
+        double input_val_2 = 122.0;
+        result = 2.08636;
+        out = UtilMethods.log(input_val_2, base);
+        Assertions.assertEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void antilogTest() {
+        int base = 2;
+        int input_val = 8;
+        double result = 256.0;
+        double out = UtilMethods.antilog(input_val, base);
+        Assertions.assertEquals(result, out, 0.0001);
+
+        base = 10;
+        double input_val_2 = 2.08636;
+        result = 122;
+        out = UtilMethods.antilog(input_val_2, base);
+        Assertions.assertEquals(result, out, 0.0001);
+    }
 }

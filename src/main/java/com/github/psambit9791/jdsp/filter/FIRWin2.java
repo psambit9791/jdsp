@@ -12,18 +12,78 @@
 
 package com.github.psambit9791.jdsp.filter;
 
-import com.github.psambit9791.jdsp.windows.Kaiser;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
+import com.github.psambit9791.jdsp.windows.Hamming;
+import org.apache.commons.math3.util.MathArrays;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * <h1>Finite Impulse Response Windowed Filter 1 Class</h1>
+ * The FIRWin2 Filter class is used to compute the coefficients of the linear phase FIR filter given the cutoff frequencies,
+ * their corresponding gains and the number of filter coefficients.
+ * This class extends to the abstract class _FIRFilter which also allows for computing the filter output for an input signal.
+ * This class can create 4 types of filters:
+ * - Type 1 filters
+ * - Type 2 filters (which have zero response at the Nyquist frequency)
+ * - Type 3 filters (which have zero response at the zero and Nyquist frequencies)
+ * - Type 4 filters (which have zero response at the zero frequency)
+ *
+ * The possible combinations to achieve each of these filters is:
+ * - Type 1: 'numTaps' is odd and 'antisymmetric' is false
+ * - Type 2: 'numTaps' is even and 'antisymmetric' is false
+ * - Type 3: 'numTaps' is odd and 'antisymmetric' is true
+ * - Type 4: 'numTaps' is even and 'antisymmetric' is true
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class FIRWin2 {
 
     private int nyquistF;
     private int numTaps;
     private boolean antisymmetric;
+    private int ftype;
+    private int nfreqs;
 
     public FIRWin2(int numTaps, int samplingFreq, boolean antisymmetric) {
         this.nyquistF = (int)(samplingFreq * 0.5);
         this.numTaps = numTaps;
         this.antisymmetric = antisymmetric;
+
+        if (!this.antisymmetric) {
+            if (this.numTaps%2 == 0) {
+                this.ftype = 2;
+            }
+            else {
+                this.ftype = 1;
+            }
+        }
+        else {
+            if (this.numTaps%2 == 0) {
+                this.ftype = 4;
+            }
+            else {
+                this.ftype = 3;
+            }
+        }
+    }
+
+    public FIRWin2(int numTaps, int samplingFreq) {
+        this.nyquistF = (int)(samplingFreq * 0.5);
+        this.numTaps = numTaps;
+        this.antisymmetric = false;
+
+        if (this.numTaps%2 == 0) {
+            this.ftype = 2;
+        }
+        else {
+            this.ftype = 1;
+        }
     }
 
 
@@ -39,36 +99,47 @@ public class FIRWin2 {
         if (cutoff.length != gain.length) {
             throw new IllegalArgumentException("Size of cutoff array and gain array must be same.");
         }
-        boolean passZero;
 
-        if (filterType.equals("lowpass")) {
-            if (cutoff.length < 1) {
-                throw new IllegalArgumentException("For lowpass, cutoff must have at least one frequency");
-            }
-            passZero = true;
+        if (!UtilMethods.isSorted(cutoff, false)) {
+            throw new IllegalArgumentException("Cutoff frequencies must be non-decreasing");
         }
-        else if (filterType.equals("bandstop")) {
-            if (cutoff.length < 2) {
-                throw new IllegalArgumentException("For bandstop, cutoff must have at least two frequencies");
-            }
-            passZero = true;
+
+        Double[] arr = new Double[cutoff.length];
+        for (int i=0; i<cutoff.length; i++) {
+            arr[i] = cutoff[i];
         }
-        else if (filterType.equals("highpass")) {
-            if (cutoff.length < 1) {
-                throw new IllegalArgumentException("For highpass, cutoff must have at least one frequency");
-            }
-            passZero = false;
+        Set<Double> targetSet = new HashSet<Double>(Arrays.asList(arr));
+
+        if (arr.length != targetSet.size()) {
+            throw new IllegalArgumentException("Cutoff array cannot have any duplicates");
         }
-        else if (filterType.equals("bandpass")) {
-            if (cutoff.length < 2) {
-                throw new IllegalArgumentException("For bandpass, cutoff must have at least two frequencies");
-            }
-            passZero = false;
+
+        if (arr[0] != 0 || arr[arr.length - 1] != this.nyquistF) {
+            throw new IllegalArgumentException("Cutoff must start with 0 and end with the Nyquist frequency");
         }
-        else {
-            throw new IllegalArgumentException("filterType must be one of 'lowpass', 'bandpass', 'highpass' or 'bandpass'");
+
+        int base = 2;
+        int log_val = (int)(Math.ceil(UtilMethods.log(numTaps, base)));
+        this.nfreqs = (int)(UtilMethods.antilog(log_val, base) + 1);
+
+
+        double[] x = UtilMethods.linspace(0.0, (double)(this.nyquistF), this.nfreqs, true);
+        double[] fx = UtilMethods.interpolate(x, cutoff, gain);
+
+        double[] outfull = {};
+
+        //// FILL IN CODE FOR SHIFTING COEFFICIENTS
+        //// FILL IN CODE FOR IFFT
+
+        Hamming w = new Hamming(this.numTaps);
+        double[] window = w.getWindow();
+
+        double[] out = UtilMethods.splitByIndex(outfull, 0, this.numTaps);
+        out = MathArrays.ebeMultiply(out, window);
+
+        if (this.ftype == 3) {
+            out[out.length/2] = 0.0;
         }
-        double[] out = {};
         return out;
     }
 }

@@ -19,7 +19,6 @@ import org.apache.commons.math3.linear.SingularValueDecomposition;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.MathArrays;
 
-import javax.rmi.CORBA.Util;
 import java.io.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -1192,5 +1191,45 @@ public class UtilMethods {
             }
         }
         return matrix;
+    }
+
+    /**
+     * Compute the log of the the input number for a specific base
+     * @param y Input number
+     * @param base Base value
+     * @return double Log of input number with specific base
+     */
+    public static double log(int y, int base) {
+        return Math.log(y)/Math.log(base);
+    }
+
+    /**
+     * Compute the log of the the input number for a specific base
+     * @param y Input number
+     * @param base Base value
+     * @return double Log of input number with specific base
+     */
+    public static double log(double y, int base) {
+        return Math.log(y)/Math.log(base);
+    }
+
+    /**
+     * Compute the antilog of the input number for a specific base
+     * @param x Input number
+     * @param base Base value
+     * @return Antilog of the input number with specific base
+     */
+    public static double antilog(int x, int base) {
+        return Math.pow(base, x);
+    }
+
+    /**
+     * Compute the antilog of the input number for a specific base
+     * @param x Input number
+     * @param base Base value
+     * @return Antilog of the input number with specific base
+     */
+    public static double antilog(double x, int base) {
+        return Math.pow(base, x);
     }
 }

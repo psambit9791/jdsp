@@ -21,8 +21,12 @@ import java.util.Arrays;
 
 /**
  * <h1>Finite Impulse Response Windowed Filter 1 Class</h1>
- * The FIRWin1 Filter class is used to compute the coefficients of the FIR filter given the properties of the filter.
+ * The FIRWin1 Filter class is used to compute the coefficients of the linear phase FIR filter given the cutoff frequencies
+ * and the number of filter coefficients.
  * This class extends to the abstract class _FIRFilter which also allows for computing the filter output for an input signal.
+ * This class can create 2 types of filters:
+ * - Type 1 filters
+ * - Type 2 filters (which have zero response at the Nyquist frequency and hence require numTaps to be odd)
  * <p>
  *
  * @author  Sambit Paul
