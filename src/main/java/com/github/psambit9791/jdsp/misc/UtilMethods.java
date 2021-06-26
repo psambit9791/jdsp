@@ -12,6 +12,7 @@ package com.github.psambit9791.jdsp.misc;
 
 import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
+import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.linear.DecompositionSolver;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -1191,6 +1192,20 @@ public class UtilMethods {
             }
         }
         return matrix;
+    }
+
+    /**
+     * Convert a complex array to a 2D matrix
+     * @param arr A list of Complex numbers
+     * @return double[][] Complex Numbers as a 2D matrix. Dimension 1: Length, Dimension 2: Real part, complex part
+     */
+    public static double[][] complexTo2D(Complex[] arr) {
+        double[][] out = new double[arr.length][2];
+        for (int i=0; i<arr.length; i++) {
+            out[i][0] = arr[i].getReal();
+            out[i][1] = arr[i].getImaginary();
+        }
+        return out;
     }
 
     /**

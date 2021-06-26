@@ -12,7 +12,6 @@ package com.github.psambit9791.jdsp.filter;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.signal.Convolution;
-import java.util.Arrays;
 
 /**
  * <h1>Finite Impulse Response Filter Class</h1>
@@ -63,6 +62,5 @@ abstract class _FIRFilter {
         double[] fout = UtilMethods.splitByIndex(conv_out, 0, x.length);
         return fout;
     }
-
 
 }

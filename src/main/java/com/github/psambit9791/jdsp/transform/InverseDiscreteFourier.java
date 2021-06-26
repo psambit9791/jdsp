@@ -45,6 +45,8 @@ public class InverseDiscreteFourier {
     /**
      * This constructor initialises the prerequisites required to use InverseDiscreteFourier.
      * @param seq Sequence to be transformed (real) [The FFT output has only real numbers]
+     * @param onlyPositive Only the first half of the FFT output is provided. Used for real signals where the last half
+     *                     are complex conjugates of the first half.
      */
     public InverseDiscreteFourier(double[] seq, boolean onlyPositive) {
         this.real_sequence = seq;

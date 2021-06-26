@@ -14,7 +14,9 @@ package com.github.psambit9791.jdsp.filter;
 
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
+import com.github.psambit9791.jdsp.transform.InverseDiscreteFourier;
 import com.github.psambit9791.jdsp.windows.Hamming;
+import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.util.MathArrays;
 
 import java.util.Arrays;
@@ -73,8 +75,44 @@ public class FIRWin2 {
         }
     }
 
+    public FIRWin2(int numTaps, boolean antisymmetric) {
+        this.nyquistF = 1;
+        this.numTaps = numTaps;
+        this.antisymmetric = antisymmetric;
+
+        if (!this.antisymmetric) {
+            if (this.numTaps%2 == 0) {
+                this.ftype = 2;
+            }
+            else {
+                this.ftype = 1;
+            }
+        }
+        else {
+            if (this.numTaps%2 == 0) {
+                this.ftype = 4;
+            }
+            else {
+                this.ftype = 3;
+            }
+        }
+    }
+
     public FIRWin2(int numTaps, int samplingFreq) {
         this.nyquistF = (int)(samplingFreq * 0.5);
+        this.numTaps = numTaps;
+        this.antisymmetric = false;
+
+        if (this.numTaps%2 == 0) {
+            this.ftype = 2;
+        }
+        else {
+            this.ftype = 1;
+        }
+    }
+
+    public FIRWin2(int numTaps) {
+        this.nyquistF = 1;
         this.numTaps = numTaps;
         this.antisymmetric = false;
 
@@ -92,10 +130,9 @@ public class FIRWin2 {
      * linear phase and (approximately) the given frequency response.
      * @param cutoff The cutoff frequencies for the filter
      * @param gain The filter gains at the frequency sampling points.
-     * @param filterType This can be 'lowpass', 'bandpass', 'highpass' or 'bandpass'
      * @return double[] Filtered signal
      */
-    public double[] get_coefficients(double[] cutoff, double[] gain, String filterType) {
+    public double[] compute_coefficients(double[] cutoff, double[] gain) {
         if (cutoff.length != gain.length) {
             throw new IllegalArgumentException("Size of cutoff array and gain array must be same.");
         }
@@ -126,15 +163,34 @@ public class FIRWin2 {
         double[] x = UtilMethods.linspace(0.0, (double)(this.nyquistF), this.nfreqs, true);
         double[] fx = UtilMethods.interpolate(x, cutoff, gain);
 
-        double[] outfull = {};
-
         //// FILL IN CODE FOR SHIFTING COEFFICIENTS
+        Complex shift_const = new Complex(0.0, -(((this.numTaps - 1) / 2.0) * Math.PI) / this.nyquistF);
+        Complex factor = new Complex(0, 1);
+        Complex[] fx2 = new Complex[fx.length];
+
+        for (int i=0; i<fx2.length; i++) {
+            Complex shift = shift_const.multiply(x[i]);
+            shift = shift.exp();
+            if (this.ftype > 2) {
+                shift = shift.multiply(factor);
+            }
+            fx2[i] = shift.multiply(fx[i]);
+        }
+
         //// FILL IN CODE FOR IFFT
+
+        // Convert from Complex array to 2D double array
+        double[][] fx2D = UtilMethods.complexTo2D(fx2);
+
+        // Perform the Inverse DFT
+        InverseDiscreteFourier transform = new InverseDiscreteFourier(fx2D, true);
+        transform.idft();
+        double[] outFull = transform.getRealSignal();
 
         Hamming w = new Hamming(this.numTaps);
         double[] window = w.getWindow();
 
-        double[] out = UtilMethods.splitByIndex(outfull, 0, this.numTaps);
+        double[] out = UtilMethods.splitByIndex(outFull, 0, this.numTaps);
         out = MathArrays.ebeMultiply(out, window);
 
         if (this.ftype == 3) {
