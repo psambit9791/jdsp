@@ -136,6 +136,8 @@ public class FIRWin1 extends _FIRFilter {
      * have linear phase; it will be Type I if `numtaps` is odd and Type II if `numtaps` is even.
      * @param cutoff The cutoff frequencies for the filter
      * @param filterType This can be 'lowpass', 'bandstop', 'multibandstop' 'highpass', 'bandpass' or 'multibandpass'
+     *                   Multibandpass does not allow between 0 and f1 and alternates after that.
+     *                   Multibandstop allows between 0 and f1.
      * @param scale Scale the coefficients so that the frequency response is exactly unity at either 0, the Nyquist
      *              Frequency or the centre of the first passband.
      * @return double[] Filtered signal
