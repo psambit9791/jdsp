@@ -140,7 +140,7 @@ public class FIRWin1 extends _FIRFilter {
      *              Frequency or the centre of the first passband.
      * @return double[] Filtered signal
      */
-    public double[] compute_coefficients(double[] cutoff, String filterType, boolean scale) {
+    public double[] computeCoefficients(double[] cutoff, String filterType, boolean scale) {
 
         for (int i=0; i<cutoff.length; i++) {
             cutoff[i] = cutoff[i]/this.nyquistF;

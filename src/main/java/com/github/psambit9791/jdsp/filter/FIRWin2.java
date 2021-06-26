@@ -44,7 +44,7 @@ import java.util.Set;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class FIRWin2 {
+public class FIRWin2 extends _FIRFilter {
 
     private int nyquistF;
     private int numTaps;
@@ -52,6 +52,12 @@ public class FIRWin2 {
     private int ftype;
     private int nfreqs;
 
+    /**
+     * FIRWin2 constructor for generating a filter using the number of coefficients in the filter
+     * @param numTaps Number of coefficients in the filter
+     * @param samplingFreq Sampling frequency of the signal
+     * @param antisymmetric Whether resulting impulse response is symmetric/antisymmetric
+     */
     public FIRWin2(int numTaps, int samplingFreq, boolean antisymmetric) {
         this.nyquistF = (int)(samplingFreq * 0.5);
         this.numTaps = numTaps;
@@ -75,6 +81,12 @@ public class FIRWin2 {
         }
     }
 
+    /**
+     * FIRWin2 constructor for generating a filter using the number of coefficients in the filter.
+     * Sampling Frequency is set to 2.
+     * @param numTaps Number of coefficients in the filter
+     * @param antisymmetric Whether resulting impulse response is symmetric/antisymmetric
+     */
     public FIRWin2(int numTaps, boolean antisymmetric) {
         this.nyquistF = 1;
         this.numTaps = numTaps;
@@ -98,6 +110,12 @@ public class FIRWin2 {
         }
     }
 
+    /**
+     * FIRWin2 constructor for generating a filter using the number of coefficients in the filter.
+     * antisymmetric is set to false.
+     * @param numTaps Number of coefficients in the filter
+     * @param samplingFreq Sampling frequency of the signal
+     */
     public FIRWin2(int numTaps, int samplingFreq) {
         this.nyquistF = (int)(samplingFreq * 0.5);
         this.numTaps = numTaps;
@@ -111,6 +129,11 @@ public class FIRWin2 {
         }
     }
 
+    /**
+     * FIRWin2 constructor for generating a filter using the number of coefficients in the filter.
+     * Sampling frequency is set to 2 and antisymmetric is set to false.
+     * @param numTaps Number of coefficients in the filter
+     */
     public FIRWin2(int numTaps) {
         this.nyquistF = 1;
         this.numTaps = numTaps;
@@ -124,6 +147,10 @@ public class FIRWin2 {
         }
     }
 
+    public int getFilterType() {
+        return this.ftype;
+    }
+
 
     /**
      * From the given cutoff frequencies and their corresponding gains, this method constructs an FIR filter with
@@ -132,7 +159,7 @@ public class FIRWin2 {
      * @param gain The filter gains at the frequency sampling points.
      * @return double[] Filtered signal
      */
-    public double[] compute_coefficients(double[] cutoff, double[] gain) {
+    public double[] computeCoefficients(double[] cutoff, double[] gain) {
         if (cutoff.length != gain.length) {
             throw new IllegalArgumentException("Size of cutoff array and gain array must be same.");
         }

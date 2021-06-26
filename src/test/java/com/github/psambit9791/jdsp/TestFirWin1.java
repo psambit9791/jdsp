@@ -35,7 +35,7 @@ public class TestFirWin1 {
 
         double[] f = {0.1};
         String filterType = "lowpass";
-        double[] outCoeffs = fw.compute_coefficients(f, filterType, true);
+        double[] outCoeffs = fw.computeCoefficients(f, filterType, true);
         double[] resCoeffs = {0.00268693, 0.99462614, 0.00268693};
 
         Assertions.assertArrayEquals(resCoeffs, outCoeffs, 0.0001);
@@ -49,7 +49,7 @@ public class TestFirWin1 {
 
         double[] f = {0.1};
         String filterType = "lowpass";
-        double[] outCoeffs = fw.compute_coefficients(f, filterType, true);
+        double[] outCoeffs = fw.computeCoefficients(f, filterType, true);
         double[] resCoeffs = {0.5, 0.5};
 
         Assertions.assertArrayEquals(resCoeffs, outCoeffs, 0.0001);
@@ -64,7 +64,7 @@ public class TestFirWin1 {
         double[] cutoff = {10.0};
 
         FIRWin1 fw = new FIRWin1(rippleVal, width, samplingRate);
-        double[] outCoeffs = fw.compute_coefficients(cutoff, "lowpass", true);
+        double[] outCoeffs = fw.computeCoefficients(cutoff, "lowpass", true);
         double[] filteredX = fw.firfilter(outCoeffs, this.signal);
 
         double[] resFiltered = {-1.58405013e-04, -2.90811822e-04, -1.69777617e-04,  3.73634468e-04, 1.28292071e-03,
@@ -88,7 +88,7 @@ public class TestFirWin1 {
 
         double[] f = {0.1};
         String filterType = "highpass";
-        double[] outCoeffs = fw.compute_coefficients(f, filterType, true);
+        double[] outCoeffs = fw.computeCoefficients(f, filterType, true);
         double[] resCoeffs = {-2.99980692e-04,  9.99400039e-01, -2.99980692e-04};
 
         Assertions.assertArrayEquals(resCoeffs, outCoeffs, 0.0001);
@@ -101,7 +101,7 @@ public class TestFirWin1 {
 
         double[] f = {0.1};
         String filterType = "highpass";
-        double[] outCoeffs = fw.compute_coefficients(f, filterType, true);
+        double[] outCoeffs = fw.computeCoefficients(f, filterType, true);
         double[] resCoeffs = {-0.03832441, -0.08195481,  0.9127392,  -0.08195481, -0.03832441};
 
         Assertions.assertArrayEquals(resCoeffs, outCoeffs, 0.0001);
@@ -115,7 +115,7 @@ public class TestFirWin1 {
         double[] cutoff = {10.0};
 
         FIRWin1 fw = new FIRWin1(rippleVal, width, samplingRate);
-        double[] outCoeffs = fw.compute_coefficients(cutoff, "highpass", true);
+        double[] outCoeffs = fw.computeCoefficients(cutoff, "highpass", true);
         double[] filteredX = fw.firfilter(outCoeffs, this.signal);
 
         double[] resFiltered = {-4.61780200e-05, -5.79239141e-05,  1.10122479e-05,  1.60153990e-04, 3.32483420e-04,
@@ -138,7 +138,7 @@ public class TestFirWin1 {
 
         double[] f = {0.1, 0.2};
         String filterType = "bandpass";
-        double[] outCoeffs = fw.compute_coefficients(f, filterType, true);
+        double[] outCoeffs = fw.computeCoefficients(f, filterType, true);
         double[] resCoeffs = {0.00242647, 0.99567599, 0.00242647};
 
         Assertions.assertArrayEquals(resCoeffs, outCoeffs, 0.0001);
@@ -151,7 +151,7 @@ public class TestFirWin1 {
 
         double[] f = {0.1, 0.2};
         String filterType = "bandpass";
-        double[] outCoeffs = fw.compute_coefficients(f, filterType, true);
+        double[] outCoeffs = fw.computeCoefficients(f, filterType, true);
         double[] resCoeffs = {0.5142076, 0.5142076};
 
         Assertions.assertArrayEquals(resCoeffs, outCoeffs, 0.0001);
@@ -165,7 +165,7 @@ public class TestFirWin1 {
         double[] cutoff = {1.0, 10.0};
 
         FIRWin1 fw = new FIRWin1(rippleVal, width, samplingRate);
-        double[] outCoeffs = fw.compute_coefficients(cutoff, "bandpass", true);
+        double[] outCoeffs = fw.computeCoefficients(cutoff, "bandpass", true);
         double[] filteredX = fw.firfilter(outCoeffs, this.signal);
 
         double[] resFiltered = {-3.05136193e-04, -7.10252287e-04, -9.88189075e-04, -9.82162773e-04, -7.87521123e-04,
@@ -189,7 +189,7 @@ public class TestFirWin1 {
 
         double[] f = {0.1, 0.2};
         String filterType = "bandstop";
-        double[] outCoeffs = fw.compute_coefficients(f, filterType, true);
+        double[] outCoeffs = fw.computeCoefficients(f, filterType, true);
         double[] resCoeffs = {-2.70925670e-04,  1.00054185e+00, -2.70925670e-04};
 
         Assertions.assertArrayEquals(resCoeffs, outCoeffs, 0.0001);
@@ -202,7 +202,7 @@ public class TestFirWin1 {
 
         double[] f = {0.1, 0.2};
         String filterType = "bandstop";
-        double[] outCoeffs = fw.compute_coefficients(f, filterType, true);
+        double[] outCoeffs = fw.computeCoefficients(f, filterType, true);
         double[] resCoeffs = {-0.03301143, -0.10304144,  1.27210575, -0.10304144, -0.03301143};
 
         Assertions.assertArrayEquals(resCoeffs, outCoeffs, 0.0001);
@@ -216,7 +216,7 @@ public class TestFirWin1 {
         double[] cutoff = {1.0, 10.0};
 
         FIRWin1 fw = new FIRWin1(rippleVal, width, samplingRate);
-        double[] outCoeffs = fw.compute_coefficients(cutoff, "bandstop", true);
+        double[] outCoeffs = fw.computeCoefficients(cutoff, "bandstop", true);
         double[] filteredX = fw.firfilter(outCoeffs, this.signal);
 
         double[] resFiltered = {-8.84091500e-05, -1.66189536e-04, -1.78407554e-04, -1.21999377e-04, -5.88643835e-05,
@@ -241,7 +241,7 @@ public class TestFirWin1 {
         double[] cutoff = {1.0, 2.5, 7.5, 10.0};
 
         FIRWin1 fw = new FIRWin1(rippleVal, width, samplingRate);
-        double[] outCoeffs = fw.compute_coefficients(cutoff, "multibandpass", true);
+        double[] outCoeffs = fw.computeCoefficients(cutoff, "multibandpass", true);
         double[] filteredX = fw.firfilter(outCoeffs, this.signal);
 
         double[] resFiltered = {-4.05441421e-04, -1.01842704e-03, -1.72754421e-03, -2.66866946e-03, -4.45006204e-03,
@@ -265,7 +265,7 @@ public class TestFirWin1 {
         double[] cutoff = {1.0, 2.5, 7.5, 10.0};
 
         FIRWin1 fw = new FIRWin1(rippleVal, width, samplingRate);
-        double[] outCoeffs = fw.compute_coefficients(cutoff, "multibandstop", true);
+        double[] outCoeffs = fw.computeCoefficients(cutoff, "multibandstop", true);
         double[] filteredX = fw.firfilter(outCoeffs, this.signal);
 
         double[] resFiltered = {-2.36078255e-04, -5.39401619e-04, -7.95397069e-04, -9.43887084e-04, -1.01541209e-03,
