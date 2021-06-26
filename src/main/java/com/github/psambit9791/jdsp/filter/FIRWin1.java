@@ -50,8 +50,8 @@ public class FIRWin1 extends _FIRFilter {
         this.nyquistF = (int)(samplingFreq * 0.5);
         this.numTaps = numTaps;
         this.width = width/this.nyquistF;
-        this.kaiser_attenutation();
-        this.kaiser_beta();
+        this.kaiserAttenutation();
+        this.kaiserBeta();
     }
 
     /**
@@ -64,7 +64,7 @@ public class FIRWin1 extends _FIRFilter {
     public FIRWin1(double ripple, double width, int samplingFreq) {
         this.nyquistF = (int)(samplingFreq * 0.5);
         this.width = width/this.nyquistF;
-        this.kaiser_order(ripple, this.width);
+        this.kaiserOrder(ripple, this.width);
     }
 
     /**
@@ -77,8 +77,8 @@ public class FIRWin1 extends _FIRFilter {
         this.nyquistF = 1;
         this.numTaps = numTaps;
         this.width = width;
-        this.kaiser_attenutation();
-        this.kaiser_beta();
+        this.kaiserAttenutation();
+        this.kaiserBeta();
     }
 
     /**
@@ -91,13 +91,13 @@ public class FIRWin1 extends _FIRFilter {
     public FIRWin1(double ripple, double width) {
         this.nyquistF = 1;
         this.width = width;
-        this.kaiser_order(ripple, this.width);
+        this.kaiserOrder(ripple, this.width);
     }
 
     /**
      * Computes the beta parameter for the Kaiser window given the attenuation
      */
-    private void kaiser_beta() {
+    private void kaiserBeta() {
         if (this.attenuation > 50) {
             this.beta = 0.1102 * (this.attenuation - 8.7);
         }
@@ -112,7 +112,7 @@ public class FIRWin1 extends _FIRFilter {
     /**
      * Computes the attenuation factor of a Kaiser FIR filter
      */
-    private void kaiser_attenutation() {
+    private void kaiserAttenutation() {
         this.attenuation = 2.285 * (this.numTaps - 1) * Math.PI * (float)(this.width) + 7.95;
     }
 
@@ -121,13 +121,13 @@ public class FIRWin1 extends _FIRFilter {
      * @param ripple Upper bound for the deviation (in dB) of the magnitude of the filter's frequency response from that of the desired filter
      * @param width Width of the transition region expressed as a fraction of the Nyquist Frequency
      */
-    public void kaiser_order(double ripple, double width) {
+    public void kaiserOrder(double ripple, double width) {
         this.attenuation = Math.abs(ripple);
         if (this.attenuation < 8) {
             throw new IllegalArgumentException("Maximum ripple attenuation too small for Kaiser function");
         }
         this.width = width;
-        this.kaiser_beta();
+        this.kaiserBeta();
         this.numTaps = (int) Math.ceil((((this.attenuation - 7.95) / 2.285) / (Math.PI * this.width)) + 1);
     }
 
