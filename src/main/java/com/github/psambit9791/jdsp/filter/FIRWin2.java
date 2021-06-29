@@ -46,11 +46,10 @@ import java.util.Set;
  */
 public class FIRWin2 extends _FIRFilter {
 
-    private int nyquistF;
+    private double nyquistF;
     private int numTaps;
     private boolean antisymmetric;
     private int ftype;
-    private int nfreqs;
 
     /**
      * FIRWin2 constructor for generating a filter using the number of coefficients in the filter
@@ -58,8 +57,8 @@ public class FIRWin2 extends _FIRFilter {
      * @param samplingFreq Sampling frequency of the signal
      * @param antisymmetric Whether resulting impulse response is symmetric/antisymmetric
      */
-    public FIRWin2(int numTaps, int samplingFreq, boolean antisymmetric) {
-        this.nyquistF = (int)(samplingFreq * 0.5);
+    public FIRWin2(int numTaps, double samplingFreq, boolean antisymmetric) {
+        this.nyquistF = (samplingFreq * 0.5);
         this.numTaps = numTaps;
         this.antisymmetric = antisymmetric;
 
@@ -88,7 +87,7 @@ public class FIRWin2 extends _FIRFilter {
      * @param antisymmetric Whether resulting impulse response is symmetric/antisymmetric
      */
     public FIRWin2(int numTaps, boolean antisymmetric) {
-        this.nyquistF = 1;
+        this.nyquistF = 1.0;
         this.numTaps = numTaps;
         this.antisymmetric = antisymmetric;
 
@@ -116,8 +115,8 @@ public class FIRWin2 extends _FIRFilter {
      * @param numTaps Number of coefficients in the filter
      * @param samplingFreq Sampling frequency of the signal
      */
-    public FIRWin2(int numTaps, int samplingFreq) {
-        this.nyquistF = (int)(samplingFreq * 0.5);
+    public FIRWin2(int numTaps, double samplingFreq) {
+        this.nyquistF = samplingFreq * 0.5;
         this.numTaps = numTaps;
         this.antisymmetric = false;
 
@@ -135,7 +134,7 @@ public class FIRWin2 extends _FIRFilter {
      * @param numTaps Number of coefficients in the filter
      */
     public FIRWin2(int numTaps) {
-        this.nyquistF = 1;
+        this.nyquistF = 1.0;
         this.numTaps = numTaps;
         this.antisymmetric = false;
 
@@ -184,10 +183,10 @@ public class FIRWin2 extends _FIRFilter {
 
         int base = 2;
         int log_val = (int)(Math.ceil(UtilMethods.log(numTaps, base)));
-        this.nfreqs = (int)(UtilMethods.antilog(log_val, base) + 1);
+        int nfreqs = (int) (UtilMethods.antilog(log_val, base) + 1);
 
 
-        double[] x = UtilMethods.linspace(0.0, (double)(this.nyquistF), this.nfreqs, true);
+        double[] x = UtilMethods.linspace(0.0, (double)(this.nyquistF), nfreqs, true);
         double[] fx = UtilMethods.interpolate(x, cutoff, gain);
 
         //// FILL IN CODE FOR SHIFTING COEFFICIENTS

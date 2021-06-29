@@ -11,6 +11,9 @@
 package com.github.psambit9791.jdsp.signal;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
+import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.util.MathArrays;
+
 import java.util.Arrays;
 
 /**
@@ -180,5 +183,71 @@ public class Generate {
         }
 
         return sawtooth;
+    }
+
+    /**
+     * Returns a Ricker wavelet, also known as the "Mexican hat wavelet"
+     * @param points Number of points in the wavelet
+     * @param width Width parameter
+     * @return double[] Array of points in the shape of a ricker curve
+     */
+    public double[] generateRicker(int points, double width) {
+        double A = 2.0 / ((Math.sqrt(3*width)) * (Math.pow(Math.PI, 0.25)));
+
+        double wsq = Math.pow(width, 2.0);
+        double[] vec = UtilMethods.arange(0, points, 1.0);
+        vec = UtilMethods.scalarArithmetic(vec, (points - 1)/2.0, "sub");
+        vec = UtilMethods.scalarArithmetic(vec, 2, "pow");
+
+        double[] mod = UtilMethods.scalarArithmetic(vec, wsq, "div");
+        mod = UtilMethods.scalarArithmetic(mod, 1.0, "reverse_sub");
+
+        double[] gauss = UtilMethods.scalarArithmetic(vec, 2*wsq, "div");
+
+        for (int i=0; i<gauss.length; i++) {
+            gauss[i] = Math.exp(0 - gauss[i]);
+        }
+
+        double[] out = MathArrays.ebeMultiply(mod, gauss);
+        return UtilMethods.scalarArithmetic(out, A, "mul");
+    }
+
+    /**
+     * Returns a Complex Morlet Wavelet
+     * @param points Length of the wavelet
+     * @param omega0 Central frequency
+     * @param scale Scaling factor
+     * @return Complex[] The
+     */
+    public Complex[] generateMorletComplex(int points, double omega0, double scale) {
+        double[] x = UtilMethods.linspace(-scale*2*Math.PI, 2*scale*Math.PI, points, true);
+        Complex[] output = new Complex[points];
+        Complex temp1;
+        Complex temp2;
+        for (int i=0; i<points; i++) {
+            temp1 = new Complex(0, omega0*x[i]);
+            temp1 = temp1.exp();
+
+            temp2 = new Complex(-0.5*Math.pow(omega0, 2), 0);
+            temp2 = temp2.exp();
+
+            temp1 = temp1.subtract(temp2);
+            temp1 = temp1.multiply(Math.exp(-0.5 * Math.pow(x[i], 2)) * Math.pow(Math.PI, -0.25));
+
+            output[i] = temp1;
+        }
+        return output;
+    }
+
+    /**
+     * Returns a Complex Morlet Wavelet
+     * @param points Length of the wavelet
+     * @param omega0 Central frequency
+     * @param scale Scaling Factor
+     * @return double[][] Complex array as a 2D vector. Dimension 1: Length, Dimension 2: Real part, Complex part
+     */
+    public double[][] generateMorlet(int points, double omega0, double scale) {
+        Complex[] temp = this.generateMorletComplex(points, omega0, scale);
+        return UtilMethods.complexTo2D(temp);
     }
 }

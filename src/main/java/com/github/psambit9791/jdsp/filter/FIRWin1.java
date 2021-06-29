@@ -38,7 +38,7 @@ public class FIRWin1 extends _FIRFilter {
     private double beta;
     private int numTaps;
     private double width;
-    private int nyquistF;
+    private double nyquistF;
 
     /**
      * FIRWin1 constructor for generating a filter using the number of coefficients in the filter
@@ -46,8 +46,8 @@ public class FIRWin1 extends _FIRFilter {
      * @param width Width of the Kaiser window to be used
      * @param samplingFreq Sampling frequency of the signal
      */
-    public FIRWin1(int numTaps, double width, int samplingFreq) {
-        this.nyquistF = (int)(samplingFreq * 0.5);
+    public FIRWin1(int numTaps, double width, double samplingFreq) {
+        this.nyquistF = samplingFreq * 0.5;
         this.numTaps = numTaps;
         this.width = width/this.nyquistF;
         this.kaiserAttenutation();
@@ -61,8 +61,8 @@ public class FIRWin1 extends _FIRFilter {
      * @param width Width of the Kaiser window to be used
      * @param samplingFreq Sampling frequency of the signal
      */
-    public FIRWin1(double ripple, double width, int samplingFreq) {
-        this.nyquistF = (int)(samplingFreq * 0.5);
+    public FIRWin1(double ripple, double width, double samplingFreq) {
+        this.nyquistF = samplingFreq * 0.5;
         this.width = width/this.nyquistF;
         this.kaiserOrder(ripple, this.width);
     }
@@ -74,7 +74,7 @@ public class FIRWin1 extends _FIRFilter {
      * @param width Width of the Kaiser window to be used
      */
     public FIRWin1(int numTaps, double width) {
-        this.nyquistF = 1;
+        this.nyquistF = 1.0;
         this.numTaps = numTaps;
         this.width = width;
         this.kaiserAttenutation();
@@ -89,7 +89,7 @@ public class FIRWin1 extends _FIRFilter {
      * @param width Width of the Kaiser window to be used
      */
     public FIRWin1(double ripple, double width) {
-        this.nyquistF = 1;
+        this.nyquistF = 1.0;
         this.width = width;
         this.kaiserOrder(ripple, this.width);
     }

@@ -59,7 +59,7 @@ public class TestFirWin1 {
     @Test
     public void lowPassFilter1() {
         double width = 5;
-        int samplingRate = 100;
+        double samplingRate = 100;
         double rippleVal = 60.0;
         double[] cutoff = {10.0};
 
@@ -84,7 +84,7 @@ public class TestFirWin1 {
     @Test
     public void lowPassFilter2() {
         double width = 5;
-        int samplingRate = 100;
+        double samplingRate = 100;
         int taps = 5;
         double[] cutoff = {10.0};
 
@@ -136,7 +136,7 @@ public class TestFirWin1 {
     @Test
     public void highPassFilter1() {
         double width = 2;
-        int samplingRate = 100;
+        double samplingRate = 100;
         double rippleVal = 60.0;
         double[] cutoff = {10.0};
 
@@ -160,7 +160,7 @@ public class TestFirWin1 {
     @Test
     public void highPassFilter2() {
         double width = 5;
-        int samplingRate = 100;
+        double samplingRate = 100;
         int taps = 5;
         double[] cutoff = {10.0};
 
@@ -214,7 +214,7 @@ public class TestFirWin1 {
     @Test
     public void bandPassFilter1() {
         double width = 5;
-        int samplingRate = 100;
+        double samplingRate = 100;
         double rippleVal = 60.0;
         double[] cutoff = {1.0, 10.0};
 
@@ -239,7 +239,7 @@ public class TestFirWin1 {
     @Test
     public void bandPassFilter2() {
         double width = 5;
-        int samplingRate = 100;
+        double samplingRate = 100;
         int taps = 5;
         double[] cutoff = {1.0, 10.0};
 
@@ -291,7 +291,7 @@ public class TestFirWin1 {
     @Test
     public void bandStopFilter1() {
         double width = 2;
-        int samplingRate = 100;
+        double samplingRate = 100;
         double rippleVal = 60.0;
         double[] cutoff = {1.0, 10.0};
 
@@ -316,7 +316,7 @@ public class TestFirWin1 {
     @Test
     public void bandStopFilter2() {
         double width = 2;
-        int samplingRate = 100;
+        double samplingRate = 100;
         int taps = 5;
         double[] cutoff = {1.0, 10.0};
 
@@ -342,7 +342,7 @@ public class TestFirWin1 {
     @Test
     public void multiBandPassTest1() {
         double width = 5;
-        int samplingRate = 100;
+        double samplingRate = 100;
         double rippleVal = 60.0;
         double[] cutoff = {1.0, 2.5, 7.5, 10.0};
 
@@ -366,7 +366,7 @@ public class TestFirWin1 {
     @Test
     public void multiBandPassTest2() {
         double width = 5;
-        int samplingRate = 100;
+        double samplingRate = 100;
         int taps = 5;
         double[] cutoff = {1.0, 2.5, 7.5, 10.0};
 
@@ -391,7 +391,7 @@ public class TestFirWin1 {
     @Test
     public void multiBandStopTest() {
         double width = 2;
-        int samplingRate = 100;
+        double samplingRate = 100;
         double rippleVal = 60.0;
         double[] cutoff = {1.0, 2.5, 7.5, 10.0};
 
@@ -415,7 +415,7 @@ public class TestFirWin1 {
     @Test
     public void multiBandStopTest2() {
         double width = 5;
-        int samplingRate = 100;
+        double samplingRate = 100;
         int taps = 5;
         double[] cutoff = {1.0, 2.5, 7.5, 10.0};
 

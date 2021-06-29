@@ -13,6 +13,8 @@
 package com.github.psambit9791.jdsp.filter;
 
 
+import java.util.Arrays;
+
 /**
  * <h1>Finite Impulse Response Filter Class using Least Squares Minimization</h1>
  * The FIRLS Filter class is used to compute the best coefficients of the linear phase FIR filter using least squares minimization
@@ -23,5 +25,29 @@ package com.github.psambit9791.jdsp.filter;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class FIRLS {
+public class FIRLS extends _FIRFilter {
+
+    private double nyquistF;
+    private int numTaps;
+
+    public FIRLS(int numTaps, double samplingFreq) {
+        this.numTaps = numTaps;
+        this.nyquistF = samplingFreq * 0.5;
+    }
+
+    public FIRLS(int numTaps) {
+        this.numTaps = numTaps;
+        this.nyquistF = 1.0;
+    }
+
+    public double[] computeCoefficients(double[] cutoff, double[] gains, double[] weights) {
+        double[] out = new double[22];
+        return out;
+    }
+
+    public double[] computeCoefficients(double[] cutoff, double[] gains) {
+        double[] weights = new double[cutoff.length];
+        Arrays.fill(weights, 1.0);
+        return this.computeCoefficients(cutoff, gains, weights);
+    }
 }

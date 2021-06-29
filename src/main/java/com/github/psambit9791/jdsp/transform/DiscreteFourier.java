@@ -22,7 +22,7 @@ import org.apache.commons.math3.complex.Complex;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.1
+ * @version 1.2
  */
 public class DiscreteFourier {
 
@@ -112,6 +112,34 @@ public class DiscreteFourier {
             for (int i=0; i<dftout.length; i++) {
                 dftout[i][0] = this.output[i].getReal();
                 dftout[i][1] = this.output[i].getImaginary();
+            }
+        }
+        return dftout;
+    }
+
+    /**
+     * Returns the complex value of the discrete fourier transformed sequence
+     * @param onlyPositive Set to True if non-mirrored output is required
+     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
+     * @return Complex[] The complex DFT output
+     */
+    public Complex[] returnComplex(boolean onlyPositive) throws ExceptionInInitializerError {
+        if (this.output == null) {
+            throw new ExceptionInInitializerError("Execute dft() function before returning result");
+        }
+        Complex[] dftout;
+
+        if (onlyPositive) {
+            int numBins = this.output.length/2+1;
+            dftout = new Complex[numBins];
+            for (int i=0; i<dftout.length; i++) {
+                dftout[i] = this.output[i];
+            }
+        }
+        else{
+            dftout = new Complex[this.output.length];
+            for (int i=0; i<dftout.length; i++) {
+                dftout[i] = this.output[i];
             }
         }
         return dftout;
