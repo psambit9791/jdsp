@@ -35,7 +35,7 @@ implementation 'com.github.psambit9791:jdsp:0.6.0'
 
 <br/>
 
-For the latest development version of JDSP (unreleased):
+For the latest development version of JDSP (nightly build):
 
 ### Github
 ```  
@@ -69,7 +69,7 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Smooth.html">com.github.psambit9791.jdsp.signal.Smooth</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Smooth"><strong>Signal</strong> Operation</a> | Implements convolutional smoothing with rectangular and triangular window |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Decimate.html">com.github.psambit9791.jdsp.signal.Decimate</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Decimate"><strong>Signal</strong> Operation</a> | Implements the decimation operation to downsample a signal after applying an anti-aliasing filter |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Resample.html">com.github.psambit9791.jdsp.signal.Resample</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Resample"><strong>Signal</strong> Operation</a> | Implements the resampling operation to change the number of samples in a signal using Fourier method |
-| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Generate.html">com.github.psambit9791.jdsp.signal.Generate</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Generate"><strong>Signal</strong> Operation</a> | Helps to generate sin, cosine and square waves |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/Generate.html">com.github.psambit9791.jdsp.signal.Generate</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Generate"><strong>Signal</strong> Operation</a> | Helps to generate different waves and wavelets |
 ||||
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/peaks/FindPeak.html">com.github.psambit9791.jdsp.signal.peaks.FindPeak</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Peak-&-Trough-Detection-and-Filtering"><strong>Peak</strong> Detection</a> | Identifies peaks in the signal |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/signal/peaks/Peak.html">com.github.psambit9791.jdsp.signal.peaks.Peak</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Peak-&-Trough-Detection-and-Filtering"><strong>Peak</strong> Detection</a> | Calculates peak properties and allows filtering with them |

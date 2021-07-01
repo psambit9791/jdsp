@@ -167,6 +167,12 @@ public class FIRWin2 extends _FIRFilter {
             throw new IllegalArgumentException("Cutoff frequencies must be non-decreasing");
         }
 
+        for (double v : cutoff) {
+            if (v < 0) {
+                throw new IllegalArgumentException("Cutoff frequencies cannot be negative");
+            }
+        }
+
         Double[] arr = new Double[cutoff.length];
         for (int i=0; i<cutoff.length; i++) {
             arr[i] = cutoff[i];
@@ -189,7 +195,7 @@ public class FIRWin2 extends _FIRFilter {
         double[] x = UtilMethods.linspace(0.0, (double)(this.nyquistF), nfreqs, true);
         double[] fx = UtilMethods.interpolate(x, cutoff, gain);
 
-        //// FILL IN CODE FOR SHIFTING COEFFICIENTS
+        //// CODE FOR SHIFTING COEFFICIENTS
         Complex shift_const = new Complex(0.0, -(((this.numTaps - 1) / 2.0) * Math.PI) / this.nyquistF);
         Complex factor = new Complex(0, 1);
         Complex[] fx2 = new Complex[fx.length];
@@ -203,7 +209,7 @@ public class FIRWin2 extends _FIRFilter {
             fx2[i] = shift.multiply(fx[i]);
         }
 
-        //// FILL IN CODE FOR IFFT
+        //// CODE FOR IFFT
 
         // Convert from Complex array to 2D double array
         double[][] fx2D = UtilMethods.complexTo2D(fx2);
