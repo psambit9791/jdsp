@@ -14,7 +14,11 @@ package com.github.psambit9791.jdsp.filter;
 
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
+import org.apache.commons.math3.linear.DefaultRealMatrixChangingVisitor;
+import org.apache.commons.math3.linear.MatrixUtils;
+import org.apache.commons.math3.linear.RealMatrix;
 
+import javax.rmi.CORBA.Util;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,7 +39,7 @@ public class FIRLS extends _FIRFilter {
     private int numTaps;
 
     public FIRLS(int numTaps, double samplingFreq) {
-        if (numTaps % 2 == 1 || numTaps < 1) {
+        if (numTaps % 2 == 0 || numTaps < 1) {
             throw new IllegalArgumentException("numTaps must be odd and greater than 0");
         }
         this.numTaps = numTaps;
@@ -43,7 +47,7 @@ public class FIRLS extends _FIRFilter {
     }
 
     public FIRLS(int numTaps) {
-        if (numTaps % 2 == 1 || numTaps < 1) {
+        if (numTaps % 2 == 0 || numTaps < 1) {
             throw new IllegalArgumentException("numTaps must be odd and greater than 0");
         }
         this.numTaps = numTaps;
@@ -53,7 +57,6 @@ public class FIRLS extends _FIRFilter {
     public double[] computeCoefficients(double[] cutoff, double[] gains, double[] weights) {
 
         // Constraint testing for arrays
-
         if (cutoff.length % 2 == 1) {
             throw new IllegalArgumentException("Cutoff must contain frequency pairs");
         }
@@ -94,7 +97,114 @@ public class FIRLS extends _FIRFilter {
             throw new IllegalArgumentException("Cutoff must start with 0 and end with the Nyquist frequency");
         }
 
-        // Constraints set
+        int semi_cutoff = cutoff.length/2;
+
+        // Reshape vectors
+        RealMatrix bands = MatrixUtils.createRealMatrix(semi_cutoff, 2);
+        RealMatrix desired = MatrixUtils.createRealMatrix(semi_cutoff, 2);
+        RealMatrix w = MatrixUtils.createRealMatrix(semi_cutoff, 1);
+
+        int index_cutoff = 0;
+        int index_gains = 0;
+        for (int i=0; i<semi_cutoff; i++) {
+            bands.addToEntry(i, 0, cutoff[index_cutoff++]);
+            bands.addToEntry(i, 1, cutoff[index_cutoff++]);
+
+            desired.addToEntry(i, 0, gains[index_gains++]);
+            desired.addToEntry(i, 1, gains[index_gains++]);
+
+            w.addToEntry(i, 0, weights[i]);
+        }
+
+        bands = bands.scalarMultiply(1/this.nyquistF);
+
+        // Generate the Q matrix
+        double[] n = UtilMethods.arange(0.0, (double)this.numTaps, 1.0);
+        RealMatrix[] holder = new RealMatrix[this.numTaps];
+        RealMatrix q = MatrixUtils.createRealMatrix(this.numTaps, semi_cutoff);
+        RealMatrix qout = MatrixUtils.createRealMatrix(this.numTaps, 1);
+
+        for (int i=0; i<this.numTaps; i++) {
+            holder[i] = bands.scalarMultiply(n[i]);
+            holder[i].walkInOptimizedOrder(new DefaultRealMatrixChangingVisitor() {
+                @Override
+                public double visit(int row, int column, double value) {
+                    return UtilMethods.sinc(value);
+                }
+            });
+
+            holder[i] = UtilMethods.ebeMultiply(holder[i], bands);
+
+            for (int row=0; row<semi_cutoff; row++) {
+                q.setEntry(i, row, holder[i].getEntry(row, 1) - holder[i].getEntry(row, 0));
+            }
+            qout = q.multiply(w);
+        }
+
+        double[] q_double = new double[qout.getRowDimension()];
+        for (int i=0; i<q_double.length; i++) {
+            q_double[i] = qout.getEntry(i, 0);
+        }
+
+        int M = (this.numTaps - 1)/2;
+
+        double[] temp1 = UtilMethods.splitByIndex(q_double, 0, M+1);
+        double[] temp2 = UtilMethods.splitByIndex(q_double, M, q_double.length);
+
+        RealMatrix Q1 = MatrixUtils.createRealMatrix(UtilMethods.toeplitz(temp1));
+        RealMatrix Q2 = MatrixUtils.createRealMatrix(UtilMethods.hankel(temp1, temp2));
+
+        RealMatrix Q = Q1.add(Q2);
+
+        // Calculate b vector
+        RealMatrix bands_diff = MatrixUtils.createRealMatrix(semi_cutoff, 1);
+        for (int i=0; i<semi_cutoff; i++) {
+            bands_diff.setEntry(i, 0, bands.getEntry(i, 1) - bands.getEntry(i, 0));
+        }
+        RealMatrix desired_diff = MatrixUtils.createRealMatrix(semi_cutoff, 1);
+        for (int i=0; i<semi_cutoff; i++) {
+            desired_diff.setEntry(i, 0, desired.getEntry(i, 1) - desired.getEntry(i, 0));
+        }
+
+        n = UtilMethods.splitByIndex(n,0, M+1);
+        int short_n = n.length;
+
+        RealMatrix m = UtilMethods.ebeDivide(desired_diff, bands_diff);
+        RealMatrix band0 = bands.getSubMatrix(0, bands.getRowDimension()-1, 0, 0);
+        RealMatrix desired0 = desired.getSubMatrix(0, desired.getRowDimension()-1, 0, 0);
+
+        RealMatrix c = desired0.subtract(UtilMethods.ebeMultiply(band0, m));
+
+        holder = new RealMatrix[short_n];
+        for (int i=0; i<short_n; i++) {
+            holder[i] = bands.scalarMultiply(n[i]);
+            holder[i].walkInOptimizedOrder(new DefaultRealMatrixChangingVisitor() {
+                @Override
+                public double visit(int row, int column, double value) {
+                    return UtilMethods.sinc(value);
+                }
+            });
+
+            holder[i] = UtilMethods.ebeMultiply(holder[i], bands);
+
+            for (int row=0; row<semi_cutoff; row++) {
+                q.setEntry(i, row, holder[i].getEntry(row, 1) - holder[i].getEntry(row, 0));
+            }
+            qout = q.multiply(w);
+        }
+
+
+//        double[][] tempholder = c.getData();
+//        for (int i=0; i<tempholder.length; i++) {
+//            for (int j=0; j<tempholder[0].length; j++) {
+//                System.out.print(tempholder[i][j] + ", ");
+//            }
+//            System.out.println();
+//        }
+
+        // Solve for Q and b to get a
+
+        // Process a and return coefficients
 
         double[] out = new double[22];
         return out;

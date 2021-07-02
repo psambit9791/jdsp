@@ -546,6 +546,17 @@ public class TestUtils {
     }
 
     @Test
+    public void hankel2Test() {
+        double[] c = {1, 2, 3, 4};
+        double[] r = {4, 7, 7, 8, 9};
+        double[][] output = UtilMethods.hankel(c, r);
+        double[][] result = {{1, 2, 3, 4, 7}, {2, 3, 4, 7, 7}, {3, 4, 7, 7, 8}, {4, 7, 7, 8, 9}};
+        for (int i=0; i<result.length; i++) {
+            Assertions.assertArrayEquals(result[i], output[i], 0.0001);
+        }
+    }
+
+    @Test
     public void logTest() {
         int base = 2;
         int input_val = 256;

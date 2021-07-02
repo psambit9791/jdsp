@@ -1177,18 +1177,42 @@ public class UtilMethods {
 
     /**
      * Constructs a Hankel matrix from the input vector and returns it
-     * @param x First column of the matrix
+     * @param c First column of the matrix
      * @return double[][] The square Hankel matrix
      */
-    public static double[][] hankel(double[] x) {
-        double[][] matrix = new double[x.length][x.length];
+    public static double[][] hankel(double[] c) {
+        double[][] matrix = new double[c.length][c.length];
         for (double[] row: matrix)
             Arrays.fill(row, 0.0);
 
-        for (int i=0; i<x.length; i++) {
+        for (int i=0; i<c.length; i++) {
             int index = i;
-            for (int j=0; j<x.length-i; j++) {
-                matrix[i][j] = x[index++];
+            for (int j=0; j<c.length-i; j++) {
+                matrix[i][j] = c[index++];
+            }
+        }
+        return matrix;
+    }
+
+    /**
+     * Constructs a Hankel matrix from the input vector and returns it
+     * @param c First column of the matrix
+     * @param r Last row of the matrix
+     * @return double[][] The Hankel matrix with dimensions (r.length x c.length)
+     */
+    public static double[][] hankel(double[] c, double[] r) {
+        double[][] matrix = new double[c.length][r.length];
+        if (c[c.length-1] != r[0]) {
+            throw new IllegalArgumentException("Last element of c and First element of x must be same");
+        }
+
+        double[] temp_r = UtilMethods.splitByIndex(r, 1, r.length);
+        double[] vals = UtilMethods.concatenateArray(c, temp_r);
+
+        for (int i=0; i<c.length; i++) {
+            int index = i;
+            for (int j=0; j<r.length; j++) {
+                matrix[i][j] = vals[index++];
             }
         }
         return matrix;
@@ -1232,7 +1256,7 @@ public class UtilMethods {
      * Compute the antilog of the input number for a specific base
      * @param x Input number
      * @param base Base value
-     * @return Antilog of the input number with specific base
+     * @return double Antilog of the input number with specific base
      */
     public static double antilog(int x, int base) {
         return Math.pow(base, x);
@@ -1242,9 +1266,70 @@ public class UtilMethods {
      * Compute the antilog of the input number for a specific base
      * @param x Input number
      * @param base Base value
-     * @return Antilog of the input number with specific base
+     * @return double Antilog of the input number with specific base
      */
     public static double antilog(double x, int base) {
         return Math.pow(base, x);
+    }
+
+    /**
+     * Element by Element multiplication of 2 RealMatrix of same shape
+     * @param m1 Matrix 1
+     * @param m2 Matrix 2
+     * @return RealMatrix ebeMutliplication of the 2 matrices
+     */
+    public static RealMatrix ebeMultiply(RealMatrix m1, RealMatrix m2) {
+        int rowDim = m1.getRowDimension();
+        int colDim = m1.getColumnDimension();
+        if (rowDim != m2.getRowDimension() || colDim != m2.getColumnDimension()) {
+            throw new IllegalArgumentException("Dimensions of m1 and m2 matrices must be the same");
+        }
+
+        RealMatrix out = MatrixUtils.createRealMatrix(rowDim, colDim);
+        for (int i=0; i<rowDim; i++) {
+            for (int j=0; j<colDim; j++) {
+                out.setEntry(i, j, m1.getEntry(i, j) * m2.getEntry(i, j));
+            }
+        }
+        return out;
+    }
+
+    /**
+     * Element by Element division of 2 RealMatrix of same shape
+     * @param m1 Matrix 1
+     * @param m2 Matrix 2
+     * @return RealMatrix ebeDivision of the 2 matrices (m1/m2)
+     */
+    public static RealMatrix ebeDivide(RealMatrix m1, RealMatrix m2) {
+        int rowDim = m1.getRowDimension();
+        int colDim = m1.getColumnDimension();
+        if (rowDim != m2.getRowDimension() || colDim != m2.getColumnDimension()) {
+            throw new IllegalArgumentException("Dimensions of m1 and m2 matrices must be the same");
+        }
+
+        RealMatrix out = MatrixUtils.createRealMatrix(rowDim, colDim);
+        for (int i=0; i<rowDim; i++) {
+            for (int j=0; j<colDim; j++) {
+                out.setEntry(i, j, m1.getEntry(i, j) / m2.getEntry(i, j));
+            }
+        }
+        return out;
+    }
+
+    /**
+     * Element by Element inversion (x -> 1/x) of a RealMatrix
+     * @param m1 Matrix to be inverted
+     * @return RealMatrix the inverted matrix
+     */
+    public static RealMatrix ebeInvert(RealMatrix m1) {
+        int rowDim = m1.getRowDimension();
+        int colDim = m1.getColumnDimension();
+        RealMatrix out = MatrixUtils.createRealMatrix(rowDim, colDim);
+        for (int i=0; i<rowDim; i++) {
+            for (int j=0; j<colDim; j++) {
+                out.setEntry(i, j, 1/m1.getEntry(i, j));
+            }
+        }
+        return out;
     }
 }
