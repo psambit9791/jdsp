@@ -11,6 +11,8 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
+import org.apache.commons.math3.linear.MatrixUtils;
+import org.apache.commons.math3.linear.RealMatrix;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -584,5 +586,101 @@ public class TestUtils {
         result = 122;
         out = UtilMethods.antilog(input_val_2, base);
         Assertions.assertEquals(result, out, 0.0001);
+    }
+
+    @Test
+    public void ebeMultiplyTest() {
+        double[][] m1 = {{1.0, 2.0}, {2.0, 0.5}, {3.0, 4.0}};
+        double[][] m2 = {{1.0, 2.0}, {2.0, 0.5}, {3.0, 4.0}};
+        double[][] m2_row = {{0.5, 1.0}};
+        double[][] m2_col = {{0.5}, {1.0}, {2.0}};
+        double[][] res = {{1.0, 4.0}, {4.0, 0.25}, {9.0, 16.0}};
+        double[][] res_row = {{0.5, 2.0}, {1.0, 0.5}, {1.5, 4.0}};
+        double[][] res_col = {{0.5, 1.0}, {2.0, 0.5}, {6.0, 8.0}};
+
+        RealMatrix out = UtilMethods.ebeMultiply(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2));
+        for (int i=0; i<res.length; i++) {
+            Assertions.assertArrayEquals(res[i], out.getData()[i], 0.001);
+        }
+        RealMatrix out_row = UtilMethods.ebeMultiply(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2_row), "row");
+        for (int i=0; i<res_row.length; i++) {
+            Assertions.assertArrayEquals(res_row[i], out_row.getData()[i], 0.001);
+        }
+        RealMatrix out_col = UtilMethods.ebeMultiply(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2_col), "column");
+        for (int i=0; i<res_col.length; i++) {
+            Assertions.assertArrayEquals(res_col[i], out_col.getData()[i], 0.001);
+        }
+    }
+
+    @Test
+    public void ebeDivideTest() {
+        double[][] m1 = {{1.0, 2.0}, {2.0, 0.5}, {3.0, 4.0}};
+        double[][] m2 = {{1.0, 2.0}, {2.0, 0.5}, {3.0, 4.0}};
+        double[][] m2_row = {{0.5, 1.0}};
+        double[][] m2_col = {{0.5}, {1.0}, {2.0}};
+        double[][] res = {{1.0, 1.0}, {1.0, 1.0}, {1.0, 1.0}};
+        double[][] res_row = {{2.0, 2.0}, {4.0, 0.5}, {6.0, 4.0}};
+        double[][] res_col = {{2.0, 4.0}, {2.0, 0.5}, {1.5, 2.0}};
+
+        RealMatrix out = UtilMethods.ebeDivide(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2));
+        for (int i=0; i<res.length; i++) {
+            Assertions.assertArrayEquals(res[i], out.getData()[i], 0.001);
+        }
+        RealMatrix out_row = UtilMethods.ebeDivide(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2_row), "row");
+        for (int i=0; i<res_row.length; i++) {
+            Assertions.assertArrayEquals(res_row[i], out_row.getData()[i], 0.001);
+        }
+        RealMatrix out_col = UtilMethods.ebeDivide(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2_col), "column");
+        for (int i=0; i<res_col.length; i++) {
+            Assertions.assertArrayEquals(res_col[i], out_col.getData()[i], 0.001);
+        }
+    }
+
+    @Test
+    public void ebeAdditionTest() {
+        double[][] m1 = {{1.0, 2.0}, {2.0, 0.5}, {3.0, 4.0}};
+        double[][] m2 = {{1.0, 2.0}, {2.0, 0.5}, {3.0, 4.0}};
+        double[][] m2_row = {{0.5, 1.0}};
+        double[][] m2_col = {{0.5}, {1.0}, {2.0}};
+        double[][] res = {{2.0, 4.0}, {4.0, 1.0}, {6.0, 8.0}};
+        double[][] res_row = {{1.5, 3.0}, {2.5, 1.5}, {3.5, 5.0}};
+        double[][] res_col = {{1.5, 2.5}, {3.0, 1.5}, {5.0, 6.0}};
+
+        RealMatrix out = UtilMethods.ebeAdd(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2));
+        for (int i=0; i<res.length; i++) {
+            Assertions.assertArrayEquals(res[i], out.getData()[i], 0.001);
+        }
+        RealMatrix out_row = UtilMethods.ebeAdd(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2_row), "row");
+        for (int i=0; i<res_row.length; i++) {
+            Assertions.assertArrayEquals(res_row[i], out_row.getData()[i], 0.001);
+        }
+        RealMatrix out_col = UtilMethods.ebeAdd(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2_col), "column");
+        for (int i=0; i<res_col.length; i++) {
+            Assertions.assertArrayEquals(res_col[i], out_col.getData()[i], 0.001);
+        }
+    }
+
+    @Test
+    public void ebeSubtractTest() {
+        double[][] m1 = {{1.0, 2.0}, {2.0, 0.5}, {3.0, 4.0}};
+        double[][] m2 = {{1.0, 2.0}, {2.0, 0.5}, {3.0, 4.0}};
+        double[][] m2_row = {{0.5, 1.0}};
+        double[][] m2_col = {{0.5}, {1.0}, {2.0}};
+        double[][] res = {{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
+        double[][] res_row = {{0.5, 1.0}, {1.5, -0.5}, {2.5, 3.0}};
+        double[][] res_col = {{0.5, 1.5}, {1.0, -0.5}, {1.0, 2.0}};
+
+        RealMatrix out = UtilMethods.ebeSubtract(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2));
+        for (int i=0; i<res.length; i++) {
+            Assertions.assertArrayEquals(res[i], out.getData()[i], 0.001);
+        }
+        RealMatrix out_row = UtilMethods.ebeSubtract(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2_row), "row");
+        for (int i=0; i<res_row.length; i++) {
+            Assertions.assertArrayEquals(res_row[i], out_row.getData()[i], 0.001);
+        }
+        RealMatrix out_col = UtilMethods.ebeSubtract(MatrixUtils.createRealMatrix(m1), MatrixUtils.createRealMatrix(m2_col), "column");
+        for (int i=0; i<res_col.length; i++) {
+            Assertions.assertArrayEquals(res_col[i], out_col.getData()[i], 0.001);
+        }
     }
 }

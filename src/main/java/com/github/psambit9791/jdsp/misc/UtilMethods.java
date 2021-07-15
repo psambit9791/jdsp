@@ -764,7 +764,7 @@ public class UtilMethods {
      * @param val Value with which arithmetic operation is performed
      * @param action What action needs to be performed. Can be addition, subtraction (2 modes), multiplication, division and raising to power.
      * @throws java.lang.IllegalArgumentException if action is not "add", "sub", "reverse_sub", "mul", "div", "pow"
-     * @return double[][] The result of the operation
+     * @return double[] The result of the operation
      */
     public static double[] scalarArithmetic(double[] arr, double val, String action) throws IllegalArgumentException {
         if (!action.equals("add") && !action.equals("sub") && !action.equals("mul") && !action.equals("reverse_sub") &&
@@ -1295,6 +1295,43 @@ public class UtilMethods {
     }
 
     /**
+     * Element by Element multiplication of 2 RealMatrix of same shape
+     * @param m1 Matrix 1
+     * @param m2 Matrix 2
+     * @param type row wise or column wise (can be row or column)
+     * @return RealMatrix ebeMutliplication of the 2 matrices
+     */
+    public static RealMatrix ebeMultiply(RealMatrix m1, RealMatrix m2, String type) {
+        int rowDim = m1.getRowDimension();
+        int colDim = m1.getColumnDimension();
+        if (!type.equals("row") && !type.equals("column")) {
+            throw new IllegalArgumentException("Type must be either 'row' or 'column'");
+        }
+        RealMatrix out = MatrixUtils.createRealMatrix(rowDim, colDim);
+        if (type.equals("column")) {
+            if (rowDim != m2.getRowDimension() || m2.getColumnDimension() != 1) {
+                throw new IllegalArgumentException("Rows of m1 and m2 matrices must be the same and m2 should have only 1 column");
+            }
+            for (int i=0; i<rowDim; i++) {
+                for (int j=0; j<colDim; j++) {
+                    out.setEntry(i, j, m1.getEntry(i, j) * m2.getEntry(i, 0));
+                }
+            }
+        }
+        if (type.equals("row")) {
+            if (colDim != m2.getColumnDimension() || m2.getRowDimension() != 1) {
+                throw new IllegalArgumentException("Columns of m1 and m2 matrices must be the same and m2 should have only 1 row");
+            }
+            for (int i=0; i<rowDim; i++) {
+                for (int j=0; j<colDim; j++) {
+                    out.setEntry(i, j, m1.getEntry(i, j) * m2.getEntry(0, j));
+                }
+            }
+        }
+        return out;
+    }
+
+    /**
      * Element by Element division of 2 RealMatrix of same shape
      * @param m1 Matrix 1
      * @param m2 Matrix 2
@@ -1311,6 +1348,165 @@ public class UtilMethods {
         for (int i=0; i<rowDim; i++) {
             for (int j=0; j<colDim; j++) {
                 out.setEntry(i, j, m1.getEntry(i, j) / m2.getEntry(i, j));
+            }
+        }
+        return out;
+    }
+
+
+    /**
+     * Element by Element division of 2 RealMatrix
+     * @param m1 Matrix 1
+     * @param m2 Matrix 2
+     * @param type row wise or column wise (can be row or column)
+     * @return RealMatrix ebeDivision of the 2 matrices
+     */
+    public static RealMatrix ebeDivide(RealMatrix m1, RealMatrix m2, String type) {
+        int rowDim = m1.getRowDimension();
+        int colDim = m1.getColumnDimension();
+        if (!type.equals("row") && !type.equals("column")) {
+            throw new IllegalArgumentException("Type must be either 'row' or 'column'");
+        }
+        RealMatrix out = MatrixUtils.createRealMatrix(rowDim, colDim);
+        if (type.equals("column")) {
+            if (rowDim != m2.getRowDimension() || m2.getColumnDimension() != 1) {
+                throw new IllegalArgumentException("Rows of m1 and m2 matrices must be the same and m2 should have only 1 column");
+            }
+            for (int i=0; i<rowDim; i++) {
+                for (int j=0; j<colDim; j++) {
+                    out.setEntry(i, j, m1.getEntry(i, j) / m2.getEntry(i, 0));
+                }
+            }
+        }
+        if (type.equals("row")) {
+            if (colDim != m2.getColumnDimension() || m2.getRowDimension() != 1) {
+                throw new IllegalArgumentException("Columns of m1 and m2 matrices must be the same and m2 should have only 1 row");
+            }
+            for (int i=0; i<rowDim; i++) {
+                for (int j=0; j<colDim; j++) {
+                    out.setEntry(i, j, m1.getEntry(i, j) / m2.getEntry(0, j));
+                }
+            }
+        }
+        return out;
+    }
+
+
+    /**
+     * Element by Element addition of 2 RealMatrix of same shape
+     * @param m1 Matrix 1
+     * @param m2 Matrix 2
+     * @return RealMatrix ebeAddition of the 2 matrices (m1+m2)
+     */
+    public static RealMatrix ebeAdd(RealMatrix m1, RealMatrix m2) {
+        int rowDim = m1.getRowDimension();
+        int colDim = m1.getColumnDimension();
+        if (rowDim != m2.getRowDimension() || colDim != m2.getColumnDimension()) {
+            throw new IllegalArgumentException("Dimensions of m1 and m2 matrices must be the same");
+        }
+
+        RealMatrix out = MatrixUtils.createRealMatrix(rowDim, colDim);
+        for (int i=0; i<rowDim; i++) {
+            for (int j=0; j<colDim; j++) {
+                out.setEntry(i, j, m1.getEntry(i, j) + m2.getEntry(i, j));
+            }
+        }
+        return out;
+    }
+
+
+    /**
+     * Element by Element addition of 2 RealMatrix
+     * @param m1 Matrix 1
+     * @param m2 Matrix 2
+     * @param type row wise or column wise (can be row or column)
+     * @return RealMatrix ebeAddition of the 2 matrices
+     */
+    public static RealMatrix ebeAdd(RealMatrix m1, RealMatrix m2, String type) {
+        int rowDim = m1.getRowDimension();
+        int colDim = m1.getColumnDimension();
+        if (!type.equals("row") && !type.equals("column")) {
+            throw new IllegalArgumentException("Type must be either 'row' or 'column'");
+        }
+        RealMatrix out = MatrixUtils.createRealMatrix(rowDim, colDim);
+        if (type.equals("column")) {
+            if (rowDim != m2.getRowDimension() || m2.getColumnDimension() != 1) {
+                throw new IllegalArgumentException("Rows of m1 and m2 matrices must be the same and m2 should have only 1 column");
+            }
+            for (int i=0; i<rowDim; i++) {
+                for (int j=0; j<colDim; j++) {
+                    out.setEntry(i, j, m1.getEntry(i, j) + m2.getEntry(i, 0));
+                }
+            }
+        }
+        if (type.equals("row")) {
+            if (colDim != m2.getColumnDimension() || m2.getRowDimension() != 1) {
+                throw new IllegalArgumentException("Columns of m1 and m2 matrices must be the same and m2 should have only 1 row");
+            }
+            for (int i=0; i<rowDim; i++) {
+                for (int j=0; j<colDim; j++) {
+                    out.setEntry(i, j, m1.getEntry(i, j) + m2.getEntry(0, j));
+                }
+            }
+        }
+        return out;
+    }
+
+    /**
+     * Element by Element addition of 2 RealMatrix of same shape
+     * @param m1 Matrix 1
+     * @param m2 Matrix 2
+     * @return RealMatrix ebeAddition of the 2 matrices (m1+m2)
+     */
+    public static RealMatrix ebeSubtract(RealMatrix m1, RealMatrix m2) {
+        int rowDim = m1.getRowDimension();
+        int colDim = m1.getColumnDimension();
+        if (rowDim != m2.getRowDimension() || colDim != m2.getColumnDimension()) {
+            throw new IllegalArgumentException("Dimensions of m1 and m2 matrices must be the same");
+        }
+
+        RealMatrix out = MatrixUtils.createRealMatrix(rowDim, colDim);
+        for (int i=0; i<rowDim; i++) {
+            for (int j=0; j<colDim; j++) {
+                out.setEntry(i, j, m1.getEntry(i, j) - m2.getEntry(i, j));
+            }
+        }
+        return out;
+    }
+
+
+    /**
+     * Element by Element addition of 2 RealMatrix
+     * @param m1 Matrix 1
+     * @param m2 Matrix 2
+     * @param type row wise or column wise (can be row or column)
+     * @return RealMatrix ebeAddition of the 2 matrices
+     */
+    public static RealMatrix ebeSubtract(RealMatrix m1, RealMatrix m2, String type) {
+        int rowDim = m1.getRowDimension();
+        int colDim = m1.getColumnDimension();
+        if (!type.equals("row") && !type.equals("column")) {
+            throw new IllegalArgumentException("Type must be either 'row' or 'column'");
+        }
+        RealMatrix out = MatrixUtils.createRealMatrix(rowDim, colDim);
+        if (type.equals("column")) {
+            if (rowDim != m2.getRowDimension() || m2.getColumnDimension() != 1) {
+                throw new IllegalArgumentException("Rows of m1 and m2 matrices must be the same and m2 should have only 1 column");
+            }
+            for (int i=0; i<rowDim; i++) {
+                for (int j=0; j<colDim; j++) {
+                    out.setEntry(i, j, m1.getEntry(i, j) - m2.getEntry(i, 0));
+                }
+            }
+        }
+        if (type.equals("row")) {
+            if (colDim != m2.getColumnDimension() || m2.getRowDimension() != 1) {
+                throw new IllegalArgumentException("Columns of m1 and m2 matrices must be the same and m2 should have only 1 row");
+            }
+            for (int i=0; i<rowDim; i++) {
+                for (int j=0; j<colDim; j++) {
+                    out.setEntry(i, j, m1.getEntry(i, j) - m2.getEntry(0, j));
+                }
             }
         }
         return out;

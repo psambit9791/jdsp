@@ -14,9 +14,7 @@ package com.github.psambit9791.jdsp.filter;
 
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
-import org.apache.commons.math3.linear.DefaultRealMatrixChangingVisitor;
-import org.apache.commons.math3.linear.MatrixUtils;
-import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.linear.*;
 
 import javax.rmi.CORBA.Util;
 import java.util.Arrays;
@@ -138,9 +136,9 @@ public class FIRLS extends _FIRFilter {
             for (int row=0; row<semi_cutoff; row++) {
                 q.setEntry(i, row, holder[i].getEntry(row, 1) - holder[i].getEntry(row, 0));
             }
-            qout = q.multiply(w);
         }
 
+        qout = q.multiply(w);
         double[] q_double = new double[qout.getRowDimension()];
         for (int i=0; i<q_double.length; i++) {
             q_double[i] = qout.getEntry(i, 0);
@@ -174,8 +172,11 @@ public class FIRLS extends _FIRFilter {
         RealMatrix desired0 = desired.getSubMatrix(0, desired.getRowDimension()-1, 0, 0);
 
         RealMatrix c = desired0.subtract(UtilMethods.ebeMultiply(band0, m));
+        RealMatrix mbc;
 
         holder = new RealMatrix[short_n];
+        RealMatrix b = MatrixUtils.createRealMatrix(short_n, semi_cutoff);
+
         for (int i=0; i<short_n; i++) {
             holder[i] = bands.scalarMultiply(n[i]);
             holder[i].walkInOptimizedOrder(new DefaultRealMatrixChangingVisitor() {
@@ -186,15 +187,37 @@ public class FIRLS extends _FIRFilter {
             });
 
             holder[i] = UtilMethods.ebeMultiply(holder[i], bands);
+            mbc = UtilMethods.ebeMultiply(bands, m, "column");
+            mbc = UtilMethods.ebeAdd(mbc, c, "column");
+            holder[i] = UtilMethods.ebeMultiply(holder[i], mbc);
 
-            for (int row=0; row<semi_cutoff; row++) {
-                q.setEntry(i, row, holder[i].getEntry(row, 1) - holder[i].getEntry(row, 0));
+            if (i == 0) {
+                RealMatrix temp = UtilMethods.ebeMultiply(bands, bands);
+                temp = UtilMethods.ebeMultiply(temp, m, "column");
+                temp = temp.scalarMultiply(0.5);
+                holder[i] = UtilMethods.ebeSubtract(holder[i], temp);
             }
-            qout = q.multiply(w);
+            else {
+                RealMatrix temp = bands.scalarMultiply(Math.PI*n[i]);
+                temp = UtilMethods.ebeMultiply(temp, m, "column");
+                temp = temp.scalarMultiply(Math.pow(n[i] * Math.PI, 2));
+                holder[i] = UtilMethods.ebeSubtract(holder[i], temp);
+            }
+            for (int row=0; row<semi_cutoff; row++) {
+                b.setEntry(i, row, holder[i].getEntry(row, 1) - holder[i].getEntry(row, 0));
+            }
         }
 
+        b = b.multiply(w);
+        RealVector b_final = b.getColumnVector(0);
 
-//        double[][] tempholder = c.getData();
+        // Solve for Q and b to get a
+
+        DecompositionSolver solver = new SingularValueDecomposition(Q).getSolver();
+        RealVector solution = solver.solve(b_final);
+        double[] a = solution.toArray();
+
+//        double[][] tempholder = b.getData();
 //        for (int i=0; i<tempholder.length; i++) {
 //            for (int j=0; j<tempholder[0].length; j++) {
 //                System.out.print(tempholder[i][j] + ", ");
@@ -202,11 +225,16 @@ public class FIRLS extends _FIRFilter {
 //            System.out.println();
 //        }
 
-        // Solve for Q and b to get a
-
         // Process a and return coefficients
-
-        double[] out = new double[22];
+        double[] out = new double[(a.length-1)*2 + 1];
+        int index = 0;
+        for (int i = a.length-1; i>=1; i--) {
+            out[index++] = a[i];
+        }
+        out[index++] = a[0] * 2;
+        for (int i = 1; i<a.length; i++) {
+            out[index++] = a[i];
+        }
         return out;
     }
 
