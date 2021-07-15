@@ -683,4 +683,15 @@ public class TestUtils {
             Assertions.assertArrayEquals(res_col[i], out_col.getData()[i], 0.001);
         }
     }
+
+    @Test
+    public void ebeInvertTest() {
+        double[][] m1 = {{1.0, 2.0}, {2.0, 0.5}, {3.0, 4.0}};
+        double[][] res = {{1.0, 0.5}, {0.5, 2.0}, {0.333, 0.25}};
+
+        RealMatrix out = UtilMethods.ebeInvert(MatrixUtils.createRealMatrix(m1));
+        for (int i=0; i<res.length; i++) {
+            Assertions.assertArrayEquals(res[i], out.getData()[i], 0.001);
+        }
+    }
 }

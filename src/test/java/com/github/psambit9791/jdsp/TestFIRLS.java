@@ -13,7 +13,6 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.filter.FIRLS;
-import com.github.psambit9791.jdsp.filter.FIRWin2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -28,21 +27,34 @@ public class TestFIRLS {
             0.42250524, 0.23092439, 0.0692671 , 0.19940213, 0.47231721, 0.51117719, 0.26229594};
 
     @Test
-    public void LSTest1() {
+    public void LSCoeffTest() {
         double[] freqs = {0.0, 1.0, 2.0, 4.0, 4.5, 5.0};
         double[] gains = {0.0, 0.0, 1.0, 1.0, 0.0, 0.0};
         int taps = 7;
         FIRLS fwls = new FIRLS(taps, this.samplingRate);
-
-//        Assertions.assertEquals(1, fw2.getFilterType());
-//
         double[] outCoeffs = fwls.computeCoefficients(freqs, gains);
-//
-//        double[] resCoeffs = {-3.88242319e-04, -1.58896291e-03, -2.22541746e-03,  7.63400590e-17,
-//                -1.48888123e-02, -8.48578140e-02, -1.94033715e-01,  7.50000000e-01,
-//                -1.94033715e-01, -8.48578140e-02, -1.48888123e-02, -6.37562342e-17,
-//                -2.22541746e-03, -1.58896291e-03, -3.88242319e-04};
-//
-//        Assertions.assertArrayEquals(resCoeffs, outCoeffs, 0.0001);
+        double[] resCoeffs = {0.0919431, -0.25844535, -0.10932055,  0.51617629, -0.10932055, -0.25844535, 0.0919431};
+        Assertions.assertArrayEquals(resCoeffs, outCoeffs, 0.0001);
+    }
+
+    @Test
+    public void LSFilterTest() {
+        double[] freqs = {0.0, 1.0, 2.0, 4.0, 4.5, 5.0};
+        double[] gains = {0.0, 0.0, 1.0, 1.0, 0.0, 0.0};
+        int taps = 7;
+        FIRLS fwls = new FIRLS(taps, this.samplingRate);
+        double[] coefficients = fwls.computeCoefficients(freqs, gains);
+        double[] out = fwls.firfilter(coefficients, this.signal);
+        double[] filteredX = {0.10129239, -0.1576683 , -0.35895171,  0.18127447,  0.26554274,
+                -0.04124198, -0.10609781, -0.09557783, -0.06558016, -0.09273025,
+                -0.055534  ,  0.07856325,  0.10428176, -0.08165953, -0.23987745,
+                -0.13301068,  0.08710159,  0.11412031, -0.04091367, -0.11846021,
+                -0.05465986, -0.02509455, -0.07490909, -0.04757479,  0.07320284,
+                0.08099257, -0.08295922, -0.17863375, -0.05132701,  0.10124603,
+                0.05600998, -0.07467797, -0.06493154,  0.03158094,  0.00996555,
+                -0.09381836, -0.06855386,  0.072451  ,  0.0940202 , -0.04773118,
+                -0.1223432 , -0.02426985,  0.05748538, -0.00780381, -0.06523476,
+                0.01910777,  0.08982935, -0.01955447, -0.15668723, -0.08510961};
+        Assertions.assertArrayEquals(filteredX, out, 0.0001);
     }
 }
