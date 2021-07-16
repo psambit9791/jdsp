@@ -64,9 +64,6 @@ public class TestWav {
         double[][] signal = objRead.getData("long");
 
         Hashtable<String, Long> propsOut = objRead.getProperties();
-
-        System.out.println(propsOut);
-
         Wav objWrite = new Wav();
         String outputFileName = "test_outputs/sampleLong.wav";
         objWrite.putData(signal, propsOut.get("SampleRate"), "long", outputFileName);
