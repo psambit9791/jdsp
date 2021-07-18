@@ -115,11 +115,12 @@
         <!--  TABS  -->
         <div id="tabs">
           <ul>
-            <li><a href="#frequency-filter">Frequency-Based Filters</a> </li>
+            <li><a href="#iir-filter">IIR Filters</a> </li>
+            <li><a href="#fir-filter">FIR Filters</a> </li>
             <li><a href="#kernel-filter">Kernel-Based Filters</a> </li>
           </ul>
 
-          <div id="frequency-filter">
+          <div id="iir-filter">
 
             <!--  START OF BUTTERWORTH FILTER  -->
             <div class="bg-white" style="padding-top:30px;">
@@ -434,6 +435,210 @@ double[] result = flt.bandStopFilter(order, lowCutOff, highCutOff); //get the re
             <!-- END OF BESSEL FILTER-->
 
           </div>
+
+
+            <div id="fir-filter">
+
+                <!--  START OF FIRWIN1 FILTER  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Windowed FIR Filter</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/filters/firwin1/firwin.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Low Pass Filter</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>High Pass Filter</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double width = 5;
+double samplingRate = 100;
+int taps = 5;
+double[] cutoff = {10.0};
+
+FIRWin1 fw = new FIRWin1(taps, width, samplingRate);
+double[] outCoeffs = fw.computeCoefficients(cutoff, "lowpass", true);
+double[] filteredX = fw.firfilter(outCoeffs, signal);
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double width = 5;
+double samplingRate = 100;
+int taps = 5;
+double[] cutoff = {10.0};
+
+FIRWin1 fw = new FIRWin1(taps, width, samplingRate);
+double[] outCoeffs = fw.computeCoefficients(cutoff, "highpass", true);
+double[] filteredX = fw.firfilter(outCoeffs, signal);
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Band Pass Filter</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Band Stop Filter</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double width = 5;
+double samplingRate = 100;
+int taps = 5;
+double[] cutoff = {1.0, 10.0};
+
+FIRWin1 fw = new FIRWin1(taps, width, samplingRate);
+double[] outCoeffs = fw.computeCoefficients(cutoff, "bandpass", true);
+double[] filteredX = fw.firfilter(outCoeffs, signal);
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double width = 2;
+double samplingRate = 100;
+int taps = 5;
+double[] cutoff = {1.0, 10.0};
+
+FIRWin1 fw = new FIRWin1(taps, width, samplingRate);
+double[] outCoeffs = fw.computeCoefficients(cutoff, "bandstop", true);
+double[] filteredX = fw.firfilter(outCoeffs, signal);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF FIRWIN1 FILTER-->
+
+                <!--  START OF FIRWIN2 FILTER  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Windowed FIR Filter with Gain</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/filters/firwin2/firwin2.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 1 Filter</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 2 Filter</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double samplingRate = 100;
+double[] freqs = {0.0, 25, 50};
+double[] gains = {0.0, 1.0, 1.0};
+int taps = 15;
+
+FIRWin2 fw2 = new FIRWin2(taps, samplingRate);
+double[] outCoeffs = fw2.computeCoefficients(freqs, gains);
+double[] filteredX = fw2.firfilter(outCoeffs, signal);
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double samplingRate = 100;
+double[] freqs = {0.0, 25, 50};
+double[] gains = {1.0, 1.0, 0.0};
+int taps = 10;
+
+FIRWin2 fw2 = new FIRWin2(taps, samplingRate);
+double[] outCoeffs = fw2.computeCoefficients(freqs, gains);
+double[] filteredX = fw2.firfilter(outCoeffs, signal);
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 3 Filter</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 4 Filter</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double samplingRate = 100;
+double[] freqs = {0.0, 25, 50};
+double[] gains = {0.0, 1.0, 0.0};
+int taps = 15;
+
+FIRWin2 fw2 = new FIRWin2(taps, samplingRate, true);
+double[] outCoeffs = fw2.computeCoefficients(freqs, gains);
+double[] filteredX = fw2.firfilter(outCoeffs, signal);
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double samplingRate = 100;
+double[] freqs = {0.0, 25, 50};
+double[] gains = {0.0, 1.0, 1.0};
+int taps = 10;
+
+FIRWin2 fw2 = new FIRWin2(taps, samplingRate, true);
+double[] outCoeffs = fw2.computeCoefficients(freqs, gains);
+double[] filteredX = fw2.firfilter(outCoeffs, signal);
+
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF FIRWIN2 FILTER-->
+
+                <!--  START OF FIRLS FILTER  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Least Squares Optimised FIR Filter</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/filters/firls/firls.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double samplingRate = 100;
+double[] freqs = {0.0, 1.0, 2.0, 4.0, 4.5, 5.0};
+double[] gains = {0.0, 0.0, 1.0, 1.0, 0.0, 0.0};
+int taps = 7;
+
+FIRLS fwls = new FIRLS(taps, samplingRate);
+double[] coefficients = fwls.computeCoefficients(freqs, gains);
+double[] out = fwls.firfilter(coefficients, signal);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- END OF FIRLS FILTER-->
+
+            </div>
 
           <div id="kernel-filter">
 
