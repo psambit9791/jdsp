@@ -556,6 +556,62 @@ double[] out = gp.generateUnitImpulse(position);
               </div>
               <!-- END OF UNIT IMPULSE-->
 
+
+              <!--  START OF MORLET WAVELET  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Morlet Wavelet</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/signal/generate/morlet.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100;
+Generate gp = new Generate(0, 1, Fs);
+int points = 100;
+double omega0 = 5; //central frequency
+double scaling = 1;
+double[] out = gp.generateMorlet(points, omega0, scaling);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF MORLET WAVELET-->
+
+              <!--  START OF RICKER WAVELET  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Ricker Wavelet</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <img src="res/signal/signal/generate/ricker.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int Fs = 100;
+Generate gp = new Generate(0, 1, Fs);
+int points = 100;
+double width = 4;
+double[] out = gp.generateRicker(points, width);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF RICKER WAVELET-->
+
           </div>
         </div>
         
