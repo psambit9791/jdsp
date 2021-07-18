@@ -732,8 +732,8 @@ public class UtilMethods {
      * @return double[][] The result of the matrix multiplication
      */
     public static double[][] matrixAddition(double[][] a, double[][] b) throws ArithmeticException {
-        if (a[0].length != b.length) {
-            throw new ArithmeticException("Columns in multiplier must be equal to Rows in Multiplicand");
+        if (a.length != b.length || a[0].length != b[0].length) {
+            throw new ArithmeticException("Size of both matrices should be same");
         }
         RealMatrix m1 = MatrixUtils.createRealMatrix(a);
         RealMatrix m2= MatrixUtils.createRealMatrix(b);
@@ -749,8 +749,8 @@ public class UtilMethods {
      * @return double[][] The result of the matrix subtraction
      */
     public static double[][] matrixSubtraction(double[][] a, double[][] b) throws ArithmeticException {
-        if (a[0].length != b.length) {
-            throw new ArithmeticException("Columns in multiplier must be equal to Rows in Multiplicand");
+        if (a.length != b.length || a[0].length != b[0].length) {
+            throw new ArithmeticException("Size of both matrices should be same");
         }
         RealMatrix m1 = MatrixUtils.createRealMatrix(a);
         RealMatrix m2= MatrixUtils.createRealMatrix(b);
