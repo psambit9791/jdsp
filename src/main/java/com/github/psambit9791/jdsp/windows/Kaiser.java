@@ -57,6 +57,7 @@ public class Kaiser extends _Window{
 
     /**
      * Generates and returns the Kaiser Window
+     * @param beta Shape parameter. As beta increases, the window gets narrower.
      * @return double[] the generated window
      */
     public double[] getWindow(double beta) {

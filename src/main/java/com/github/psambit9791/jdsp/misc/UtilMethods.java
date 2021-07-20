@@ -1513,7 +1513,7 @@ public class UtilMethods {
     }
 
     /**
-     * Element by Element inversion (x -> 1/x) of a RealMatrix
+     * Element by Element inversion (x to 1/x) of a RealMatrix
      * @param m1 Matrix to be inverted
      * @return RealMatrix the inverted matrix
      */
