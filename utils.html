@@ -984,8 +984,56 @@ double[][] out = UtilMethods.absoluteArray(m1);
                 </div>
                 <!-- END OF MATRIX ABSOLUTE VALUE-->
 
-                <!--  START OF EBE ARITHMETIC  -->
+
+                <!--  START OF 2D ARRAY ARITHMETIC  -->
                 <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">2D Array Operations</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Addition</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Subtraction</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[][] m1 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+double[][] m2 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+double[][] out = {{2.0, 4.0, 6.0}, {8.0, 10.0, 12.0}, {14.0, 16.0, 18.0}};
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[][] m1 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+double[][] m2 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+double[][] out = {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}};
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                                <img src="res/signal/ebe/mat_add.svg" alt="Image" class="img-fluid" style="width: auto; height: 64px;">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                                <img src="res/signal/ebe/sub_ebe.svg" alt="Image" class="img-fluid" style="width: auto; height: 64px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF 2D ARRAY ARITHMETIC-->
+
+                <!--  START OF EBE ARITHMETIC  -->
+                <div class="bg-light" style="padding-top:30px;">
                     <div class="row mb-5">
                         <div class="col-md-7 mx-auto text-center">
                             <h2 class="heading-29190">Element-by-Element Operations</h2>
@@ -1067,7 +1115,7 @@ RealMatrix out = UtilMethods.ebeDivide(MatrixUtils.createRealMatrix(m1), MatrixU
                 <!-- END OF EBE ARITHMETIC-->
 
                 <!--  START OF ROW-WISE ARITHMETIC  -->
-                <div class="bg-light" style="padding-top:30px;">
+                <div class="bg-white" style="padding-top:30px;">
                     <div class="row mb-5">
                         <div class="col-md-7 mx-auto text-center">
                             <h2 class="heading-29190">Row-wise Operations</h2>
@@ -1150,7 +1198,7 @@ RealMatrix out = UtilMethods.ebeDivide(MatrixUtils.createRealMatrix(m1), MatrixU
 
 
                 <!--  START OF COLUMN-WISE ARITHMETIC  -->
-                <div class="bg-white" style="padding-top:30px;">
+                <div class="bg-light" style="padding-top:30px;">
                     <div class="row mb-5">
                         <div class="col-md-7 mx-auto text-center">
                             <h2 class="heading-29190">Column-wise Operations</h2>
@@ -1771,6 +1819,95 @@ double[] out2 = UtilMethods.convertToPrimitiveDouble(numbers);
                     <div class="container" style="padding-bottom:50px;"></div>
                 </div>
                 <!-- END OF DOUBLE-->
+
+                <!--  START OF CHEBYSHEV EVAL -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Chebyshev Evaluation</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] arr = {1000.0, 2.0, 3.4, 17.0, 50.0};
+double[] x_arr = {1.0, 2.0, 3.0, 4.0, 5.0};
+double[] out_arr = UtilMethods.chebyEval(x_arr, arr);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-center">
+[-470.2, 1047.4, 23580.4, 97134.8, 263716.6]
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF CHEBYSHEV EVAL -->
+
+                <!--  START OF ARRAY TRANSFORMS  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Vector to Matrix Transform</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Hankel</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Toeplitz</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] c = {1, 2, 3, 4};
+double[] r = {4, 7, 7, 8, 9};
+double[][] output = UtilMethods.hankel(c, r);
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] c = {1,2,3,4};
+double[][] output = UtilMethods.toeplitz(c);
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                                <img src="res/signal/hankel.svg" alt="Image" class="img-fluid" style="width: auto; height: 64px;">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                                <img src="res/signal/toeplitz.svg" alt="Image" class="img-fluid" style="width: auto; height: 64px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF ARRAY TRANSFORMS-->
 
             </div>
 
