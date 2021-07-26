@@ -48,7 +48,7 @@ git clone --single-branch --branch master https://github.com/psambit9791/jDSP.gi
 
 See the [**Wiki**](https://github.com/psambit9791/jDSP/wiki) for an introduction to the general use of JDSP.
 
-See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for more advanced documentation.
+See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for more detailed documentation.
 
 <br/>
 
