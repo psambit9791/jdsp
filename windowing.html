@@ -130,6 +130,7 @@
                 <li><a href="#bartlett">Bartlett</a> </li>
                 <li><a href="#bartletthann">Bartlett-Hann</a> </li>
                 <li><a href="#bohman">Bohman</a> </li>
+                <li><a href="#kaiser">Kaiser</a> </li>
             </ul>
 
             <div id="boxcar">
@@ -627,6 +628,41 @@ double[] out = w2.getWindow();
                     </div>
                 </div>
                 <!-- END OF BOHMAN-->
+
+            </div>
+
+
+            <div id="kaiser">
+
+                <!--  START OF KAISER  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Kaiser Window</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/windows/kaiser.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int len = 10;
+double beta = 14;
+
+Kaiser w1 = new Kaiser(len); // For Symmetric
+double[] out = w1.getWindow(beta);
+
+Kaiser w2 = new Kaiser(len, false); // For asymmetric
+double[] out = w2.getWindow(beta);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- END OF KAISER-->
 
             </div>
 
