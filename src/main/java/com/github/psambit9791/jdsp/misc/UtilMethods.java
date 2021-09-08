@@ -368,7 +368,7 @@ public class UtilMethods {
         }
         else {
             throw new IllegalArgumentException("padSignalforConvolution modes can only be reflect, constant, " +
-                    "nearest, mirror, wrap or interp (default)");
+                    "nearest, mirror, or wrap");
         }
         return newSignal;
     }

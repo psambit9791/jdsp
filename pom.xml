@@ -179,6 +179,13 @@
             <version>5.6.2</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/ca.umontreal.iro.simul/ssj -->
+        <dependency>
+            <groupId>ca.umontreal.iro.simul</groupId>
+            <artifactId>ssj</artifactId>
+            <version>3.3.1</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.commons</groupId>
