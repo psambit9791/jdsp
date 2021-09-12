@@ -286,7 +286,7 @@ public class Plotting {
     public void saveAsPNG(String name) throws IOException, IllegalArgumentException {
         String extension = name.substring(name.length()-4);
         if (!extension.equals(".png")) {
-            throw new IllegalArgumentException("Filename must have PNG exception");
+            throw new IllegalArgumentException("Filename must have PNG extension");
         }
         String filename = name.substring(0, name.length()-4);
         BitmapEncoder.saveBitmapWithDPI(this.figure, filename, BitmapEncoder.BitmapFormat.PNG, 300);

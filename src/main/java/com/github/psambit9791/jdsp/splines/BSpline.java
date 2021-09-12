@@ -39,6 +39,7 @@ public class BSpline {
         }
         this.xMin = x[0];
         this.xMax = x[x.length - 1];
+//        this.psf = umontreal.ssj.functionfit.BSpline.createInterpBSpline(x, y, this.order);
         this.psf = new umontreal.ssj.functionfit.BSpline(x, y, this.order);
     }
 
