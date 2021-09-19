@@ -23,9 +23,7 @@ import org.apache.commons.math3.util.MathArrays;
 import java.io.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 
 /**
@@ -207,10 +205,8 @@ public class UtilMethods {
      */
     public static double[] reverse(double[] arr) {
         double[] inv = new double[arr.length];
-        int index = 0;
-        for (int i=(arr.length-1); i>=0; i--) {
-            inv[index] = arr[i];
-            index++;
+        for (int i=0; i<inv.length; i++) {
+            inv[i] = arr[arr.length-1-i];
         }
         return inv;
     }
@@ -222,10 +218,8 @@ public class UtilMethods {
      */
     public static int[] reverse(int[] arr) {
         int[] inv = new int[arr.length];
-        int index = 0;
-        for (int i=(arr.length-1); i>=0; i--) {
-            inv[index] = arr[i];
-            index++;
+        for (int i=0; i<inv.length; i++) {
+            inv[i] = arr[arr.length-1-i];
         }
         return inv;
     }
@@ -255,6 +249,32 @@ public class UtilMethods {
         System.arraycopy(arr1, 0, out, 0, arr1.length);
         System.arraycopy(arr2, 0, out, arr1.length, arr2.length);
         return out;
+    }
+
+    /**
+     * This function returns the reversal of the input matrix.
+     * @param mat Array to be added first
+     * @return int[][] Reversed matrix
+     */
+    public static int[][] reverseMatrix(int[][] mat) {
+        int[][] rev = new int[mat.length][mat[0].length];
+        for (int i=0; i<mat[0].length; i++){
+            rev[i] = UtilMethods.reverse(mat[i]);
+        }
+        return rev;
+    }
+
+    /**
+     * This function returns the reversal of the input matrix.
+     * @param mat Array to be added first
+     * @return double[][] Reversed matrix
+     */
+    public static double[][] reverseMatrix(double[][] mat) {
+        double[][] rev = new double[mat.length][mat[0].length];
+        for (int i=0; i<mat[0].length; i++){
+            rev[i] = UtilMethods.reverse(mat[i]);
+        }
+        return rev;
     }
 
     // Split an array by indices
@@ -404,7 +424,7 @@ public class UtilMethods {
     /**
      * Implementation of the numpy version of unwrap()
      * Helps to unwrap a given array by changing deltas to values of 2*pi complement
-     * It unwraps radian phase p by changing absolute jumps greater than discont to their 2*pi complement along the given axis
+     * It unwraps radian phase p by changing absolute jumps greater than discontinunity to their 2*pi complement
      * @param arr The array to be unwrapped
      * @return double[] The unwrapped array
      */
@@ -692,6 +712,34 @@ public class UtilMethods {
         double[] out = new double [m.length];
         for (int i=0; i<m.length; i++) {
             out[i] = Math.abs(m[i]);
+        }
+        return out;
+    }
+
+    /**
+     * Returns the absolute value of the matrix.
+     * @param m The array to be processed
+     * @return int[] The absolute value of the array
+     */
+    public static int[] flattenMatrix(int[][] m) {
+        int cols = m[0].length;
+        int[] out = new int [m.length*cols];
+        for (int i=0; i<out.length; i++) {
+            out[i] = m[i/cols][i%cols];
+        }
+        return out;
+    }
+
+    /**
+     * Returns the absolute value of the matrix.
+     * @param m The array to be processed
+     * @return double[] The absolute value of the array
+     */
+    public static double[] flattenMatrix(double[][] m) {
+        int cols = m[0].length;
+        double[] out = new double [m.length*cols];
+        for (int i=0; i<out.length; i++) {
+            out[i] = m[i/cols][i%cols];
         }
         return out;
     }

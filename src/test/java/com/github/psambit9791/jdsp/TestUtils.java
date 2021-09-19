@@ -694,4 +694,40 @@ public class TestUtils {
             Assertions.assertArrayEquals(res[i], out.getData()[i], 0.001);
         }
     }
+
+    @Test
+    public void reverseDoubleMatrixTest() {
+        double[][] matrix = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+        double[][] result = {{3.0, 2.0, 1.0}, {6.0, 5.0, 4.0}, {9.0, 8.0, 7.0}};
+        double[][] out = UtilMethods.reverseMatrix(matrix);
+        Assertions.assertArrayEquals(result[0], out[0], 0.001);
+        Assertions.assertArrayEquals(result[1], out[1], 0.001);
+        Assertions.assertArrayEquals(result[1], out[1], 0.001);
+    }
+
+    @Test
+    public void reverseIntMatrixTest() {
+        int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int[][] result = {{3, 2, 1}, {6, 5, 4}, {9, 8, 7}};
+        int[][] out = UtilMethods.reverseMatrix(matrix);
+        Assertions.assertArrayEquals(result[0], out[0]);
+        Assertions.assertArrayEquals(result[1], out[1]);
+        Assertions.assertArrayEquals(result[1], out[1]);
+    }
+
+    @Test
+    public void flattenDoubleMatrixTest() {
+        double[][] matrix = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+        double[] result = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0};
+        double[] out = UtilMethods.flattenMatrix(matrix);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void flattenIntMatrixTest() {
+        int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] out = UtilMethods.flattenMatrix(matrix);
+        Assertions.assertArrayEquals(result, out);
+    }
 }

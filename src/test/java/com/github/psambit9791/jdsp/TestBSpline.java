@@ -111,7 +111,6 @@ public class TestBSpline {
                 -0.959796, -0.914386, -0.871464, -0.840208, -0.823638, -0.814445,
                 -0.793499, -0.735181, -0.615391, -0.419663, -0.151121,  0.16566 ,
                 0.491194,  0.781721,  1.};
-        System.out.println(this.rms_error(result, out));
         Assertions.assertTrue(this.rms_error(result, out) <= 0.00025);
     }
 
@@ -183,7 +182,6 @@ public class TestBSpline {
                 -0.969881, -0.932558, -0.891495, -0.854285, -0.823638, -0.795517,
                 -0.759112, -0.696886, -0.588123, -0.419663, -0.189447,  0.093438,
                 0.408755,  0.725119,  1.};
-        System.out.println(this.rms_error(result, out));
         Assertions.assertTrue(this.rms_error(result, out) <= 0.00025);
     }
 

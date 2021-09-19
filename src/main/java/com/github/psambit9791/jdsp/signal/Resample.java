@@ -11,9 +11,16 @@
 package com.github.psambit9791.jdsp.signal;
 
 
+import com.github.psambit9791.jdsp.filter.FIRWin1;
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.transform.DiscreteFourier;
 import com.github.psambit9791.jdsp.transform.InverseDiscreteFourier;
+import org.apache.commons.math3.stat.StatUtils;
+import org.apache.commons.math3.stat.descriptive.rank.Median;
+import org.apache.commons.math3.util.ArithmeticUtils;
 import org.apache.commons.math3.util.MathArrays;
+
+import java.util.Arrays;
 
 /**
  * <h1>Resample</h1>
@@ -24,30 +31,139 @@ import org.apache.commons.math3.util.MathArrays;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
+ * @version 1.1
  */
 public class Resample {
 
     private double[] signal;
+    private boolean poly;
     private int num;
+    private int up;
+    private int down;
+    private int width;
+    private double cval;
     private boolean isComplex;
+    private double[] output;
+    private String padtype;
 
     /**
      * This constructor initialises the prerequisites required to use Resample.
-     * @param signal Signal to be resampled
      * @param num The number of samples required after resampling
      */
-    public Resample(double[] signal, int num) {
-        this.signal = signal;
+    public Resample(int num) {
         this.num = num;
         this.isComplex = false;
+        this.poly = false;
     }
 
     /**
-     * This method using the Fourier method to change the number of samples to the given number of samples.
-      * @return double[] The resampled signal with 'num' samples
+     * This constructor initialises the prerequisites required to use Polyphase Resample. Uses a Kaiser window of width
+     * 5 to construct the low-pass filter.
+     * @param up The number of samples required after resampling
+     * @param down The number of samples required after resampling
+     * @param padtype Kind of signal extension to be used to extend the boundaries. Can be one of 'mean', 'median', 'min',
+     *                'max' or 'constant'
+     * @param cval Only used when padtype is "constant"
      */
-    public double[] resampleSignal() {
+    public Resample(int up, int down, String padtype, double cval) {
+        if ((up < 1) && (down < 1)) {
+            throw new IllegalArgumentException("up and down must be greater than 0");
+        }
+        this.up = up;
+        this.down = down;
+        this.width = 5;
+        this.cval = cval;
+        if (!padtype.equals("mean") && !padtype.equals("median") && !padtype.equals("min") && !padtype.equals("max") &&
+                !padtype.equals("constant")) {
+            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max' or 'constant'");
+        }
+        this.padtype = padtype;
+        this.isComplex = false;
+        this.poly = true;
+    }
+
+    /**
+     * This constructor initialises the prerequisites required to use Polyphase Resample. Uses a Kaiser window of provided
+     * width to construct the low-pass filter. Sets cval to 0 for "constant" padtype.
+     * @param up The number of samples required after resampling
+     * @param down The number of samples required after resampling
+     * @param width Width of the Kaiser window for designing the low-pass filter
+     * @param padtype Kind of signal extension to be used to extend the boundaries. Can be one of 'mean', 'median', 'min',
+     *                'max' or 'constant'
+     */
+    public Resample(int up, int down, int width, String padtype) {
+        if ((up < 1) && (down < 1)) {
+            throw new IllegalArgumentException("up and down must be greater than 0");
+        }
+        this.up = up;
+        this.down = down;
+        this.width = width;
+        this.cval = 0;
+        if (!padtype.equals("mean") && !padtype.equals("median") && !padtype.equals("min") && !padtype.equals("max") &&
+                !padtype.equals("constant")) {
+            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max' or 'constant'");
+        }
+        this.padtype = padtype;
+        this.isComplex = false;
+        this.poly = true;
+    }
+
+    /**
+     * This constructor initialises the prerequisites required to use Polyphase Resample. Uses a Kaiser window of width
+     * 5 to construct the low-pass filter. Sets cval to 0 for "constant" padtype.
+     * @param up The number of samples required after resampling
+     * @param down The number of samples required after resampling
+     * @param padtype Kind of signal extension to be used to extend the boundaries. Can be one of 'mean', 'median', 'min',
+     *                'max' or 'constant'
+     */
+    public Resample(int up, int down, String padtype) {
+        if ((up < 1) && (down < 1)) {
+            throw new IllegalArgumentException("up and down must be greater than 0");
+        }
+        this.up = up;
+        this.down = down;
+        this.width = 0;
+        this.cval = cval;
+        if (!padtype.equals("mean") && !padtype.equals("median") && !padtype.equals("min") && !padtype.equals("max") &&
+                !padtype.equals("constant")) {
+            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max' or 'constant'");
+        }
+        this.padtype = padtype;
+        this.isComplex = false;
+        this.poly = true;
+    }
+
+    /**
+     * This constructor initialises the prerequisites required to use Polyphase Resample. Uses a Kaiser window of provided
+     * width to construct the low-pass filter.
+     * @param up The number of samples required after resampling
+     * @param down The number of samples required after resampling
+     * @param width Width of the Kaiser window for designing the low-pass filter
+     * @param padtype Kind of signal extension to be used to extend the boundaries. Can be one of 'mean', 'median', 'min',
+     *                'max' or 'constant'
+     * @param cval Only used when padtype is "constant"
+     */
+    public Resample(int up, int down, int width, String padtype, double cval) {
+        if ((up < 1) && (down < 1)) {
+            throw new IllegalArgumentException("up and down must be greater than 0");
+        }
+        this.up = up;
+        this.down = down;
+        this.width = width;
+        this.cval = cval;
+        if (!padtype.equals("mean") && !padtype.equals("median") && !padtype.equals("min") && !padtype.equals("max") &&
+                !padtype.equals("constant")) {
+            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max' or 'constant'");
+        }
+        this.padtype = padtype;
+        this.isComplex = false;
+        this.poly = true;
+    }
+
+    /**
+     * This method resamples using the Fourier method to change the number of samples to the given number of samples.
+     */
+    private void resample_base() {
         int Nx = this.signal.length;
 
         DiscreteFourier df = new DiscreteFourier(this.signal);
@@ -78,7 +194,236 @@ public class Resample {
         InverseDiscreteFourier idf = new InverseDiscreteFourier(Y, true);
         idf.idft();
         double[] y = idf.getRealSignal();
-        y = MathArrays.scale((float)this.num/(float)Nx, y);
-        return y;
+        this.output = MathArrays.scale((float)this.num/(float)Nx, y);
+    }
+
+    private static double _funcs(double[] signal, String action, double cval) {
+        double out = 0.0;
+        if (action.equals("mean")) {
+            out = StatUtils.mean(signal);
+        }
+        else if (action.equals("median")) {
+            out = new Median().evaluate(signal);
+        }
+        else if (action.equals("max")) {
+            out = StatUtils.max(signal);
+        }
+        else if (action.equals("min")) {
+            out = StatUtils.min(signal);
+        }
+        else if (action.equals("constant")) {
+            out = cval;
+        }
+        return out;
+    }
+
+    private static int _output_len(int hlen, int siglen, int up, int down) {
+        return (((siglen - 1) * up + hlen) - 1) / down + 1;
+    }
+
+    /**
+     * This method resamples using Polyphase filtering by upsampling by factor 'up', applying a zero-phase low-pass FIR
+     * filter, and then downsampling by factor 'down'. The resultant resampling factor is up/down * original sampling rate.
+     */
+    private void resample_poly() {
+        int g = ArithmeticUtils.gcd(this.up, this.down);
+        this.up = this.up/g;
+        this.down = this.down/g;
+        if ((this.up == 1) && (this.down == 1)) {
+            this.output = this.signal;
+        }
+
+        int n_in = this.signal.length;
+        int n_out = n_in * this.up;
+        n_out = n_out / this.down + ((n_out % this.down > 0) ? 1 : 0);
+
+        int max_rate = Math.max(this.up, this.down);
+        double f_c = 1.0/max_rate;
+        int half_len = 10 * max_rate;
+        FIRWin1 fw = new FIRWin1(2*half_len+1, this.width);
+        double[] h = fw.computeCoefficients(new double[] {f_c}, "lowpass", true);
+        h = UtilMethods.scalarArithmetic(h, this.up, "mul");
+
+        int n_pre_pad = (this.down - half_len % this.down);
+        int n_post_pad = 0;
+        int n_pre_remove = (half_len + n_pre_pad) / this.down;
+        int n_pre_remove_pad = n_pre_remove + n_out;
+        while (_output_len(h.length + n_pre_pad + n_post_pad, n_in, this.up, this.down) < n_out + n_pre_remove) {
+            n_post_pad++;
+        }
+
+        double[] pre = new double[n_pre_pad];
+        Arrays.fill(pre, 0.0);
+        double[] post = new double[n_post_pad];
+        Arrays.fill(post, 0.0);
+        h = UtilMethods.concatenateArray(pre, h);
+        h = UtilMethods.concatenateArray(h, post);
+        int n_pre_remove_end = n_pre_remove + n_out;
+
+        double bg_val = _funcs(this.signal, this.padtype, this.cval);
+        this.signal = UtilMethods.scalarArithmetic(this.signal, bg_val, "sub");
+
+        // Add main functionality
+        _UpFIRDown ufd = new _UpFIRDown(h, this.up, this.down, this.cval);
+        this.output = ufd.apply_filter(this.signal, this.padtype);
+        this.output = UtilMethods.splitByIndex(this.output, n_pre_remove, n_pre_remove_end);
+
+        // Add background values
+        this.output = UtilMethods.scalarArithmetic(this.output, bg_val, "add");
+
+    }
+
+    /**
+     * Calls the relevant resampling method depending on the constructor. If "poly" is true, plyphase resampling s performed,
+     * otherwise basic resampling.
+     * @param signal Signal to be resampled
+     * @return double[] The resampled signal
+     */
+    public double[] resampleSignal(double[] signal) {
+        this.signal = signal;
+        if (this.poly) {
+            this.resample_poly();
+        }
+        else {
+            this.resample_base();
+        }
+        return this.output;
+    }
+
+    /**
+     * Polyphase Resampling Helper Class
+     */
+    class _UpFIRDown {
+
+        private double[] _padH(double[] h, int up) {
+            int h_padlen = h.length + (-h.length%up);
+            double[][] htemp = new double[h_padlen/up][up];
+            Arrays.fill(htemp, 0);
+            for (int i=0; i<h.length; i++){
+                htemp[i/up][i%up] = h[i];
+            }
+            htemp = UtilMethods.transpose(htemp);
+            htemp = UtilMethods.reverseMatrix(htemp);
+            return UtilMethods.flattenMatrix(htemp);
+        }
+
+        private int up;
+        private int down;
+        private double[] h_trans_flip;
+        private int h_orig_len;
+        private double cval;
+
+        private _UpFIRDown(double[] h, int up, int down, double cval) {
+            this.up = up;
+            this.down = down;
+            this.h_orig_len = h.length;
+            this.h_trans_flip = this._padH(h, up);
+            this.cval = cval;
+        }
+
+        private double _extend_left(double[] signal, String padtype, double cval) {
+            double out = 0;
+            if (padtype.equals("constant")){
+                out = cval;
+            }
+            else if (padtype.equals("constant_edge")) {
+                out = signal[0];
+            }
+            else {
+                out = -1;
+            }
+            return out;
+        }
+
+        private double _extend_right(double[] signal, String padtype, double cval) {
+            double out = 0;
+            if (padtype.equals("constant")){
+                out = cval;
+            }
+            else if (padtype.equals("constant_edge")) {
+                out = signal[signal.length - 1];
+            }
+            else {
+                out = -1;
+            }
+            return out;
+        }
+
+        private double[] apply_filter(double[] signal, String padtype) {
+            int output_len = _output_len(this.h_orig_len, signal.length, this.up, this.down);
+            double[] output = new double[output_len];
+            Arrays.fill(output, 0.0);
+
+            int len_x = signal.length;
+            int len_h = this.h_trans_flip.length;
+            int len_out = output_len;
+            int h_per_phase = len_h / this.up;
+            int padded_len = len_x + h_per_phase - 1;
+            int x_idx, y_idx, h_idx, x_conv_idx, t;
+            x_idx = y_idx = h_idx = x_conv_idx = t = 0;
+            double x_val = 0.0;
+            boolean zpad = false;
+            if (padtype.equals("constant") && this.cval == 0) {
+                zpad = true;
+            }
+
+            // Where the actual computation happens
+            while (x_idx < len_x) {
+                h_idx = t * h_per_phase;
+                x_conv_idx = x_idx - h_per_phase + 1;
+
+                if (x_conv_idx < 0) {
+                    if (zpad) {
+                        h_idx = h_idx - x_conv_idx;
+                    }
+                    else {
+                        for (int xcidx=x_conv_idx; xcidx<0; xcidx++) {
+                            x_val = this._extend_left(signal, padtype, this.cval);
+                            output[y_idx] = output[y_idx] + x_val * this.h_trans_flip[h_idx];
+                            h_idx++;
+                        }
+                    }
+                    x_conv_idx = 0;
+                }
+                for (int xcidx=x_conv_idx; xcidx < x_idx + 1; xcidx++) {
+                    output[y_idx] = output[y_idx] + signal[xcidx] * this.h_trans_flip[h_idx];
+                    h_idx++;
+                }
+                y_idx++;
+                if (y_idx >= len_out) {
+                    return output;
+                }
+                t = t + this.down;
+                x_idx = x_idx + t/this.up;
+                t = t%this.up;
+            }
+
+            // Use a second simplified loop to flush out the last bits
+            while (x_idx < padded_len) {
+                h_idx = t * h_per_phase;
+                x_conv_idx = x_idx - h_per_phase + 1;
+                for (int xcidx=x_conv_idx; xcidx < x_idx + 1; xcidx++) {
+                    if (xcidx > len_x) {
+                        x_val = this._extend_right(signal, padtype, this.cval);
+                    }
+                    else if (xcidx < 0) {
+                        x_val = this._extend_left(signal, padtype, this.cval);
+                    }
+                    else {
+                        x_val = signal[x_conv_idx];
+                    }
+                    output[y_idx] = output[y_idx] + x_val * this.h_trans_flip[h_idx];
+                    h_idx++;
+                }
+                y_idx++;
+                if (y_idx >= len_out) {
+                    return output;
+                }
+                t = t + this.down;
+                x_idx = x_idx + t/this.up;
+                t = t % this.up;
+            }
+            return output;
+        }
     }
 }

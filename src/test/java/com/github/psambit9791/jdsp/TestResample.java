@@ -39,8 +39,8 @@ public class TestResample {
                 -0.323, -0.12 ,  0.106,  0.356,  0.618,  0.865,  1.059,  1.153,
                 1.112,  0.92 ,  0.595,  0.185, -0.235, -0.582, -0.781, -0.786,
                 -0.594, -0.244,  0.195,  0.636};
-        Resample r1 = new Resample(this.input_signal_1, 100);
-        double[] out = r1.resampleSignal();
+        Resample r1 = new Resample(100);
+        double[] out = r1.resampleSignal(this.input_signal_1);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -57,8 +57,8 @@ public class TestResample {
                 -0.464, -0.166,  0.143,  0.467,  0.793,  1.079,  1.266,  1.289,
                 1.109,  0.736,  0.232, -0.289, -0.699, -0.889, -0.807, -0.474,
                 0.022,  0.555};
-        Resample r1 = new Resample(this.input_signal_2, 82);
-        double[] out = r1.resampleSignal();
+        Resample r1 = new Resample(82);
+        double[] out = r1.resampleSignal(this.input_signal_2);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 }
