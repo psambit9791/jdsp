@@ -271,7 +271,7 @@ public class UtilMethods {
      */
     public static double[][] reverseMatrix(double[][] mat) {
         double[][] rev = new double[mat.length][mat[0].length];
-        for (int i=0; i<mat[0].length; i++){
+        for (int i=0; i<mat.length; i++){
             rev[i] = UtilMethods.reverse(mat[i]);
         }
         return rev;
@@ -450,6 +450,18 @@ public class UtilMethods {
      * @return double Result of the modulo operation
      */
     public static double modulo(double dividend, double divisor) {
+        return (((dividend % divisor) + divisor) % divisor);
+    }
+
+    /**
+     * Java provides a different implementation of modulo than Python.
+     * In Java, the result has the sign of the dividend, but in Python, the sign is from the divisor.
+     * This method implements the Python version of the modulo operation
+     * @param dividend The numerator
+     * @param divisor The denominator
+     * @return int Result of the modulo operation
+     */
+    public static int modulo(int dividend, int divisor) {
         return (((dividend % divisor) + divisor) % divisor);
     }
 

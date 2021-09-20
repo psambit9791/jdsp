@@ -82,6 +82,19 @@ public class FIRWin1 extends _FIRFilter {
     }
 
     /**
+     * FIRWin1 constructor for generating a filter using the number of coefficients in the filter and the beta for the
+     * Kaiser window. The Nyquist frequency is set to 1.
+     * @param numTaps Number of coefficients in the filter
+     * @param beta Width of the Kaiser window to be used
+     * @param direct_kaiser Using beta directly instead of computing using kaiserBeta()
+     */
+    public FIRWin1(int numTaps, double beta, boolean direct_kaiser) {
+        this.nyquistF = 1.0;
+        this.numTaps = numTaps;
+        this.beta = beta;
+    }
+
+    /**
      * FIRWin1 constructor for generating a filter using the ripple factor of the filter. The Nyquist frequency
      * is set to 1.
      * @param ripple Upper bound for the deviation (in dB) of the magnitude of the filter's frequency response from that

@@ -40,11 +40,11 @@ public class Resample {
     private int num;
     private int up;
     private int down;
-    private int width;
+    private double beta;
     private double cval;
-    private boolean isComplex;
     private double[] output;
     private String padtype;
+    private String upfirdn_mode;
 
     /**
      * This constructor initialises the prerequisites required to use Resample.
@@ -52,12 +52,11 @@ public class Resample {
      */
     public Resample(int num) {
         this.num = num;
-        this.isComplex = false;
         this.poly = false;
     }
 
     /**
-     * This constructor initialises the prerequisites required to use Polyphase Resample. Uses a Kaiser window of width
+     * This constructor initialises the prerequisites required to use Polyphase Resample. Uses a Kaiser window of beta
      * 5 to construct the low-pass filter.
      * @param up The number of samples required after resampling
      * @param down The number of samples required after resampling
@@ -71,14 +70,14 @@ public class Resample {
         }
         this.up = up;
         this.down = down;
-        this.width = 5;
+        this.beta = 5.0;
         this.cval = cval;
         if (!padtype.equals("mean") && !padtype.equals("median") && !padtype.equals("min") && !padtype.equals("max") &&
-                !padtype.equals("constant")) {
-            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max' or 'constant'");
+                !padtype.equals("constant") && !padtype.equals("edge")) {
+            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max', 'constant' or 'edge'");
         }
         this.padtype = padtype;
-        this.isComplex = false;
+        this.upfirdn_mode = padtype;
         this.poly = true;
     }
 
@@ -87,29 +86,29 @@ public class Resample {
      * width to construct the low-pass filter. Sets cval to 0 for "constant" padtype.
      * @param up The number of samples required after resampling
      * @param down The number of samples required after resampling
-     * @param width Width of the Kaiser window for designing the low-pass filter
+     * @param beta Beta parameter of the Kaiser window for designing the low-pass filter
      * @param padtype Kind of signal extension to be used to extend the boundaries. Can be one of 'mean', 'median', 'min',
      *                'max' or 'constant'
      */
-    public Resample(int up, int down, int width, String padtype) {
+    public Resample(int up, int down, double beta, String padtype) {
         if ((up < 1) && (down < 1)) {
             throw new IllegalArgumentException("up and down must be greater than 0");
         }
         this.up = up;
         this.down = down;
-        this.width = width;
+        this.beta = beta;
         this.cval = 0;
         if (!padtype.equals("mean") && !padtype.equals("median") && !padtype.equals("min") && !padtype.equals("max") &&
-                !padtype.equals("constant")) {
-            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max' or 'constant'");
+                !padtype.equals("constant") && !padtype.equals("edge")) {
+            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max', 'constant' or 'edge'");
         }
         this.padtype = padtype;
-        this.isComplex = false;
+        this.upfirdn_mode = padtype;
         this.poly = true;
     }
 
     /**
-     * This constructor initialises the prerequisites required to use Polyphase Resample. Uses a Kaiser window of width
+     * This constructor initialises the prerequisites required to use Polyphase Resample. Uses a Kaiser window of beta
      * 5 to construct the low-pass filter. Sets cval to 0 for "constant" padtype.
      * @param up The number of samples required after resampling
      * @param down The number of samples required after resampling
@@ -122,14 +121,14 @@ public class Resample {
         }
         this.up = up;
         this.down = down;
-        this.width = 0;
-        this.cval = cval;
+        this.beta = 5.0;
+        this.cval = 0.0;
         if (!padtype.equals("mean") && !padtype.equals("median") && !padtype.equals("min") && !padtype.equals("max") &&
-                !padtype.equals("constant")) {
-            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max' or 'constant'");
+                !padtype.equals("constant") && !padtype.equals("edge")) {
+            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max', 'constant' or 'edge'");
         }
         this.padtype = padtype;
-        this.isComplex = false;
+        this.upfirdn_mode = padtype;
         this.poly = true;
     }
 
@@ -138,25 +137,25 @@ public class Resample {
      * width to construct the low-pass filter.
      * @param up The number of samples required after resampling
      * @param down The number of samples required after resampling
-     * @param width Width of the Kaiser window for designing the low-pass filter
+     * @param beta Beta parameter of the Kaiser window for designing the low-pass filter
      * @param padtype Kind of signal extension to be used to extend the boundaries. Can be one of 'mean', 'median', 'min',
      *                'max' or 'constant'
      * @param cval Only used when padtype is "constant"
      */
-    public Resample(int up, int down, int width, String padtype, double cval) {
+    public Resample(int up, int down, double beta, String padtype, double cval) {
         if ((up < 1) && (down < 1)) {
             throw new IllegalArgumentException("up and down must be greater than 0");
         }
         this.up = up;
         this.down = down;
-        this.width = width;
+        this.beta = beta;
         this.cval = cval;
         if (!padtype.equals("mean") && !padtype.equals("median") && !padtype.equals("min") && !padtype.equals("max") &&
-                !padtype.equals("constant")) {
-            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max' or 'constant'");
+                !padtype.equals("constant") && !padtype.equals("edge")) {
+            throw new ArithmeticException("padtype must be 'mean', 'median', 'min', 'max', 'constant' or 'edge'");
         }
         this.padtype = padtype;
-        this.isComplex = false;
+        this.upfirdn_mode = padtype;
         this.poly = true;
     }
 
@@ -197,22 +196,30 @@ public class Resample {
         this.output = MathArrays.scale((float)this.num/(float)Nx, y);
     }
 
-    private static double _funcs(double[] signal, String action, double cval) {
+    private double _funcs(double[] signal, String action) {
         double out = 0.0;
         if (action.equals("mean")) {
             out = StatUtils.mean(signal);
+            this.upfirdn_mode = "constant";
+            this.cval = 0.0;
         }
         else if (action.equals("median")) {
             out = new Median().evaluate(signal);
+            this.upfirdn_mode = "constant";
+            this.cval = 0.0;
         }
         else if (action.equals("max")) {
             out = StatUtils.max(signal);
+            this.upfirdn_mode = "constant";
+            this.cval = 0.0;
         }
         else if (action.equals("min")) {
             out = StatUtils.min(signal);
+            this.upfirdn_mode = "constant";
+            this.cval = 0.0;
         }
-        else if (action.equals("constant")) {
-            out = cval;
+        else {
+            out = 0.0;
         }
         return out;
     }
@@ -235,19 +242,19 @@ public class Resample {
 
         int n_in = this.signal.length;
         int n_out = n_in * this.up;
-        n_out = n_out / this.down + ((n_out % this.down > 0) ? 1 : 0);
+        n_out = n_out / this.down + ((UtilMethods.modulo(n_out, this.down) > 0) ? 1 : 0);
 
         int max_rate = Math.max(this.up, this.down);
         double f_c = 1.0/max_rate;
         int half_len = 10 * max_rate;
-        FIRWin1 fw = new FIRWin1(2*half_len+1, this.width);
+        FIRWin1 fw = new FIRWin1(2*half_len+1, this.beta, true);
         double[] h = fw.computeCoefficients(new double[] {f_c}, "lowpass", true);
         h = UtilMethods.scalarArithmetic(h, this.up, "mul");
 
         int n_pre_pad = (this.down - half_len % this.down);
         int n_post_pad = 0;
         int n_pre_remove = (half_len + n_pre_pad) / this.down;
-        int n_pre_remove_pad = n_pre_remove + n_out;
+        int n_pre_remove_end = n_pre_remove + n_out;
         while (_output_len(h.length + n_pre_pad + n_post_pad, n_in, this.up, this.down) < n_out + n_pre_remove) {
             n_post_pad++;
         }
@@ -258,18 +265,23 @@ public class Resample {
         Arrays.fill(post, 0.0);
         h = UtilMethods.concatenateArray(pre, h);
         h = UtilMethods.concatenateArray(h, post);
-        int n_pre_remove_end = n_pre_remove + n_out;
 
-        double bg_val = _funcs(this.signal, this.padtype, this.cval);
-        this.signal = UtilMethods.scalarArithmetic(this.signal, bg_val, "sub");
+
+        double bg_val = this._funcs(this.signal, this.padtype);
+        if (this.padtype.equals("mean") || this.padtype.equals("median") || this.padtype.equals("max") || this.padtype.equals("min")) {
+            this.signal = UtilMethods.scalarArithmetic(this.signal, bg_val, "sub");
+        }
 
         // Add main functionality
         _UpFIRDown ufd = new _UpFIRDown(h, this.up, this.down, this.cval);
-        this.output = ufd.apply_filter(this.signal, this.padtype);
+        this.output = ufd.apply_filter(this.signal, this.upfirdn_mode);
+        System.out.println(n_pre_remove + ", " + n_pre_remove_end);
         this.output = UtilMethods.splitByIndex(this.output, n_pre_remove, n_pre_remove_end);
 
         // Add background values
-        this.output = UtilMethods.scalarArithmetic(this.output, bg_val, "add");
+        if (this.padtype.equals("mean") || this.padtype.equals("median") || this.padtype.equals("max") || this.padtype.equals("min")) {
+            this.output = UtilMethods.scalarArithmetic(this.output, bg_val, "add");
+        }
 
     }
 
@@ -296,9 +308,11 @@ public class Resample {
     class _UpFIRDown {
 
         private double[] _padH(double[] h, int up) {
-            int h_padlen = h.length + (-h.length%up);
+            int h_padlen = h.length + UtilMethods.modulo(-h.length, up);
             double[][] htemp = new double[h_padlen/up][up];
-            Arrays.fill(htemp, 0);
+            for (double[] row: htemp) {
+                Arrays.fill(row, 0.0);
+            }
             for (int i=0; i<h.length; i++){
                 htemp[i/up][i%up] = h[i];
             }
@@ -326,7 +340,7 @@ public class Resample {
             if (padtype.equals("constant")){
                 out = cval;
             }
-            else if (padtype.equals("constant_edge")) {
+            else if (padtype.equals("edge")) {
                 out = signal[0];
             }
             else {
@@ -340,7 +354,7 @@ public class Resample {
             if (padtype.equals("constant")){
                 out = cval;
             }
-            else if (padtype.equals("constant_edge")) {
+            else if (padtype.equals("edge")) {
                 out = signal[signal.length - 1];
             }
             else {
@@ -350,13 +364,12 @@ public class Resample {
         }
 
         private double[] apply_filter(double[] signal, String padtype) {
-            int output_len = _output_len(this.h_orig_len, signal.length, this.up, this.down);
-            double[] output = new double[output_len];
+            int len_out = _output_len(this.h_orig_len, signal.length, this.up, this.down);
+            double[] output = new double[len_out];
             Arrays.fill(output, 0.0);
 
             int len_x = signal.length;
             int len_h = this.h_trans_flip.length;
-            int len_out = output_len;
             int h_per_phase = len_h / this.up;
             int padded_len = len_x + h_per_phase - 1;
             int x_idx, y_idx, h_idx, x_conv_idx, t;
@@ -395,7 +408,7 @@ public class Resample {
                 }
                 t = t + this.down;
                 x_idx = x_idx + t/this.up;
-                t = t%this.up;
+                t = UtilMethods.modulo(t, this.up);
             }
 
             // Use a second simplified loop to flush out the last bits
@@ -403,7 +416,7 @@ public class Resample {
                 h_idx = t * h_per_phase;
                 x_conv_idx = x_idx - h_per_phase + 1;
                 for (int xcidx=x_conv_idx; xcidx < x_idx + 1; xcidx++) {
-                    if (xcidx > len_x) {
+                    if (xcidx >= len_x) {
                         x_val = this._extend_right(signal, padtype, this.cval);
                     }
                     else if (xcidx < 0) {
@@ -421,7 +434,7 @@ public class Resample {
                 }
                 t = t + this.down;
                 x_idx = x_idx + t/this.up;
-                t = t % this.up;
+                t = UtilMethods.modulo(t, this.up);
             }
             return output;
         }
