@@ -266,7 +266,7 @@ public class Resample {
         h = UtilMethods.concatenateArray(pre, h);
         h = UtilMethods.concatenateArray(h, post);
 
-
+        // Subtract background values
         double bg_val = this._funcs(this.signal, this.padtype);
         if (this.padtype.equals("mean") || this.padtype.equals("median") || this.padtype.equals("max") || this.padtype.equals("min")) {
             this.signal = UtilMethods.scalarArithmetic(this.signal, bg_val, "sub");
@@ -275,7 +275,6 @@ public class Resample {
         // Add main functionality
         _UpFIRDown ufd = new _UpFIRDown(h, this.up, this.down, this.cval);
         this.output = ufd.apply_filter(this.signal, this.upfirdn_mode);
-        System.out.println(n_pre_remove + ", " + n_pre_remove_end);
         this.output = UtilMethods.splitByIndex(this.output, n_pre_remove, n_pre_remove_end);
 
         // Add background values
@@ -423,7 +422,7 @@ public class Resample {
                         x_val = this._extend_left(signal, padtype, this.cval);
                     }
                     else {
-                        x_val = signal[x_conv_idx];
+                        x_val = signal[xcidx];
                     }
                     output[y_idx] = output[y_idx] + x_val * this.h_trans_flip[h_idx];
                     h_idx++;
