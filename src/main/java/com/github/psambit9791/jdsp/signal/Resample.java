@@ -24,9 +24,12 @@ import java.util.Arrays;
 
 /**
  * <h1>Resample</h1>
- * The Resample class samples the signal again with a new number of samples. The new spacing equals the number of previous
- * samples divided by the new number of samples and the previous spacing. This method uses Fourier Transform and expects
- * the signal to be periodic.
+ * The Resample class samples the signal again with a new number of samples. Resampling works in two modes - using the
+ * Fourier transform and the Polyphase filtering.
+ * For the Fourier transform method; the new spacing equals the number of previous samples divided by the new number of samples
+ * and the previous spacing. This method uses Fourier Transform and expects the signal to be periodic.
+ * For the Polyphase filtering method; the signal is upsampled by 'up' factor, filtered using a zero-phase low-pass FIR filter
+ * (FIRWin1), and downsampled by 'down' factor.
  * Resampling works only for real signals.
  * <p>
  *
@@ -162,7 +165,7 @@ public class Resample {
     /**
      * This method resamples using the Fourier method to change the number of samples to the given number of samples.
      */
-    private void resample_base() {
+    private void resample_fft() {
         int Nx = this.signal.length;
 
         DiscreteFourier df = new DiscreteFourier(this.signal);
@@ -296,7 +299,7 @@ public class Resample {
             this.resample_poly();
         }
         else {
-            this.resample_base();
+            this.resample_fft();
         }
         return this.output;
     }
