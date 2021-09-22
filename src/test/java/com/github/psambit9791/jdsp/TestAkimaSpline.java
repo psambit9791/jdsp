@@ -17,7 +17,6 @@ import com.github.psambit9791.jdsp.splines.AkimaSpline;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 
 public class TestAkimaSpline {
 

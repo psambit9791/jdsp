@@ -22,6 +22,9 @@ public class BSpline {
     private umontreal.ssj.functionfit.BSpline psf;
 
     public BSpline(int order) {
+        if (order < 2 || order > 5) {
+            throw new IllegalArgumentException("Order must be between 2 and 5");
+        }
         this.order = order;
         this.psf = null;
     }
