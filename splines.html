@@ -1,22 +1,360 @@
-<!--
-  ~ /*
-  ~  * Copyright (c) 2020 Sambit Paul
-  ~  *
-  ~  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-  ~  *
-  ~  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-  ~  *
-  ~  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-  ~  */
-  -->
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>JDSP - Digital Signal Processing in Java</title>
+    <link rel="icon" type="image/png" href="res/logos/favicon.png"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="JDSP - Java Library for Digital Signal Processing" />
+    <meta property="og:image" content="res/logos/favicon.png"/>
+
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170609701-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-170609701-1');
+    </script>
+
 </head>
-<body>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+<div class="site-wrap" id="home-section">
+
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+
+
+
+    <header class="site-navbar py-3 js-site-navbar site-navbar-target" role="banner" id="site-navbar">
+
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-11 col-xl-2 site-logo">
+                    <a href="index.html" class="font-weight-bold"><img src="res/logos/jDSP-Logo-NoText-Transparent.png" alt="Image" class="img-fluid" style="width: auto; height: 24px;"></a>
+                </div>
+                <div class="col-12 col-md-10 d-none d-xl-block">
+                    <nav class="site-navigation position-relative text-right" role="navigation">
+
+                        <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
+                            <li><a href="index.html" class="nav-link">Home</a></li>
+                            <li><a href="https://psambit9791.github.io/jDSP/index.html#section-features" class="nav-link">Features</a></li>
+                            <li class="has-children">
+                                <a class="nav-link">Toolkit</a>
+                                <ul class="dropdown">
+                                    <li><a href="get_started.html" class="nav-link">Get Started</a></li>
+                                    <li><a href="preprocess.html" class="nav-link">Pre-processing & Synthesis</a></li>
+                                    <li><a href="filters.html" class="nav-link">Filters</a></li>
+                                    <li><a href="transforms.html" class="nav-link">Transforms</a></li>
+                                    <li><a href="peaks.html" class="nav-link">Peak Detection</a></li>
+                                    <li><a href="windowing.html" class="nav-link">Windowing</a></li>
+                                    <li class="active"><a href="splines.html" class="nav-link">Splines</a></li>
+                                    <li><a href="io.html" class="nav-link">Input/Output</a></li>
+                                    <li><a href="utils.html" class="nav-link">Utilities</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="https://javadoc.io/doc/com.github.psambit9791/jdsp" target="_blank" class="nav-link">Documentation</a></li>
+                            <li><a href="https://github.com/psambit9791/jDSP/tree/master" target="_blank" class="nav-link">Source Code</a></li>
+                            <li><a href="https://search.maven.org/artifact/com.github.psambit9791/jdsp/0.4.0/jar" target="_blank" class="nav-link">Maven</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+
+                <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="text-white site-menu-toggle js-menu-toggle"><span class="text-white icon-menu h3"></span></a></div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <div class="ftco-blocks-cover-1">
+        <div class="site-section-cover overlay" style="background-image: url('res/images/abstract-258338_1920.png')">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-7 text-center">
+                        <h1 class="mb-4 text-white">Splines</h1>
+                        <p class="mb-4">Provides a demonstration of using Akima and B-Splines through JDSP</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section bg-black">
+
+        <!--  TABS  -->
+        <div id="tabs">
+            <ul>
+                <li><a href="#akima">Akima Spline</a> </li>
+                <li><a href="#b">B-Spline</a> </li>
+                <li><a href="#quad">Quadratic Spline</a> </li>
+                <li><a href="#cubic">Cubic Spline</a> </li>
+            </ul>
+
+            <div id="akima">
+
+                <!--  START OF AKIMA SPLINE  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Akima Spline</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/splines/akima.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+AkimaSpline aks = new AkimaSpline();
+aks.computeFunction(this.x, this.y);
+double[] xnew = UtilMethods.linspace(0.0, 10.0, 201, true);
+double[] result = aks.getValue(xnew);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF AKIMA SPLINE-->
+
+            </div>
+
+
+
+            <div id="b">
+
+                <!--  START OF B SPLINE  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">B-Spline</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>B-Spline of Order 4</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>B-Spline of Order 5</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center" style="padding-bottom: 50px">
+                            <img src="res/signal/splines/b4.png" alt="Image" class="img-fluid" style="padding: 25px">
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center" style="padding-bottom: 50px">
+                            <img src="res/signal/splines/b5.png" alt="Image" class="img-fluid" style="padding: 25px">
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+CubicSpline cbs = new B-Spline(4);
+cbs.computeFunction(this.x, this.y);
+double[] xnew = UtilMethods.linspace(0.0, 10.0, 201, true);
+double[] result = cbs.getValue(xnew);
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+CubicSpline cbs = new BSpline(5);
+cbs.computeFunction(this.x, this.y);
+double[] xnew = UtilMethods.linspace(0.0, 10.0, 201, true);
+double[] result = cbs.getValue(xnew);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF B SPLINE-->
+
+            </div>
+
+            <div id="cubic">
+
+                <!--  START OF CUBIC SPLINE  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Cubic Spline</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/splines/b3.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+CubicSpline cbs = new CubicSpline();
+cbs.computeFunction(this.x, this.y);
+double[] xnew = UtilMethods.linspace(0.0, 10.0, 201, true);
+double[] result = cbs.getValue(xnew);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF CUBIC SPLINE-->
+
+            </div>
+
+
+            <div id="quad">
+
+                <!--  START OF QUADRATIC SPLINE  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Quadratic Spline</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/splines/b2.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+QuadraticSpline qbs = new QuadraticSpline();
+qbs.computeFunction(this.x, this.y);
+double[] xnew = UtilMethods.linspace(0.0, 10.0, 201, true);
+double[] result = qbs.getValue(xnew);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF QUADRATIC SPLINE-->
+
+            </div>
+        </div>
+
+    </div>
+    <!-- END Section -->
+
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row d-flex justify-content-around">
+                <div class="col-3 col-md-3 col-lg-3 justify-content-center">
+                    <h2 class="footer-heading mb-3">Support</h2>
+                    <p>JDSP is a labour of love and requires time and effort to maintain and develop. Financial
+                        contributions towards JDSP enhances the tool and also quickens development. You can help by becoming
+                        a supporter.</p>
+                    <div class="row" style="padding: 15px">
+                        <div class="col-4 col-md-4 col-lg-4 align-text-center">
+                            <a href="https://www.patreon.com/sambitpaul" target="_blank"><img src="res/logos/patreon.png" alt="Image" class="img-fluid support-image-1"></a>
+                        </div>
+                        <div class="col-4 col-md-4 col-lg-4 align-text-center">
+                            <a href="https://paypal.me/psambit9791" target="_blank"><img src="res/logos/paypal.png" alt="Image" class="img-fluid support-image-2"></a>
+                        </div>
+                        <div class="col-4 col-md-4 col-lg-4 align-text-center">
+                            <a href="https://www.ko-fi.com/sambitpaul" target="_blank"><img src="res/logos/kofi.png" alt="Image" class="img-fluid support-image-2"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-6 col-lg-6 align-text-center">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-6 col-md-6 col-lg-6 align-text-center">
+                            <h2 class="footer-heading mb-4">Quick Links</h2>
+                            <ul class="list-unstyled">
+                                <li><a href="https://github.com/psambit9791/jDSP" target="_blank">Github</a></li>
+                                <li><a href="index.html" target="_blank">JDSP Home</a></li>
+                                <li><a href="https://search.maven.org/artifact/com.github.psambit9791/jdsp/" target="_blank">Maven Central</a></li>
+                                <li><a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/index.html" target="_blank">Documentation</a></li>
+                                <li><a href="https://github.com/psambit9791/jDSP/blob/master/LICENSE" target="_blank">License</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 col-md-3 col-lg-3">
+                    <h2 class="footer-heading mb-4">Connect</h2>
+                    <div class="social_29128 white mb-5">
+                        <a href="https://www.linkedin.com/in/sambit-paul/" target="_blank"><span class="fa fa-linkedin"></span></a>
+                        <a href="https://github.com/psambit9791" target="_blank"><span class="fa fa-github"></span></a>
+                        <a href="https://twitter.com/psambit9791" target="_blank"><span class="fa fa-twitter"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-5 mt-5 text-center">
+                <div class="col-12 col-md-12 col-mlg-12">
+                    <div class="border-top pt-5">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-migrate-3.0.0.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/jquery.fancybox.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/isotope.pkgd.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+
+<script src="js/main.js"></script>
+
+<script type="text/javascript">
+      $('#tabs').tabs()
+    </script>
 
 </body>
+
 </html>
+
