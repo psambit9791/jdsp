@@ -77,6 +77,7 @@
                       <li><a href="transforms.html" class="nav-link">Transforms</a></li>
                       <li><a href="peaks.html" class="nav-link">Peak Detection</a></li>
                       <li><a href="windowing.html" class="nav-link">Windowing</a></li>
+                      <li><a href="splines.html" class="nav-link">Splines</a></li>
                       <li><a href="io.html" class="nav-link">Input/Output</a></li>
                       <li><a href="utils.html" class="nav-link">Utilities</a></li>
                     </ul>
@@ -274,19 +275,27 @@ double[] out = d.decimate(factor);
               </div>
               <!-- END OF DECIMATE-->
 
-              <!--  START OF SMOOTH  -->
+              <!--  START OF RESAMPLE  -->
               <div class="bg-light" style="padding-top:30px;">
                   <div class="row mb-5">
                       <div class="col-md-7 mx-auto text-center">
                           <h2 class="heading-29190">Resample</h2>
                       </div>
                   </div>
-                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
-                      <img src="res/signal/signal/resample/resample.png" alt="Image" class="img-fluid" style="width: auto; height: 384px;">
-                  </div>
-
                   <div class="row">
-                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>FFT-based Resampling</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Polyphase Filter-based Resampling</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center" style="padding-bottom: 50px">
+                          <img src="res/signal/signal/resample/resample.png" alt="Image" class="img-fluid" style="padding: 25px">
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center" style="padding-bottom: 50px">
+                          <img src="res/signal/signal/resample/resample_poly.png" alt="Image" class="img-fluid" style="padding: 25px">
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
 Resample rs = new Resample(this.signal, 100);
@@ -294,11 +303,18 @@ double[] resampled = rs.resampleSignal();
                     </code>
                   </pre>
                       </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+Resample rs = new Resample(100, 20, "constant");
+double[] resampled = rs.resampleSignal(this.signal);
+                    </code>
+                  </pre>
+                      </div>
                   </div>
-
                   <div class="container" style="padding-bottom:50px;"></div>
               </div>
-              <!-- END OF SMOOTH-->
+              <!-- END OF RESAMPLE-->
 
               <!--  START OF CONVOLVE  -->
               <div class="bg-white" style="padding-top:30px;">
