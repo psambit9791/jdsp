@@ -12,8 +12,18 @@
 
 package com.github.psambit9791.jdsp.splines;
 
+/**
+ * <h1>Cubic Spline</h1>
+ * An extension of the BSpline class for degree 3.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class CubicSpline extends BSpline {
-
+    /**
+     * This constructor initialises the prerequisites required create a Cubic Spline
+     */
     public CubicSpline() {
         super(3);
     }
