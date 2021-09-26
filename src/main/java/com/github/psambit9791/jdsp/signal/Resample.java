@@ -27,7 +27,7 @@ import java.util.Arrays;
  * The Resample class samples the signal again with a new number of samples. Resampling works in two modes - using the
  * Fourier transform and the Polyphase filtering.
  * For the Fourier transform method; the new spacing equals the number of previous samples divided by the new number of samples
- * and the previous spacing. This method uses Fourier Transform and expects the signal to be periodic.
+ * and the previous spacing. The signal is expected to be periodic.
  * For the Polyphase filtering method; the signal is upsampled by 'up' factor, filtered using a zero-phase low-pass FIR filter
  * (FIRWin1), and downsampled by 'down' factor.
  * Resampling works only for real signals.
