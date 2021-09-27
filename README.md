@@ -21,7 +21,7 @@ To get the latest stable release of JDSP:
 
 ### Gradle
 ```
-implementation 'com.github.psambit9791:jdsp:0.7.0'
+implementation 'com.github.psambit9791:jdsp:0.8.0'
 ```
 
 ### Maven
@@ -29,7 +29,7 @@ implementation 'com.github.psambit9791:jdsp:0.7.0'
 <dependency>
   <groupId>com.github.psambit9791</groupId>
   <artifactId>jdsp</artifactId>
-  <version>0.7.0</version>
+  <version>0.8.0</version>
 </dependency>
 ```
 
@@ -99,6 +99,11 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/windows/BartlettHann.html">com.github.psambit9791.jdsp.windows.BartlettHann</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Bartlett-Hann-Window"><strong>Windowing</strong></a> | Generates a Bartlett-Hann Window |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/windows/Bohman.html">com.github.psambit9791.jdsp.windows.Bohman</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Bohman-Window"><strong>Windowing</strong></a> | Generates a Bohman Window |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/windows/Kaiser.html">com.github.psambit9791.jdsp.windows.Kaiser</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Kaiser-Window"><strong>Windowing</strong></a> | Generates a Kaiser Window |
+||||
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/splines/AkimaSpline.html">com.github.psambit9791.jdsp.splines.AkimaSpline</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Akima-Spline"><strong>Splines</strong></a> | Provides methods to construct an Akima Spline |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/splines/BSpline.html">com.github.psambit9791.jdsp.splines.BSpline</a> | <a href="https://github.com/psambit9791/jDSP/wiki/B-Spline"><strong>Splines</strong></a> | Provides methods to construct an B-Spline |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/splines/QuadraticSpline.html">com.github.psambit9791.jdsp.splines.QuadraticSpline</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Quadratic-Spline"><strong>Splines</strong></a> | Provides methods to construct an Quadratic B-Spline |
+| <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/splines/CubicSpline.html">com.github.psambit9791.jdsp.splines.CubicSpline</a> | <a href="https://github.com/psambit9791/jDSP/wiki/Cubic-Spline"><strong>Splines</strong></a> | Provides methods to construct an Cubic B-Spline |
 ||||
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/io/Wav.html">com.github.psambit9791.jdsp.io.Wav</a> | <a href="https://github.com/psambit9791/jDSP/wiki/WAV-File-IO"><strong>Input/Output</strong></a> | Provides methods to read from and write to WAV files |
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/io/Csv.html">com.github.psambit9791.jdsp.io.Csv</a> | <a href="https://github.com/psambit9791/jDSP/wiki/CSV-File-IO"><strong>Input/Output</strong></a> | Provides methods to read from and write to CSV files |
