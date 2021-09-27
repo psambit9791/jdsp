@@ -117,15 +117,15 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 If you are using this software in your research, please use the following citation:
 
 ```
-@software{sambit_paul_2021_5137347,
+@software{sambit_paul_2021_5529652,
   author       = {Sambit Paul},
-  title        = {psambit9791/jDSP: v0.7.0 (July 26, 2021)},
-  month        = jul,
+  title        = {psambit9791/jDSP: v0.8.0 (September 27, 2021)},
+  month        = sep,
   year         = 2021,
   publisher    = {Zenodo},
-  version      = {v0.7.0},
-  doi          = {10.5281/zenodo.5137347},
-  url          = {https://doi.org/10.5281/zenodo.5137347}
+  version      = {v0.8.0},
+  doi          = {10.5281/zenodo.5529652},
+  url          = {https://doi.org/10.5281/zenodo.5529652}
 }
 ```
 ## Supporting JDSP 
