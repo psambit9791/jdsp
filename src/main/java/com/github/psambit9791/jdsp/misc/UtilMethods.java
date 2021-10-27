@@ -214,6 +214,19 @@ public class UtilMethods {
     /**
      * This function returns the input array after reversing the order of the elements in it.
      * @param arr Array to be reversed
+     * @return Complex[] Reversed array
+     */
+    public static Complex[] reverse(Complex[] arr) {
+        Complex[] inv = new Complex[arr.length];
+        for (int i=0; i<inv.length; i++) {
+            inv[i] = arr[arr.length-1-i];
+        }
+        return inv;
+    }
+
+    /**
+     * This function returns the input array after reversing the order of the elements in it.
+     * @param arr Array to be reversed
      * @return int[] Reversed array
      */
     public static int[] reverse(int[] arr) {
@@ -1276,6 +1289,42 @@ public class UtilMethods {
             }
         }
         return matrix;
+    }
+
+    /**
+     * Convert a 2D matrix to a list of Complex numbers
+     * @param arr Complex Numbers as a 2D matrix. Dimension 1: Length, Dimension 2: Real part, complex part (optional)
+     * @return Complex[] A list of Complex numbers
+     */
+    public static Complex[] matToComplex(double[][] arr) {
+        Complex[] out = new Complex[arr.length];
+        if (arr[0].length == 2) {
+            for (int i=0; i<out.length; i++) {
+                out[i] = new Complex(arr[i][0], arr[i][1]);
+            }
+        }
+        else if (arr[0].length == 1) {
+            for (int i=0; i<out.length; i++) {
+                out[i] = new Complex(arr[i][0]);
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Dimension 2 must be of length 1 or 2.");
+        }
+        return out;
+    }
+
+    /**
+     * Convert a 1D list of numbers to a list of Complex numbers
+     * @param arr Complex Numbers as a 1D matrix (only real values).
+     * @return Complex[] A list of Complex numbers
+     */
+    public static Complex[] matToComplex(double[] arr) {
+        Complex[] out = new Complex[arr.length];
+        for (int i=0; i<out.length; i++) {
+            out[i] = new Complex(arr[i]);
+        }
+        return out;
     }
 
     /**

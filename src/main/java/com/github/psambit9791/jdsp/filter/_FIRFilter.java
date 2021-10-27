@@ -15,7 +15,7 @@ import com.github.psambit9791.jdsp.signal.Convolution;
 
 /**
  * <h1>Finite Impulse Response Filter Class</h1>
- * The FIR Filter class is a super class for all FIR filters - firWin1, firWin2, firLS and remez.
+ * The FIR Filter class is a super class for all FIR filters - firWin1, firWin2 and firLS.
  * <p>
  *
  * @author  Sambit Paul
@@ -26,6 +26,7 @@ abstract class _FIRFilter {
     /**
      * FIR Filters follow the formula y_n = sum(b_i * x_(n-i)) for all coefficients i = 0 to M.
      * For FIR filters we can set a to 1.0.
+     * Similar to lfilter (from scipy) but modified for FIR application
      * @param b The numerator coefficient vector
      * @param x The signal to be filtered
      * @param zi Initial conditions for the filter delays

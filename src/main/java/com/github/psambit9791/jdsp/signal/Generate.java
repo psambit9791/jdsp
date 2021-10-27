@@ -31,6 +31,12 @@ public class Generate {
 
     /**
      * This constructor initialises the prerequisites
+     * required to generate wavelets which do not need any arguments.
+     */
+    public Generate() {}
+
+    /**
+     * This constructor initialises the prerequisites
      * required to generate different signals.
      * @param start The starting timepoint
      * @param stop The ending timepoint
@@ -240,7 +246,7 @@ public class Generate {
     }
 
     /**
-     * Returns a Complex Morlet Wavelet
+     * Returns a Complex Morlet Wavelet in 2D matrix format
      * @param points Length of the wavelet
      * @param omega0 Central frequency
      * @param scale Scaling Factor
@@ -248,6 +254,53 @@ public class Generate {
      */
     public double[][] generateMorlet(int points, double omega0, double scale) {
         Complex[] temp = this.generateMorletComplex(points, omega0, scale);
+        return UtilMethods.complexTo2D(temp);
+    }
+
+    /**
+     * Returns a Complex Morlet Wavelet compatible with CWT
+     * @param points Length of the wavelet
+     * @param omega0 Central frequency
+     * @param width Width parameter of wavelet
+     * @return Complex[] The
+     */
+    public Complex[] generateMorletCWTComplex(int points, double omega0, double width) {
+        double[] x = UtilMethods.arange(0, points, 1.0);
+        double sub_const = (points - 1)/2.0;
+        double pi_root_root = Math.pow(Math.PI, -0.25);
+        double width_sqrt = Math.pow(1/width, 0.5);
+
+        for (int i=0; i<x.length; i++) {
+            x[i] = (x[i] - sub_const)/width;
+        }
+        Complex[] output = new Complex[points];
+        Complex temp1;
+        Complex temp2;
+        for (int i=0; i<points; i++) {
+            temp1 = new Complex(0, omega0*x[i]);
+            temp1 = temp1.exp();
+
+            temp2 = new Complex(-0.5*Math.pow(x[i], 2), 0);
+            temp2 = temp2.exp();
+
+            temp1 = temp1.multiply(temp2);
+            temp1 = temp1.multiply(pi_root_root);
+
+            output[i] = temp1.multiply(width_sqrt);
+        }
+
+        return output;
+    }
+
+    /**
+     * Returns a Complex Morlet Wavelet (CWT compatible) in 2D matrix format
+     * @param points Length of the wavelet
+     * @param omega0 Central frequency
+     * @param width Width parameter of wavelet
+     * @return double[][] Complex array as a 2D vector. Dimension 1: Length, Dimension 2: Real part, Complex part
+     */
+    public double[][] generateMorletCWT(int points, double omega0, double width) {
+        Complex[] temp = this.generateMorletCWTComplex(points, omega0, width);
         return UtilMethods.complexTo2D(temp);
     }
 }
