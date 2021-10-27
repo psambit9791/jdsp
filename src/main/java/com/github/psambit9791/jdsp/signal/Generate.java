@@ -12,6 +12,7 @@ package com.github.psambit9791.jdsp.signal;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.util.CombinatoricsUtils;
 import org.apache.commons.math3.util.MathArrays;
 
 import java.util.Arrays;
@@ -301,6 +302,72 @@ public class Generate {
      */
     public double[][] generateMorletCWT(int points, double omega0, double width) {
         Complex[] temp = this.generateMorletCWTComplex(points, omega0, width);
+        return UtilMethods.complexTo2D(temp);
+    }
+
+
+    /**
+     * Returns a Complex Paul Wavelet compatible with CWT
+     * @param order Order of the wavelet function
+     * @param width Width parameter of wavelet
+     * @return Complex[] The
+     */
+    public Complex[] generatePaulComplex(int order, double width) {
+        double M = width * 10;
+        double[] x = UtilMethods.arange((-M + 1)/2.0, (M + 1)/2.0, 1.0);
+        Complex mul_const = new Complex(0, 1);
+        mul_const = mul_const.pow(order).multiply(CombinatoricsUtils.factorial(order));
+        mul_const = mul_const.multiply(Math.pow(2, order));
+        mul_const = mul_const.divide(Math.pow(Math.PI * CombinatoricsUtils.factorial(2 * order), 0.5));
+        mul_const = new Complex(mul_const.getReal(), 0);
+
+        Complex[] output = new Complex[x.length];
+        for (int i=0; i<output.length; i++) {
+            Complex func_form = new Complex(1, -1 * x[i]);
+            func_form = func_form.pow(-(order + 1));
+            output[i] = mul_const.multiply(func_form);
+        }
+
+        return output;
+    }
+
+    /**
+     * Returns a Complex Paul Wavelet compatible with CWT
+     * @param order Order of the wavelet function
+     * @param width Width parameter of wavelet
+     * @param scale Scaling factor
+     * @return Complex[] The
+     */
+    public Complex[] generatePaulComplex(int order, double width, double scale) {
+        double M = width * 10;
+        double[] x = UtilMethods.arange((-M + 1)/2.0, (M + 1)/2.0, 1.0);
+        for (int i=0; i<x.length; i++) {
+            x[i] = x[i] / scale;
+        }
+        Complex mul_const = new Complex(0, 1);
+        mul_const = mul_const.pow(order).multiply(CombinatoricsUtils.factorial(order));
+        mul_const = mul_const.multiply(Math.pow(2, order));
+        mul_const = mul_const.divide(Math.pow(Math.PI * CombinatoricsUtils.factorial(2 * order), 0.5));
+        mul_const = new Complex(mul_const.getReal(), 0);
+
+        Complex[] output = new Complex[x.length];
+        for (int i=0; i<output.length; i++) {
+            Complex func_form = new Complex(1, -1 * x[i]);
+            func_form = func_form.pow(-(order + 1));
+            output[i] = mul_const.multiply(func_form);
+        }
+
+        return output;
+    }
+
+    /**
+     * Returns a Complex Paul Wavelet in 2D matrix format
+     * @param order Order of the wavelet function
+     * @param width Width parameter of wavelet
+     * @return double[][] Complex array as a 2D vector. Dimension 1: Length, Dimension 2: Real part, Complex part
+     */
+    public double[][] generatePaul(int order, double width) {
+        Complex[] temp = this.generatePaulComplex(order, width);
         return UtilMethods.complexTo2D(temp);
     }
 }
