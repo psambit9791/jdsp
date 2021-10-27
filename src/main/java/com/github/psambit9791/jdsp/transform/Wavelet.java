@@ -48,31 +48,59 @@ public class Wavelet {
         return UtilMethods.matToComplex(temp);
     }
 
-    // Works with Ricker
-    public Complex[][] cwt() {
-        Complex[][] output = new Complex[this.widths.length][this.signal.length];
+    private Complex[] paul_cwt(double[] data, Complex[] wavelet) {
+        double[][] decomp_wvlt = UtilMethods.transpose(UtilMethods.complexTo2D(wavelet));
 
-        for (int i=0; i<this.widths.length; i++) {
-            int N = Math.min(10*this.widths[i], this.signal.length);
-            Generate gp = new Generate();
-            double[] wavelet = gp.generateRicker(N, this.widths[i]);
-            wavelet = UtilMethods.reverse(wavelet);
-            output[i] = this.ricker_cwt(this.signal, wavelet);
-        }
-        return output;
+        Convolution c_real = new Convolution(data, decomp_wvlt[0]);
+        Convolution c_imag = new Convolution(data, decomp_wvlt[1]);
+
+        double[][] temp = {c_real.convolve("same"), c_imag.convolve("same")};
+        temp = UtilMethods.transpose(temp);
+
+        return UtilMethods.matToComplex(temp);
     }
 
-    // Works with Morlet (you can use a default omega0 value of 5.0)
-    public Complex[][] cwt(double omega0) {
+    // args value: Ignored for Ricker, omega0 for Morlet, order for Paul
+    public Complex[][] cwt(String wavelet_type, double args) throws IllegalArgumentException{
+
+        if (!wavelet_type.equals("ricker") && !wavelet_type.equals("morlet") && !wavelet_type.equals("paul")) {
+            throw new ArithmeticException("wavelet_type must be 'ricker', 'morlet' or 'paul'");
+        }
+
         Complex[][] output = new Complex[this.widths.length][this.signal.length];
 
-        for (int i=0; i<this.widths.length; i++) {
-            int N = Math.min(10*this.widths[i], this.signal.length);
-            Generate gp = new Generate();
-            Complex[] wavelet = gp.generateMorletCWTComplex(N, omega0, this.widths[i]);
-            wavelet = UtilMethods.reverse(wavelet);
-            output[i] = this.morlet_cwt(this.signal, wavelet);
+        if (wavelet_type.equals("ricker")) {
+            for (int i=0; i<this.widths.length; i++) {
+                int N = Math.min(10*this.widths[i], this.signal.length);
+                Generate gp = new Generate();
+                double[] wavelet = gp.generateRicker(N, this.widths[i]);
+                wavelet = UtilMethods.reverse(wavelet);
+                output[i] = this.ricker_cwt(this.signal, wavelet);
+            }
         }
+
+        else if  (wavelet_type.equals("morlet")) {
+            for (int i=0; i<this.widths.length; i++) {
+                int N = Math.min(10*this.widths[i], this.signal.length);
+                Generate gp = new Generate();
+                Complex[] wavelet = gp.generateMorletCWTComplex(N, args, this.widths[i]);
+                wavelet = UtilMethods.reverse(wavelet);
+                output[i] = this.morlet_cwt(this.signal, wavelet);
+            }
+        }
+
+        else if  (wavelet_type.equals("paul")) {
+            for (int i=0; i<this.widths.length; i++) {
+                Generate gp = new Generate();
+                double norm = Math.sqrt(1.0/this.widths[i]);
+                Complex[] wavelet = gp.generatePaulComplex((int)args, this.widths[i], (double)this.widths[i]);
+                for (int w=0; w<wavelet.length; w++) {
+                    wavelet[w] = wavelet[w].multiply(norm); //Normalization
+                }
+                output[i] = this.paul_cwt(this.signal, wavelet);
+            }
+        }
+
         return output;
     }
 }
