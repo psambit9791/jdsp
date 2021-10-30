@@ -10,7 +10,11 @@
 
 package com.github.psambit9791.jdsp.transform;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.apache.commons.math3.complex.Complex;
+
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 
 /**
@@ -60,61 +64,25 @@ public class DiscreteFourier {
     // About plotting, please refer here: https://stackoverflow.com/a/25735274
 
     /**
-     * Returns the absolute value of the discrete fourier transformed sequence
+     * Returns the absolute value (amplitude) of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
      * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
      * @return double[] The absolute DFT output
      */
     public double[] returnAbsolute(boolean onlyPositive) throws ExceptionInInitializerError{
-        if (this.output == null) {
-            throw new ExceptionInInitializerError("Execute dft() function before returning result");
-        }
-        double[] dftout;
-
-        if (onlyPositive) {
-            int numBins = this.output.length/2+1;
-            dftout = new double[numBins];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i] = this.output[i].abs();
-            }
-        }
-        else{
-            dftout = new double[this.output.length];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i] = this.output[i].abs();
-            }
-        }
-        return dftout;
+        Complex[] dftout = returnComplex(onlyPositive);
+        return Arrays.stream(dftout).mapToDouble(Complex::abs).toArray();
     }
 
     /**
      * Returns the complex value of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
      * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
-     * @return double[][] The complex DFT output
+     * @return double[][] The complex DFT output; first array column = real part; second array column = imaginary part
      */
     public double[][] returnFull(boolean onlyPositive) throws ExceptionInInitializerError {
-        if (this.output == null) {
-            throw new ExceptionInInitializerError("Execute dft() function before returning result");
-        }
-        double[][] dftout;
-
-        if (onlyPositive) {
-            int numBins = this.output.length/2+1;
-            dftout = new double[numBins][2];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i][0] = this.output[i].getReal();
-                dftout[i][1] = this.output[i].getImaginary();
-            }
-        }
-        else{
-            dftout = new double[this.output.length][2];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i][0] = this.output[i].getReal();
-                dftout[i][1] = this.output[i].getImaginary();
-            }
-        }
-        return dftout;
+        Complex[] dftout = returnComplex(onlyPositive);
+        return UtilMethods.complexTo2D(dftout);
     }
 
     /**
@@ -132,16 +100,11 @@ public class DiscreteFourier {
         if (onlyPositive) {
             int numBins = this.output.length/2+1;
             dftout = new Complex[numBins];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i] = this.output[i];
-            }
         }
         else{
             dftout = new Complex[this.output.length];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i] = this.output[i];
-            }
         }
+        System.arraycopy(this.output, 0, dftout, 0, dftout.length);
         return dftout;
     }
 }
