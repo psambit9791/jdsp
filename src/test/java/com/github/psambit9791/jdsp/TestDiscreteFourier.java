@@ -10,6 +10,7 @@
 
 package com.github.psambit9791.jdsp;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.transform.DiscreteFourier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -35,19 +36,19 @@ public class TestDiscreteFourier {
             -0.293, -0.658,  0.};
 
     @Test
-    public void testFourierAbsolutePositive1(){
+    public void testFourierMagnitudePositive1(){
         double[] result = {0.0,  0.266,  0.59,  1.113,  2.397, 39.963,  2.12 ,  0.154, 18.472,  3.176,  1.859,  1.4,
                 1.148,  0.988,  0.877,  0.789, 0.726,  0.673,  0.628,  0.592,  0.557,  0.53 ,  0.506,  0.485, 0.473,
                 0.455,  0.444,  0.426,  0.422,  0.411,  0.397,  0.396, 0.387,  0.386,  0.38 ,  0.375,  0.369,  0.368,
                 0.366,  0.366, 0.36};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[] out = fft1.returnAbsolute(true);
+        double[] out = fft1.getMagnitude(true);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
-    public void testFourierAbsolutePositive2(){
+    public void testFourierMagnitudePositive2(){
         double[] result = {0.    ,  0.6718, 39.7421,  1.1819,  0.6037,  0.3815,  0.2566,
                 0.1646,  0.0836,  0.0221,  0.0468,  0.1134,  0.1919,  0.2839,
                 0.3939,  0.543 ,  0.7596,  1.0899,  1.7161,  3.3335, 17.6649,
@@ -56,12 +57,12 @@ public class TestDiscreteFourier {
                 0.6235,  0.6083,  0.6041,  0.5938,  0.5941, 0.5820};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[] out = fft1.returnAbsolute(true);
+        double[] out = fft1.getMagnitude(true);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
-    public void testFourierAbsolute1(){
+    public void testFourierMagnitude1(){
         double[] result = {0.0,  0.266,  0.59 ,  1.113,  2.397, 39.963,  2.12,  0.154, 18.472,  3.176,  1.859,  1.4,
                 1.148,  0.988,  0.877,  0.789, 0.726,  0.673,  0.628,  0.592,  0.557,  0.53 ,  0.506,  0.485, 0.473,
                 0.455,  0.444,  0.426,  0.422,  0.411,  0.397,  0.396, 0.387,  0.386,  0.38 ,  0.375,  0.369,  0.368,
@@ -71,12 +72,12 @@ public class TestDiscreteFourier {
                 1.113,  0.59 ,  0.266};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[] out = fft1.returnAbsolute(false);
+        double[] out = fft1.getMagnitude(false);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
-    public void testFourierAbsolute2(){
+    public void testFourierMagnitude2(){
         double[] result = {0.    ,  0.6718, 39.7421,  1.1819,  0.6037,  0.3815,  0.2566,
                 0.1646,  0.0836,  0.0221,  0.0468,  0.1134,  0.1919,  0.2839,
                 0.3939,  0.543 ,  0.7596,  1.0899,  1.7161,  3.3335, 17.6649,
@@ -91,8 +92,163 @@ public class TestDiscreteFourier {
                 1.1819, 39.7421,  0.6718};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[] out = fft1.returnAbsolute(false);
+        double[] out = fft1.getMagnitude(false);
         Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void testFourierPhaseRadPositive1() {
+        // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
+        double[] result = {0,   -1.5315,    -1.4923,    -1.453,     -1.4137,
+                -1.3744,    1.8064,     -1.2959,    -1.2566,    1.9242,     1.9635,
+                2.0028,     2.042,      2.0813,     2.1206,     2.1598,     2.1991,
+                2.2384,     2.2777,     2.3169,     2.3562,     2.3955,     2.4347,
+                2.474,      2.5133,     2.5525,     2.5918,     2.6311,     2.6704,
+                2.7096,     2.7489,     2.7882,     2.8274,     2.8667,     2.906,
+                2.9452,     2.9845,     3.0238,     3.0631,     3.1023,     -3.1414};
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
+        fft1.dft();
+        double[] out = fft1.getPhaseRad(true);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void testFourierPhaseRadPositive2() {
+        // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
+        double[] result = {3.1415,  -1.5315,    -1.4923,    1.6886,     1.7279,
+                1.7671,     1.8064,     1.8457,     1.885,      1.9242,     -1.1781,
+                -1.1388,    -1.0996,    -1.0603,    -1.021,     -0.98175,   -0.94248,
+                -0.90321,   -0.86394,   -0.82467,   -0.7854,    2.3955,     2.4347,
+                2.474,      2.5133,     2.5525,     2.5918,     2.6311,     2.6704,
+                2.7096,     2.7489,     2.7882,     2.8274,     2.8667,     2.906,
+                2.9452,     2.9845,     3.0238,     3.0631,     3.1023,     3.1416};
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
+        fft1.dft();
+        double[] out = fft1.getPhaseRad(true);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void testFourierPhaseDeg1() {
+        // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
+        double[] result = {0,   -87.75,     -85.5,      -83.25,     -81,
+                -78.75,     103.5,      -74.25,     -72,    110.25,     112.5,
+                114.75,     117,        119.25,     121.5,  123.75,     126,
+                128.25,     130.5,      132.75,     135,    137.25,     139.5,
+                141.75,     144,        146.25,     148.5,  150.75,     153,
+                155.25,     157.5,      159.75,     162,    164.25,     166.5,
+                168.75,     171,        173.25,     175.5,  177.75,     -180,
+                -177.75,    -175.5,     -173.25,    -171,   -168.75,    -166.5,
+                -164.25,    -162,       -159.75,    -157.5, -155.25,    -153,
+                -150.75,    -148.5,     -146.25,    -144,   -141.75,    -139.5,
+                -137.25,    -135,       -132.75,    -130.5, -128.25,    -126,
+                -123.75,    -121.5,     -119.25,    -117,   -114.75,    -112.5,
+                -110.25,    72,         74.25,      -103.5, 78.75,      81,
+                83.25,      85.5,       87.75};
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
+        fft1.dft();
+        double[] out = fft1.getPhaseDeg(false);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void testFourierPhaseRad1(){
+        // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
+        double[] result = {0,   -1.5315,    -1.4923,    -1.453,     -1.4137,
+                -1.3744,    1.8064,     -1.2959,    -1.2566,    1.9242,     1.9635,
+                2.0028,     2.042,      2.0813,     2.1206,     2.1598,     2.1991,
+                2.2384,     2.2777,     2.3169,     2.3562,     2.3955,     2.4347,
+                2.474,      2.5133,     2.5525,     2.5918,     2.6311,     2.6704,
+                2.7096,     2.7489,     2.7882,     2.8274,     2.8667,     2.906,
+                2.9452,     2.9845,     3.0238,     3.0631,     3.1023,     -3.1414,
+                -3.1023,    -3.0631,    -3.0238,    -2.9845,    -2.9452,    -2.906,
+                -2.8667,    -2.8274,    -2.7882,    -2.7489,    -2.7096,    -2.6704,
+                -2.6311,    -2.5918,    -2.5525,    -2.5133,    -2.474,     -2.4347,
+                -2.3955,    -2.3562,    -2.3169,    -2.2777,    -2.2384,    -2.1991,
+                -2.1598,    -2.1206,    -2.0813,    -2.042,     -2.0028,    -1.9635,
+                -1.9242,    1.2566,     1.2959,     -1.8064,    1.3744,     1.4137,
+                1.453,      1.4923,     1.5315};
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
+        fft1.dft();
+        double[] out = fft1.getPhaseRad(false);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void testFourierPhaseRad2(){
+        // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
+        double[] result = {3.1415,  -1.5315,    -1.4923,    1.6886,     1.7279,
+                1.7671,     1.8064,     1.8457,     1.885,      1.9242,     -1.1781,
+                -1.1388,    -1.0996,    -1.0603,    -1.021,     -0.98175,   -0.94248,
+                -0.90321,   -0.86394,   -0.82467,   -0.7854,    2.3955,     2.4347,
+                2.474,      2.5133,     2.5525,     2.5918,     2.6311,     2.6704,
+                2.7096,     2.7489,     2.7882,     2.8274,     2.8667,     2.906,
+                2.9452,     2.9845,     3.0238,     3.0631,     3.1023,     3.1416,
+                -3.1023,    -3.0631,    -3.0238,    -2.9845,    -2.9452,    -2.906,
+                -2.8667,    -2.8274,    -2.7882,    -2.7489,    -2.7096,    -2.6704,
+                -2.6311,    -2.5918,    -2.5525,    -2.5133,    -2.474,     -2.4347,
+                -2.3955,    0.7854,     0.82467,    0.86394,    0.90321,    0.94248,
+                0.98175,    1.021,      1.0603,     1.0996,     1.1388,     1.1781,
+                -1.9242,    -1.885,     -1.8457,    -1.8064,    -1.7671,    -1.7279,
+                -1.6886,    1.4923,     1.5315};
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
+        fft1.dft();
+        double[] out = fft1.getPhaseRad(false);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void testFourierMagPhaseDeg1() {
+        // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
+        double[] resultMag = {0.0,  0.266,  0.59 ,  1.113,  2.397, 39.963,  2.12,  0.154, 18.472,  3.176,  1.859,  1.4,
+                1.148,  0.988,  0.877,  0.789, 0.726,  0.673,  0.628,  0.592,  0.557,  0.53 ,  0.506,  0.485, 0.473,
+                0.455,  0.444,  0.426,  0.422,  0.411,  0.397,  0.396, 0.387,  0.386,  0.38 ,  0.375,  0.369,  0.368,
+                0.366,  0.366, 0.36 ,  0.366,  0.366,  0.368,  0.369,  0.375,  0.38 ,  0.386, 0.387,  0.396,  0.397,
+                0.411,  0.422,  0.426,  0.444,  0.455, 0.473,  0.485,  0.506,  0.53 ,  0.557,  0.592,  0.628,  0.673,
+                0.726,  0.789,  0.877,  0.988,  1.148,  1.4,  1.859,  3.176, 18.472,  0.154,  2.12 , 39.963,  2.397,
+                1.113,  0.59 ,  0.266};
+        double[] resultPhase = {0,   -87.75,     -85.5,      -83.25,     -81,
+                -78.75,     103.5,      -74.25,     -72,    110.25,     112.5,
+                114.75,     117,        119.25,     121.5,  123.75,     126,
+                128.25,     130.5,      132.75,     135,    137.25,     139.5,
+                141.75,     144,        146.25,     148.5,  150.75,     153,
+                155.25,     157.5,      159.75,     162,    164.25,     166.5,
+                168.75,     171,        173.25,     175.5,  177.75,     -180,
+                -177.75,    -175.5,     -173.25,    -171,   -168.75,    -166.5,
+                -164.25,    -162,       -159.75,    -157.5, -155.25,    -153,
+                -150.75,    -148.5,     -146.25,    -144,   -141.75,    -139.5,
+                -137.25,    -135,       -132.75,    -130.5, -128.25,    -126,
+                -123.75,    -121.5,     -119.25,    -117,   -114.75,    -112.5,
+                -110.25,    72,         74.25,      -103.5, 78.75,      81,
+                83.25,      85.5,       87.75};
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
+        fft1.dft();
+        double[][] out = fft1.getMagPhaseDeg(false);
+        Assertions.assertArrayEquals(resultMag, UtilMethods.getColumn(out, 0), 0.001);
+        Assertions.assertArrayEquals(resultPhase, UtilMethods.getColumn(out, 1), 0.001);
+    }
+
+    @Test
+    public void testFourierMagPhaseRadPositive2() {
+        // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
+        double[] resultMag = {0.    ,  0.6718, 39.7421,  1.1819,  0.6037,  0.3815,  0.2566,
+                0.1646,  0.0836,  0.0221,  0.0468,  0.1134,  0.1919,  0.2839,
+                0.3939,  0.543 ,  0.7596,  1.0899,  1.7161,  3.3335, 17.6649,
+                6.3761,  2.885 ,  1.9382,  1.4996,  1.2456,  1.0793,  0.958 ,
+                0.873 ,  0.8136,  0.7597,  0.7162,  0.685 ,  0.6591,  0.6362,
+                0.6235,  0.6083,  0.6041,  0.5938,  0.5941, 0.5820};
+        double[] resultPhase =  {3.1415,  -1.5315,    -1.4923,    1.6886,     1.7279,
+                1.7671,     1.8064,     1.8457,     1.885,      1.9242,     -1.1781,
+                -1.1388,    -1.0996,    -1.0603,    -1.021,     -0.98175,   -0.94248,
+                -0.90321,   -0.86394,   -0.82467,   -0.7854,    2.3955,     2.4347,
+                2.474,      2.5133,     2.5525,     2.5918,     2.6311,     2.6704,
+                2.7096,     2.7489,     2.7882,     2.8274,     2.8667,     2.906,
+                2.9452,     2.9845,     3.0238,     3.0631,     3.1023,     3.1416};
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
+        fft1.dft();
+        double[][] out = fft1.getMagPhaseRad(true);
+        Assertions.assertArrayEquals(resultMag, UtilMethods.getColumn(out, 0), 0.001);
+        Assertions.assertArrayEquals(resultPhase, UtilMethods.getColumn(out, 1), 0.001);
     }
 
     @Test
@@ -108,7 +264,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[][] out = fft1.returnFull(true);
+        double[][] out = fft1.getFull(true);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];
@@ -128,7 +284,7 @@ public class TestDiscreteFourier {
                 0.2058,  0.3016,  0.4465,  0.6747,  1.1145,  2.2628, 12.491 ,
                 -4.6821, -2.1938, -1.5221, -1.2132, -1.0357, -0.9202, -0.8359,
                 -0.7779, -0.7389, -0.7019, -0.672 , -0.6515, -0.6344, -0.6186,
-                -0.6115, -0.6008, -0.5999, -0.592 , -0.593, -0.582};;
+                -0.6115, -0.6008, -0.5999, -0.592 , -0.593, -0.582};
 
         double[] resultIm = {-0.    ,  -0.6712, -39.6196,   1.1738,   0.5962,   0.3742,
                 0.2495,   0.1584,   0.0795,   0.0207,  -0.0433,  -0.103 ,
@@ -140,7 +296,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[][] out = fft1.returnFull(true);
+        double[][] out = fft1.getFull(true);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];
@@ -172,7 +328,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[][] out = fft1.returnFull(false);
+        double[][] out = fft1.getFull(false);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];
@@ -217,7 +373,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[][] out = fft1.returnFull(false);
+        double[][] out = fft1.getFull(false);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];

@@ -10,7 +10,10 @@
 
 package com.github.psambit9791.jdsp.transform;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.apache.commons.math3.complex.Complex;
+
+import java.util.Arrays;
 
 
 /**
@@ -60,61 +63,85 @@ public class DiscreteFourier {
     // About plotting, please refer here: https://stackoverflow.com/a/25735274
 
     /**
-     * Returns the absolute value of the discrete fourier transformed sequence
+     * Returns the magnitude of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
      * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
-     * @return double[] The absolute DFT output
+     * @return double[] The magnitude of the DFT output
      */
-    public double[] returnAbsolute(boolean onlyPositive) throws ExceptionInInitializerError{
-        if (this.output == null) {
-            throw new ExceptionInInitializerError("Execute dft() function before returning result");
-        }
-        double[] dftout;
+    public double[] getMagnitude(boolean onlyPositive) throws ExceptionInInitializerError{
+        Complex[] dftout = getComplex(onlyPositive);
+        return Arrays.stream(dftout).mapToDouble(Complex::abs).toArray();
+    }
 
-        if (onlyPositive) {
-            int numBins = this.output.length/2+1;
-            dftout = new double[numBins];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i] = this.output[i].abs();
-            }
+    /**
+     * Returns the phase of the discrete fourier transformed sequence in radians
+     * @param onlyPositive Set to True if non-mirrored output is required
+     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
+     * @return double[] The phase of the DFT output (in radians)
+     */
+    public double[] getPhaseRad(boolean onlyPositive) throws ExceptionInInitializerError{
+        Complex[] dftout = getComplex(onlyPositive);
+        return Arrays.stream(dftout).mapToDouble(Complex::getArgument).toArray();
+    }
+
+    /**
+     * Returns the phase of the discrete fourier transformed sequence in degrees
+     * @param onlyPositive Set to True if non-mirrored output is required
+     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
+     * @return double[] The phase of the DFT output (in degrees)
+     */
+    public double[] getPhaseDeg(boolean onlyPositive) throws ExceptionInInitializerError{
+        double[] dftout = getPhaseRad(onlyPositive);
+        return Arrays.stream(dftout).map(Math::toDegrees).toArray();
+    }
+
+    /**
+     * Returns the magnitude and phase (in radians) of the fourier transformed sequence. The first column
+     * of the output contains the magnitude, the second one the phase.
+     * @param onlyPositive Set to True if non-mirrored output is required
+     * @return double[][] The magnitude and phase (in radians) of the DFT output in respectively the first and second column
+     * @throws ExceptionInInitializerError
+     */
+    public double[][] getMagPhaseRad(boolean onlyPositive) throws ExceptionInInitializerError {
+        double[] dftMag = getMagnitude(onlyPositive);
+        double[] dftPhase = getPhaseRad(onlyPositive);
+        double[][] out = new double[dftMag.length][2];
+
+        for (int i = 0; i < out.length; i++) {
+            out[i][0] = dftMag[i];
+            out[i][1] = dftPhase[i];
         }
-        else{
-            dftout = new double[this.output.length];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i] = this.output[i].abs();
-            }
+        return out;
+    }
+
+    /**
+     * Returns the magnitude and phase (in degrees) of the fourier transformed sequence. The first column
+     * of the output contains the magnitude, the second one the phase.
+     * @param onlyPositive Set to True if non-mirrored output is required
+     * @return double[][] The magnitude and phase (in degrees) of the DFT output in respectively the first and second column
+     * @throws ExceptionInInitializerError
+     */
+    public double[][] getMagPhaseDeg(boolean onlyPositive) throws ExceptionInInitializerError {
+        double[] dftMag = getMagnitude(onlyPositive);
+        double[] dftPhase = getPhaseDeg(onlyPositive);
+        double[][] out = new double[dftMag.length][2];
+
+        for (int i = 0; i < out.length; i++) {
+            out[i][0] = dftMag[i];
+            out[i][1] = dftPhase[i];
         }
-        return dftout;
+        return out;
     }
 
     /**
      * Returns the complex value of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
      * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
-     * @return double[][] The complex DFT output
+     * @return double[][] The complex DFT output; first array column = real part; second array column = imaginary part
      */
-    public double[][] returnFull(boolean onlyPositive) throws ExceptionInInitializerError {
-        if (this.output == null) {
-            throw new ExceptionInInitializerError("Execute dft() function before returning result");
-        }
-        double[][] dftout;
-
-        if (onlyPositive) {
-            int numBins = this.output.length/2+1;
-            dftout = new double[numBins][2];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i][0] = this.output[i].getReal();
-                dftout[i][1] = this.output[i].getImaginary();
-            }
-        }
-        else{
-            dftout = new double[this.output.length][2];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i][0] = this.output[i].getReal();
-                dftout[i][1] = this.output[i].getImaginary();
-            }
-        }
-        return dftout;
+    public double[][] getFull(boolean onlyPositive) throws ExceptionInInitializerError {
+        Complex[] dftout = getComplex(onlyPositive);
+        return UtilMethods.complexTo2D(dftout);
     }
 
     /**
@@ -123,7 +150,7 @@ public class DiscreteFourier {
      * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
      * @return Complex[] The complex DFT output
      */
-    public Complex[] returnComplex(boolean onlyPositive) throws ExceptionInInitializerError {
+    public Complex[] getComplex(boolean onlyPositive) throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute dft() function before returning result");
         }
@@ -132,16 +159,11 @@ public class DiscreteFourier {
         if (onlyPositive) {
             int numBins = this.output.length/2+1;
             dftout = new Complex[numBins];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i] = this.output[i];
-            }
         }
         else{
             dftout = new Complex[this.output.length];
-            for (int i=0; i<dftout.length; i++) {
-                dftout[i] = this.output[i];
-            }
         }
+        System.arraycopy(this.output, 0, dftout, 0, dftout.length);
         return dftout;
     }
 }

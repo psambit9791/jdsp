@@ -65,7 +65,7 @@ public class Hilbert {
     public void hilbertTransform() {
         DiscreteFourier dft = new DiscreteFourier(this.signal);
         dft.dft();
-        double[][] dftOut = dft.returnFull(false);
+        double[][] dftOut = dft.getFull(false);
 
         double[][] modOut = new double[dftOut.length][dftOut[0].length];
 
@@ -126,8 +126,7 @@ public class Hilbert {
         for (int i=0; i<sig.length; i++) {
             sig[i] = ang.value(this.output[i].getImaginary(), this.output[i].getReal());
         }
-        double[] out = UtilMethods.unwrap(sig);
-        return out;
+        return UtilMethods.unwrap(sig);
     }
 
     /**

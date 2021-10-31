@@ -345,63 +345,69 @@ public class UtilMethods {
      * @return double[][] Pseudo-inverse of the input matrix
      */
     public static double[] padSignal(double[] signal, String mode) {
-        double[] newSignal = {};
-        if (mode.equals("reflect")) {
-            double[] revSig = reverse(signal);
-            double[] newSig = {};
-            newSig = concatenateArray(newSig, revSig);
-            newSig = concatenateArray(newSig, signal);
-            newSig = concatenateArray(newSig, revSig);
-            newSignal = newSig;
-        }
-        else if (mode.equals("constant")) {
-            double[] cons = new double[signal.length];
-            Arrays.fill(cons, 0);
-            double[] newSig = {};
-            newSig = concatenateArray(newSig, cons);
-            newSig = concatenateArray(newSig, signal);
-            newSig = concatenateArray(newSig, cons);
-            newSignal = newSig;
-        }
-        else if (mode.equals("nearest")) {
-            double[] left = new double[signal.length];
-            Arrays.fill(left, signal[0]);
-            double[] right = new double[signal.length];
-            Arrays.fill(right, signal[signal.length-1]);
+        double[] newSignal;
+        switch (mode) {
+            case "reflect": {
+                double[] revSig = reverse(signal);
+                double[] newSig = {};
+                newSig = concatenateArray(newSig, revSig);
+                newSig = concatenateArray(newSig, signal);
+                newSig = concatenateArray(newSig, revSig);
+                newSignal = newSig;
+                break;
+            }
+            case "constant": {
+                double[] cons = new double[signal.length];
+                Arrays.fill(cons, 0);
+                double[] newSig = {};
+                newSig = concatenateArray(newSig, cons);
+                newSig = concatenateArray(newSig, signal);
+                newSig = concatenateArray(newSig, cons);
+                newSignal = newSig;
+                break;
+            }
+            case "nearest": {
+                double[] left = new double[signal.length];
+                Arrays.fill(left, signal[0]);
+                double[] right = new double[signal.length];
+                Arrays.fill(right, signal[signal.length - 1]);
 
-            double[] newSig = {};
-            newSig = concatenateArray(newSig, left);
-            newSig = concatenateArray(newSig, signal);
-            newSig = concatenateArray(newSig, right);
-            newSignal = newSig;
-        }
-        else if (mode.equals("mirror")) {
-            double[] temp = splitByIndex(signal, 1, signal.length);
-            temp = reverse(temp);
-            double[] val = new double[]{temp[1]};
-            double[] left = concatenateArray(val, temp);
+                double[] newSig = {};
+                newSig = concatenateArray(newSig, left);
+                newSig = concatenateArray(newSig, signal);
+                newSig = concatenateArray(newSig, right);
+                newSignal = newSig;
+                break;
+            }
+            case "mirror": {
+                double[] temp = splitByIndex(signal, 1, signal.length);
+                temp = reverse(temp);
+                double[] val = new double[]{temp[1]};
+                double[] left = concatenateArray(val, temp);
 
-            temp = splitByIndex(signal, 0, signal.length-1);
-            temp = reverse(temp);
-            val = new double[]{temp[temp.length - 2]};
-            double[] right = concatenateArray(temp, val);
+                temp = splitByIndex(signal, 0, signal.length - 1);
+                temp = reverse(temp);
+                val = new double[]{temp[temp.length - 2]};
+                double[] right = concatenateArray(temp, val);
 
-            double[] newSig = {};
-            newSig = concatenateArray(newSig, left);
-            newSig = concatenateArray(newSig, signal);
-            newSig = concatenateArray(newSig, right);
-            newSignal = newSig;
-        }
-        else if (mode.equals("wrap")) {
-            double[] newSig = {};
-            newSig = concatenateArray(newSig, signal);
-            newSig = concatenateArray(newSig, signal);
-            newSig = concatenateArray(newSig, signal);
-            newSignal = newSig;
-        }
-        else {
-            throw new IllegalArgumentException("padSignalforConvolution modes can only be reflect, constant, " +
-                    "nearest, mirror, or wrap");
+                double[] newSig = {};
+                newSig = concatenateArray(newSig, left);
+                newSig = concatenateArray(newSig, signal);
+                newSig = concatenateArray(newSig, right);
+                newSignal = newSig;
+                break;
+            }
+            case "wrap": {
+                double[] newSig = {};
+                newSig = concatenateArray(newSig, signal);
+                newSig = concatenateArray(newSig, signal);
+                newSig = concatenateArray(newSig, signal);
+                newSignal = newSig;
+                break;
+            }
+            default:
+                throw new IllegalArgumentException("padSignalforConvolution modes can only be reflect, constant, " +
+                        "nearest, mirror, or wrap");
         }
         return newSignal;
     }
@@ -485,16 +491,8 @@ public class UtilMethods {
      * @return double Result of the rounding operation
      */
     public static double round(double value, int decimals) {
-        String dPlaces = "#.";
-        for (int i=0; i<decimals; i++) {
-            dPlaces = dPlaces + "#";
-        }
-
-        DecimalFormat df = new DecimalFormat(dPlaces);
-        df.setRoundingMode(RoundingMode.HALF_EVEN);
-        Double d = value;
-        String temp = df.format(d);
-        return Double.parseDouble(temp);
+        double scale = Math.pow(10, decimals);
+        return Math.round(value * scale) / scale;
     }
 
     /**
@@ -504,19 +502,7 @@ public class UtilMethods {
      * @return double The rounded double array
      */
     public static double[] round(double[] arr, int decimals) {
-        double[] rounded = new double[arr.length];
-        String dPlaces = "#.";
-        for (int i=0; i<decimals; i++) {
-            dPlaces = dPlaces + "#";
-        }
-
-        DecimalFormat df = new DecimalFormat(dPlaces);
-            df.setRoundingMode(RoundingMode.HALF_EVEN);
-        for (int i=0; i<rounded.length; i++) {
-            Double d = arr[i];
-            rounded[i] = Double.parseDouble(df.format(d));
-        }
-        return rounded;
+        return Arrays.stream(arr).map(c -> UtilMethods.round(c, decimals)).toArray();
     }
 
     /**
@@ -594,8 +580,7 @@ public class UtilMethods {
      */
     private static PolynomialSplineFunction linearInterp(double[] x, double[] y) {
         LinearInterpolator li = new LinearInterpolator();
-        PolynomialSplineFunction psf = li.interpolate(x, y);
-        return psf;
+        return li.interpolate(x, y);
     }
 
     /**
@@ -606,7 +591,7 @@ public class UtilMethods {
     public static int[] convertToPrimitiveInt(ArrayList<Integer> l) {
         int[] ret = new int[l.size()];
         for (int i=0; i<ret.length; i++) {
-            ret[i] = l.get(i).intValue();
+            ret[i] = l.get(i);
         }
         return ret;
     }
@@ -619,7 +604,7 @@ public class UtilMethods {
     public static double[] convertToPrimitiveDouble(ArrayList<Double> l) {
         double[] ret = new double[l.size()];
         for (int i=0; i<ret.length; i++) {
-            ret[i] = l.get(i).doubleValue();
+            ret[i] = l.get(i);
         }
         return ret;
     }
@@ -705,6 +690,7 @@ public class UtilMethods {
         double[] data = new double[108000];
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream is = classLoader.getResourceAsStream("ecg.dat");
+        assert is != null;
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String[] line = br.readLine().trim().split(" ");
         for (int i=0; i<line.length; i++) {
@@ -770,14 +756,53 @@ public class UtilMethods {
     }
 
     /**
+     * Return the row-array of matrix <m>, at row index <rowIdx>
+     * @param m 2D array (matrix) from which to get the row
+     * @param rowIdx row index which you want to extract
+     * @return double[] row array located at the row index
+     */
+    public static double[] getRow(double[][] m, int rowIdx) {
+        if (rowIdx < 0) {
+            System.err.println("Row index can not be negative");
+            return null;
+        }
+        if (rowIdx >= m.length) {
+            System.err.println("Row index is greater than matrix row dimension");
+            return null;
+        }
+        return m[rowIdx];
+    }
+
+    /**
+     * Return the column-array of matrix <m>, at column index <colIdx>
+     * @param m 2D array (matrix) from which to get the column
+     * @param colIdx column index which you want to extract
+     * @return double[] column array located at the column index
+     */
+    public static double[] getColumn(double[][] m, int colIdx) {
+        if (colIdx < 0) {
+            System.err.println("Column index can not be negative");
+            return null;
+        }
+        if (colIdx >= m[0].length) {
+            System.err.println("Column index is greater than matrix column dimension");
+            return null;
+        }
+        double[] column = new double[m.length];
+        for (int i = 0; i < column.length; i++){
+            column[i] = m[i][colIdx];
+        }
+        return column;
+    }
+
+    /**
      * Returns the transpose of the matrix.
      * @param m The matrix to be transposed
      * @return double[][] The transpose of the matrix
      */
     public static double[][] transpose(double[][] m) {
         RealMatrix m1 = MatrixUtils.createRealMatrix(m);
-        double[][] m_t = m1.transpose().getData();
-        return m_t;
+        return m1.transpose().getData();
     }
 
     /**
@@ -845,35 +870,37 @@ public class UtilMethods {
             throw new ArithmeticException("action must be 'add', 'sub', 'reverse_sub', 'mul', 'div' or 'pow'");
         }
         double[] out = new double[arr.length];
-        if (action.equals("add")) {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = arr[i] + val;
-            }
-        }
-        else if (action.equals("sub")) {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = arr[i] - val;
-            }
-        }
-        else if (action.equals("reverse_sub")) {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = val - arr[i];
-            }
-        }
-        else if (action.equals("mul")) {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = arr[i] * val;
-            }
-        }
-        else if (action.equals("div")) {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = arr[i] / val;
-            }
-        }
-        else {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = Math.pow(arr[i], val);
-            }
+        switch (action) {
+            case "add":
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = arr[i] + val;
+                }
+                break;
+            case "sub":
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = arr[i] - val;
+                }
+                break;
+            case "reverse_sub":
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = val - arr[i];
+                }
+                break;
+            case "mul":
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = arr[i] * val;
+                }
+                break;
+            case "div":
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = arr[i] / val;
+                }
+                break;
+            default:
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = Math.pow(arr[i], val);
+                }
+                break;
         }
         return out;
     }
@@ -891,35 +918,37 @@ public class UtilMethods {
             throw new ArithmeticException("action must be 'sin', 'cos', 'tan', 'asin', 'acos' or 'atan'");
         }
         double[] out = new double[arr.length];
-        if (function.equals("sin")) {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = Math.sin(arr[i]);
-            }
-        }
-        else if (function.equals("cos")) {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = Math.cos(arr[i]);
-            }
-        }
-        else if (function.equals("tan")) {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = Math.tan(arr[i]);
-            }
-        }
-        else if (function.equals("asin")) {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = Math.asin(arr[i]);
-            }
-        }
-        else if (function.equals("acos")) {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = Math.acos(arr[i]);
-            }
-        }
-        else {
-            for (int i=0; i<arr.length; i++) {
-                out[i] = Math.atan(arr[i]);
-            }
+        switch (function) {
+            case "sin":
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = Math.sin(arr[i]);
+                }
+                break;
+            case "cos":
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = Math.cos(arr[i]);
+                }
+                break;
+            case "tan":
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = Math.tan(arr[i]);
+                }
+                break;
+            case "asin":
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = Math.asin(arr[i]);
+                }
+                break;
+            case "acos":
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = Math.acos(arr[i]);
+                }
+                break;
+            default:
+                for (int i = 0; i < arr.length; i++) {
+                    out[i] = Math.atan(arr[i]);
+                }
+                break;
         }
         return out;
     }
@@ -962,8 +991,7 @@ public class UtilMethods {
         }
         LinearInterpolator li = new LinearInterpolator();
         PolynomialSplineFunction psf = li.interpolate(x, y);
-        double out = psf.value(point);
-        return out;
+        return psf.value(point);
     }
 
     /**
@@ -1015,8 +1043,7 @@ public class UtilMethods {
             }
         }
 
-        double[] out = MathArrays.scale(0.5, MathArrays.ebeSubtract(b0, b2));
-        return out;
+        return MathArrays.scale(0.5, MathArrays.ebeSubtract(b0, b2));
     }
 
     /**
@@ -1106,7 +1133,7 @@ public class UtilMethods {
                 2.89137052083475648297E-6, 6.88975834691682398426E-5, 3.36911647825569408990E-3,
                 8.04490411014108831608E-1 };
 
-        double out = 0.0;
+        double out;
         x = Math.abs(x);
 
         if (x <= 8) {
@@ -1184,7 +1211,7 @@ public class UtilMethods {
                 2.89137052083475648297E-6, 6.88975834691682398426E-5, 3.36911647825569408990E-3,
                 8.04490411014108831608E-1 };
 
-        double out = 0.0;
+        double out;
         x = Math.abs(x);
 
         if (x <= 8) {
