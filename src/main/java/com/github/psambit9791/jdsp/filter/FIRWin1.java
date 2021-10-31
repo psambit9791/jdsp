@@ -236,7 +236,7 @@ public class FIRWin1 extends _FIRFilter {
         }
 
         double alpha = 0.5 * (this.numTaps - 1);
-        double[] m = UtilMethods.arange(0.0, (double)numTaps, 1.0);
+        double[] m = UtilMethods.arange(0.0, numTaps, 1.0);
         m = UtilMethods.scalarArithmetic(m, alpha, "sub");
         double[] h = new double[this.numTaps];
         Arrays.fill(h, 0.0);
