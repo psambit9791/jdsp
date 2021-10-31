@@ -170,7 +170,7 @@ public class Resample {
 
         DiscreteFourier df = new DiscreteFourier(this.signal);
         df.dft();
-        double[][] X = df.returnFull(true);
+        double[][] X = df.getFull(true);
         double[][] Y = new double[this.num/2+1][2];
 
         int N = Math.min(this.num, Nx);
@@ -200,29 +200,31 @@ public class Resample {
     }
 
     private double _funcs(double[] signal, String action) {
-        double out = 0.0;
-        if (action.equals("mean")) {
-            out = StatUtils.mean(signal);
-            this.upfirdn_mode = "constant";
-            this.cval = 0.0;
-        }
-        else if (action.equals("median")) {
-            out = new Median().evaluate(signal);
-            this.upfirdn_mode = "constant";
-            this.cval = 0.0;
-        }
-        else if (action.equals("max")) {
-            out = StatUtils.max(signal);
-            this.upfirdn_mode = "constant";
-            this.cval = 0.0;
-        }
-        else if (action.equals("min")) {
-            out = StatUtils.min(signal);
-            this.upfirdn_mode = "constant";
-            this.cval = 0.0;
-        }
-        else {
-            out = 0.0;
+        double out;
+        switch (action) {
+            case "mean":
+                out = StatUtils.mean(signal);
+                this.upfirdn_mode = "constant";
+                this.cval = 0.0;
+                break;
+            case "median":
+                out = new Median().evaluate(signal);
+                this.upfirdn_mode = "constant";
+                this.cval = 0.0;
+                break;
+            case "max":
+                out = StatUtils.max(signal);
+                this.upfirdn_mode = "constant";
+                this.cval = 0.0;
+                break;
+            case "min":
+                out = StatUtils.min(signal);
+                this.upfirdn_mode = "constant";
+                this.cval = 0.0;
+                break;
+            default:
+                out = 0.0;
+                break;
         }
         return out;
     }
@@ -338,7 +340,7 @@ public class Resample {
         }
 
         private double _extend_left(double[] signal, String padtype, double cval) {
-            double out = 0;
+            double out;
             if (padtype.equals("constant")){
                 out = cval;
             }
@@ -352,7 +354,7 @@ public class Resample {
         }
 
         private double _extend_right(double[] signal, String padtype, double cval) {
-            double out = 0;
+            double out;
             if (padtype.equals("constant")){
                 out = cval;
             }
@@ -376,11 +378,8 @@ public class Resample {
             int padded_len = len_x + h_per_phase - 1;
             int x_idx, y_idx, h_idx, x_conv_idx, t;
             x_idx = y_idx = h_idx = x_conv_idx = t = 0;
-            double x_val = 0.0;
-            boolean zpad = false;
-            if (padtype.equals("constant") && this.cval == 0) {
-                zpad = true;
-            }
+            double x_val;
+            boolean zpad = padtype.equals("constant") && this.cval == 0;
 
             // Where the actual computation happens
             while (x_idx < len_x) {
