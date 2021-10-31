@@ -170,7 +170,7 @@ public class Resample {
 
         DiscreteFourier df = new DiscreteFourier(this.signal);
         df.dft();
-        double[][] X = df.returnFull(true);
+        double[][] X = df.getFull(true);
         double[][] Y = new double[this.num/2+1][2];
 
         int N = Math.min(this.num, Nx);

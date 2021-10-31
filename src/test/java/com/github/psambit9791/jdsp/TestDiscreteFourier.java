@@ -14,8 +14,6 @@ import com.github.psambit9791.jdsp.transform.DiscreteFourier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 public class TestDiscreteFourier {
 
     // 50Hz Sine + 80Hz Sine sampled @ 100Hz with Nyquist of 50Hz
@@ -44,7 +42,7 @@ public class TestDiscreteFourier {
                 0.366,  0.366, 0.36};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[] out = fft1.returnAbsolute(true);
+        double[] out = fft1.getMagnitude(true);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -58,7 +56,7 @@ public class TestDiscreteFourier {
                 0.6235,  0.6083,  0.6041,  0.5938,  0.5941, 0.5820};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[] out = fft1.returnAbsolute(true);
+        double[] out = fft1.getMagnitude(true);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -73,7 +71,7 @@ public class TestDiscreteFourier {
                 1.113,  0.59 ,  0.266};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[] out = fft1.returnAbsolute(false);
+        double[] out = fft1.getMagnitude(false);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -93,7 +91,7 @@ public class TestDiscreteFourier {
                 1.1819, 39.7421,  0.6718};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[] out = fft1.returnAbsolute(false);
+        double[] out = fft1.getMagnitude(false);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -109,7 +107,7 @@ public class TestDiscreteFourier {
                 2.9452,     2.9845,     3.0238,     3.0631,     3.1023,     -3.1414};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[] out = fft1.returnArgumentRad(true);
+        double[] out = fft1.getPhaseRad(true);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -125,7 +123,7 @@ public class TestDiscreteFourier {
                 2.9452,     2.9845,     3.0238,     3.0631,     3.1023,     3.1416};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[] out = fft1.returnArgumentRad(true);
+        double[] out = fft1.getPhaseRad(true);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -147,7 +145,7 @@ public class TestDiscreteFourier {
                 83.25,      85.5,       87.75};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[] out = fft1.returnArgumentDeg(false);
+        double[] out = fft1.getPhaseDeg(false);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -170,7 +168,7 @@ public class TestDiscreteFourier {
                 1.453,      1.4923,     1.5315};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[] out = fft1.returnArgumentRad(false);
+        double[] out = fft1.getPhaseRad(false);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -193,7 +191,7 @@ public class TestDiscreteFourier {
                 -1.6886,    1.4923,     1.5315};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[] out = fft1.returnArgumentRad(false);
+        double[] out = fft1.getPhaseRad(false);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -210,7 +208,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[][] out = fft1.returnFull(true);
+        double[][] out = fft1.getFull(true);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];
@@ -242,7 +240,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[][] out = fft1.returnFull(true);
+        double[][] out = fft1.getFull(true);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];
@@ -274,7 +272,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[][] out = fft1.returnFull(false);
+        double[][] out = fft1.getFull(false);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];
@@ -319,7 +317,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[][] out = fft1.returnFull(false);
+        double[][] out = fft1.getFull(false);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];

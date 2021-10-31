@@ -65,7 +65,7 @@ public class Hilbert {
     public void hilbertTransform() {
         DiscreteFourier dft = new DiscreteFourier(this.signal);
         dft.dft();
-        double[][] dftOut = dft.returnFull(false);
+        double[][] dftOut = dft.getFull(false);
 
         double[][] modOut = new double[dftOut.length][dftOut[0].length];
 
