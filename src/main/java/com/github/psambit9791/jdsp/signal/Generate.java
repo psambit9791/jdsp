@@ -119,8 +119,7 @@ public class Generate {
             gauss_env[i] = Math.exp(-a * this.time[i] * this.time[i]);
             gauss_pulse[i] = gauss_env[i] * Math.cos(2 * Math.PI * centralFreq * this.time[i]);
         }
-        double[][] out = {gauss_pulse, gauss_env};
-        return out;
+        return new double[][]{gauss_pulse, gauss_env};
     }
 
     /**
