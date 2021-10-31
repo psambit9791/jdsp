@@ -14,6 +14,8 @@ import com.github.psambit9791.jdsp.transform.DiscreteFourier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class TestDiscreteFourier {
 
     // 50Hz Sine + 80Hz Sine sampled @ 100Hz with Nyquist of 50Hz
@@ -107,7 +109,7 @@ public class TestDiscreteFourier {
                 2.9452,     2.9845,     3.0238,     3.0631,     3.1023,     -3.1414};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[] out = fft1.returnArgument(true);
+        double[] out = fft1.returnArgumentRad(true);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -123,7 +125,29 @@ public class TestDiscreteFourier {
                 2.9452,     2.9845,     3.0238,     3.0631,     3.1023,     3.1416};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[] out = fft1.returnArgument(true);
+        double[] out = fft1.returnArgumentRad(true);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void testFourierArgumentDeg1() {
+        double[] result = {0,   -87.75,     -85.5,      -83.25,     -81,
+                -78.75,     103.5,      -74.25,     -72,    110.25,     112.5,
+                114.75,     117,        119.25,     121.5,  123.75,     126,
+                128.25,     130.5,      132.75,     135,    137.25,     139.5,
+                141.75,     144,        146.25,     148.5,  150.75,     153,
+                155.25,     157.5,      159.75,     162,    164.25,     166.5,
+                168.75,     171,        173.25,     175.5,  177.75,     -180,
+                -177.75,    -175.5,     -173.25,    -171,   -168.75,    -166.5,
+                -164.25,    -162,       -159.75,    -157.5, -155.25,    -153,
+                -150.75,    -148.5,     -146.25,    -144,   -141.75,    -139.5,
+                -137.25,    -135,       -132.75,    -130.5, -128.25,    -126,
+                -123.75,    -121.5,     -119.25,    -117,   -114.75,    -112.5,
+                -110.25,    72,         74.25,      -103.5, 78.75,      81,
+                83.25,      85.5,       87.75};
+        DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
+        fft1.dft();
+        double[] out = fft1.returnArgumentDeg(false);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -146,7 +170,7 @@ public class TestDiscreteFourier {
                 1.453,      1.4923,     1.5315};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[] out = fft1.returnArgument(false);
+        double[] out = fft1.returnArgumentRad(false);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -169,7 +193,7 @@ public class TestDiscreteFourier {
                 -1.6886,    1.4923,     1.5315};
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[] out = fft1.returnArgument(false);
+        double[] out = fft1.returnArgumentRad(false);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 

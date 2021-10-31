@@ -75,14 +75,25 @@ public class DiscreteFourier {
     }
 
     /**
-     * Returns the argument value (phase) of the discrete fourier transformed sequence
+     * Returns the argument value (phase) of the discrete fourier transformed sequence in radians
      * @param onlyPositive Set to True if non-mirrored output is required
      * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
-     * @return double[] The argument DFT output
+     * @return double[] The argument DFT output (in radians)
      */
-    public double[] returnArgument(boolean onlyPositive) throws ExceptionInInitializerError{
+    public double[] returnArgumentRad(boolean onlyPositive) throws ExceptionInInitializerError{
         Complex[] dftout = returnComplex(onlyPositive);
         return Arrays.stream(dftout).mapToDouble(Complex::getArgument).toArray();
+    }
+
+    /**
+     * Returns the argument value (phase) of the discrete fourier transformed sequence in degrees
+     * @param onlyPositive Set to True if non-mirrored output is required
+     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
+     * @return double[] The argument DFT output (in degrees)
+     */
+    public double[] returnArgumentDeg(boolean onlyPositive) throws ExceptionInInitializerError{
+        double[] dftout = returnArgumentRad(onlyPositive);
+        return Arrays.stream(dftout).map(Math::toDegrees).toArray();
     }
 
     /**
