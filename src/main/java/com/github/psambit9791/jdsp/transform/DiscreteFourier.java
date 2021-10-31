@@ -75,6 +75,17 @@ public class DiscreteFourier {
     }
 
     /**
+     * Returns the argument value (phase) of the discrete fourier transformed sequence
+     * @param onlyPositive Set to True if non-mirrored output is required
+     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
+     * @return double[] The argument DFT output
+     */
+    public double[] returnArgument(boolean onlyPositive) throws ExceptionInInitializerError{
+        Complex[] dftout = returnComplex(onlyPositive);
+        return Arrays.stream(dftout).mapToDouble(Complex::getArgument).toArray();
+    }
+
+    /**
      * Returns the complex value of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
      * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
