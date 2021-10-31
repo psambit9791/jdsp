@@ -10,7 +10,7 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
  * @author  Sambit Paul
  * @version 1.0
  */
-abstract class _Window {
+public abstract class _Window {
 
     boolean extendVal;
 
