@@ -11,8 +11,7 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
  * @version 1.0
  */
 public abstract class _Window {
-
-    boolean extendVal;
+    private boolean extendVal;
 
     /**
      * Handles window length if it is less than or equal to 0
@@ -59,4 +58,25 @@ public abstract class _Window {
      * @return double[] The generated window
      */
     public abstract double[] getWindow();
+
+    /**
+     * Apply the window to the input data and return the output. Throws an exception if the array dimensions don't match.
+     * @param input input data
+     * @return double[] windowed input data
+     */
+    public double[] applyWindow(double[] input) {
+        double[] window = getWindow();
+        if (window == null) {
+            throw new NullPointerException("Window not initialized");
+        }
+        if (input.length != window.length) {
+            throw new IllegalArgumentException("Input data dimensions and window dimensions don't match");
+        }
+
+        double[] out = new double[input.length];
+        for (int i = 0; i < input.length; i++) {
+            out[i] = input[i]*window[i];
+        }
+        return out;
+    }
 }
