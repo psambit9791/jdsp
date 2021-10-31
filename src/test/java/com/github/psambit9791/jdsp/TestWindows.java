@@ -337,19 +337,19 @@ public class TestWindows {
     public void KaiserSymTest() {
         int len = 10;
         double[] result = {0.0 , 0.007 , 0.1038, 0.4627, 0.9199, 0.9199, 0.4627, 0.1038, 0.007 , 0.0};
-        Kaiser w1 = new Kaiser(len);
-        double[] out = w1.getWindow(14);
+        Kaiser w1 = new Kaiser(len, 14);
+        double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Kaiser w0 = new Kaiser(-2);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Kaiser w0 = new Kaiser(-2, 14);});
     }
 
     @Test
     public void KaiserASymTest() {
         int len = 10;
         double[] result = {0.0, 0.0048, 0.0682, 0.3249, 0.7615, 1.0, 0.7615, 0.3249, 0.0682, 0.0048};
-        Kaiser w2 = new Kaiser(len, false);
-        double[] out = w2.getWindow(14);
+        Kaiser w2 = new Kaiser(len, 14, false);
+        double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Kaiser w0 = new Kaiser(-2, false);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {Kaiser w0 = new Kaiser(-2, 14, false);});
     }
 }

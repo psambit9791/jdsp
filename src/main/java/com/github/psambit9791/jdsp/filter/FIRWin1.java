@@ -169,8 +169,8 @@ public class FIRWin1 extends _FIRFilter {
             throw new IllegalArgumentException("Invalid cutoff frequency: must be strictly increasing");
         }
 
-        Kaiser w = new Kaiser(this.numTaps);
-        double[] window = w.getWindow(this.beta);
+        Kaiser w = new Kaiser(this.numTaps, this.beta);
+        double[] window = w.getWindow();
 
         boolean passZero;
         if (filterType.equals("lowpass")) {
