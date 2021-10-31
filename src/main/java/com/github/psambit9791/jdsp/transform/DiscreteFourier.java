@@ -96,6 +96,44 @@ public class DiscreteFourier {
     }
 
     /**
+     * Returns the magnitude and phase (in radians) of the fourier transformed sequence. The first column
+     * of the output contains the magnitude, the second one the phase.
+     * @param onlyPositive Set to True if non-mirrored output is required
+     * @return double[][] The magnitude and phase (in radians) of the DFT output in respectively the first and second column
+     * @throws ExceptionInInitializerError
+     */
+    public double[][] getMagPhaseRad(boolean onlyPositive) throws ExceptionInInitializerError {
+        double[] dftMag = getMagnitude(onlyPositive);
+        double[] dftPhase = getPhaseRad(onlyPositive);
+        double[][] out = new double[dftMag.length][2];
+
+        for (int i = 0; i < out.length; i++) {
+            out[i][0] = dftMag[i];
+            out[i][1] = dftPhase[i];
+        }
+        return out;
+    }
+
+    /**
+     * Returns the magnitude and phase (in degrees) of the fourier transformed sequence. The first column
+     * of the output contains the magnitude, the second one the phase.
+     * @param onlyPositive Set to True if non-mirrored output is required
+     * @return double[][] The magnitude and phase (in degrees) of the DFT output in respectively the first and second column
+     * @throws ExceptionInInitializerError
+     */
+    public double[][] getMagPhaseDeg(boolean onlyPositive) throws ExceptionInInitializerError {
+        double[] dftMag = getMagnitude(onlyPositive);
+        double[] dftPhase = getPhaseDeg(onlyPositive);
+        double[][] out = new double[dftMag.length][2];
+
+        for (int i = 0; i < out.length; i++) {
+            out[i][0] = dftMag[i];
+            out[i][1] = dftPhase[i];
+        }
+        return out;
+    }
+
+    /**
      * Returns the complex value of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
      * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
