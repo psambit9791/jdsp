@@ -40,6 +40,15 @@ public class FIRWin1 extends _FIRFilter {
     private double width;
     private double nyquistF;
 
+    public enum FIRfilterType {
+        LOWPASS,
+        BANDSTOP,
+        MULTIBANDSTOP,
+        HIGHPASS,
+        BANDPASS,
+        MULTIBANDPASS
+    }
+
     /**
      * FIRWin1 constructor for generating a filter using the number of coefficients in the filter
      * @param numTaps Number of coefficients in the filter
@@ -155,7 +164,7 @@ public class FIRWin1 extends _FIRFilter {
      *              Frequency or the centre of the first passband.
      * @return double[] Filtered signal
      */
-    public double[] computeCoefficients(double[] cutoff, String filterType, boolean scale) {
+    public double[] computeCoefficients(double[] cutoff, FIRfilterType filterType, boolean scale) {
 
         for (int i=0; i<cutoff.length; i++) {
             cutoff[i] = cutoff[i]/this.nyquistF;
@@ -173,44 +182,45 @@ public class FIRWin1 extends _FIRFilter {
         double[] window = w.getWindow();
 
         boolean passZero;
-        if (filterType.equals("lowpass")) {
-            if (cutoff.length < 1) {
-                throw new IllegalArgumentException("For lowpass, cutoff must have only one frequency");
-            }
-            passZero = true;
-        }
-        else if (filterType.equals("bandstop")) {
-            if (cutoff.length < 2) {
-                throw new IllegalArgumentException("For bandstop, cutoff must have at least two frequencies");
-            }
-            passZero = true;
-        }
-        else if (filterType.equals("multibandstop")) {
-            if (cutoff.length < 3) {
-                throw new IllegalArgumentException("For multibandstop, cutoff must have at least three frequencies");
-            }
-            passZero = true;
-        }
-        else if (filterType.equals("highpass")) {
-            if (cutoff.length < 1) {
-                throw new IllegalArgumentException("For highpass, cutoff must have only one frequency");
-            }
-            passZero = false;
-        }
-        else if (filterType.equals("bandpass")) {
-            if (cutoff.length < 2) {
-                throw new IllegalArgumentException("For bandpass, cutoff must have at least two frequencies");
-            }
-            passZero = false;
-        }
-        else if (filterType.equals("multibandpass")) {
-            if (cutoff.length < 3) {
-                throw new IllegalArgumentException("For multibandpass, cutoff must have at least three frequencies");
-            }
-            passZero = false;
-        }
-        else {
-            throw new IllegalArgumentException("filterType must be one of 'lowpass', 'bandstop', 'multibandstop' 'highpass', 'bandpass' or 'multibandpass'");
+        switch (filterType) {
+            case LOWPASS:
+                if (cutoff.length < 1) {
+                    throw new IllegalArgumentException("For lowpass, cutoff must have only one frequency");
+                }
+                passZero = true;
+                break;
+            case BANDSTOP:
+                if (cutoff.length < 2) {
+                    throw new IllegalArgumentException("For bandstop, cutoff must have at least two frequencies");
+                }
+                passZero = true;
+                break;
+            case MULTIBANDSTOP:
+                if (cutoff.length < 3) {
+                    throw new IllegalArgumentException("For multibandstop, cutoff must have at least three frequencies");
+                }
+                passZero = true;
+                break;
+            case HIGHPASS:
+                if (cutoff.length < 1) {
+                    throw new IllegalArgumentException("For highpass, cutoff must have only one frequency");
+                }
+                passZero = false;
+                break;
+            case BANDPASS:
+                if (cutoff.length < 2) {
+                    throw new IllegalArgumentException("For bandpass, cutoff must have at least two frequencies");
+                }
+                passZero = false;
+                break;
+            case MULTIBANDPASS:
+                if (cutoff.length < 3) {
+                    throw new IllegalArgumentException("For multibandpass, cutoff must have at least three frequencies");
+                }
+                passZero = false;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown filter type");
         }
 
         boolean passNyquist = ((cutoff.length & 1) == 1) ^ passZero;
