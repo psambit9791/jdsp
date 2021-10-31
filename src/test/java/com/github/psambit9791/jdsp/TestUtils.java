@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -729,5 +731,63 @@ public class TestUtils {
         int[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[] out = UtilMethods.flattenMatrix(matrix);
         Assertions.assertArrayEquals(result, out);
+    }
+
+    @Test
+    public void getRowTest() {
+        double[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        double[] result1 = {1, 2, 3};
+        double[] result2 = {4, 5, 6};
+        double[] result3 = {7, 8, 9};
+
+        double[] out1 = UtilMethods.getRow(matrix, 0);
+        double[] out2 = UtilMethods.getRow(matrix, 1);
+        double[] out3 = UtilMethods.getRow(matrix, 2);
+        // We don't want the System.err.println message
+        PrintStream stderr = System.err;    // Save standard stderr
+        System.setErr(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) throws IOException {
+
+            }
+        }));
+        double[] out4 = UtilMethods.getRow(matrix, 3);
+        double[] out5 = UtilMethods.getRow(matrix, -1);
+        System.setErr(stderr);  // Reset to standard stderr
+
+        Assertions.assertArrayEquals(result1, out1);
+        Assertions.assertArrayEquals(result2, out2);
+        Assertions.assertArrayEquals(result3, out3);
+        Assertions.assertNull(out4);
+        Assertions.assertNull(out5);
+    }
+
+    @Test
+    public void getColumnTest() {
+        double[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        double[] result1 = {1, 4, 7};
+        double[] result2 = {2, 5, 8};
+        double[] result3 = {3, 6, 9};
+
+        double[] out1 = UtilMethods.getColumn(matrix, 0);
+        double[] out2 = UtilMethods.getColumn(matrix, 1);
+        double[] out3 = UtilMethods.getColumn(matrix, 2);
+        // We don't want the System.err.println message
+        PrintStream stderr = System.err;    // Save standard stderr
+        System.setErr(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) throws IOException {
+
+            }
+        }));
+        double[] out4 = UtilMethods.getColumn(matrix, 3);
+        double[] out5 = UtilMethods.getColumn(matrix, -1);
+        System.setErr(stderr);  // Reset to standard stderr
+
+        Assertions.assertArrayEquals(result1, out1);
+        Assertions.assertArrayEquals(result2, out2);
+        Assertions.assertArrayEquals(result3, out3);
+        Assertions.assertNull(out4);
+        Assertions.assertNull(out5);
     }
 }

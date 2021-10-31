@@ -485,16 +485,8 @@ public class UtilMethods {
      * @return double Result of the rounding operation
      */
     public static double round(double value, int decimals) {
-        String dPlaces = "#.";
-        for (int i=0; i<decimals; i++) {
-            dPlaces = dPlaces + "#";
-        }
-
-        DecimalFormat df = new DecimalFormat(dPlaces);
-        df.setRoundingMode(RoundingMode.HALF_EVEN);
-        Double d = value;
-        String temp = df.format(d);
-        return Double.parseDouble(temp);
+        double scale = Math.pow(10, decimals);
+        return Math.round(value * scale) / scale;
     }
 
     /**
@@ -504,19 +496,7 @@ public class UtilMethods {
      * @return double The rounded double array
      */
     public static double[] round(double[] arr, int decimals) {
-        double[] rounded = new double[arr.length];
-        String dPlaces = "#.";
-        for (int i=0; i<decimals; i++) {
-            dPlaces = dPlaces + "#";
-        }
-
-        DecimalFormat df = new DecimalFormat(dPlaces);
-            df.setRoundingMode(RoundingMode.HALF_EVEN);
-        for (int i=0; i<rounded.length; i++) {
-            Double d = arr[i];
-            rounded[i] = Double.parseDouble(df.format(d));
-        }
-        return rounded;
+        return Arrays.stream(arr).map(c -> UtilMethods.round(c, decimals)).toArray();
     }
 
     /**
@@ -767,6 +747,46 @@ public class UtilMethods {
             out[i] = m[i/cols][i%cols];
         }
         return out;
+    }
+
+    /**
+     * Return the row-array of matrix <m>, at row index <rowIdx>
+     * @param m 2D array (matrix) from which to get the row
+     * @param rowIdx row index which you want to extract
+     * @return
+     */
+    public static double[] getRow(double[][] m, int rowIdx) {
+        if (rowIdx < 0) {
+            System.err.println("Row index can not be negative");
+            return null;
+        }
+        if (rowIdx >= m.length) {
+            System.err.println("Row index is greater than matrix row dimension");
+            return null;
+        }
+        return m[rowIdx];
+    }
+
+    /**
+     * Return the column-array of matrix <m>, at column index <colIdx>
+     * @param m 2D array (matrix) from which to get the column
+     * @param colIdx column index which you want to extract
+     * @return
+     */
+    public static double[] getColumn(double[][] m, int colIdx) {
+        if (colIdx < 0) {
+            System.err.println("Column index can not be negative");
+            return null;
+        }
+        if (colIdx >= m[0].length) {
+            System.err.println("Column index is greater than matrix column dimension");
+            return null;
+        }
+        double[] column = new double[m.length];
+        for (int i = 0; i < column.length; i++){
+            column[i] = m[i][colIdx];
+        }
+        return column;
     }
 
     /**
