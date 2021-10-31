@@ -237,19 +237,17 @@ public class TestUtils {
 
     @Test
     public void convertToPrimitiveIntTest() {
-        ArrayList<Integer> numbers = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5));
+        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
         int[] nums = {1, 2, 3, 4, 5};
         int[] out = UtilMethods.convertToPrimitiveInt(numbers);
-        Assertions.assertTrue(out instanceof int[]);
         Assertions.assertArrayEquals(nums, out);
     }
 
     @Test
     public void convertToPrimitiveDoubleTest() {
-        ArrayList<Double> numbers = new ArrayList<Double>(Arrays.asList(1.1, 2.22, 3.3, 4.4, 5.55));
+        ArrayList<Double> numbers = new ArrayList<>(Arrays.asList(1.1, 2.22, 3.3, 4.4, 5.55));
         double[] nums = {1.1, 2.22, 3.3, 4.4, 5.55};
         double[] out = UtilMethods.convertToPrimitiveDouble(numbers);
-        Assertions.assertTrue(out instanceof double[]);
         Assertions.assertArrayEquals(nums, out, 0.001);
     }
 
@@ -293,7 +291,7 @@ public class TestUtils {
     }
 
     @Test
-    public void absoluteTest() throws Exception {
+    public void absoluteTest() {
         double[][] test1 = {{1.22, -3.41, -0.22}, {-0.89, 1.6, 7.65}};
         double[][] res1 = {{1.22, 3.41, 0.22}, {0.89, 1.6, 7.65}};
         double[][] out1 = UtilMethods.absoluteArray(test1);
@@ -747,9 +745,7 @@ public class TestUtils {
         PrintStream stderr = System.err;    // Save standard stderr
         System.setErr(new PrintStream(new OutputStream() {
             @Override
-            public void write(int b) throws IOException {
-
-            }
+            public void write(int b) { }
         }));
         double[] out4 = UtilMethods.getRow(matrix, 3);
         double[] out5 = UtilMethods.getRow(matrix, -1);
@@ -776,9 +772,7 @@ public class TestUtils {
         PrintStream stderr = System.err;    // Save standard stderr
         System.setErr(new PrintStream(new OutputStream() {
             @Override
-            public void write(int b) throws IOException {
-
-            }
+            public void write(int b) { }
         }));
         double[] out4 = UtilMethods.getColumn(matrix, 3);
         double[] out5 = UtilMethods.getColumn(matrix, -1);
