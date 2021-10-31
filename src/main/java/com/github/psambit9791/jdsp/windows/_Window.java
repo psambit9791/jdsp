@@ -20,10 +20,7 @@ public abstract class _Window {
      * @return boolean False if length more than 0, otherwise True
      */
     public boolean lenGuard(int length) {
-        if (length > 0) {
-            return false;
-        }
-        return true;
+        return length <= 0;
     }
 
     /**
