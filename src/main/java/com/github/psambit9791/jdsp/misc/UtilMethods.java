@@ -1292,30 +1292,7 @@ public class UtilMethods {
     }
 
     /**
-     * Convert a 2D matrix to a list of Complex numbers
-     * @param arr Complex Numbers as a 2D matrix. Dimension 1: Length, Dimension 2: Real part, complex part (optional)
-     * @return Complex[] A list of Complex numbers
-     */
-    public static Complex[] matToComplex(double[][] arr) {
-        Complex[] out = new Complex[arr.length];
-        if (arr[0].length == 2) {
-            for (int i=0; i<out.length; i++) {
-                out[i] = new Complex(arr[i][0], arr[i][1]);
-            }
-        }
-        else if (arr[0].length == 1) {
-            for (int i=0; i<out.length; i++) {
-                out[i] = new Complex(arr[i][0]);
-            }
-        }
-        else {
-            throw new IllegalArgumentException("Dimension 2 must be of length 1 or 2.");
-        }
-        return out;
-    }
-
-    /**
-     * Convert a 1D list of numbers to a list of Complex numbers
+     * Convert a 1D list of real numbers to a list of Complex numbers
      * @param arr Complex Numbers as a 1D matrix (only real values).
      * @return Complex[] A list of Complex numbers
      */
@@ -1323,6 +1300,48 @@ public class UtilMethods {
         Complex[] out = new Complex[arr.length];
         for (int i=0; i<out.length; i++) {
             out[i] = new Complex(arr[i]);
+        }
+        return out;
+    }
+
+    /**
+     * Convert a 2D matrix to a list of Complex numbers
+     * @param arr Complex Numbers as a 2D matrix. Dimension 1: Length, Dimension 2: Real part, complex part (optional)
+     * @return Complex[] A list of Complex numbers
+     */
+    public static Complex[] matToComplex(double[][] arr) {
+        Complex[] out = new Complex[arr.length];
+        for (int i=0; i<out.length; i++) {
+            if (arr[i].length == 2) {
+                out[i] = new Complex(arr[i][0], arr[i][1]);
+            }
+            else if (arr[i].length == 1) {
+                out[i] = new Complex(arr[i][0]);
+            }
+            else {
+                throw new IllegalArgumentException("Dimension 2 must be of length 1 or 2.");
+            }
+        }
+        return out;
+    }
+
+    /**
+     * Convert a 3D matrix to a matrix of Complex numbers
+     * @param arr Complex Numbers as a 3D matrix. Dimension 1: Rows, Dimension 2: Columns, Dimension 3: Real part, complex part (optional)
+     * @return Complex[][] A list of Complex numbers
+     */
+    public static Complex[][] matToComplex(double[][][] arr) {
+        Complex[][] out = new Complex[arr.length][arr[0].length];
+        for (int i=0; i<out.length; i++) {
+            for (int j = 0; j < out[0].length; j++) {
+                if (arr[i][j].length == 2) {
+                    out[i][j] = new Complex(arr[i][j][0], arr[i][j][1]);
+                } else if (arr[i][j].length == 1) {
+                    out[i][j] = new Complex(arr[i][j][0]);
+                } else {
+                    throw new IllegalArgumentException("Dimension 3 must be of length 1 or 2.");
+                }
+            }
         }
         return out;
     }

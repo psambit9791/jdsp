@@ -89,7 +89,7 @@ public class Wavelet {
             }
         }
 
-        else if  (wavelet_type.equals("paul")) {
+        else {
             for (int i=0; i<this.widths.length; i++) {
                 Generate gp = new Generate();
                 double norm = Math.sqrt(1.0/this.widths[i]);
