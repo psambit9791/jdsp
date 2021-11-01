@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class ShortTimeFourier {
     private double[] signal;
-    private Complex[][] output = null;
+    private DiscreteFourier[] output = null;
     private final double Fs;
     private final int frameLength;
     private final int overlap;
@@ -81,21 +81,18 @@ public class ShortTimeFourier {
         }
 
         int cols = (this.signal.length - frameLength) / (frameLength - overlap) + 1;
-        this.output = new Complex[frameLength][cols];
+        this.output = new DiscreteFourier[cols];
 
         int R = 0;  // Initialize frame counter
-        for (int m = 0; R < this.output[0].length; m += (frameLength - overlap)) {
+        for (int m = 0; R < cols; m += (frameLength - overlap)) {
             double[] frame = Arrays.copyOfRange(this.signal, m, m + frameLength);
             frame = window.applyWindow(frame);
             // TODO: zero-padding
             DiscreteFourier dft = new DiscreteFourier(frame);       // TODO: better to use FFT once implemented
             dft.dft();
-            Complex[] dftOut = dft.getComplex(false);
 
             // Fill in the output
-            for (int i = 0; i < this.output.length; i++) {
-                this.output[i][R] = dftOut[i];
-            }
+            this.output[R] = dft;
 
             R++;
         }
@@ -173,6 +170,10 @@ public class ShortTimeFourier {
         return result;
     }
 
+    public DiscreteFourier[] getOutput() {
+        return output;
+    }
+
     /**
      * Returns the full complex matrix of the STFT
      * @param onlyPositive set to True if non-mirrored output is required
@@ -183,22 +184,16 @@ public class ShortTimeFourier {
             stft();
         }
 
-        Complex[][] result;
-
-        if (onlyPositive) {
-            int numBins = this.output.length / 2 + 1;
-            result = new Complex[numBins][this.output[0].length];
-        }
-        else {
-            result = new Complex[this.output.length][this.output[0].length];
-        }
+        Complex[][] result = new Complex[this.output[0].getComplex(onlyPositive).length][this.output.length];
 
         // Fill in the output
-        for (int c = 0; c < result[0].length; c++) {
+        for (int c = 0; c < this.output.length; c++) {
+            DiscreteFourier dft = this.output[c];
             for (int r = 0; r < result.length; r++) {
-                result[r][c] = this.output[r][c];
+                result[r][c] = dft.getComplex(onlyPositive)[r];
             }
         }
+
         return result;
     }
 
@@ -212,14 +207,7 @@ public class ShortTimeFourier {
             throw new ExceptionInInitializerError("No STFT calculated yet");
         }
 
-        double[] axis;
-        if (onlyPositive) {
-            int numBins = this.output.length / 2 + 1;
-            axis = new double[numBins];
-        }
-        else {
-            axis = new double[this.output.length];
-        }
+        double[] axis = new double[this.output[0].getComplex(onlyPositive).length];
 
         for (int i = 0; i < axis.length; i++) {
             axis[i] = i*this.Fs/this.frameLength;
@@ -237,7 +225,7 @@ public class ShortTimeFourier {
             throw new ExceptionInInitializerError("No STFT calculated yet");
         }
 
-        double[] axis = new double[this.output[0].length];
+        double[] axis = new double[this.output.length];
         for (int i = 0; i < axis.length; i++) {
             axis[i] = i*(this.frameLength - overlap)/this.Fs;
         }
