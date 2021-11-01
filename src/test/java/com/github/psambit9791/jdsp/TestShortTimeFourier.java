@@ -2,6 +2,7 @@ package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.misc.Export;
 import com.github.psambit9791.jdsp.transform.ShortTimeFourier;
+import com.github.psambit9791.jdsp.windows.Hanning;
 import com.github.psambit9791.jdsp.windows.Rectangular;
 import com.github.psambit9791.jdsp.windows._Window;
 import org.apache.commons.math3.complex.Complex;
@@ -156,6 +157,34 @@ public class TestShortTimeFourier {
         int overlap = 2;
         double Fs = 100;
         _Window window = new Rectangular(frameLength);
+
+        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
+
+        Complex[][] out = stft.getComplex(true);
+
+        for (int c = 0; c < out[0].length; c++) {
+            for (int r = 0; r < out.length; r++) {
+                Assertions.assertEquals(resultReal[r][c], out[r][c].getReal(), 0.001);
+                Assertions.assertEquals(resultImag[r][c], out[r][c].getImaginary(), 0.001);
+            }
+        }
+    }
+
+    @Test
+    public void testSTFTPositiveHanning2() throws IOException {
+        // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
+        //      STFT result with Hanning window
+        double[][] resultReal = {{2.884570e-02,1.632510e-01,4.102850e-01,7.584200e-01,1.175675e+00,1.596045e+00,1.910295e+00,1.973270e+00,1.641875e+00,8.522050e-01,-2.806675e-01,-1.398130e+00,-1.963815e+00,-1.531605e+00,-1.488520e-01,1.401120e+00,1.923850e+00,7.909860e-01,-1.138920e+00,-1.903460e+00,-4.631350e-01,1.587670e+00,1.475165e+00,-8.288486e-01,-1.818350e+00,2.933800e-01,1.862805e+00,-1.714030e-01,-1.831990e+00,4.708300e-01,1.665700e+00,-1.109751e+00},
+                {-2.154479e-02,-1.034154e-01,-2.444861e-01,-4.374396e-01,-6.629119e-01,-8.822842e-01,-1.033592e+00,-1.037498e+00,-8.207788e-01,-3.607519e-01,2.612682e-01,8.323611e-01,1.058867e+00,7.278064e-01,-7.463959e-02,-8.658167e-01,-1.004359e+00,-2.558429e-01,7.714940e-01,9.935091e-01,4.121927e-02,-9.861550e-01,-6.520424e-01,6.714486e-01,9.229040e-01,-4.212884e-01,-9.956074e-01,3.758533e-01,9.678937e-01,-5.515941e-01,-7.956845e-01,8.707611e-01},
+                {7.121938e-03,2.178989e-02,3.934360e-02,5.822959e-02,7.507439e-02,8.426174e-02,7.844412e-02,5.086318e-02,-1.586614e-04,-6.535057e-02,-1.209345e-01,-1.332961e-01,-7.696000e-02,3.799615e-02,1.490656e-01,1.652567e-01,4.243393e-02,-1.396501e-01,-2.020340e-01,-4.177915e-02,1.903482e-01,1.923200e-01,-8.554013e-02,-2.570243e-01,-1.372899e-02,2.745984e-01,6.420493e-02,-2.901518e-01,-5.189867e-02,3.161791e-01,-3.716551e-02,-3.158856e-01}};
+        double[][] resultImag = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {-5.832141e-04,-3.759031e-02,-1.186688e-01,-2.412418e-01,-3.965870e-01,-5.645285e-01,-7.086219e-01,-7.758403e-01,-7.063347e-01,-4.584513e-01,-4.717547e-02,4.203105e-01,7.464768e-01,7.206177e-01,2.720860e-01,-3.861680e-01,-7.896988e-01,-5.439877e-01,2.269081e-01,7.933719e-01,4.717681e-01,-4.512748e-01,-7.888305e-01,2.329592e-02,8.174400e-01,2.439655e-01,-7.793730e-01,-3.207132e-01,7.941698e-01,2.127854e-01,-8.506664e-01,1.003125e-01},
+                {-2.464685e-03,6.312688e-03,2.568667e-02,5.530862e-02,9.344685e-02,1.355700e-01,1.729406e-01,1.922244e-01,1.775019e-01,1.165720e-01,1.127268e-02,-1.118206e-01,-1.999100e-01,-1.934562e-01,-6.921182e-02,1.156121e-01,2.276630e-01,1.496305e-01,-8.199621e-02,-2.443456e-01,-1.290490e-01,1.627833e-01,2.465674e-01,-3.939776e-02,-2.799605e-01,-4.487184e-02,2.882477e-01,6.777151e-02,-3.068942e-01,-1.963251e-02,3.266402e-01,-1.108638e-01}};
+
+        int frameLength = 5;
+        int overlap = 2;
+        double Fs = 100;
+        _Window window = new Hanning(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
 
