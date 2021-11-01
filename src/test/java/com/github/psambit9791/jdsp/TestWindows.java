@@ -1,9 +1,11 @@
 package com.github.psambit9791.jdsp;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.windows.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javax.rmi.CORBA.Util;
 import java.util.Arrays;
 
 public class TestWindows {
@@ -15,7 +17,17 @@ public class TestWindows {
         Boxcar w1 = new Boxcar(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
+        out = UtilMethods.getWindow("boxcar", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {Boxcar w0 = new Boxcar(-2);});
+    }
+
+    @Test
+    public void BoxCarSymUtilTest() {
+        int len = 10;
+        double[] result = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+        double[] out = UtilMethods.getWindow("boxcar", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
     }
 
     @Test
@@ -62,6 +74,15 @@ public class TestWindows {
     }
 
     @Test
+    public void HammingSymUtilTest() {
+        int len = 10;
+        double[] result = {0.08, 0.1876, 0.4601, 0.77, 0.9723, 0.9723, 0.77, 0.4601, 0.1876, 0.08};
+        double[] out = UtilMethods.getWindow("hamming", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
+
+    }
+
+    @Test
     public void HammingASymTest() {
         int len = 10;
         double[] result = {0.08, 0.1679, 0.3979, 0.6821, 0.9121, 1.0, 0.9121, 0.6821, 0.3979, 0.1679};
@@ -79,6 +100,14 @@ public class TestWindows {
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {Hanning w0 = new Hanning(-2);});
+    }
+
+    @Test
+    public void HanningSymUtilTest() {
+        int len = 10;
+        double[] result = {0.0, 0.117, 0.4132, 0.75, 0.9698, 0.9698, 0.75, 0.4132, 0.117, 0.0};
+        double[] out = UtilMethods.getWindow("hanning", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
     }
 
     @Test
@@ -102,6 +131,14 @@ public class TestWindows {
     }
 
     @Test
+    public void BlackmanSymUtilTest() {
+        int len = 10;
+        double[] result = {-0.0, 0.0509, 0.258, 0.63, 0.9511, 0.9511, 0.63, 0.258, 0.0509, -0.0};
+        double[] out = UtilMethods.getWindow("blackman", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
     public void BlackmanASymTest() {
         int len = 10;
         double[] result = {-0.0, 0.0402, 0.2008, 0.5098, 0.8492, 1.0, 0.8492, 0.5098, 0.2008, 0.0402};
@@ -119,6 +156,14 @@ public class TestWindows {
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {BlackmanHarris w0 = new BlackmanHarris(-2);});
+    }
+
+    @Test
+    public void BlackmanHarrisSymUtilTest() {
+        int len = 10;
+        double[] result = {0.0001, 0.0151, 0.147, 0.5206, 0.9317, 0.9317, 0.5206, 0.147, 0.0151, 0.0001};
+        double[] out = UtilMethods.getWindow("blackman-harris", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
     }
 
     @Test
@@ -142,6 +187,14 @@ public class TestWindows {
     }
 
     @Test
+    public void PoissonSymUtilTest() {
+        int len = 10;
+        double[] result = {0.0111, 0.0302, 0.0821, 0.2231, 0.6065, 0.6065, 0.2231, 0.0821, 0.0302, 0.0111};
+        double[] out = UtilMethods.getWindow("poisson", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
     public void PoissonASymTest() {
         int len = 10;
         double[] result = {0.0067, 0.0183, 0.0498, 0.1353, 0.3679, 1.0, 0.3679, 0.1353, 0.0498, 0.0183};
@@ -162,6 +215,14 @@ public class TestWindows {
     }
 
     @Test
+    public void FlatTopSymUtilTest() {
+        int len = 10;
+        double[] result = {-0.0004, -0.0202, -0.0702, 0.1982, 0.8625, 0.8625, 0.1982, -0.0702, -0.0202, -0.0004};
+        double[] out = UtilMethods.getWindow("flattop", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
     public void FlatTopASymTest() {
         int len = 10;
         double[] result = {-0.0004, -0.0156, -0.0677, 0.0545, 0.6069, 1.0, 0.6069, 0.0545, -0.0677, -0.0156};
@@ -179,6 +240,14 @@ public class TestWindows {
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {Nuttall w0 = new Nuttall(-2);});
+    }
+
+    @Test
+    public void NuttallSymUtilTest() {
+        int len = 10;
+        double[] result = {0.0004, 0.0179, 0.1556, 0.5292, 0.9332, 0.9332, 0.5292, 0.1556, 0.0179, 0.0004};
+        double[] out = UtilMethods.getWindow("nuttall", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
     }
 
     @Test
@@ -246,6 +315,14 @@ public class TestWindows {
     }
 
     @Test
+    public void TriangularEvenSymUtilTest() {
+        int len = 10;
+        double[] result = {0.1, 0.3, 0.5, 0.7, 0.9, 0.9, 0.7, 0.5, 0.3, 0.1};
+        double[] out = UtilMethods.getWindow("triangular", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
     public void TriangularEvenASymTest() {
         int len = 10;
         double[] result = {0.1667, 0.3333, 0.5, 0.6667, 0.8333, 1.0, 0.8333, 0.6667, 0.5, 0.3333};
@@ -284,6 +361,14 @@ public class TestWindows {
     }
 
     @Test
+    public void BartlettSymUtilTest() {
+        int len = 10;
+        double[] result = {0.0, 0.2222, 0.4444, 0.6667, 0.8889, 0.8889, 0.6667, 0.4444, 0.2222, 0.0};
+        double[] out = UtilMethods.getWindow("bartlett", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
     public void BartlettASymTest() {
         int len = 10;
         double[] result = {0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 0.8, 0.6, 0.4, 0.2};
@@ -304,6 +389,14 @@ public class TestWindows {
     }
 
     @Test
+    public void BartlettHannSymUtilTest() {
+        int len = 10;
+        double[] result = {0.0, 0.1422, 0.4207, 0.73, 0.9504, 0.9504, 0.73, 0.4207, 0.1422, 0.0};
+        double[] out = UtilMethods.getWindow("bartlett-hann", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
+    }
+
+    @Test
     public void BartlettHannASymTest() {
         int len = 10;
         double[] result = {0.0, 0.1206, 0.3586, 0.6414, 0.8794, 1.0, 0.8794, 0.6414, 0.3586, 0.1206};
@@ -321,6 +414,14 @@ public class TestWindows {
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {Bohman w0 = new Bohman(-2);});
+    }
+
+    @Test
+    public void BohmanSymUtilTest() {
+        int len = 10;
+        double[] result = {0.0, 0.0344, 0.2363, 0.609, 0.9442, 0.9442, 0.609, 0.2363, 0.0344, 0.0};
+        double[] out = UtilMethods.getWindow("bohman", len, true);
+        Assertions.assertArrayEquals(result, out, 0.0001);
     }
 
     @Test

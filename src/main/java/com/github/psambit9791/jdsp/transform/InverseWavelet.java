@@ -28,6 +28,13 @@ public class InverseWavelet {
         this.dj = 0.125;
     }
 
+//    private double findS0(String wavelet, double args) {
+//        double s0 = 0.0;
+//        if (wavelet.equals("ricker")) {
+//
+//        }
+//    }
+
     // Values precomputed for quicker operations during ICWT
     private double getWaveletPsi0(String wavelet, double args) {
         double psi0 = 0.0;

@@ -148,6 +148,32 @@ public class TestUtils {
     }
 
     @Test
+    public void padSignalLengthTest() {
+        double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
+        double[] reflect = {4, 0, 8, 2, 2, 8, 0, 4, 1, 9, 9, 0, 0, 9, 9, 1};
+        double[] constant = {0, 0, 0, 0, 2, 8, 0, 4, 1, 9, 9, 0, 0, 0, 0, 0};
+        double[] nearest = {2, 2, 2, 2, 2, 8, 0, 4, 1, 9, 9, 0, 0, 0, 0, 0};
+        double[] mirror = {1, 4, 0, 8, 2, 8, 0, 4, 1, 9, 9, 0, 9, 9, 1, 4};
+        double[] wrap = {1, 9, 9, 0, 2, 8, 0, 4, 1, 9, 9, 0, 2, 8, 0, 4};
+
+        double[] out = UtilMethods.padSignal(signal, "reflect", 4);
+        Assertions.assertArrayEquals(reflect, out, 0.001);
+
+        out = UtilMethods.padSignal(signal, "constant", 4);
+        Assertions.assertArrayEquals(constant, out, 0.001);
+
+        out = UtilMethods.padSignal(signal, "nearest", 4);
+        Assertions.assertArrayEquals(nearest, out, 0.001);
+
+        out = UtilMethods.padSignal(signal, "mirror", 4);
+        Assertions.assertArrayEquals(mirror, out, 0.001);
+
+        out = UtilMethods.padSignal(signal, "wrap", 4);
+        Assertions.assertArrayEquals(wrap, out, 0.001);
+
+    }
+
+    @Test
     public void diffTest() {
         double[] seq = {1, 2, 3, 4, 6, -4};
         double[] result = {1, 1, 1, 2, -10};

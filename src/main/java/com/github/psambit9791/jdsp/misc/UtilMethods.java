@@ -10,6 +10,7 @@
 
 package com.github.psambit9791.jdsp.misc;
 
+import com.github.psambit9791.jdsp.windows.*;
 import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
 import org.apache.commons.math3.complex.Complex;
@@ -402,6 +403,94 @@ public class UtilMethods {
                 newSig = concatenateArray(newSig, signal);
                 newSig = concatenateArray(newSig, signal);
                 newSig = concatenateArray(newSig, signal);
+                newSignal = newSig;
+                break;
+            }
+            default:
+                throw new IllegalArgumentException("padSignalforConvolution modes can only be reflect, constant, " +
+                        "nearest, mirror, or wrap");
+        }
+        return newSignal;
+    }
+
+
+    // Different methods of padding a signal
+    /**
+     * This function returns the input signal by padding it.
+     * The output differs based on the mode of operation.
+     * @param signal Signal to be padded
+     * @param mode The mode in which padding will take place
+     * @param length The number of elements by which the signal is extended on either side
+     * @throws java.lang.IllegalArgumentException If string mode is not "reflect", "constant", "nearest", "mirror" or "wrap"
+     * Mode outputs for signal [a b c d]:
+     * "reflect" : [d c b a | a b c d | d c b a]
+     * "constant" : [0 0 0 0 | a b c d | 0 0 0 0]
+     * "nearest" : [a a a a | a b c d | d d d d]
+     * "mirror" : [c d c b | a b c d | c b a b]
+     * "wrap" : [a b c d | a b c d | a b c d]
+     * @return double[][] Pseudo-inverse of the input matrix
+     */
+    public static double[] padSignal(double[] signal, String mode, int length) {
+        double[] newSignal;
+        if (length > signal.length) {
+            throw new IllegalArgumentException("length has to be less than the signal length");
+        }
+        switch (mode) {
+            case "reflect": {
+                double[] revSig = reverse(signal);
+                double[] newSig = {};
+                newSig = concatenateArray(newSig, UtilMethods.splitByIndex(revSig, signal.length-length, signal.length));
+                newSig = concatenateArray(newSig, signal);
+                newSig = concatenateArray(newSig, UtilMethods.splitByIndex(revSig, 0, length));
+                newSignal = newSig;
+                break;
+            }
+            case "constant": {
+                double[] cons = new double[length];
+                Arrays.fill(cons, 0);
+                double[] newSig = {};
+                newSig = concatenateArray(newSig, cons);
+                newSig = concatenateArray(newSig, signal);
+                newSig = concatenateArray(newSig, cons);
+                newSignal = newSig;
+                break;
+            }
+            case "nearest": {
+                double[] left = new double[length];
+                Arrays.fill(left, signal[0]);
+                double[] right = new double[length];
+                Arrays.fill(right, signal[signal.length - 1]);
+
+                double[] newSig = {};
+                newSig = concatenateArray(newSig, left);
+                newSig = concatenateArray(newSig, signal);
+                newSig = concatenateArray(newSig, right);
+                newSignal = newSig;
+                break;
+            }
+            case "mirror": {
+                double[] temp = splitByIndex(signal, 1, signal.length);
+                temp = reverse(temp);
+                double[] val = new double[]{temp[1]};
+                double[] left = concatenateArray(val, temp);
+
+                temp = splitByIndex(signal, 0, signal.length - 1);
+                temp = reverse(temp);
+                val = new double[]{temp[temp.length - 2]};
+                double[] right = concatenateArray(temp, val);
+
+                double[] newSig = {};
+                newSig = concatenateArray(newSig, UtilMethods.splitByIndex(left, signal.length-length, signal.length));
+                newSig = concatenateArray(newSig, signal);
+                newSig = concatenateArray(newSig, UtilMethods.splitByIndex(right, 0, length));
+                newSignal = newSig;
+                break;
+            }
+            case "wrap": {
+                double[] newSig = {};
+                newSig = concatenateArray(newSig, UtilMethods.splitByIndex(signal, signal.length-length, signal.length));
+                newSig = concatenateArray(newSig, signal);
+                newSig = concatenateArray(newSig, UtilMethods.splitByIndex(signal, 0, length));
                 newSignal = newSig;
                 break;
             }
@@ -1682,5 +1771,65 @@ public class UtilMethods {
             }
         }
         return out;
+    }
+
+    public static double[] getWindow(String windowName, int len, boolean sym) {
+
+        double[] window;
+        switch (windowName) {
+            case "bartlett": {
+                window = new Bartlett(len, sym).getWindow();
+                break;
+            }
+            case "bartlett-hann": {
+                window = new BartlettHann(len, sym).getWindow();
+                break;
+            }
+            case "blackman": {
+                window = new Blackman(len, sym).getWindow();
+                break;
+            }
+            case "blackman-harris": {
+                window = new BlackmanHarris(len, sym).getWindow();
+                break;
+            }
+            case "bohman": {
+                window = new Bohman(len, sym).getWindow();
+                break;
+            }
+            case "boxcar": {
+                window = new Boxcar(len, sym).getWindow();
+                break;
+            }
+            case "flattop": {
+                window = new FlatTop(len, sym).getWindow();
+                break;
+            }
+            case "hamming": {
+                window = new Hamming(len, sym).getWindow();
+                break;
+            }
+            case "hanning": {
+                window = new Hanning(len, sym).getWindow();
+                break;
+            }
+            case "nuttall": {
+                window = new Nuttall(len, sym).getWindow();
+                break;
+            }
+            case "poisson": {
+                window = new Poisson(len, sym).getWindow();
+                break;
+            }
+            case "triangular": {
+                window = new Triangular(len, sym).getWindow();
+                break;
+            }
+            default:
+                throw new IllegalArgumentException("windowName can be one of 'bartlett', 'bartlett-hann', 'blackman', " +
+                        "'blackman-harris', 'bohman', 'boxcar', 'flattop', 'hamming', 'hanning', 'nuttall', 'poisson', " +
+                        "'triangular'");
+        }
+        return window;
     }
 }
