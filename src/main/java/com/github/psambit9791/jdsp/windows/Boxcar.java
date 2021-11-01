@@ -11,10 +11,9 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class Boxcar extends _Window {
-
-    double[] window;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final boolean sym;
+    private final int len;
 
     /**
      * This constructor initialises the Boxcar class.
@@ -23,11 +22,10 @@ public class Boxcar extends _Window {
      * @param sym Whether the window is symmetric
      */
     public Boxcar(int len, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
         this.sym = sym;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -36,11 +34,14 @@ public class Boxcar extends _Window {
      * @param len Length of the window
      */
     public Boxcar(int len) throws IllegalArgumentException {
-        this.len = len;
-        this.sym = true;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        this(len, true);
+    }
+
+    private void generateWindow() {
+        int tempLen = super.extend(this.len, this.sym);
+        this.window = new double[tempLen];
+        Arrays.fill(this.window, 1);
+        this.window = super.truncate(this.window);
     }
 
     /**
@@ -48,10 +49,6 @@ public class Boxcar extends _Window {
      * @return double[] the generated window
      */
     public double[] getWindow() {
-        int tempLen = super.extend(this.len, this.sym);
-        this.window = new double[tempLen];
-        Arrays.fill(this.window, 1);
-        this.window = super.truncate(this.window);
         return this.window;
     }
 }

@@ -13,10 +13,9 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class Bohman extends _Window{
-
-    double[] window;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final boolean sym;
+    private final int len;
 
     /**
      * This constructor initialises the Bohman class.
@@ -25,11 +24,10 @@ public class Bohman extends _Window{
      * @param sym Whether the window is symmetric
      */
     public Bohman(int len, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
         this.sym = sym;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -38,18 +36,10 @@ public class Bohman extends _Window{
      * @param len Length of the window
      */
     public Bohman(int len) throws IllegalArgumentException {
-        this.len = len;
-        this.sym = true;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        this(len, true);
     }
 
-    /**
-     * Generates and returns the Bohman Window
-     * @return double[] the generated window
-     */
-    public double[] getWindow() {
+    private void generateWindow() {
         int tempLen = super.extend(this.len, this.sym);
         this.window = UtilMethods.linspace(-1, 1, tempLen, true);
         for (int i=0; i<this.window.length; i++) {
@@ -59,6 +49,13 @@ public class Bohman extends _Window{
         this.window[0] = 0;
         this.window[tempLen-1] = 0;
         this.window = super.truncate(this.window);
+    }
+
+    /**
+     * Generates and returns the Bohman Window
+     * @return double[] the generated window
+     */
+    public double[] getWindow() {
         return this.window;
     }
 }

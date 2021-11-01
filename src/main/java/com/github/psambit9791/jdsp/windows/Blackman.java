@@ -10,10 +10,9 @@ package com.github.psambit9791.jdsp.windows;
  * @version 1.0
  */
 public class Blackman extends _Window{
-
-    double[] window;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final boolean sym;
+    private final int len;
 
     /**
      * This constructor initialises the Blackman class.
@@ -22,11 +21,10 @@ public class Blackman extends _Window{
      * @param sym Whether the window is symmetric
      */
     public Blackman(int len, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
         this.sym = sym;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -35,11 +33,13 @@ public class Blackman extends _Window{
      * @param len Length of the window
      */
     public Blackman(int len) throws IllegalArgumentException {
-        this.len = len;
-        this.sym = true;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        this(len, true);
+    }
+
+    private void generateWindow() {
+        double[] w = {0.42, 0.50, 0.08};
+        GeneralCosine gc = new GeneralCosine(this.len, w, this.sym);
+        this.window = gc.getWindow();
     }
 
     /**
@@ -47,9 +47,6 @@ public class Blackman extends _Window{
      * @return double[] the generated window
      */
     public double[] getWindow() {
-        double[] w = {0.42, 0.50, 0.08};
-        GeneralCosine gc = new GeneralCosine(this.len, w, this.sym);
-        this.window = gc.getWindow();
         return this.window;
     }
 }

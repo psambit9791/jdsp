@@ -253,7 +253,7 @@ public class Resample {
         double f_c = 1.0/max_rate;
         int half_len = 10 * max_rate;
         FIRWin1 fw = new FIRWin1(2*half_len+1, this.beta, true);
-        double[] h = fw.computeCoefficients(new double[] {f_c}, "lowpass", true);
+        double[] h = fw.computeCoefficients(new double[] {f_c}, FIRWin1.FIRfilterType.LOWPASS, true);
         h = UtilMethods.scalarArithmetic(h, this.up, "mul");
 
         int n_pre_pad = (this.down - half_len % this.down);

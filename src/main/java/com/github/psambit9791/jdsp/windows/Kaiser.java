@@ -23,10 +23,9 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
  * @version 1.0
  */
 public class Kaiser extends _Window{
-
-    double[] window;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final boolean sym;
+    private final int len;
     private double beta;
 
     /**
@@ -37,12 +36,11 @@ public class Kaiser extends _Window{
      * @param sym Whether the window is symmetric
      */
     public Kaiser(int len, double beta, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
         this.beta = beta;
         this.sym = sym;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -52,12 +50,7 @@ public class Kaiser extends _Window{
      * @param beta Shape parameter. As beta increases, the window gets narrower.
      */
     public Kaiser(int len, double beta) throws IllegalArgumentException {
-        this.len = len;
-        this.beta = beta;
-        this.sym = true;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        this(len, beta, true);
     }
 
     /**
@@ -66,13 +59,10 @@ public class Kaiser extends _Window{
      */
     public void setBeta(double beta) {
         this.beta = beta;
+        generateWindow();
     }
 
-    /**
-     * Generates and returns the Kaiser Window
-     * @return double[] the generated window
-     */
-    public double[] getWindow() {
+    private void generateWindow() {
         int tempLen = super.extend(this.len, this.sym);
         double alpha = (tempLen - 1) / 2.0;
         this.window = new double[tempLen];
@@ -83,6 +73,13 @@ public class Kaiser extends _Window{
         this.window = UtilMethods.i0(this.window);
         this.window = UtilMethods.scalarArithmetic(this.window, UtilMethods.i0(this.beta), "div");
         this.window = super.truncate(this.window);
+    }
+
+    /**
+     * Generates and returns the Kaiser Window
+     * @return double[] the generated window
+     */
+    public double[] getWindow() {
         return this.window;
     }
 }

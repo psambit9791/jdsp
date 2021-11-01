@@ -14,6 +14,16 @@ public abstract class _Window {
     private boolean extendVal;
 
     /**
+     * Constructor for window with window length <len>
+     * @param len length of the window (number of samples)
+     */
+    public _Window(int len) {
+        if (lenGuard(len)) {
+            throw new IllegalArgumentException("Window Length must be greater than 0");
+        }
+    }
+
+    /**
      * Handles window length if it is less than or equal to 0
      * @param length Input length of the window
      * @return boolean False if length more than 0, otherwise True
