@@ -352,14 +352,4 @@ public class TestWindows {
         Assertions.assertArrayEquals(result, out, 0.0001);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {Kaiser w0 = new Kaiser(-2, 14, false);});
     }
-
-    @Test
-    public void RectangularTest() {
-        int len = 10;
-        double[] result = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-        _Window w = new Rectangular(len);
-        double[] out = w.getWindow();
-        Assertions.assertArrayEquals(result, out, 0.0001);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Kaiser w0 = new Kaiser(-2, 14, false);});
-    }
 }
