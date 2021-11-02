@@ -429,6 +429,22 @@ public class UtilMethods {
     }
 
     /**
+     * Truncate the signal so that it has a final length of 'signalSize'
+     * @param signal signal to be truncated
+     * @param signalSize final size of the signal after truncating
+     * @return double[] truncated signal
+     */
+    public static double[] truncateSignal(double[] signal, int signalSize) {
+        if (signalSize < 0) {
+            throw new IllegalArgumentException("Truncation size should be a positive integer");
+        }
+        if (signalSize > signal.length) {
+            throw new IllegalArgumentException("Truncation size should be smaller than signal size");
+        }
+        return Arrays.copyOfRange(signal, 0, signalSize);
+    }
+
+    /**
      * Implementation of the numpy version of diff()
      * Calculate the first discrete difference in the array
      * @param arr The array to be processed

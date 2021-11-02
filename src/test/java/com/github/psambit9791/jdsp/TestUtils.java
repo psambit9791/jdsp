@@ -157,6 +157,16 @@ public class TestUtils {
     }
 
     @Test
+    public void truncateTest() {
+        double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
+        double[] truncated = {2, 8, 0, 4, 1};
+        double[] out = UtilMethods.truncateSignal(signal, 5);
+        Assertions.assertArrayEquals(truncated, out, 0.001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.truncateSignal(signal, -1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.truncateSignal(signal, 20));
+    }
+
+    @Test
     public void diffTest() {
         double[] seq = {1, 2, 3, 4, 6, -4};
         double[] result = {1, 1, 1, 2, -10};
