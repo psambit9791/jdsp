@@ -318,7 +318,6 @@ public class Generate {
         mul_const = mul_const.pow(order).multiply(CombinatoricsUtils.factorial(order));
         mul_const = mul_const.multiply(Math.pow(2, order));
         mul_const = mul_const.divide(Math.pow(Math.PI * CombinatoricsUtils.factorial(2 * order), 0.5));
-        mul_const = new Complex(mul_const.getReal(), 0);
 
         Complex[] output = new Complex[x.length];
         for (int i=0; i<output.length; i++) {
@@ -347,7 +346,6 @@ public class Generate {
         mul_const = mul_const.pow(order).multiply(CombinatoricsUtils.factorial(order));
         mul_const = mul_const.multiply(Math.pow(2, order));
         mul_const = mul_const.divide(Math.pow(Math.PI * CombinatoricsUtils.factorial(2 * order), 0.5));
-        mul_const = new Complex(mul_const.getReal(), 0);
 
         Complex[] output = new Complex[x.length];
         for (int i=0; i<output.length; i++) {
