@@ -413,6 +413,22 @@ public class UtilMethods {
     }
 
     /**
+     * Returns a zero padded version of the signal by adding 'padSize' number of zeroes at the end of the signal.
+     * E.g. signal [a b c d] with padSize 3 becomes: [a b c d 0 0 0]
+     * @param signal signal to be padded
+     * @param padSize number of zeroes to add at the end of the signal
+     * @return double[] the zero padded signal
+     */
+    public static double[] zeroPadSignal(double[] signal, int padSize) {
+        if (padSize < 0) {
+            throw new IllegalArgumentException("Pad size must be a positive integer");
+        }
+        double[] zeroes = new double[padSize];
+        Arrays.fill(zeroes, 0);
+        return concatenateArray(signal, zeroes);
+    }
+
+    /**
      * Implementation of the numpy version of diff()
      * Calculate the first discrete difference in the array
      * @param arr The array to be processed

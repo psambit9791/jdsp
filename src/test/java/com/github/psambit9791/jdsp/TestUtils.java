@@ -148,6 +148,15 @@ public class TestUtils {
     }
 
     @Test
+    public void zeroPadTest() {
+        double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
+        double[] zeroPadded = {2, 8, 0, 4, 1, 9, 9, 0, 0, 0, 0, 0};
+        double[] out = UtilMethods.zeroPadSignal(signal, 4);
+        Assertions.assertArrayEquals(zeroPadded, out, 0.001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.zeroPadSignal(signal, -1));
+    }
+
+    @Test
     public void diffTest() {
         double[] seq = {1, 2, 3, 4, 6, -4};
         double[] result = {1, 1, 1, 2, -10};
