@@ -28,6 +28,12 @@ public class ShortTimeFourier {
      *                          Value greater than frameLength => frame gets zero padded
      */
     public ShortTimeFourier(double[] signal, int frameLength, int overlap, double Fs, _Window window, int fourierLength) {
+        if (overlap >= frameLength) {
+            throw new IllegalArgumentException("Overlap size should be smaller than the frame length");
+        }
+        if (fourierLength < frameLength) {
+            throw new IllegalArgumentException("Fourier length should be equal to or greater than the frame length");
+        }
         this.signal = signal;
         this.frameLength = frameLength;
         this.overlap = overlap;
@@ -94,10 +100,6 @@ public class ShortTimeFourier {
      * Calculate the STFT output
      */
     public void stft() {
-        if (overlap >= frameLength) {
-            throw new IllegalArgumentException("Overlap size should be smaller than frame length size");
-        }
-
         int cols = (this.signal.length - frameLength) / (frameLength - overlap) + 1;
         this.output = new DiscreteFourier[cols];
 
