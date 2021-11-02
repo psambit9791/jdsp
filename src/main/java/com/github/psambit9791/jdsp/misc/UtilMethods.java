@@ -52,7 +52,7 @@ public class UtilMethods {
 
         double span = stop - start;
 
-        double stopVal = (double) stop;
+        double stopVal = stop;
         double i = start;
 
         if (includeEnd) {
@@ -91,7 +91,7 @@ public class UtilMethods {
 
         double span = stop - start;
 
-        double stopVal = (double) stop;
+        double stopVal = stop;
         double i = start;
 
         if (includeEnd) {
