@@ -7,6 +7,16 @@ import org.apache.commons.math3.complex.Complex;
 
 import java.util.Arrays;
 
+/**
+ * <h1>Short Time Fourier Transform</h1>
+ * The ShortTimeFourier class applies the short time fourier transform on the input signal and
+ * provides different representations of the output to be returned (spectrogram, complex value, magnitudes, phases...)
+ * and if the output should be mirrored or not-mirrored
+ * <p>
+ *
+ * @author  Sibo Van Gool
+ * @version 1.0
+ */
 public class ShortTimeFourier {
     private double[] signal;
     private DiscreteFourier[] output = null;
