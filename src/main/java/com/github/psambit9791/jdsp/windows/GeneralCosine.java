@@ -34,7 +34,7 @@ public class GeneralCosine extends _Window {
     }
 
     /**
-     * This constructor initialises the BoxCar class. Symmetricity is set to True.
+     * This constructor initialises the Rectangular class. Symmetricity is set to True.
      * @throws java.lang.IllegalArgumentException if window length is less than 1.
      * @param len Length of the window
      * @param weights Sequence of weighting coefficients

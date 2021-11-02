@@ -1,7 +1,7 @@
 package com.github.psambit9791.jdsp.transform;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
-import com.github.psambit9791.jdsp.windows.Boxcar;
+import com.github.psambit9791.jdsp.windows.Rectangular;
 import com.github.psambit9791.jdsp.windows._Window;
 import org.apache.commons.math3.complex.Complex;
 
@@ -73,7 +73,7 @@ public class ShortTimeFourier {
      * @param Fs            Sampling frequency of the signal
      */
     public ShortTimeFourier(double[] signal, int frameLength, int overlap, double Fs) {
-        this(signal, frameLength, overlap, Fs, new Boxcar(frameLength));
+        this(signal, frameLength, overlap, Fs, new Rectangular(frameLength));
     }
 
     /**
@@ -83,7 +83,7 @@ public class ShortTimeFourier {
      * @param overlap       Number of samples that overlap between frames
      */
     public ShortTimeFourier(double[] signal, int frameLength, int overlap) {
-        this(signal, frameLength, overlap, 1, new Boxcar(frameLength));
+        this(signal, frameLength, overlap, 1, new Rectangular(frameLength));
     }
 
     /**
@@ -92,7 +92,7 @@ public class ShortTimeFourier {
      * @param frameLength   Number of samples that each FFT-frame should have
      */
     public ShortTimeFourier(double[] signal, int frameLength) {
-        this(signal, frameLength, frameLength/2, 1, new Boxcar(frameLength));
+        this(signal, frameLength, frameLength/2, 1, new Rectangular(frameLength));
     }
 
 

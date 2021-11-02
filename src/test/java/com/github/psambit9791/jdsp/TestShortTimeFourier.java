@@ -2,7 +2,7 @@ package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.misc.Export;
 import com.github.psambit9791.jdsp.transform.ShortTimeFourier;
-import com.github.psambit9791.jdsp.windows.Boxcar;
+import com.github.psambit9791.jdsp.windows.Rectangular;
 import com.github.psambit9791.jdsp.windows.Hanning;
 import com.github.psambit9791.jdsp.windows._Window;
 import org.apache.commons.math3.complex.Complex;
@@ -71,7 +71,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
 
@@ -102,7 +102,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
 
@@ -129,7 +129,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
 
@@ -156,7 +156,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
 
@@ -226,7 +226,7 @@ public class TestShortTimeFourier {
         int overlap = 2;
         int fourierLength = 10;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window, fourierLength);
 
@@ -253,7 +253,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
         double[][] out = stft.spectrogram(false);
@@ -277,7 +277,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
         double[][] out = stft.spectrogram(false);
@@ -299,7 +299,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
         double[][] out = stft.spectrogram(true);
@@ -321,7 +321,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
         double[][] out = stft.spectrogram(true);
@@ -340,7 +340,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
         stft.stft();
@@ -356,7 +356,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
         stft.stft();
@@ -372,7 +372,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
         stft.stft();
@@ -388,7 +388,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
         stft.stft();
@@ -404,7 +404,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
         stft.stft();
@@ -420,7 +420,7 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         double Fs = 100;
-        _Window window = new Boxcar(frameLength);
+        _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
         stft.stft();

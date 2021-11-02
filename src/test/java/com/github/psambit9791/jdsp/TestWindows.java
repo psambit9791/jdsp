@@ -4,28 +4,28 @@ import com.github.psambit9791.jdsp.windows.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 public class TestWindows {
 
     @Test
-    public void BoxCarSymTest() {
+    public void RectangularSymTest() {
         int len = 10;
         double[] result = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
-        _Window w1 = new Boxcar(len);
+        _Window w1 = new Rectangular(len);
         double[] out = w1.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Boxcar w0 = new Boxcar(-2);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Rectangular w0 = new Rectangular(-2);});
     }
 
     @Test
-    public void BoxCarASymTest() {
+    public void RectangularASymTest() {
         int len = 10;
         double[] result = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
-        _Window w2 = new Boxcar(len, false);
+        _Window w2 = new Rectangular(len, false);
         double[] out = w2.getWindow();
         Assertions.assertArrayEquals(result, out, 0.0001);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Boxcar w0 = new Boxcar(-2, false);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Rectangular w0 = new Rectangular(-2, false);});
     }
 
     @Test
