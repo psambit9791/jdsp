@@ -1,5 +1,6 @@
 package com.github.psambit9791.jdsp.transform;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.windows.Rectangular;
 import com.github.psambit9791.jdsp.windows._Window;
 import org.apache.commons.math3.complex.Complex;
@@ -11,6 +12,7 @@ public class ShortTimeFourier {
     private DiscreteFourier[] output = null;
     private final double Fs;
     private final int frameLength;
+    private final int fourierLength;
     private final int overlap;
     private final _Window window;
 
@@ -22,13 +24,29 @@ public class ShortTimeFourier {
      * @param overlap       Number of samples that overlap between frames
      * @param Fs            Sampling frequency of the signal
      * @param window        Windowing function to perform on each STFT frame
+     * @param fourierLength Number of samples used in the Fourier analysis of each frame
+     *                          Value greater than frameLength => frame gets zero padded
      */
-    public ShortTimeFourier(double[] signal, int frameLength, int overlap, double Fs, _Window window) {
+    public ShortTimeFourier(double[] signal, int frameLength, int overlap, double Fs, _Window window, int fourierLength) {
         this.signal = signal;
         this.frameLength = frameLength;
         this.overlap = overlap;
         this.Fs = Fs;
         this.window = window;
+        this.fourierLength = fourierLength;
+    }
+
+    /**
+     * Compute the Short-Time Fourier Transform for a time signal, with windowing.
+     *
+     * @param signal        Signal for which to compute the STFT
+     * @param frameLength   Number of samples that each FFT-frame should have
+     * @param overlap       Number of samples that overlap between frames
+     * @param Fs            Sampling frequency of the signal
+     * @param window        Windowing function to perform on each STFT frame
+     */
+    public ShortTimeFourier(double[] signal, int frameLength, int overlap, double Fs, _Window window) {
+        this(signal, frameLength, overlap, Fs, window, frameLength);
     }
 
     /**
@@ -86,8 +104,16 @@ public class ShortTimeFourier {
         int R = 0;  // Initialize frame counter
         for (int m = 0; R < cols; m += (frameLength - overlap)) {
             double[] frame = Arrays.copyOfRange(this.signal, m, m + frameLength);
+
+            // Apply windowing
             frame = window.applyWindow(frame);
-            // TODO: zero-padding
+
+            // Perform zero padding
+            if (this.fourierLength > this.frameLength) {
+                frame = UtilMethods.zeroPadSignal(frame, this.fourierLength-this.frameLength);
+            }
+
+            // Calculate Fourier transform
             DiscreteFourier dft = new DiscreteFourier(frame);       // TODO: better to use FFT once implemented
             dft.dft();
 
