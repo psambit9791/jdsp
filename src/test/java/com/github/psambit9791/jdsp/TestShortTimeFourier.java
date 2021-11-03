@@ -1,6 +1,5 @@
 package com.github.psambit9791.jdsp;
 
-import com.github.psambit9791.jdsp.misc.Export;
 import com.github.psambit9791.jdsp.transform.ShortTimeFourier;
 import com.github.psambit9791.jdsp.windows.Rectangular;
 import com.github.psambit9791.jdsp.windows.Hanning;
@@ -257,8 +256,6 @@ public class TestShortTimeFourier {
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
         double[][] out = stft.spectrogram(false);
-        String filePath = "test_outputs/testSpectrogram1.csv";
-        Export.toCSV(out, filePath);
 
         for (int i = 0; i < result.length; i++) {
             Assertions.assertArrayEquals(result[i], out[i], 0.001);
@@ -281,8 +278,6 @@ public class TestShortTimeFourier {
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
         double[][] out = stft.spectrogram(false);
-        String filePath = "test_outputs/testSpectrogram2.csv";
-        Export.toCSV(out, filePath);
 
         for (int i = 0; i < result.length; i++) {
             Assertions.assertArrayEquals(result[i], out[i], 0.001);
@@ -303,8 +298,6 @@ public class TestShortTimeFourier {
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
         double[][] out = stft.spectrogram(true);
-        String filePath = "test_outputs/testSpectrogramPositive1.csv";
-        Export.toCSV(out, filePath);
 
         for (int i = 0; i < result.length; i++) {
             Assertions.assertArrayEquals(result[i], out[i], 0.001);
@@ -325,8 +318,6 @@ public class TestShortTimeFourier {
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
         double[][] out = stft.spectrogram(true);
-        String filePath = "test_outputs/testSpectrogramPositive2.csv";
-        Export.toCSV(out, filePath);
 
         for (int i = 0; i < result.length; i++) {
             Assertions.assertArrayEquals(result[i], out[i], 0.001);
