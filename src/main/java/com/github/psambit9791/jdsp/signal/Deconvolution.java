@@ -13,6 +13,10 @@
 package com.github.psambit9791.jdsp.signal;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
+import com.github.psambit9791.jdsp.transform.DiscreteFourier;
+import com.github.psambit9791.jdsp.transform.InverseDiscreteFourier;
+import org.apache.commons.math3.complex.Complex;
+
 import java.util.Arrays;
 
 // Using FFT method
@@ -20,20 +24,51 @@ public class Deconvolution {
 
     private double[] signal;
     private double[] kernel;
-    private int shape;
+    private int sig_len;
+    private int ker_len;
     private double[] output;
 
     public Deconvolution(double[] signal, double[] window) {
-        this.shape = Math.max(signal.length, window.length);
-        double[] padding = new double[this.shape - Math.min(signal.length, window.length)];
+        this.sig_len = signal.length;
+        this.ker_len = window.length;
+        int shape = Math.max(signal.length, window.length);
+        double[] padding = new double[shape - Math.min(signal.length, window.length)];
         Arrays.fill(padding, 0.0);
-        if (signal.length < this.shape) {
+        if (signal.length < shape) {
             signal = UtilMethods.concatenateArray(signal, padding);
         }
-        else if (window.length < this.shape){
+        else if (window.length < shape){
             window = UtilMethods.concatenateArray(window, padding);
         }
         this.signal = signal;
         this.kernel = window;
+    }
+
+    public double[] deconvolve(String mode) {
+        DiscreteFourier ffts = new DiscreteFourier(this.signal);
+        ffts.dft();
+        DiscreteFourier fftk = new DiscreteFourier(this.kernel);
+        fftk.dft();
+
+        Complex[] s = ffts.getComplex(true);
+        Complex[] w = fftk.getComplex(true);
+
+        Complex[] s_w = new Complex[s.length];
+
+        for (int i=0; i<s_w.length; i++) {
+            s_w[i] = s[i].divide(w[i].add(Float.MIN_NORMAL));
+        }
+
+        InverseDiscreteFourier idf = new InverseDiscreteFourier(UtilMethods.complexTo2D(s_w), true);
+        idf.idft();
+
+        double[] true_signal = idf.getRealSignal();
+        true_signal = UtilMethods.round(true_signal, 3);
+        int true_length = 0;
+        if (mode.equals("full")) {
+            true_length = this.sig_len - this.ker_len + 1;
+        }
+
+        return Arrays.copyOfRange(true_signal, 0, true_length);
     }
 }

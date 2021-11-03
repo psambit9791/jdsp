@@ -11,7 +11,6 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.signal.Convolution;
-import com.github.psambit9791.jdsp.signal.Smooth;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
