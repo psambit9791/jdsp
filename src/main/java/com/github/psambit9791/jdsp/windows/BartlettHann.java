@@ -11,10 +11,9 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
  * @version 1.0
  */
 public class BartlettHann extends _Window {
-
-    double[] window;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final boolean sym;
+    private final int len;
 
     /**
      * This constructor initialises the BartlettHann class.
@@ -23,11 +22,10 @@ public class BartlettHann extends _Window {
      * @param sym Whether the window is symmetric
      */
     public BartlettHann(int len, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
         this.sym = sym;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -36,11 +34,19 @@ public class BartlettHann extends _Window {
      * @param len Length of the window
      */
     public BartlettHann(int len) throws IllegalArgumentException {
-        this.len = len;
-        this.sym = true;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
+        this(len, true);
+    }
+
+    private void generateWindow() {
+        int tempLen = super.extend(this.len, this.sym);
+
+        this.window = UtilMethods.arange(0.0, tempLen, 1.0);
+        for (int i=0; i<this.window.length; i++) {
+            double fac = Math.abs(this.window[i]/(tempLen - 1) - 0.5);
+            this.window[i] = 0.62 - 0.48 * fac + 0.38 * Math.cos(2 * Math.PI * fac);
         }
+
+        this.window = super.truncate(this.window);
     }
 
     /**
@@ -48,16 +54,6 @@ public class BartlettHann extends _Window {
      * @return double[] the generated window
      */
     public double[] getWindow() {
-        int tempLen = super.extend(this.len, this.sym);
-        this.window = new double[tempLen];
-
-        this.window = UtilMethods.arange(0.0, (double)tempLen, 1.0);
-        for (int i=0; i<this.window.length; i++) {
-            double fac = Math.abs(this.window[i]/(tempLen - 1) - 0.5);
-            this.window[i] = 0.62 - 0.48 * fac + 0.38 * Math.cos(2 * Math.PI * fac);
-        }
-
-        this.window = super.truncate(this.window);
         return this.window;
     }
 }

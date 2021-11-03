@@ -13,10 +13,9 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class Triangular extends _Window{
-
-    double[] window;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final boolean sym;
+    private final int len;
 
     /**
      * This constructor initialises the Triangular class.
@@ -25,11 +24,10 @@ public class Triangular extends _Window{
      * @param sym Whether the window is symmetric
      */
     public Triangular(int len, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
         this.sym = sym;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -38,22 +36,14 @@ public class Triangular extends _Window{
      * @param len Length of the window
      */
     public Triangular(int len) throws IllegalArgumentException {
-        this.len = len;
-        this.sym = true;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        this(len, true);
     }
 
-    /**
-     * Generates and returns the Triangular Window
-     * @return double[] the generated window
-     */
-    public double[] getWindow() {
+    private void generateWindow() {
         int tempLen = super.extend(this.len, this.sym);
 
         int halfPoint = (tempLen+1)/2 + 1;
-        double[] n = UtilMethods.arange(1.0, (double)halfPoint, 1.0);
+        double[] n = UtilMethods.arange(1.0, halfPoint, 1.0);
 
         if (tempLen%2 == 0) {
             for (int i=0; i<n.length; i++) {
@@ -71,6 +61,13 @@ public class Triangular extends _Window{
             this.window = UtilMethods.concatenateArray(n, nRev);
         }
         this.window = super.truncate(this.window);
+    }
+
+    /**
+     * Generates and returns the Triangular Window
+     * @return double[] the generated window
+     */
+    public double[] getWindow() {
         return this.window;
     }
 }

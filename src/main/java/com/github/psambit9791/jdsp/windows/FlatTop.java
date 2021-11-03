@@ -11,10 +11,9 @@ package com.github.psambit9791.jdsp.windows;
  * @version 1.0
  */
 public class FlatTop extends _Window{
-
-    double[] window;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final boolean sym;
+    private final int len;
 
     /**
      * This constructor initialises the FlatTop class.
@@ -23,11 +22,10 @@ public class FlatTop extends _Window{
      * @param sym Whether the window is symmetric
      */
     public FlatTop(int len, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
         this.sym = sym;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -36,11 +34,13 @@ public class FlatTop extends _Window{
      * @param len Length of the window
      */
     public FlatTop(int len) throws IllegalArgumentException {
-        this.len = len;
-        this.sym = true;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        this(len, true);
+    }
+
+    private void generateWindow() {
+        double[] w = {0.21557895, 0.41663158, 0.277263158, 0.083578947, 0.006947368};
+        GeneralCosine gc = new GeneralCosine(this.len, w, this.sym);
+        this.window = gc.getWindow();
     }
 
     /**
@@ -48,9 +48,6 @@ public class FlatTop extends _Window{
      * @return double[] the generated window
      */
     public double[] getWindow() {
-        double[] w = {0.21557895, 0.41663158, 0.277263158, 0.083578947, 0.006947368};
-        GeneralCosine gc = new GeneralCosine(this.len, w, this.sym);
-        this.window = gc.getWindow();
         return this.window;
     }
 }

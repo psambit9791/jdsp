@@ -53,7 +53,7 @@ public class UtilMethods {
 
         double span = stop - start;
 
-        double stopVal = (double) stop;
+        double stopVal = stop;
         double i = start;
 
         if (includeEnd) {
@@ -92,7 +92,7 @@ public class UtilMethods {
 
         double span = stop - start;
 
-        double stopVal = (double) stop;
+        double stopVal = stop;
         double i = start;
 
         if (includeEnd) {
@@ -499,6 +499,38 @@ public class UtilMethods {
                         "nearest, mirror, or wrap");
         }
         return newSignal;
+    }
+
+    /**
+     * Returns a zero padded version of the signal by adding 'padSize' number of zeroes at the end of the signal.
+     * E.g. signal [a b c d] with padSize 3 becomes: [a b c d 0 0 0]
+     * @param signal signal to be padded
+     * @param padSize number of zeroes to add at the end of the signal
+     * @return double[] the zero padded signal
+     */
+    public static double[] zeroPadSignal(double[] signal, int padSize) {
+        if (padSize < 0) {
+            throw new IllegalArgumentException("Pad size must be a positive integer");
+        }
+        double[] zeroes = new double[padSize];
+        Arrays.fill(zeroes, 0);
+        return concatenateArray(signal, zeroes);
+    }
+
+    /**
+     * Truncate the signal so that it has a final length of 'signalSize'
+     * @param signal signal to be truncated
+     * @param signalSize final size of the signal after truncating
+     * @return double[] truncated signal
+     */
+    public static double[] truncateSignal(double[] signal, int signalSize) {
+        if (signalSize < 0) {
+            throw new IllegalArgumentException("Truncation size should be a positive integer");
+        }
+        if (signalSize > signal.length) {
+            throw new IllegalArgumentException("Truncation size should be smaller than signal size");
+        }
+        return Arrays.copyOfRange(signal, 0, signalSize);
     }
 
     /**

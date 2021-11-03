@@ -23,54 +23,63 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
  * @version 1.0
  */
 public class Kaiser extends _Window{
-
-    double[] window;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final boolean sym;
+    private final int len;
+    private double beta;
 
     /**
      * This constructor initialises the Kaiser class.
      * @throws java.lang.IllegalArgumentException if window length is less than 1
      * @param len Length of the window
+     * @param beta Shape parameter. As beta increases, the window gets narrower.
      * @param sym Whether the window is symmetric
      */
-    public Kaiser(int len, boolean sym) throws IllegalArgumentException {
+    public Kaiser(int len, double beta, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
+        this.beta = beta;
         this.sym = sym;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
      * This constructor initialises the Kaiser class. Symmetricity is set to True.
      * @throws java.lang.IllegalArgumentException if window length is less than 1.
      * @param len Length of the window
+     * @param beta Shape parameter. As beta increases, the window gets narrower.
      */
-    public Kaiser(int len) throws IllegalArgumentException {
-        this.len = len;
-        this.sym = true;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+    public Kaiser(int len, double beta) throws IllegalArgumentException {
+        this(len, beta, true);
     }
 
     /**
-     * Generates and returns the Kaiser Window
+     * Set the shape parameter of the Kaiser window. A larger beta narrows the window shape.
      * @param beta Shape parameter. As beta increases, the window gets narrower.
-     * @return double[] the generated window
      */
-    public double[] getWindow(double beta) {
+    public void setBeta(double beta) {
+        this.beta = beta;
+        generateWindow();
+    }
+
+    private void generateWindow() {
         int tempLen = super.extend(this.len, this.sym);
         double alpha = (tempLen - 1) / 2.0;
         this.window = new double[tempLen];
         int[] temp = UtilMethods.arange(0, tempLen, 1);
         for (int i = 0; i<temp.length; i++) {
-            this.window[i] = beta * Math.sqrt(1 - Math.pow(((double) temp[i] - alpha)/alpha, 2));
+            this.window[i] = this.beta * Math.sqrt(1 - Math.pow(((double) temp[i] - alpha)/alpha, 2));
         }
         this.window = UtilMethods.i0(this.window);
-        this.window = UtilMethods.scalarArithmetic(this.window, UtilMethods.i0(beta), "div");
+        this.window = UtilMethods.scalarArithmetic(this.window, UtilMethods.i0(this.beta), "div");
         this.window = super.truncate(this.window);
+    }
+
+    /**
+     * Generates and returns the Kaiser Window
+     * @return double[] the generated window
+     */
+    public double[] getWindow() {
         return this.window;
     }
 }

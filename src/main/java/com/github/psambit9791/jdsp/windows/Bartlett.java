@@ -12,10 +12,9 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
  * @version 1.0
  */
 public class Bartlett extends _Window{
-
-    double[] window;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final boolean sym;
+    private final int len;
 
     /**
      * This constructor initialises the Bartlett class.
@@ -24,11 +23,10 @@ public class Bartlett extends _Window{
      * @param sym Whether the window is symmetric
      */
     public Bartlett(int len, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
         this.sym = sym;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -37,22 +35,13 @@ public class Bartlett extends _Window{
      * @param len Length of the window
      */
     public Bartlett(int len) throws IllegalArgumentException {
-        this.len = len;
-        this.sym = true;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        this(len, true);
     }
 
-    /**
-     * Generates and returns the Bartlett Window
-     * @return double[] the generated window
-     */
-    public double[] getWindow() {
+    private void generateWindow() {
         int tempLen = super.extend(this.len, this.sym);
-        this.window = new double[tempLen];
 
-        this.window = UtilMethods.arange(0.0, (double)tempLen, 1.0);
+        this.window = UtilMethods.arange(0.0, tempLen, 1.0);
         for (int i=0; i<this.window.length; i++) {
             if (this.window[i] <= (tempLen-1)/2.0) {
                 this.window[i] = 2.0*this.window[i]/(tempLen - 1);
@@ -63,6 +52,13 @@ public class Bartlett extends _Window{
         }
 
         this.window = super.truncate(this.window);
+    }
+
+    /**
+     * Generates and returns the Bartlett Window
+     * @return double[] the generated window
+     */
+    public double[] getWindow() {
         return this.window;
     }
 }

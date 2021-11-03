@@ -10,9 +10,18 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
  * @author  Sambit Paul
  * @version 1.0
  */
-abstract class _Window {
+public abstract class _Window {
+    private boolean extendVal;
 
-    boolean extendVal;
+    /**
+     * Constructor for window with window length <len>
+     * @param len length of the window (number of samples)
+     */
+    public _Window(int len) {
+        if (lenGuard(len)) {
+            throw new IllegalArgumentException("Window Length must be greater than 0");
+        }
+    }
 
     /**
      * Handles window length if it is less than or equal to 0
@@ -20,10 +29,7 @@ abstract class _Window {
      * @return boolean False if length more than 0, otherwise True
      */
     public boolean lenGuard(int length) {
-        if (length > 0) {
-            return false;
-        }
-        return true;
+        return length <= 0;
     }
 
     /**
@@ -57,9 +63,30 @@ abstract class _Window {
         }
     }
 
-//    /**
-//     * This method computes the window and returns it
-//     * @return double[] The generated window
-//     */
-//    public abstract double[] getWindow();
+    /**
+     * This method computes the window and returns it
+     * @return double[] The generated window
+     */
+    public abstract double[] getWindow();
+
+    /**
+     * Apply the window to the input data and return the output. Throws an exception if the array dimensions don't match.
+     * @param input input data
+     * @return double[] windowed input data
+     */
+    public double[] applyWindow(double[] input) {
+        double[] window = getWindow();
+        if (window == null) {
+            throw new NullPointerException("Window not initialized");
+        }
+        if (input.length != window.length) {
+            throw new IllegalArgumentException("Input data dimensions and window dimensions don't match");
+        }
+
+        double[] out = new double[input.length];
+        for (int i = 0; i < input.length; i++) {
+            out[i] = input[i]*window[i];
+        }
+        return out;
+    }
 }

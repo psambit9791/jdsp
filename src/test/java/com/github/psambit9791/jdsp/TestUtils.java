@@ -148,6 +148,23 @@ public class TestUtils {
     }
 
     @Test
+    public void zeroPadTest() {
+        double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
+        double[] zeroPadded = {2, 8, 0, 4, 1, 9, 9, 0, 0, 0, 0, 0};
+        double[] out = UtilMethods.zeroPadSignal(signal, 4);
+        Assertions.assertArrayEquals(zeroPadded, out, 0.001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.zeroPadSignal(signal, -1));
+    }
+
+    @Test
+    public void truncateTest() {
+        double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
+        double[] truncated = {2, 8, 0, 4, 1};
+        double[] out = UtilMethods.truncateSignal(signal, 5);
+        Assertions.assertArrayEquals(truncated, out, 0.001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.truncateSignal(signal, -1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.truncateSignal(signal, 20));
+
     public void padSignalLengthTest() {
         double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
         double[] reflect = {4, 0, 8, 2, 2, 8, 0, 4, 1, 9, 9, 0, 0, 9, 9, 1};
@@ -170,7 +187,6 @@ public class TestUtils {
 
         out = UtilMethods.padSignal(signal, "wrap", 4);
         Assertions.assertArrayEquals(wrap, out, 0.001);
-
     }
 
     @Test

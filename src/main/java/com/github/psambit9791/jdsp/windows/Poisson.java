@@ -11,10 +11,9 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
  * @version 1.0
  */
 public class Poisson extends _Window {
-
-    double[] window;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final boolean sym;
+    private final int len;
 
     /**
      * This constructor initialises the Poisson class.
@@ -23,11 +22,10 @@ public class Poisson extends _Window {
      * @param sym Whether the window is symmetric
      */
     public Poisson(int len, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
         this.sym = sym;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -36,11 +34,17 @@ public class Poisson extends _Window {
      * @param len Length of the window
      */
     public Poisson(int len) throws IllegalArgumentException {
-        this.len = len;
-        this.sym = true;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
+        this(len, true);
+    }
+
+    private void generateWindow() {
+        int tempLen = super.extend(this.len, this.sym);
+        double centre = ((double)tempLen-1.0)/2.0;
+        this.window = UtilMethods.arange(0.0, tempLen, 1.0);
+        for (int i=0; i<this.window.length; i++) {
+            this.window[i] = Math.exp(-Math.abs(this.window[i] - centre));
         }
+        this.window = super.truncate(this.window);
     }
 
     /**
@@ -48,13 +52,6 @@ public class Poisson extends _Window {
      * @return double[] the generated window
      */
     public double[] getWindow() {
-        int tempLen = super.extend(this.len, this.sym);
-        double centre = ((double)tempLen-1.0)/2.0;
-        this.window = UtilMethods.arange(0.0, (double)tempLen, 1.0);
-        for (int i=0; i<this.window.length; i++) {
-            this.window[i] = Math.exp(-Math.abs(this.window[i] - centre));
-        }
-        this.window = super.truncate(this.window);
         return this.window;
     }
 }

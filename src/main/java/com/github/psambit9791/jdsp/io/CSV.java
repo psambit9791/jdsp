@@ -25,7 +25,7 @@ import java.util.Set;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class Csv {
+public class CSV {
     private HashMap<String, ArrayList<Object>> content = new HashMap<String, ArrayList<Object>>();
 //    private enum dataType {DOUBLE, FLOAT, LONG, INTEGER, STRING}
     private String sep;
@@ -37,7 +37,7 @@ public class Csv {
 //     * @param separator The character separating the columns
 //     * @param columnDatatypes The datatype of the content of each column
 //     */
-//    public Csv(char separator, dataType[] columnDatatypes) {
+//    public CSV(char separator, dataType[] columnDatatypes) {
 //        this.sep = separator+"";
 //        this.colTypes = columnDatatypes;
 //    }
@@ -46,7 +46,7 @@ public class Csv {
      * This constructor initialises the prerequisites required to read and write CSV files.
      * @param separator The character separating the columns
      */
-    public Csv(char separator) {
+    public CSV(char separator) {
         this.sep = separator+"";
     }
 

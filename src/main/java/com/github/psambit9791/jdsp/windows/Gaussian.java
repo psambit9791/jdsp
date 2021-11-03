@@ -11,11 +11,10 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
  * @version 1.0
  */
 public class Gaussian extends _Window {
-
-    double[] window;
-    double std;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final double std;
+    private final boolean sym;
+    private final int len;
 
     /**
      * This constructor initialises the FlatTop class.
@@ -25,12 +24,11 @@ public class Gaussian extends _Window {
      * @param sym Whether the window is symmetric
      */
     public Gaussian(int len, double std, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
         this.std = std;
         this.sym = sym;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -40,12 +38,18 @@ public class Gaussian extends _Window {
      * @param std The standard deviation
      */
     public Gaussian(int len, double std) throws IllegalArgumentException {
-        this.len = len;
-        this.std = std;
-        this.sym = true;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
+        this(len, std, true);
+    }
+
+    private void generateWindow() {
+        int tempLen = super.extend(this.len, this.sym);
+        this.window = UtilMethods.arange(0.0, tempLen, 1.0);
+        for (int i=0; i<this.window.length; i++) {
+            this.window[i] = this.window[i] - ((double)tempLen - 1.0)/2.0;
+            double sig2 = 2*this.std*this.std;
+            this.window[i] = Math.exp(-(this.window[i]*this.window[i])/sig2);
         }
+        this.window = super.truncate(this.window);
     }
 
     /**
@@ -53,14 +57,6 @@ public class Gaussian extends _Window {
      * @return double[] the generated window
      */
     public double[] getWindow() {
-        int tempLen = super.extend(this.len, this.sym);
-        this.window = UtilMethods.arange(0.0, (double)tempLen, 1.0);
-        for (int i=0; i<this.window.length; i++) {
-            this.window[i] = this.window[i] - ((double)tempLen - 1.0)/2.0;
-            double sig2 = 2*this.std*this.std;
-            this.window[i] = Math.exp(-(this.window[i]*this.window[i])/sig2);
-        }
-        this.window = super.truncate(this.window);
         return this.window;
     }
 }

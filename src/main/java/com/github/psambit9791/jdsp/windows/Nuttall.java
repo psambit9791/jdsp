@@ -9,10 +9,9 @@ package com.github.psambit9791.jdsp.windows;
  * @version 1.0
  */
 public class Nuttall extends _Window{
-
-    double[] window;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final boolean sym;
+    private final int len;
 
     /**
      * This constructor initialises the Nuttall class.
@@ -21,11 +20,10 @@ public class Nuttall extends _Window{
      * @param sym Whether the window is symmetric
      */
     public Nuttall(int len, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.sym = sym;
         this.len = len;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -34,11 +32,13 @@ public class Nuttall extends _Window{
      * @param len Length of the window
      */
     public Nuttall(int len) throws IllegalArgumentException {
-        this.sym = true;
-        this.len = len;
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        this(len, true);
+    }
+
+    private void generateWindow() {
+        double[] w = {0.3635819, 0.4891775, 0.1365995, 0.0106411};
+        GeneralCosine gc = new GeneralCosine(this.len, w, this.sym);
+        this.window = gc.getWindow();
     }
 
     /**
@@ -46,9 +46,6 @@ public class Nuttall extends _Window{
      * @return double[] the generated window
      */
     public double[] getWindow() {
-        double[] w = {0.3635819, 0.4891775, 0.1365995, 0.0106411};
-        GeneralCosine gc = new GeneralCosine(this.len, w, this.sym);
-        this.window = gc.getWindow();
         return this.window;
     }
 }

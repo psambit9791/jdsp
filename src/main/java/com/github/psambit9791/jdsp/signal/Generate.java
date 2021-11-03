@@ -119,8 +119,7 @@ public class Generate {
             gauss_env[i] = Math.exp(-a * this.time[i] * this.time[i]);
             gauss_pulse[i] = gauss_env[i] * Math.cos(2 * Math.PI * centralFreq * this.time[i]);
         }
-        double[][] out = {gauss_pulse, gauss_env};
-        return out;
+        return new double[][]{gauss_pulse, gauss_env};
     }
 
     /**
@@ -367,5 +366,34 @@ public class Generate {
     public double[][] generatePaul(int order, double width) {
         Complex[] temp = this.generatePaulComplex(order, width);
         return UtilMethods.complexTo2D(temp);
+    }
+
+    /**
+     * Return a sine wave chirp signal ranging from startFreq to endFreq and with initial phase phi0.
+     * @param startFreq starting frequency of the chirp signal
+     * @param endFreq end frequency of the chirp signal
+     * @param phi0 initial phase of the chirp signal (in radians)
+     * @return double[] chirp signal over time
+     */
+    public double[] generateChirp(double startFreq, double endFreq, double phi0) {
+        double[] out = new double[this.time.length];
+        double T = this.time[this.time.length-1] - this.time[0];   // Period of the signal
+
+        double c = (endFreq - startFreq)/T;
+        for (int i = 0; i < out.length; i++) {
+            out[i] = Math.sin(phi0 + 2*Math.PI * (c/2 * Math.pow(this.time[i], 2) + startFreq*this.time[i]));
+        }
+
+        return out;
+    }
+
+    /**
+     * Return a sine wave chirp signal ranging from startFreq to endFreq, with initial phase 0
+     * @param startFreq starting frequency of the chirp signal
+     * @param endFreq end frequency of the chirp signal
+     * @return double[] chirp signal over time
+     */
+    public double[] generateChirp(double startFreq, double endFreq) {
+        return generateChirp(startFreq, endFreq, 0);
     }
 }

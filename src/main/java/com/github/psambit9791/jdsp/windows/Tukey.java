@@ -12,11 +12,10 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class Tukey extends _Window {
-
-    double[] window;
-    double alpha;
-    boolean sym;
-    int len;
+    private double[] window;
+    private final double alpha;
+    private final boolean sym;
+    private final int len;
 
     /**
      * This constructor initialises the Tukey class.
@@ -27,15 +26,14 @@ public class Tukey extends _Window {
      * @throws java.lang.IllegalArgumentException if window length is less than 1
      */
     public Tukey(int len, double alpha, boolean sym) throws IllegalArgumentException {
+        super(len);
         this.len = len;
         this.alpha = alpha;
         this.sym = sym;
         if (alpha > 1 || alpha < 0) {
             throw new IllegalArgumentException("Alpha must be between 0 and 1");
         }
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        generateWindow();
     }
 
     /**
@@ -46,27 +44,14 @@ public class Tukey extends _Window {
      * @throws java.lang.IllegalArgumentException if window length is less than 1
      */
     public Tukey(int len, double alpha) throws IllegalArgumentException {
-        this.len = len;
-        this.alpha = alpha;
-        this.sym = true;
-        if (alpha > 1 || alpha < 0) {
-            throw new IllegalArgumentException("Alpha must be between 0 and 1");
-        }
-        if (lenGuard(len)) {
-            throw new IllegalArgumentException("Window Length must be greater than 0");
-        }
+        this(len, alpha, true);
     }
 
-    /**
-     * Generates and returns the Tukey Window
-     *
-     * @return double[] the generated window
-     */
-    public double[] getWindow() {
+    private void generateWindow() {
         int tempLen = super.extend(this.len, this.sym);
         this.window = new double[tempLen];
 
-        double[] n = UtilMethods.arange(0.0, (double)tempLen, 1.0);
+        double[] n = UtilMethods.arange(0.0, tempLen, 1.0);
         int width = (int)Math.floor(this.alpha*(tempLen-1)/2.0);
 
         double[] n1 = UtilMethods.splitByIndex(n, 0, width+1);
@@ -84,7 +69,14 @@ public class Tukey extends _Window {
         this.window = UtilMethods.concatenateArray(n1, n2);
         this.window = UtilMethods.concatenateArray(this.window, n3);
         this.window = super.truncate(this.window);
+    }
 
+    /**
+     * Generates and returns the Tukey Window
+     *
+     * @return double[] the generated window
+     */
+    public double[] getWindow() {
         return this.window;
     }
 }
