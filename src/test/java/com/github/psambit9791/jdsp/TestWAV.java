@@ -10,7 +10,7 @@
 
 package com.github.psambit9791.jdsp;
 
-import com.github.psambit9791.jdsp.io.Wav;
+import com.github.psambit9791.jdsp.io.WAV;
 import com.github.psambit9791.wavfile.WavFileException;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
 
-public class TestWav {
+public class TestWAV {
 
     @Test
     @Order(1)
@@ -35,20 +35,20 @@ public class TestWav {
 
     @Test
     public void wavTestTemplateInt() throws WavFileException, IOException {
-        Wav objRead = new Wav();
+        WAV objRead = new WAV();
         objRead.readTemplate();
         double[][] signal = objRead.getData("int");
 
         Hashtable<String, Long> propsOut = objRead.getProperties();
 
-        Wav objWrite = new Wav();
+        WAV objWrite = new WAV();
         String outputFileName = "test_outputs/sampleInt.wav";
         objWrite.putData(signal, propsOut.get("SampleRate"), "int", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
-        Wav objRead2 = new Wav();
-        objRead2.readWav(outputFileName);
+        WAV objRead2 = new WAV();
+        objRead2.readWAV(outputFileName);
         double[][] signalWritten = objRead2.getData("int");
         double[][] signalT = UtilMethods.transpose(signal);
         double[][] signalWrittenT = UtilMethods.transpose(signalWritten);
@@ -59,19 +59,19 @@ public class TestWav {
 
     @Test
     public void wavTestTemplateLong() throws WavFileException, IOException {
-        Wav objRead = new Wav();
+        WAV objRead = new WAV();
         objRead.readTemplate();
         double[][] signal = objRead.getData("long");
 
         Hashtable<String, Long> propsOut = objRead.getProperties();
-        Wav objWrite = new Wav();
+        WAV objWrite = new WAV();
         String outputFileName = "test_outputs/sampleLong.wav";
         objWrite.putData(signal, propsOut.get("SampleRate"), "long", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
-        Wav objRead2 = new Wav();
-        objRead2.readWav(outputFileName);
+        WAV objRead2 = new WAV();
+        objRead2.readWAV(outputFileName);
         double[][] signalWritten = objRead2.getData("long");
         double[][] signalT = UtilMethods.transpose(signal);
         double[][] signalWrittenT = UtilMethods.transpose(signalWritten);
@@ -82,20 +82,20 @@ public class TestWav {
 
     @Test
     public void wavTestTemplateDouble() throws WavFileException, IOException {
-        Wav objRead = new Wav();
+        WAV objRead = new WAV();
         objRead.readTemplate();
         double[][] signal = objRead.getData("double");
 
         Hashtable<String, Long> propsOut = objRead.getProperties();
 
-        Wav objWrite = new Wav();
+        WAV objWrite = new WAV();
         String outputFileName = "test_outputs/sampleDouble.wav";
         objWrite.putData(signal, propsOut.get("SampleRate"), "double", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
-        Wav objRead2 = new Wav();
-        objRead2.readWav(outputFileName);
+        WAV objRead2 = new WAV();
+        objRead2.readWAV(outputFileName);
         double[][] signalWritten = objRead2.getData("double");
         double[][] signalT = UtilMethods.transpose(signal);
         double[][] signalWrittenT = UtilMethods.transpose(signalWritten);
@@ -106,20 +106,20 @@ public class TestWav {
 
     @Test
     public void wavTestCustomInt() throws WavFileException, IOException {
-        Wav objRead1 = new Wav();
+        WAV objRead1 = new WAV();
         String inputFilename = "test_inputs/music.wav";
-        objRead1.readWav(inputFilename);
+        objRead1.readWAV(inputFilename);
         Hashtable<String, Long> propsOut = objRead1.getProperties();
         double[][] signal = objRead1.getData("int");
 
-        Wav objWrite = new Wav();
+        WAV objWrite = new WAV();
         String outputFileName = "test_outputs/musicInt.wav";
         objWrite.putData(signal, propsOut.get("SampleRate"), "int", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
-        Wav objRead2 = new Wav();
-        objRead2.readWav(outputFileName);
+        WAV objRead2 = new WAV();
+        objRead2.readWAV(outputFileName);
         double[][] signalWritten = objRead2.getData("int");
         double[][] signalT = UtilMethods.transpose(signal);
         double[][] signalWrittenT = UtilMethods.transpose(signalWritten);
@@ -130,20 +130,20 @@ public class TestWav {
 
     @Test
     public void wavTestCustomLong() throws WavFileException, IOException {
-        Wav objRead1 = new Wav();
+        WAV objRead1 = new WAV();
         String inputFilename = "test_inputs/music.wav";
-        objRead1.readWav(inputFilename);
+        objRead1.readWAV(inputFilename);
         Hashtable<String, Long> propsOut = objRead1.getProperties();
         double[][] signal = objRead1.getData("long");
 
-        Wav objWrite = new Wav();
+        WAV objWrite = new WAV();
         String outputFileName = "test_outputs/musicLong.wav";
         objWrite.putData(signal, propsOut.get("SampleRate"), "long", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
-        Wav objRead2 = new Wav();
-        objRead2.readWav(outputFileName);
+        WAV objRead2 = new WAV();
+        objRead2.readWAV(outputFileName);
         double[][] signalWritten = objRead2.getData("long");
         double[][] signalT = UtilMethods.transpose(signal);
         double[][] signalWrittenT = UtilMethods.transpose(signalWritten);
@@ -154,20 +154,20 @@ public class TestWav {
 
     @Test
     public void wavTestCustomDouble() throws WavFileException, IOException {
-        Wav objRead1 = new Wav();
+        WAV objRead1 = new WAV();
         String inputFilename = "test_inputs/music.wav";
-        objRead1.readWav(inputFilename);
+        objRead1.readWAV(inputFilename);
         Hashtable<String, Long> propsOut = objRead1.getProperties();
         double[][] signal = objRead1.getData("double");
 
-        Wav objWrite = new Wav();
+        WAV objWrite = new WAV();
         String outputFileName = "test_outputs/musicDouble.wav";
         objWrite.putData(signal, propsOut.get("SampleRate"), "double", outputFileName);
         boolean fileExists = new File("./"+outputFileName).exists();
         Assertions.assertTrue(fileExists);
 
-        Wav objRead2 = new Wav();
-        objRead2.readWav(outputFileName);
+        WAV objRead2 = new WAV();
+        objRead2.readWAV(outputFileName);
         double[][] signalWritten = objRead2.getData("double");
         double[][] signalT = UtilMethods.transpose(signal);
         double[][] signalWrittenT = UtilMethods.transpose(signalWritten);

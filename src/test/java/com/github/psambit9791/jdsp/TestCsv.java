@@ -10,7 +10,7 @@
 
 package com.github.psambit9791.jdsp;
 
-import com.github.psambit9791.jdsp.io.Csv;
+import com.github.psambit9791.jdsp.io.CSV;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -65,7 +65,7 @@ public class TestCsv {
     @Test
     public void csvReadTest1() throws IOException {
         this.generateResultHashMap(new String[]{"t", "diff", "x", "y", "z"});
-        Csv readObj = new Csv(',');
+        CSV readObj = new CSV(',');
         String inputFilename = "test_inputs/sheet_withcolumn.csv";
         HashMap<String, ArrayList<Object>> out = readObj.readCSV(inputFilename, true);
         Assertions.assertTrue(out.equals(this.result));
@@ -74,7 +74,7 @@ public class TestCsv {
     @Test
     public void csvReadTest2() throws IOException {
         this.generateResultHashMap(new String[]{"X0", "X1", "X2", "X3", "X4"});
-        Csv readObj = new Csv(',');
+        CSV readObj = new CSV(',');
         String inputFilename = "test_inputs/sheet_nocolumn.csv";
         HashMap<String, ArrayList<Object>> out = readObj.readCSV(inputFilename, false);
         Assertions.assertTrue(out.equals(this.result));
@@ -83,7 +83,7 @@ public class TestCsv {
     @Test
     public void csvReadCustomColumnsTest3() throws IOException {
         this.generateResultHashMap(new String[]{"Time", "Difference", "X-Axis", "Y-Axis", "Z-Axis"});
-        Csv readObj = new Csv(',');
+        CSV readObj = new CSV(',');
         String inputFilename = "test_inputs/sheet_withcolumn.csv";
         HashMap<String, ArrayList<Object>> out = readObj.readCSV(inputFilename, new String[]{"Time", "Difference", "X-Axis", "Y-Axis", "Z-Axis"}, true);
         Assertions.assertTrue(out.equals(this.result));
@@ -92,7 +92,7 @@ public class TestCsv {
     @Test
     public void csvReadCustomColumnsTest4() throws IOException {
         this.generateResultHashMap(new String[]{"Time", "Difference", "X-Axis", "Y-Axis", "Z-Axis"});
-        Csv readObj = new Csv(',');
+        CSV readObj = new CSV(',');
         String inputFilename = "test_inputs/sheet_nocolumn.csv";
         HashMap<String, ArrayList<Object>> out = readObj.readCSV(inputFilename, new String[]{"Time", "Difference", "X-Axis", "Y-Axis", "Z-Axis"}, false);
         Assertions.assertTrue(out.equals(this.result));
@@ -102,7 +102,7 @@ public class TestCsv {
     public void csvWrite() throws IOException {
         this.generateResultHashMap(new String[]{"t", "diff", "x", "y", "z"});
         String outputFilename = "test_outputs/sheet.csv";
-        Csv writeObj = new Csv(',');
+        CSV writeObj = new CSV(',');
         writeObj.writeCSV(outputFilename, this.result);
         boolean fileExists = new File("./"+outputFilename).exists();
         Assertions.assertTrue(fileExists);

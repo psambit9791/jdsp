@@ -32,7 +32,7 @@ import java.util.Hashtable;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class Wav {
+public class WAV {
     private WavFile wf;
     public Hashtable<String, Long> props;
     private double[][] data;
@@ -60,7 +60,7 @@ public class Wav {
      * @throws com.github.psambit9791.wavfile.WavFileException if error occurs in WavFile class
      * @throws java.io.IOException if sample file does not exist
      */
-    public void readWav(String filename) throws WavFileException, IOException{
+    public void readWAV(String filename) throws WavFileException, IOException{
         String ext = filename.substring(filename.lastIndexOf(".")+1, filename.length());
         if (!ext.equals("wav")) {
             System.out.println("File is not of WAV format");
