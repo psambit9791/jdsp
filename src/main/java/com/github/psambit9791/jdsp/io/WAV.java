@@ -62,7 +62,7 @@ public class WAV {
      */
     public void readWAV(String filename) throws WavFileException, IOException{
         String ext = filename.substring(filename.lastIndexOf(".")+1, filename.length());
-        if (!ext.equals("wav")) {
+        if (!ext.equalsIgnoreCase("wav")) {
             System.out.println("File is not of WAV format");
         }
         else {
