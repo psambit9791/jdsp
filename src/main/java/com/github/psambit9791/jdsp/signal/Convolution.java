@@ -31,16 +31,13 @@ public class Convolution {
 
     /**
      * This constructor initialises the prerequisites required to perform convolution.
-     * @param s Signal to be convolved
-     * @param w Kernel for convolution
+     * @param signal Signal to be convolved
+     * @param window Kernel for convolution
      * @throws java.lang.IllegalArgumentException if kernel size is greater than or equal to signal length
      */
-    public Convolution(double[] s, double[] w) {
-//        if (s.length < w.length) {
-//            throw new IllegalArgumentException("Weight Size should be less than Signal Length");
-//        }
-        this.signal = s;
-        this.kernel = w;
+    public Convolution(double[] signal, double[] window) {
+        this.signal = signal;
+        this.kernel = window;
         this.output = null;
     }
 
