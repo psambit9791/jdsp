@@ -93,11 +93,11 @@ public class InverseDiscreteFourier {
     }
 
     /**
-     * This method returns the absolute value of the generated signal.
+     * This method returns the magnitude value of the IDFT result.
      * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
      * @return double[] The signal (absolute)
      */
-    public double[] getAbsoluteSignal() throws ExceptionInInitializerError {
+    public double[] getMagnitudeSignal() throws ExceptionInInitializerError {
         if (this.signal == null) {
             throw new ExceptionInInitializerError("Execute idft() function before returning result");
         }

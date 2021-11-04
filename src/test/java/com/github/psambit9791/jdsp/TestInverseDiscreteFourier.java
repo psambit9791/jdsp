@@ -61,7 +61,7 @@ public class TestInverseDiscreteFourier {
                 0.372,  0.409,  0.44 ,  0.51 ,  0.615,  0.702,  0.688,  0.504, 0.133, -0.373, -0.894, -1.281, -1.401,
                 -1.192, -0.684, -0.0};
 
-        double[] resultAbs = {0.0, 0.684, 1.192, 1.401, 1.281, 0.894, 0.373, 0.133, 0.504, 0.688, 0.702, 0.615, 0.51,
+        double[] resultMag = {0.0, 0.684, 1.192, 1.401, 1.281, 0.894, 0.373, 0.133, 0.504, 0.688, 0.702, 0.615, 0.51,
                 0.44, 0.409, 0.372, 0.263, 0.033, 0.319, 0.726, 1.074, 1.236, 1.121, 0.714, 0.093, 0.593, 1.163, 1.464,
                 1.42, 1.053, 0.476, 0.147, 0.658, 0.948, 0.991, 0.839, 0.588, 0.338, 0.154, 0.041, 0.041, 0.154, 0.338,
                 0.588, 0.839, 0.991, 0.948, 0.658, 0.147, 0.476, 1.053, 1.42, 1.464, 1.163, 0.593, 0.093, 0.714, 1.121,
@@ -82,7 +82,7 @@ public class TestInverseDiscreteFourier {
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqCompFull, false);
         transformer.idft();
         double[] outReal = transformer.getRealSignal();
-        double[] outAbsolute = transformer.getAbsoluteSignal();
+        double[] outMagnitude = transformer.getMagnitudeSignal();
 
         double[][] out = transformer.getComplexSignal();
         double[] outR = new double[out.length];
@@ -94,7 +94,7 @@ public class TestInverseDiscreteFourier {
         }
 
         Assertions.assertArrayEquals(resultReal, outReal, 0.001);
-        Assertions.assertArrayEquals(resultAbs, outAbsolute, 0.001);
+        Assertions.assertArrayEquals(resultMag, outMagnitude, 0.001);
         Assertions.assertArrayEquals(resultComplex[0], outR, 0.001);
         Assertions.assertArrayEquals(resultComplex[1], outI, 0.001);
     }
@@ -109,7 +109,7 @@ public class TestInverseDiscreteFourier {
                 0.372,  0.409,  0.44 ,  0.51 ,  0.615,  0.702,  0.688,  0.504, 0.133, -0.373, -0.894, -1.281, -1.401,
                 -1.192, -0.684, -0.0};
 
-        double[] resultAbs = {0.0, 0.684, 1.192, 1.401, 1.281, 0.894, 0.373, 0.133, 0.504, 0.688, 0.702, 0.615, 0.51,
+        double[] resultMag = {0.0, 0.684, 1.192, 1.401, 1.281, 0.894, 0.373, 0.133, 0.504, 0.688, 0.702, 0.615, 0.51,
                 0.44, 0.409, 0.372, 0.263, 0.033, 0.319, 0.726, 1.074, 1.236, 1.121, 0.714, 0.093, 0.593, 1.163, 1.464,
                 1.42, 1.053, 0.476, 0.147, 0.658, 0.948, 0.991, 0.839, 0.588, 0.338, 0.154, 0.041, 0.041, 0.154, 0.338,
                 0.588, 0.839, 0.991, 0.948, 0.658, 0.147, 0.476, 1.053, 1.42, 1.464, 1.163, 0.593, 0.093, 0.714, 1.121,
@@ -130,7 +130,7 @@ public class TestInverseDiscreteFourier {
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqCompPositive, true);
         transformer.idft();
         double[] outReal = transformer.getRealSignal();
-        double[] outAbsolute = transformer.getAbsoluteSignal();
+        double[] outMagnitude = transformer.getMagnitudeSignal();
 
         double[][] out = transformer.getComplexSignal();
         double[] outR = new double[out.length];
@@ -142,7 +142,7 @@ public class TestInverseDiscreteFourier {
         }
 
         Assertions.assertArrayEquals(resultReal, outReal, 0.001);
-        Assertions.assertArrayEquals(resultAbs, outAbsolute, 0.001);
+        Assertions.assertArrayEquals(resultMag, outMagnitude, 0.001);
         Assertions.assertArrayEquals(resultComplex[0], outR, 0.001);
         Assertions.assertArrayEquals(resultComplex[1], outI, 0.001);
     }
@@ -156,7 +156,7 @@ public class TestInverseDiscreteFourier {
                 -0.285, -0.343, -0.311, -0.203, -0.058, 0.081, 0.174, 0.204, 0.176, 0.115, 0.054, 0.018, 0.016, 0.035,
                 0.053, 0.043, -0.007, -0.092, -0.186, -0.253, -0.261, -0.193, -0.06, 0.105, 0.254, 0.342};
 
-        double[] resultAbs = {0.0, 0.342, 0.254, 0.105, 0.06, 0.193, 0.261, 0.253, 0.186, 0.092, 0.007, 0.043, 0.053,
+        double[] resultMag = {0.0, 0.342, 0.254, 0.105, 0.06, 0.193, 0.261, 0.253, 0.186, 0.092, 0.007, 0.043, 0.053,
                 0.035, 0.016, 0.018, 0.054, 0.115, 0.176, 0.204, 0.174, 0.081, 0.058, 0.203, 0.311, 0.343, 0.285, 0.151,
                 0.022, 0.184, 0.288, 0.312, 0.255, 0.145, 0.022, 0.076, 0.125, 0.125, 0.092, 0.056, 0.041, 0.056, 0.092,
                 0.125, 0.125, 0.076, 0.022, 0.145, 0.255, 0.312, 0.288, 0.184, 0.022, 0.151, 0.285, 0.343, 0.311, 0.203,
@@ -178,7 +178,7 @@ public class TestInverseDiscreteFourier {
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqRealFull, false);
         transformer.idft();
         double[] outReal = transformer.getRealSignal();
-        double[] outAbsolute = transformer.getAbsoluteSignal();
+        double[] outMagnitude = transformer.getMagnitudeSignal();
 
         double[][] out = transformer.getComplexSignal();
         double[] outR = new double[out.length];
@@ -190,7 +190,7 @@ public class TestInverseDiscreteFourier {
         }
 
         Assertions.assertArrayEquals(resultReal, outReal, 0.001);
-        Assertions.assertArrayEquals(resultAbs, outAbsolute, 0.001);
+        Assertions.assertArrayEquals(resultMag, outMagnitude, 0.001);
         Assertions.assertArrayEquals(resultComplex[0], outR, 0.001);
         Assertions.assertArrayEquals(resultComplex[1], outI, 0.001);
     }
@@ -204,7 +204,7 @@ public class TestInverseDiscreteFourier {
                 -0.285, -0.343, -0.311, -0.203, -0.058, 0.081, 0.174, 0.204, 0.176, 0.115, 0.054, 0.018, 0.016, 0.035,
                 0.053, 0.043, -0.007, -0.092, -0.186, -0.253, -0.261, -0.193, -0.06, 0.105, 0.254, 0.342};
 
-        double[] resultAbs = {0.0, 0.342, 0.254, 0.105, 0.06, 0.193, 0.261, 0.253, 0.186, 0.092, 0.007, 0.043, 0.053,
+        double[] resultMag = {0.0, 0.342, 0.254, 0.105, 0.06, 0.193, 0.261, 0.253, 0.186, 0.092, 0.007, 0.043, 0.053,
                 0.035, 0.016, 0.018, 0.054, 0.115, 0.176, 0.204, 0.174, 0.081, 0.058, 0.203, 0.311, 0.343, 0.285, 0.151,
                 0.022, 0.184, 0.288, 0.312, 0.255, 0.145, 0.022, 0.076, 0.125, 0.125, 0.092, 0.056, 0.041, 0.056, 0.092,
                 0.125, 0.125, 0.076, 0.022, 0.145, 0.255, 0.312, 0.288, 0.184, 0.022, 0.151, 0.285, 0.343, 0.311, 0.203,
@@ -226,7 +226,7 @@ public class TestInverseDiscreteFourier {
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqRealPositive, true);
         transformer.idft();
         double[] outReal = transformer.getRealSignal();
-        double[] outAbsolute = transformer.getAbsoluteSignal();
+        double[] outMagnitude = transformer.getMagnitudeSignal();
 
         double[][] out = transformer.getComplexSignal();
         double[] outR = new double[out.length];
@@ -238,7 +238,7 @@ public class TestInverseDiscreteFourier {
         }
 
         Assertions.assertArrayEquals(resultReal, outReal, 0.001);
-        Assertions.assertArrayEquals(resultAbs, outAbsolute, 0.001);
+        Assertions.assertArrayEquals(resultMag, outMagnitude, 0.001);
         Assertions.assertArrayEquals(resultComplex[0], outR, 0.001);
         Assertions.assertArrayEquals(resultComplex[1], outI, 0.001);
     }
