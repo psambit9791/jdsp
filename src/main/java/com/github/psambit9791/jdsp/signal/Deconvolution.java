@@ -44,14 +44,25 @@ public class Deconvolution {
         this.kernel = window;
     }
 
+    private int[] computeLength(String mode) {
+        int start = 0;
+        int stop = 0;
+        if (mode.equals("full")) {
+            start = 0;
+            stop = this.sig_len - this.ker_len + 1;
+        }
+
+        return new int[] {start, stop};
+    }
+
     public double[] deconvolve(String mode) {
         DiscreteFourier ffts = new DiscreteFourier(this.signal);
         ffts.dft();
         DiscreteFourier fftk = new DiscreteFourier(this.kernel);
         fftk.dft();
 
-        Complex[] s = ffts.getComplex(true);
-        Complex[] w = fftk.getComplex(true);
+        Complex[] s = ffts.getComplex(false);
+        Complex[] w = fftk.getComplex(false);
 
         Complex[] s_w = new Complex[s.length];
 
@@ -59,16 +70,13 @@ public class Deconvolution {
             s_w[i] = s[i].divide(w[i].add(Float.MIN_NORMAL));
         }
 
-        InverseDiscreteFourier idf = new InverseDiscreteFourier(UtilMethods.complexTo2D(s_w), true);
+        InverseDiscreteFourier idf = new InverseDiscreteFourier(UtilMethods.complexTo2D(s_w), false);
         idf.idft();
 
         double[] true_signal = idf.getRealSignal();
         true_signal = UtilMethods.round(true_signal, 3);
-        int true_length = 0;
-        if (mode.equals("full")) {
-            true_length = this.sig_len - this.ker_len + 1;
-        }
+        int[] limits = this.computeLength(mode);
 
-        return Arrays.copyOfRange(true_signal, 0, true_length);
+        return Arrays.copyOfRange(true_signal, limits[0], limits[1]);
     }
 }

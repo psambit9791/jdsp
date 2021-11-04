@@ -29,7 +29,6 @@ public class TestDeconvolution {
         double[] kernel = {1.0, 0.0, 1.0, 0.5};
 
         Deconvolution d1 = new Deconvolution(output, kernel);
-        System.out.println(Arrays.toString(d1.deconvolve("full")));
         Assertions.assertArrayEquals(d1.deconvolve("full"), this.signal1, 0.001);
     }
 
@@ -39,7 +38,6 @@ public class TestDeconvolution {
         double[] kernel = {1.0, 3.0, 1.0, 3.0};
 
         Deconvolution d2 = new Deconvolution(output, kernel);
-        System.out.println(Arrays.toString(d2.deconvolve("full")));
-//        Assertions.assertArrayEquals(d2.deconvolve("full"), this.signal2, 0.001);
+        Assertions.assertArrayEquals(d2.deconvolve("full"), this.signal2, 0.001);
     }
 }
