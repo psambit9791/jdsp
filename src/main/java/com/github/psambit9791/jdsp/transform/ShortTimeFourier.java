@@ -209,6 +209,7 @@ public class ShortTimeFourier {
     }
 
     public DiscreteFourier[] getOutput() {
+        checkOutput();
         return output;
     }
 
@@ -218,9 +219,7 @@ public class ShortTimeFourier {
      * @return Complex[][] STFT result matrix; row = frequency frame; column = time frame
      */
     public Complex[][] getComplex(boolean onlyPositive) {
-        if (this.output == null) {
-            stft();
-        }
+        checkOutput();
 
         Complex[][] result = new Complex[this.output[0].getComplex(onlyPositive).length][this.output.length];
 
@@ -241,9 +240,7 @@ public class ShortTimeFourier {
      * @return double[] array of all the time frames
      */
     public double[] getFrequencyAxis(boolean onlyPositive) {
-        if (this.output == null) {
-            throw new ExceptionInInitializerError("No STFT calculated yet");
-        }
+        checkOutput();
 
         double[] axis = new double[this.output[0].getComplex(onlyPositive).length];
 
@@ -259,15 +256,23 @@ public class ShortTimeFourier {
      * @return double[] array of all the frequency frames
      */
     public double[] getTimeAxis() {
-        if (this.output == null) {
-            throw new ExceptionInInitializerError("No STFT calculated yet");
-        }
+        checkOutput();
 
         double[] axis = new double[this.output.length];
         for (int i = 0; i < axis.length; i++) {
             axis[i] = i*(this.frameLength - overlap)/this.Fs;
         }
         return axis;
+    }
+
+    /**
+     * Checks whether the STFT has been calculated yet
+     * @throws ExceptionInInitializerError if result hasn't been calculated yet
+     */
+    private void checkOutput() {
+        if (this.output == null) {
+            throw new ExceptionInInitializerError("Execute stft() function before returning result");
+        }
     }
 }
 
