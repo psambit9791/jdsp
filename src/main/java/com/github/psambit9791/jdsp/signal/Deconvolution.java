@@ -23,12 +23,25 @@ import java.util.Arrays;
 
 // Using FFT method for 'full' and OLA method for 'same'
 // DOES NOT WORK FOR VALID MODE
+
+/**
+ * <h1>Deconvolution</h1>
+ * The Deconvolution class implements methods to recover signals which are convolved with a kernel. This function only
+ * works if the signal has been convolved in 'same' mode or 'full' mode. Given the convolved signal, the convolutional
+ * kernel used and the mode of convolution; the process can recover the original signal.
+ * For 'full' mode, FFT-based deconvolution is used.
+ * For 'same' mode, the overlap-and-add based deconvolution is used.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class Deconvolution {
 
     private double[] signal;
     private double[] kernel;
-    private int sig_len;
-    private int ker_len;
+    private final int sig_len;
+    private final int ker_len;
 
     public Deconvolution(double[] signal, double[] window) {
         this.sig_len = signal.length;
