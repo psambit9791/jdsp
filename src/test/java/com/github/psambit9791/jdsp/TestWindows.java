@@ -39,6 +39,36 @@ public class TestWindows {
     }
 
     @Test
+    public void BoxcarSymTest() {
+        int len = 10;
+        double[] result = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+        _Window w1 = new Boxcar(len);
+        double[] out = w1.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Boxcar w0 = new Boxcar(-2);});
+    }
+
+    @Test
+    public void BoxcarASymTest() {
+        int len = 10;
+        double[] result = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+        _Window w2 = new Boxcar(len, false);
+        double[] out = w2.getWindow();
+        Assertions.assertArrayEquals(result, out, 0.0001);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Boxcar w0 = new Boxcar(-2, false);});
+    }
+
+    @Test
+    public void BoxcarApplyTest() {
+        double[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        _Window w = new Boxcar(signal.length);
+        double[] out = w.applyWindow(signal);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void GeneralCosineSymTest() {
         int len = 10;
         double[] weights = {1, 2, 2, 1};

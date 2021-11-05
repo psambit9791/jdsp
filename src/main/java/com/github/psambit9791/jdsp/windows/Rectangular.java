@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * <h1>Rectangular Window</h1>
- * Also known as a rectangular window or Dirichlet window, this is equivalent to no window at all.
+ * Also known as a Boxcar window or Dirichlet window, this is equivalent to no window at all.
  * <p>
  *
  * @author  Sambit Paul
