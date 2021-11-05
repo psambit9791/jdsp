@@ -33,7 +33,6 @@ public class Convolution {
      * This constructor initialises the prerequisites required to perform convolution.
      * @param signal Signal to be convolved
      * @param window Kernel for convolution
-     * @throws java.lang.IllegalArgumentException if kernel size is greater than or equal to signal length
      */
     public Convolution(double[] signal, double[] window) {
         this.signal = signal;

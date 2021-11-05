@@ -34,7 +34,6 @@ public class CrossCorrelation {
      * This constructor initialises the prerequisites required to perform cross-correlation.
      * @param signal Signal to be convolved
      * @param window Kernel for convolution
-     * @throws java.lang.IllegalArgumentException if kernel size is greater than or equal to signal length
      */
     public CrossCorrelation(double[] signal, double[] window) {
         this.signal = signal;
