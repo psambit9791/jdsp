@@ -16,46 +16,41 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.transform.DiscreteFourier;
 import com.github.psambit9791.jdsp.transform.InverseDiscreteFourier;
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.linear.*;
 
 import java.util.Arrays;
 
-// Using FFT method
+
+// Using FFT method for 'full' and OLA method for 'same'
+// DOES NOT WORK FOR VALID MODE
 public class Deconvolution {
 
     private double[] signal;
     private double[] kernel;
     private int sig_len;
     private int ker_len;
-    private double[] output;
 
     public Deconvolution(double[] signal, double[] window) {
         this.sig_len = signal.length;
         this.ker_len = window.length;
-        int shape = Math.max(signal.length, window.length);
-        double[] padding = new double[shape - Math.min(signal.length, window.length)];
-        Arrays.fill(padding, 0.0);
-        if (signal.length < shape) {
-            signal = UtilMethods.concatenateArray(signal, padding);
-        }
-        else if (window.length < shape){
-            window = UtilMethods.concatenateArray(window, padding);
-        }
-        this.signal = signal;
         this.kernel = window;
+        this.signal = signal;
     }
 
-    private int[] computeLength(String mode) {
-        int start = 0;
-        int stop = 0;
-        if (mode.equals("full")) {
-            start = 0;
-            stop = this.sig_len - this.ker_len + 1;
+    private void preprocess_fft() {
+        int shape = Math.max(this.signal.length, this.kernel.length);
+        double[] padding = new double[shape - Math.min(this.signal.length, this.kernel.length)];
+        Arrays.fill(padding, 0.0);
+        if (this.signal.length < shape) {
+            this.signal = UtilMethods.concatenateArray(this.signal, padding);
         }
-
-        return new int[] {start, stop};
+        else if (this.kernel.length < shape){
+            this.kernel = UtilMethods.concatenateArray(this.kernel, padding);
+        }
     }
 
-    public double[] deconvolve(String mode) {
+    private double[] deconvolve_fft() {
+        this.preprocess_fft();
         DiscreteFourier ffts = new DiscreteFourier(this.signal);
         ffts.dft();
         DiscreteFourier fftk = new DiscreteFourier(this.kernel);
@@ -73,10 +68,33 @@ public class Deconvolution {
         InverseDiscreteFourier idf = new InverseDiscreteFourier(UtilMethods.complexTo2D(s_w), false);
         idf.idft();
 
-        double[] true_signal = idf.getRealSignal();
-        true_signal = UtilMethods.round(true_signal, 3);
-        int[] limits = this.computeLength(mode);
+        return Arrays.copyOfRange(UtilMethods.round(idf.getRealSignal(), 3), 0, this.sig_len - this.ker_len + 1);
+    }
 
-        return Arrays.copyOfRange(true_signal, limits[0], limits[1]);
+    private double[] deconvolve_ola() {
+        double[][] matA = new double[this.sig_len][this.sig_len];
+        double[] krn_temp = UtilMethods.padSignal(UtilMethods.reverse(this.kernel), "constant", this.sig_len - 1);
+        int index = 0;
+        for (int i = krn_temp.length - this.sig_len - 1; i >= krn_temp.length - this.sig_len - this.sig_len; i--) {
+            matA[index] = UtilMethods.splitByIndex(krn_temp, i, i + this.sig_len);
+            index++;
+        }
+        DecompositionSolver solver = new LUDecomposition(MatrixUtils.createRealMatrix(matA)).getSolver();
+        RealVector soln = solver.solve(new ArrayRealVector(this.signal, false));
+        return UtilMethods.round(soln.toArray(), 3);
+    }
+
+    public double[] deconvolve(String mode) {
+        double[] out;
+        if (mode.equals("full")) {
+            out = this.deconvolve_fft();
+        }
+        else if (mode.equals("same")) {
+            out = this.deconvolve_ola();
+        }
+        else {
+            throw new IllegalArgumentException("mode has to be one of 'full' or 'same'.");
+        }
+        return out;
     }
 }

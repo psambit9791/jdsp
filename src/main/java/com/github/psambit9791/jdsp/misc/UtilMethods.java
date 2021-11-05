@@ -432,9 +432,6 @@ public class UtilMethods {
      */
     public static double[] padSignal(double[] signal, String mode, int length) {
         double[] newSignal;
-        if (length > signal.length) {
-            throw new IllegalArgumentException("length has to be less than the signal length");
-        }
         switch (mode) {
             case "reflect": {
                 double[] revSig = reverse(signal);

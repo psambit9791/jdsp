@@ -16,8 +16,6 @@ import com.github.psambit9791.jdsp.signal.Deconvolution;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 public class TestDeconvolution {
 
     private double[] signal1 = {1.0, 2.0, 3.0, 4.0, 5.0};
@@ -39,5 +37,24 @@ public class TestDeconvolution {
 
         Deconvolution d2 = new Deconvolution(output, kernel);
         Assertions.assertArrayEquals(d2.deconvolve("full"), this.signal2, 0.001);
+    }
+
+    @Test
+    public void sameDeconvolutionTest1() {
+        double[] output = {2.0, 4.0, 6.5, 9.0, 5.5};
+        double[] kernel = {1.0, 0.0, 1.0, 0.5};
+
+        Deconvolution d1 = new Deconvolution(output, kernel);
+        Assertions.assertArrayEquals(d1.deconvolve("same"), this.signal1, 0.001);
+    }
+
+    @Test
+    public void sameDeconvolutionTest2() {
+        double[] output = {14, 26, 18, 37, 16, 49, 39, 36};;
+        double[] kernel = {1.0, 3.0, 1.0, 3.0};
+
+        Deconvolution d2 = new Deconvolution(output, kernel);
+        double[] temp = d2.deconvolve("same");
+        Assertions.assertArrayEquals(d2.deconvolve("same"), this.signal2, 0.001);
     }
 }
