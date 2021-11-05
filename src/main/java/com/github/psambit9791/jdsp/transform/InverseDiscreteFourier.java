@@ -12,6 +12,8 @@ package com.github.psambit9791.jdsp.transform;
 
 import org.apache.commons.math3.complex.Complex;
 
+import java.util.Arrays;
+
 /**
  * <h1>Inverse Discrete Fourier Transform</h1>
  * The InverseDiscreteFourier class applies the inverse discrete fourier transform on the input sequence (real/complex) and
@@ -104,6 +106,22 @@ public class InverseDiscreteFourier {
         double[] ret = new double[this.signal.length];
         for (int i=0; i<ret.length; i++) {
             ret[i] = this.signal[i].abs();
+        }
+        return ret;
+    }
+
+    /**
+     * This method returns the phase value of the IDFT result.
+     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
+     * @return double[] phase of the signal
+     */
+    public double[] getPhaseSignal() throws ExceptionInInitializerError {
+        if (this.signal == null) {
+            throw new ExceptionInInitializerError("Execute idft() function before returning result");
+        }
+        double[] ret = new double[this.signal.length];
+        for (int i=0; i<ret.length; i++) {
+            ret[i] = this.signal[i].getArgument();
         }
         return ret;
     }
