@@ -15,6 +15,7 @@ package com.github.psambit9791.jdsp.signal;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.util.MathArrays;
 
 /**
  * <h1>Convolution for Complex Numbers</h1>
@@ -97,11 +98,17 @@ public class ComplexConvolution {
 
     private void convolveComplexComplex(String mode) {
         double[][] signal2D = UtilMethods.transpose(UtilMethods.complexTo2D(this.complexSignal));
+        double[][] kernel2D = UtilMethods.transpose(UtilMethods.complexTo2D(this.complexKernel));
 
-        Convolution c_real = new Convolution(signal2D[0], this.kernel);
-        Convolution c_imag = new Convolution(signal2D[1], this.kernel);
+        Convolution c_real_real = new Convolution(signal2D[0], kernel2D[0]);
+        Convolution c_imag_imag = new Convolution(signal2D[1], kernel2D[1]);
+        Convolution c_real_imag = new Convolution(signal2D[0], kernel2D[1]);
+        Convolution c_imag_real = new Convolution(signal2D[1], kernel2D[0]);
 
-        double[][] temp = {c_real.convolve(mode), c_imag.convolve(mode)};
+        double[] real = MathArrays.ebeAdd(c_real_real.convolve(mode), MathArrays.scale(-1, c_imag_imag.convolve(mode)));
+        double[] imag = MathArrays.ebeAdd(c_real_imag.convolve(mode), c_imag_real.convolve(mode));
+
+        double[][] temp = {real, imag};
         temp = UtilMethods.transpose(temp);
 
         this.output = UtilMethods.matToComplex(temp);

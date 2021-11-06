@@ -75,7 +75,24 @@ public class TestComplexConvolution {
 
     @Test
     public void testComplexComplex1() {
-
+        Complex[] sg = UtilMethods.matToComplex(this.complexSignal1);
+        Complex[] krn = UtilMethods.matToComplex(this.complexKernel1);
+        ComplexConvolution c1 = new ComplexConvolution(sg, krn);
+        double[][] output_same = UtilMethods.complexTo2D(c1.convolve("same"));
+        double[][] result_same = {{-8.0, 14.0}, {14.0, 23.0}, {24.0, 36.0}, {20.0, 25.0}, {81.0, 18.0}};
+        double[][] output_full = UtilMethods.complexTo2D(c1.convolve("full"));
+        double[][] result_full = {{-3.0, 4.0}, {-8.0, 14.0}, {14.0, 23.0}, {24.0, 36.0}, {20.0, 25.0}, {81.0, 18.0}, {26.0, 2.0}, {48.0, 19.0}};
+        double[][] output_valid = UtilMethods.complexTo2D(c1.convolve("valid"));
+        double[][] result_valid = {{24.0, 36.0}, {20.0, 25.0}};
+        for (int i=0; i<result_same.length; i++) {
+            Assertions.assertArrayEquals(result_same[i], output_same[i], 0.001);
+        }
+        for (int i=0; i<result_full.length; i++) {
+            Assertions.assertArrayEquals(result_full[i], output_full[i], 0.001);
+        }
+        for (int i=0; i<result_valid.length; i++) {
+            Assertions.assertArrayEquals(result_valid[i], output_valid[i], 0.001);
+        }
     }
 
     @Test
@@ -123,6 +140,23 @@ public class TestComplexConvolution {
 
     @Test
     public void testComplexComplex2() {
-
+        Complex[] sg = UtilMethods.matToComplex(this.complexSignal2);
+        Complex[] krn = UtilMethods.matToComplex(this.complexKernel2);
+        ComplexConvolution c1 = new ComplexConvolution(sg, krn);
+        double[][] output_same = UtilMethods.complexTo2D(c1.convolve("same"));
+        double[][] result_same = {{-12.58, -1.9}, {-1.89, 33.95}, {47.08, -15.38}, {-19.834, 17.356}, {243.468, -109.122}};
+        double[][] output_full = UtilMethods.complexTo2D(c1.convolve("full"));
+        double[][] result_full = {{1.2, 0.8}, {-12.58, -1.9}, {-1.89, 33.95}, {47.08, -15.38}, {-19.834, 17.356}, {243.468, -109.122}, {-9.564, -3.412}, {139.538, -34.166}};
+        double[][] output_valid = UtilMethods.complexTo2D(c1.convolve("valid"));
+        double[][] result_valid = {{47.08, -15.38}, {-19.834, 17.356}};
+        for (int i=0; i<result_same.length; i++) {
+            Assertions.assertArrayEquals(result_same[i], output_same[i], 0.001);
+        }
+        for (int i=0; i<result_full.length; i++) {
+            Assertions.assertArrayEquals(result_full[i], output_full[i], 0.001);
+        }
+        for (int i=0; i<result_valid.length; i++) {
+            Assertions.assertArrayEquals(result_valid[i], output_valid[i], 0.001);
+        }
     }
 }
