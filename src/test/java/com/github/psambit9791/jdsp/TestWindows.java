@@ -5,6 +5,10 @@ import com.github.psambit9791.jdsp.windows.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+
 public class TestWindows {
     private double[] signal = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
@@ -39,6 +43,15 @@ public class TestWindows {
     }
 
     @Test
+    public void RectangularApplyInverseTest() {
+        double[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        _Window w = new Rectangular(signal.length);
+        double[] out = w.applyWindow(signal);
+        out = w.applyInverseWindow(out);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void GeneralCosineSymTest() {
         int len = 10;
         double[] weights = {1, 2, 2, 1};
@@ -66,6 +79,23 @@ public class TestWindows {
         double[] weights = {1, 2, 2, 1};
         _Window w = new GeneralCosine(signal.length, weights);
         double[] out = w.applyWindow(signal);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void GeneralCosineApplyInverseTest() {
+        double[] result = {0, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        double[] weights = {1, 2, 2, 1};
+        _Window w = new GeneralCosine(signal.length, weights);
+        double[] out = w.applyWindow(signal);
+        // We don't want the System.err.println message
+        PrintStream stderr = System.err;    // Save standard stderr
+        System.setErr(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) { }
+        }));
+        out = w.applyInverseWindow(out);
+        System.setErr(stderr);  // Reset to standard stderr
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -108,6 +138,15 @@ public class TestWindows {
     }
 
     @Test
+    public void HammingApplyInverseTest() {
+        double[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        _Window w = new Hamming(signal.length);
+        double[] out = w.applyWindow(signal);
+        out = w.applyInverseWindow(out);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void HanningSymTest() {
         int len = 10;
         double[] result = {0.0, 0.117, 0.4132, 0.75, 0.9698, 0.9698, 0.75, 0.4132, 0.117, 0.0};
@@ -140,6 +179,22 @@ public class TestWindows {
         double[] result = {0,2.339556e-01,1.239528e+00,3.000000e+00,4.849232e+00,5.819078e+00,5.250000e+00,3.305407e+00,1.052800e+00,0};
         _Window w = new Hanning(signal.length);
         double[] out = w.applyWindow(signal);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void HanningApplyInverseTest() {
+        double[] result = {0, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        _Window w = new Hanning(signal.length);
+        double[] out = w.applyWindow(signal);
+        // We don't want the System.err.println message
+        PrintStream stderr = System.err;    // Save standard stderr
+        System.setErr(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) { }
+        }));
+        out = w.applyInverseWindow(out);
+        System.setErr(stderr);  // Reset to standard stderr
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -180,6 +235,15 @@ public class TestWindows {
     }
 
     @Test
+    public void BlackmanApplyInverseTest() {
+        double[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        _Window w = new Blackman(signal.length);
+        double[] out = w.applyWindow(signal);
+        out = w.applyInverseWindow(out);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void BlackmanHarrisSymTest() {
         int len = 10;
         double[] result = {0.0001, 0.0151, 0.147, 0.5206, 0.9317, 0.9317, 0.5206, 0.147, 0.0151, 0.0001};
@@ -212,6 +276,15 @@ public class TestWindows {
         double[] result = {6.000000e-05,3.014235e-02,4.411187e-01,2.082300e+00,4.658296e+00,5.589956e+00,3.644025e+00,1.176316e+00,1.356406e-01,6.000000e-04};
         _Window w = new BlackmanHarris(signal.length);
         double[] out = w.applyWindow(signal);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void BlackmanHarrisApplyInverseTest() {
+        double[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        _Window w = new BlackmanHarris(signal.length);
+        double[] out = w.applyWindow(signal);
+        out = w.applyInverseWindow(out);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -252,6 +325,15 @@ public class TestWindows {
     }
 
     @Test
+    public void PoissonApplyInverseTest() {
+        double[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        _Window w = new Poisson(signal.length);
+        double[] out = w.applyWindow(signal);
+        out = w.applyInverseWindow(out);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void FlatTopSymTest() {
         int len = 10;
         double[] result = {-0.0004, -0.0202, -0.0702, 0.1982, 0.8625, 0.8625, 0.1982, -0.0702, -0.0202, -0.0004};
@@ -284,6 +366,15 @@ public class TestWindows {
         double[] result = {-4.210510e-04,-4.034406e-02,-2.105971e-01,7.928421e-01,4.312382e+00,5.174858e+00,1.387474e+00,-5.615923e-01,-1.815483e-01,-4.210510e-03};
         _Window w = new FlatTop(signal.length);
         double[] out = w.applyWindow(signal);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void FlatTopApplyInverseTest() {
+        double[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        _Window w = new FlatTop(signal.length);
+        double[] out = w.applyWindow(signal);
+        out = w.applyInverseWindow(out);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -324,6 +415,15 @@ public class TestWindows {
     }
 
     @Test
+    public void NuttallApplyInverseTest() {
+        double[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        _Window w = new Nuttall(signal.length);
+        double[] out = w.applyWindow(signal);
+        out = w.applyInverseWindow(out);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void GaussianSymTest() {
         int len = 10;
         double std = 2.0;
@@ -355,6 +455,16 @@ public class TestWindows {
     }
 
     @Test
+    public void GaussianApplyInverseTest() {
+        double[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        double std = 2.0;
+        _Window w = new Gaussian(signal.length, std);
+        double[] out = w.applyWindow(signal);
+        out = w.applyInverseWindow(out);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void TukeySymTest() {
         int len = 10;
         double alpha = 0.5;
@@ -382,6 +492,23 @@ public class TestWindows {
         double alpha = 0.5;
         _Window w = new Tukey(signal.length, alpha);
         double[] out = w.applyWindow(signal);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void TukeyApplyInverseTest() {
+        double[] result = {0, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        double alpha = 0.5;
+        _Window w = new Tukey(signal.length, alpha);
+        double[] out = w.applyWindow(signal);
+        // We don't want the System.err.println message
+        PrintStream stderr = System.err;    // Save standard stderr
+        System.setErr(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) { }
+        }));
+        out = w.applyInverseWindow(out);
+        System.setErr(stderr);  // Reset to standard stderr
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -440,6 +567,15 @@ public class TestWindows {
     }
 
     @Test
+    public void TriangularEvenApplyInverseTest() {
+        double[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        _Window w = new Triangular(signal.length);
+        double[] out = w.applyWindow(signal);
+        out = w.applyInverseWindow(out);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void BartlettSymTest() {
         int len = 10;
         double[] result = {0.0, 0.2222, 0.4444, 0.6667, 0.8889, 0.8889, 0.6667, 0.4444, 0.2222, 0.0};
@@ -472,6 +608,22 @@ public class TestWindows {
         double[] result = {0,4.444444e-01,1.333333e+00,2.666667e+00,4.444444e+00,5.333333e+00,4.666667e+00,3.555556e+00,2,0};
         _Window w = new Bartlett(signal.length);
         double[] out = w.applyWindow(signal);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void BartlettApplyInverseTest() {
+        double[] result = {0, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        _Window w = new Bartlett(signal.length);
+        double[] out = w.applyWindow(signal);
+        // We don't want the System.err.println message
+        PrintStream stderr = System.err;    // Save standard stderr
+        System.setErr(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) { }
+        }));
+        out = w.applyInverseWindow(out);
+        System.setErr(stderr);  // Reset to standard stderr
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -512,6 +664,22 @@ public class TestWindows {
     }
 
     @Test
+    public void BartlettHannApplyInverseTest() {
+        double[] result = {0, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        _Window w = new BartlettHann(signal.length);
+        double[] out = w.applyWindow(signal);
+        // We don't want the System.err.println message
+        PrintStream stderr = System.err;    // Save standard stderr
+        System.setErr(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) { }
+        }));
+        out = w.applyInverseWindow(out);
+        System.setErr(stderr);  // Reset to standard stderr
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void BohmanSymTest() {
         int len = 10;
         double[] result = {0.0, 0.0344, 0.2363, 0.609, 0.9442, 0.9442, 0.609, 0.2363, 0.0344, 0.0};
@@ -548,6 +716,22 @@ public class TestWindows {
     }
 
     @Test
+    public void BohmanApplyInverseTest() {
+        double[] result = {0, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        _Window w = new Bohman(signal.length);
+        double[] out = w.applyWindow(signal);
+        // We don't want the System.err.println message
+        PrintStream stderr = System.err;    // Save standard stderr
+        System.setErr(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) { }
+        }));
+        out = w.applyInverseWindow(out);
+        System.setErr(stderr);  // Reset to standard stderr
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void KaiserSymTest() {
         int len = 10;
         double[] result = {0.0 , 0.007 , 0.1038, 0.4627, 0.9199, 0.9199, 0.4627, 0.1038, 0.007 , 0.0};
@@ -572,6 +756,15 @@ public class TestWindows {
         double[] result = {7.726867e-06,1.399204e-02,3.114775e-01,1.850866e+00,4.599353e+00,5.519223e+00,3.239015e+00,8.306066e-01,6.296416e-02,7.726867e-05};
         _Window w = new Kaiser(signal.length, 14);
         double[] out = w.applyWindow(signal);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void KaiserApplyInverseTest() {
+        double[] result = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        _Window w = new Kaiser(signal.length, 14);
+        double[] out = w.applyWindow(signal);
+        out = w.applyInverseWindow(out);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 }
