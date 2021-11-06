@@ -13,6 +13,7 @@
 package com.github.psambit9791.jdsp.transform;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
+import com.github.psambit9791.jdsp.signal.ComplexConvolution;
 import com.github.psambit9791.jdsp.signal.Convolution;
 import com.github.psambit9791.jdsp.signal.Generate;
 import org.apache.commons.math3.complex.Complex;
@@ -35,8 +36,7 @@ public class Wavelet {
         MORLET,
         RICKER,
         PAUL
-    };
-
+    }
 
     /**
      * This constructor initialises the prerequisites required to use Wavelet.
@@ -70,15 +70,8 @@ public class Wavelet {
         for (int i=0; i<wavelet.length; i++) {
             wavelet_conjugate[i] = wavelet[i].conjugate();
         }
-        double[][] decomp_wvlt = UtilMethods.transpose(UtilMethods.complexTo2D(wavelet_conjugate));
-
-        Convolution c_real = new Convolution(data, decomp_wvlt[0]);
-        Convolution c_imag = new Convolution(data, decomp_wvlt[1]);
-
-        double[][] temp = {c_real.convolve("same"), c_imag.convolve("same")};
-        temp = UtilMethods.transpose(temp);
-
-        return UtilMethods.matToComplex(temp);
+        ComplexConvolution c1 = new ComplexConvolution(data, wavelet_conjugate);
+        return c1.convolve("same");
     }
 
     /**
@@ -88,15 +81,8 @@ public class Wavelet {
      * @return Complex[] Transformed signal
      */
     private Complex[] paul_cwt(double[] data, Complex[] wavelet) {
-        double[][] decomp_wvlt = UtilMethods.transpose(UtilMethods.complexTo2D(wavelet));
-
-        Convolution c_real = new Convolution(data, decomp_wvlt[0]);
-        Convolution c_imag = new Convolution(data, decomp_wvlt[1]);
-
-        double[][] temp = {c_real.convolve("same"), c_imag.convolve("same")};
-        temp = UtilMethods.transpose(temp);
-
-        return UtilMethods.matToComplex(temp);
+        ComplexConvolution c1 = new ComplexConvolution(data, wavelet);
+        return c1.convolve("same");
     }
 
     /**
@@ -141,7 +127,7 @@ public class Wavelet {
                 }
                 break;
             default:
-                throw new ArithmeticException("wavelet_type must be 'ricker', 'morlet' or 'paul'");
+                throw new ArithmeticException("wavelet_type must be RICKER, MORLET or PAUL");
         }
         return output;
     }
