@@ -38,11 +38,20 @@ public class ShortTimeFourier {
      *                          Value greater than frameLength => frame gets zero padded
      */
     public ShortTimeFourier(double[] signal, int frameLength, int overlap, double Fs, _Window window, int fourierLength) {
+        if (signal == null) {
+            throw new IllegalArgumentException("Signal can not be null");
+        }
+        if (frameLength < 1) {
+            throw new IllegalArgumentException("Frame length must be greater than 0");
+        }
         if (overlap >= frameLength) {
             throw new IllegalArgumentException("Overlap size should be smaller than the frame length");
         }
         if (fourierLength < frameLength) {
             throw new IllegalArgumentException("Fourier length should be equal to or greater than the frame length");
+        }
+        if (window == null) {
+            throw new IllegalArgumentException("Window can not be null");
         }
         this.signal = signal;
         this.frameLength = frameLength;
