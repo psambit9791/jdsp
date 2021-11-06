@@ -262,7 +262,7 @@ public class Generate {
      * @param points Length of the wavelet
      * @param omega0 Central frequency
      * @param width Width parameter of wavelet
-     * @return Complex[] The
+     * @return Complex[] The generated wavelet
      */
     public Complex[] generateMorletCWTComplex(int points, double omega0, double width) {
         double[] x = UtilMethods.arange(0, points, 1.0);
@@ -309,7 +309,7 @@ public class Generate {
      * Returns a Complex Paul Wavelet compatible with CWT
      * @param order Order of the wavelet function
      * @param width Width parameter of wavelet
-     * @return Complex[] The
+     * @return Complex[] The generated wavelet
      */
     public Complex[] generatePaulComplex(int order, double width) {
         double M = width * 10;
@@ -334,7 +334,7 @@ public class Generate {
      * @param order Order of the wavelet function
      * @param width Width parameter of wavelet
      * @param scale Scaling factor
-     * @return Complex[] The
+     * @return Complex[] The generated wavelet
      */
     public Complex[] generatePaulComplex(int order, double width, double scale) {
         double M = width * 10;

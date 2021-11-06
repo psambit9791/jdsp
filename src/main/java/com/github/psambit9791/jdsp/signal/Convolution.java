@@ -98,7 +98,7 @@ public class Convolution {
      */
     public double[] convolve1d(String mode) {
 
-        double[] output = new double[this.signal.length];
+        double[] output;
         double[] temp;
 
         if (mode.equals("reflect") || mode.equals("constant") || mode.equals("nearest") ||
