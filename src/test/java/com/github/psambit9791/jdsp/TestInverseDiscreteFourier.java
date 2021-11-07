@@ -81,10 +81,10 @@ public class TestInverseDiscreteFourier {
 
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqCompFull, false);
         transformer.idft();
-        double[] outReal = transformer.getRealSignal();
-        double[] outMagnitude = transformer.getMagnitudeSignal();
+        double[] outReal = transformer.getReal();
+        double[] outMagnitude = transformer.getMagnitude();
 
-        double[][] out = transformer.getComplexSignal();
+        double[][] out = transformer.getComplex2D();
         double[] outR = new double[out.length];
         double[] outI = new double[out.length];
 
@@ -129,10 +129,10 @@ public class TestInverseDiscreteFourier {
 
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqCompPositive, true);
         transformer.idft();
-        double[] outReal = transformer.getRealSignal();
-        double[] outMagnitude = transformer.getMagnitudeSignal();
+        double[] outReal = transformer.getReal();
+        double[] outMagnitude = transformer.getMagnitude();
 
-        double[][] out = transformer.getComplexSignal();
+        double[][] out = transformer.getComplex2D();
         double[] outR = new double[out.length];
         double[] outI = new double[out.length];
 
@@ -177,10 +177,10 @@ public class TestInverseDiscreteFourier {
 
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqRealFull, false);
         transformer.idft();
-        double[] outReal = transformer.getRealSignal();
-        double[] outMagnitude = transformer.getMagnitudeSignal();
+        double[] outReal = transformer.getReal();
+        double[] outMagnitude = transformer.getMagnitude();
 
-        double[][] out = transformer.getComplexSignal();
+        double[][] out = transformer.getComplex2D();
         double[] outR = new double[out.length];
         double[] outI = new double[out.length];
 
@@ -225,10 +225,10 @@ public class TestInverseDiscreteFourier {
 
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqRealPositive, true);
         transformer.idft();
-        double[] outReal = transformer.getRealSignal();
-        double[] outMagnitude = transformer.getMagnitudeSignal();
+        double[] outReal = transformer.getReal();
+        double[] outMagnitude = transformer.getMagnitude();
 
-        double[][] out = transformer.getComplexSignal();
+        double[][] out = transformer.getComplex2D();
         double[] outR = new double[out.length];
         double[] outI = new double[out.length];
 

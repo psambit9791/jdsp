@@ -195,7 +195,7 @@ public class Resample {
 
         InverseDiscreteFourier idf = new InverseDiscreteFourier(Y, true);
         idf.idft();
-        double[] y = idf.getRealSignal();
+        double[] y = idf.getReal();
         this.output = MathArrays.scale((float)this.num/(float)Nx, y);
     }
 
