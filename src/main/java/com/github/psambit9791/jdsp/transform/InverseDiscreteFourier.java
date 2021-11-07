@@ -81,7 +81,7 @@ public class InverseDiscreteFourier {
     /**
      * This method returns the complex value of the generated signal as a Complex array.
      * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
-     * @return double[] The signal (complex)
+     * @return Complex[] The signal (complex)
      */
     protected Complex[] getComplex() throws ExceptionInInitializerError {
         checkOutput();
