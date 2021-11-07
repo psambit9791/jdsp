@@ -33,7 +33,6 @@ import java.util.*;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
  */
 
 public class UtilMethods {
@@ -432,9 +431,6 @@ public class UtilMethods {
      */
     public static double[] padSignal(double[] signal, String mode, int length) {
         double[] newSignal;
-        if (length > signal.length) {
-            throw new IllegalArgumentException("length has to be less than the signal length");
-        }
         switch (mode) {
             case "reflect": {
                 double[] revSig = reverse(signal);
@@ -1803,65 +1799,5 @@ public class UtilMethods {
             }
         }
         return out;
-    }
-
-    public static double[] getWindow(String windowName, int len, boolean sym) {
-
-        double[] window;
-        switch (windowName) {
-            case "bartlett": {
-                window = new Bartlett(len, sym).getWindow();
-                break;
-            }
-            case "bartlett-hann": {
-                window = new BartlettHann(len, sym).getWindow();
-                break;
-            }
-            case "blackman": {
-                window = new Blackman(len, sym).getWindow();
-                break;
-            }
-            case "blackman-harris": {
-                window = new BlackmanHarris(len, sym).getWindow();
-                break;
-            }
-            case "bohman": {
-                window = new Bohman(len, sym).getWindow();
-                break;
-            }
-            case "boxcar": {
-                window = new Boxcar(len, sym).getWindow();
-                break;
-            }
-            case "flattop": {
-                window = new FlatTop(len, sym).getWindow();
-                break;
-            }
-            case "hamming": {
-                window = new Hamming(len, sym).getWindow();
-                break;
-            }
-            case "hanning": {
-                window = new Hanning(len, sym).getWindow();
-                break;
-            }
-            case "nuttall": {
-                window = new Nuttall(len, sym).getWindow();
-                break;
-            }
-            case "poisson": {
-                window = new Poisson(len, sym).getWindow();
-                break;
-            }
-            case "triangular": {
-                window = new Triangular(len, sym).getWindow();
-                break;
-            }
-            default:
-                throw new IllegalArgumentException("windowName can be one of 'bartlett', 'bartlett-hann', 'blackman', " +
-                        "'blackman-harris', 'bohman', 'boxcar', 'flattop', 'hamming', 'hanning', 'nuttall', 'poisson', " +
-                        "'triangular'");
-        }
-        return window;
     }
 }

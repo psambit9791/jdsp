@@ -164,7 +164,9 @@ public class TestUtils {
         Assertions.assertArrayEquals(truncated, out, 0.001);
         Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.truncateSignal(signal, -1));
         Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.truncateSignal(signal, 20));
+    }
 
+    @Test
     public void padSignalLengthTest() {
         double[] signal = {2, 8, 0, 4, 1, 9, 9, 0};
         double[] reflect = {4, 0, 8, 2, 2, 8, 0, 4, 1, 9, 9, 0, 0, 9, 9, 1};

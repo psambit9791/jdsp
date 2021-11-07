@@ -3,25 +3,25 @@ package com.github.psambit9791.jdsp.windows;
 import java.util.Arrays;
 
 /**
- * <h1>Rectangular Window</h1>
- * Also known as a Boxcar window or Dirichlet window, this is equivalent to no window at all.
+ * <h1>Boxcar Window</h1>
+ * Also known as a rectangular window or Dirichlet window, this is equivalent to no window at all.
  * <p>
  *
  * @author  Sambit Paul
  * @version 1.0
  */
-public class Rectangular extends _Window {
+public class Boxcar extends _Window {
     private double[] window;
     private final boolean sym;
     private final int len;
 
     /**
      * This constructor initialises the Rectangular class.
-     * @throws java.lang.IllegalArgumentException if window length is less than 1
+     * @throws IllegalArgumentException if window length is less than 1
      * @param len Length of the window
      * @param sym Whether the window is symmetric
      */
-    public Rectangular(int len, boolean sym) throws IllegalArgumentException {
+    public Boxcar(int len, boolean sym) throws IllegalArgumentException {
         super(len);
         this.len = len;
         this.sym = sym;
@@ -30,10 +30,10 @@ public class Rectangular extends _Window {
 
     /**
      * This constructor initialises the Rectangular class. Symmetricity is set to True.
-     * @throws java.lang.IllegalArgumentException if window length is less than 1.
+     * @throws IllegalArgumentException if window length is less than 1.
      * @param len Length of the window
      */
-    public Rectangular(int len) throws IllegalArgumentException {
+    public Boxcar(int len) throws IllegalArgumentException {
         this(len, true);
     }
 
