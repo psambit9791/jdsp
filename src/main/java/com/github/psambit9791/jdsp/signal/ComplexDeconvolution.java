@@ -31,11 +31,11 @@ public class ComplexDeconvolution {
     /**
      * This constructor initialises the prerequisites required to perform convolution.
      * Geenerates a complex signal
-     * @param output The output of the complex convolution
+     * @param signal The output of the complex convolution
      * @param window Kernel for convolution
      */
-    public ComplexDeconvolution(Complex[] output, double[] window) {
-        this.convolutionOutput = output;
+    public ComplexDeconvolution(Complex[] signal, double[] window) {
+        this.convolutionOutput = signal;
         this.kernel = window;
         this.complex = true;
     }
@@ -43,11 +43,11 @@ public class ComplexDeconvolution {
     /**
      * This constructor initialises the prerequisites required to perform convolution.
      * Generates a real signal
-     * @param output The output of the complex convolution
+     * @param signal The output of the complex convolution
      * @param window Kernel for convolution
      */
-    public ComplexDeconvolution(Complex[] output, Complex[] window) {
-        this.convolutionOutput = output;
+    public ComplexDeconvolution(Complex[] signal, Complex[] window) {
+        this.convolutionOutput = signal;
         this.complexKernel = window;
         this.complex = false;
     }

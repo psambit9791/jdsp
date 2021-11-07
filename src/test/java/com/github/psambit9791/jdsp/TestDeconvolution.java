@@ -20,6 +20,7 @@ public class TestDeconvolution {
 
     private double[] signal1 = {1.0, 2.0, 3.0, 4.0, 5.0};
     private double[] signal2 = {2.0, 8.0, 0.0, 4.0, 1.0, 9.0, 9.0, 0.0};
+    private double[] signal3 = {1.01, 2.33, 4.56, 7.89, 11.09, 12.43, 13.96};
 
     @Test
     public void fullDeconvolutionTest1() {
@@ -40,6 +41,15 @@ public class TestDeconvolution {
     }
 
     @Test
+    public void fullDeconvolutionTest3() {
+        double[] output = {1.01,   4.35,  12.25,  28.04,  54.92,  90.19, 132.12, 160.47, 167.39, 148.06, 105.75,  40.35,  13.96};;
+        double[] kernel = {1, 2, 3, 4, 5, 2, 1};
+
+        Deconvolution d3 = new Deconvolution(output, kernel);
+        Assertions.assertArrayEquals(d3.deconvolve("full"), this.signal3, 0.001);
+    }
+
+    @Test
     public void sameDeconvolutionTest1() {
         double[] output = {2.0, 4.0, 6.5, 9.0, 5.5};
         double[] kernel = {1.0, 0.0, 1.0, 0.5};
@@ -54,7 +64,15 @@ public class TestDeconvolution {
         double[] kernel = {1.0, 3.0, 1.0, 3.0};
 
         Deconvolution d2 = new Deconvolution(output, kernel);
-        double[] temp = d2.deconvolve("same");
         Assertions.assertArrayEquals(d2.deconvolve("same"), this.signal2, 0.001);
+    }
+
+    @Test
+    public void sameDeconvolutionTest3() {
+        double[] output = {28.04,  54.92,  90.19, 132.12, 160.47, 167.39, 148.06};;
+        double[] kernel = {1, 2, 3, 4, 5, 2, 1};
+
+        Deconvolution d3 = new Deconvolution(output, kernel);
+        Assertions.assertArrayEquals(d3.deconvolve("same"), this.signal3, 0.001);
     }
 }

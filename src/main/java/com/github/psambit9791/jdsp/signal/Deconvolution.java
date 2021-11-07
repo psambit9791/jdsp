@@ -44,12 +44,8 @@ public class Deconvolution {
      * This constructor initialises the prerequisites required to perform deconvolution.
      * @param signal The convolved signal
      * @param window Kernel used for convolution
-     * @throws java.lang.IllegalArgumentException if kernel size is greater than the signal length
      */
     public Deconvolution(double[] signal, double[] window) {
-        if (window.length > signal.length) {
-            throw new IllegalArgumentException("Signal length must be less than the kernel size.");
-        }
         this.sig_len = signal.length;
         this.ker_len = window.length;
         this.kernel = window;
@@ -105,12 +101,21 @@ public class Deconvolution {
         double[][] matA = new double[this.sig_len][this.sig_len];
         double[] krn_temp = UtilMethods.padSignal(UtilMethods.reverse(this.kernel), "constant", this.sig_len - 1);
         int index = 0;
-        for (int i = krn_temp.length - this.sig_len - 1; i >= krn_temp.length - this.sig_len - this.sig_len; i--) {
+        int start_point = this.ker_len/2 + this.sig_len - 1;
+        for (int i = start_point; i >= start_point - this.sig_len + 1; i--) {
             matA[index] = UtilMethods.splitByIndex(krn_temp, i, i + this.sig_len);
             index++;
         }
-        DecompositionSolver solver = new LUDecomposition(MatrixUtils.createRealMatrix(matA)).getSolver();
-        RealVector soln = solver.solve(new ArrayRealVector(this.signal, false));
+        RealVector soln;
+        try {
+            DecompositionSolver solver = new LUDecomposition(MatrixUtils.createRealMatrix(matA)).getSolver();
+            soln = solver.solve(new ArrayRealVector(this.signal, false));
+        }
+        catch (SingularMatrixException e) {
+            DecompositionSolver solver = new SingularValueDecomposition(MatrixUtils.createRealMatrix(matA)).getSolver();
+            soln = solver.solve(new ArrayRealVector(this.signal, false));
+        }
+
         return UtilMethods.round(soln.toArray(), 3);
     }
 
