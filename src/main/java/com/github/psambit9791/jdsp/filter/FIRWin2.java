@@ -217,7 +217,7 @@ public class FIRWin2 extends _FIRFilter {
         // Perform the Inverse DFT
         InverseDiscreteFourier transform = new InverseDiscreteFourier(fx2D, true);
         transform.idft();
-        double[] outFull = transform.getRealSignal();
+        double[] outFull = transform.getReal();
 
         Hamming w = new Hamming(this.numTaps);
         double[] window = w.getWindow();

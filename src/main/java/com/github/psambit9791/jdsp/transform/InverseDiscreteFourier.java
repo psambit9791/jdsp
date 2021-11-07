@@ -12,10 +12,12 @@ package com.github.psambit9791.jdsp.transform;
 
 import org.apache.commons.math3.complex.Complex;
 
+import java.util.Arrays;
+
 /**
  * <h1>Inverse Discrete Fourier Transform</h1>
  * The InverseDiscreteFourier class applies the inverse discrete fourier transform on the input sequence (real/complex) and
- * provides different representations of the reconstructed signal to be returned (real signal, complex signal, absolute signal)
+ * provides different representations of the reconstructed signal to be returned (real signal, complex signal, ...)
  * <p>
  *
  * @author  Sambit Paul
@@ -77,35 +79,13 @@ public class InverseDiscreteFourier {
     }
 
     /**
-     * This method returns the real part of the generated signal.
+     * This method returns the complex value of the generated signal as a Complex array.
      * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
-     * @return double[] The signal (real part)
+     * @return Complex[] The signal (complex)
      */
-    public double[] getRealSignal() throws ExceptionInInitializerError {
-        if (this.signal == null) {
-            throw new ExceptionInInitializerError("Execute idft() function before returning result");
-        }
-        double[] ret = new double[this.signal.length];
-        for (int i=0; i<ret.length; i++) {
-            ret[i] = this.signal[i].getReal();
-        }
-        return ret;
-    }
-
-    /**
-     * This method returns the absolute value of the generated signal.
-     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
-     * @return double[] The signal (absolute)
-     */
-    public double[] getAbsoluteSignal() throws ExceptionInInitializerError {
-        if (this.signal == null) {
-            throw new ExceptionInInitializerError("Execute idft() function before returning result");
-        }
-        double[] ret = new double[this.signal.length];
-        for (int i=0; i<ret.length; i++) {
-            ret[i] = this.signal[i].abs();
-        }
-        return ret;
+    protected Complex[] getComplex() throws ExceptionInInitializerError {
+        checkOutput();
+        return this.signal;
     }
 
     /**
@@ -113,10 +93,8 @@ public class InverseDiscreteFourier {
      * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
      * @return double[][] The signal (complex)
      */
-    public double[][] getComplexSignal() throws ExceptionInInitializerError {
-        if (this.signal == null) {
-            throw new ExceptionInInitializerError("Execute idft() function before returning result");
-        }
+    public double[][] getComplex2D() throws ExceptionInInitializerError {
+        checkOutput();
         double[][] ret = new double[this.signal.length][2];
         for (int i=0; i<ret.length; i++) {
             ret[i][0] = this.signal[i].getReal();
@@ -126,18 +104,60 @@ public class InverseDiscreteFourier {
     }
 
     /**
-     * This method returns the complex value of the generated signal as a Complex array.
+     * This method returns the real part of the generated signal.
      * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
-     * @return double[] The signal (complex)
+     * @return double[] The signal (real part)
      */
-    protected Complex[] getAsComplex() throws ExceptionInInitializerError
-    {
-        if (this.signal == null) {
-            throw new ExceptionInInitializerError("Execute idft() function before returning result");
+    public double[] getReal() throws ExceptionInInitializerError {
+        checkOutput();
+        double[] ret = new double[this.signal.length];
+        for (int i=0; i<ret.length; i++) {
+            ret[i] = this.signal[i].getReal();
         }
-        return this.signal;
+        return ret;
     }
 
+    /**
+     * This method returns the imaginary part of the generated signal.
+     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
+     * @return double[] The signal (imaginary part)
+     */
+    public double[] getImaginary() throws ExceptionInInitializerError {
+        checkOutput();
+        double[] ret = new double[this.signal.length];
+        for (int i=0; i<ret.length; i++) {
+            ret[i] = this.signal[i].getImaginary();
+        }
+        return ret;
+    }
+
+    /**
+     * This method returns the magnitude value of the IDFT result.
+     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
+     * @return double[] The signal (magnitude)
+     */
+    public double[] getMagnitude() throws ExceptionInInitializerError {
+        checkOutput();
+        double[] ret = new double[this.signal.length];
+        for (int i=0; i<ret.length; i++) {
+            ret[i] = this.signal[i].abs();
+        }
+        return ret;
+    }
+
+    /**
+     * This method returns the phase value of the IDFT result.
+     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
+     * @return double[] phase of the signal
+     */
+    public double[] getPhase() throws ExceptionInInitializerError {
+        checkOutput();
+        double[] ret = new double[this.signal.length];
+        for (int i=0; i<ret.length; i++) {
+            ret[i] = this.signal[i].getArgument();
+        }
+        return ret;
+    }
 
     private void idftRealFull() {
         Complex[] out = new Complex[this.real_sequence.length];
@@ -227,5 +247,11 @@ public class InverseDiscreteFourier {
             out[t] = Complex.valueOf(sigValR/out.length, sigValI/out.length);
         }
         this.signal = out;
+    }
+
+    private void checkOutput() {
+        if (this.signal == null) {
+            throw new ExceptionInInitializerError("Execute idft() function before returning result");
+        }
     }
 }

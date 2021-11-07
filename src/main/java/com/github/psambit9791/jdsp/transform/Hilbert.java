@@ -65,7 +65,7 @@ public class Hilbert {
     public void hilbertTransform() {
         DiscreteFourier dft = new DiscreteFourier(this.signal);
         dft.dft();
-        double[][] dftOut = dft.getFull(false);
+        double[][] dftOut = dft.getComplex2D(false);
 
         double[][] modOut = new double[dftOut.length][dftOut[0].length];
 
@@ -76,7 +76,7 @@ public class Hilbert {
 
         InverseDiscreteFourier idft = new InverseDiscreteFourier(modOut, false);
         idft.idft();
-        this.output = idft.getAsComplex();
+        this.output = idft.getComplex();
     }
 
     /**

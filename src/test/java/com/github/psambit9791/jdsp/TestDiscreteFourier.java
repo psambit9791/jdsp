@@ -264,7 +264,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[][] out = fft1.getFull(true);
+        double[][] out = fft1.getComplex2D(true);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];
@@ -296,7 +296,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[][] out = fft1.getFull(true);
+        double[][] out = fft1.getComplex2D(true);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];
@@ -328,7 +328,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal1);
         fft1.dft();
-        double[][] out = fft1.getFull(false);
+        double[][] out = fft1.getComplex2D(false);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];
@@ -373,7 +373,7 @@ public class TestDiscreteFourier {
 
         DiscreteFourier fft1 = new DiscreteFourier(this.signal2);
         fft1.dft();
-        double[][] out = fft1.getFull(false);
+        double[][] out = fft1.getComplex2D(false);
 
         double[] outReal = new double[out.length];
         double[] outIm = new double[out.length];

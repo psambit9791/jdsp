@@ -134,12 +134,12 @@ public class DiscreteFourier {
     }
 
     /**
-     * Returns the complex value of the discrete fourier transformed sequence
+     * Returns the complex value of the discrete fourier transformed sequence as a 2D matrix
      * @param onlyPositive Set to True if non-mirrored output is required
      * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
      * @return double[][] The complex DFT output; first array column = real part; second array column = imaginary part
      */
-    public double[][] getFull(boolean onlyPositive) throws ExceptionInInitializerError {
+    public double[][] getComplex2D(boolean onlyPositive) throws ExceptionInInitializerError {
         Complex[] dftout = getComplex(onlyPositive);
         return UtilMethods.complexTo2D(dftout);
     }
