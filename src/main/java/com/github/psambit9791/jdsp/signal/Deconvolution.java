@@ -90,7 +90,7 @@ public class Deconvolution {
         InverseDiscreteFourier idf = new InverseDiscreteFourier(UtilMethods.complexTo2D(s_w), false);
         idf.idft();
 
-        return Arrays.copyOfRange(UtilMethods.round(idf.getRealSignal(), 3), 0, this.sig_len - this.ker_len + 1);
+        return Arrays.copyOfRange(UtilMethods.round(idf.getReal(), 3), 0, this.sig_len - this.ker_len + 1);
     }
 
     /**

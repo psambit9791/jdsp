@@ -48,6 +48,8 @@ public class TestWindows {
         _Window w = new Rectangular(signal.length);
         double[] out = w.applyWindow(signal);
         out = w.applyInverseWindow(out);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
 
     @Test
     public void BoxcarSymTest() {
