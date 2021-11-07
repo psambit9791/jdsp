@@ -69,11 +69,9 @@ public class TestShortTimeFourier {
 
         int frameLength = 5;
         int overlap = 2;
-        double Fs = 100;
-        _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
-
+        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap);
+        stft.stft();
         Complex[][] out = stft.getComplex(false);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -100,11 +98,9 @@ public class TestShortTimeFourier {
 
         int frameLength = 5;
         int overlap = 2;
-        double Fs = 100;
-        _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
-
+        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap);
+        stft.stft();
         Complex[][] out = stft.getComplex(false);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -127,11 +123,9 @@ public class TestShortTimeFourier {
 
         int frameLength = 5;
         int overlap = 2;
-        double Fs = 100;
-        _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
-
+        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap);
+        stft.stft();
         Complex[][] out = stft.getComplex(true);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -154,11 +148,9 @@ public class TestShortTimeFourier {
 
         int frameLength = 5;
         int overlap = 2;
-        double Fs = 100;
-        _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
-
+        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap);
+        stft.stft();
         Complex[][] out = stft.getComplex(true);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -170,7 +162,7 @@ public class TestShortTimeFourier {
     }
 
     @Test
-    public void testSTFTPositiveHanning2() throws IOException {
+    public void testSTFTPositiveHanning2() {
         // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
         //      STFT result with Hanning window
         double[][] resultReal = {{2.884570e-02,1.632510e-01,4.102850e-01,7.584200e-01,1.175675e+00,1.596045e+00,1.910295e+00,1.973270e+00,1.641875e+00,8.522050e-01,-2.806675e-01,-1.398130e+00,-1.963815e+00,-1.531605e+00,-1.488520e-01,1.401120e+00,1.923850e+00,7.909860e-01,-1.138920e+00,-1.903460e+00,-4.631350e-01,1.587670e+00,1.475165e+00,-8.288486e-01,-1.818350e+00,2.933800e-01,1.862805e+00,-1.714030e-01,-1.831990e+00,4.708300e-01,1.665700e+00,-1.109751e+00},
@@ -182,11 +174,10 @@ public class TestShortTimeFourier {
 
         int frameLength = 5;
         int overlap = 2;
-        double Fs = 100;
         _Window window = new Hanning(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
-
+        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, window);
+        stft.stft();
         Complex[][] out = stft.getComplex(true);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -224,11 +215,9 @@ public class TestShortTimeFourier {
         int frameLength = 5;
         int overlap = 2;
         int fourierLength = 10;
-        double Fs = 100;
-        _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window, fourierLength);
-
+        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, fourierLength);
+        stft.stft();
         Complex[][] out = stft.getComplex(false);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -241,7 +230,7 @@ public class TestShortTimeFourier {
 
 
     @Test
-    public void testSpectrogram1() throws IOException {
+    public void testSpectrogram1() {
         // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
         double[][] result = {{9.241823e-03,1.863796e-01,1.096377e+00,3.651806e+00,8.646658e+00,1.574979e+01,2.231089e+01,2.352134e+01,1.605180e+01,4.223415e+00,4.921934e-01,1.142007e+01,2.203326e+01,1.309521e+01,1.086111e-01,1.076116e+01,1.970978e+01,3.206829e+00,6.710887e+00,1.808240e+01,1.011956e+00,1.204437e+01,9.998324e+00,3.135050e+00,1.437729e+01,3.800229e-01,1.414572e+01,1.242619e-01,1.271443e+01,8.272812e-01,9.679615e+00,4.155246e+00},
                 {3.323504e-03,1.876349e-02,4.561394e-02,7.634659e-02,9.352740e-02,7.528352e-02,2.407124e-02,1.104424e-02,1.642750e-01,5.010167e-01,7.171670e-01,4.366268e-01,3.405834e-02,4.965162e-01,1.335685e+00,7.564458e-01,1.306034e-01,1.602582e+00,1.385886e+00,2.214512e-01,2.359549e+00,9.740138e-01,1.350965e+00,2.558534e+00,6.028153e-01,3.457613e+00,5.255550e-01,3.936524e+00,7.201615e-01,4.134963e+00,1.486898e+00,3.313898e+00},
@@ -251,10 +240,9 @@ public class TestShortTimeFourier {
 
         int frameLength = 5;
         int overlap = 2;
-        double Fs = 100;
-        _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
+        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap);
+        stft.stft();
         double[][] out = stft.spectrogram(false);
 
         for (int i = 0; i < result.length; i++) {
@@ -263,7 +251,7 @@ public class TestShortTimeFourier {
     }
 
     @Test
-    public void testSpectrogram2() throws IOException {
+    public void testSpectrogram2() {
         // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
         double[][] result = {{9.241823e-03,1.863796e-01,1.096377e+00,3.651806e+00,8.646658e+00,1.574979e+01,2.231089e+01,2.352134e+01,1.605180e+01,4.223415e+00,4.921934e-01,1.142007e+01,2.203326e+01,1.309521e+01,1.086111e-01,1.076116e+01,1.970978e+01,3.206829e+00,6.710887e+00,1.808240e+01,1.011956e+00,1.204437e+01,9.998324e+00,3.135050e+00,1.437729e+01,3.800229e-01,1.414572e+01,1.242619e-01,1.271443e+01,8.272812e-01,9.679615e+00,4.155246e+00},
                 {3.323504e-03,1.876349e-02,4.561394e-02,7.634659e-02,9.352740e-02,7.528352e-02,2.407124e-02,1.104424e-02,1.642750e-01,5.010167e-01,7.171670e-01,4.366268e-01,3.405834e-02,4.965162e-01,1.335685e+00,7.564458e-01,1.306034e-01,1.602582e+00,1.385886e+00,2.214512e-01,2.359549e+00,9.740138e-01,1.350965e+00,2.558534e+00,6.028153e-01,3.457613e+00,5.255550e-01,3.936524e+00,7.201615e-01,4.134963e+00,1.486898e+00,3.313898e+00},
@@ -273,10 +261,9 @@ public class TestShortTimeFourier {
 
         int frameLength = 5;
         int overlap = 2;
-        double Fs = 100;
-        _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
+        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap);
+        stft.stft();
         double[][] out = stft.spectrogram(false);
 
         for (int i = 0; i < result.length; i++) {
@@ -285,7 +272,7 @@ public class TestShortTimeFourier {
     }
 
     @Test
-    public void testSpectrogramPositive1() throws IOException {
+    public void testSpectrogramPositive1() {
         // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
         double[][] result = {{9.241823e-03,1.863796e-01,1.096377e+00,3.651806e+00,8.646658e+00,1.574979e+01,2.231089e+01,2.352134e+01,1.605180e+01,4.223415e+00,4.921934e-01,1.142007e+01,2.203326e+01,1.309521e+01,1.086111e-01,1.076116e+01,1.970978e+01,3.206829e+00,6.710887e+00,1.808240e+01,1.011956e+00,1.204437e+01,9.998324e+00,3.135050e+00,1.437729e+01,3.800229e-01,1.414572e+01,1.242619e-01,1.271443e+01,8.272812e-01,9.679615e+00,4.155246e+00},
                 {3.323504e-03,1.876349e-02,4.561394e-02,7.634659e-02,9.352740e-02,7.528352e-02,2.407124e-02,1.104424e-02,1.642750e-01,5.010167e-01,7.171670e-01,4.366268e-01,3.405834e-02,4.965162e-01,1.335685e+00,7.564458e-01,1.306034e-01,1.602582e+00,1.385886e+00,2.214512e-01,2.359549e+00,9.740138e-01,1.350965e+00,2.558534e+00,6.028153e-01,3.457613e+00,5.255550e-01,3.936524e+00,7.201615e-01,4.134963e+00,1.486898e+00,3.313898e+00},
@@ -293,10 +280,9 @@ public class TestShortTimeFourier {
 
         int frameLength = 5;
         int overlap = 2;
-        double Fs = 100;
-        _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
+        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap);
+        stft.stft();
         double[][] out = stft.spectrogram(true);
 
         for (int i = 0; i < result.length; i++) {
@@ -305,7 +291,7 @@ public class TestShortTimeFourier {
     }
 
     @Test
-    public void testSpectrogramPositive2() throws IOException {
+    public void testSpectrogramPositive2() {
         // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
         double[][] result = {{9.241823e-03,1.863796e-01,1.096377e+00,3.651806e+00,8.646658e+00,1.574979e+01,2.231089e+01,2.352134e+01,1.605180e+01,4.223415e+00,4.921934e-01,1.142007e+01,2.203326e+01,1.309521e+01,1.086111e-01,1.076116e+01,1.970978e+01,3.206829e+00,6.710887e+00,1.808240e+01,1.011956e+00,1.204437e+01,9.998324e+00,3.135050e+00,1.437729e+01,3.800229e-01,1.414572e+01,1.242619e-01,1.271443e+01,8.272812e-01,9.679615e+00,4.155246e+00},
                 {3.323504e-03,1.876349e-02,4.561394e-02,7.634659e-02,9.352740e-02,7.528352e-02,2.407124e-02,1.104424e-02,1.642750e-01,5.010167e-01,7.171670e-01,4.366268e-01,3.405834e-02,4.965162e-01,1.335685e+00,7.564458e-01,1.306034e-01,1.602582e+00,1.385886e+00,2.214512e-01,2.359549e+00,9.740138e-01,1.350965e+00,2.558534e+00,6.028153e-01,3.457613e+00,5.255550e-01,3.936524e+00,7.201615e-01,4.134963e+00,1.486898e+00,3.313898e+00},
@@ -313,10 +299,9 @@ public class TestShortTimeFourier {
 
         int frameLength = 5;
         int overlap = 2;
-        double Fs = 100;
-        _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
+        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap);
+        stft.stft();
         double[][] out = stft.spectrogram(true);
 
         for (int i = 0; i < result.length; i++) {
@@ -333,7 +318,7 @@ public class TestShortTimeFourier {
         double Fs = 100;
         _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
+        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, frameLength, window, Fs);
         stft.stft();
         double[] out = stft.getFrequencyAxis(false);
 
@@ -349,7 +334,7 @@ public class TestShortTimeFourier {
         double Fs = 100;
         _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
+        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, frameLength, window, Fs);
         stft.stft();
         double[] out = stft.getFrequencyAxis(false);
 
@@ -365,7 +350,7 @@ public class TestShortTimeFourier {
         double Fs = 100;
         _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
+        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, frameLength, window, Fs);
         stft.stft();
         double[] out = stft.getFrequencyAxis(true);
 
@@ -381,7 +366,7 @@ public class TestShortTimeFourier {
         double Fs = 100;
         _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
+        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, frameLength, window, Fs);
         stft.stft();
         double[] out = stft.getFrequencyAxis(true);
 
@@ -397,7 +382,7 @@ public class TestShortTimeFourier {
         double Fs = 100;
         _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, Fs, window);
+        ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, frameLength, window, Fs);
         stft.stft();
         double[] out = stft.getTimeAxis();
 
@@ -413,7 +398,7 @@ public class TestShortTimeFourier {
         double Fs = 100;
         _Window window = new Rectangular(frameLength);
 
-        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, Fs, window);
+        ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, frameLength, window, Fs);
         stft.stft();
         double[] out = stft.getTimeAxis();
 

@@ -32,12 +32,12 @@ public class ShortTimeFourier {
      * @param signal        Signal for which to compute the STFT
      * @param frameLength   Number of samples that each FFT-frame should have
      * @param overlap       Number of samples that overlap between frames
-     * @param Fs            Sampling frequency of the signal
-     * @param window        Windowing function to perform on each STFT frame
      * @param fourierLength Number of samples used in the Fourier analysis of each frame
      *                          Value greater than frameLength => frame gets zero padded
+     * @param window        Windowing function to perform on each STFT frame
+     * @param Fs            Sampling frequency of the signal (in Hz)
      */
-    public ShortTimeFourier(double[] signal, int frameLength, int overlap, double Fs, _Window window, int fourierLength) {
+    public ShortTimeFourier(double[] signal, int frameLength, int overlap, int fourierLength, _Window window, double Fs) {
         if (signal == null) {
             throw new IllegalArgumentException("Signal can not be null");
         }
@@ -56,62 +56,75 @@ public class ShortTimeFourier {
         this.signal = signal;
         this.frameLength = frameLength;
         this.overlap = overlap;
-        this.Fs = Fs;
-        this.window = window;
         this.fourierLength = fourierLength;
+        this.window = window;
+        this.Fs = Fs;
     }
 
     /**
      * Compute the Short-Time Fourier Transform for a time signal, with windowing.
+     * Defaults sampling frequency to 1.
      *
      * @param signal        Signal for which to compute the STFT
      * @param frameLength   Number of samples that each FFT-frame should have
      * @param overlap       Number of samples that overlap between frames
-     * @param Fs            Sampling frequency of the signal
+     * @param fourierLength Number of samples used in the Fourier analysis of each frame
+     *                          Value greater than frameLength => frame gets zero padded
      * @param window        Windowing function to perform on each STFT frame
      */
-    public ShortTimeFourier(double[] signal, int frameLength, int overlap, double Fs, _Window window) {
-        this(signal, frameLength, overlap, Fs, window, frameLength);
+    public ShortTimeFourier(double[] signal, int frameLength, int overlap, int fourierLength, _Window window) {
+        this(signal, frameLength, overlap, fourierLength, window, 1);
+    }
+
+    /**
+     * Compute the Short-Time Fourier Transform for a time signal.
+     * Defaults window to rectangular window (= no windowing) and sampling frequency to 1.
+     *
+     * @param signal        Signal for which to compute the STFT
+     * @param frameLength   Number of samples that each FFT-frame should have
+     * @param overlap       Number of samples that overlap between frames
+     * @param fourierLength Number of samples used in the Fourier analysis of each frame
+     *                          Value greater than frameLength => frame gets zero padded
+     */
+    public ShortTimeFourier(double[] signal, int frameLength, int overlap, int fourierLength) {
+        this(signal, frameLength, overlap, fourierLength, new Rectangular(frameLength), 1);
     }
 
     /**
      * Compute the Short-Time Fourier Transform for a time signal, with windowing.
+     * Defaults fourier length to frameLength and sampling frequency to 1.
      *
-     * @param frameLength   Number of samples that each FFT-frame should have
-     * @param overlap       Number of samples that overlap between frames
-     */
-    public ShortTimeFourier(double[] signal, int frameLength, int overlap, _Window window) {
-        this(signal, frameLength, overlap, 1, window);
-    }
-
-    /**
-     * Defaults window as a rectangular window (= no windowing performed)
      * @param signal        Signal for which to compute the STFT
      * @param frameLength   Number of samples that each FFT-frame should have
      * @param overlap       Number of samples that overlap between frames
-     * @param Fs            Sampling frequency of the signal
+     * @param window        Windowing function to perform on each STFT frame
      */
-    public ShortTimeFourier(double[] signal, int frameLength, int overlap, double Fs) {
-        this(signal, frameLength, overlap, Fs, new Rectangular(frameLength));
+    public ShortTimeFourier(double[] signal, int frameLength, int overlap, _Window window) {
+        this(signal, frameLength, overlap, frameLength, window, 1);
     }
 
     /**
-     * Defaults Fs to 1 and as window a rectangular window (= no windowing performed)
+     * Compute the Short-Time Fourier Transform for a time signal.
+     * Defaults window to rectangular window (= no windowing), fourier length to frameLength and sampling frequency to 1.
+     *
      * @param signal        Signal for which to compute the STFT
      * @param frameLength   Number of samples that each FFT-frame should have
      * @param overlap       Number of samples that overlap between frames
      */
     public ShortTimeFourier(double[] signal, int frameLength, int overlap) {
-        this(signal, frameLength, overlap, 1, new Rectangular(frameLength));
+        this(signal, frameLength, overlap, frameLength, new Rectangular(frameLength), 1);
     }
 
     /**
-     * Defaults Fs to 1 and as window a rectangular window (= no windowing performed) and 50% overlap
+     * Compute the Short-Time Fourier Transform for a time signal.
+     * Defaults overlap to 50% (half of the samples of frameLength), window to rectangular window (= no windowing),
+     * fourier length to frameLength and sampling frequency to 1.
+     *
      * @param signal        Signal for which to compute the STFT
      * @param frameLength   Number of samples that each FFT-frame should have
      */
     public ShortTimeFourier(double[] signal, int frameLength) {
-        this(signal, frameLength, frameLength/2, 1, new Rectangular(frameLength));
+        this(signal, frameLength, frameLength/2, frameLength, new Rectangular(frameLength), 1);
     }
 
 
