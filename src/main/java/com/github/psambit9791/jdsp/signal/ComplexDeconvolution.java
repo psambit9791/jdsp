@@ -17,6 +17,21 @@ import org.apache.commons.math3.complex.Complex;
 
 import java.security.InvalidParameterException;
 
+/**
+ * <h1>Complex Deconvolution</h1>
+ * The ComplexDeconvolution class implements methods to recover signals which are convolved with a kernel. This function only
+ * works if the output of the convolution is a complex signal and if the original signal has been convolved in 'same' mode
+ * or 'full' mode. Given the convolved signal, the convolutional kernel used and the mode of convolution; the process
+ * can recover the original signal.
+ * The recovered signals can be complex or real.
+ * For 'full' mode, FFT-based deconvolution is used.
+ * For 'same' mode, the overlap-and-add based deconvolution is used.
+ * NOTE: Outputs may vary from the *scipy.signal.deconvolve* implementation which uses inverse filtering.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class ComplexDeconvolution {
 
     public double[] signal;
@@ -42,7 +57,7 @@ public class ComplexDeconvolution {
 
     /**
      * This constructor initialises the prerequisites required to perform convolution.
-     * Generates a real signal
+     * Generates a real signal.
      * @param signal The output of the complex convolution
      * @param window Kernel for convolution
      */
@@ -79,6 +94,12 @@ public class ComplexDeconvolution {
         this.signal = d1.deconvolve(mode);
     }
 
+    /**
+     * This function is a hyper-function which determines which type of deconvolution to perform depending on the convolved
+     * signal and the window.
+     * @param mode String to state which mode of convolution was performed on the convolved signal.
+     *             Can  either be 'full' or 'same'. 'valid' mode is not supported.
+     */
     public void deconvolve(String mode) {
         if (this.complexKernel != null) {
             this.deconvolve2Double(mode);
@@ -91,18 +112,28 @@ public class ComplexDeconvolution {
         }
     }
 
+    /**
+     * If the convolved signal is Complex and the window is Complex, the signal generated is real. This function returns
+     * the recovered real signal.
+     * @return double[]
+     */
     public double[] getRealOutput() {
-        if (complex) {
+        if (this.complex) {
             throw new InvalidParameterException("The signal generated is complex. Please use getComplexOutput().");
         }
-        if (signal == null) {
+        if (this.signal == null) {
             throw new ExceptionInInitializerError("Execute deconvolve() function before returning result");
         }
         return this.signal;
     }
 
+    /**
+     * If the convolved signal is Complex and the window is real, the signal generated is Complex. This function returns
+     * the recovered Complex signal.
+     * @return Complex[]
+     */
     public Complex[] getComplexOutput() {
-        if (!complex) {
+        if (!this.complex) {
             throw new InvalidParameterException("The signal generated is real. Please use getRealOutput().");
         }
         if (this.complexSignal == null) {

@@ -19,9 +19,19 @@ import com.github.psambit9791.jdsp.signal.Generate;
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.stat.StatUtils;
 
-import org.apache.commons.math3.stat.descriptive.rank.Median;
-import java.util.Arrays;
 
+/**
+ * <h1>Inverse Wavelet Transform</h1>
+ * The InverseWavelet class recovers a signal from the CWT output given the wavelet used to compute the CWT. The Wavelet
+ * Transform is a redundant transform, however since the deconvolution process may use an least-squares solution, the
+ * final signal is averaged over multiple (usually not all) inverse CWT outputs.
+ * The inverse wavelet transform works on the same wavelet wavelet functions as the WaveletTransform class - Ricker,
+ * Morlet and Paul.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class InverseWavelet {
 
     private Complex[][] transformed;
@@ -33,6 +43,11 @@ public class InverseWavelet {
         PAUL
     }
 
+    /**
+     * This constructor initialises the prerequisites required to perform inverse wavelet transform.
+     * @param transformed The wavelet transformed signal
+     * @param widths The widths used for the wavelet functions
+     */
     public InverseWavelet(Complex[][] transformed, int[] widths) {
         if (widths.length != transformed.length) {
             throw new IllegalArgumentException("Number of widths should be same as number of wavelet transformations");
@@ -51,6 +66,11 @@ public class InverseWavelet {
 
     }
 
+    /**
+     * Performs ICWT for signals transformed using the Paul wavelet
+     * @param args Wavelet property
+     * @return Returns the reconstructed signal for each transformed input and their corresponding wavelet
+     */
     private double[][] icwt_paul(int args) {
         double[][] out = new double[this.transformed.length][this.transformed[0].length];
         Generate gp = new Generate();
@@ -68,6 +88,11 @@ public class InverseWavelet {
         return out;
     }
 
+    /**
+     * Performs ICWT for signals transformed using the Morlet wavelet
+     * @param args Wavelet property
+     * @return Returns the reconstructed signal for each transformed input and their corresponding wavelet
+     */
     private double[][] icwt_morlet(double args) {
         double[][] out = new double[this.transformed.length][this.transformed[0].length];
         Generate gp = new Generate();
@@ -82,8 +107,11 @@ public class InverseWavelet {
         return out;
     }
 
+    /**
+     * Performs ICWT for signals transformed using the Ricker wavelet
+     * @return Returns the reconstructed signal for each transformed input and their corresponding wavelet
+     */
     private double[][] icwt_ricker() {
-//        System.out.println(Arrays.toString(this.widths));
         double[][] out = new double[this.transformed.length][this.transformed[0].length];
         Generate gp = new Generate();
         for (int i=0; i<out.length; i++) {
@@ -94,15 +122,20 @@ public class InverseWavelet {
             }
             double[] wavelet = gp.generateRicker(N, this.widths[i]);
             wavelet = UtilMethods.reverse(wavelet);
-//            System.out.println(Arrays.toString(data));
-//            System.out.println(Arrays.toString(wavelet));
             Deconvolution cdc = new Deconvolution(data, wavelet);
             out[i] = cdc.deconvolve("same");
-//            System.out.println(Arrays.toString(out[i]));
         }
         return out;
     }
 
+    /**
+     * This function is a hyper-function which determines the ICWT process depending on the wavelet type.
+     * @param wavelet_type Which wavelet was used for the CWT transformation
+     * @param wavelet_args The wavelet property used for wavelet generation.
+     *                     Ignored for Ricker, omega0 for Morlet and wavelet order for Paul
+     * @return double[] The recovered signal averaged over all the inverse transformed outputs
+     * @throws IllegalArgumentException If wavelet_type is not one of RICKER, MORLET or PAUL
+     */
     public double[] icwt(waveletType wavelet_type, double wavelet_args) throws IllegalArgumentException{
         double[][] out;
         switch (wavelet_type) {
