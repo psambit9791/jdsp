@@ -41,6 +41,13 @@ public class DiscreteFourier extends Fourier {
     }
 
     /**
+     * Return the length of the modified signal (padded length)
+     */
+    protected int getSignalLength() {
+        return this.signal.length;
+    }
+
+    /**
      * This function performs the fourier transform on the input signal
      */
     public void transform() {

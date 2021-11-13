@@ -51,6 +51,13 @@ public class FastFourier extends Fourier {
     }
 
     /**
+     * Return the length of the modified signal (padded length)
+     */
+    protected int getSignalLength() {
+        return this.signal.length;
+    }
+
+    /**
      * This constructor initialises the prerequisites required to use FastFourier.
      * @param signal Signal to be transformed
      */

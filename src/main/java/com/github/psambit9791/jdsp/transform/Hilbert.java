@@ -39,9 +39,6 @@ public class Hilbert {
      */
     public Hilbert(double[] s) {
         this.signal = s;
-        this.h = new double[s.length];
-        Arrays.fill(this.h, 0);
-        this.fillH();
     }
 
     private void fillH() {
@@ -66,9 +63,15 @@ public class Hilbert {
         Fourier dft;
         if (this.signal.length > 200) {
             dft = new FastFourier(this.signal);
+            this.h = new double[dft.getSignalLength()];
+            Arrays.fill(this.h, 0);
+            this.fillH();
         }
         else {
             dft = new DiscreteFourier(this.signal);
+            this.h = new double[dft.getSignalLength()];
+            Arrays.fill(this.h, 0);
+            this.fillH();
         }
         dft.transform();
         double[][] dftOut = dft.getComplex2D(false);

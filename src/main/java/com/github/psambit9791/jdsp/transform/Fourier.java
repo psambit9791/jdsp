@@ -24,5 +24,5 @@ public abstract class Fourier {
     public abstract double[][] getMagPhaseDeg(boolean onlyPositive);
     public abstract double[][] getComplex2D(boolean onlyPositive);
     public abstract Complex[] getComplex(boolean onlyPositive);
-
+    protected abstract int getSignalLength();
 }
