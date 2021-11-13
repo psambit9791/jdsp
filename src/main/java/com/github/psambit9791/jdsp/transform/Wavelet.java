@@ -94,7 +94,7 @@ public class Wavelet {
      * @return Complex[][] Transformed wavelet for the different widths
      * @throws IllegalArgumentException If filterType is not one of MORLET, RICKER or PAUL
      */
-    public Complex[][] cwt(waveletType wavelet_type, double args) throws IllegalArgumentException{
+    public Complex[][] transform(waveletType wavelet_type, double args) throws IllegalArgumentException{
         Complex[][] output = new Complex[this.widths.length][this.signal.length];
         switch (wavelet_type) {
             case RICKER:

@@ -12,12 +12,15 @@
 
 package com.github.psambit9791.jdsp.transform;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.transform.DftNormalization;
 import org.apache.commons.math3.transform.FastFourierTransformer;
 import org.apache.commons.math3.transform.TransformType;
 
-public class InverseFastFourier {
+import javax.rmi.CORBA.Util;
+
+public class InverseFastFourier extends InverseFourier {
 
     private Complex[] sequence;
     private Complex[] signal = null;
@@ -32,13 +35,24 @@ public class InverseFastFourier {
     private Complex[] toFullSequence(Complex[] signal) {
         int size = (signal.length-1)*2;
         Complex[] out = new Complex[size];
-
-        System.arraycopy(out, 0, signal, 0, signal.length-1);
+        System.arraycopy(signal, 0, out, 0, signal.length);
         int index = signal.length;
         for (int i=signal.length-2; i>0; i--) {
             out[index] = signal[i].conjugate();
+            index++;
         }
-        return signal;
+        return out;
+    }
+
+    public InverseFastFourier(double[][] fftOutput, boolean onlyPositive) {
+        Complex[] temp = UtilMethods.matToComplex(fftOutput);
+        if (onlyPositive) {
+            this.sequence = this.toFullSequence(temp);
+        }
+        else {
+            this.sequence = temp;
+        }
+        this.ft = new FastFourierTransformer(DftNormalization.STANDARD);
     }
 
     public InverseFastFourier(Complex[] fftOutput, boolean onlyPositive) {
@@ -61,7 +75,7 @@ public class InverseFastFourier {
         this.ft = new FastFourierTransformer(norm);
     }
 
-    public void ifft() {
+    public void transform() {
         this.signal = this.ft.transform(this.sequence, TransformType.INVERSE);
     }
 

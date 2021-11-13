@@ -1,6 +1,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.transform.DiscreteFourier;
+import com.github.psambit9791.jdsp.transform.Fourier;
 import com.github.psambit9791.jdsp.transform.InverseShortTimeFourier;
 import com.github.psambit9791.jdsp.transform.ShortTimeFourier;
 import com.github.psambit9791.jdsp.windows.Bartlett;
@@ -31,10 +32,10 @@ public class TestInverseShortTimeFourier {
         int frameLength = 10;
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal1, frameLength);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts);
-        istft.istft();
+        istft.transform();
         double[] outputReal = istft.getReal();
 
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
@@ -47,10 +48,10 @@ public class TestInverseShortTimeFourier {
         int frameLength = 10;
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal2, frameLength);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts);
-        istft.istft();
+        istft.transform();
         double[] outputReal = istft.getReal();
 
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
@@ -64,10 +65,10 @@ public class TestInverseShortTimeFourier {
         int overlap = 0;
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal1, frameLength, overlap);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts, frameLength, overlap);
-        istft.istft();
+        istft.transform();
         double[] outputReal = istft.getReal();
 
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
@@ -81,10 +82,10 @@ public class TestInverseShortTimeFourier {
         int overlap = 0;
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal2, frameLength, overlap);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts, frameLength, overlap);
-        istft.istft();
+        istft.transform();
         double[] outputReal = istft.getReal();
 
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
@@ -99,10 +100,10 @@ public class TestInverseShortTimeFourier {
         int fourierLength = 17;
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal1, frameLength, overlap, fourierLength);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts, frameLength, overlap);
-        istft.istft();
+        istft.transform();
         double[] outputReal = istft.getReal();
 
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
@@ -117,10 +118,10 @@ public class TestInverseShortTimeFourier {
         int fourierLength = 17;
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal2, frameLength, overlap, fourierLength);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts, frameLength);
-        istft.istft();
+        istft.transform();
         double[] outputReal = istft.getReal();
 
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
@@ -135,10 +136,10 @@ public class TestInverseShortTimeFourier {
         int overlap = 0;
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal1, frameLength, overlap, fourierLength);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts, frameLength, overlap);
-        istft.istft();
+        istft.transform();
         double[] outputReal = istft.getReal();
 
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
@@ -153,10 +154,10 @@ public class TestInverseShortTimeFourier {
         int overlap = 0;
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal2, frameLength, overlap, fourierLength);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts, frameLength, overlap);
-        istft.istft();
+        istft.transform();
         double[] outputReal = istft.getReal();
 
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
@@ -172,10 +173,10 @@ public class TestInverseShortTimeFourier {
         _Window window = new Hamming(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal1, frameLength, overlap, fourierLength, window);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts, frameLength, overlap, window);
-        istft.istft();
+        istft.transform();
         double[] outputReal = istft.getReal();
 
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
@@ -191,10 +192,10 @@ public class TestInverseShortTimeFourier {
         _Window window = new Hamming(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal2, frameLength, overlap, fourierLength, window);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts, frameLength, overlap, window);
-        istft.istft();
+        istft.transform();
         double[] outputReal = istft.getReal();
 
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
@@ -210,8 +211,8 @@ public class TestInverseShortTimeFourier {
         _Window window = new Bartlett(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal1, frameLength, overlap, fourierLength, window);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts, frameLength, overlap, window);
         // We don't want the System.err.println message
         PrintStream stderr = System.err;    // Save standard stderr
@@ -219,7 +220,7 @@ public class TestInverseShortTimeFourier {
             @Override
             public void write(int b) { }
         }));
-        istft.istft();
+        istft.transform();
         System.setErr(stderr);  // Reset to standard stderr
         double[] outputReal = istft.getReal();
 
@@ -242,8 +243,8 @@ public class TestInverseShortTimeFourier {
         _Window window = new Bartlett(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(this.signal2, frameLength, overlap, fourierLength, window);
-        stft.stft();
-        DiscreteFourier[] dfts = stft.getOutput();
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
         InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts, frameLength, overlap, window);
         // We don't want the System.err.println message
         PrintStream stderr = System.err;    // Save standard stderr
@@ -251,7 +252,7 @@ public class TestInverseShortTimeFourier {
             @Override
             public void write(int b) { }
         }));
-        istft.istft();
+        istft.transform();
         System.setErr(stderr);  // Reset to standard stderr
         double[] outputReal = istft.getReal();
 

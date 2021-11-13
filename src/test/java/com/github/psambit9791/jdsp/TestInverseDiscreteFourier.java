@@ -80,7 +80,7 @@ public class TestInverseDiscreteFourier {
                 0.0, 0.0, -0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}};
 
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqCompFull, false);
-        transformer.idft();
+        transformer.transform();
         double[] outReal = transformer.getReal();
         double[] outMagnitude = transformer.getMagnitude();
 
@@ -128,7 +128,7 @@ public class TestInverseDiscreteFourier {
                 0.0, 0.0, -0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}};
 
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqCompPositive, true);
-        transformer.idft();
+        transformer.transform();
         double[] outReal = transformer.getReal();
         double[] outMagnitude = transformer.getMagnitude();
 
@@ -176,7 +176,7 @@ public class TestInverseDiscreteFourier {
                 0.0, 0.0, 0.0, 0.0, 0.0}};
 
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqRealFull, false);
-        transformer.idft();
+        transformer.transform();
         double[] outReal = transformer.getReal();
         double[] outMagnitude = transformer.getMagnitude();
 
@@ -224,7 +224,7 @@ public class TestInverseDiscreteFourier {
                 0.0, 0.0, 0.0, 0.0, 0.0}};
 
         InverseDiscreteFourier transformer = new InverseDiscreteFourier(this.seqRealPositive, true);
-        transformer.idft();
+        transformer.transform();
         double[] outReal = transformer.getReal();
         double[] outMagnitude = transformer.getMagnitude();
 

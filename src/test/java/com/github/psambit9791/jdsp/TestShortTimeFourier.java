@@ -71,7 +71,7 @@ public class TestShortTimeFourier {
         int overlap = 2;
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap);
-        stft.stft();
+        stft.transform();
         Complex[][] out = stft.getComplex(false);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -100,7 +100,7 @@ public class TestShortTimeFourier {
         int overlap = 2;
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap);
-        stft.stft();
+        stft.transform();
         Complex[][] out = stft.getComplex(false);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -125,7 +125,7 @@ public class TestShortTimeFourier {
         int overlap = 2;
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap);
-        stft.stft();
+        stft.transform();
         Complex[][] out = stft.getComplex(true);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -150,7 +150,7 @@ public class TestShortTimeFourier {
         int overlap = 2;
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap);
-        stft.stft();
+        stft.transform();
         Complex[][] out = stft.getComplex(true);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -177,7 +177,7 @@ public class TestShortTimeFourier {
         _Window window = new Hanning(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, window);
-        stft.stft();
+        stft.transform();
         Complex[][] out = stft.getComplex(true);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -217,7 +217,7 @@ public class TestShortTimeFourier {
         int fourierLength = 10;
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, fourierLength);
-        stft.stft();
+        stft.transform();
         Complex[][] out = stft.getComplex(false);
 
         for (int c = 0; c < out[0].length; c++) {
@@ -242,7 +242,7 @@ public class TestShortTimeFourier {
         int overlap = 2;
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap);
-        stft.stft();
+        stft.transform();
         double[][] out = stft.spectrogram(false);
 
         for (int i = 0; i < result.length; i++) {
@@ -263,7 +263,7 @@ public class TestShortTimeFourier {
         int overlap = 2;
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap);
-        stft.stft();
+        stft.transform();
         double[][] out = stft.spectrogram(false);
 
         for (int i = 0; i < result.length; i++) {
@@ -282,7 +282,7 @@ public class TestShortTimeFourier {
         int overlap = 2;
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap);
-        stft.stft();
+        stft.transform();
         double[][] out = stft.spectrogram(true);
 
         for (int i = 0; i < result.length; i++) {
@@ -301,7 +301,7 @@ public class TestShortTimeFourier {
         int overlap = 2;
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap);
-        stft.stft();
+        stft.transform();
         double[][] out = stft.spectrogram(true);
 
         for (int i = 0; i < result.length; i++) {
@@ -319,7 +319,7 @@ public class TestShortTimeFourier {
         _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, frameLength, window, Fs);
-        stft.stft();
+        stft.transform();
         double[] out = stft.getFrequencyAxis(false);
 
         Assertions.assertArrayEquals(result, out, 0.001);
@@ -335,7 +335,7 @@ public class TestShortTimeFourier {
         _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, frameLength, window, Fs);
-        stft.stft();
+        stft.transform();
         double[] out = stft.getFrequencyAxis(false);
 
         Assertions.assertArrayEquals(result, out, 0.001);
@@ -351,7 +351,7 @@ public class TestShortTimeFourier {
         _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, frameLength, window, Fs);
-        stft.stft();
+        stft.transform();
         double[] out = stft.getFrequencyAxis(true);
 
         Assertions.assertArrayEquals(result, out, 0.001);
@@ -367,7 +367,7 @@ public class TestShortTimeFourier {
         _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, frameLength, window, Fs);
-        stft.stft();
+        stft.transform();
         double[] out = stft.getFrequencyAxis(true);
 
         Assertions.assertArrayEquals(result, out, 0.001);
@@ -383,7 +383,7 @@ public class TestShortTimeFourier {
         _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal1, frameLength, overlap, frameLength, window, Fs);
-        stft.stft();
+        stft.transform();
         double[] out = stft.getTimeAxis();
 
         Assertions.assertArrayEquals(result, out, 0.001);
@@ -399,7 +399,7 @@ public class TestShortTimeFourier {
         _Window window = new Rectangular(frameLength);
 
         ShortTimeFourier stft = new ShortTimeFourier(signal2, frameLength, overlap, frameLength, window, Fs);
-        stft.stft();
+        stft.transform();
         double[] out = stft.getTimeAxis();
 
         Assertions.assertArrayEquals(result, out, 0.001);

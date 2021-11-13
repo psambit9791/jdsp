@@ -18,7 +18,7 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class InverseShortTimeFourier {
-    private final DiscreteFourier[] signal;
+    private final Fourier[] signal;
     private final int overlap;
     private final int frameLength;
     private final _Window window;
@@ -28,12 +28,12 @@ public class InverseShortTimeFourier {
      * This constructor initialises the prerequisites required to use InverseShortTimeFourier.
      * @param signal        STFT signal to be converted
      * @param frameLength   length of the frame used in the STFT
-     *                          if this is smaller than the DiscreteFourier length of signal, then this means that
+     *                          if this is smaller than the Fourier length of signal, then this means that
      *                          the signal was zero-padded in the STFT
      * @param overlap       number of overlap frames used in the STFT
      * @param window        window used in the STFT
      */
-    public InverseShortTimeFourier(DiscreteFourier[] signal, int frameLength, int overlap, _Window window) {
+    public InverseShortTimeFourier(Fourier[] signal, int frameLength, int overlap, _Window window) {
         if (signal == null) {
             throw new IllegalArgumentException("Signal can not be null");
         }
@@ -60,11 +60,11 @@ public class InverseShortTimeFourier {
      * Defaults window to rectangular window (= no windowing effect)
      * @param signal        STFT signal to be converted
      * @param frameLength   length of the frame used in the STFT
-     *                          if this is smaller than the DiscreteFourier length of signal, then this means that
+     *                          if this is smaller than the Fourier length of signal, then this means that
      *                          the signal was zero-padded in the STFT
      * @param overlap       number of overlap frames used in the STFT
      */
-    public InverseShortTimeFourier(DiscreteFourier[] signal, int frameLength, int overlap) {
+    public InverseShortTimeFourier(Fourier[] signal, int frameLength, int overlap) {
         this(signal, frameLength, overlap, new Rectangular(frameLength));
     }
 
@@ -74,10 +74,10 @@ public class InverseShortTimeFourier {
      * in frameLength)
      * @param signal        STFT signal to be converted
      * @param frameLength   length of the frame used in the STFT
-     *                          if this is smaller than the DiscreteFourier length of signal, then this means that
+     *                          if this is smaller than the Fourier length of signal, then this means that
      *                          the signal was zero-padded in the STFT
      */
-    public InverseShortTimeFourier(DiscreteFourier[] signal, int frameLength) {
+    public InverseShortTimeFourier(Fourier[] signal, int frameLength) {
         this(signal, frameLength, frameLength/2,
                 new Rectangular(frameLength));
     }
@@ -85,10 +85,10 @@ public class InverseShortTimeFourier {
     /**
      * This constructor initialises the prerequisites required to use InverseShortTimeFourier.
      * Defaults window to rectangular window (= no windowing effect) and overlap to 50% (= 1/2 of the number of samples
-     * in frameLength), and frame length to the DiscreteFourier length of signal
+     * in frameLength), and frame length to the Fourier length of signal
      * @param signal        STFT signal to be converted
      */
-    public InverseShortTimeFourier(DiscreteFourier[] signal) {
+    public InverseShortTimeFourier(Fourier[] signal) {
         this(signal, signal[0].getComplex(false).length, signal[0].getComplex(false).length/2,
                 new Rectangular(signal[0].getComplex(false).length));
     }
@@ -96,7 +96,7 @@ public class InverseShortTimeFourier {
     /**
      * This function performs the inverse discrete fourier transform on the input sequence
      */
-    public void istft() {
+    public void transform() {
         int signalLength = (int)Math.floor((this.signal.length - 1) * (frameLength - this.overlap) + frameLength);
         this.output = new Complex[signalLength];
 
@@ -108,10 +108,16 @@ public class InverseShortTimeFourier {
         // irretrievable loss of the signal.
         boolean dataLost = false;
 
-        for (DiscreteFourier dtft : this.signal) {
+        for (Fourier dtft : this.signal) {
             double[][] seq = UtilMethods.complexTo2D(dtft.getComplex(false));
-            InverseDiscreteFourier idft = new InverseDiscreteFourier(seq, false);
-            idft.idft();
+            InverseFourier idft;
+            if (Math.log(seq.length)%Math.log(2) == 0) {
+                idft = new InverseFastFourier(UtilMethods.matToComplex(seq), false);
+            }
+            else {
+                idft = new InverseDiscreteFourier(seq, false);
+            }
+            idft.transform();
             Complex[] idft_result = idft.getComplex();
 
             // Fill in output signal

@@ -20,21 +20,40 @@ import org.apache.commons.math3.transform.TransformType;
 
 import java.util.Arrays;
 
-public class FastFourier {
+/**
+ * <h1>Fast Fourier Transform</h1>
+ * The FastFourier class performs discrete fourier transform on the input signal using the FFT algorithm and
+ * provides different representations of the output to be returned and if the output should be mirrored or not-mirrored.
+ * This can be considered a wrapper on top of the Apache Math3 FastFourierTransformer which pre-processes the signal before
+ * the operation.
+ * Reference <a href="https://mathworld.wolfram.com/FastFourierTransform.html">article</a> for more information on fast fourier transform.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.2
+ */
+public class FastFourier extends Fourier {
 
     private double[] signal;
     private Complex[] output;
     private FastFourierTransformer ft;
 
+    /**
+     * This extends the signal such that length is in the nearest power of 2
+     */
     private void extendSignal() {
         double power = Math.log(this.signal.length)/Math.log(2);
         double raised_power = Math.ceil(power);
         int new_length = (int)(Math.pow(2, raised_power));
         if (new_length != this.signal.length) {
-            this.signal = UtilMethods.zeroPadSignal(this.signal, new_length);
+            this.signal = UtilMethods.zeroPadSignal(this.signal, new_length-this.signal.length);
         }
     }
 
+    /**
+     * This constructor initialises the prerequisites required to use FastFourier.
+     * @param signal Signal to be transformed
+     */
     public FastFourier(double[] signal) {
         this.signal = signal;
         this.extendSignal();
@@ -47,7 +66,7 @@ public class FastFourier {
         this.ft = new FastFourierTransformer(norm);
     }
 
-    public void fft() {
+    public void transform() {
         this.output = this.ft.transform(this.signal, TransformType.FORWARD);
     }
 

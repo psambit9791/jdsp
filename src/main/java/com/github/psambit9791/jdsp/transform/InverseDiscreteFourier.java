@@ -23,7 +23,7 @@ import java.util.Arrays;
  * @author  Sambit Paul
  * @version 1.1
  */
-public class InverseDiscreteFourier {
+public class InverseDiscreteFourier extends InverseFourier {
 
     private double[][] complex_sequence;
     private double[] real_sequence;
@@ -59,7 +59,7 @@ public class InverseDiscreteFourier {
     /**
      * This function performs the inverse discrete fourier transform on the input sequence
      */
-    public void idft() {
+    public void transform() {
         if (this.isComplex) {
             if (this.onlyPositive) {
                 this.idftComplexMirror();
@@ -83,7 +83,7 @@ public class InverseDiscreteFourier {
      * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
      * @return Complex[] The signal (complex)
      */
-    protected Complex[] getComplex() throws ExceptionInInitializerError {
+    public Complex[] getComplex() throws ExceptionInInitializerError {
         checkOutput();
         return this.signal;
     }

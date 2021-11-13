@@ -74,9 +74,9 @@ public class Deconvolution {
     private double[] deconvolve_dft() {
         this.preprocess_dft();
         DiscreteFourier ffts = new DiscreteFourier(this.signal);
-        ffts.dft();
+        ffts.transform();
         DiscreteFourier fftk = new DiscreteFourier(this.kernel);
-        fftk.dft();
+        fftk.transform();
 
         Complex[] s = ffts.getComplex(false);
         Complex[] w = fftk.getComplex(false);
@@ -88,7 +88,7 @@ public class Deconvolution {
         }
 
         InverseDiscreteFourier idf = new InverseDiscreteFourier(UtilMethods.complexTo2D(s_w), false);
-        idf.idft();
+        idf.transform();
 
         return Arrays.copyOfRange(UtilMethods.round(idf.getReal(), 3), 0, this.sig_len - this.ker_len + 1);
     }

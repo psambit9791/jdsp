@@ -136,7 +136,7 @@ public class InverseWavelet {
      * @return double[] The recovered signal averaged over all the inverse transformed outputs
      * @throws IllegalArgumentException If wavelet_type is not one of RICKER, MORLET or PAUL
      */
-    public double[] icwt(waveletType wavelet_type, double wavelet_args) throws IllegalArgumentException{
+    public double[] transform(waveletType wavelet_type, double wavelet_args) throws IllegalArgumentException{
         double[][] out;
         switch (wavelet_type) {
             case RICKER:

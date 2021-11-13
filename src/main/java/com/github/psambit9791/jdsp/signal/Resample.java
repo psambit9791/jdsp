@@ -169,7 +169,7 @@ public class Resample {
         int Nx = this.signal.length;
 
         DiscreteFourier df = new DiscreteFourier(this.signal);
-        df.dft();
+        df.transform();
         double[][] X = df.getComplex2D(true);
         double[][] Y = new double[this.num/2+1][2];
 
@@ -194,7 +194,7 @@ public class Resample {
         }
 
         InverseDiscreteFourier idf = new InverseDiscreteFourier(Y, true);
-        idf.idft();
+        idf.transform();
         double[] y = idf.getReal();
         this.output = MathArrays.scale((float)this.num/(float)Nx, y);
     }

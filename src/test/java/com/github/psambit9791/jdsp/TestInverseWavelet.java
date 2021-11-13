@@ -55,7 +55,7 @@ public class TestInverseWavelet {
         }
         Complex[][] cplx_res = UtilMethods.matToComplex(res3D);
         InverseWavelet icwt = new InverseWavelet(cplx_res, this.widths);
-        double[] out = icwt.icwt(InverseWavelet.waveletType.RICKER, 0);
+        double[] out = icwt.transform(InverseWavelet.waveletType.RICKER, 0);
         Assertions.assertArrayEquals(this.signal, out, 0.1);
     }
 
@@ -75,7 +75,7 @@ public class TestInverseWavelet {
         };
         Complex[][] cplx_res = UtilMethods.matToComplex(result);
         InverseWavelet icwt = new InverseWavelet(cplx_res, this.widths);
-        double[] out = icwt.icwt(InverseWavelet.waveletType.MORLET, 5);
+        double[] out = icwt.transform(InverseWavelet.waveletType.MORLET, 5);
         Assertions.assertArrayEquals(this.signal, out, 0.1);
     }
 
@@ -95,7 +95,7 @@ public class TestInverseWavelet {
         };
         Complex[][] cplx_res = UtilMethods.matToComplex(result);
         InverseWavelet icwt = new InverseWavelet(cplx_res, this.widths);
-        double[] out = icwt.icwt(InverseWavelet.waveletType.PAUL, 4.0);
+        double[] out = icwt.transform(InverseWavelet.waveletType.PAUL, 4.0);
         Assertions.assertArrayEquals(this.signal, out, 0.1);
     }
 }

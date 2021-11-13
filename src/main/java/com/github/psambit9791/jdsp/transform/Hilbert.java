@@ -62,9 +62,15 @@ public class Hilbert {
     /**
      * This function performs the hilbert transform on the input signal
      */
-    public void hilbertTransform() {
-        DiscreteFourier dft = new DiscreteFourier(this.signal);
-        dft.dft();
+    public void transform() {
+        Fourier dft;
+        if (this.signal.length > 200) {
+            dft = new FastFourier(this.signal);
+        }
+        else {
+            dft = new DiscreteFourier(this.signal);
+        }
+        dft.transform();
         double[][] dftOut = dft.getComplex2D(false);
 
         double[][] modOut = new double[dftOut.length][dftOut[0].length];
@@ -74,8 +80,14 @@ public class Hilbert {
             modOut[i][1] = dftOut[i][1] * this.h[i];
         }
 
-        InverseDiscreteFourier idft = new InverseDiscreteFourier(modOut, false);
-        idft.idft();
+        InverseFourier idft;
+        if (Math.log(modOut.length)%Math.log(2) == 0) {
+            idft = new InverseFastFourier(UtilMethods.matToComplex(modOut), false);
+        }
+        else {
+            idft = new InverseDiscreteFourier(modOut, false);
+        }
+        idft.transform();
         this.output = idft.getComplex();
     }
 

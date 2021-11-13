@@ -27,7 +27,7 @@ import java.util.Arrays;
  * @author  Sambit Paul
  * @version 1.2
  */
-public class DiscreteFourier {
+public class DiscreteFourier extends Fourier {
 
     private double[] signal;
     private Complex[] output = null;
@@ -43,7 +43,7 @@ public class DiscreteFourier {
     /**
      * This function performs the fourier transform on the input signal
      */
-    public void dft() {
+    public void transform() {
         Complex[] out = new Complex[this.signal.length];
 
         for (int k=0; k<out.length; k++) {
