@@ -1,5 +1,6 @@
 package com.github.psambit9791.jdsp;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.transform.ShortTimeFourier;
 import com.github.psambit9791.jdsp.windows.Rectangular;
 import com.github.psambit9791.jdsp.windows.Hanning;
@@ -9,8 +10,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class TestShortTimeFourier {
     // Linear chirp signal starting at 0 Hz, ending at 10 Hz, sampled @ 100 Hz
@@ -403,5 +407,49 @@ public class TestShortTimeFourier {
         double[] out = stft.getTimeAxis();
 
         Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void testSTFTLongSignal() throws IOException {
+        // Results calculated with MATLAB R2020b Update 4 9.9.0.1570001
+        Scanner sc = new Scanner(new BufferedReader(new FileReader("test_inputs/S_real.dat")));
+        int rows = 20;
+        int columns = 5400;
+        double [][] resultReal = new double[rows][columns];
+        while(sc.hasNextLine()) {
+            for (int i = 0; i < resultReal.length; i++) {
+                String[] line = sc.nextLine().trim().split(",");
+                for (int j = 0; j < line.length; j++) {
+                    resultReal[i][j] = Double.parseDouble(line[j]);
+                }
+            }
+        }
+
+        sc = new Scanner(new BufferedReader(new FileReader("test_inputs/S_imag.dat")));
+        double[][] resultImag = new double[rows][columns];
+        while(sc.hasNextLine()) {
+            for (int i = 0; i < resultImag.length; i++) {
+                String[] line = sc.nextLine().trim().split(",");
+                for (int j = 0; j < line.length; j++) {
+                    resultImag[i][j] = Double.parseDouble(line[j]);
+                }
+            }
+        }
+
+        double[] longSignal = UtilMethods.electrocardiogram();
+
+        int frameLength = 20;
+        int overlap = 0;
+
+        ShortTimeFourier stft = new ShortTimeFourier(longSignal, frameLength, overlap);
+        stft.transform();
+        Complex[][] out = stft.getComplex(false);
+
+        for (int c = 0; c < out[0].length; c++) {
+            for (int r = 0; r < out.length; r++) {
+                Assertions.assertEquals(resultReal[r][c], out[r][c].getReal(), 0.001);
+                Assertions.assertEquals(resultImag[r][c], out[r][c].getImaginary(), 0.001);
+            }
+        }
     }
 }

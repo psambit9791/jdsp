@@ -1,6 +1,6 @@
 package com.github.psambit9791.jdsp;
 
-import com.github.psambit9791.jdsp.transform.DiscreteFourier;
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.transform.Fourier;
 import com.github.psambit9791.jdsp.transform.InverseShortTimeFourier;
 import com.github.psambit9791.jdsp.transform.ShortTimeFourier;
@@ -10,6 +10,7 @@ import com.github.psambit9791.jdsp.windows._Window;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
@@ -254,6 +255,25 @@ public class TestInverseShortTimeFourier {
         }));
         istft.transform();
         System.setErr(stderr);  // Reset to standard stderr
+        double[] outputReal = istft.getReal();
+
+        Assertions.assertArrayEquals(expected, outputReal, 0.001);
+    }
+
+    @Test
+    public void testInverseShortTimeFourierLongSignal1() throws IOException {
+        double[] expected = UtilMethods.electrocardiogram();
+        for (int i = 0; i < expected.length; i++) {
+            expected[i] = Math.random();
+        }
+
+        int frameLength = expected.length;
+
+        ShortTimeFourier stft = new ShortTimeFourier(expected, frameLength);
+        stft.transform();
+        Fourier[] dfts = stft.getOutput();
+        InverseShortTimeFourier istft = new InverseShortTimeFourier(dfts, frameLength);
+        istft.transform();
         double[] outputReal = istft.getReal();
 
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
