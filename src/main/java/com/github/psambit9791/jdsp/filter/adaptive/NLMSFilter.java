@@ -113,7 +113,7 @@ public class NLMSFilter {
      * Run the NLMS adaptive filter algorithm. This will iterate over the input signal x and adapt the filter weights to
      * match the desired signal.
      * @param desired desired signal that you want after filtering of x
-     * @param x input signal that you want to filter with the LMS adaptive filter to achieve the desired signal
+     * @param x input signal that you want to filter with the NLMS adaptive filter to achieve the desired signal
      */
     public void run(double[] desired, double[] x) {
         if (desired == null || desired.length == 0) {
@@ -152,7 +152,7 @@ public class NLMSFilter {
     }
 
     /**
-     * Returns the final weights of the LMS adaptive filter
+     * Returns the final weights of the NLMS adaptive filter
      * @return double[] final filter weights
      */
     public double[] getWeights() {
