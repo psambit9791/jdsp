@@ -60,7 +60,7 @@ public class Hilbert {
      * This function performs the hilbert transform on the input signal
      */
     public void transform() {
-        Fourier dft;
+        _Fourier dft;
         if (this.signal.length > 200) {
             dft = new FastFourier(this.signal);
             this.h = new double[dft.getSignalLength()];

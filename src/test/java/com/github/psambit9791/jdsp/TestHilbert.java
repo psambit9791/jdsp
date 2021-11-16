@@ -10,7 +10,6 @@
 
 package com.github.psambit9791.jdsp;
 
-import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.signal.Generate;
 import com.github.psambit9791.jdsp.transform.Hilbert;
 import org.junit.jupiter.api.Assertions;

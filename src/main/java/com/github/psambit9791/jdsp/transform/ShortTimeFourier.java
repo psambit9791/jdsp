@@ -19,7 +19,7 @@ import java.util.Arrays;
  */
 public class ShortTimeFourier {
     private double[] signal;
-    private Fourier[] output = null;
+    private _Fourier[] output = null;
     private final double Fs;
     private final int frameLength;
     private final int fourierLength;
@@ -133,7 +133,7 @@ public class ShortTimeFourier {
      */
     public void transform() {
         int cols = (this.signal.length - frameLength) / (frameLength - overlap) + 1;
-        this.output = new Fourier[cols];
+        this.output = new _Fourier[cols];
 
         int R = 0;  // Initialize frame counter
         for (int m = 0; R < cols; m += (frameLength - overlap)) {
@@ -148,7 +148,7 @@ public class ShortTimeFourier {
             }
 
             // Calculate Fourier transform
-            Fourier dft;
+            _Fourier dft;
             if (frame.length > 200) {
                 dft = new FastFourier(frame);
             }
@@ -236,7 +236,7 @@ public class ShortTimeFourier {
         return result;
     }
 
-    public Fourier[] getOutput() {
+    public _Fourier[] getOutput() {
         checkOutput();
         return output;
     }
@@ -253,7 +253,7 @@ public class ShortTimeFourier {
 
         // Fill in the output
         for (int c = 0; c < this.output.length; c++) {
-            Fourier dft = this.output[c];
+            _Fourier dft = this.output[c];
             for (int r = 0; r < result.length; r++) {
                 result[r][c] = dft.getComplex(onlyPositive)[r];
             }

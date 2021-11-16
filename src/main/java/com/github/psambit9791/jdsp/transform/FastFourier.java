@@ -32,7 +32,7 @@ import java.util.Arrays;
  * @author  Sambit Paul
  * @version 1.2
  */
-public class FastFourier extends Fourier {
+public class FastFourier implements _Fourier {
 
     private double[] signal;
     private Complex[] output;
@@ -53,7 +53,7 @@ public class FastFourier extends Fourier {
     /**
      * Return the length of the modified signal (padded length)
      */
-    protected int getSignalLength() {
+    public int getSignalLength() {
         return this.signal.length;
     }
 

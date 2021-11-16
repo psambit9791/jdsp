@@ -14,15 +14,15 @@ package com.github.psambit9791.jdsp.transform;
 
 import org.apache.commons.math3.complex.Complex;
 
-public abstract class Fourier {
+public interface _Fourier {
 
-    public abstract void transform();
-    public abstract double[] getMagnitude(boolean onlyPositive);
-    public abstract double[] getPhaseRad(boolean onlyPositive);
-    public abstract double[] getPhaseDeg(boolean onlyPositive);
-    public abstract double[][] getMagPhaseRad(boolean onlyPositive);
-    public abstract double[][] getMagPhaseDeg(boolean onlyPositive);
-    public abstract double[][] getComplex2D(boolean onlyPositive);
-    public abstract Complex[] getComplex(boolean onlyPositive);
-    protected abstract int getSignalLength();
+    void transform();
+    double[] getMagnitude(boolean onlyPositive);
+    double[] getPhaseRad(boolean onlyPositive);
+    double[] getPhaseDeg(boolean onlyPositive);
+    double[][] getMagPhaseRad(boolean onlyPositive);
+    double[][] getMagPhaseDeg(boolean onlyPositive);
+    double[][] getComplex2D(boolean onlyPositive);
+    Complex[] getComplex(boolean onlyPositive);
+    int getSignalLength();
 }

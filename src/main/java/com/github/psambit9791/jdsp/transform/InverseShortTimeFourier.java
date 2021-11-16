@@ -18,7 +18,7 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class InverseShortTimeFourier {
-    private final Fourier[] signal;
+    private final _Fourier[] signal;
     private final int overlap;
     private final int frameLength;
     private final _Window window;
@@ -33,7 +33,7 @@ public class InverseShortTimeFourier {
      * @param overlap       number of overlap frames used in the STFT
      * @param window        window used in the STFT
      */
-    public InverseShortTimeFourier(Fourier[] signal, int frameLength, int overlap, _Window window) {
+    public InverseShortTimeFourier(_Fourier[] signal, int frameLength, int overlap, _Window window) {
         if (signal == null) {
             throw new IllegalArgumentException("Signal can not be null");
         }
@@ -64,7 +64,7 @@ public class InverseShortTimeFourier {
      *                          the signal was zero-padded in the STFT
      * @param overlap       number of overlap frames used in the STFT
      */
-    public InverseShortTimeFourier(Fourier[] signal, int frameLength, int overlap) {
+    public InverseShortTimeFourier(_Fourier[] signal, int frameLength, int overlap) {
         this(signal, frameLength, overlap, new Rectangular(frameLength));
     }
 
@@ -77,7 +77,7 @@ public class InverseShortTimeFourier {
      *                          if this is smaller than the Fourier length of signal, then this means that
      *                          the signal was zero-padded in the STFT
      */
-    public InverseShortTimeFourier(Fourier[] signal, int frameLength) {
+    public InverseShortTimeFourier(_Fourier[] signal, int frameLength) {
         this(signal, frameLength, frameLength/2,
                 new Rectangular(frameLength));
     }
@@ -88,7 +88,7 @@ public class InverseShortTimeFourier {
      * in frameLength), and frame length to the Fourier length of signal
      * @param signal        STFT signal to be converted
      */
-    public InverseShortTimeFourier(Fourier[] signal) {
+    public InverseShortTimeFourier(_Fourier[] signal) {
         this(signal, signal[0].getComplex(false).length, signal[0].getComplex(false).length/2,
                 new Rectangular(signal[0].getComplex(false).length));
     }
@@ -108,7 +108,7 @@ public class InverseShortTimeFourier {
         // irretrievable loss of the signal.
         boolean dataLost = false;
 
-        for (Fourier dtft : this.signal) {
+        for (_Fourier dtft : this.signal) {
             double[][] seq = UtilMethods.complexTo2D(dtft.getComplex(false));
             InverseFourier idft;
             if (Math.log(seq.length)%Math.log(2) == 0) {
