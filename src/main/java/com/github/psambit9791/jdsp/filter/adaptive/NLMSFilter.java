@@ -115,7 +115,7 @@ public class NLMSFilter {
      * @param desired desired signal that you want after filtering of x
      * @param x input signal that you want to filter with the NLMS adaptive filter to achieve the desired signal
      */
-    public void run(double[] desired, double[] x) {
+    public void filter(double[] desired, double[] x) {
         if (desired == null || desired.length == 0) {
             throw new IllegalArgumentException("Desired signal cannot be null, or with size 0");
         }
@@ -181,7 +181,7 @@ public class NLMSFilter {
 
     private void checkOutput() {
         if (this.output == null) {
-            throw new ExceptionInInitializerError("Execute run() function before returning result");
+            throw new ExceptionInInitializerError("Execute filter() function before returning result");
         }
     }
 }
