@@ -11,7 +11,7 @@ import java.util.Arrays;
  * It is very similar to the LMS-filter, with the difference that the learning rate gets automatically adjusted according
  * to the input signal's power.
  *
- * @author SiboVanGool
+ * @author Sibo Van Gool
  * @version 1.0
  */
 public class NLMS {

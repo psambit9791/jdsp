@@ -8,7 +8,7 @@ import java.util.Arrays;
  * signal (= the output of the filter). It does this by trying to minimize the squared error between the desired signal
  * and the filter output signal.
  *
- * @author SiboVanGool
+ * @author Sibo Van Gool
  * @version 1.0
  */
 public class LMS {
