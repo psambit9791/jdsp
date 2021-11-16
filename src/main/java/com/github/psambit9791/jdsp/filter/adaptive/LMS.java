@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @author SiboVanGool
  * @version 1.0
  */
-public class LMSFilter {
+public class LMS {
     private final double learningRate;  // Learning rate (= step size)
     private double[] weights;           // Weights of the filter
     private double[] error;             // Error of the filter
@@ -37,7 +37,7 @@ public class LMSFilter {
      *                              With 'k' being a sample index, and n ranging from 0 to weights.length
      * @param weights initialized weights (size = number of taps of the filter)
      */
-    public LMSFilter(double learningRate, double[] weights) {
+    public LMS(double learningRate, double[] weights) {
         if (weights == null || weights.length == 0) {
             throw new IllegalArgumentException("Weights must be non-null and with a length greater than 0");
         }
@@ -56,7 +56,7 @@ public class LMSFilter {
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public LMSFilter(double learningRate, int length, WeightsFillMethod fillMethod) {
+    public LMS(double learningRate, int length, WeightsFillMethod fillMethod) {
         this.weights = new double[length];
         switch (fillMethod) {
             // Create random weights between 0 and 1

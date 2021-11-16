@@ -14,7 +14,7 @@ import java.util.Arrays;
  * @author SiboVanGool
  * @version 1.0
  */
-public class NLMSFilter {
+public class NLMS {
     private final double learningRate;  // Learning rate (= step size)
     private double[] weights;           // Weights of the filter
     private double[] error;             // Error of the filter
@@ -39,7 +39,7 @@ public class NLMSFilter {
      *                          0 ≤ learningRate ≤ 2
      * @param weights initialized weights (size = number of taps of the filter)
      */
-    public NLMSFilter(double learningRate, double[] weights) {
+    public NLMS(double learningRate, double[] weights) {
         if (weights == null || weights.length == 0) {
             throw new IllegalArgumentException("Weights must be non-null and with a length greater than 0");
         }
@@ -60,7 +60,7 @@ public class NLMSFilter {
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public NLMSFilter(double learningRate, int length, WeightsFillMethod fillMethod) {
+    public NLMS(double learningRate, int length, WeightsFillMethod fillMethod) {
         if (learningRate < 0 || learningRate > 2) {
             System.err.println("Keep the learning rate between 0 and 2 to avoid diverging results");
         }
