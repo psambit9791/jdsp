@@ -7,12 +7,15 @@ import java.util.Arrays;
  * The LMS adaptive filter is a filter that adapts its filter weights to get an input signal x to match a desired output
  * signal (= the output of the filter). It does this by trying to minimize the squared error between the desired signal
  * and the filter output signal.
+ * Additionally, you can use a Leaky LMS filter by setting the leakage factor in the LMS constructor.
+ * A leakage factor < 1 results in improved stability and tracking of the filter.
  *
  * @author Sibo Van Gool
  * @version 1.0
  */
 public class LMS {
     private final double learningRate;  // Learning rate (= step size)
+    private final double leakageFactor; // Leakage factor
     private double[] weights;           // Weights of the filter
     private double[] error;             // Error of the filter
     private double[] output;            // Filtered output
@@ -35,14 +38,32 @@ public class LMS {
      *                      For a stable filter, the learning rate should be:
      *                          0 ≤ learningRate ≤ 2 / (sum(x^2(k-n)))
      *                              With 'k' being a sample index, and n ranging from 0 to weights.length
+     * @param leakageFactor defines how much leakage the Leaky LMS filter should have
+     *                          0 ≤ leakageFactor ≤ 1
+     *                          leakageFactor = 1 => no leakage; leakageFactor < 1 => leakage
      * @param weights initialized weights (size = number of taps of the filter)
      */
-    public LMS(double learningRate, double[] weights) {
+    public LMS(double learningRate, double leakageFactor, double[] weights) {
         if (weights == null || weights.length == 0) {
             throw new IllegalArgumentException("Weights must be non-null and with a length greater than 0");
         }
         this.learningRate = learningRate;
+        this.leakageFactor = leakageFactor;
         this.weights = weights;
+    }
+
+    /**
+     * This constructor initialises the prerequisites required for the LMS adaptive filter, without leakage.
+     * @param learningRate also known as step size. Determines how fast the adaptive filter changes its filter weights.
+     *                     If it is too slow, the filter may have bad performance. If it is too high, the filter will
+     *                     be unstable. A correct learning rate is dependent on the power of the input signal
+     *                      For a stable filter, the learning rate should be:
+     *                          0 ≤ learningRate ≤ 2 / (sum(x^2(k-n)))
+     *                              With 'k' being a sample index, and n ranging from 0 to weights.length
+     * @param weights initialized weights (size = number of taps of the filter)
+     */
+    public LMS(double learningRate, double[] weights) {
+        this(learningRate, 1, weights);
     }
 
     /**
@@ -53,10 +74,15 @@ public class LMS {
      *                      For a stable filter, the learning rate should be:
      *                          0 ≤ learningRate ≤ 2 / (sum(x^2(k-n)))
      *                              With 'k' being a sample index, and n ranging from 0 to length
+     * @param leakageFactor defines how much leakage the Leaky LMS filter should have
+     *                          0 ≤ leakageFactor ≤ 1
+     *                          leakageFactor = 1 => no leakage; leakageFactor < 1 => leakage
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public LMS(double learningRate, int length, WeightsFillMethod fillMethod) {
+    public LMS(double learningRate, double leakageFactor, int length, WeightsFillMethod fillMethod) {
+        this.learningRate = learningRate;
+        this.leakageFactor = leakageFactor;
         this.weights = new double[length];
         switch (fillMethod) {
             // Create random weights between 0 and 1
@@ -72,7 +98,21 @@ public class LMS {
             default:
                 throw new IllegalArgumentException("Unknown weights fill method");
         }
-        this.learningRate = learningRate;
+    }
+
+    /**
+     * This constructor initialises the prerequisites required for the LMS adaptive filter, without leakage.
+     * @param learningRate also known as step size. Determines how fast the adaptive filter changes its filter weights.
+     *                     If it is too slow, the filter may have bad performance. If it is too high, the filter will
+     *                     be unstable. A correct learning rate is dependent on the power of the input signal
+     *                      For a stable filter, the learning rate should be:
+     *                          0 ≤ learningRate ≤ 2 / (sum(x^2(k-n)))
+     *                              With 'k' being a sample index, and n ranging from 0 to length
+     * @param length length (number of taps) of the filter
+     * @param fillMethod determines how the weights should be initialized
+     */
+    public LMS(double learningRate, int length, WeightsFillMethod fillMethod) {
+        this(learningRate, 1, length, fillMethod);
     }
 
     /**
@@ -93,7 +133,7 @@ public class LMS {
 
         // Update filter coefficients
         for (int i = 0; i < this.weights.length; i++) {
-            this.weights[i] = this.weights[i] + this.learningRate * error * x[x.length - 1 - i];
+            this.weights[i] = this.leakageFactor*this.weights[i] + this.learningRate * error * x[x.length - 1 - i];
         }
 
         return new double[] {y, error};
