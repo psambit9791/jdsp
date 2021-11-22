@@ -111,7 +111,8 @@ public class InverseShortTimeFourier {
         for (_Fourier dtft : this.signal) {
             double[][] seq = UtilMethods.complexTo2D(dtft.getComplex(false));
             InverseFourier idft;
-            if (Math.log(seq.length)%Math.log(2) == 0) {
+            double logval = Math.log(seq.length)/Math.log(2);
+            if (logval == (int)(logval)) {
                 idft = new InverseFastFourier(UtilMethods.matToComplex(seq), false);
             }
             else {

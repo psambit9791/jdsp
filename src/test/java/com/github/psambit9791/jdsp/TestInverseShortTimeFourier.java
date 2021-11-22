@@ -1,5 +1,6 @@
 package com.github.psambit9791.jdsp;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.transform._Fourier;
 import com.github.psambit9791.jdsp.transform.InverseShortTimeFourier;
 import com.github.psambit9791.jdsp.transform.ShortTimeFourier;
@@ -9,6 +10,7 @@ import com.github.psambit9791.jdsp.windows._Window;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
@@ -255,6 +257,19 @@ public class TestInverseShortTimeFourier {
         System.setErr(stderr);  // Reset to standard stderr
         double[] outputReal = istft.getReal();
 
+        Assertions.assertArrayEquals(expected, outputReal, 0.001);
+    }
+
+    @Test
+    public void testInverseShortTimeFourierLongSignal1() throws IOException {
+        double[] expected = UtilMethods.electrocardiogram();
+        int frameLength = 6000;
+        ShortTimeFourier stft = new ShortTimeFourier(expected, frameLength);
+        stft.transform();
+        _Fourier[] sf1 = stft.getOutput();
+        InverseShortTimeFourier isf1 = new InverseShortTimeFourier(sf1, frameLength);
+        isf1.transform();
+        double[] outputReal = isf1.getReal();
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
     }
 }
