@@ -261,7 +261,7 @@ public class TestInverseShortTimeFourier {
     }
 
     @Test
-    public void testInverseShortTimeFourierLongSignal1() throws IOException {
+    public void testInverseShortTimeFourierLongSignal1Divisible() throws IOException {
         double[] expected = UtilMethods.electrocardiogram();
         int frameLength = 6000;
         ShortTimeFourier stft = new ShortTimeFourier(expected, frameLength);
@@ -270,6 +270,21 @@ public class TestInverseShortTimeFourier {
         InverseShortTimeFourier isf1 = new InverseShortTimeFourier(sf1, frameLength);
         isf1.transform();
         double[] outputReal = isf1.getReal();
+        Assertions.assertArrayEquals(expected, outputReal, 0.001);
+    }
+
+    @Test
+    public void testInverseShortTimeFourierLongSignal1Indivisible() throws IOException {
+        double[] expected = UtilMethods.electrocardiogram();
+        int frameLength = 20000;
+        int outputLength = expected.length - expected.length%frameLength;
+        ShortTimeFourier stft = new ShortTimeFourier(expected, frameLength);
+        stft.transform();
+        _Fourier[] sf1 = stft.getOutput();
+        InverseShortTimeFourier isf1 = new InverseShortTimeFourier(sf1, frameLength);
+        isf1.transform();
+        double[] outputReal = isf1.getReal();
+        expected = UtilMethods.splitByIndex(expected, 0, outputLength);
         Assertions.assertArrayEquals(expected, outputReal, 0.001);
     }
 }
