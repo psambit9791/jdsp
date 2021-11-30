@@ -1,5 +1,8 @@
 package com.github.psambit9791.jdsp.filter.adaptive;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
+import org.apache.commons.math3.stat.StatUtils;
+
 import java.util.Arrays;
 
 /**
@@ -127,14 +130,10 @@ public class NLMS {
      * @return double[] with first element the filter output 'y' and second element the filter error 'e'
      */
     private double[] adaptWeights(double desired, double[] x) {
-        double y = 0;
-        double power_x = 0;
         double regTerm = 2.2204460492503131E-16;  // Regularization term (for when power_x is zero) - term taken from MATLAB: https://nl.mathworks.com/help/dsp/ref/dsp.lmsfilter-system-object.html#bsfxw0_-6
         // Calculate output and power in x
-        for (int i = 0; i < x.length; i++) {
-            y += x[x.length - 1 - i] * weights[i];
-            power_x += Math.pow(x[i], 2);
-        }
+        double y = UtilMethods.dotProduct(UtilMethods.reverse(x), weights);
+        double power_x = StatUtils.sum(UtilMethods.scalarArithmetic(x, 2, "pow"));
 
         // Calculate error
         double error = desired - y;

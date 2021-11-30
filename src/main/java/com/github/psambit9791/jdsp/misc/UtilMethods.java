@@ -14,10 +14,7 @@ import com.github.psambit9791.jdsp.windows.*;
 import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
 import org.apache.commons.math3.complex.Complex;
-import org.apache.commons.math3.linear.DecompositionSolver;
-import org.apache.commons.math3.linear.MatrixUtils;
-import org.apache.commons.math3.linear.RealMatrix;
-import org.apache.commons.math3.linear.SingularValueDecomposition;
+import org.apache.commons.math3.linear.*;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.MathArrays;
 
@@ -923,6 +920,19 @@ public class UtilMethods {
     }
 
     /**
+     * Returns the transpose of the matrix.
+     * @param m The matrix to be transposed
+     * @return double[][] The transpose of the matrix
+     */
+    public static double[][] transpose(double[] m) {
+        double[][] m1 = new double[m.length][1];
+        for (int i=0; i<m.length; i++) {
+            m1[i][0] = m[i];
+        }
+        return m1;
+    }
+
+    /**
      * Returns the multiplication of 2 matrices
      * @param a Multiplier Matrix
      * @param b Multiplicand Matrix
@@ -1799,5 +1809,11 @@ public class UtilMethods {
             }
         }
         return out;
+    }
+
+    public static double dotProduct(double[] w, double[] x) {
+        RealVector a = new ArrayRealVector(w, false);
+        RealVector b = new ArrayRealVector(x, false);
+        return a.dotProduct(b);
     }
 }

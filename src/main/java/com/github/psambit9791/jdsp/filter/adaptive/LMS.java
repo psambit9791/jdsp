@@ -1,5 +1,7 @@
 package com.github.psambit9791.jdsp.filter.adaptive;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
+
 import java.util.Arrays;
 
 /**
@@ -122,11 +124,8 @@ public class LMS {
      * @return double[] with first element the filter output 'y' and second element the filter error 'e'
      */
     private double[] adaptWeights(double desired, double[] x) {
-        double y = 0;
         // Calculate output
-        for (int i = 0; i < x.length; i++) {
-            y += x[x.length - 1 - i] * weights[i];
-        }
+        double y = UtilMethods.dotProduct(UtilMethods.reverse(x), weights);
 
         // Calculate error
         double error = desired - y;

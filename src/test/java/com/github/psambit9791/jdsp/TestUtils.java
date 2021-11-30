@@ -828,4 +828,14 @@ public class TestUtils {
         Assertions.assertNull(out4);
         Assertions.assertNull(out5);
     }
+
+    @Test
+    public void dotProductTest() {
+        double[] a = {1,2,3,4};
+        double[] b = {4,3,2,1};
+        double[] x = {1,2,3,4};
+
+        Assertions.assertEquals(UtilMethods.dotProduct(a, x), 30, 0.0001);
+        Assertions.assertEquals(UtilMethods.dotProduct(b, x), 20, 0.0001);
+    }
 }
