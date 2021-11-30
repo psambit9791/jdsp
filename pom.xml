@@ -111,6 +111,19 @@
                 </configuration>
             </plugin>
 
+            <!--For Automatic Module-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Automatic-Module-Name>com.github.psambit9791.jdsp</Automatic-Module-Name>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
             <!--To make sure JUnit5 tests are executed-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
