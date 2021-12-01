@@ -43,7 +43,7 @@ public class RLS {
     }
 
     /**
-     * This constructor initialises the prerequisites required for the LMS adaptive filter.
+     * This constructor initialises the prerequisites required for the RLS adaptive filter.
      * @param mu forgetting factor. It is introduced to give exponentially less weight to older error samples.
      * @param eps initialisation value.
      * @param weights Initialised set of weights
@@ -64,7 +64,7 @@ public class RLS {
     }
 
     /**
-     * This constructor initialises the prerequisites required for the LMS adaptive filter.
+     * This constructor initialises the prerequisites required for the RLS adaptive filter.
      * 'mu' and 'eps' are set to default values of 0.99 and 0.1.
      * @param weights Initialised set of weights
      */
@@ -73,7 +73,7 @@ public class RLS {
     }
 
     /**
-     * This constructor initialises the prerequisites required for the LMS adaptive filter.
+     * This constructor initialises the prerequisites required for the RLS adaptive filter.
      * @param mu forgetting factor. It is introduced to give exponentially less weight to older error samples.
      * @param eps initialisation value.
      * @param length length (number of taps) of the filter
@@ -104,7 +104,7 @@ public class RLS {
     }
 
     /**
-     * This constructor initialises the prerequisites required for the LMS adaptive filter.
+     * This constructor initialises the prerequisites required for the RLS adaptive filter.
      * 'mu' and 'eps' are set to default values of 0.99 and 0.1.
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
@@ -149,7 +149,7 @@ public class RLS {
     }
 
     /**
-     * Run the LMS adaptive filter algorithm. This will iterate over the input signal x and adapt the filter weights to
+     * Run the RLS adaptive filter algorithm. This will iterate over the input signal x and adapt the filter weights to
      * match the desired signal.
      * @param desired desired signal that you want after filtering of x
      * @param x input signal that you want to filter with the LMS adaptive filter to achieve the desired signal
@@ -192,7 +192,7 @@ public class RLS {
     }
 
     /**
-     * Returns the final weights of the LMS adaptive filter
+     * Returns the final weights of the RLS adaptive filter
      * @return double[] final filter weights
      */
     public double[] getWeights() {
