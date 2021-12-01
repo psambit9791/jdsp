@@ -1,3 +1,15 @@
+/*
+ *
+ *  * Copyright (c) 2020 Sambit Paul
+ *  *
+ *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *  *
+ *  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *  *
+ *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ */
+
 package com.github.psambit9791.jdsp.filter.adaptive;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
@@ -6,20 +18,21 @@ import org.apache.commons.math3.stat.StatUtils;
 import java.util.Arrays;
 
 /**
- * <h1>Normalized Least-mean-squares (NLMS) adaptive filter</h1>
- * The NLMS adaptive filter is a filter that adapts its filter weights to get an input signal x to match a desired output
+ * <h1>Normalized Sign-Sign Least-mean-squares (NSSLMS) adaptive filter</h1>
+ * The NSSLMS adaptive filter is a filter that adapts its filter weights to get an input signal x to match a desired output
  * signal (= the output of the filter). It does this by trying to minimize the squared error between the desired signal
- * and the filter output signal.
+ * and the filter output signal. Unlike the NLMS, the weights are updated based on only the sign of the error and the signal
+ *  * instead of the actual error and signal values.
  * Additionally, you can use a Leaky LMS filter by setting the leakage factor in the LMS constructor.
  * A leakage factor < 1 results in improved stability and tracking of the filter.
  *
  * It is very similar to the LMS-filter, with the difference that the learning rate gets automatically adjusted according
  * to the input signal's power.
  *
- * @author Sibo Van Gool
+ * @author Sambit Paul
  * @version 1.0
  */
-public class NLMS {
+public class NSSLMS {
     private final double learningRate;  // Learning rate (= step size)
     private final double leakageFactor; // Leakage factor
     private double[] weights;           // Weights of the filter
@@ -37,7 +50,26 @@ public class NLMS {
     }
 
     /**
-     * This constructor initialises the prerequisites required for the NLMS adaptive filter.
+     * Returns the sign of the input number.
+     * @param err Value whose sign is to be determined
+     * @return the sign of the value
+     */
+    private double sign(double err) {
+        double val = 0;
+        if (err < 0) {
+            val = -1;
+        }
+        else if (err == 0) {
+            val = 0;
+        }
+        else {
+            val = 1;
+        }
+        return val;
+    }
+
+    /**
+     * This constructor initialises the prerequisites required for the NSSLMS adaptive filter.
      * @param learningRate also known as step size. Determines how fast the adaptive filter changes its filter weights.
      *                     If it is too slow, the filter may have bad performance. If it is too high, the filter will
      *                     be unstable. A correct learning rate is dependent on the power of the input signal
@@ -48,7 +80,7 @@ public class NLMS {
      *                          leakageFactor = 1 => no leakage; leakageFactor < 1 => leakage
      * @param weights initialized weights (size = number of taps of the filter)
      */
-    public NLMS(double learningRate, double leakageFactor, double[] weights) {
+    public NSSLMS(double learningRate, double leakageFactor, double[] weights) {
         if (weights == null || weights.length == 0) {
             throw new IllegalArgumentException("Weights must be non-null and with a length greater than 0");
         }
@@ -61,7 +93,7 @@ public class NLMS {
     }
 
     /**
-     * This constructor initialises the prerequisites required for the NLMS adaptive filter, without leakage.
+     * This constructor initialises the prerequisites required for the NSSLMS adaptive filter, without leakage.
      * @param learningRate also known as step size. Determines how fast the adaptive filter changes its filter weights.
      *                     If it is too slow, the filter may have bad performance. If it is too high, the filter will
      *                     be unstable. A correct learning rate is dependent on the power of the input signal
@@ -69,12 +101,12 @@ public class NLMS {
      *                          0 ≤ learningRate ≤ 2
      * @param weights initialized weights (size = number of taps of the filter)
      */
-    public NLMS(double learningRate, double[] weights) {
+    public NSSLMS(double learningRate, double[] weights) {
         this(learningRate, 1, weights);
     }
 
     /**
-     * This constructor initialises the prerequisites required for the NLMS adaptive filter.
+     * This constructor initialises the prerequisites required for the NSSLMS adaptive filter.
      * @param learningRate also known as step size. Determines how fast the adaptive filter changes its filter weights.
      *                     If it is too slow, the filter may have bad performance. If it is too high, the filter will
      *                     be unstable. A correct learning rate is dependent on the power of the input signal
@@ -86,7 +118,7 @@ public class NLMS {
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public NLMS(double learningRate, double leakageFactor, int length, WeightsFillMethod fillMethod) {
+    public NSSLMS(double learningRate, double leakageFactor, int length, NLMS.WeightsFillMethod fillMethod) {
         if (learningRate < 0 || learningRate > 2) {
             System.err.println("Keep the learning rate between 0 and 2 to avoid diverging results");
         }
@@ -110,7 +142,7 @@ public class NLMS {
     }
 
     /**
-     * This constructor initialises the prerequisites required for the NLMS adaptive filter, without leakage.
+     * This constructor initialises the prerequisites required for the NSSLMS adaptive filter, without leakage.
      * @param learningRate also known as step size. Determines how fast the adaptive filter changes its filter weights.
      *                     If it is too slow, the filter may have bad performance. If it is too high, the filter will
      *                     be unstable. A correct learning rate is dependent on the power of the input signal
@@ -119,7 +151,7 @@ public class NLMS {
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public NLMS(double learningRate, int length, WeightsFillMethod fillMethod) {
+    public NSSLMS(double learningRate, int length, NLMS.WeightsFillMethod fillMethod) {
         this(learningRate, 1, length, fillMethod);
     }
 
@@ -140,17 +172,17 @@ public class NLMS {
 
         // Update filter coefficients
         for (int i = 0; i < this.weights.length; i++) {
-            this.weights[i] = this.leakageFactor*this.weights[i] + this.learningRate/(regTerm + power_x) * error * x[i];
+            this.weights[i] = this.leakageFactor*this.weights[i] + this.learningRate/(regTerm + power_x) * this.sign(error) * this.sign(x[i]);
         }
 
         return new double[] {y, error};
     }
 
     /**
-     * Run the NLMS adaptive filter algorithm. This will iterate over the input signal x and adapt the filter weights to
+     * Run the NSSLMS adaptive filter algorithm. This will iterate over the input signal x and adapt the filter weights to
      * match the desired signal.
      * @param desired desired signal that you want after filtering of x
-     * @param x input signal that you want to filter with the NLMS adaptive filter to achieve the desired signal
+     * @param x input signal that you want to filter with the NSSLMS adaptive filter to achieve the desired signal
      */
     public void filter(double[] desired, double[] x) {
         if (desired == null || desired.length == 0) {

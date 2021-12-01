@@ -125,14 +125,14 @@ public class LMS {
      */
     private double[] adaptWeights(double desired, double[] x) {
         // Calculate output
-        double y = UtilMethods.dotProduct(UtilMethods.reverse(x), weights);
+        double y = UtilMethods.dotProduct(weights, x);
 
         // Calculate error
         double error = desired - y;
 
         // Update filter coefficients
         for (int i = 0; i < this.weights.length; i++) {
-            this.weights[i] = this.leakageFactor*this.weights[i] + this.learningRate * error * x[x.length - 1 - i];
+            this.weights[i] = this.leakageFactor*this.weights[i] + this.learningRate * error * x[i];
         }
 
         return new double[] {y, error};
