@@ -88,7 +88,7 @@ public class GNGD {
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public GNGD(int length, double mu, double eps, double ro, RLS.WeightsFillMethod fillMethod) {
+    public GNGD(int length, double mu, double eps, double ro, WeightsFillMethod fillMethod) {
         this.weights = new double[length];
         this.mu = mu;
         this.eps = eps;
@@ -119,7 +119,7 @@ public class GNGD {
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public GNGD(int length, RLS.WeightsFillMethod fillMethod) {
+    public GNGD(int length, WeightsFillMethod fillMethod) {
         this(length, 1.0, 1.0, 0.1, fillMethod);
     }
 

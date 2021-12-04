@@ -117,7 +117,7 @@ public class SSLMS {
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public SSLMS(double learningRate, double leakageFactor, int length, LMS.WeightsFillMethod fillMethod) {
+    public SSLMS(double learningRate, double leakageFactor, int length, WeightsFillMethod fillMethod) {
         this.learningRate = learningRate;
         this.leakageFactor = leakageFactor;
         this.weights = new double[length];
@@ -148,7 +148,7 @@ public class SSLMS {
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public SSLMS(double learningRate, int length, LMS.WeightsFillMethod fillMethod) {
+    public SSLMS(double learningRate, int length, WeightsFillMethod fillMethod) {
         this(learningRate, 1, length, fillMethod);
     }
 

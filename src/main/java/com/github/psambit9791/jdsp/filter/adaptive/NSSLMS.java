@@ -118,7 +118,7 @@ public class NSSLMS {
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public NSSLMS(double learningRate, double leakageFactor, int length, NLMS.WeightsFillMethod fillMethod) {
+    public NSSLMS(double learningRate, double leakageFactor, int length, WeightsFillMethod fillMethod) {
         if (learningRate < 0 || learningRate > 2) {
             System.err.println("Keep the learning rate between 0 and 2 to avoid diverging results");
         }
@@ -151,7 +151,7 @@ public class NSSLMS {
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public NSSLMS(double learningRate, int length, NLMS.WeightsFillMethod fillMethod) {
+    public NSSLMS(double learningRate, int length, WeightsFillMethod fillMethod) {
         this(learningRate, 1, length, fillMethod);
     }
 
