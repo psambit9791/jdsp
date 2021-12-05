@@ -10,7 +10,7 @@ import java.util.Arrays;
  * signal (= the output of the filter). It does this by trying to minimize the squared error between the desired signal
  * and the filter output signal.
  * Additionally, you can use a Leaky LMS filter by setting the leakage factor in the LMS constructor.
- * A leakage factor < 1 results in improved stability and tracking of the filter.
+ * A leakage factor of less than 1 results in improved stability and tracking of the filter.
  *
  * @author Sibo Van Gool
  * @version 1.0
@@ -42,7 +42,7 @@ public class LMS {
      *                              With 'k' being a sample index, and n ranging from 0 to weights.length
      * @param leakageFactor defines how much leakage the Leaky LMS filter should have
      *                          0 ≤ leakageFactor ≤ 1
-     *                          leakageFactor = 1 => no leakage; leakageFactor < 1 => leakage
+     *                          leakageFactor of 1 implies no leakage; leakageFactor of less than 1 implies leakage
      * @param weights initialized weights (size = number of taps of the filter)
      */
     public LMS(double learningRate, double leakageFactor, double[] weights) {
@@ -78,7 +78,7 @@ public class LMS {
      *                              With 'k' being a sample index, and n ranging from 0 to length
      * @param leakageFactor defines how much leakage the Leaky LMS filter should have
      *                          0 ≤ leakageFactor ≤ 1
-     *                          leakageFactor = 1 => no leakage; leakageFactor < 1 => leakage
+     *                          leakageFactor of 1 implies no leakage; leakageFactor of less than 1 implies leakage
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */

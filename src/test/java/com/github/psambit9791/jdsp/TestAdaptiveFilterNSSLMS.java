@@ -53,11 +53,11 @@ public class TestAdaptiveFilterNSSLMS {
         Assertions.assertArrayEquals(result, filt2.getOutput(), 0.1);
 
         // Save plot result
-        Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
+        Plotting fig = new Plotting(600, 500, "NSSLMS Application", "Time", "Signal");
         fig.initialisePlot();
         fig.addSignal("Desired", this.desired1, false);
         fig.addSignal("Output", filt1.getOutput(), false);
-        fig.addSignal("Error", filt1.getError(), false);
+//        fig.addSignal("Error", filt1.getError(), false);
         fig.saveAsPNG(outputFileName);
     }
 
@@ -81,11 +81,11 @@ public class TestAdaptiveFilterNSSLMS {
         Assertions.assertArrayEquals(result, filt2.getOutput(), 0.1);
 
         // Save plot result
-        Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
+        Plotting fig = new Plotting(600, 500, "NSSLMS Application", "Time", "Signal");
         fig.initialisePlot();
         fig.addSignal("Desired", this.desired2, false);
         fig.addSignal("Output", filt1.getOutput(), false);
-        fig.addSignal("Error", filt1.getError(), false);
+//        fig.addSignal("Error", filt1.getError(), false);
         fig.saveAsPNG(outputFileName);
     }
 }

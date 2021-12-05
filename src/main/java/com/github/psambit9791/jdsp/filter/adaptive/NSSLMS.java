@@ -23,8 +23,8 @@ import java.util.Arrays;
  * signal (= the output of the filter). It does this by trying to minimize the squared error between the desired signal
  * and the filter output signal. Unlike the NLMS, the weights are updated based on only the sign of the error and the signal
  *  * instead of the actual error and signal values.
- * Additionally, you can use a Leaky LMS filter by setting the leakage factor in the LMS constructor.
- * A leakage factor < 1 results in improved stability and tracking of the filter.
+ * Additionally, you can use a Leaky NSSLMS filter by setting the leakage factor in the NSSLMS constructor.
+ * A leakage factor of less than 1 results in improved stability and tracking of the filter.
  *
  * It is very similar to the LMS-filter, with the difference that the learning rate gets automatically adjusted according
  * to the input signal's power.
@@ -77,7 +77,7 @@ public class NSSLMS {
      *                          0 ≤ learningRate ≤ 2
      * @param leakageFactor defines how much leakage the Leaky LMS filter should have
      *                          0 ≤ leakageFactor ≤ 1
-     *                          leakageFactor = 1 => no leakage; leakageFactor < 1 => leakage
+     *                          leakageFactor of 1 implies no leakage; leakageFactor of less than 1 implies leakage
      * @param weights initialized weights (size = number of taps of the filter)
      */
     public NSSLMS(double learningRate, double leakageFactor, double[] weights) {
@@ -114,7 +114,7 @@ public class NSSLMS {
      *                          0 ≤ learningRate ≤ 2
      * @param leakageFactor defines how much leakage the Leaky LMS filter should have
      *                          0 ≤ leakageFactor ≤ 1
-     *                          leakageFactor = 1 => no leakage; leakageFactor < 1 => leakage
+     *                          leakageFactor of 1 implies no leakage; leakageFactor of less than 1 implies leakage
      * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */

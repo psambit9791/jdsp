@@ -14,7 +14,7 @@ public abstract class _Window {
     private boolean extendVal;
 
     /**
-     * Constructor for window with window length <len>
+     * Constructor for window with window length 'len'
      * @param len length of the window (number of samples)
      */
     public _Window(int len) {

@@ -33,7 +33,7 @@ public class ShortTimeFourier {
      * @param frameLength   Number of samples that each FFT-frame should have
      * @param overlap       Number of samples that overlap between frames
      * @param fourierLength Number of samples used in the Fourier analysis of each frame
-     *                          Value greater than frameLength => frame gets zero padded
+     *                          If the value is greater than frameLength, frame gets zero padded
      * @param window        Windowing function to perform on each STFT frame
      * @param Fs            Sampling frequency of the signal (in Hz)
      */
@@ -69,7 +69,7 @@ public class ShortTimeFourier {
      * @param frameLength   Number of samples that each FFT-frame should have
      * @param overlap       Number of samples that overlap between frames
      * @param fourierLength Number of samples used in the Fourier analysis of each frame
-     *                          Value greater than frameLength => frame gets zero padded
+     *                          If the value is greater than frameLength, frame gets zero padded
      * @param window        Windowing function to perform on each STFT frame
      */
     public ShortTimeFourier(double[] signal, int frameLength, int overlap, int fourierLength, _Window window) {
@@ -84,7 +84,7 @@ public class ShortTimeFourier {
      * @param frameLength   Number of samples that each FFT-frame should have
      * @param overlap       Number of samples that overlap between frames
      * @param fourierLength Number of samples used in the Fourier analysis of each frame
-     *                          Value greater than frameLength => frame gets zero padded
+     *                          If the value is greater than frameLength, frame gets zero padded
      */
     public ShortTimeFourier(double[] signal, int frameLength, int overlap, int fourierLength) {
         this(signal, frameLength, overlap, fourierLength, new Rectangular(frameLength), 1);

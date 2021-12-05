@@ -24,7 +24,7 @@ import java.util.Arrays;
  * This filter is useful when the input data is highly correlated.
  * AP uses multiple input vectors for each sample where the number of input vectors depends on the projection order.
  *
- * Cite: Gonzalez, A., Ferrer, M., Albu, F., & De Diego, M. (2012, August). Affine projection algorithms:
+ * Cite: Gonzalez, A., Ferrer, M., Albu, F., and De Diego, M. (2012, August). Affine projection algorithms:
  * Evolution to smart and fast algorithms and applications. In 2012 Proceedings of the 20th European Signal Processing
  * Conference (EUSIPCO) (pp. 1965-1969). IEEE.
  *

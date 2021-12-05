@@ -68,7 +68,7 @@ public class TestAdaptiveFilterAP {
         Assertions.assertArrayEquals(result, filt2.getOutput(), 0.1);
 
         // Save plot result
-        Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
+        Plotting fig = new Plotting(600, 500, "AP Application", "Time", "Signal");
         fig.initialisePlot();
         fig.addSignal("Desired", this.desired1, false);
         fig.addSignal("Output", filt1.getOutput(), false);
@@ -95,7 +95,7 @@ public class TestAdaptiveFilterAP {
         Assertions.assertArrayEquals(result, filt1.getOutput(), 0.1);
 
         // Save plot result
-        Plotting fig = new Plotting(600, 500, "Sample Figure", "Time", "Signal");
+        Plotting fig = new Plotting(600, 500, "AP Application", "Time", "Signal");
         fig.initialisePlot();
         fig.addSignal("Desired", this.desired2, false);
         fig.addSignal("Output", filt1.getOutput(), false);

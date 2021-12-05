@@ -870,7 +870,7 @@ public class UtilMethods {
     }
 
     /**
-     * Return the row-array of matrix <m>, at row index <rowIdx>
+     * Return the row-array of matrix 'm', at row index 'rowIdx'
      * @param m 2D array (matrix) from which to get the row
      * @param rowIdx row index which you want to extract
      * @return double[] row array located at the row index
@@ -888,7 +888,7 @@ public class UtilMethods {
     }
 
     /**
-     * Return the column-array of matrix <m>, at column index <colIdx>
+     * Return the column-array of matrix 'm', at column index 'colIdx'
      * @param m 2D array (matrix) from which to get the column
      * @param colIdx column index which you want to extract
      * @return double[] column array located at the column index
