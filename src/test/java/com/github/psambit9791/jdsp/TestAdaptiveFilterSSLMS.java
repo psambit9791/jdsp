@@ -53,7 +53,7 @@ public class TestAdaptiveFilterSSLMS {
         Assertions.assertArrayEquals(result, filt2.getOutput(), 0.05);
 
         // Save plot result
-        Plotting fig = new Plotting(600, 500, "SSLMS Application", "Time", "Signal");
+        Plotting fig = new Plotting(600, 300, "SSLMS Application", "Time", "Signal");
         fig.initialisePlot();
         fig.addSignal("Desired", this.desired1, false);
         fig.addSignal("Output", filt1.getOutput(), false);
@@ -81,7 +81,7 @@ public class TestAdaptiveFilterSSLMS {
         Assertions.assertArrayEquals(result, filt2.getOutput(), 0.05);
 
         // Save plot result
-        Plotting fig = new Plotting(600, 500, "SSLMS Application", "Time", "Signal");
+        Plotting fig = new Plotting(600, 300, "SSLMS Application", "Time", "Signal");
         fig.initialisePlot();
         fig.addSignal("Desired", this.desired2, false);
         fig.addSignal("Output", filt1.getOutput(), false);

@@ -52,7 +52,7 @@ public class TestAdaptiveFilterNLMS {
         Assertions.assertArrayEquals(result, filt2.getOutput(), 0.1);
 
         // Save plot result
-        Plotting fig = new Plotting(600, 500, "NLMS Application", "Time", "Signal");
+        Plotting fig = new Plotting(600, 300, "NLMS Application", "Time", "Signal");
         fig.initialisePlot();
         fig.addSignal("Desired", this.desired1, false);
         fig.addSignal("Output", filt1.getOutput(), false);
@@ -80,7 +80,7 @@ public class TestAdaptiveFilterNLMS {
         Assertions.assertArrayEquals(result, filt2.getOutput(), 0.1);
 
         // Save plot result
-        Plotting fig = new Plotting(600, 500, "NLMS Application", "Time", "Signal");
+        Plotting fig = new Plotting(600, 300, "NLMS Application", "Time", "Signal");
         fig.initialisePlot();
         fig.addSignal("Desired", this.desired2, false);
         fig.addSignal("Output", filt1.getOutput(), false);

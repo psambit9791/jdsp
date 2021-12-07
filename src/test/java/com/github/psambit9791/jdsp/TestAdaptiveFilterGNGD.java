@@ -67,7 +67,7 @@ public class TestAdaptiveFilterGNGD {
         Assertions.assertArrayEquals(result, filt2.getOutput(), 0.1);
 
         // Save plot result
-        Plotting fig = new Plotting(600, 500, "GNGD Application", "Time", "Signal");
+        Plotting fig = new Plotting(600, 300, "GNGD Application", "Time", "Signal");
         fig.initialisePlot();
         fig.addSignal("Desired", this.desired1, false);
         fig.addSignal("Output", filt1.getOutput(), false);
@@ -94,7 +94,7 @@ public class TestAdaptiveFilterGNGD {
         Assertions.assertArrayEquals(result, filt1.getOutput(), 0.1);
 
         // Save plot result
-        Plotting fig = new Plotting(600, 500, "GNGD", "Time", "Signal");
+        Plotting fig = new Plotting(600, 300, "GNGD", "Time", "Signal");
         fig.initialisePlot();
         fig.addSignal("Desired", this.desired2, false);
         fig.addSignal("Output", filt1.getOutput(), false);
