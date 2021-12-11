@@ -51,17 +51,17 @@ public class GNGD {
 
     /**
      * This constructor initialises the prerequisites required for the GNGD adaptive filter.
-     * @param mu learning rate
+     * @param learningRate learning rate
      * @param eps compensation term
      * @param ro step size adaptation parameter
      * @param weights Initialised set of weights
      */
-    public GNGD(double mu, double eps, double ro, double[] weights) {
+    public GNGD(double learningRate, double eps, double ro, double[] weights) {
         if (weights == null || weights.length == 0) {
             throw new IllegalArgumentException("Weights must be non-null and with a length greater than 0");
         }
         this.weights = weights;
-        this.mu = mu;
+        this.mu = learningRate;
         this.ro = ro;
         this.eps = eps;
         int length = weights.length;
@@ -82,15 +82,15 @@ public class GNGD {
 
     /**
      * This constructor initialises the prerequisites required for the GNGD adaptive filter.
-     * @param mu learning rate
+     * @param length length (number of taps) of the filter
+     * @param learningRate learning rate
      * @param eps compensation term
      * @param ro step size adaptation parameter
-     * @param length length (number of taps) of the filter
      * @param fillMethod determines how the weights should be initialized
      */
-    public GNGD(int length, double mu, double eps, double ro, WeightsFillMethod fillMethod) {
+    public GNGD(int length, double learningRate, double eps, double ro, WeightsFillMethod fillMethod) {
         this.weights = new double[length];
-        this.mu = mu;
+        this.mu = learningRate;
         this.eps = eps;
         this.ro = ro;
         switch (fillMethod) {

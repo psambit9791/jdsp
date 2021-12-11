@@ -31,7 +31,7 @@ import java.util.Arrays;
  * @author Sambit Paul
  * @version 1.0
  */
-public class AP {
+public class AP implements _Adaptive {
 
     private double[][] x_mem;
     private double[] d_mem;
@@ -43,16 +43,6 @@ public class AP {
     private double[] weights;           // Weights of the filter
     private double[] error;
     private double[] output;
-
-    /**
-     * Dictates how the filter weights initialization should be done:
-     *      RANDOM: filter weights get an initial random value ranging from 0 to 1
-     *      ZEROS: filter weights get initial value 0
-     */
-    public enum WeightsFillMethod {
-        RANDOM,
-        ZEROS
-    }
 
     /**
      * This constructor initialises the prerequisites required for the LMS adaptive filter.
@@ -217,7 +207,7 @@ public class AP {
     }
 
     /**
-     * Run the RLS adaptive filter algorithm. This will iterate over the input signal x and adapt the filter weights to
+     * Run the adaptive filter algorithm. This will iterate over the input signal x and adapt the filter weights to
      * match the desired signal.
      * @param desired desired signal that you want after filtering of x
      * @param x input signal that you want to filter with the LMS adaptive filter to achieve the desired signal

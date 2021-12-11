@@ -14,7 +14,7 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.signal.Convolution;
 
 /**
- * <h1>Finite Impulse Response Filter Class</h1>
+ * <h1>Finite Impulse Response Filter Class (Abstract)</h1>
  * The FIR Filter class is a super class for all FIR filters - firWin1, firWin2 and firLS.
  * <p>
  *
