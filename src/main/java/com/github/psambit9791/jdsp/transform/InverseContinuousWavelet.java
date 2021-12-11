@@ -21,8 +21,8 @@ import org.apache.commons.math3.stat.StatUtils;
 
 
 /**
- * <h1>Inverse Wavelet Transform</h1>
- * The InverseWavelet class recovers a signal from the CWT output given the wavelet used to compute the CWT. The Wavelet
+ * <h1>Inverse Continuous Wavelet Transform</h1>
+ * The InverseContinuousWavelet class recovers a signal from the CWT output given the wavelet used to compute the CWT. The Wavelet
  * Transform is a redundant transform, however since the deconvolution process may use an least-squares solution, the
  * final signal is averaged over multiple (usually not all) inverse CWT outputs.
  * The inverse wavelet transform works on the same wavelet wavelet functions as the WaveletTransform class - Ricker,
@@ -32,7 +32,7 @@ import org.apache.commons.math3.stat.StatUtils;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class InverseWavelet {
+public class InverseContinuousWavelet {
 
     private Complex[][] transformed;
     private int[] widths;
@@ -48,7 +48,7 @@ public class InverseWavelet {
      * @param transformed The wavelet transformed signal
      * @param widths The widths used for the wavelet functions
      */
-    public InverseWavelet(Complex[][] transformed, int[] widths) {
+    public InverseContinuousWavelet(Complex[][] transformed, int[] widths) {
         if (widths.length != transformed.length) {
             throw new IllegalArgumentException("Number of widths should be same as number of wavelet transformations");
         }

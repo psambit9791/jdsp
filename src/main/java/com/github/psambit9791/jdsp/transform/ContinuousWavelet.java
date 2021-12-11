@@ -19,15 +19,15 @@ import com.github.psambit9791.jdsp.signal.Generate;
 import org.apache.commons.math3.complex.Complex;
 
 /**
- * <h1>Wavelet Transform</h1>
- * The Wavelet class applies the wavelet transform on the input signal using different wavelet functions. This class
+ * <h1>Continuous Wavelet Transform</h1>
+ * The ContinuousWavelet class applies the wavelet transform on the input signal using different wavelet functions. This class
  * works with 3 kinds of wavelets - Ricker, Morlet and Paul.
  * <p>
  *
  * @author  Sambit Paul
  * @version 1.0
  */
-public class Wavelet {
+public class ContinuousWavelet {
 
     private double[] signal;
     private int[] widths;
@@ -43,7 +43,7 @@ public class Wavelet {
      * @param signal The signal to be transformed
      * @param widths The width of the wavelets to be used.
      */
-    public Wavelet(double[] signal, int[] widths) {
+    public ContinuousWavelet(double[] signal, int[] widths) {
         this.signal = signal;
         this.widths = widths;
     }
