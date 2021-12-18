@@ -129,7 +129,8 @@ public class InverseContinuousWavelet {
     }
 
     /**
-     * This function is a hyper-function which determines the ICWT process depending on the wavelet type.
+     * This function is a hyper-function which determines the ICWT process depending on the wavelet type and returns the
+     * recovered signal.
      * @param wavelet_type Which wavelet was used for the CWT transformation
      * @param wavelet_args The wavelet property used for wavelet generation.
      *                     Ignored for Ricker, omega0 for Morlet and wavelet order for Paul

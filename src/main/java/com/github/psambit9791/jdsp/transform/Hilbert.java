@@ -83,7 +83,7 @@ public class Hilbert {
             modOut[i][1] = dftOut[i][1] * this.h[i];
         }
 
-        InverseFourier idft;
+        _InverseFourier idft;
         if (Math.log(modOut.length)%Math.log(2) == 0) {
             idft = new InverseFastFourier(UtilMethods.matToComplex(modOut), false);
         }

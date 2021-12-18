@@ -73,7 +73,7 @@ public class AP implements _Adaptive {
     }
 
     /**
-     * This constructor initialises the prerequisites required for the LMS adaptive filter, without leakage.4
+     * This constructor initialises the prerequisites required for the AP adaptive filter.
      * 'order' and 'eps' is set to 5 and 0.001 respectively by default.
      * @param learningRate also known as step size. Determines how fast the adaptive filter changes its filter weights.
      *                     If it is too slow, the filter may have bad performance. If it is too high, the filter will
@@ -88,7 +88,7 @@ public class AP implements _Adaptive {
     }
 
     /**
-     * This constructor initialises the prerequisites required for the LMS adaptive filter.
+     * This constructor initialises the prerequisites required for the AP adaptive filter.
      * @param length length (number of taps) of the filter
      * @param order projection order to determine the memory
      * @param learningRate also known as step size. Determines how fast the adaptive filter changes its filter weights.
@@ -128,7 +128,7 @@ public class AP implements _Adaptive {
     }
 
     /**
-     * This constructor initialises the prerequisites required for the LMS adaptive filter, without leakage.
+     * This constructor initialises the prerequisites required for the AP adaptive filter.
      * 'order' and 'eps' is set to 5 and 0.001 respectively by default.
      * @param length length (number of taps) of the filter
      * @param learningRate also known as step size. Determines how fast the adaptive filter changes its filter weights.

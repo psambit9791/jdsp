@@ -19,7 +19,10 @@ import java.util.Arrays;
 
 /**
  * <h1>Generate Periodic Signal</h1>
- * The GeneratePeriodic class implements methods to generate sin(), cos(), and square() wave based on sampling frequency and wave frequency
+ * The GeneratePeriodic class implements methods to generate various waves and wavelets based on different characteristic
+ * properties.
+ * Provides generate functions for the following waves: Sine, Cosine, Square, Gaussian Pulse, Unit Impulse, Sawtooth, Chirp
+ * Provides generate functions for the following wavelets: Ricker, Morlet, Paul and Morlet-CWT
  * <p>
  *
  * @author  Sambit Paul

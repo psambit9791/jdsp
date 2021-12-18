@@ -17,13 +17,14 @@ import java.util.Arrays;
 /**
  * <h1>Inverse Discrete Fourier Transform</h1>
  * The InverseDiscreteFourier class applies the inverse discrete fourier transform on the input sequence (real/complex) and
- * provides different representations of the reconstructed signal to be returned (real signal, complex signal, ...)
+ * provides different representations of the reconstructed signal to be returned (real signal, complex signal, ...).
+ * This should be used for signals transformed using DFT.
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.1
+ * @version 1.0
  */
-public class InverseDiscreteFourier extends InverseFourier {
+public class InverseDiscreteFourier implements _InverseFourier {
 
     private double[][] complex_sequence;
     private double[] real_sequence;
@@ -80,7 +81,7 @@ public class InverseDiscreteFourier extends InverseFourier {
 
     /**
      * This method returns the complex value of the generated signal as a Complex array.
-     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return Complex[] The signal (complex)
      */
     public Complex[] getComplex() throws ExceptionInInitializerError {
@@ -90,7 +91,7 @@ public class InverseDiscreteFourier extends InverseFourier {
 
     /**
      * This method returns the complex value of the generated signal as a 2D matrix.
-     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[][] The signal (complex)
      */
     public double[][] getComplex2D() throws ExceptionInInitializerError {
@@ -105,7 +106,7 @@ public class InverseDiscreteFourier extends InverseFourier {
 
     /**
      * This method returns the real part of the generated signal.
-     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The signal (real part)
      */
     public double[] getReal() throws ExceptionInInitializerError {
@@ -119,7 +120,7 @@ public class InverseDiscreteFourier extends InverseFourier {
 
     /**
      * This method returns the imaginary part of the generated signal.
-     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The signal (imaginary part)
      */
     public double[] getImaginary() throws ExceptionInInitializerError {
@@ -133,7 +134,7 @@ public class InverseDiscreteFourier extends InverseFourier {
 
     /**
      * This method returns the magnitude value of the IDFT result.
-     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The signal (magnitude)
      */
     public double[] getMagnitude() throws ExceptionInInitializerError {
@@ -147,7 +148,7 @@ public class InverseDiscreteFourier extends InverseFourier {
 
     /**
      * This method returns the phase value of the IDFT result.
-     * @throws java.lang.ExceptionInInitializerError if called before executing idft() method
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] phase of the signal
      */
     public double[] getPhase() throws ExceptionInInitializerError {
@@ -251,7 +252,7 @@ public class InverseDiscreteFourier extends InverseFourier {
 
     private void checkOutput() {
         if (this.signal == null) {
-            throw new ExceptionInInitializerError("Execute idft() function before returning result");
+            throw new ExceptionInInitializerError("Execute transform() function before returning result");
         }
     }
 }

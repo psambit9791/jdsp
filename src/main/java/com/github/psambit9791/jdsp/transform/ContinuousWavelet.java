@@ -21,7 +21,7 @@ import org.apache.commons.math3.complex.Complex;
 /**
  * <h1>Continuous Wavelet Transform</h1>
  * The ContinuousWavelet class applies the wavelet transform on the input signal using different wavelet functions. This class
- * works with 3 kinds of wavelets - Ricker, Morlet and Paul.
+ * works with 3 wavelets - Ricker, Morlet and Paul.
  * <p>
  *
  * @author  Sambit Paul
@@ -87,7 +87,7 @@ public class ContinuousWavelet {
 
     /**
      * A function is a hyper-function which accepts the wavelet type and the property of the wavelet to apply the wavelet
-     * transform on the signal.
+     * transform on the signal and returns the output.
      * @param wavelet_type The type of wavelet to be used
      * @param args Wavelet property to be used.
      *             Ignored for Ricker, omega0 for Morlet and wavelet order for Paul

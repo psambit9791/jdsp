@@ -17,7 +17,8 @@ import com.github.psambit9791.jdsp.filter.Chebyshev;
 /**
  * <h1>Decimate</h1>
  * Downsample the signal after applying an anti-aliasing filter.
- * Reference <a href="https://dspguru.com/dsp/faqs/multirate/decimation/">article</a> for more information on decimation and its difference from down-sampling.
+ * Reference <a href="https://dspguru.com/dsp/faqs/multirate/decimation/">article</a> for more information on decimation
+ * and its difference from down-sampling.
  * <p>
  *
  * @author  Sambit Paul

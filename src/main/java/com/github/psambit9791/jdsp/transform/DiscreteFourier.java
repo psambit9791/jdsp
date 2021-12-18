@@ -72,7 +72,7 @@ public class DiscreteFourier implements _Fourier {
     /**
      * Returns the magnitude of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
-     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The magnitude of the DFT output
      */
     public double[] getMagnitude(boolean onlyPositive) throws ExceptionInInitializerError{
@@ -83,7 +83,7 @@ public class DiscreteFourier implements _Fourier {
     /**
      * Returns the phase of the discrete fourier transformed sequence in radians
      * @param onlyPositive Set to True if non-mirrored output is required
-     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The phase of the DFT output (in radians)
      */
     public double[] getPhaseRad(boolean onlyPositive) throws ExceptionInInitializerError{
@@ -94,7 +94,7 @@ public class DiscreteFourier implements _Fourier {
     /**
      * Returns the phase of the discrete fourier transformed sequence in degrees
      * @param onlyPositive Set to True if non-mirrored output is required
-     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The phase of the DFT output (in degrees)
      */
     public double[] getPhaseDeg(boolean onlyPositive) throws ExceptionInInitializerError{
@@ -107,7 +107,7 @@ public class DiscreteFourier implements _Fourier {
      * of the output contains the magnitude, the second one the phase.
      * @param onlyPositive Set to True if non-mirrored output is required
      * @return double[][] The magnitude and phase (in radians) of the DFT output in respectively the first and second column
-     * @throws ExceptionInInitializerError if called before executing dft() method
+     * @throws ExceptionInInitializerError if called before executing transform() method
      */
     public double[][] getMagPhaseRad(boolean onlyPositive) throws ExceptionInInitializerError {
         double[] dftMag = getMagnitude(onlyPositive);
@@ -126,7 +126,7 @@ public class DiscreteFourier implements _Fourier {
      * of the output contains the magnitude, the second one the phase.
      * @param onlyPositive Set to True if non-mirrored output is required
      * @return double[][] The magnitude and phase (in degrees) of the DFT output in respectively the first and second column
-     * @throws ExceptionInInitializerError if called before executing dft() method
+     * @throws ExceptionInInitializerError if called before executing transform() method
      */
     public double[][] getMagPhaseDeg(boolean onlyPositive) throws ExceptionInInitializerError {
         double[] dftMag = getMagnitude(onlyPositive);
@@ -143,7 +143,7 @@ public class DiscreteFourier implements _Fourier {
     /**
      * Returns the complex value of the discrete fourier transformed sequence as a 2D matrix
      * @param onlyPositive Set to True if non-mirrored output is required
-     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[][] The complex DFT output; first array column = real part; second array column = imaginary part
      */
     public double[][] getComplex2D(boolean onlyPositive) throws ExceptionInInitializerError {
@@ -154,12 +154,12 @@ public class DiscreteFourier implements _Fourier {
     /**
      * Returns the complex value of the discrete fourier transformed sequence
      * @param onlyPositive Set to True if non-mirrored output is required
-     * @throws java.lang.ExceptionInInitializerError if called before executing dft() method
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return Complex[] The complex DFT output
      */
     public Complex[] getComplex(boolean onlyPositive) throws ExceptionInInitializerError {
         if (this.output == null) {
-            throw new ExceptionInInitializerError("Execute dft() function before returning result");
+            throw new ExceptionInInitializerError("Execute transform() function before returning result");
         }
         Complex[] dftout;
 

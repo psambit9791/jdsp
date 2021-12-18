@@ -7,11 +7,10 @@ import org.apache.commons.math3.complex.Complex;
 
 import java.util.Arrays;
 
-// TODO: once FFT is implemented, replace all DFT stuff in here with DFT
 /**
  * <h1>Inverse Short Time Fourier Transform</h1>
- * The InversShortTimeFourier class applies the inverse short time fourier transform on an input sequence and
- * provides different representations of the reconstructed signal to be returned (real signal, complex signal, ...)
+ * The InverseShortTimeFourier class applies the inverse short time fourier transform on an input sequence and
+ * provides different representations of the reconstructed signal to be returned (real signal, complex signal, ...).
  * <p>
  *
  * @author  Sibo Van Gool
@@ -110,7 +109,7 @@ public class InverseShortTimeFourier {
 
         for (_Fourier dtft : this.signal) {
             double[][] seq = UtilMethods.complexTo2D(dtft.getComplex(false));
-            InverseFourier idft;
+            _InverseFourier idft;
             double logval = Math.log(seq.length)/Math.log(2);
             if (logval == (int)(logval)) {
                 idft = new InverseFastFourier(UtilMethods.matToComplex(seq), false);

@@ -14,13 +14,13 @@ package com.github.psambit9791.jdsp.transform;
 
 import org.apache.commons.math3.complex.Complex;
 
-public abstract class InverseFourier {
+public interface _InverseFourier {
 
-    public abstract void transform();
-    public abstract Complex[] getComplex();
-    public abstract double[][] getComplex2D();
-    public abstract double[] getReal();
-    public abstract double[] getImaginary();
-    public abstract double[] getMagnitude();
-    public abstract double[] getPhase();
+    void transform();
+    Complex[] getComplex();
+    double[][] getComplex2D();
+    double[] getReal();
+    double[] getImaginary();
+    double[] getMagnitude();
+    double[] getPhase();
 }
