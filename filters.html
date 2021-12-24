@@ -119,6 +119,7 @@
             <li><a href="#iir-filter">IIR Filters</a> </li>
             <li><a href="#fir-filter">FIR Filters</a> </li>
             <li><a href="#kernel-filter">Kernel-Based Filters</a> </li>
+            <li><a href="#adaptive-filter">Adaptive Filters</a> </li>
           </ul>
 
           <div id="iir-filter">
@@ -466,7 +467,7 @@ int taps = 5;
 double[] cutoff = {10.0};
 
 FIRWin1 fw = new FIRWin1(taps, width, samplingRate);
-double[] outCoeffs = fw.computeCoefficients(cutoff, "lowpass", true);
+double[] outCoeffs = fw.computeCoefficients(cutoff, FIRWin1.FIRfilterType.LOWPASS, true);
 double[] filteredX = fw.firfilter(outCoeffs, signal);
                     </code>
                   </pre>
@@ -480,7 +481,7 @@ int taps = 5;
 double[] cutoff = {10.0};
 
 FIRWin1 fw = new FIRWin1(taps, width, samplingRate);
-double[] outCoeffs = fw.computeCoefficients(cutoff, "highpass", true);
+double[] outCoeffs = fw.computeCoefficients(cutoff, FIRWin1.FIRfilterType.HIGHPASS, true);
 double[] filteredX = fw.firfilter(outCoeffs, signal);
                     </code>
                   </pre>
@@ -500,7 +501,7 @@ int taps = 5;
 double[] cutoff = {1.0, 10.0};
 
 FIRWin1 fw = new FIRWin1(taps, width, samplingRate);
-double[] outCoeffs = fw.computeCoefficients(cutoff, "bandpass", true);
+double[] outCoeffs = fw.computeCoefficients(cutoff, FIRWin1.FIRfilterType.BANDPASS, true);
 double[] filteredX = fw.firfilter(outCoeffs, signal);
                     </code>
                   </pre>
@@ -514,7 +515,7 @@ int taps = 5;
 double[] cutoff = {1.0, 10.0};
 
 FIRWin1 fw = new FIRWin1(taps, width, samplingRate);
-double[] outCoeffs = fw.computeCoefficients(cutoff, "bandstop", true);
+double[] outCoeffs = fw.computeCoefficients(cutoff, FIRWin1.FIRfilterType.BANDSTOP, true);
 double[] filteredX = fw.firfilter(outCoeffs, signal);
                     </code>
                   </pre>
@@ -778,6 +779,204 @@ double[] out = wf.filter(); //get the result after filtering
               <!-- END OF WIENER FILTER-->
 
           </div>
+
+            <div id="adaptive-filter">
+
+                <!--  START OF AP FILTER  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Affine Projection Adaptive Filter</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/filters/adaptive/AP.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int order = 3;
+double mu = 0.25;
+double eps = 0.001;
+int length = 20;
+
+AP filt1 = new AP(length, order, mu, eps, AP.WeightsFillMethod.ZEROS); // Initialising weights to zero
+filt1.filter(desired, signal);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF AP FILTER-->
+
+                <!--  START OF GNGD FILTER  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Generalised Normalised Gradient Descent Adaptive Filter</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/filters/adaptive/GNGD.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+int order = 3;
+double mu = 0.25;
+double eps = 0.001;
+int length = 20;
+
+GNGD filt1 = new GNGD(length, mu, eps, ro, GNGD.WeightsFillMethod.ZEROS); // Initialising weights to zero
+filt1.filter(desired, signal);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF GNGD FILTER-->
+
+                <!--  START OF LMS FILTER  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Least Mean Squares Adaptive Filter</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/filters/adaptive/LMS.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double mu = 0.1;
+int length = 20;
+
+LMS filt1 = new LMS(mu, length, LMS.WeightsFillMethod.ZEROS); // Initialising weights to zero
+filt1.filter(desired, signal);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF LMS FILTER-->
+
+                <!--  START OF NLMS FILTER  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Normalised Least Mean Squares Adaptive Filter</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/filters/adaptive/NLMS.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double mu = 1.0;
+int length = 20;
+
+NLMS filt1 = new NLMS(mu, length, NLMS.WeightsFillMethod.ZEROS); // Initialising weights to zero
+filt1.filter(desired, signal);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF NLMS FILTER-->
+
+                <!--  START OF RLS FILTER  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Reduced Least Squares Adaptive Filter</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/filters/adaptive/RLS.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double mu = 0.5;
+double eps = 0.25;
+int length = 20;
+
+RLS filt1 = new RLS(length, mu, eps, RLS.WeightsFillMethod.ZEROS); // Initialising weights to zero
+filt1.filter(desired, signal);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF RLS FILTER-->
+
+                <!--  START OF SSLMS FILTER  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Sign-Sign Least Mean Squares Adaptive Filter</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/filters/adaptive/SSLMS.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double mu = 0.25;
+int length = 20;
+
+SSLMS filt1 = new SSLMS(mu, length, SSLMS.WeightsFillMethod.ZEROS); // Initialising weights to zero
+filt1.filter(desired, signal);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF SSLMS FILTER-->
+
+                <!--  START OF NSSLMS FILTER  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Normalised Sign-Sign Least Mean Squares Adaptive Filter</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/filters/adaptive/NSSLMS.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double mu = 1.0;
+int length = 20;
+
+NSSLMS filt1 = new NSSLMS(mu, length, SSLMS.WeightsFillMethod.ZEROS); // Initialising weights to zero
+filt1.filter(desired, signal);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF NSSLMS FILTER-->
+
+            </div>
 
         </div>
         <!-- END OF TABS-->
