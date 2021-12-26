@@ -9,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?)](https://github.com/psambit9791/jDSP/blob/master/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3903921.svg)](https://doi.org/10.5281/zenodo.3903921)
 
-JDSP is a library of signal processing tools aimed at providing functionalities as available in scipy-signal package for 
+JDSP is a library of signal processing tools aimed at providing functionalities as available in MATLAB or in scipy-signal package for 
 Python. The goal is to provide easy-to-use APIs for performing complex operation on signals eliminating the necessity 
 of understanding the low-level complexities in the processing pipeline.  
 
@@ -21,7 +21,7 @@ To get the latest stable release of JDSP:
 
 ### Gradle
 ```
-implementation 'com.github.psambit9791:jdsp:0.8.0'
+implementation 'com.github.psambit9791:jdsp:1.0.0'
 ```
 
 ### Maven
@@ -29,19 +29,21 @@ implementation 'com.github.psambit9791:jdsp:0.8.0'
 <dependency>
   <groupId>com.github.psambit9791</groupId>
   <artifactId>jdsp</artifactId>
-  <version>0.8.0</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
 <br/>
 
-For the latest development version of JDSP (nightly build):
+For the latest development version of JDSP:
 
 ### Github
 ```  
 git clone --single-branch --branch master https://github.com/psambit9791/jDSP.git
 ``` 
 
+### JitPack
+You can use **JitPack** to use the development version on your application; use this [link](https://jitpack.io/#psambit9791/jdsp/master-SNAPSHOT) for reference.
 <br/>
 
 ## Documentation
