@@ -15,22 +15,12 @@ import java.util.Arrays;
  * @author Sibo Van Gool
  * @version 1.0
  */
-public class LMS {
+public class LMS implements _Adaptive {
     private final double learningRate;  // Learning rate (= step size)
     private final double leakageFactor; // Leakage factor
     private double[] weights;           // Weights of the filter
     private double[] error;             // Error of the filter
     private double[] output;            // Filtered output
-
-    /**
-     * Dictates how the filter weights initialization should be done:
-     *      RANDOM: filter weights get an initial random value ranging from 0 to 1
-     *      ZEROS: filter weights get initial value 0
-     */
-    public enum WeightsFillMethod {
-        RANDOM,
-        ZEROS
-    }
 
     /**
      * This constructor initialises the prerequisites required for the LMS adaptive filter.

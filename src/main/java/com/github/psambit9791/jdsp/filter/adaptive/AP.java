@@ -45,7 +45,7 @@ public class AP implements _Adaptive {
     private double[] output;
 
     /**
-     * This constructor initialises the prerequisites required for the LMS adaptive filter.
+     * This constructor initialises the prerequisites required for the AP adaptive filter.
      * @param order projection order to determine the memory
      * @param learningRate also known as step size. Determines how fast the adaptive filter changes its filter weights.
      *                     If it is too slow, the filter may have bad performance. If it is too high, the filter will

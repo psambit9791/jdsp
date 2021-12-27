@@ -21,7 +21,7 @@ import com.github.psambit9791.jdsp.signal.Convolution;
  * @author  Sambit Paul
  * @version 1.2
  */
-abstract class _FIRFilter {
+public abstract class _FIRFilter {
 
     /**
      * FIR Filters follow the formula y_n = sum(b_i * x_(n-i)) for all coefficients i = 0 to M.

@@ -27,7 +27,7 @@ import java.util.Arrays;
  * @author Sambit Paul
  * @version 1.0
  */
-public class GNGD {
+public class GNGD implements _Adaptive{
 
     private double[] weights;           // Weights of the filter
     private double[] error;
@@ -38,16 +38,6 @@ public class GNGD {
 
     private double last_e;
     private double[] last_x;
-
-    /**
-     * Dictates how the filter weights initialization should be done:
-     *      RANDOM: filter weights get an initial random value ranging from 0 to 1
-     *      ZEROS: filter weights get initial value 0
-     */
-    public enum WeightsFillMethod {
-        RANDOM,
-        ZEROS
-    }
 
     /**
      * This constructor initialises the prerequisites required for the GNGD adaptive filter.

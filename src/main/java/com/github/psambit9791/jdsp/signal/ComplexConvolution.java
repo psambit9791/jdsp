@@ -20,7 +20,7 @@ import org.apache.commons.math3.util.MathArrays;
 /**
  * <h1>Convolution for Complex Numbers</h1>
  * The ComplexConvolution class implements different modes of convolution for a list of complex numbers.
- * The window can be a list of Complex or double numbers.
+ * The window can be a list of Complex or real (double) numbers.
  * <p>
  *
  * @author  Sambit Paul

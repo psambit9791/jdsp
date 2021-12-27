@@ -25,22 +25,12 @@ import java.util.Arrays;
  * @author Sambit Paul
  * @version 1.0
  */
-public class RLS {
+public class RLS implements _Adaptive{
     private double[] weights;           // Weights of the filter
     private double[] error;
     private double[] output;
     private double mu;                  // Forgetting factor
     private double[][] R;
-
-    /**
-     * Dictates how the filter weights initialization should be done:
-     *      RANDOM: filter weights get an initial random value ranging from 0 to 1
-     *      ZEROS: filter weights get initial value 0
-     */
-    public enum WeightsFillMethod {
-        RANDOM,
-        ZEROS
-    }
 
     /**
      * This constructor initialises the prerequisites required for the RLS adaptive filter.

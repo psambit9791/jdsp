@@ -20,10 +20,10 @@ package com.github.psambit9791.jdsp.filter.adaptive;
  * @author  Sambit Paul
  * @version 1.0
  */
-interface  _Adaptive {
+public interface _Adaptive {
 
     /**
-     * Dictates how the filter weights initialization should be done:
+     * Dictates how the filter weights initialization should be done.
      *      RANDOM: filter weights get an initial random value ranging from 0 to 1
      *      ZEROS: filter weights get initial value 0
      */
