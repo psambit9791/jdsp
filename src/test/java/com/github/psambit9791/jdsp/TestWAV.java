@@ -34,9 +34,41 @@ public class TestWAV {
     }
 
     @Test
+    public void wavPropertiesTest16() throws WavFileException, IOException {
+        WAV objRead = new WAV();
+        objRead.readTemplate("sample");
+        Hashtable<String, Long> propsOut = objRead.getProperties();
+
+        Assertions.assertEquals(2, propsOut.get("Channels"));
+        Assertions.assertEquals(1208718, propsOut.get("Frames"));
+        Assertions.assertEquals(16, propsOut.get("ValidBits"));
+        Assertions.assertEquals(4, propsOut.get("BlockAlign"));
+        Assertions.assertEquals(44100, propsOut.get("SampleRate"));
+        Assertions.assertEquals(2, propsOut.get("BytesPerSample"));
+        Assertions.assertEquals(27409, objRead.getDurationInMilliseconds());
+        Assertions.assertEquals(3556, objRead.getRMS());
+    }
+
+    @Test
+    public void wavPropertiesTest8() throws WavFileException, IOException {
+        WAV objRead = new WAV();
+        objRead.readTemplate("tone");
+        Hashtable<String, Long> propsOut = objRead.getProperties();
+
+        Assertions.assertEquals(1, propsOut.get("Channels"));
+        Assertions.assertEquals(384000, propsOut.get("Frames"));
+        Assertions.assertEquals(8, propsOut.get("ValidBits"));
+        Assertions.assertEquals(1, propsOut.get("BlockAlign"));
+        Assertions.assertEquals(48000, propsOut.get("SampleRate"));
+        Assertions.assertEquals(1, propsOut.get("BytesPerSample"));
+        Assertions.assertEquals(8000, objRead.getDurationInMilliseconds());
+        Assertions.assertEquals(70, objRead.getRMS());
+    }
+
+    @Test
     public void wavTestTemplateInt() throws WavFileException, IOException {
         WAV objRead = new WAV();
-        objRead.readTemplate();
+        objRead.readTemplate("sample");
         double[][] signal = objRead.getData("int");
 
         Hashtable<String, Long> propsOut = objRead.getProperties();
@@ -60,7 +92,7 @@ public class TestWAV {
     @Test
     public void wavTestTemplateLong() throws WavFileException, IOException {
         WAV objRead = new WAV();
-        objRead.readTemplate();
+        objRead.readTemplate("sample");
         double[][] signal = objRead.getData("long");
 
         Hashtable<String, Long> propsOut = objRead.getProperties();
@@ -83,7 +115,7 @@ public class TestWAV {
     @Test
     public void wavTestTemplateDouble() throws WavFileException, IOException {
         WAV objRead = new WAV();
-        objRead.readTemplate();
+        objRead.readTemplate("sample");
         double[][] signal = objRead.getData("double");
 
         Hashtable<String, Long> propsOut = objRead.getProperties();

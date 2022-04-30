@@ -838,4 +838,29 @@ public class TestUtils {
         Assertions.assertEquals(UtilMethods.dotProduct(a, x), 30, 0.0001);
         Assertions.assertEquals(UtilMethods.dotProduct(b, x), 20, 0.0001);
     }
+
+    @Test
+    public void decibelToRatioTest() {
+        double db = 20;
+        Assertions.assertEquals(UtilMethods.decibelToRatio(db), 10, 0.00000001);
+        Assertions.assertEquals(UtilMethods.decibelToRatio(db, false), 100, 0.00000001);
+    }
+
+    @Test
+    public void ratioToDecibelsTest() {
+        double ratio = 10;
+        Assertions.assertEquals(UtilMethods.ratioToDecibels(1), 0, 0.00000001);
+        Assertions.assertEquals(UtilMethods.ratioToDecibels(ratio), 20, 0.00000001);
+        Assertions.assertEquals(UtilMethods.ratioToDecibels(ratio*10, false), 20, 0.00000001);
+    }
+
+    @Test
+    public void integerToBooleanTest() {
+        Assertions.assertFalse(UtilMethods.integerToBoolean(0));
+        Assertions.assertTrue(UtilMethods.integerToBoolean(1));
+        Assertions.assertTrue(UtilMethods.integerToBoolean(2));
+        Assertions.assertTrue(UtilMethods.integerToBoolean(-1));
+        Assertions.assertTrue(UtilMethods.integerToBoolean(-2));
+
+    }
 }

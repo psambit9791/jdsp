@@ -1811,9 +1811,87 @@ public class UtilMethods {
         return out;
     }
 
+    /**
+     * Dot Product of 2 1-D arrays
+     * @param w 1st Vector
+     * @param x 2nd Vector
+     * @return double Output of the dot product
+     */
     public static double dotProduct(double[] w, double[] x) {
         RealVector a = new ArrayRealVector(w, false);
         RealVector b = new ArrayRealVector(x, false);
         return a.dotProduct(b);
+    }
+
+    /**
+     * Converts decibels to equivalent ratio - in relation to power
+     * @param db Value in decibels
+     * @return double Ratio in Power
+     */
+    public static double decibelToRatio(double db) {
+        return Math.pow(10, db/20.0);
+    }
+
+    /**
+     * Converts decibels to equivalent ratio in relation to power or amplitude
+     * @param db Value in decibels
+     * @param using_amplitude If conversion is in relation to power or amplitude - True if using amplitude
+     * @return double Ratio in relation to input type
+     */
+    public static double decibelToRatio(double db, boolean using_amplitude) {
+        double ratio;
+        if (using_amplitude) {
+            ratio = Math.pow(10, db/20.0);
+        }
+        else {
+            ratio = Math.pow(10, db/10.0);
+        }
+        return ratio;
+    }
+
+    /**
+     * Converts ratio (power) to equivalent decibels
+     * @param ratio Power Ratio
+     * @return Double Decibels
+     */
+    public static Double ratioToDecibels(double ratio) {
+        if (ratio == 0) {
+            return Double.POSITIVE_INFINITY;
+        }
+        return 20 * UtilMethods.log(ratio, 10);
+    }
+
+    /**
+     * Converts ratio (power or amplitude) to equivalent decibels
+     * @param ratio Value in decibels
+     * @param using_amplitude If conversion is in relation to power or amplitude - True if using amplitude
+     * @return Double Decibels
+     */
+    public static Double ratioToDecibels(double ratio, boolean using_amplitude) {
+        Double decibels = (double) 0;
+        if (ratio == 0) {
+            decibels = Double.POSITIVE_INFINITY;
+        }
+        else {
+            if (using_amplitude) {
+                decibels = 20 * UtilMethods.log(ratio, 10);
+            }
+            else {
+                decibels = 10 * UtilMethods.log(ratio, 10);
+            }
+        }
+        return decibels;
+    }
+
+    /**
+     * Converts any input integer to boolean. 0 is returned as False, everything else is True.
+     * @param value Integer to be converted
+     * @return boolean Converted value
+     */
+    public static boolean integerToBoolean(int value) {
+        if (value == 0) {
+            return false;
+        }
+        return true;
     }
 }

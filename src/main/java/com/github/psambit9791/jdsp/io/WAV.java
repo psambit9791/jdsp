@@ -16,6 +16,8 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Hashtable;
 
 /**
@@ -35,23 +37,29 @@ import java.util.Hashtable;
 public class WAV {
     private WavFile wf;
     public Hashtable<String, Long> props;
-    private double[][] data;
+    private double[][] dataInt;
+    private double[][] dataLong;
+    private double[][] dataDouble;
 
     /**
      * This reads a sample file from the res folder called "sample.wav"
+     * @param name Can be one of sample (16-bit) or tone (8-bit)
      * @throws com.github.psambit9791.wavfile.WavFileException if error occurs in WavFile class
      * @throws java.io.IOException if sample file does not exist
      */
-    public void readTemplate() throws WavFileException, IOException {
+    public void readTemplate(String name) throws WavFileException, IOException {
         File f = null;
         try {
-            f = new File(getClass().getClassLoader().getResource("sample.wav").getFile());
+            f = new File(getClass().getClassLoader().getResource(name + ".wav").getFile());
         }
         catch (NullPointerException e) {
             System.out.println("File Not Found.");
         }
         this.wf = WavFile.openWavFile(f);
         this.computeProperties();
+        this.storeArray("int");
+        this.storeArray("long");
+        this.storeArray("double");
     }
 
     /**
@@ -75,7 +83,19 @@ public class WAV {
             }
             this.wf = WavFile.openWavFile(f);
             this.computeProperties();
+            this.storeArray("int");
+            this.storeArray("long");
+            this.storeArray("double");
         }
+    }
+
+    private double[][] convertEightBitToSigned(double[][] signal) {
+        for (int i = 0; i<signal.length; i++) {
+            for (int j=0; j<signal[0].length; j++) {
+                signal[i][j] = signal[i][j] - 128;
+            }
+        }
+        return signal;
     }
 
     /**
@@ -100,6 +120,43 @@ public class WAV {
         return this.props;
     }
 
+    /**
+     * Get the duration of the WAV signal in milliseconds
+     * @return int Duration Value
+     */
+    public int getDurationInMilliseconds() {
+        return (int)UtilMethods.round((double)(this.props.get("Frames")*1000)/this.props.get("SampleRate"), 0);
+    }
+
+    /**
+     * Get th Root Mean Squared value of the WAV file in integer
+     * @return
+     * @throws IOException Derived from getData()
+     * @throws WavFileException Derived from getData()
+     * @throws IllegalArgumentException Derived from getData()
+     */
+    public int getRMS() throws IOException, WavFileException, IllegalArgumentException {
+        double rms = 0;
+        double[] temp = this.flatten(this.getData("int"));
+        for (int i=0; i<temp.length; i++) {
+            rms = rms + temp[i]*temp[i];
+        }
+        rms = Math.sqrt(rms/temp.length);
+        return (int)(rms);
+    }
+
+    private double[] flatten(double[][] signal) {
+        double[] flat = new double[signal.length*signal[0].length];
+        int idx = 0;
+        for (int i=0; i< signal.length; i++) {
+            for (int j=0; j<signal[0].length; j++) {
+                flat[idx] = signal[i][j];
+                idx++;
+            }
+        }
+        return flat;
+    }
+
 
     private double[][] toDouble(int[][] a) {
         double[][] out = new double[a.length][a[0].length];
@@ -122,7 +179,7 @@ public class WAV {
     }
 
     /**
-     * Returns the wav file content as a 2-D array
+     * Stores the wav file content as a 2-D array in memory
      * @throws java.io.IOException In case any error occurs while reading the frames
      * @throws com.github.psambit9791.wavfile.WavFileException if error occurs in WavFile class
      * @throws java.lang.IllegalArgumentException if type is anything other than "int", "long", "double"
@@ -130,9 +187,8 @@ public class WAV {
      *             "int" - Up to 32 bit unsigned
      *             "long" - Up to 64 bit unsigned
      *             "double" - Scales the value between -1 and 1.
-     * @return double[][] The content of the wav file
      */
-    public double[][] getData(String type) throws IOException, WavFileException, IllegalArgumentException {
+    private void storeArray(String type) throws IOException, WavFileException, IllegalArgumentException {
         int channels = this.props.get("Channels").intValue();
         int frames = this.props.get("Frames").intValue();
         double[][] signal;
@@ -140,22 +196,41 @@ public class WAV {
             int[][] sig = new int[channels][frames];
             wf.readFrames(sig, frames);
             signal = this.toDouble(sig);
+            this.dataInt= UtilMethods.transpose(signal);
+            if (this.props.get("BytesPerSample") == 1) {
+                this.dataInt = this.convertEightBitToSigned(this.dataInt);
+            }
         }
         else if (type.equals("long")) {
             long[][] sig = new long[channels][frames];
             wf.readFrames(sig, frames);
             signal = this.toDouble(sig);
+            this.dataLong = UtilMethods.transpose(signal);
         }
         else if (type.equals("double")) {
             double[][] sig = new double[channels][frames];
             wf.readFrames(sig, frames);
             signal = sig;
+            this.dataDouble = UtilMethods.transpose(signal);
         }
         else {
             throw new IllegalArgumentException("Type must be int, long or double");
         }
-        signal = UtilMethods.transpose(signal);
-        return signal;
+    }
+
+    public double[][] getData(String type) throws IllegalArgumentException {
+        if (type.equals("int")) {
+            return this.dataInt;
+        }
+        else if (type.equals("long")) {
+            return this.dataLong;
+        }
+        else if (type.equals("double")) {
+            return this.dataDouble;
+        }
+        else {
+            throw new IllegalArgumentException("Type must be int, long or double");
+        }
     }
 
     /**
