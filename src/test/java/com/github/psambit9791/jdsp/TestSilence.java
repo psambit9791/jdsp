@@ -33,15 +33,10 @@ public class TestSilence {
         if (! directory.exists()){
             directory.mkdir();
         }
-    }
-
-    @Test
-    @Order(2)
-    public void createTestOutputSubdirectory() {
-        String dirName = "./test_outputs/non_silences/";
-        File directory = new File(dirName);
-        if (! directory.exists()){
-            directory.mkdir();
+        String subdirName = "./test_outputs/non_silences/";
+        File subdirectory = new File(subdirName);
+        if (! subdirectory.exists()){
+            subdirectory.mkdir();
         }
     }
 
@@ -263,6 +258,7 @@ public class TestSilence {
     }
 
     @Test
+    @Order(3)
     public void testSplitBySilence() throws IOException, WavFileException {
         WAV objRead = new WAV();
         objRead.readWAV("test_inputs/silence.wav");

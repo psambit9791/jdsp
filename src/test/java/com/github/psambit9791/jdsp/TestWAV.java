@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Hashtable;
 
 public class TestWAV {
@@ -166,7 +165,6 @@ public class TestWAV {
         WAV objRead1 = new WAV();
         String inputFilename = "test_inputs/tone.wav";
         objRead1.readWAV(inputFilename);
-        System.out.println(objRead1.getProperties());
         Hashtable<String, Long> propsOut = objRead1.getProperties();
         double[][] signal = objRead1.getData("int");
 
@@ -181,8 +179,6 @@ public class TestWAV {
         double[][] signalWritten = objRead2.getData("int");
         double[][] signalT = UtilMethods.transpose(signal);
         double[][] signalWrittenT = UtilMethods.transpose(signalWritten);
-        System.out.println(Arrays.toString(UtilMethods.splitByIndex(signalT[0], 0, 100)));
-        System.out.println(Arrays.toString(UtilMethods.splitByIndex(signalWrittenT[0], 0, 100)));
         for (int i=0; i<signalT.length; i++) {
             Assertions.assertArrayEquals(signalT[i], signalWrittenT[i]);
         }
