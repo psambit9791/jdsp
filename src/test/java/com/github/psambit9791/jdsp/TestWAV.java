@@ -36,7 +36,7 @@ public class TestWAV {
     @Test
     public void wavPropertiesTest16() throws WavFileException, IOException {
         WAV objRead = new WAV();
-        objRead.readTemplate("sample");
+        objRead.readTemplate(16);
         Hashtable<String, Long> propsOut = objRead.getProperties();
 
         Assertions.assertEquals(2, propsOut.get("Channels"));
@@ -52,7 +52,7 @@ public class TestWAV {
     @Test
     public void wavPropertiesTest8() throws WavFileException, IOException {
         WAV objRead = new WAV();
-        objRead.readTemplate("tone");
+        objRead.readTemplate(8);
         Hashtable<String, Long> propsOut = objRead.getProperties();
 
         Assertions.assertEquals(1, propsOut.get("Channels"));
@@ -68,7 +68,7 @@ public class TestWAV {
     @Test
     public void wavTestTemplateInt() throws WavFileException, IOException {
         WAV objRead = new WAV();
-        objRead.readTemplate("sample");
+        objRead.readTemplate(16);
         double[][] signal = objRead.getData("int");
 
         Hashtable<String, Long> propsOut = objRead.getProperties();
@@ -92,7 +92,7 @@ public class TestWAV {
     @Test
     public void wavTestTemplateLong() throws WavFileException, IOException {
         WAV objRead = new WAV();
-        objRead.readTemplate("sample");
+        objRead.readTemplate(16);
         double[][] signal = objRead.getData("long");
 
         Hashtable<String, Long> propsOut = objRead.getProperties();
@@ -115,7 +115,7 @@ public class TestWAV {
     @Test
     public void wavTestTemplateDouble() throws WavFileException, IOException {
         WAV objRead = new WAV();
-        objRead.readTemplate("sample");
+        objRead.readTemplate(16);
         double[][] signal = objRead.getData("double");
 
         Hashtable<String, Long> propsOut = objRead.getProperties();

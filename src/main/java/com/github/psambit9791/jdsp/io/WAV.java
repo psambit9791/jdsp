@@ -43,14 +43,14 @@ public class WAV {
 
     /**
      * This reads a sample file from the res folder called "sample.wav"
-     * @param name Can be one of sample (16-bit) or tone (8-bit)
+     * @param bitSize Can either be 8 or 16.
      * @throws com.github.psambit9791.wavfile.WavFileException if error occurs in WavFile class
      * @throws java.io.IOException if sample file does not exist
      */
-    public void readTemplate(String name) throws WavFileException, IOException {
+    public void readTemplate(int bitSize) throws WavFileException, IOException {
         File f = null;
         try {
-            f = new File(getClass().getClassLoader().getResource(name + ".wav").getFile());
+            f = new File(getClass().getClassLoader().getResource("sample" + bitSize + ".wav").getFile());
         }
         catch (NullPointerException e) {
             System.out.println("File Not Found.");
