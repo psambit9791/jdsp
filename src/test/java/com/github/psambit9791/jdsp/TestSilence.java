@@ -16,13 +16,34 @@ import com.github.psambit9791.jdsp.io.WAV;
 import com.github.psambit9791.jdsp.speech.Silence;
 import com.github.psambit9791.wavfile.WavFileException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 
 public class TestSilence {
+
+    @Test
+    @Order(1)
+    public void createTestOutputDirectory() {
+        String dirName = "./test_outputs/";
+        File directory = new File(dirName);
+        if (! directory.exists()){
+            directory.mkdir();
+        }
+    }
+
+    @Test
+    @Order(2)
+    public void createTestOutputSubdirectory() {
+        String dirName = "./test_outputs/non_silences/";
+        File directory = new File(dirName);
+        if (! directory.exists()){
+            directory.mkdir();
+        }
+    }
 
     @Test
     public void silenceTestMilliSecStepLess1() throws IOException, WavFileException {
@@ -239,5 +260,24 @@ public class TestSilence {
         non_silences = s3.getNonSilent();
         Assertions.assertArrayEquals(new int[] {16000, 102400}, non_silences[0]);
         Assertions.assertArrayEquals(new int[] {118400, 320302}, non_silences[1]);
+    }
+
+    @Test
+    public void testSplitBySilence() throws IOException, WavFileException {
+        WAV objRead = new WAV();
+        objRead.readWAV("test_inputs/silence.wav");
+
+        String saveDirectory = "./test_outputs/non_silences/";
+
+        Silence s1 = new Silence(500, -20, 2.5);
+        s1.detectSilence(objRead);
+        s1.splitBySilence(saveDirectory);
+
+        boolean fileExists;
+
+        fileExists = new File("./"+saveDirectory + "sil1.wav").exists();
+        Assertions.assertTrue(fileExists);
+        fileExists = new File("./"+saveDirectory + "sil2.wav").exists();
+        Assertions.assertTrue(fileExists);
     }
 }

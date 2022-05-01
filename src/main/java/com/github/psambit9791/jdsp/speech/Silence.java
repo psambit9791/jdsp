@@ -16,6 +16,7 @@ import com.github.psambit9791.jdsp.io.WAV;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.wavfile.WavFileException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Hashtable;
@@ -30,6 +31,8 @@ public class Silence {
 
     private float scaling_factor;
     private int total_length;
+
+    private double[][] audio_segment;
 
     private Hashtable<String, Long> propsOut;
 
@@ -97,9 +100,9 @@ public class Silence {
         this.silences = new int[0][2];
         int[] silence_starts = new int[0];
 
-        double[][] audio_segment = audio.getData("int");
-        this.total_length = audio_segment.length;
-        audio_segment = UtilMethods.transpose(audio_segment);
+        this.audio_segment = audio.getData("int");
+        this.total_length = this.audio_segment.length;
+        this.audio_segment = UtilMethods.transpose(this.audio_segment);
         this.propsOut = audio.getProperties();
 
         int seglen = audio.getDurationInMilliseconds();
@@ -124,7 +127,7 @@ public class Silence {
         for (int i=0; i<slice_starts.length; i=i+scaled_iter_steps) {
             double[][] audio_slice = new double[channels][this.min_silence_length];
             for (int j=0; j<channels; j++) {
-                audio_slice[j] = UtilMethods.splitByIndex(audio_segment[j], slice_starts[i], slice_starts[i]+this.min_silence_length);
+                audio_slice[j] = UtilMethods.splitByIndex(this.audio_segment[j], slice_starts[i], slice_starts[i]+this.min_silence_length);
             }
             double[] flattened_audio_slice = this.flatten(audio_slice);
             if (this.rms(flattened_audio_slice) <= threshold) {
@@ -223,7 +226,24 @@ public class Silence {
         }
     }
 
-    public void splitBySilence(String saveDir) {
+    public void splitBySilence(String saveDir) throws IOException, WavFileException {
+        if (this.silences == null) {
+            throw new ExceptionInInitializerError("Execute detectSilence() function before returning result");
+        }
+        File directory = new File(saveDir);
+        if (! directory.exists()){
+            throw new NullPointerException("Provided directory to save files not found.");
+        }
+        double[][] tempData = new double[2][0];
 
+        int[][] non_sil = this.getNonSilent();
+        for (int i=0; i<non_sil.length; i++) {
+            String outputFileName = saveDir + "sil" + (i + 1) + ".wav";
+            for (int j=0; j<this.audio_segment.length; j++) {
+                tempData[j] = UtilMethods.splitByIndex(this.audio_segment[j], non_sil[i][0], non_sil[i][1]);
+            }
+            WAV objWrite = new WAV();
+            objWrite.putData(UtilMethods.transpose(tempData), propsOut.get("SampleRate"), this.propsOut.get("ValidBits").intValue(),"int", outputFileName);
+        }
     }
 }
