@@ -17,6 +17,7 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.wavfile.WavFileException;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Hashtable;
 
 public class Silence {
@@ -28,12 +29,13 @@ public class Silence {
     private double iter_steps;
 
     private float scaling_factor;
+    private int total_length;
 
-    private void concatenate(int[] new_ind) {
-        int[][] out = new int[this.silences.length + 1][2];
-        System.arraycopy(this.silences, 0, out, 0, this.silences.length);
+    private int[][] concatenate(int[] new_ind, int[][] existing) {
+        int[][] out = new int[existing.length + 1][2];
+        System.arraycopy(existing, 0, out, 0, existing.length);
         out[out.length-1] = new_ind;
-        this.silences = out;
+        return out;
     }
 
     private double[] flatten(double[][] signal) {
@@ -94,6 +96,7 @@ public class Silence {
         int[] silence_starts = new int[0];
 
         double[][] audio_segment = audio.getData("int");
+        this.total_length = audio_segment.length;
         audio_segment = UtilMethods.transpose(audio_segment);
         Hashtable<String, Long> propsOut = audio.getProperties();
 
@@ -141,15 +144,22 @@ public class Silence {
             has_gap = (silence_starts[i] > (previous_i + this.min_silence_length));
 
             if (!continuous && has_gap) {
-                this.concatenate(new int[] {current_start, previous_i+this.min_silence_length});
+                this.silences = this.concatenate(new int[] {current_start, previous_i+this.min_silence_length}, this.silences);
                 current_start = silence_starts[i];
             }
             previous_i = silence_starts[i];
         }
-        this.concatenate(new int[] {current_start, previous_i+this.min_silence_length});
+        this.silences = this.concatenate(new int[] {current_start, previous_i+this.min_silence_length}, this.silences);
     }
 
-    public int[][] getSilence(boolean milliseconds) {
+    public int[][] getSilence() throws ExceptionInInitializerError {
+        return this.getSilence(false);
+    }
+
+    public int[][] getSilence(boolean milliseconds) throws ExceptionInInitializerError {
+        if (this.silences == null) {
+            throw new ExceptionInInitializerError("Execute detectSilence() function before returning result");
+        }
         if (milliseconds) {
             int[][] silenceMS = new int[silences.length][2];
             for (int i=0; i<silenceMS.length; i++) {
@@ -160,6 +170,54 @@ public class Silence {
         }
         else {
             return this.silences;
+        }
+    }
+
+    public int[][] getNonSilent() throws ExceptionInInitializerError {
+        return this.getNonSilent(false);
+    }
+
+    public int[][] getNonSilent(boolean milliseconds) throws ExceptionInInitializerError {
+        if (this.silences == null) {
+            throw new ExceptionInInitializerError("Execute detectSilence() function before returning result");
+        }
+        int[][] sil = this.getSilence();
+        int[][] non_sil = new int[0][2];
+
+        for (int i=0; i<sil.length+1; i++) {
+            int base_start;
+            int sil_start;
+
+            if (i == 0) {
+                base_start = 0;
+                sil_start = sil[i][0];
+            } else if (i == sil.length) {
+                base_start = sil[i-1][1];
+                sil_start = this.total_length - 1;
+            }
+            else {
+                base_start = sil[i-1][1];
+                sil_start = sil[i][0];
+            }
+
+            if (base_start == sil_start) {
+                continue;
+            }
+            else {
+                non_sil = this.concatenate(new int[] {base_start, sil_start}, non_sil);
+            }
+        }
+
+        if (milliseconds) {
+            int[][] nonSilenceMS = new int[non_sil.length][2];
+            for (int i=0; i<non_sil.length; i++) {
+                nonSilenceMS[i][0] = (int)(non_sil[i][0]/this.scaling_factor);
+                nonSilenceMS[i][1] = (int)(non_sil[i][1]/this.scaling_factor);
+            }
+            return nonSilenceMS;
+        }
+        else {
+            return non_sil;
         }
     }
 }
