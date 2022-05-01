@@ -98,6 +98,15 @@ public class WAV {
         return signal;
     }
 
+    private int[][] convertSignedToEightBit(int[][] signal) {
+        for (int i = 0; i<signal.length; i++) {
+            for (int j=0; j<signal[0].length; j++) {
+                signal[i][j] = signal[i][j] + 128;
+            }
+        }
+        return signal;
+    }
+
     /**
      * Compute properties of the WAV File
      */
@@ -255,7 +264,7 @@ public class WAV {
      * @param signal The 2-D array that needs to be saved as a wav file
      * @param samplingRate The sampling rate at which the audio was captured
      * @param validBits The number of valid bits used for storing a single sample
-     * @param type Can be "int", "long" and "double". Depends on what the content of the signal parameter is.
+     * @param type Can be "int8", "int", "long" and "double". Depends on what the content of the signal parameter is.
      * @param filename The name of the file the signal will be saved as
      */
     public void putData(double[][] signal, long samplingRate, int validBits, String type, String filename) throws IOException, WavFileException, IllegalArgumentException {
@@ -264,7 +273,25 @@ public class WAV {
         long frames = (long)signal[0].length;
         File f = new File(filename);
         this.wf = WavFile.newWavFile(f, channels, frames, validBits, samplingRate);
-        if (type.equals("int")) {
+        if (type.equals("int8")) {
+            int[][] buffer = new int[channels][100];
+            long frameCounter = 0;
+            while (frameCounter < frames)
+            {
+                long remaining = this.wf.getFramesRemaining();
+                int toWrite = (remaining > 100) ? 100 : (int) remaining;
+                for (int s=0 ; s<toWrite ; s++, frameCounter++)
+                {
+                    for (int c=0; c<channels; c++) {
+                        buffer[c][s] = (int)signal[c][(int)frameCounter];
+                    }
+                }
+                buffer = this.convertSignedToEightBit(buffer);
+                this.wf.writeFrames(buffer, toWrite);
+            }
+            this.wf.close();
+        }
+        else if (type.equals("int")) {
             int[][] buffer = new int[channels][100];
             long frameCounter = 0;
             while (frameCounter < frames)

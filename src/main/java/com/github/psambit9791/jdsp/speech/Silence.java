@@ -31,6 +31,8 @@ public class Silence {
     private float scaling_factor;
     private int total_length;
 
+    private Hashtable<String, Long> propsOut;
+
     private int[][] concatenate(int[] new_ind, int[][] existing) {
         int[][] out = new int[existing.length + 1][2];
         System.arraycopy(existing, 0, out, 0, existing.length);
@@ -98,12 +100,12 @@ public class Silence {
         double[][] audio_segment = audio.getData("int");
         this.total_length = audio_segment.length;
         audio_segment = UtilMethods.transpose(audio_segment);
-        Hashtable<String, Long> propsOut = audio.getProperties();
+        this.propsOut = audio.getProperties();
 
         int seglen = audio.getDurationInMilliseconds();
-        this.scaling_factor = propsOut.get("SampleRate")/1000;
-        long sample_width = propsOut.get("BytesPerSample");
-        int channels = propsOut.get("Channels").intValue();
+        this.scaling_factor = this.propsOut.get("SampleRate")/1000;
+        long sample_width = this.propsOut.get("BytesPerSample");
+        int channels = this.propsOut.get("Channels").intValue();
         if (seglen < this.min_silence_length) {
             return;
         }
@@ -219,5 +221,9 @@ public class Silence {
         else {
             return non_sil;
         }
+    }
+
+    public void splitBySilence(String saveDir) {
+
     }
 }
