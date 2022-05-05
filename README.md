@@ -6,6 +6,7 @@
 [![codecov](https://codecov.io/gh/psambit9791/jdsp/branch/master/graph/badge.svg)](https://codecov.io/gh/psambit9791/jdsp)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.psambit9791/jdsp.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.psambit9791%22%20AND%20a:%22jdsp%22)
 [![javadoc](https://javadoc.io/badge2/com.github.psambit9791/jdsp/javadoc.svg)](https://javadoc.io/doc/com.github.psambit9791/jdsp)
+[![jitpack](https://jitpack.io/v/psambit9791/jdsp.svg)](https://jitpack.io/#psambit9791/jdsp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?)](https://github.com/psambit9791/jdsp/blob/master/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3903921.svg)](https://doi.org/10.5281/zenodo.3903921)
 
