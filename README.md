@@ -1,5 +1,13 @@
 <p align="center">
-  <img src="https://github.com/psambit9791/jdsp/blob/master/res/img/JDSP-Logo.png" alt="JDSP Logo"/>
+    <a href="https://github.com/itaditya#gh-light-mode-only">
+        <img src="https://github.com/psambit9791/jdsp/blob/master/res/img/JDSP-Logo.png#gh-light-mode-only" alt="JDSP Logo"/>
+    </a>
+</p>
+
+<p align="center">
+    <a href="https://github.com/itaditya#gh-light-mode-only">
+        <img src="https://github.com/psambit9791/jdsp/blob/master/res/img/JDSP-Logo-Inverted.png#gh-dark-mode-only" alt="JDSP Logo"/>
+    </a>
 </p>
 
 [![Build Status](https://travis-ci.com/psambit9791/jdsp.svg?branch=master)](https://app.travis-ci.com/psambit9791/jdsp)
