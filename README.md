@@ -1,15 +1,6 @@
-<a href="https://github.com/psambit9791#gh-light-mode-only">
-    <p align="center">
-        <img src="https://github.com/psambit9791/jdsp/blob/master/res/img/JDSP-Logo.png#gh-light-mode-only" alt="JDSP Logo"/>
-    </p>
-</a>
+![Logo](https://github.com/psambit9791/jdsp/blob/master/res/img/JDSP-Logo-Inverted.png#gh-dark-mode-only)
+![Logo](https://github.com/psambit9791/jdsp/blob/master/res/img/JDSP-Logo.png#gh-light-mode-only)
 
-
-<a href="https://github.com/psambit9791#gh-light-mode-only">
-    <p align="center">
-        <img src="https://github.com/psambit9791/jdsp/blob/master/res/img/JDSP-Logo-Inverted.png#gh-dark-mode-only" alt="JDSP Logo"/>
-    </p>
-</a>
 
 [![Build Status](https://travis-ci.com/psambit9791/jdsp.svg?branch=master)](https://app.travis-ci.com/psambit9791/jdsp)
 [![codecov](https://codecov.io/gh/psambit9791/jdsp/branch/master/graph/badge.svg)](https://codecov.io/gh/psambit9791/jdsp)
