@@ -18,12 +18,13 @@ package com.github.psambit9791.jdsp.filter;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.1
+ * @version 2.0
  */
 public interface _KernelFilter {
     /**
      * This method implements a kernel filter with given parameters, applies it on the signal and returns it.
+     * @param signal Signal to be filtered
      * @return double[] Filtered signal
      */
-    public double[] filter();
+    public double[] filter(double[] signal);
 }

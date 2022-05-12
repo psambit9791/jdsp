@@ -24,45 +24,38 @@ import java.util.Arrays;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
+ * @version 2.0
  */
 public class Wiener implements _KernelFilter {
 
-    private double[] signal;
     private int windowSize;
 
     /**
      * This constructor initialises the prerequisites required to use Wiener filter. Default window size set to 3.
-     * @param s Signal to be filtered
      * @throws java.lang.IllegalArgumentException if wsize (3) is greater than or equal to signal length
      */
-    public Wiener(double[] s) throws IllegalArgumentException{
-        if (3 >= s.length) {
-            throw new IllegalArgumentException("Signal Length has to be greater than 3.");
-        }
-        this.signal = s;
+    public Wiener() throws IllegalArgumentException{
         this.windowSize = 3;
     }
 
     /**
      * This constructor initialises the prerequisites required to use Wiener filter.
-     * @param s Signal to be filtered
      * @throws java.lang.IllegalArgumentException if wsize is greater than or equal to signal length
      * @param wsize Window size for the filter
      */
-    public Wiener(double[] s, int wsize) throws IllegalArgumentException{
-        if (wsize >= s.length) {
-            throw new IllegalArgumentException("Window size cannot be greater than or equal to signal length");
-        }
-        this.signal = s;
+    public Wiener(int wsize) throws IllegalArgumentException{
         this.windowSize = wsize;
     }
 
     /**
      * This method implements a Wiener filter with given parameters, applies it on the signal and returns it.
+     * @param signal Signal to be filtered
      * @return double[] Filtered signal
      */
-    public double[] filter() {
+    public double[] filter(double[] signal) {
+        if (this.windowSize >= signal.length) {
+            throw new IllegalArgumentException("Signal Length has to be greater than 3.");
+        }
         double[] cons = new double[this.windowSize];
         Arrays.fill(cons, 1);
 
@@ -70,12 +63,12 @@ public class Wiener implements _KernelFilter {
         double[] localVariance;
 
         // Estimating the local mean
-        Convolution c1 = new Convolution(this.signal, cons);
+        Convolution c1 = new Convolution(signal, cons);
         localMean = c1.convolve("same");
         localMean = MathArrays.scale((1.0/this.windowSize), localMean);
 
         // Estimating the local variance
-        double[] signalSquare = MathArrays.ebeMultiply(this.signal, this.signal);
+        double[] signalSquare = MathArrays.ebeMultiply(signal, signal);
         double[] meanSquare = MathArrays.ebeMultiply(localMean, localMean);
         CrossCorrelation c2 = new CrossCorrelation(signalSquare, cons);
         localVariance = c2.crossCorrelate("same");
@@ -85,7 +78,7 @@ public class Wiener implements _KernelFilter {
         // Estimating the noise as the Average of the Local Variance of the Signal
         double noiseMean = StatUtils.mean(localVariance);
 
-        double[] res = MathArrays.ebeSubtract(this.signal, localMean);
+        double[] res = MathArrays.ebeSubtract(signal, localMean);
         double[] temp = new double[localVariance.length];
         for (int i=0; i<temp.length; i++) {
             temp[i] = (1.0 - noiseMean/localVariance[i]);

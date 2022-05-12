@@ -23,55 +23,48 @@ import java.util.Arrays;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
+ * @version 2.0
  */
 
 public class Median implements _KernelFilter {
 
-    private double[] signal;
     private int windowSize;
 
     /**
      * This constructor initialises the prerequisites required to use Median filter.
      * @throws java.lang.IllegalArgumentException if wsize (3) is greater than or equal to signal length
-     * @param s Signal to be filtered
      */
-    public Median(double[] s) throws IllegalArgumentException{
-        if (3 >= s.length) {
-            throw new IllegalArgumentException("Signal Length has to be greater than 3.");
-        }
-        this.signal = s;
+    public Median() throws IllegalArgumentException{
         this.windowSize = 3;
     }
 
     /**
      * This constructor initialises the prerequisites required to use Median filter.
-     * @param s Signal to be filtered
      * @throws java.lang.IllegalArgumentException if wsize is greater than or equal to signal length
      * @param wsize Window or kernel size
      */
-    public Median(double[] s, int wsize) throws IllegalArgumentException {
-        if (wsize >= s.length) {
-            throw new IllegalArgumentException("Window size cannot be greater than or equal to signal length");
-        }
-        this.signal = s;
+    public Median(int wsize) throws IllegalArgumentException {
         this.windowSize = wsize;
     }
 
     /**
      * This method implements a median filter with given parameters, applies it on the signal and returns it.
+     * @param signal Signal to be filtered
      * @return double[] Filtered signal
      */
-    public double[] filter() {
+    public double[] filter(double[] signal) {
+        if (this.windowSize >= signal.length) {
+            throw new IllegalArgumentException("Window size cannot be greater than or equal to signal length");
+        }
         int paddingSize = (this.windowSize - 1)/2;
         double[] cons = new double[paddingSize];
-        double[] newSignal = new double[this.signal.length];
+        double[] newSignal = new double[signal.length];
         Arrays.fill(cons, 0);
         double[] paddedSignal = {};
         paddedSignal = UtilMethods.concatenateArray(paddedSignal, cons);
-        paddedSignal = UtilMethods.concatenateArray(paddedSignal, this.signal);
+        paddedSignal = UtilMethods.concatenateArray(paddedSignal, signal);
         paddedSignal = UtilMethods.concatenateArray(paddedSignal, cons);
-        for (int i = 0; i<this.signal.length; i++) {
+        for (int i = 0; i<signal.length; i++) {
             newSignal[i] = StatUtils.percentile(paddedSignal, i, this.windowSize, 50);
         }
         return newSignal;

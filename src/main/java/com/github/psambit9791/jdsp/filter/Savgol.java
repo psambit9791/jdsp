@@ -27,7 +27,6 @@ import java.util.Arrays;
  */
 public class Savgol implements _KernelFilter{
 
-    private double[] signal;
     private int windowSize;
     private int polyOrder;
     private double[] output;
@@ -39,15 +38,13 @@ public class Savgol implements _KernelFilter{
     /**
      * This constructor initialises the prerequisites required to use Savgol filter.
      * deriv is set to 0 and delta is set to 1
-     * @param s Signal to be filtered
      * @param windowSize Size of the filter window/kernel
      * @param polynomialOrder The order of the polynomial used to fit the samples
      */
-    public Savgol(double[] s, int windowSize, int polynomialOrder) {
+    public Savgol(int windowSize, int polynomialOrder) {
         if (polynomialOrder >= windowSize) {
             throw new IllegalArgumentException("polynomialOrder must be less that windowSize");
         }
-        this.signal = s;
         this.windowSize = windowSize;
         this.polyOrder = polynomialOrder;
         this.deriv = 0;
@@ -56,17 +53,15 @@ public class Savgol implements _KernelFilter{
 
     /**
      * This constructor initialises the prerequisites required to use Savgol filter.
-     * @param s Signal to be filtered
      * @param windowSize Size of the filter window/kernel
      * @param polynomialOrder The order of the polynomial used to fit the samples
      * @param deriv The order of the derivative to compute
      * @param delta The spacing of the samples to which the filter will be applied. Used only if deriv greater than 0
      */
-    public Savgol(double[] s, int windowSize, int polynomialOrder, int deriv, double delta) {
+    public Savgol(int windowSize, int polynomialOrder, int deriv, double delta) {
         if (polynomialOrder >= windowSize) {
             throw new IllegalArgumentException("polynomialOrder must be less that windowSize");
         }
-        this.signal = s;
         this.windowSize = windowSize;
         this.polyOrder = polynomialOrder;
         this.deriv = deriv;
@@ -111,11 +106,12 @@ public class Savgol implements _KernelFilter{
 
     /**
      * Convolves the 1-d Savitzky-Golay coefficients with the signals in "nearest" mode
+     * @param signal Signal to be filtered
      * @return double[] Filtered signal
      */
-    public double[] filter() {
+    public double[] filter(double[] signal) {
         this.savgolCoeffs();
-        Convolution c = new Convolution(this.signal, this.coeffs);
+        Convolution c = new Convolution(signal, this.coeffs);
         this.output = c.convolve1d("nearest");
         return this.output;
     }
@@ -123,16 +119,17 @@ public class Savgol implements _KernelFilter{
     /**
      * Convolves the 1-d Savitzky-Golay coefficients with the signals
      * Operates in 4 modes of convolution for filtering: "nearest", "constant", "mirror", "wrap"
+     * @param signal Signal to be filtered
      * @param mode Mode of Filter operation
      * @throws java.lang.IllegalArgumentException if mode is not nearest, constant, mirror or wrap
      * @return double[] Filtered signal
      */
-    public double[] filter(String mode) throws IllegalArgumentException {
+    public double[] filter(double[] signal, String mode) throws IllegalArgumentException {
         if (!mode.equals("nearest") && !mode.equals("constant") && !mode.equals("mirror") && !mode.equals("wrap")) {
             throw new IllegalArgumentException("mode must be mirror, constant, nearest or wrap");
         }
         this.savgolCoeffs();
-        Convolution c = new Convolution(this.signal, this.coeffs);
+        Convolution c = new Convolution(signal, this.coeffs);
         this.output = c.convolve1d(mode);
         return this.output;
     }

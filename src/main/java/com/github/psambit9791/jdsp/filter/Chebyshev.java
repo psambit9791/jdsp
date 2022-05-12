@@ -18,7 +18,7 @@ package com.github.psambit9791.jdsp.filter;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.1
+ * @version 2.0
  */
 public class Chebyshev implements _IIRFilter {
     private double samplingFreq;

@@ -17,7 +17,7 @@ package com.github.psambit9791.jdsp.filter;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.2
+ * @version 2.0
  */
 public interface _IIRFilter {
 

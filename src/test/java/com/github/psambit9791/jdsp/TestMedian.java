@@ -23,8 +23,8 @@ public class TestMedian {
         int wSize = 5;
         double[] result = {2.0, 2.0, 3.0, 4.0, 2.0, 4.0, 5.0, 4.0, 0.0};
 
-        Median mf = new Median(signal, wSize);
-        double[] out = mf.filter();
+        Median mf = new Median(wSize);
+        double[] out = mf.filter(signal);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -33,8 +33,8 @@ public class TestMedian {
         double[] signal = {3.0, 4.0, 2.0, 1.0, 5.0, 6.0, 0.0, 4.0, 5.0};
         double[] result = {3.0, 3.0, 2.0, 2.0, 5.0, 5.0, 4.0, 4.0, 4.0};
 
-        Median mf = new Median(signal);
-        double[] out = mf.filter();
+        Median mf = new Median();
+        double[] out = mf.filter(signal);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -43,8 +43,8 @@ public class TestMedian {
         double[] signal = {3.0, 4.0, 2.0, 1.0, 5.0, 6.0, 0.0, 4.0, 5.0};
         double[] result = {3.0, 3.0, 2.0, 2.0, 5.0, 5.0, 4.0, 4.0, 4.0};
 
-        _KernelFilter mf = new Median(signal);
-        double[] out = mf.filter();
+        _KernelFilter mf = new Median();
+        double[] out = mf.filter(signal);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 }

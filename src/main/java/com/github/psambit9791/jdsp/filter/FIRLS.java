@@ -36,6 +36,11 @@ public class FIRLS extends _FIRFilter {
     private double nyquistF;
     private int numTaps;
 
+    /**
+     * FIRLS constructor for generating a filter using the number of coefficients in the filter
+     * @param numTaps Number of coefficients in the filter
+     * @param samplingFreq Sampling frequency of the signal
+     */
     public FIRLS(int numTaps, double samplingFreq) {
         if (numTaps % 2 == 0 || numTaps < 1) {
             throw new IllegalArgumentException("numTaps must be odd and greater than 0");
@@ -44,6 +49,10 @@ public class FIRLS extends _FIRFilter {
         this.nyquistF = samplingFreq * 0.5;
     }
 
+    /**
+     * FIRLS constructor for generating a filter using the number of coefficients in the filter with the sampling frequency set to 1.0
+     * @param numTaps Number of coefficients in the filter
+     */
     public FIRLS(int numTaps) {
         if (numTaps % 2 == 0 || numTaps < 1) {
             throw new IllegalArgumentException("numTaps must be odd and greater than 0");
@@ -52,6 +61,14 @@ public class FIRLS extends _FIRFilter {
         this.nyquistF = 1.0;
     }
 
+    /**
+     * This method computes the coefficients of a finite impulse response filter which has the best approximation of the desired gains
+     * computed using the least squares solution.
+     * @param cutoff The cutoff frequencies for the filter. Must be non-decreasing and less than or equal to the Nyquist Frequency.
+     * @param gains Desired gains at the start and stop of each cutoff band. Must be same length as cutoff.
+     * @param weights A relative weighting to give to each band region when solving the least squares problem. Must be half the length of gains.
+     * @return double[] Filtered signal
+     */
     public double[] computeCoefficients(double[] cutoff, double[] gains, double[] weights) {
 
         // Constraint testing for arrays
@@ -238,6 +255,13 @@ public class FIRLS extends _FIRFilter {
         return out;
     }
 
+    /**
+     * This method computes the coefficients of a finite impulse response filter which has the best approximation of the desired gains
+     * computed using the least squares solution. The weights are set toa default value of 1.0.
+     * @param cutoff The cutoff frequencies for the filter. Must be non-decreasing and less than or equal to the Nyquist Frequency.
+     * @param gains Desired gains at the start and stop of each cutoff band. Must be same length as cutoff.
+     * @return double[] Filtered signal
+     */
     public double[] computeCoefficients(double[] cutoff, double[] gains) {
         double[] weights = new double[cutoff.length/2];
         Arrays.fill(weights, 1.0);
