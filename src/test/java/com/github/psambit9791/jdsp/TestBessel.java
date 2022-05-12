@@ -35,8 +35,8 @@ public class TestBessel {
             0.049, -0.982, 0.399, -2.174, -1.624, -0.951, -0.263, 0.331, -2.167, -0.685, -1.588, 1.42, -0.589, -0.249,
             -1.385};
 
-    private Bessel flt1 = new Bessel(this.signal1, 100);
-    private Bessel flt2 = new Bessel(this.signal2, 100);
+    private Bessel flt = new Bessel(100);
+
 
     @Test
     public void LowPassTest1() {
@@ -49,7 +49,7 @@ public class TestBessel {
                 1.228, 1.309, 0.857, 0.527, 0.238, 0.374, 1.129, 1.411, 0.677, -0.234, -0.925, -1.4, -1.104, -0.285,
                 -0.141, -0.676, -1.039};
 
-        double[] result = flt1.lowPassFilter(4, 9);
+        double[] result = flt.lowPassFilter(this.signal1,4, 9);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -64,7 +64,7 @@ public class TestBessel {
                 -0.607, -0.521, -0.62, -0.885, -1.053, -0.976, -0.826, -0.856, -1.049, -1.142, -0.988, -0.762, -0.716,
                 -0.836, -0.859, -0.639, -0.353};
 
-        double[] result = flt2.lowPassFilter(4, 5);
+        double[] result = flt.lowPassFilter(this.signal2, 4, 5);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -79,7 +79,7 @@ public class TestBessel {
                 0.094, -1.518, -0.206, 0.761, -0.267,0.286, 1.142, -0.614, -1.338, 0.425, 0.496, -0.358, 0.775, 0.764,
                 -1.245, -0.876, 0.735, 0.044, -0.187};
 
-        double[] result = flt1.highPassFilter(4, 29);
+        double[] result = flt.highPassFilter(this.signal1,4, 29);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -94,7 +94,7 @@ public class TestBessel {
                 -0.125, 0.638, -0.57, 0.733, -1.166, 0.987, -0.677, 0.82, -0.596, -0.028, 0.152, -0.226, 0.797, -1.004,
                 0.771, -0.96, 1.089, -0.592};
 
-        double[] result = flt2.highPassFilter(4, 40);
+        double[] result = flt.highPassFilter(this.signal2, 4, 40);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -109,7 +109,7 @@ public class TestBessel {
                 0.854, 0.451, -0.584, -1.119, -0.538, 0.329, 0.85, 0.932, 0.248, -0.791, -0.964, -0.199, 0.538, 0.896,
                 0.723, -0.22, -1.102, -0.886};
 
-        double[] result = flt1.bandPassFilter(4, 12, 18);
+        double[] result = flt.bandPassFilter(this.signal1,4, 12, 18);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -124,7 +124,7 @@ public class TestBessel {
                 -0.639, -0.923, 0.02, 0.94, 0.593, -0.658, -0.901, -0.042, 0.999, 0.508, -0.587, -0.978, 0.01, 0.957,
                 0.521, -0.58, -1.011};
 
-        double[] result = flt2.bandPassFilter(4, 12, 30);
+        double[] result = flt.bandPassFilter(this.signal2, 4, 12, 30);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -139,7 +139,7 @@ public class TestBessel {
                 -0.953, 0.487, 1.389, 0.076, 0.532, 1.917, 0.731, -0.034, 1.282, 0.697, -0.937, -0.097, 0.261, -1.486,
                 -1.31, -0.026, -1.121, -1.615};
 
-        double[] result = flt1.bandStopFilter(4, 7, 28);
+        double[] result = flt.bandStopFilter(this.signal1,4, 7, 28);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -154,13 +154,13 @@ public class TestBessel {
                 -0.441, -1.146, -0.071, -1.739, 0.077, -1.94, -0.094, -1.704, -0.542, -1.136, -1.102, -0.446, -1.543,
                 0.126, -1.661, 0.408, -1.361, 0.349, -0.69};
 
-        double[] result = flt2.bandStopFilter(4, 12, 30);
+        double[] result = flt.bandStopFilter(this.signal2, 4, 12, 30);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
     public void InterfaceTest1() {
-        _IIRFilter interfaceFF = new Bessel(this.signal2, 100);
+        _IIRFilter interfaceFF = new Bessel(100);
         final double[] out = {0.0, 0.756, -0.121, 1.048, -0.357, 1.404, -0.682, 1.462, 0.243, 1.482, 0.745, 0.71, 1.394,
                 0.274, 1.873, 0.035, 2.012, 0.019, 1.454, 0.237, 0.874, 0.824, 0.036, 1.001, -0.701, 1.115, -0.958,
                 0.766, -0.979, 0.061, -0.655, -0.754, -0.232, -1.468, 0.044, -1.91, 0.016, -1.869, -0.272, -1.441,
@@ -170,17 +170,17 @@ public class TestBessel {
                 -0.441, -1.146, -0.071, -1.739, 0.077, -1.94, -0.094, -1.704, -0.542, -1.136, -1.102, -0.446, -1.543,
                 0.126, -1.661, 0.408, -1.361, 0.349, -0.69};
 
-        double[] result = interfaceFF.bandStopFilter(4, 12, 30);
+        double[] result = interfaceFF.bandStopFilter(this.signal2, 4, 12, 30);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
     @Test
     public void TestExceptions() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            double[] result = flt2.bandStopFilter(4, 30, 12);;
+            double[] result = flt.bandStopFilter(this.signal2, 4, 30, 12);;
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            double[] result = flt2.bandPassFilter(4, 30, 12);;
+            double[] result = flt.bandPassFilter(this.signal2, 4, 30, 12);;
         });
     }
 }

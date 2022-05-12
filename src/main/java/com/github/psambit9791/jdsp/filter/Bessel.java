@@ -22,96 +22,97 @@ package com.github.psambit9791.jdsp.filter;
  * @version 1.1
  */
 public class Bessel implements _IIRFilter {
-    private double[] signal;
     private double samplingFreq;
-    private double[] output;
+
 
     /**
      * This constructor initialises the prerequisites
      * required to use Bessel filter.
-     * @param s Signal to be filtered
      * @param Fs Sampling frequency of input signal in Hz
      */
-    public Bessel(double[] s, double Fs) {
-        this.signal = s;
+    public Bessel(double Fs) {
         this.samplingFreq = Fs;
     }
 
     /**
      * This method implements a low pass filter with given parameters, filters the signal and returns it.
+     * @param signal Signal to be filtered
      * @param order Order of the filter
      * @param cutoffFreq The cutoff frequency for the filter
      * @return double[] Filtered signal
      */
-    public double[] lowPassFilter(int order, double cutoffFreq) {
-        this.output = new double[this.signal.length];
+    public double[] lowPassFilter(double[] signal, int order, double cutoffFreq) {
+        double[] output = new double[signal.length];
         uk.me.berndporr.iirj.Bessel lp = new uk.me.berndporr.iirj.Bessel();
         lp.lowPass(order, this.samplingFreq, cutoffFreq);
-        for (int i =0; i<this.output.length; i++) {
-            this.output[i] = lp.filter(this.signal[i]);
+        for (int i =0; i<output.length; i++) {
+            output[i] = lp.filter(signal[i]);
         }
-        return this.output;
+        return output;
     }
 
     /**
      * This method implements a high pass filter with given parameters, filters the signal and returns it.
+     * @param signal Signal to be filtered
      * @param order Order of the filter
      * @param cutoffFreq The cutoff frequency for the filter
      * @return double[] Filtered signal
      */
-    public double[] highPassFilter(int order, double cutoffFreq) {
-        this.output = new double[this.signal.length];
+    public double[] highPassFilter(double[] signal, int order, double cutoffFreq) {
+        double[] output = new double[signal.length];
         uk.me.berndporr.iirj.Bessel hp = new uk.me.berndporr.iirj.Bessel();
         hp.highPass(order, this.samplingFreq, cutoffFreq);
-        for (int i =0; i<this.output.length; i++) {
-            this.output[i] = hp.filter(this.signal[i]);
+        for (int i =0; i<output.length; i++) {
+            output[i] = hp.filter(signal[i]);
         }
-        return this.output;
+        return output;
     }
 
     /**
      * This method implements a band pass filter with given parameters, filters the signal and returns it.
+     * @param signal Signal to be filtered
      * @param order Order of the filter
      * @param lowCutoff The lower cutoff frequency for the filter
      * @param highCutoff The upper cutoff frequency for the filter
      * @throws java.lang.IllegalArgumentException The lower cutoff frequency is greater than the higher cutoff frequency
      * @return double[] Filtered signal
      */
-    public double[] bandPassFilter(int order, double lowCutoff, double highCutoff) throws IllegalArgumentException {
+    public double[] bandPassFilter(double[] signal, int order, double lowCutoff, double highCutoff) throws IllegalArgumentException {
         if (lowCutoff >= highCutoff) {
             throw new IllegalArgumentException("Lower Cutoff Frequency cannot be more than the Higher Cutoff Frequency");
         }
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
-        this.output = new double[this.signal.length];
+        double[] output = new double[signal.length];
         uk.me.berndporr.iirj.Bessel bp = new uk.me.berndporr.iirj.Bessel();
         bp.bandPass(order, this.samplingFreq, centreFreq, width);
-        for (int i=0; i<this.output.length; i++) {
-            this.output[i] = bp.filter(this.signal[i]);
+        for (int i=0; i<output.length; i++) {
+            output[i] = bp.filter(signal[i]);
         }
-        return this.output;
+        return output;
     }
 
     /**
      * This method implements a band stop filter with given parameters, filters the signal and returns it.
+     * @param signal Signal to be filtered
      * @param order Order of the filter
      * @param lowCutoff The lower cutoff frequency for the filter
      * @param highCutoff The upper cutoff frequency for the filter
      * @throws java.lang.IllegalArgumentException The lower cutoff frequency is greater than the higher cutoff frequency
      * @return double[] Filtered signal
      */
-    public double[] bandStopFilter(int order, double lowCutoff, double highCutoff) throws IllegalArgumentException{
+    public double[] bandStopFilter(double[] signal, int order, double lowCutoff, double highCutoff) throws IllegalArgumentException{
         if (lowCutoff >= highCutoff) {
             throw new IllegalArgumentException("Lower Cutoff Frequency cannot be more than the Higher Cutoff Frequency");
         }
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
-        this.output = new double[this.signal.length];
+        double[] output = new double[signal.length];
         uk.me.berndporr.iirj.Bessel bs = new uk.me.berndporr.iirj.Bessel();
         bs.bandStop(order, this.samplingFreq, centreFreq, width);
-        for (int i=0; i<this.output.length; i++) {
-            this.output[i] = bs.filter(this.signal[i]);
+        for (int i=0; i<output.length; i++) {
+            output[i] = bs.filter(signal[i]);
         }
-        return this.output;
+        return output;
     }
 }
