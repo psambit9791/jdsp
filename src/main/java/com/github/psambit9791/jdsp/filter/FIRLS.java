@@ -234,14 +234,6 @@ public class FIRLS extends _FIRFilter {
         RealVector solution = solver.solve(b_final);
         double[] a = solution.toArray();
 
-//        double[][] tempholder = b.getData();
-//        for (int i=0; i<tempholder.length; i++) {
-//            for (int j=0; j<tempholder[0].length; j++) {
-//                System.out.print(tempholder[i][j] + ", ");
-//            }
-//            System.out.println();
-//        }
-
         // Process a and return coefficients
         double[] out = new double[(a.length-1)*2 + 1];
         int index = 0;
