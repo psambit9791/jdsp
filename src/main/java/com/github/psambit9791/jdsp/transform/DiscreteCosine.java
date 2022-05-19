@@ -12,5 +12,183 @@
 
 package com.github.psambit9791.jdsp.transform;
 
-public class DiscreteCosine {
+import org.apache.commons.math3.transform.DctNormalization;
+import org.apache.commons.math3.transform.FastCosineTransformer;
+
+public class DiscreteCosine implements _Cosine{
+
+    private double[] signal;
+    private double[] output = null;
+    private int type;
+    public enum Normalization {
+        STANDARD,
+        ORTHOGONAL
+    }
+
+    private Normalization norm;
+
+    public DiscreteCosine(double[] s, int type, Normalization norm) throws IllegalArgumentException {
+        if ((type <= 0) || (type > 4)) {
+            throw new IllegalArgumentException("Type must be between 1 and 4");
+        }
+        this.signal = s;
+        this.type = type;
+        this.norm = norm;
+
+    }
+
+    public DiscreteCosine(double[] s, Normalization norm) throws IllegalArgumentException {
+        this.signal = s;
+        this.type = 2;
+        this.norm = norm;
+    }
+
+    public DiscreteCosine(double[] s, int type) throws IllegalArgumentException {
+        if ((type <= 0) || (type > 4)) {
+            throw new IllegalArgumentException("Type must be between 1 and 4");
+        }
+        this.signal = s;
+        this.type = type;
+        this.norm = Normalization.STANDARD;
+    }
+
+    public DiscreteCosine(double[] s) {
+        this.signal = s;
+        this.type = 2;
+        this.norm = Normalization.STANDARD;
+    }
+
+    private double get_scaling_factor(int k) {
+        int N = this.signal.length;
+        double factor = 0;
+        if (this.type == 1) {
+            if (k == 0 || k == (N-1)) {
+                factor = 0.5 * Math.sqrt(1.0/(N-1));
+            }
+            else {
+                factor = 0.5 * Math.sqrt(2.0/(N-1));
+            }
+        }
+        else if (this.type == 2) {
+            if (k == 0) {
+                factor = Math.sqrt(1.0/ (4*N));
+            }
+            else {
+                factor = Math.sqrt(1.0/ (2*N));
+            }
+        }
+        else if (this.type == 3) {
+            factor = 1.0/Math.sqrt(N);
+        }
+        else if (this.type == 4) {
+            factor = 1.0/ Math.sqrt(2*N);
+        }
+        return factor;
+    }
+
+    private double[] type1() {
+        double[] out = new double[this.signal.length];
+        double factor1 = 1.0;
+        double factor2 = 1.0;
+        if (this.norm == Normalization.ORTHOGONAL) {
+            factor1 = Math.sqrt(2.0);
+        }
+        for (int k=0; k<out.length; k++) {
+            if (this.norm == Normalization.ORTHOGONAL) {
+                factor2 = this.get_scaling_factor(k);
+            }
+            double temp0 = factor1 * this.signal[0];
+            double temp1 = factor1 * Math.pow(-1, k) * this.signal[this.signal.length - 1];
+            double sum = 0;
+            for (int n = 1; n < this.signal.length - 1; n++) {
+                sum += this.signal[n] * Math.cos((Math.PI * k * n) / (this.signal.length - 1));
+            }
+            out[k] = factor2 * (temp0 + temp1 + 2 * sum);
+        }
+        return out;
+    }
+
+    private double[] type2() {
+        double[] out = new double[this.signal.length];
+        for (int k=0; k<out.length; k++){
+            double sum = 0;
+            for (int n=0; n<this.signal.length; n++) {
+                sum += this.signal[n] * Math.cos((Math.PI * k * (2*n + 1))/(2 * this.signal.length));
+            }
+            if (this.norm == Normalization.ORTHOGONAL) {
+                out[k] = this.get_scaling_factor(k) * 2 * sum;
+            }
+            else {
+                out[k] = 2 * sum;
+            }
+        }
+        return out;
+    }
+
+    private double[] type3() {
+        double[] out = new double[this.signal.length];
+        for (int k=0; k<out.length; k++) {
+
+            double temp0 = this.signal[0];
+            double sum = 0;
+            for (int n = 1; n < this.signal.length; n++) {
+                sum += this.signal[n] * Math.cos((Math.PI * (2*k + 1) * n) / (this.signal.length * 2));
+            }
+            if (this.norm == Normalization.ORTHOGONAL) {
+                out[k] = this.get_scaling_factor(k) * (temp0 + Math.sqrt(2) * sum);
+            }
+            else {
+                out[k] = temp0 + 2 * sum;
+            }
+        }
+        return out;
+    }
+
+    private double[] type4() {
+        double[] out = new double[this.signal.length];
+        for (int k=0; k<out.length; k++){
+            double sum = 0;
+            for (int n=0; n<this.signal.length; n++) {
+                sum += this.signal[n] * Math.cos((Math.PI * (2*k + 1) * (2*n + 1))/(4 * this.signal.length));
+            }
+            if (this.norm == Normalization.ORTHOGONAL) {
+                out[k] = this.get_scaling_factor(k) * 2 * sum;
+            }
+            else {
+                out[k] = 2 * sum;
+            }
+        }
+        return out;
+
+    }
+
+
+    public void transform() {
+        switch (this.type) {
+            case 1:
+                this.output = this.type1();
+                break;
+            case 2:
+                this.output = this.type2();
+                break;
+            case 3:
+                this.output = this.type3();
+                break;
+            case 4:
+                this.output = this.type4();
+                break;
+        }
+
+    }
+
+    public int getSignalLength() {
+        return this.signal.length;
+    }
+
+    public double[] getMagnitude() throws ExceptionInInitializerError {
+        if (this.output == null) {
+            throw new ExceptionInInitializerError("Execute transform() function before returning result");
+        }
+        return this.output;
+    }
 }
