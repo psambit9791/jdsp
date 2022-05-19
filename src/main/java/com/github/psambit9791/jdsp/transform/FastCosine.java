@@ -68,6 +68,4 @@ public class FastCosine implements _Cosine {
         }
         return this.output;
     }
-
-
 }

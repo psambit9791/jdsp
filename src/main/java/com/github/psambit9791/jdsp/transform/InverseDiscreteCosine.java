@@ -12,5 +12,70 @@
 
 package com.github.psambit9791.jdsp.transform;
 
-public class InverseDiscreteCosine {
+public class InverseDiscreteCosine implements _InverseCosine{
+
+    private double[] signal;
+    private double[] output = null;
+    private int type;
+
+    private DiscreteCosine.Normalization norm;
+
+    private int inferType(int t) {
+        int inf = 0;
+        if (t == 1 || t == 4) {
+            inf = t;
+        }
+        else if (t == 2) {
+            inf = 3;
+        }
+        else if (t == 3) {
+            inf = 2;
+        }
+        return inf;
+    }
+
+    public InverseDiscreteCosine(double[] s, int type, DiscreteCosine.Normalization norm) throws IllegalArgumentException {
+        if ((type <= 0) || (type > 4)) {
+            throw new IllegalArgumentException("Type must be between 1 and 4");
+        }
+        this.signal = s;
+        this.type = this.inferType(type);
+        this.norm = norm;
+
+    }
+
+    public InverseDiscreteCosine(double[] s, DiscreteCosine.Normalization norm) throws IllegalArgumentException {
+        this.signal = s;
+        this.type = this.inferType(2);
+        this.norm = norm;
+    }
+
+    public InverseDiscreteCosine(double[] s, int type) throws IllegalArgumentException {
+        if ((type <= 0) || (type > 4)) {
+            throw new IllegalArgumentException("Type must be between 1 and 4");
+        }
+        this.signal = s;
+        this.type = this.inferType(type);
+        this.norm = DiscreteCosine.Normalization.STANDARD;
+    }
+
+    public InverseDiscreteCosine(double[] s) {
+        this.signal = s;
+        this.type = this.inferType(2);
+        this.norm = DiscreteCosine.Normalization.STANDARD;
+    }
+
+    public void transform() {
+        DiscreteCosine dct = new DiscreteCosine(this.signal, this.type, this.norm);
+        dct.transform();
+        this.output = dct.getMagnitude();
+    }
+
+    public double[] getMagnitude() {
+        return this.output;
+    }
+
+    public int getSignalLength() {
+        return this.signal.length;
+    }
 }
