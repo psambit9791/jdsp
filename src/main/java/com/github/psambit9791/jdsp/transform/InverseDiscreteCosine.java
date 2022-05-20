@@ -71,7 +71,10 @@ public class InverseDiscreteCosine implements _InverseCosine{
         this.output = dct.getMagnitude();
     }
 
-    public double[] getMagnitude() {
+    public double[] getMagnitude() throws ExceptionInInitializerError {
+        if (this.output == null) {
+            throw new ExceptionInInitializerError("Execute transform() function before returning result");
+        }
         return this.output;
     }
 

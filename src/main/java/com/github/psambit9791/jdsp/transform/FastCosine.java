@@ -28,7 +28,7 @@ public class FastCosine implements _Cosine {
 
 
     private void extendSignal() {
-        double power = Math.log(this.signal.length)/Math.log(2);
+        double power = Math.log(this.signal.length - 1)/Math.log(2);
         double raised_power = Math.ceil(power);
         int new_length = (int)(Math.pow(2, raised_power)) + 1;
         if (new_length != this.signal.length) {
@@ -55,7 +55,6 @@ public class FastCosine implements _Cosine {
         else {
             this.fct = new FastCosineTransformer(DctNormalization.STANDARD_DCT_I);
         }
-
     }
 
     public void transform() {

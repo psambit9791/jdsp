@@ -12,5 +12,55 @@
 
 package com.github.psambit9791.jdsp.transform;
 
-public class InverseFastCosine {
+import com.github.psambit9791.jdsp.misc.UtilMethods;
+import org.apache.commons.math3.transform.DctNormalization;
+import org.apache.commons.math3.transform.FastCosineTransformer;
+import org.apache.commons.math3.transform.TransformType;
+
+public class InverseFastCosine implements _InverseCosine {
+
+    private double[] signal;
+    private double[] output;
+    private FastCosineTransformer fct;
+
+    private void extendSignal() {
+        double power = Math.log(this.signal.length - 1)/Math.log(2);
+        double raised_power = Math.ceil(power);
+        int new_length = (int)(Math.pow(2, raised_power)) + 1;
+        if (new_length != this.signal.length) {
+            this.signal = UtilMethods.zeroPadSignal(this.signal, new_length-this.signal.length);
+        }
+    }
+
+    public int getSignalLength() {
+        return this.signal.length;
+    }
+
+    public InverseFastCosine(double[] signal) {
+        this.signal = signal;
+        this.extendSignal();
+        this.fct = new FastCosineTransformer(DctNormalization.STANDARD_DCT_I);
+    }
+
+    public InverseFastCosine(double[] signal, FastCosine.Normalization norm) {
+        this.signal = signal;
+        this.extendSignal();
+        if (norm == FastCosine.Normalization.ORTHOGONAL) {
+            this.fct = new FastCosineTransformer(DctNormalization.ORTHOGONAL_DCT_I);
+        }
+        else {
+            this.fct = new FastCosineTransformer(DctNormalization.STANDARD_DCT_I);
+        }
+    }
+
+    public void transform() {
+        this.output = this.fct.transform(this.signal, TransformType.INVERSE);
+    }
+
+    public double[] getMagnitude() throws ExceptionInInitializerError {
+        if (this.output == null) {
+            throw new ExceptionInInitializerError("Execute transform() function before returning result");
+        }
+        return this.output;
+    }
 }
