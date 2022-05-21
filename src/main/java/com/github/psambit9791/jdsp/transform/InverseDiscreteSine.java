@@ -12,9 +12,7 @@
 
 package com.github.psambit9791.jdsp.transform;
 
-import java.util.Objects;
-
-public class InverseDiscreteCosine implements _InverseSineCosine {
+public class InverseDiscreteSine implements _SineCosine {
 
     private double[] signal;
     private double[] output = null;
@@ -36,7 +34,7 @@ public class InverseDiscreteCosine implements _InverseSineCosine {
         return inf;
     }
 
-    public InverseDiscreteCosine(double[] s, int type, Normalization norm) throws IllegalArgumentException {
+    public InverseDiscreteSine(double[] s, int type, Normalization norm) throws IllegalArgumentException {
         if ((type <= 0) || (type > 4)) {
             throw new IllegalArgumentException("Type must be between 1 and 4");
         }
@@ -46,13 +44,13 @@ public class InverseDiscreteCosine implements _InverseSineCosine {
 
     }
 
-    public InverseDiscreteCosine(double[] s, Normalization norm) {
+    public InverseDiscreteSine(double[] s, Normalization norm) {
         this.signal = s;
         this.type = this.inferType(2);
         this.norm = norm;
     }
 
-    public InverseDiscreteCosine(double[] s, int type) throws IllegalArgumentException {
+    public InverseDiscreteSine(double[] s, int type) throws IllegalArgumentException {
         if ((type <= 0) || (type > 4)) {
             throw new IllegalArgumentException("Type must be between 1 and 4");
         }
@@ -61,22 +59,22 @@ public class InverseDiscreteCosine implements _InverseSineCosine {
         this.norm = Normalization.STANDARD;
     }
 
-    public InverseDiscreteCosine(double[] s) {
+    public InverseDiscreteSine(double[] s) {
         this.signal = s;
         this.type = this.inferType(2);
         this.norm = Normalization.STANDARD;
     }
 
     public void transform() {
-        DiscreteCosine dct;
+        DiscreteSine dst;
         if (this.norm == Normalization.STANDARD) {
-            dct = new DiscreteCosine(this.signal, this.type, _SineCosine.Normalization.STANDARD);
+            dst = new DiscreteSine(this.signal, this.type, _SineCosine.Normalization.STANDARD);
         }
         else {
-            dct = new DiscreteCosine(this.signal, this.type, _SineCosine.Normalization.ORTHOGONAL);
+            dst = new DiscreteSine(this.signal, this.type, _SineCosine.Normalization.ORTHOGONAL);
         }
-        dct.transform();
-        this.output = dct.getMagnitude();
+        dst.transform();
+        this.output = dst.getMagnitude();
     }
 
     public double[] getMagnitude() throws ExceptionInInitializerError {

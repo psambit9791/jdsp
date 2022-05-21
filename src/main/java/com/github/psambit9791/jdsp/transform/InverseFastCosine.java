@@ -17,7 +17,7 @@ import org.apache.commons.math3.transform.DctNormalization;
 import org.apache.commons.math3.transform.FastCosineTransformer;
 import org.apache.commons.math3.transform.TransformType;
 
-public class InverseFastCosine implements _InverseCosine {
+public class InverseFastCosine implements _InverseSineCosine {
 
     private double[] signal;
     private double[] output;
@@ -42,10 +42,10 @@ public class InverseFastCosine implements _InverseCosine {
         this.fct = new FastCosineTransformer(DctNormalization.STANDARD_DCT_I);
     }
 
-    public InverseFastCosine(double[] signal, FastCosine.Normalization norm) {
+    public InverseFastCosine(double[] signal, Normalization norm) {
         this.signal = signal;
         this.extendSignal();
-        if (norm == FastCosine.Normalization.ORTHOGONAL) {
+        if (norm == Normalization.ORTHOGONAL) {
             this.fct = new FastCosineTransformer(DctNormalization.ORTHOGONAL_DCT_I);
         }
         else {

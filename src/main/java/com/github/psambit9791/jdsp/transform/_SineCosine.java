@@ -12,7 +12,12 @@
 
 package com.github.psambit9791.jdsp.transform;
 
-public interface _Cosine {
+public interface _SineCosine {
+
+    public enum Normalization {
+        STANDARD,
+        ORTHOGONAL
+    }
 
     void transform();
     double[] getMagnitude();

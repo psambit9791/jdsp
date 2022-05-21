@@ -15,42 +15,45 @@ package com.github.psambit9791.jdsp.transform;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.apache.commons.math3.transform.*;
 
-public class FastCosine implements _SineCosine {
-    // Only DCT-I
+public class InverseFastSine implements _SineCosine {
 
     private double[] signal;
     private double[] output;
-    private FastCosineTransformer fct;
+    public enum Normalization {
+        STANDARD,
+        ORTHOGONAL
+    }
+    private FastSineTransformer fst;
 
 
     private void extendSignal() {
-        double power = Math.log(this.signal.length - 1)/Math.log(2);
+        double power = Math.log(this.signal.length)/Math.log(2);
         double raised_power = Math.ceil(power);
-        int new_length = (int)(Math.pow(2, raised_power)) + 1;
+        int new_length = (int)(Math.pow(2, raised_power));
         if (new_length != this.signal.length) {
             this.signal = UtilMethods.zeroPadSignal(this.signal, new_length-this.signal.length);
         }
     }
 
-    public FastCosine(double[] signal) {
+    public InverseFastSine(double[] signal) {
         this.signal = signal;
         this.extendSignal();
-        this.fct = new FastCosineTransformer(DctNormalization.STANDARD_DCT_I);
+        this.fst = new FastSineTransformer(DstNormalization.STANDARD_DST_I);
     }
 
-    public FastCosine(double[] signal, Normalization norm) {
+    public InverseFastSine(double[] signal, FastSine.Normalization norm) {
         this.signal = signal;
         this.extendSignal();
-        if (norm == Normalization.ORTHOGONAL) {
-            this.fct = new FastCosineTransformer(DctNormalization.ORTHOGONAL_DCT_I);
+        if (norm == FastSine.Normalization.ORTHOGONAL) {
+            this.fst = new FastSineTransformer(DstNormalization.ORTHOGONAL_DST_I);
         }
         else {
-            this.fct = new FastCosineTransformer(DctNormalization.STANDARD_DCT_I);
+            this.fst = new FastSineTransformer(DstNormalization.STANDARD_DST_I);
         }
     }
 
     public void transform() {
-        this.output = this.fct.transform(this.signal, TransformType.FORWARD);
+        this.output = this.fst.transform(this.signal, TransformType.INVERSE);
     }
 
     public double[] getMagnitude() throws ExceptionInInitializerError {

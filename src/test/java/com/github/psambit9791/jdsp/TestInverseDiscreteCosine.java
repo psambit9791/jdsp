@@ -197,7 +197,7 @@ public class TestInverseDiscreteCosine {
                 -0.   , -0.072,  0.   , -0.069,  0.   , -0.067,  0.   , -0.065,
                 0.   , -0.064, -0.   , -0.062, -0.   , -0.061, -0.   , -0.059,
                 0.   , -0.059, -0.   , -0.058,  0.   , -0.058,  0.   , -0.041};
-        InverseDiscreteCosine idct1 = new InverseDiscreteCosine(this.signal1, 1, DiscreteCosine.Normalization.ORTHOGONAL);
+        InverseDiscreteCosine idct1 = new InverseDiscreteCosine(this.signal1, 1, InverseDiscreteCosine.Normalization.ORTHOGONAL);
         idct1.transform();
         double[] output1 = idct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
@@ -212,7 +212,7 @@ public class TestInverseDiscreteCosine {
                 0.   , -0.144, -0.   , -0.132,  0.   , -0.122, -0.   , -0.115,
                 0.   , -0.109,  0.   , -0.104, -0.   , -0.101, -0.   , -0.098,
                 -0.   , -0.097,  0.   , -0.095,  0.   , -0.095,  0.   , -0.065};
-        InverseDiscreteCosine idct2 = new InverseDiscreteCosine(this.signal2, 1, DiscreteCosine.Normalization.ORTHOGONAL);
+        InverseDiscreteCosine idct2 = new InverseDiscreteCosine(this.signal2, 1, InverseDiscreteCosine.Normalization.ORTHOGONAL);
         idct2.transform();
         double[] output2 = idct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
@@ -230,7 +230,7 @@ public class TestInverseDiscreteCosine {
                 -0.008, -0.064, -0.009, -0.059, -0.01 , -0.056, -0.012, -0.052,
                 -0.014, -0.049, -0.016, -0.045, -0.017, -0.042, -0.019, -0.039,
                 -0.021, -0.037, -0.023, -0.034, -0.025, -0.032, -0.027, -0.029};
-        InverseDiscreteCosine idct1 = new InverseDiscreteCosine(this.signal1, 2, DiscreteCosine.Normalization.ORTHOGONAL);
+        InverseDiscreteCosine idct1 = new InverseDiscreteCosine(this.signal1, 2, InverseDiscreteCosine.Normalization.ORTHOGONAL);
         idct1.transform();
         double[] output1 = idct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
@@ -245,7 +245,7 @@ public class TestInverseDiscreteCosine {
                 -0.015, -0.128, -0.018, -0.114, -0.02 , -0.102, -0.022, -0.092,
                 -0.024, -0.084, -0.027, -0.077, -0.029, -0.071, -0.032, -0.065,
                 -0.034, -0.061, -0.038, -0.055, -0.04 , -0.052, -0.044, -0.047};
-        InverseDiscreteCosine idct2 = new InverseDiscreteCosine(this.signal2, 2, DiscreteCosine.Normalization.ORTHOGONAL);
+        InverseDiscreteCosine idct2 = new InverseDiscreteCosine(this.signal2, 2, InverseDiscreteCosine.Normalization.ORTHOGONAL);
         idct2.transform();
         double[] output2 = idct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
@@ -263,7 +263,7 @@ public class TestInverseDiscreteCosine {
                 0.   , -0.031,  0.   , -0.027,  0.   , -0.025,  0.   , -0.021,
                 0.   , -0.019,  0.   , -0.015,  0.   , -0.013,  0.   , -0.01 ,
                 0.   , -0.008,  0.   , -0.005,  0.   , -0.003,  0.   , -0.001};
-        InverseDiscreteCosine idct1 = new InverseDiscreteCosine(this.signal1, 3, DiscreteCosine.Normalization.ORTHOGONAL);
+        InverseDiscreteCosine idct1 = new InverseDiscreteCosine(this.signal1, 3, InverseDiscreteCosine.Normalization.ORTHOGONAL);
         idct1.transform();
         double[] output1 = idct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
@@ -278,7 +278,7 @@ public class TestInverseDiscreteCosine {
                 0.   , -0.065,  0.   , -0.054,  0.   , -0.045,  0.   , -0.038,
                 0.   , -0.032,  0.   , -0.027,  0.   , -0.022,  0.   , -0.017,
                 0.   , -0.014,  0.   , -0.009,  0.   , -0.006,  0.   , -0.001};
-        InverseDiscreteCosine idct2 = new InverseDiscreteCosine(this.signal2, 3, DiscreteCosine.Normalization.ORTHOGONAL);
+        InverseDiscreteCosine idct2 = new InverseDiscreteCosine(this.signal2, 3, InverseDiscreteCosine.Normalization.ORTHOGONAL);
         idct2.transform();
         double[] output2 = idct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
@@ -296,7 +296,7 @@ public class TestInverseDiscreteCosine {
                 0.017, -0.048,  0.018, -0.045,  0.018, -0.043,  0.02 , -0.041,
                 0.021, -0.04 ,  0.022, -0.038,  0.023, -0.036,  0.024, -0.034,
                 0.025, -0.033,  0.026, -0.031,  0.027, -0.03 ,  0.028, -0.029};
-        InverseDiscreteCosine idct1 = new InverseDiscreteCosine(this.signal1, 4, DiscreteCosine.Normalization.ORTHOGONAL);
+        InverseDiscreteCosine idct1 = new InverseDiscreteCosine(this.signal1, 4, InverseDiscreteCosine.Normalization.ORTHOGONAL);
         idct1.transform();
         double[] output1 = idct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
@@ -311,7 +311,7 @@ public class TestInverseDiscreteCosine {
                 0.034, -0.096,  0.035, -0.087,  0.036, -0.079,  0.036, -0.073,
                 0.037, -0.068,  0.038, -0.063,  0.038, -0.06 ,  0.04 , -0.057,
                 0.041, -0.054,  0.042, -0.051,  0.044, -0.049,  0.046, -0.046};
-        InverseDiscreteCosine idct2 = new InverseDiscreteCosine(this.signal2, 4, DiscreteCosine.Normalization.ORTHOGONAL);
+        InverseDiscreteCosine idct2 = new InverseDiscreteCosine(this.signal2, 4, InverseDiscreteCosine.Normalization.ORTHOGONAL);
         idct2.transform();
         double[] output2 = idct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
