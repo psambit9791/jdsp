@@ -156,7 +156,7 @@ _Fourier ft = new DiscreteFourier(signal);
 _Fourier ft = new FastFourier(signal);
 ft.transform();
 boolean onlyPositive = true;
-double[] out = fft.getMagnitude(onlyPositive); //Positive Absolute
+double[] out = ft.getMagnitude(onlyPositive); //Positive Absolute
                     </code>
                   </pre>
                 </div>
@@ -168,7 +168,7 @@ _Fourier ft = new DiscreteFourier(signal);
 _Fourier ft = new FastFourier(signal);
 ft.dft();
 boolean onlyPositive = true;
-double[][] out = fft.getComplex2D(onlyPositive); //Positive Complex
+double[][] out = ft.getComplex2D(onlyPositive); //Positive Complex
                     </code>
                   </pre>
                 </div>
@@ -186,7 +186,7 @@ _Fourier ft = new DiscreteFourier(signal);
 _Fourier ft = new FastFourier(signal);
 ft.dft();
 boolean onlyPositive = false;
-double[] out = fft.getMagnitude(onlyPositive); //Full Absolute
+double[] out = ft.getMagnitude(onlyPositive); //Full Absolute
                     </code>
                   </pre>
                 </div>
@@ -198,7 +198,7 @@ _Fourier ft = new DiscreteFourier(signal);
 _Fourier ft = new FastFourier(signal);
 ft.dft();
 boolean onlyPositive = false;
-double[][] out = fft.getComplex2D(onlyPositive); //Full Complex
+double[][] out = ft.getComplex2D(onlyPositive); //Full Complex
                     </code>
                   </pre>
                 </div>
@@ -231,9 +231,9 @@ _InverseFourier ift = new InverseDiscreteFourier(complexSequence); //If transfor
 // OR
 _InverseFourier ift = new InverseFastFourier(complexSequence); //If transformed using FFT
 ift.transform();
-double[] outReal = transformer.getReal(); //To get only the real component
-double[] outAbsolute = transformer.getMagnitude(); //To get the absolute value of the complex signal
-double[][] out = transformer.getComplex2D(); // To get the complex signal
+double[] outReal = ift.getReal(); //To get only the real component
+double[] outAbsolute = ift.getMagnitude(); //To get the absolute value of the complex signal
+double[][] out = ift.getComplex2D(); // To get the complex signal
                     </code>
                   </pre>
                 </div>
