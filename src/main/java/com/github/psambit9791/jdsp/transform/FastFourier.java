@@ -58,6 +58,34 @@ public class FastFourier implements _Fourier {
     }
 
     /**
+     * Returns the frequencies of the FFT bins are computation
+     * @param Fs Sampling frequency of the signal
+     * @param onlyPositive Set to True if non-mirrored output is required
+     * @return double[] Array of frequency bins
+     */
+    public double[] getFFTFreq(int Fs, boolean onlyPositive) {
+        if (this.output == null) {
+            throw new ExceptionInInitializerError("Execute transform() function before returning FFT bins");
+        }
+        double[] results;
+        double val = (double)Fs /this.signal.length;
+
+        if (onlyPositive) {
+            int N = (this.signal.length)/2 + 1;
+            int[] p1 = UtilMethods.arange(0, N, 1);
+            results = Arrays.stream(p1).asDoubleStream().toArray();
+        }
+        else {
+            int N = (this.signal.length - 1)/2 + 1;
+            int[] p1 = UtilMethods.arange(0, N, 1);
+            int[] p2 = UtilMethods.arange(-(this.signal.length/2), 0, 1);
+            results = Arrays.stream(UtilMethods.concatenateArray(p1, p2)).asDoubleStream().toArray();
+        }
+        results = UtilMethods.scalarArithmetic(results, val, "mul");
+        return results;
+    }
+
+    /**
      * This constructor initialises the prerequisites required to use FastFourier.
      * @param signal Signal to be transformed
      */
