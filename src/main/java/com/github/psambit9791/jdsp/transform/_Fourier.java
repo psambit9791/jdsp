@@ -25,4 +25,5 @@ public interface _Fourier {
     double[][] getComplex2D(boolean onlyPositive);
     Complex[] getComplex(boolean onlyPositive);
     int getSignalLength();
+    double[] getFFTFreq(int Fs, boolean onlyPositive);
 }
