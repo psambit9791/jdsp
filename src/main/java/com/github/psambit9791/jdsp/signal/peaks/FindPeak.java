@@ -35,6 +35,7 @@ public class FindPeak {
     private int[] trough_indices = null;
 
     private int overlap = 3;
+    private int threads = 4;
 
     /**
      * This constructor initialises the prerequisites required to use FindPeak.
@@ -144,15 +145,14 @@ public class FindPeak {
     // internal function for detecting peaks
     private Peak detect(double[] signal, String mode) {
         this.reset_indices();
-        int threads = 10;
 
-        double[][] splitSignal = this.splitSignalByThreads(signal, threads);
-        int[] offsetIndices = this.getSplitIndices(signal, threads);
-        DetectConcurrent[] dcObj = new DetectConcurrent[threads];
-        Thread[] t = new Thread[threads];
-        int[][][] out = new int[threads][][];
+        double[][] splitSignal = this.splitSignalByThreads(signal, this.threads);
+        int[] offsetIndices = this.getSplitIndices(signal, this.threads);
+        DetectConcurrent[] dcObj = new DetectConcurrent[this.threads];
+        Thread[] t = new Thread[this.threads];
+        int[][][] out = new int[this.threads][][];
 
-        for (int i = 0; i<splitSignal.length; i++) {
+        for (int i = 0; i<this.threads; i++) {
             dcObj[i] = new DetectConcurrent(splitSignal[i], offsetIndices[i]);
             t[i] = new Thread(dcObj[i]);
             t[i].start();
@@ -175,9 +175,9 @@ public class FindPeak {
             right_edge = UtilMethods.concatenateArray(right_edge, out[i][2]);
         }
 
-        midpoints = this.removeDuplicates(midpoints);
-        left_edge = this.removeDuplicates(left_edge);
-        right_edge = this.removeDuplicates(right_edge);
+//        midpoints = this.removeDuplicates(midpoints);
+//        left_edge = this.removeDuplicates(left_edge);
+//        right_edge = this.removeDuplicates(right_edge);
 
         Peak pObj = new Peak(signal, midpoints, left_edge, right_edge, mode);
         return pObj;
