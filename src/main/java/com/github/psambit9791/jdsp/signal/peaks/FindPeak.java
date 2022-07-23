@@ -11,7 +11,9 @@
 package com.github.psambit9791.jdsp.signal.peaks;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
+import org.apache.commons.math3.stat.StatUtils;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -22,7 +24,7 @@ import java.util.*;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
+ * @version 1.1
  */
 public class FindPeak {
 
@@ -31,6 +33,8 @@ public class FindPeak {
     private ArrayList<Integer> minima_indices;
     private int[] peak_indices = null;
     private int[] trough_indices = null;
+
+    private int overlap = 3;
 
     /**
      * This constructor initialises the prerequisites required to use FindPeak.
@@ -45,6 +49,43 @@ public class FindPeak {
     private void reset_indices() {
         this.maxima_indices = new ArrayList<Integer>();
         this.minima_indices = new ArrayList<Integer>();
+    }
+
+    private boolean checkState(Thread[] threads) {
+        for (Thread t : threads) {
+            if (!String.valueOf(t.getState()).equals("TERMINATED")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private int[] getSplitIndices(double[] signal, int threads) {
+        int splitLength = signal.length/threads;
+        int[] indices = new int[threads];
+        int start_index = 0;
+
+        for (int i=0; i<indices.length; i++) {
+            indices[i] = start_index;
+            start_index = start_index + splitLength - overlap;
+        }
+        return indices;
+    }
+
+    private double[][] splitSignalByThreads(double[] signal, int threads) {
+        int splitLength = signal.length/threads;
+        double[][] splitData = new double[threads][];
+
+        int start_index = 0;
+
+        for (int i=0; i<threads-1; i++) {
+            int stop_index = start_index + splitLength;
+            splitData[i] = UtilMethods.splitByIndex(signal, start_index, stop_index);
+            start_index = stop_index - this.overlap;
+        }
+
+        splitData[threads-1] = UtilMethods.splitByIndex(signal, start_index, signal.length);
+        return splitData;
     }
 
     /**
@@ -102,35 +143,43 @@ public class FindPeak {
 
     // internal function for detecting peaks
     private Peak detect(double[] signal, String mode) {
-        ArrayList<Integer> midpoints = new ArrayList<Integer>();
-        ArrayList<Integer> left_edge = new ArrayList<Integer>();
-        ArrayList<Integer> right_edge = new ArrayList<Integer>();
         this.reset_indices();
-        int i = 1;
-        int i_max = signal.length - 1;
-        int i_ahead = 0;
+        int threads = 10;
 
-        while (i<i_max) {
-            if (signal[i-1] < signal[i]) {
-                i_ahead = i + 1;
-                while ((i_ahead < i_max) && (signal[i_ahead] == signal[i])) {
-                    i_ahead++;
-                }
+        double[][] splitSignal = this.splitSignalByThreads(signal, threads);
+        int[] offsetIndices = this.getSplitIndices(signal, threads);
+        DetectConcurrent[] dcObj = new DetectConcurrent[threads];
+        Thread[] t = new Thread[threads];
+        int[][][] out = new int[threads][][];
 
-                if (signal[i_ahead] < signal[i]) {
-                    left_edge.add(i);
-                    right_edge.add(i_ahead-1);
-                    midpoints.add((i+i_ahead-1)/2);
-                    i = i_ahead;
-                }
-            }
-            i++;
+        for (int i = 0; i<splitSignal.length; i++) {
+            dcObj[i] = new DetectConcurrent(splitSignal[i], offsetIndices[i]);
+            t[i] = new Thread(dcObj[i]);
+            t[i].start();
         }
-        Peak pObj = new Peak(signal,
-                UtilMethods.convertToPrimitiveInt(midpoints),
-                UtilMethods.convertToPrimitiveInt(left_edge),
-                UtilMethods.convertToPrimitiveInt(right_edge),
-                mode);
+
+        while (!checkState(t)) {
+        }
+
+        for (int i = 0; i<splitSignal.length; i++) {
+            out[i] = dcObj[i].getValue();
+        }
+
+        int[] midpoints = new int[0];
+        int[] left_edge = new int[0];
+        int[] right_edge = new int[0];
+
+        for (int i=0; i<out.length; i++) {
+            midpoints = UtilMethods.concatenateArray(midpoints, out[i][0]);
+            left_edge = UtilMethods.concatenateArray(left_edge, out[i][1]);
+            right_edge = UtilMethods.concatenateArray(right_edge, out[i][2]);
+        }
+
+        midpoints = this.removeDuplicates(midpoints);
+        left_edge = this.removeDuplicates(left_edge);
+        right_edge = this.removeDuplicates(right_edge);
+
+        Peak pObj = new Peak(signal, midpoints, left_edge, right_edge, mode);
         return pObj;
     }
 
@@ -195,5 +244,58 @@ public class FindPeak {
         list.clear();
         list.addAll(set);
         return list;
+    }
+
+    private int[] removeDuplicates(int[] data) {
+        return Arrays.stream(data).distinct().toArray();
+    }
+
+
+    private static class DetectConcurrent implements Runnable {
+
+        ArrayList<Integer> midpoints = new ArrayList<Integer>();
+        ArrayList<Integer> left_edge = new ArrayList<Integer>();
+        ArrayList<Integer> right_edge = new ArrayList<Integer>();
+
+        private double[] signal;
+        private int offset;
+
+        public DetectConcurrent(double[] signal, int offset) {
+            this.signal = signal;
+            this.offset = offset;
+        }
+
+        @Override
+        public void run() {
+            int i = 1;
+            int i_max = signal.length - 1;
+            int i_ahead = 0;
+
+            while (i<i_max) {
+                if (signal[i-1] < signal[i]) {
+                    i_ahead = i + 1;
+                    while ((i_ahead < i_max) && (signal[i_ahead] == signal[i])) {
+                        i_ahead++;
+                    }
+
+                    if (signal[i_ahead] < signal[i]) {
+                        left_edge.add(i + offset);
+                        right_edge.add(i_ahead-1 + offset);
+                        midpoints.add(((i+i_ahead-1)/2) + offset);
+                        i = i_ahead;
+                    }
+                }
+                i++;
+            }
+        }
+
+        public int[][] getValue() {
+            int[][] out = {UtilMethods.convertToPrimitiveInt(this.midpoints),
+                    UtilMethods.convertToPrimitiveInt(this.left_edge),
+                    UtilMethods.convertToPrimitiveInt(this.right_edge)
+            };
+            return out;
+        }
+
     }
 }
