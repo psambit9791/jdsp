@@ -144,17 +144,13 @@ public class FindPeak {
 
     // internal function for detecting peaks
     private Peak detect(double[] signal, String mode) {
-
-        int[] midpoints = new int[signal.length];
-        int[] left_edge = new int[signal.length];
-        int[] right_edge = new int[signal.length];
+        LinkedList<Integer> midpoints = new LinkedList<Integer>();
+        LinkedList<Integer> left_edge = new LinkedList<Integer>();
+        LinkedList<Integer> right_edge = new LinkedList<Integer>();
         this.reset_indices();
-
         int i = 1;
         int i_max = signal.length - 1;
         int i_ahead = 0;
-
-        int peak_index = 0;
 
         while (i<i_max) {
             if (signal[i-1] < signal[i]) {
@@ -164,19 +160,21 @@ public class FindPeak {
                 }
 
                 if (signal[i_ahead] < signal[i]) {
-                    left_edge[peak_index] = i;
-                    right_edge[peak_index] = i_ahead-1;
-                    midpoints[peak_index] = (i+i_ahead-1)/2;
+                    left_edge.add(i);
+                    right_edge.add(i_ahead-1);
+                    midpoints.add((i+i_ahead-1)/2);
                     i = i_ahead;
-                    peak_index++;
                 }
             }
             i++;
         }
-        midpoints = UtilMethods.splitByIndex(midpoints, 0, peak_index);
-        left_edge = UtilMethods.splitByIndex(left_edge, 0, peak_index);
-        right_edge = UtilMethods.splitByIndex(right_edge, 0, peak_index);
-        Peak pObj = new Peak(signal, midpoints, left_edge, right_edge, mode);
+        System.out.println("Processing Completed");
+
+        Peak pObj = new Peak(signal,
+                UtilMethods.convertToPrimitiveInt(midpoints),
+                UtilMethods.convertToPrimitiveInt(left_edge),
+                UtilMethods.convertToPrimitiveInt(right_edge),
+                mode);
         return pObj;
     }
 

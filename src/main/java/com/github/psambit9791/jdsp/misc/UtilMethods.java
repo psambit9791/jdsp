@@ -710,6 +710,14 @@ public class UtilMethods {
         return ret;
     }
 
+    public static int[] convertToPrimitiveInt(LinkedList<Integer> l) {
+        int[] ret = new int[l.size()];
+        for (int i=0; i<ret.length; i++) {
+            ret[i] = l.get(i);
+        }
+        return ret;
+    }
+
     /**
      * Converts an Double ArrayList to double[] array
      * @param l The Double ArrayList
