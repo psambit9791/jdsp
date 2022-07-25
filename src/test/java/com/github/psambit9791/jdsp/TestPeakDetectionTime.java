@@ -43,6 +43,7 @@ public class TestPeakDetectionTime {
         long start = System.currentTimeMillis();
         FindPeak fp = new FindPeak(zout);
         Peak out = fp.detectPeaks();
+        int[] peaks = out.getPeaks();
         long exec_time = (long) (System.currentTimeMillis() - start);
         Assertions.assertTrue(exec_time < 10000);
     }

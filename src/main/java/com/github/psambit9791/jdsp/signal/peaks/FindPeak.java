@@ -168,8 +168,6 @@ public class FindPeak {
             }
             i++;
         }
-        System.out.println("Processing Completed");
-
         Peak pObj = new Peak(signal,
                 UtilMethods.convertToPrimitiveInt(midpoints),
                 UtilMethods.convertToPrimitiveInt(left_edge),
