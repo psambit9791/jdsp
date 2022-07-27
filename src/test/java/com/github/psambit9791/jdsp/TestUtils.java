@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 
 public class TestUtils {
@@ -280,8 +281,16 @@ public class TestUtils {
     }
 
     @Test
-    public void convertToPrimitiveIntTest() {
+    public void convertToPrimitiveIntFromALTest() {
         ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        int[] nums = {1, 2, 3, 4, 5};
+        int[] out = UtilMethods.convertToPrimitiveInt(numbers);
+        Assertions.assertArrayEquals(nums, out);
+    }
+
+    @Test
+    public void convertToPrimitiveIntFromLLTest() {
+        LinkedList<Integer> numbers = new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5));
         int[] nums = {1, 2, 3, 4, 5};
         int[] out = UtilMethods.convertToPrimitiveInt(numbers);
         Assertions.assertArrayEquals(nums, out);
