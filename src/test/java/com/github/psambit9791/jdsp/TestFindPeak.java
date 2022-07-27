@@ -76,6 +76,56 @@ public class TestFindPeak {
     }
 
     @Test
+    public void peakFilterIllegalArgsExceptionTest() throws IOException {
+        int[] resultPeaks = {10, 37, 75, 104, 133, 212};
+        String expectedMessage = "Peaks in argument does not exist in the original peak list";
+
+        // Detection Tests
+        FindPeak fp = new FindPeak(this.simpleSignal);
+        Peak out = fp.detectPeaks();
+        out.getPeakSharpness();
+        out.getWidthData();
+        out.getProminenceData();
+
+        // Detection Test for Plateau Size
+        Exception exc = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            out.filterByPlateauSize(resultPeaks, 0.0, 1.0);
+        });
+        Assertions.assertTrue(exc.getMessage().contains(expectedMessage));
+
+        // Detection Test for Height
+        exc = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            out.filterByHeight(resultPeaks, 0.0, 1.0);
+        });
+        Assertions.assertTrue(exc.getMessage().contains(expectedMessage));
+
+        // Detection Test for Prominence
+        exc = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            out.filterByProminence(resultPeaks, 0.0, 1.0);
+        });
+        Assertions.assertTrue(exc.getMessage().contains(expectedMessage));
+
+        // Detection Test for Width
+        exc = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            out.filterByWidth(resultPeaks, 0.0, 1.0);
+        });
+        Assertions.assertTrue(exc.getMessage().contains(expectedMessage));
+
+        // Detection Test for Distance
+        exc = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            out.filterByPeakDistance(resultPeaks, 1);
+        });
+        Assertions.assertTrue(exc.getMessage().contains(expectedMessage));
+
+        // Detection Test for Sharpness
+        exc = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            out.filterBySharpness(resultPeaks, 0.0, 1.0);
+        });
+        Assertions.assertTrue(exc.getMessage().contains(expectedMessage));
+
+    }
+
+        @Test
     public void peakDetectTest() throws IOException {
         int[] resultPeaks = {10,  37,  75, 104, 133, 171, 197, 232};
 

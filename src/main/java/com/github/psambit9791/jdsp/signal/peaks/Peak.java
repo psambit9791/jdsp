@@ -99,18 +99,23 @@ public class Peak {
      */
     private int[] getIndexFromPeak(int[] peaks) {
         int[] indices = new int[peaks.length];
-        for (int i=0; i<indices.length; i++) {
-            boolean exists = false;
-            for (int j=0; j<this.midpoints.length; j++) {
-                if (peaks[i] == this.midpoints[j]) {
-                    indices[i] = j;
-                    exists = true;
-                    break;
-                }
+        int indexCounter = 0;
+        int i = 0;
+        int j = 0;
+
+        while ((i < this.midpoints.length) && (j < peaks.length)) {
+            if (this.midpoints[i] == peaks[j]) {
+                indices[j] = i;
+                indexCounter++;
+                i++;
+                j++;
             }
-            if (!exists) {
-                throw new IllegalArgumentException("Peaks in argument does not exist in the original peak list");
+            else {
+                i++;
             }
+        }
+        if (indexCounter != peaks.length) {
+            throw new IllegalArgumentException("Peaks in argument does not exist in the original peak list");
         }
         return indices;
     }
@@ -122,6 +127,13 @@ public class Peak {
      * @return double[] The list of all the heights of peaks
      */
     public double[] findPeakHeights(int[] peaks) {
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            this.getIndexFromPeak(peaks);
+        }
+        else {
+            peaks = this.midpoints;
+        }
         double[] newHeight = new double[peaks.length];
         for (int i=0; i<peaks.length; i++) {
             newHeight[i] = this.signal[peaks[i]];
@@ -135,6 +147,13 @@ public class Peak {
      * @return double[] The list of all the spreads of peaks
      */
     public int[] findPlateauSize(int[] peaks) {
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            this.getIndexFromPeak(peaks);
+        }
+        else {
+            peaks = this.midpoints;
+        }
         int[] peak_indices = this.getIndexFromPeak(peaks);
         int[] newPS = new int[peaks.length];
         for (int i=0; i<peak_indices.length; i++) {
@@ -150,6 +169,13 @@ public class Peak {
      * @return int[][] The vertical distance between the preceding and following samples of peak. 0: Vertical distance from preceding peak, 1: Vertical distance from following peak
      */
     public double[][] findPeakSharpness(int[] peaks) {
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            this.getIndexFromPeak(peaks);
+        }
+        else {
+            peaks = this.midpoints;
+        }
         double[][] sharpness = new double[2][peaks.length];
         for (int i=0; i<peaks.length; i++) {
             sharpness[0][i] = this.signal[peaks[i]] - this.signal[peaks[i]-1];
@@ -165,7 +191,13 @@ public class Peak {
      * @return int[] An array of distances between peaks
      */
     public int[] findPeakDistance(int[] peaks) {
-        Arrays.sort(peaks);
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            this.getIndexFromPeak(peaks);
+        }
+        else {
+            peaks = this.midpoints;
+        }
         return UtilMethods.diff(peaks);
     }
 
@@ -176,6 +208,13 @@ public class Peak {
      * @return double[][] The prominence of the input peaks. 0: Contains the prominence, 1: Contains the Left Bases, 2: Contains the Right Bases
      */
     public double[][] findPeakProminence(int[] peaks) {
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            this.getIndexFromPeak(peaks);
+        }
+        else {
+            peaks = this.midpoints;
+        }
         double[] prominence = new double[peaks.length];
         double[] left_base = new double[peaks.length];
         double[] right_base = new double[peaks.length];
@@ -227,7 +266,13 @@ public class Peak {
      * @return double[][] The width of the input peaks. 0: Contains the widths, 1: Contains the Left Intersection Points, 2: Contains the Right Intersection Points
      */
     public double[][] findPeakWidth(int[] peaks, double rel_height) throws IllegalArgumentException {
-
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            this.getIndexFromPeak(peaks);
+        }
+        else {
+            peaks = this.midpoints;
+        }
         if (rel_height > 1.0 || rel_height < 0.0) {
             throw new IllegalArgumentException("rel_height can be between 0.0 and 1.0");
         }
@@ -298,7 +343,9 @@ public class Peak {
      */
     public double[][] getPeakSharpness() {
         // Peak Sharpness Information (Equivalent to scipy.signal.find_peaks() threshold parameter)
-        this.sharpness = this.findPeakSharpness(this.midpoints);
+        if (this.sharpness == null) {
+            this.sharpness = this.findPeakSharpness(this.midpoints);
+        }
         return this.sharpness;
     }
 
@@ -316,7 +363,9 @@ public class Peak {
      */
     public int[] getPeakDistance() {
         // Peak Distance Information (Equivalent to scipy.signal.find_peaks() distance parameter)
-        this.distance = this.findPeakDistance(this.midpoints);
+        if (this.distance == null) {
+            this.distance = this.findPeakDistance(this.midpoints);
+        }
         return this.distance;
     }
 
@@ -327,7 +376,9 @@ public class Peak {
     public double[] getWidth() {
         // Peak Width Information (Equivalent to scipy.signal.find_peaks() width parameter)
         // Refer to https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_widths.html
-        this.widthData = this.findPeakWidth(this.midpoints, this.relative_height);
+        if (this.widthData == null) {
+            this.widthData = this.findPeakWidth(this.midpoints, this.relative_height);
+        }
         return this.widthData[0];
     }
 
@@ -338,7 +389,9 @@ public class Peak {
     public double[][] getWidthData() {
         // Peak Width Information (Equivalent to scipy.signal.find_peaks() width parameter)
         // Refer to https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_widths.html
-        this.widthData = this.findPeakWidth(this.midpoints, this.relative_height);
+        if (this.widthData == null) {
+            this.widthData = this.findPeakWidth(this.midpoints, this.relative_height);
+        }
         return this.widthData;
     }
 
@@ -349,7 +402,9 @@ public class Peak {
     public double[] getProminence() {
         // Peak Prominence Information (Equivalent to scipy.signal.find_peaks() prominence parameter)
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
-        this.prominenceData = this.findPeakProminence(this.midpoints);
+        if (this.prominenceData == null) {
+            this.prominenceData = this.findPeakProminence(this.midpoints);
+        }
         return this.prominenceData[0];
     }
 
@@ -358,7 +413,9 @@ public class Peak {
      * @return double[][] The list of all the prominence of peaks and the left and right bases
      */
     public double[][] getProminenceData() {
-        this.prominenceData = this.findPeakProminence(this.midpoints);
+        if (this.prominenceData == null) {
+            this.prominenceData = this.findPeakProminence(this.midpoints);
+        }
         return this.prominenceData;
     }
 
@@ -382,7 +439,19 @@ public class Peak {
      */
     public int[] filterByHeight(int[] peaks, Double lower_threshold, Double upper_threshold) {
         ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        double[] height = this.findPeakHeights(peaks);
+        double[] height = new double[peaks.length];
+        int[] indices;
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            indices = this.getIndexFromPeak(peaks);
+            for (int i=0; i<indices.length; i++) {
+                height[i] = this.height[indices[i]];
+            }
+        }
+        else {
+            peaks = this.midpoints;
+            height = this.height;
+        }
         if (lower_threshold == null && upper_threshold == null) {
             throw new IllegalArgumentException("All thresholds cannot be null");
         }
@@ -430,7 +499,19 @@ public class Peak {
      */
     public int[] filterByPlateauSize(int[] peaks, Double lower_threshold, Double upper_threshold) {
         ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        int[] plateau_size = this.findPlateauSize(peaks);
+        int[] plateau_size = new int[peaks.length];
+        int[] indices;
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            indices = this.getIndexFromPeak(peaks);
+            for (int i=0; i<indices.length; i++) {
+                plateau_size[i] = this.plateau_size[indices[i]];
+            }
+        }
+        else {
+            peaks = this.midpoints;
+            plateau_size = this.plateau_size;
+        }
         if (lower_threshold == null && upper_threshold == null) {
             throw new IllegalArgumentException("All thresholds cannot be null");
         }
@@ -477,8 +558,23 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterByProminence(int[] peaks, Double lower_threshold, Double upper_threshold) {
+        if (this.prominenceData == null) {
+            this.getProminenceData();
+        }
         ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        double[] prominence = this.findPeakProminence(peaks)[0];
+        double[] prominence = new double[peaks.length];
+        int[] indices;
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            indices = this.getIndexFromPeak(peaks);
+            for (int i=0; i<indices.length; i++) {
+                prominence[i] = this.prominenceData[0][indices[i]];
+            }
+        }
+        else {
+            peaks = this.midpoints;
+            prominence = this.prominenceData[0];
+        }
         if (lower_threshold == null && upper_threshold == null) {
             throw new IllegalArgumentException("All thresholds cannot be null");
         }
@@ -525,8 +621,23 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterByWidth(int[] peaks, Double lower_threshold, Double upper_threshold) {
+        if (this.widthData == null) {
+            this.getWidthData();
+        }
         ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        double[] width = this.findPeakWidth(peaks, this.relative_height)[0];
+        double[] width = new double[peaks.length];
+        int[] indices;
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            indices = this.getIndexFromPeak(peaks);
+            for (int i=0; i<indices.length; i++) {
+                width[i] = this.widthData[0][indices[i]];
+            }
+        }
+        else {
+            peaks = this.midpoints;
+            width = this.widthData[0];
+        }
         if (lower_threshold == null && upper_threshold == null) {
             throw new IllegalArgumentException("All thresholds cannot be null");
         }
@@ -573,6 +684,19 @@ public class Peak {
         int[] keep = new int[peaks.length];
         Arrays.fill(keep, 1);
         double[] heights = this.findPeakHeights(peaks);
+        int[] indices;
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            indices = this.getIndexFromPeak(peaks);
+            for (int i=0; i<indices.length; i++) {
+                heights[i] = this.height[indices[i]];
+            }
+        }
+        else {
+            peaks = this.midpoints;
+            heights = this.height;
+        }
+
         int[] priority = UtilMethods.argsort(heights, true);
         for (int i=peaks.length-1; i>=0; i--) {
             int j = priority[i];
@@ -620,10 +744,27 @@ public class Peak {
      * @return int[] The list of filtered peaks
      */
     public int[] filterBySharpness(int[] peaks, Double lower_threshold, Double upper_threshold) {
+        if (this.sharpness == null) {
+            this.getPeakSharpness();
+        }
         ArrayList<Integer> newPeaks = new ArrayList<Integer>();
         double[][] sharpness = this.findPeakSharpness(peaks);
         int[] keep = new int[peaks.length];
         Arrays.fill(keep, 1);
+
+        int[] indices;
+        if (!Arrays.equals(this.midpoints, peaks)) {
+            Arrays.sort(peaks);
+            indices = this.getIndexFromPeak(peaks);
+            for (int i=0; i<indices.length; i++) {
+                sharpness[0][i] = this.sharpness[0][indices[i]];
+                sharpness[1][i] = this.sharpness[1][indices[i]];
+            }
+        }
+        else {
+            peaks = this.midpoints;
+            sharpness = this.sharpness;
+        }
 
         if (lower_threshold == null && upper_threshold == null) {
             throw new IllegalArgumentException("All thresholds cannot be null");
