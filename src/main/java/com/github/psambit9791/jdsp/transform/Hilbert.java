@@ -57,7 +57,7 @@ public class Hilbert {
     }
 
     /**
-     * This function performs the hilbert transform on the input signal
+     * This function performs the hilbert transform on the input signal. The output analytical signal is set to the FFT output length
      */
     public void transform() {
         _Fourier dft;
@@ -72,6 +72,53 @@ public class Hilbert {
             this.h = new double[dft.getSignalLength()];
             Arrays.fill(this.h, 0);
             this.fillH();
+        }
+        dft.transform();
+        double[][] dftOut = dft.getComplex2D(false);
+
+        double[][] modOut = new double[dftOut.length][dftOut[0].length];
+
+        for (int i=0; i<modOut.length; i++) {
+            modOut[i][0] = dftOut[i][0] * this.h[i];
+            modOut[i][1] = dftOut[i][1] * this.h[i];
+        }
+
+        _InverseFourier idft;
+        if (Math.log(modOut.length)%Math.log(2) == 0) {
+            idft = new InverseFastFourier(UtilMethods.matToComplex(modOut), false);
+        }
+        else {
+            idft = new InverseDiscreteFourier(modOut, false);
+        }
+        idft.transform();
+        this.output = idft.getComplex();
+    }
+
+    /**
+     * This function performs the hilbert transform on the input signal
+     * @param forceDFT If set to True, DFT is used instead of FFT and the output length is same as signal length.
+     */
+    public void transform(boolean forceDFT) {
+        _Fourier dft;
+        if (forceDFT) {
+            dft = new DiscreteFourier(this.signal);
+            this.h = new double[dft.getSignalLength()];
+            Arrays.fill(this.h, 0);
+            this.fillH();
+        }
+        else {
+            if (this.signal.length > 200) {
+                dft = new FastFourier(this.signal);
+                this.h = new double[dft.getSignalLength()];
+                Arrays.fill(this.h, 0);
+                this.fillH();
+            }
+            else {
+                dft = new DiscreteFourier(this.signal);
+                this.h = new double[dft.getSignalLength()];
+                Arrays.fill(this.h, 0);
+                this.fillH();
+            }
         }
         dft.transform();
         double[][] dftOut = dft.getComplex2D(false);
