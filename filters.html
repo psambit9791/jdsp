@@ -76,6 +76,7 @@
                       <li class="active"><a href="filters.html" class="nav-link">Filters</a></li>
                       <li><a href="transforms.html" class="nav-link">Transforms</a></li>
                       <li><a href="peaks.html" class="nav-link">Peak Detection</a></li>
+                        <li><a href="speech.html" class="nav-link">Speech</a></li>
                       <li><a href="windowing.html" class="nav-link">Windowing</a></li>
                       <li><a href="splines.html" class="nav-link">Splines</a></li>
                       <li><a href="io.html" class="nav-link">Input/Output</a></li>
@@ -84,7 +85,7 @@
                   </li>
                   <li><a href="https://javadoc.io/doc/com.github.psambit9791/jdsp" target="_blank" class="nav-link">Documentation</a></li>
                   <li><a href="https://github.com/psambit9791/jdsp/tree/master" target="_blank" class="nav-link">Source Code</a></li>
-                  <li><a href="https://search.maven.org/artifact/com.github.psambit9791/jdsp/0.4.0/jar" target="_blank" class="nav-link">Maven</a></li>
+                  <li><a href="https://search.maven.org/artifact/com.github.psambit9791/jdsp/2.0.0/jar" target="_blank" class="nav-link">Maven</a></li>
                 </ul>
               </nav>
             </div>
@@ -104,7 +105,7 @@
             <div class="row align-items-center justify-content-center">
               <div class="col-md-7 text-center">
                 <h1 class="mb-4 text-white">Filters</h1>
-                <p class="mb-4">Provides a demonstration of using IIR, FIR and Kernel-based Filters through JDSP</p>
+                <p class="mb-4">Provides a demonstration of using different IIR, FIR and Kernel-based Filters available in JDSP</p>
               </div>
             </div>
           </div>
@@ -147,8 +148,8 @@
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int cutOff = 9; //Cut-off Frequency
-Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
-double[] result = flt.lowPassFilter(order, cutOff); //get the result after filtering
+Butterworth flt = new Butterworth(Fs);
+double[] result = flt.lowPassFilter(signal, order, cutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -158,8 +159,8 @@ double[] result = flt.lowPassFilter(order, cutOff); //get the result after filte
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int cutOff = 29; //Cut-off Frequency
-Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
-double[] result = flt.highPassFilter(order, cutOff); //get the result after filtering
+Butterworth flt = new Butterworth(Fs);
+double[] result = flt.highPassFilter(signal, order, cutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -176,8 +177,8 @@ int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int lowCutOff = 12; //Lower Cut-off Frequency
 int highCutOff = 18; //Higher Cut-off Frequency
-Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
-double[] result = flt.bandPassFilter(order, lowCutOff, highCutOff); //get the result after filtering
+Butterworth flt = new Butterworth(Fs);
+double[] result = flt.bandPassFilter(signal, order, lowCutOff, highCutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -188,8 +189,8 @@ int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int lowCutOff = 7; //Lower Cut-off Frequency
 int highCutOff = 28; //Higher Cut-off Frequency
-Butterworth flt = new Butterworth(signal, Fs); //signal is of type double[]
-double[] result = flt.bandStopFilter(order, lowCutOff, highCutOff); //get the result after filtering
+Butterworth flt = new Butterworth(Fs);
+double[] result = flt.bandStopFilter(signal, order, lowCutOff, highCutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -223,8 +224,8 @@ double rippleFactor = 1; //maximum ripple allowed below unity gain
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int cutOff = 9; //Cut-off Frequency
-Chebyshev flt = new Chebyshev(signal, Fs, rippleFactor, filterType); //signal is of type double[]
-double[] result = flt.lowPassFilter(order, cutOff); //get the result after filtering
+Chebyshev flt = new Chebyshev(Fs, rippleFactor, filterType);
+double[] result = flt.lowPassFilter(signal, order, cutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -236,8 +237,8 @@ double rippleFactor = 1; //maximum ripple allowed below unity gain
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int cutOff = 29; //Cut-off Frequency
-Chebyshev flt = new Chebyshev(signal, Fs, rippleFactor, filterType); //signal is of type double[]
-double[] result = flt.highPassFilter(order, cutOff); //get the result after filtering
+Chebyshev flt = new Chebyshev(Fs, rippleFactor, filterType);
+double[] result = flt.highPassFilter(signal, order, cutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -256,8 +257,8 @@ int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int lowCutOff = 12; //Lower Cut-off Frequency
 int highCutOff = 18; //Higher Cut-off Frequency
-Chebyshev flt = new Chebyshev(signal, Fs, rippleFactor, filterType); //signal is of type double[]
-double[] result = flt.BandPassFilter(order, lowCutOff, highCutOff); //get the result after filtering
+Chebyshev flt = new Chebyshev(Fs, rippleFactor, filterType);
+double[] result = flt.BandPassFilter(signal, order, lowCutOff, highCutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -270,8 +271,8 @@ int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int lowCutOff = 7; //Lower Cut-off Frequency
 int highCutOff = 28; //Higher Cut-off Frequency
-Chebyshev flt = new Chebyshev(signal, Fs, rippleFactor, filterType); //signal is of type double[]
-double[] result = flt.bandStopFilter(order, lowCutOff, highCutOff); //get the result after filtering
+Chebyshev flt = new Chebyshev(Fs, rippleFactor, filterType);
+double[] result = flt.bandStopFilter(signal, order, lowCutOff, highCutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -305,8 +306,8 @@ double rippleFactor = 1; //maximum ripple allowed below unity gain
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int cutOff = 9; //Cut-off Frequency
-Chebyshev flt = new Chebyshev(signal, Fs, rippleFactor, filterType); //signal is of type double[]
-double[] result = flt.lowPassFilter(order, cutOff); //get the result after filtering
+Chebyshev flt = new Chebyshev(Fs, rippleFactor, filterType);
+double[] result = flt.lowPassFilter(signal, order, cutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -318,8 +319,8 @@ double rippleFactor = 1; //maximum ripple allowed below unity gain
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int cutOff = 29; //Cut-off Frequency
-Chebyshev flt = new Chebyshev(signal, Fs, rippleFactor, filterType); //signal is of type double[]
-double[] result = flt.highPassFilter(order, cutOff); //get the result after filtering
+Chebyshev flt = new Chebyshev(Fs, rippleFactor, filterType);
+double[] result = flt.highPassFilter(signal, order, cutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -338,8 +339,8 @@ int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int lowCutOff = 12; //Lower Cut-off Frequency
 int highCutOff = 18; //Higher Cut-off Frequency
-Chebyshev flt = new Chebyshev(signal, Fs, rippleFactor, filterType); //signal is of type double[]
-double[] result = flt.bandPassFilter(order, lowCutOff, highCutOff); //get the result after filtering
+Chebyshev flt = new Chebyshev(Fs, rippleFactor, filterType);
+double[] result = flt.bandPassFilter(signal, order, lowCutOff, highCutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -352,8 +353,8 @@ int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int lowCutOff = 7; //Lower Cut-off Frequency
 int highCutOff = 28; //Higher Cut-off Frequency
-Chebyshev flt = new Chebyshev(signal, Fs, rippleFactor, filterType); //signal is of type double[]
-double[] result = flt.bandStopFilter(order, lowCutOff, highCutOff); //get the result after filtering
+Chebyshev flt = new Chebyshev(Fs, rippleFactor, filterType);
+double[] result = flt.bandStopFilter(signal, order, lowCutOff, highCutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -385,8 +386,8 @@ double[] result = flt.bandStopFilter(order, lowCutOff, highCutOff); //get the re
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int cutOff = 9; //Cut-off Frequency
-Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
-double[] result = flt.lowPassFilter(order, cutOff); //get the result after filtering
+Bessel flt = new Bessel(Fs);
+double[] result = flt.lowPassFilter(signal, order, cutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -396,8 +397,8 @@ double[] result = flt.lowPassFilter(order, cutOff); //get the result after filte
 int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int cutOff = 29; //Cut-off Frequency
-Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
-double[] result = flt.highPassFilter(order, cutOff); //get the result after filtering
+Bessel flt = new Bessel(Fs);
+double[] result = flt.highPassFilter(signal, order, cutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -414,8 +415,8 @@ int Fs = 100; //Sampling Frequency in Hz
 int order = 4; //order of the filter
 int lowCutOff = 12; //Lower Cut-off Frequency
 int highCutOff = 18; //Higher Cut-off Frequency
-Bessel flt = new Bessel(signal, Fs); //signal is of type double[]
-double[] result = flt.bandPassFilter(order, lowCutOff, highCutOff); //get the result after filtering
+Bessel flt = new Bessel(Fs);
+double[] result = flt.bandPassFilter(signal, order, lowCutOff, highCutOff); //get the result after filtering
                     </code>
                   </pre>
                 </div>
@@ -659,8 +660,8 @@ double[] out = fwls.firfilter(coefficients, signal);
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
 int windowSize = 7; //can be anything less than length of signal
-MedianFilter mf = new MedianFilter(signal, windowSize); //signal is of type double[]
-double[] out = mf.filter(); //get the result after filtering
+MedianFilter mf = new MedianFilter(windowSize);
+double[] out = mf.filter(signal); //get the result after filtering
                     </code>
                   </pre>
                       </div>
@@ -694,9 +695,9 @@ int windowSize = 5; //can be anything less than length of signal
 int polyOrder = 2; //Order of the polynomial used to generate coefficients
 int deriv = 0; // Order of derivative
 int delta = 1; // Spacing of samples to which filter is applied
-Savgol s1 = new Savgol(signal, windowSize, polyOrder, deriv, delta); //signal is of type double[]
-// ALSO: Savgol s1 = new Savgol(signal, windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
-double[] out = s1.filter(mode); //get the result after filtering
+Savgol s1 = new Savgol(windowSize, polyOrder, deriv, delta);
+// ALSO: Savgol s1 = new Savgol(windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
+double[] out = s1.filter(signal, mode); //get the result after filtering
                     </code>
                   </pre>
                       </div>
@@ -708,9 +709,9 @@ int windowSize = 5; //can be anything less than length of signal
 int polyOrder = 2; //Order of the polynomial used to generate coefficients
 int deriv = 0; // Order of derivative
 int delta = 1; // Spacing of samples to which filter is applied
-Savgol s1 = new Savgol(signal, windowSize, polyOrder, deriv, delta); //signal is of type double[]
-// ALSO: Savgol s1 = new Savgol(signal, windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
-double[] out = s1.filter(mode); //get the result after filtering
+Savgol s1 = new Savgol(windowSize, polyOrder, deriv, delta);
+// ALSO: Savgol s1 = new Savgol(windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
+double[] out = s1.filter(signal, mode); //get the result after filtering
                     </code>
                   </pre>
                       </div>
@@ -728,9 +729,9 @@ int windowSize = 5; //can be anything less than length of signal
 int polyOrder = 2; //Order of the polynomial used to generate coefficients
 int deriv = 0; // Order of derivative
 int delta = 1; // Spacing of samples to which filter is applied
-Savgol s1 = new Savgol(signal, windowSize, polyOrder, deriv, delta); //signal is of type double[]
-// ALSO: Savgol s1 = new Savgol(signal, windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
-double[] out = s1.filter(mode); //get the result after filtering
+Savgol s1 = new Savgol(windowSize, polyOrder, deriv, delta);
+// ALSO: Savgol s1 = new Savgol(windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
+double[] out = s1.filter(signal, mode); //get the result after filtering
                     </code>
                   </pre>
                       </div>
@@ -742,9 +743,9 @@ int windowSize = 5; //can be anything less than length of signal
 int polyOrder = 2; //Order of the polynomial used to generate coefficients
 int deriv = 0; // Order of derivative
 int delta = 1; // Spacing of samples to which filter is applied
-Savgol s1 = new Savgol(signal, windowSize, polyOrder, deriv, delta); //signal is of type double[]
-// ALSO: Savgol s1 = new Savgol(signal, windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
-double[] out = s1.filter(mode); //get the result after filtering
+Savgol s1 = new Savgol(windowSize, polyOrder, deriv, delta);
+// ALSO: Savgol s1 = new Savgol(windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
+double[] out = s1.filter(signal, mode); //get the result after filtering
                     </code>
                   </pre>
                       </div>
@@ -768,8 +769,8 @@ double[] out = s1.filter(mode); //get the result after filtering
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
 int windowSize = 7; //can be anything less than length of signal
-Wiener wf = new Wiener(signal, windowSize); //signal is of type double[]
-double[] out = wf.filter(); //get the result after filtering
+Wiener wf = new Wiener(windowSize);
+double[] out = wf.filter(signal); //get the result after filtering
                     </code>
                   </pre>
                       </div>

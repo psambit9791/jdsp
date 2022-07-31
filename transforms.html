@@ -76,6 +76,7 @@
                       <li><a href="filters.html" class="nav-link">Filters</a></li>
                       <li class="active"><a href="transforms.html" class="nav-link">Transforms</a></li>
                       <li><a href="peaks.html" class="nav-link">Peak Detection</a></li>
+                      <li><a href="speech.html" class="nav-link">Speech</a></li>
                       <li><a href="windowing.html" class="nav-link">Windowing</a></li>
                       <li><a href="splines.html" class="nav-link">Splines</a></li>
                       <li><a href="io.html" class="nav-link">Input/Output</a></li>
@@ -84,7 +85,7 @@
                   </li>
                   <li><a href="https://javadoc.io/doc/com.github.psambit9791/jdsp" target="_blank" class="nav-link">Documentation</a></li>
                   <li><a href="https://github.com/psambit9791/jdsp/tree/master" target="_blank" class="nav-link">Source Code</a></li>
-                  <li><a href="https://search.maven.org/artifact/com.github.psambit9791/jdsp/0.4.0/jar" target="_blank" class="nav-link">Maven</a></li>
+                  <li><a href="https://search.maven.org/artifact/com.github.psambit9791/jdsp/2.0.0/jar" target="_blank" class="nav-link">Maven</a></li>
                 </ul>
               </nav>
             </div>
@@ -329,6 +330,8 @@ double[] outputReal = istft.getReal();
                     <code class="container align-text-left">
 Hilbert h = new Hilbert(signal);
 h.transform();
+// OR
+h.transform(true); //To use DFT instead of FFT
 double[][] analytical_signal = h.getOutput(); //Returns the analytical signal
 double[] envelope = h.getAmplitudeEnvelope();
                     </code>
