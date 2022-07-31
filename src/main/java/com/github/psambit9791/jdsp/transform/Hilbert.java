@@ -57,22 +57,21 @@ public class Hilbert {
     }
 
     /**
-     * This function performs the hilbert transform on the input signal. The output analytical signal is set to the FFT output length
+     * This function performs the hilbert transform on the input signal. By default, if signal length is less than 200,
+     * DFT is used. For longer signals, FFT is used. This implies output length for signals of length less than 200 is
+     * same as the signal; and for signals longer than 200, it is the highest number which is a power of 2.
      */
     public void transform() {
         _Fourier dft;
         if (this.signal.length > 200) {
             dft = new FastFourier(this.signal);
-            this.h = new double[dft.getSignalLength()];
-            Arrays.fill(this.h, 0);
-            this.fillH();
         }
         else {
             dft = new DiscreteFourier(this.signal);
-            this.h = new double[dft.getSignalLength()];
-            Arrays.fill(this.h, 0);
-            this.fillH();
         }
+        this.h = new double[dft.getSignalLength()];
+        Arrays.fill(this.h, 0);
+        this.fillH();
         dft.transform();
         double[][] dftOut = dft.getComplex2D(false);
 
@@ -95,7 +94,8 @@ public class Hilbert {
     }
 
     /**
-     * This function performs the hilbert transform on the input signal
+     * This function performs the hilbert transform on the input signal. If forceDFT is false, it works the same as
+     * transform(). If forceDFT is set to True, DFT is used irrespective of the signal length.
      * @param forceDFT If set to True, DFT is used instead of FFT and the output length is same as signal length.
      */
     public void transform(boolean forceDFT) {
@@ -131,12 +131,18 @@ public class Hilbert {
         }
 
         _InverseFourier idft;
-        if (Math.log(modOut.length)%Math.log(2) == 0) {
-            idft = new InverseFastFourier(UtilMethods.matToComplex(modOut), false);
-        }
-        else {
+        if (forceDFT) {
             idft = new InverseDiscreteFourier(modOut, false);
         }
+        else {
+            if (Math.log(modOut.length)%Math.log(2) == 0) {
+                idft = new InverseFastFourier(UtilMethods.matToComplex(modOut), false);
+            }
+            else {
+                idft = new InverseDiscreteFourier(modOut, false);
+            }
+        }
+
         idft.transform();
         this.output = idft.getComplex();
     }

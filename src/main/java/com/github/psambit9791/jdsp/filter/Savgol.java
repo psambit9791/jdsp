@@ -23,7 +23,7 @@ import java.util.Arrays;
  * <p>
  *
  * @author  Sambit Paul
- * @version 1.0
+ * @version 2.0
  */
 public class Savgol implements _KernelFilter{
 
