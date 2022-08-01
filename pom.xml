@@ -163,9 +163,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/psambit9791/jDSP.git</connection>
-        <developerConnection>scm:git:ssh://github.com:psambit9791/jDSP.git</developerConnection>
-        <url>http://github.com/psambit9791/jDSP/tree/master</url>
+        <connection>scm:git:git://github.com/psambit9791/jdsp.git</connection>
+        <developerConnection>scm:git:ssh://github.com:psambit9791/jdsp.git</developerConnection>
+        <url>http://github.com/psambit9791/jdsp/tree/master</url>
     </scm>
 
     <dependencies>
