@@ -139,7 +139,7 @@ public class WAV {
 
     /**
      * Get th Root Mean Squared value of the WAV file in integer
-     * @return
+     * @return int RMS value of the wav data
      * @throws IOException Derived from getData()
      * @throws WavFileException Derived from getData()
      * @throws IllegalArgumentException Derived from getData()
