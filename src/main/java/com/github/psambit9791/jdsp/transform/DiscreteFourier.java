@@ -49,7 +49,7 @@ public class DiscreteFourier implements _Fourier {
 
 
     /**
-     * Returns the frequencies of the FFT bins are computation
+     * Returns the frequencies of the FFT bins based on the signal length and sampling frequency
      * @param Fs Sampling frequency of the signal
      * @param onlyPositive Set to True if non-mirrored output is required
      * @return double[] Array of frequency bins
