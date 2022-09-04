@@ -18,8 +18,6 @@ import org.apache.commons.math3.transform.DftNormalization;
 import org.apache.commons.math3.transform.FastFourierTransformer;
 import org.apache.commons.math3.transform.TransformType;
 
-import javax.rmi.CORBA.Util;
-
 /**
  * <h1>Inverse Fast Fourier Transform</h1>
  * The InverseFastFourier class applies the inverse fast fourier transform on the input sequence (real/complex) and
