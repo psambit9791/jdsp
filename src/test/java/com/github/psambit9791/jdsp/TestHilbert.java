@@ -241,7 +241,7 @@ public class TestHilbert {
 
     @Test
     public void FFTHilbertTest1() {
-        Generate g = new Generate(-1, 1, 512);
+        Generate g = new Generate(-1, 1, 256);
         double[] signal = g.generateGaussianPulse(5)[0];
 
         Hilbert h = new Hilbert(signal);
@@ -505,7 +505,7 @@ public class TestHilbert {
 
     @Test
     public void FFTHilbertTest2() {
-        Generate g = new Generate(-1, 1, 312);
+        Generate g = new Generate(-1, 1, 156);
         double[] signal = g.generateGaussianPulse(20)[0];
 
         Hilbert h = new Hilbert(signal);

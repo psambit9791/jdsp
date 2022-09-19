@@ -48,7 +48,7 @@ public class Generate {
      */
     public Generate(int start, int stop, int samplingFreq) {
         this.Fs = samplingFreq;
-        this.time = UtilMethods.linspace(start, stop, samplingFreq, true);
+        this.time = UtilMethods.linspace(start, stop, (stop - start) * samplingFreq, true);
     }
 
     /**

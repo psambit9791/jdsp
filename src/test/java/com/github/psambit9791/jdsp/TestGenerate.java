@@ -27,7 +27,7 @@ public class TestGenerate {
 
     final private int Fs = 100;
     private final Generate gp = new Generate(0, 1, this.Fs);
-    private final Generate gpn = new Generate(-1, 1, 2*this.Fs);
+    private final Generate gpn = new Generate(-1, 1, this.Fs);
 
     @Test
     @Order(1)
