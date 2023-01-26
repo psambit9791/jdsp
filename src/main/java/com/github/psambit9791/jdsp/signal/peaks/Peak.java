@@ -11,7 +11,6 @@
 package com.github.psambit9791.jdsp.signal.peaks;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
-import org.apache.commons.math3.stat.StatUtils;
 
 import java.util.*;
 
@@ -201,6 +200,23 @@ public class Peak {
         return UtilMethods.diff(peaks);
     }
 
+    private class ProminenceCalculationData {
+        final int minLeftIndex;
+        final int minRightIndex;
+        final double minLeft;
+        final double minRight;
+        final double threshold;
+
+        public ProminenceCalculationData(int minLeftIndex, int minRightIndex, double minLeft,
+              double minRight, double threshold) {
+            this.minLeftIndex = minLeftIndex;
+            this.minRightIndex = minRightIndex;
+            this.minLeft = minLeft;
+            this.minRight = minRight;
+            this.threshold = threshold;
+        }
+    }
+
     /**
      * This method calculates the prominence of the peaks provided as an argument
      * (Equivalent to scipy.signal.find_peaks() prominence parameter)
@@ -218,36 +234,74 @@ public class Peak {
         double[] prominence = new double[peaks.length];
         double[] left_base = new double[peaks.length];
         double[] right_base = new double[peaks.length];
-        for (int i=0; i<peaks.length; i++) {
-            double leftProm = 0;
-            double rightProm = 0;
-            double threshold = this.signal[peaks[i]];
+        Map<Integer, ProminenceCalculationData> pcd = new HashMap<>();
 
-            ArrayList<Double> temp = new ArrayList<Double>();
-            // Calculate left prominence
-            double[] partSignal = new double[0];
-            for (int j=peaks[i]-1; j>=0; j--) {
-                temp.add(this.signal[j]);
-                if (this.signal[j] > threshold) {
+        // first: update pcd map with left and right min data (index and value) between peaks.
+        int signalIndex = 0;
+        int peakIndex = 0;
+        while (signalIndex < signal.length && peakIndex < peaks.length) {
+            int nextSignalIndex = peaks[peakIndex];
+            int minLeftIndex = nextSignalIndex;
+            double minLeft = signal[nextSignalIndex];
+            for (int i = nextSignalIndex - 1; i >= signalIndex; i--) {
+                if (signal[i] < minLeft) {
+                    minLeft = signal[i];
+                    minLeftIndex = i;
+                }
+            }
+            int minRightIndex = nextSignalIndex;
+            double minRight = signal[nextSignalIndex];
+            int lastRightIndex =
+                (peakIndex + 1 < peaks.length) ? peaks[peakIndex + 1] : signal.length - 1;
+            for (int i = nextSignalIndex + 1; i <= lastRightIndex; i++) {
+                if (signal[i] < minRight) {
+                    minRight = signal[i];
+                    minRightIndex = i;
+                }
+            }
+            double th = signal[peaks[peakIndex]];
+            pcd.put(peakIndex,
+                new ProminenceCalculationData(minLeftIndex, minRightIndex, minLeft, minRight, th));
+            signalIndex = nextSignalIndex;
+            peakIndex++;
+        }
+
+        // second: find the nearest left and right minima based threshold.
+        int ref = 0;
+        while (ref < pcd.size()) {
+            int finalRef = ref;
+            double thRef = pcd.get(finalRef).threshold;
+
+            ProminenceCalculationData relativeLeftProminence = pcd.get(ref);
+            for (int i = ref - 1; i >= 0; i--) {
+              // if threshold is reached means a left peak is it.
+              if (pcd.get(i).threshold >= thRef) {
+                  break;
+              }
+              if (pcd.get(i).minLeft < relativeLeftProminence.minLeft) {
+                  relativeLeftProminence = pcd.get(i);
+              }
+            }
+
+            ProminenceCalculationData relativeRightProminence = pcd.get(ref);
+
+            for (int i = ref + 1; i < pcd.size(); i++) {
+                // if threshold is reached means a right peak is it.
+                if (pcd.get(i).threshold >= thRef) {
                     break;
                 }
-                partSignal = UtilMethods.reverse(UtilMethods.convertToPrimitiveDouble(temp));
-            }
-            leftProm = threshold - StatUtils.min(partSignal);
-            left_base[i] = peaks[i] - (partSignal.length - UtilMethods.argmin(partSignal, true));
-
-            temp.clear();
-            // Calculate right prominence
-            for (int j=peaks[i]+1; j<this.signal.length; j++) {
-                temp.add(this.signal[j]);
-                if (this.signal[j] > threshold) {
-                    break;
+                if (pcd.get(i).minRight < relativeRightProminence.minRight) {
+                    relativeRightProminence = pcd.get(i);
                 }
-                partSignal = UtilMethods.convertToPrimitiveDouble(temp);
             }
-            rightProm = threshold - StatUtils.min(partSignal);
-            right_base[i] = peaks[i] + UtilMethods.argmin(partSignal, false) + 1;
-            prominence[i] = Math.min(leftProm, rightProm);
+
+            left_base[finalRef] = relativeLeftProminence.minLeftIndex;
+            right_base[finalRef] = relativeRightProminence.minRightIndex;
+
+            prominence[finalRef] = Math.min(thRef - relativeLeftProminence.minLeft,
+                thRef - relativeRightProminence.minRight);
+
+            ref++;
         }
 
         double[][] promData = new double[3][peaks.length];
