@@ -136,16 +136,16 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 If you are using this software in your research, please use the following citation:
 
 ```
-@software{sambit_paul_2022_6950476,
+@software{sambit_paul_2023_7675362,
   author       = {Sambit Paul and
-                  SiboVG},
-  title        = {psambit9791/jdsp: v2.0.0 (August 1, 2022)},
-  month        = aug,
-  year         = 2022,
+                  Sibo Van Gool},
+  title        = {psambit9791/jdsp: v2.0.1 (February 24, 2023)},
+  month        = feb,
+  year         = 2023,
   publisher    = {Zenodo},
-  version      = {v2.0.0},
-  doi          = {10.5281/zenodo.6950476},
-  url          = {https://doi.org/10.5281/zenodo.6950476}
+  version      = {v2.0.1},
+  doi          = {10.5281/zenodo.7675362},
+  url          = {https://doi.org/10.5281/zenodo.7675362}
 }
 ```
 ## Supporting JDSP
