@@ -20,8 +20,8 @@ import java.util.*;
  * This is used by the FindPeak class in the detect() method.
  * <p>
  *
- * @author  Sambit Paul
- * @version 1.1
+ * @author  Sambit Paul and Alfredo Zamora
+ * @version 1.2
  */
 public class Peak {
     private double[] signal;
@@ -33,6 +33,9 @@ public class Peak {
 
     private double[][] prominenceData = null;
     private double[][] widthData = null;
+
+    private double[] width;
+    private double[] prominence;
 
     private double relative_height;
 
@@ -59,7 +62,23 @@ public class Peak {
             this.plateau_size[i] = Math.abs(r[i] - l[i] + 1);
         }
 
+        // Peak Distance Information (Equivalent to scipy.signal.find_peaks() distance parameter)
+        this.distance = this.findPeakDistance(this.midpoints);
+
+        // Peak Sharpness Information (Equivalent to scipy.signal.find_peaks() threshold parameter)
+        this.sharpness = this.findPeakSharpness(this.midpoints);
+
+        // Peak Prominence Information (Equivalent to scipy.signal.find_peaks() prominence parameter)
+        // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
+
+        this.prominenceData = this.findPeakProminence(this.midpoints);
+        this.prominence = prominenceData[0];
+
+        // Peak Width Information (Equivalent to scipy.signal.find_peaks() width parameter)
+        // Refer to https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_widths.html
         this.relative_height = 0.5;
+        this.widthData = this.findPeakWidth(this.midpoints, this.relative_height);
+        this.width = widthData[0];
     }
 
     public Peak(double[] s, int[] m, int[] l, int[] r, double rel_height, String mode) {
@@ -85,9 +104,23 @@ public class Peak {
             this.plateau_size[i] = Math.abs(r[i] - l[i] + 1);
         }
 
-        this.relative_height = rel_height;
+        // Peak Distance Information (Equivalent to scipy.signal.find_peaks() distance parameter)
+        this.distance = this.findPeakDistance(this.midpoints);
 
+        // Peak Sharpness Information (Equivalent to scipy.signal.find_peaks() threshold parameter)
+        this.sharpness = this.findPeakSharpness(this.midpoints);
 
+        // Peak Prominence Information (Equivalent to scipy.signal.find_peaks() prominence parameter)
+        // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
+
+        this.prominenceData = this.findPeakProminence(this.midpoints);
+        this.prominence = prominenceData[0];
+
+        // Peak Width Information (Equivalent to scipy.signal.find_peaks() width parameter)
+        // Refer to https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_widths.html
+        this.relative_height = 0.5;
+        this.widthData = this.findPeakWidth(this.midpoints, this.relative_height);
+        this.width = widthData[0];
     }
 
     /**
@@ -331,7 +364,7 @@ public class Peak {
             throw new IllegalArgumentException("rel_height can be between 0.0 and 1.0");
         }
         double[] width = new double[peaks.length];
-        double[][] promData = this.findPeakProminence(peaks);
+        double[][] promData = this.prominenceData; //this.findPeakProminence(peaks);
         double[] prominence = promData[0];
         double[] left_bases = promData[1];
         double[] right_bases = promData[2];
@@ -802,7 +835,7 @@ public class Peak {
             this.getPeakSharpness();
         }
         ArrayList<Integer> newPeaks = new ArrayList<Integer>();
-        double[][] sharpness = this.findPeakSharpness(peaks);
+        double[][] sharpness = this.sharpness; //this.findPeakSharpness(peaks);
         int[] keep = new int[peaks.length];
         Arrays.fill(keep, 1);
 
