@@ -430,9 +430,6 @@ public class Peak {
      */
     public double[][] getPeakSharpness() {
         // Peak Sharpness Information (Equivalent to scipy.signal.find_peaks() threshold parameter)
-        if (this.sharpness == null) {
-            this.sharpness = this.findPeakSharpness(this.midpoints);
-        }
         return this.sharpness;
     }
 
@@ -450,9 +447,6 @@ public class Peak {
      */
     public int[] getPeakDistance() {
         // Peak Distance Information (Equivalent to scipy.signal.find_peaks() distance parameter)
-        if (this.distance == null) {
-            this.distance = this.findPeakDistance(this.midpoints);
-        }
         return this.distance;
     }
 
@@ -463,10 +457,7 @@ public class Peak {
     public double[] getWidth() {
         // Peak Width Information (Equivalent to scipy.signal.find_peaks() width parameter)
         // Refer to https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_widths.html
-        if (this.widthData == null) {
-            this.widthData = this.findPeakWidth(this.midpoints, this.relative_height);
-        }
-        return this.widthData[0];
+        return this.width;
     }
 
     /**
@@ -476,9 +467,6 @@ public class Peak {
     public double[][] getWidthData() {
         // Peak Width Information (Equivalent to scipy.signal.find_peaks() width parameter)
         // Refer to https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_widths.html
-        if (this.widthData == null) {
-            this.widthData = this.findPeakWidth(this.midpoints, this.relative_height);
-        }
         return this.widthData;
     }
 
@@ -489,10 +477,7 @@ public class Peak {
     public double[] getProminence() {
         // Peak Prominence Information (Equivalent to scipy.signal.find_peaks() prominence parameter)
         // Refer to https://uk.mathworks.com/help/signal/ug/prominence.html
-        if (this.prominenceData == null) {
-            this.prominenceData = this.findPeakProminence(this.midpoints);
-        }
-        return this.prominenceData[0];
+        return this.prominence;
     }
 
     /**
@@ -500,9 +485,6 @@ public class Peak {
      * @return double[][] The list of all the prominence of peaks and the left and right bases
      */
     public double[][] getProminenceData() {
-        if (this.prominenceData == null) {
-            this.prominenceData = this.findPeakProminence(this.midpoints);
-        }
         return this.prominenceData;
     }
 
