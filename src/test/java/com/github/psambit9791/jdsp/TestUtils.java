@@ -862,7 +862,6 @@ public class TestUtils {
         Assertions.assertEquals(UtilMethods.ratioToDecibels(ratio), 20, 0.00000001);
         Assertions.assertEquals(UtilMethods.ratioToDecibels(ratio*10, false), 20, 0.00000001);
     }
-
     @Test
     public void integerToBooleanTest() {
         Assertions.assertFalse(UtilMethods.integerToBoolean(0));
@@ -870,6 +869,41 @@ public class TestUtils {
         Assertions.assertTrue(UtilMethods.integerToBoolean(2));
         Assertions.assertTrue(UtilMethods.integerToBoolean(-1));
         Assertions.assertTrue(UtilMethods.integerToBoolean(-2));
+    }
 
+    @Test
+    public void polyfitTest1() {
+        double[] x = {0.0, 1.0, 2.0, 3.0,  4.0,  5.0};
+        double[] y = {0.0, 0.8, 0.9, 0.1, -0.8, -1.0};
+        double[] out = UtilMethods.polyfit(x, y, 3);
+        double[] result = {0.08703704, -0.81349206,  1.69312169, -0.03968254};
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void polyfitTest2() {
+        double[] x = {0.0, 1.0, 2.0, 3.0,  4.0,  5.0};
+        double[] y = {0.0, 100.4, 209.11, 320.1, 499.8, -700.0};
+        double[] out = UtilMethods.polyfit(x, y, 2);
+        double[] result = {-111.01857143,  492.49828571, -142.00714286};
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void polyvalTest1() {
+        double[] coeffs = {3.0, 0.0, 1.0};
+        double[] x = {5.0, 3.2, 1.2};
+        double[] out = UtilMethods.polyval(coeffs, x);
+        double[] result = {76.0  , 31.72,  5.32};
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
+    public void polyvalTest2() {
+        double[] coeffs = {3.0, 0.0, 1.0};
+        double x = 5.0;
+        double out = UtilMethods.polyval(coeffs, x);
+        double result = 76;
+        Assertions.assertEquals(result, out, 0.001);
     }
 }

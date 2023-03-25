@@ -14,6 +14,8 @@ import com.github.psambit9791.jdsp.windows.*;
 import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.fitting.PolynomialCurveFitter;
+import org.apache.commons.math3.fitting.WeightedObservedPoint;
 import org.apache.commons.math3.linear.*;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.MathArrays;
@@ -1914,5 +1916,57 @@ public class UtilMethods {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Fit a polynomial of 'deg' degree to an array of point.
+     * @param x The abscissa (horizontal axis)
+     * @param y The ordinate (vertical axis)
+     * @param degree Degree of the fitting polynomial
+     * @return double[] Polynomial coefficients with the highest power first
+     */
+    public static double[] polyfit(double[] x, double[] y, int degree) {
+        if (x.length != y.length) {
+            throw new IllegalArgumentException("X and Y must be of same length");
+        }
+        PolynomialCurveFitter pcf = PolynomialCurveFitter.create(degree);
+        ArrayList<WeightedObservedPoint> points = new ArrayList<>();
+        for (int i = 0; i < x.length; i++) {
+            points.add(new WeightedObservedPoint(1, x[i], y[i]));
+        }
+        return UtilMethods.reverse(pcf.fit(points));
+    }
+
+    /**
+     * Evaluate a polynomial at specific values
+     * @param coefficients polynomial coefficients (including coefficients equal to zero) from the highest degree to the constant term
+     * @param x A list of number at which the polynomial is evaluated
+     * @return double[] The evaluation result for the input list x
+     */
+    public static double[] polyval(double[] coefficients, double[] x) {
+        int degree = coefficients.length - 1;
+        double[] y = new double[x.length];
+        Arrays.fill(y, 0.0);
+        for (int i=0; i<x.length; i++) {
+            for (int j=0; j<coefficients.length; j++) {
+                y[i] = y[i] + coefficients[j] * Math.pow(x[i], degree-j);
+            }
+        }
+        return y;
+    }
+
+    /**
+     * Evaluate a polynomial at a specific value
+     * @param coefficients polynomial coefficients (including coefficients equal to zero) from the highest degree to the constant term
+     * @param x A number at which the polynomial is evaluated
+     * @return double The evaluation result for the input x
+     */
+    public static double polyval(double[] coefficients, double x) {
+        int degree = coefficients.length - 1;
+        double y = 0.0;
+        for (int j=0; j<coefficients.length; j++) {
+            y = y + coefficients[j] * Math.pow(x, degree-j);
+        }
+        return y;
     }
 }
