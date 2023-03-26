@@ -10,7 +10,6 @@
 
 package com.github.psambit9791.jdsp.misc;
 
-import com.github.psambit9791.jdsp.windows.*;
 import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
 import org.apache.commons.math3.complex.Complex;
@@ -21,8 +20,6 @@ import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.MathArrays;
 
 import java.io.*;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.*;
 
 
