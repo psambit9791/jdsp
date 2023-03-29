@@ -15,6 +15,8 @@ import com.github.psambit9791.jdsp.filter._KernelFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 
 public class TestSavgol {
     private double[] signal = {0.425, 0.445, 0.445, 0.405, 0.4, 0.43, 0.44, 0.43, 0.435, 0.455, 0.465, 0.455, 0.44,
@@ -39,16 +41,19 @@ public class TestSavgol {
                 0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.27 , 0.289,  0.306};
 
         Savgol s1 = new Savgol(7, 2);
-        double[] out = s1.filter(this.signal);
+        double[] out = s1.filter(this.signal, "nearest");
         Assertions.assertArrayEquals(out, result, 0.001);
     }
 
     @Test
     public void savgolInterfaceTest() {
-        final double[] result = {0.435,  0.437,  0.428,  0.419,  0.415,  0.419,  0.43 ,  0.437, 0.443,  0.451,  0.458,
-                0.455,  0.447,  0.436,  0.424,  0.404, 0.374,  0.346,  0.331,  0.33 ,  0.328,  0.32 ,  0.294,  0.26 ,
-                0.231,  0.206,  0.162,  0.088,  0.009, -0.026,  0.002,  0.085, 0.173,  0.225,  0.243,  0.249,  0.246,
-                0.244,  0.236,  0.223, 0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.27 , 0.289,  0.306};
+        final double[] result = {0.44 ,  0.429,  0.422,  0.419,  0.415,  0.419,  0.43 ,  0.437,
+                0.443,  0.451,  0.458,  0.455,  0.447,  0.436,  0.424,  0.404,
+                0.374,  0.346,  0.331,  0.33 ,  0.328,  0.32 ,  0.294,  0.26 ,
+                0.231,  0.206,  0.162,  0.088,  0.009, -0.026,  0.002,  0.085,
+                0.173,  0.225,  0.243,  0.249,  0.246,  0.244,  0.236,  0.223,
+                0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.269,
+                0.288,  0.314};
 
         _KernelFilter s1 = new Savgol(7, 2);
         double[] out = s1.filter(this.signal);
@@ -88,6 +93,22 @@ public class TestSavgol {
 
         Savgol s1 = new Savgol(7, 2);
         double[] out = s1.filter(this.signal, "wrap");
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+
+    @Test
+    public void savgolFilterInterpTest() {
+        final double[] result = {0.44 ,  0.429,  0.422,  0.419,  0.415,  0.419,  0.43 ,  0.437,
+                0.443,  0.451,  0.458,  0.455,  0.447,  0.436,  0.424,  0.404,
+                0.374,  0.346,  0.331,  0.33 ,  0.328,  0.32 ,  0.294,  0.26 ,
+                0.231,  0.206,  0.162,  0.088,  0.009, -0.026,  0.002,  0.085,
+                0.173,  0.225,  0.243,  0.249,  0.246,  0.244,  0.236,  0.223,
+                0.215,  0.22 ,  0.234,  0.252,  0.26 ,  0.255,  0.257,  0.269,
+                0.288,  0.314};
+
+        Savgol s1 = new Savgol(7, 2);
+        double[] out = s1.filter(this.signal, "interp");
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 }

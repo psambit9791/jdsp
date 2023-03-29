@@ -10,6 +10,7 @@
 
 package com.github.psambit9791.jdsp.filter;
 
+import com.github.psambit9791.jdsp.misc.Polynomial;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.signal.Convolution;
 import org.apache.commons.math3.linear.MatrixUtils;
@@ -18,12 +19,12 @@ import java.util.Arrays;
 
 /**
  * <h1>Savitzky–Golay Filter</h1>
- * The Savgol class implements the Savitzky–Golay filter in 4 modes of operation: 'nearest', 'constant', 'mirror', 'wrap'.
+ * The Savgol class implements the Savitzky–Golay filter in 5 modes of operation: 'nearest', 'constant', 'mirror', 'wrap' and 'interp.
  * Reference <a href="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter">article</a> for more information on Savitzky–Golay Filters.
  * <p>
  *
  * @author  Sambit Paul
- * @version 2.0
+ * @version 3.0
  */
 public class Savgol implements _KernelFilter{
 
@@ -68,6 +69,30 @@ public class Savgol implements _KernelFilter{
         this.delta = delta;
     }
 
+    private void fitEdge(double[] signal, double[] output, int windowStart, int windowStop, int interpStart, int interpStop) {
+        double[] xEdge = UtilMethods.splitByIndex(signal, windowStart, windowStop);
+        double[] polyCoeffs = Polynomial.polyfit(UtilMethods.arange(0.0, (double)(windowStop - windowStart), 1.0), xEdge, this.polyOrder);
+
+        if (this.deriv > 0) {
+            polyCoeffs = Polynomial.polyder(polyCoeffs, this.deriv);
+        }
+
+        double[] i = UtilMethods.arange((double)(interpStart - windowStart), (double)(interpStop - windowStart), 1.0);
+        double[] values = Polynomial.polyval(polyCoeffs, i);
+        double divisor = Math.pow(this.delta, this.deriv);
+        for (int k=0; k<values.length; k++) {
+            values[k] = values[k] / divisor;
+        }
+        System.arraycopy(values, 0, this.output, interpStart, values.length);
+    }
+
+    private void fitEdgePolyfit(double[] signal, int windowLength) {
+        int halflen = windowLength/2;
+        int n = signal.length;
+        this.fitEdge(signal, this.output, 0, windowLength, 0, halflen);
+        this.fitEdge(signal, this.output, n-windowLength, n, n-halflen, n);
+    }
+
     /**
      * Compute the coefficients for a 1-d Savitzky-Golay FIR filter based on the parameters provided.
      * @throws java.lang.IllegalArgumentException if window size is even
@@ -105,14 +130,18 @@ public class Savgol implements _KernelFilter{
     }
 
     /**
-     * Convolves the 1-d Savitzky-Golay coefficients with the signals in "nearest" mode
+     * Convolves the 1-d Savitzky-Golay coefficients with the signals in "interp" mode
      * @param signal Signal to be filtered
      * @return double[] Filtered signal
      */
     public double[] filter(double[] signal) {
         this.savgolCoeffs();
         Convolution c = new Convolution(signal, this.coeffs);
-        this.output = c.convolve1d("nearest");
+        if (this.windowSize > signal.length) {
+            throw new IllegalArgumentException("For interp mode, window size should be less than signal size");
+        }
+        this.output = c.convolve1d("constant");
+        fitEdgePolyfit(signal, this.windowSize);
         return this.output;
     }
 
@@ -125,12 +154,21 @@ public class Savgol implements _KernelFilter{
      * @return double[] Filtered signal
      */
     public double[] filter(double[] signal, String mode) throws IllegalArgumentException {
-        if (!mode.equals("nearest") && !mode.equals("constant") && !mode.equals("mirror") && !mode.equals("wrap")) {
+        if (!mode.equals("nearest") && !mode.equals("constant") && !mode.equals("mirror") && !mode.equals("wrap") && !mode.equals("interp")) {
             throw new IllegalArgumentException("mode must be mirror, constant, nearest or wrap");
         }
         this.savgolCoeffs();
         Convolution c = new Convolution(signal, this.coeffs);
-        this.output = c.convolve1d(mode);
+        if (mode.equals("interp")) {
+            if (this.windowSize > signal.length) {
+                throw new IllegalArgumentException("For interp mode, window size should be less than signal size");
+            }
+            this.output = c.convolve1d("constant");
+            fitEdgePolyfit(signal, this.windowSize);
+        }
+        else {
+            this.output = c.convolve1d(mode);
+        }
         return this.output;
     }
 }
