@@ -19,7 +19,7 @@ import java.util.Arrays;
 
 /**
  * <h1>Savitzky–Golay Filter</h1>
- * The Savgol class implements the Savitzky–Golay filter in 5 modes of operation: 'nearest', 'constant', 'mirror', 'wrap' and 'interp.
+ * The Savgol class implements the Savitzky–Golay filter in 5 modes of operation: 'nearest', 'constant', 'mirror', 'wrap' and 'interp'.
  * Reference <a href="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter">article</a> for more information on Savitzky–Golay Filters.
  * <p>
  *
