@@ -150,12 +150,13 @@ public class Savgol implements _KernelFilter{
      * Operates in 4 modes of convolution for filtering: "nearest", "constant", "mirror", "wrap"
      * @param signal Signal to be filtered
      * @param mode Mode of Filter operation
-     * @throws java.lang.IllegalArgumentException if mode is not nearest, constant, mirror or wrap
+     * @throws java.lang.IllegalArgumentException if mode is not nearest, constant, mirror, wrap or interp
+     * @throws java.lang.IllegalArgumentException if mode is interp and windowSize is greater than signal length
      * @return double[] Filtered signal
      */
     public double[] filter(double[] signal, String mode) throws IllegalArgumentException {
         if (!mode.equals("nearest") && !mode.equals("constant") && !mode.equals("mirror") && !mode.equals("wrap") && !mode.equals("interp")) {
-            throw new IllegalArgumentException("mode must be mirror, constant, nearest or wrap");
+            throw new IllegalArgumentException("mode must be mirror, constant, nearest, wrap or interp");
         }
         this.savgolCoeffs();
         Convolution c = new Convolution(signal, this.coeffs);
