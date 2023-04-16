@@ -257,7 +257,7 @@ public class ICA {
             U = temp2[0];
 
             for (int i=0; i<U.length; i++) {
-                U[i] = MathArrays.ebeMultiply(U[i], UtilMethods.sign(U[i]));
+                U[i] = MathArrays.ebeMultiply(U[i], UtilMethods.sign(U[0]));
             }
 
             double[][] K = UtilMethods.ebeDivide(MatrixUtils.createRealMatrix(U), MatrixUtils.createRealMatrix(S)).getData();

@@ -870,4 +870,18 @@ public class TestUtils {
         Assertions.assertTrue(UtilMethods.integerToBoolean(-1));
         Assertions.assertTrue(UtilMethods.integerToBoolean(-2));
     }
+
+    @Test
+    public void signTest() {
+        Assertions.assertEquals(1, UtilMethods.sign(3));
+        Assertions.assertEquals(0, UtilMethods.sign(0));
+        Assertions.assertEquals(-1, UtilMethods.sign(-9));
+
+        Assertions.assertEquals(1, UtilMethods.sign(3.98));
+        Assertions.assertEquals(0, UtilMethods.sign(0.0));
+        Assertions.assertEquals(-1, UtilMethods.sign(-99.66));
+
+        Assertions.assertArrayEquals(new int[] {1, -1, 0, 1, -1}, UtilMethods.sign(new int[] {9, -6, 0, 84, -98}));
+        Assertions.assertArrayEquals(new double[] {1, -1, 0, 1, -1}, UtilMethods.sign(new double[] {9.769, -6.74, 0.0, 755.45, -918.8}));
+    }
 }

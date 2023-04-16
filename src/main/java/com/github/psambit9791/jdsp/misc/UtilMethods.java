@@ -1914,4 +1914,76 @@ public class UtilMethods {
         }
         return true;
     }
+
+    /**
+     * Returns the sign of the input value
+     * @param value Number whose sign is to be returned
+     * @return double The sign of the input
+     */
+
+    public static double sign(double value) {
+        if (value == 0) {
+            return 0;
+        } else if (value > 0) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     * Returns the sign of the input value
+     * @param list List of numbers whose sign is to be returned
+     * @return double The sign of the input
+     */
+
+    public static double[] sign(double[] list) {
+        double[] out = new double[list.length];
+        for (int i=0; i<out.length; i++) {
+            if (list[i] == 0) {
+                out[i] = 0;
+            } else if (list[i] > 0) {
+                out[i] = 1;
+            } else {
+                out[i] = -1;
+            }
+        }
+        return out;
+    }
+
+    /**
+     * Returns the sign of the input value
+     * @param value Number whose sign is to be returned
+     * @return int The sign of the input
+     */
+
+    public static int sign(int value) {
+        if (value == 0) {
+            return 0;
+        } else if (value > 0) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     * Returns the sign of the input value
+     * @param list List of numbers whose sign is to be returned
+     * @return int[] The sign of the input
+     */
+
+    public static int[] sign(int[] list) {
+        int[] out = new int[list.length];
+        for (int i=0; i<out.length; i++) {
+            if (list[i] == 0) {
+                out[i] = 0;
+            } else if (list[i] > 0) {
+                out[i] = 1;
+            } else {
+                out[i] = -1;
+            }
+        }
+        return out;
+    }
 }
