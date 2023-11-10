@@ -970,6 +970,31 @@ public class UtilMethods {
     }
 
     /**
+     * Element by Element division of 2 matrices
+     * @param a Dividend Matrix
+     * @param b Divisor Matrix
+     * @return RealMatrix ebeDivision of the 2 matrices (m1/m2)
+     */
+    public static double[][] matrixDivide(double[][] a, double[][] b) {
+        RealMatrix m1 = MatrixUtils.createRealMatrix(a);
+        RealMatrix m2= MatrixUtils.createRealMatrix(b);
+
+        int rowDim = m1.getRowDimension();
+        int colDim = m1.getColumnDimension();
+        if (rowDim != m2.getRowDimension() || colDim != m2.getColumnDimension()) {
+            throw new IllegalArgumentException("Dimensions of m1 and m2 matrices must be the same");
+        }
+
+        RealMatrix out = MatrixUtils.createRealMatrix(rowDim, colDim);
+        for (int i=0; i<rowDim; i++) {
+            for (int j=0; j<colDim; j++) {
+                out.setEntry(i, j, m1.getEntry(i, j) / m2.getEntry(i, j));
+            }
+        }
+        return out.getData();
+    }
+
+    /**
      * Returns the multiplication of 2 matrices
      * @param a Addend Matrix 1
      * @param b Addend Matrix 2

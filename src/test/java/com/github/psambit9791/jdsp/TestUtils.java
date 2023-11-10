@@ -390,6 +390,17 @@ public class TestUtils {
     }
 
     @Test
+    public void matrixDivideTest() {
+        double[][] m1 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+        double[][] m2 = {{0.5, 1.0, 3.0}, {0.5, 5.0, 2.0}, {7.0, 8.0, 9.0}};
+        double[][] result = {{2, 2, 1}, {8, 1, 3}, {1, 1, 1}};
+        double[][] out = UtilMethods.matrixDivide(m1, m2);
+        for (int i=0; i<result.length; i++) {
+            Assertions.assertArrayEquals(result[i], out[i], 0.001);
+        }
+    }
+
+    @Test
     public void matrixAdditionTest() {
         double[][] m1 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
         double[][] m2 = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
