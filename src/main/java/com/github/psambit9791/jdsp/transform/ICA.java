@@ -21,7 +21,6 @@ import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.MathArrays;
 
-import javax.rmi.CORBA.Util;
 import java.util.Arrays;
 
 public class ICA {
@@ -308,6 +307,7 @@ public class ICA {
     }
 
     public double[][] transform() {
+        return new double[1][1];
 
     }
 
