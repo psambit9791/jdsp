@@ -622,7 +622,7 @@ public class UtilMethods {
     }
 
     /**
-     * Evenly rounds the the elements of a double array to the given number of decimals
+     * Evenly rounds the elements of a double array to the given number of decimals
      * @param arr Value to be rounded
      * @param decimals Number of decimal places to round to
      * @return double The rounded double array
@@ -1983,6 +1983,49 @@ public class UtilMethods {
             } else {
                 out[i] = -1;
             }
+        }
+        return out;
+    }
+
+    /**
+     * Returns the subarray based on start and stop of row and column
+     * @param arr 2D array whose subarray is required
+     * @param row_start index of row to start at. If less than 0, set to 0.
+     * @param row_stop index of row to stop at. If greater than total columns, set to the maximum value.
+     * @param col_start index of col to start at. If less than 0, set to 0.
+     * @param col_stop index of col to stop at. If greater than total columns, set to the maximum value.
+     * @return double[][] Subarray based on the row and column indices provided
+     */
+    public static double[][] subarray(double[][] arr, int row_start, int row_stop, int col_start, int col_stop) {
+        row_start = Math.max(row_start, 0);
+        row_stop = Math.min(row_stop, arr.length);
+        col_start = Math.max(col_start, 0);
+        col_stop = Math.min(col_stop, arr[0].length);
+
+        double[][] out = new double[row_stop-row_start][col_stop-col_start];
+        for (int i=row_start; i<row_stop; i++) {
+            if (col_stop - col_start >= 0)
+                System.arraycopy(arr[i], col_start, out[i - row_start], 0, col_stop - col_start);
+        }
+        return out;
+    }
+
+    /**
+     * Returns the subarray based on start and stop of row and column
+     * @param arr 2D array whose subarray is required
+     * @param row_stop index of row to stop at. If greater than total columns, set to the maximum value.
+     * @param col_stop index of col to stop at. If greater than total columns, set to the maximum value.
+     * @return double[][] Subarray based on the row and column indices provided
+     */
+    public static double[][] subarray(double[][] arr, int row_stop, int col_stop) {
+        int row_start = 0;
+        row_stop = Math.min(row_stop, arr.length);
+        int col_start = 0;
+        col_stop = Math.min(col_stop, arr[0].length);
+
+        double[][] out = new double[row_stop-row_start][col_stop-col_start];
+        for (int i=row_start; i<row_stop; i++) {
+                System.arraycopy(arr[i], col_start, out[i - row_start], 0, col_stop - col_start);
         }
         return out;
     }

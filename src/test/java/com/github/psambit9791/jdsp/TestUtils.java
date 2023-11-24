@@ -884,4 +884,33 @@ public class TestUtils {
         Assertions.assertArrayEquals(new int[] {1, -1, 0, 1, -1}, UtilMethods.sign(new int[] {9, -6, 0, 84, -98}));
         Assertions.assertArrayEquals(new double[] {1, -1, 0, 1, -1}, UtilMethods.sign(new double[] {9.769, -6.74, 0.0, 755.45, -918.8}));
     }
+
+    @Test
+    public void subArrayTest() {
+        double[][] arr = {{1, 2, 3, 4, 5}, {10, 20, 30, 40, 50}, {13, 14, 15, 16, 17}, {50, 60, 70, 80, 90}, {-9, -8. -7, -6, -5}};
+
+        int idx = 3;
+        double[][] subArr1 = UtilMethods.subarray(arr, idx, idx);
+        double[][] resArr1 = {{1,2,3}, {10,20,30}, {13,14,15}};
+        for (int i=0; i<idx; i++) {
+            Assertions.assertArrayEquals(subArr1[i], resArr1[i], 0.0001);
+        }
+
+        int row_idx = 3;
+        int col_idx = 4;
+        double[][] subArr2 = UtilMethods.subarray(arr, row_idx, col_idx);
+        double[][] resArr2 = {{1,2,3,4}, {10,20,30,40}, {13,14,15,16}};
+        for (int i=0; i<row_idx; i++) {
+            Assertions.assertArrayEquals(subArr2[i], resArr2[i], 0.0001);
+        }
+
+        int[] row_indices = {1, 3};
+        int[] col_indices = {2, 4};
+        double[][] subArr3 = UtilMethods.subarray(arr, row_indices[0], row_indices[1], col_indices[0], col_indices[1]);
+        double[][] resArr3 = {{30,40}, {15,16}};
+        for (int i=0; i<row_indices[1] - row_indices[0]; i++) {
+            Assertions.assertArrayEquals(subArr3[i], resArr3[i], 0.0001);
+        }
+
+    }
 }

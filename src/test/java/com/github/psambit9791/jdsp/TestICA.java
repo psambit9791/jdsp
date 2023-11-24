@@ -21,44 +21,54 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class TestICA {
 
-    final double[][] func_input = {{0.38, 0.53}, {0.80, 0.86}, {0.11, 0.88}, {0.72, 0.87}, {0.37, 0.52}};
+    final double[] func_input = {0.38, 0.53, 0.80, 0.86, 0.11, 0.88, 0.72, 0.87, 0.37, 0.52};
+    final double[][] signal = {{0.85889,0.91091,0.49403}, {0.37271,0.09291,0.52412}, {0.55513,0.90252,0.29854}, {0.95566,0.46096,0.46311}, {0.73667,0.45202,0.98478}, {0.81621,0.99943,0.50113}, {0.10109,0.16242,0.39807}, {0.92849,0.70937,0.72791}, {0.60911,0.16062,0.86333}, {0.59655,0.81078,0.02617}, {0.09178,0.03515,0.29002}, {0.34519,0.53489,0.78907}, {0.66275,0.1665,0.45712}, {0.44171,0.30841,0.00693}, {0.55149,0.04506,0.41934}, {0.70371,0.23858,0.33067}, {0.5894,0.67483,0.60415}, {0.04993,0.78238,0.32462}, {0.56179,0.6952,0.98125}, {0.76636,0.32895,0.58823}};
 
     @Test
-    public void ICAFuncLogcoshTest1() {
-        double[][] gx= {{0.36270747, 0.48538109}, {0.66403677, 0.69625767}, {0.10955847, 0.70641932}, {0.6169093 , 0.70137413}, {0.35399171, 0.47770001}};
-        double[] g_x = {0.81642424, 0.53714021, 0.74448434, 0.56374862, 0.82324628};
-        ICA i1 = new ICA(this.func_input);
-        i1.logcosh_(this.func_input);
-        for (int i=0; i< gx.length; i++) {
-            Assertions.assertArrayEquals(gx[i], i1.gx[i], 0.00001);
-        }
-        Assertions.assertArrayEquals(g_x, i1.g_x, 0.00001);
+    public void ICAFuncLogcoshTest1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        double[] gx= {0.36271, 0.48538, 0.66404, 0.69626, 0.10956, 0.70642, 0.61691, 0.70137, 0.35399, 0.4777};
+        double g_x = 0.69701;
+        ICA i1 = new ICA(this.signal);
+        Method privMethod = i1.getClass().getDeclaredMethod("logcosh_", double[].class);
+        privMethod.setAccessible(true);
+        privMethod.invoke(i1, (Object) this.func_input);
+        Assertions.assertArrayEquals(gx, i1.gx, 0.00001);
+        Assertions.assertEquals(g_x, i1.g_x, 0.00001);
     }
 
     @Test
-    public void ICAFuncExpTest1() {
-        double[][] gx= {{0.35353103, 0.46055257}, {0.58091923, 0.59415034}, {0.10933651, 0.59748066}, {0.55560145, 0.59588233}, {0.34552086, 0.45424142}};
-        double[] g_x = {0.71043863, 0.22065843, 0.56755678, 0.26907011, 0.72166654};
-        ICA i1 = new ICA(this.func_input);
-        i1.exp_(this.func_input);
-        for (int i=0; i< gx.length; i++) {
-            Assertions.assertArrayEquals(gx[i], i1.gx[i], 0.00001);
-        }
-        Assertions.assertArrayEquals(g_x, i1.g_x, 0.00001);
+    public void ICAFuncExpTest1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        double[] gx= {0.35353, 0.46055, 0.58092, 0.59415, 0.10934, 0.59748, 0.5556, 0.59588, 0.34552, 0.45424};
+        double g_x = 0.49788;
+        ICA i1 = new ICA(this.signal);
+        Method privMethod = i1.getClass().getDeclaredMethod("exp_", double[].class);
+        privMethod.setAccessible(true);
+        privMethod.invoke(i1, (Object) this.func_input);
+        Assertions.assertArrayEquals(gx, i1.gx, 0.00001);
+        Assertions.assertEquals(g_x, i1.g_x, 0.00001);
     }
 
     @Test
-    public void ICAFuncCubeTest1() {
-        double[][] gx= {{0.054872, 0.148877}, {0.512   , 0.636056}, {0.001331, 0.681472}, {0.373248, 0.658503}, {0.050653, 0.140608}};
-        double[] g_x = {0.63795, 2.0694 , 1.17975, 1.91295, 0.61095};
-        ICA i1 = new ICA(this.func_input);
-        i1.cube_(this.func_input);
-        for (int i=0; i< gx.length; i++) {
-            Assertions.assertArrayEquals(gx[i], i1.gx[i], 0.00001);
-        }
-        Assertions.assertArrayEquals(g_x, i1.g_x, 0.00001);
+    public void ICAFuncCubeTest1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        double[] gx= {0.05487, 0.14888, 0.512  , 0.63606, 0.00133, 0.68147, 0.37325, 0.6585 , 0.05065, 0.14061};
+        double g_x = 1.2822;
+        ICA i1 = new ICA(this.signal);
+        Method privMethod = i1.getClass().getDeclaredMethod("cube_", double[].class);
+        privMethod.setAccessible(true);
+        privMethod.invoke(i1, (Object) this.func_input);
+        Assertions.assertArrayEquals(gx, i1.gx, 0.00001);
+        Assertions.assertEquals(g_x, i1.g_x, 0.00001);
+    }
+
+    @Test
+    public void ICATest1() {
+        double[][] w_init = {{-0.34889445,  0.98370343,  0.58092283}, {0.07028444,  0.77753268,  0.58195875}, {1.47179053,  1.66318101, -0.26117712}};
+        ICA obj = new ICA(this.signal, "logcosh", "unit-variance", w_init, 200, 1E-4, 1);
+        obj.fit();
     }
 }
