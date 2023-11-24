@@ -38,7 +38,10 @@ public class ICA {
     private String func = "logcosh";
     private long seed = 42;
     private double[] mean_;
-    private int components;
+    private int features;
+
+    public double[][] components;
+    public double[][] mixing;
 
 
     private void logcosh_(double[] x) {
@@ -88,8 +91,8 @@ public class ICA {
      */
     public ICA(double[][] signal, String func, String whiten, double[][] w_init, int max_iter, double tol, double alpha) {
         this.signal = signal;
-        this.components = this.signal[0].length;
-        if ((w_init.length != w_init[0].length) || (w_init.length != this.components)) {
+        this.features = this.signal[0].length;
+        if ((w_init.length != w_init[0].length) || (w_init.length != this.features)) {
             throw new IllegalArgumentException("w_init should be a square matrix and the shape should be same as the number of components in signal");
         }
         if (!func.equals("logcosh") && !func.equals("exp") && !func.equals("cube")) {
@@ -122,7 +125,7 @@ public class ICA {
      */
     public ICA(double[][] signal, String func, String whiten, int max_iter, double alpha, long random_state) {
         this.signal = signal;
-        this.components = this.signal[0].length;
+        this.features = this.signal[0].length;
         if (!func.equals("logcosh") && !func.equals("exp") && !func.equals("cube")) {
             throw new IllegalArgumentException("func should be one of logcosh, exp or cube");
         }
@@ -138,7 +141,7 @@ public class ICA {
         this.whiten = whiten;
         this.seed = random_state;
         this.max_iter = max_iter;
-        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
+        Random r1 = new Random(this.seed, new int[] {this.features, this.features});
         this.w_init = r1.randomNormal2D();
     }
 
@@ -151,7 +154,7 @@ public class ICA {
      */
     public ICA(double[][] signal, String func, double alpha, long random_state) {
         this.signal = signal;
-        this.components = this.signal[0].length;
+        this.features = this.signal[0].length;
         if (!func.equals("logcosh") && !func.equals("exp") && !func.equals("cube")) {
             throw new IllegalArgumentException("func should be one of logcosh, exp or cube");
         }
@@ -163,7 +166,7 @@ public class ICA {
         this.func = func;
         this.alpha = alpha;
         this.seed = random_state;
-        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
+        Random r1 = new Random(this.seed, new int[] {this.features, this.features});
         this.w_init = r1.randomNormal2D();
     }
 
@@ -175,7 +178,7 @@ public class ICA {
      */
     public ICA(double[][] signal, String func, double alpha) {
         this.signal = signal;
-        this.components = this.signal[0].length;
+        this.features = this.signal[0].length;
         if (!func.equals("logcosh") && !func.equals("exp") && !func.equals("cube")) {
             throw new IllegalArgumentException("func should be one of logcosh, exp or cube");
         }
@@ -186,7 +189,7 @@ public class ICA {
         }
         this.func = func;
         this.alpha = alpha;
-        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
+        Random r1 = new Random(this.seed, new int[] {this.features, this.features});
         this.w_init = r1.randomNormal2D();
     }
 
@@ -197,14 +200,14 @@ public class ICA {
      */
     public ICA(double[][] signal, String func) {
         this.signal = signal;
-        this.components = this.signal[0].length;
+        this.features = this.signal[0].length;
         if (!func.equals("logcosh") && !func.equals("exp") && !func.equals("cube")) {
             throw new IllegalArgumentException("func should be one of logcosh, exp or cube");
         }
         this.gx = new double[this.signal.length];
         this.g_x = 0;
         this.func = func;
-        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
+        Random r1 = new Random(this.seed, new int[] {this.features, this.features});
         this.w_init = r1.randomNormal2D();
     }
 
@@ -223,6 +226,7 @@ public class ICA {
         double n_samples = this.signal.length;
         double[][] sigT = UtilMethods.transpose(this.signal);
         double[][] X1;
+        double[][] K = new double[this.features][this.features];
 
         if (!this.whiten.isEmpty()) {
             this.zm_signal = UtilMethods.transpose(this.signal);
@@ -242,7 +246,6 @@ public class ICA {
 
             double[][][] temp2 = this.svdFlip(U, V);
             U = temp2[0];
-
             for (int i=0; i<U.length; i++) {
                 U[i] = MathArrays.ebeMultiply(U[i], UtilMethods.sign(U[0]));
             }
