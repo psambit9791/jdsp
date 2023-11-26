@@ -922,6 +922,5 @@ public class TestUtils {
         for (int i=0; i<row_indices[1] - row_indices[0]; i++) {
             Assertions.assertArrayEquals(subArr3[i], resArr3[i], 0.0001);
         }
-
     }
 }

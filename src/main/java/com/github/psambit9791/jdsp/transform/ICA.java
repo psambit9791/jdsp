@@ -127,7 +127,7 @@ public class ICA {
      * @param alpha G Function argument - only used in case of logcosh.
      * @param random_state Random seed to initialise w_init.
      */
-    public ICA(double[][] signal, String func, String whiten, int max_iter, double alpha, long random_state) {
+    public ICA(double[][] signal, String func, String whiten, int max_iter, double tol, double alpha, long random_state) {
         this.signal = signal;
         this.components = this.signal[0].length;
         if (!func.equals("logcosh") && !func.equals("exp") && !func.equals("cube")) {
@@ -145,8 +145,61 @@ public class ICA {
         this.whiten = whiten;
         this.seed = random_state;
         this.max_iter = max_iter;
+        this.tol = tol;
         Random r1 = new Random(this.seed, new int[] {this.components, this.components});
         this.w_init = r1.randomNormal2D();
+    }
+
+    /**
+     * This constructor initialises the prerequisites required to use ICA.
+     * @param signal Multi-dimensional signal to be transformed. Dimension 1: Samples, Dimension 2: Channels
+     * @param func The functional form of the G function used in the approximation to neg-entropy. Can be "logcosh", "exp" or "cube".
+     * @param max_iter Maximum number of iterations during fit.
+     * @param alpha G Function argument - only used in case of logcosh.
+     * @param random_state Random seed to initialise w_init.
+     */
+    public ICA(double[][] signal, String func, int max_iter, double alpha, long random_state) {
+        this.signal = signal;
+        this.components = this.signal[0].length;
+        if (!func.equals("logcosh") && !func.equals("exp") && !func.equals("cube")) {
+            throw new IllegalArgumentException("func should be one of logcosh, exp or cube");
+        }
+        if (func.equals("logcosh")) {
+            if ((alpha > 2) || (alpha < 1)) {
+                throw new IllegalArgumentException("alpha should be between 1 and 2");
+            }
+        }
+        this.func = func;
+        this.seed = random_state;
+        this.max_iter = max_iter;
+        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
+        this.w_init = r1.randomNormal2D();
+    }
+
+    /**
+     * This constructor initialises the prerequisites required to use ICA.
+     * @param signal Multi-dimensional signal to be transformed. Dimension 1: Samples, Dimension 2: Channels
+     * @param func The functional form of the G function used in the approximation to neg-entropy. Can be "logcosh", "exp" or "cube".
+     * @param w_init Initial un-mixing array. Defaults to values drawn from a normal distribution.
+     * @param max_iter Maximum number of iterations during fit.
+     * @param tol A positive scalar giving the tolerance at which the un-mixing matrix is considered to have converged. Defaults to 1E-4.
+     * @param alpha G Function argument - only used in case of logcosh.
+     */
+    public ICA(double[][] signal, String func, double[][] w_init, int max_iter, double tol, double alpha) {
+        this.signal = signal;
+        this.components = this.signal[0].length;
+        if (!func.equals("logcosh") && !func.equals("exp") && !func.equals("cube")) {
+            throw new IllegalArgumentException("func should be one of logcosh, exp or cube");
+        }
+        if (func.equals("logcosh")) {
+            if ((alpha > 2) || (alpha < 1)) {
+                throw new IllegalArgumentException("alpha should be between 1 and 2");
+            }
+        }
+        this.w_init = w_init;
+        this.func = func;
+        this.max_iter = max_iter;
+        this.tol = tol;
     }
 
     /**
@@ -302,9 +355,9 @@ public class ICA {
         double[][] sigT = UtilMethods.transpose(this.signal);
         double[][] X1;
         double[][] K = new double[0][];
+        this.zm_signal = UtilMethods.transpose(this.signal);
 
         if (!this.whiten.isEmpty()) {
-            this.zm_signal = UtilMethods.transpose(this.signal);
             this.mean_ = new double[sigT.length];
             for (int i=0; i<sigT.length; i++) {
                 this.mean_[i] = StatUtils.mean(sigT[i]);
@@ -316,7 +369,6 @@ public class ICA {
 
             double[][] U = svdM.getU().getData();
             double[][] S = svdM.getS().getData();
-//            double[][] V = svdM.getVT().getData();
 
             double[] signs = UtilMethods.sign(U[0]);
             for (int i=0; i<U.length; i++) {
@@ -370,10 +422,14 @@ public class ICA {
                 W = UtilMethods.transpose(W);
 
             }
+            else {
+                S2 = UtilMethods.transpose(S2);
+            }
             this.whiteningMatrix = K;
             this.componentMatrix = UtilMethods.matrixMultiply(W, K);
         }
         else {
+            S2 = UtilMethods.transpose(S2);
             this.componentMatrix = W;
         }
 
