@@ -26,7 +26,7 @@ import java.util.Arrays;
 public class ICA {
 
     private double[][] signal;
-    private double[][] zm_signal;
+    public double[][] zm_signal;
     private double[][] output;
     private double alpha = 1.0;
     public double[] gx;
@@ -39,6 +39,13 @@ public class ICA {
     private long seed = 42;
     private double[] mean_;
     private int components;
+    private int n_iter = -1;
+
+    public double[][] mixingMatrix;
+    public double[][] unmixingMatrix;
+    public double[][] whiteningMatrix;
+    private double[][] componentMatrix;
+    private double[][] sources;
 
 
     private void logcosh_(double[] x) {
@@ -219,54 +226,13 @@ public class ICA {
         this.w_init = r1.randomNormal2D();
     }
 
-    public void fit() {
-        double n_samples = this.signal.length;
-        double[][] sigT = UtilMethods.transpose(this.signal);
-        double[][] X1;
-
-        if (!this.whiten.isEmpty()) {
-            this.zm_signal = UtilMethods.transpose(this.signal);
-            this.mean_ = new double[sigT.length];
-            for (int i=0; i<sigT.length; i++) {
-                this.mean_[i] = StatUtils.mean(sigT[i]);
-                this.zm_signal[i] = UtilMethods.zeroCenter(sigT[i]);
-            }
-
-
-            RealMatrix m = MatrixUtils.createRealMatrix(this.zm_signal);
-            SingularValueDecomposition svdM = new SingularValueDecomposition(m);
-
-            double[][] U = svdM.getU().getData();
-            double[][] S = svdM.getS().getData();
-            double[][] V = svdM.getVT().getData();
-
-            double[][][] temp2 = this.svdFlip(U, V);
-            U = temp2[0];
-
-            for (int i=0; i<U.length; i++) {
-                U[i] = MathArrays.ebeMultiply(U[i], UtilMethods.sign(U[0]));
-            }
-
-            for (int i=0; i<S.length; i++) {
-                for (int j=0; j<S.length; j++) {
-                    S[i][j] = S[j][j];
-                }
-            }
-
-            double[][] K = UtilMethods.ebeDivide(MatrixUtils.createRealMatrix(U), MatrixUtils.createRealMatrix(S)).getData();
-            K = UtilMethods.transpose(K);
-            X1 = UtilMethods.matrixMultiply(K, this.zm_signal);
-            for (int i=0; i<X1.length; i++) {
-                X1[i] = UtilMethods.scalarArithmetic(X1[i], Math.sqrt(n_samples), "mul");
-            }
-        }
-        else {
-            X1 = sigT;
-        }
-        double[][] W = this.icaDef(X1, this.func, this.max_iter, this.w_init);
-
-    }
-
+    /**
+     * Orthonormalize w wrt the first j rows of W.
+     * @param w Array to be orthogonalized
+     * @param W Null space definition
+     * @param j The no of (from the first) rows of Null space W wrt which w is orthogonalized.
+     * @return double[] Orthogonalized w
+     */
     private double[] _gs_decorrelation(double[] w, double[][] W, int j) {
         double[][] sub_W = UtilMethods.subarray(W, j, W.length);
         if (j == 0) {
@@ -282,13 +248,11 @@ public class ICA {
         for (int i=0; i<_w.length; i++) {
             _w[i] = StatUtils.sum(MathArrays.ebeMultiply(sub_W[i], w));
         }
-
-
         w = MathArrays.ebeSubtract(w, _w);
         return w;
     }
 
-
+    // Internal Functions used for Deflationary Fast ICA
     private double[][] icaDef(double[][] X, String function, int max_iterations, double[][] w_init) {
         double[][] W = new double[this.components][this.components];
         for (double[] doubles : W) {
@@ -299,7 +263,8 @@ public class ICA {
             double[] w = w_init[j];
             double divisor = Math.sqrt(StatUtils.sum(UtilMethods.scalarArithmetic(w, 2, "pow")));
             w = UtilMethods.scalarArithmetic(w, divisor, "div");
-            for (int i=0; i<max_iterations; i++) {
+            int i;
+            for (i=0; i<max_iterations; i++) {
                 double[] wX = UtilMethods.flattenMatrix(UtilMethods.matrixMultiply(new double[][]{w}, X));
                 if (function.equals("logcosh")) {
                     this.logcosh_(wX);
@@ -325,49 +290,113 @@ public class ICA {
                     break;
                 }
             }
+            this.n_iter = Math.max(this.n_iter, i+1);
             W[j] = w;
         }
-        System.out.println("W Matrix");
-        for (double[] doubles : W) {
-            System.out.println(Arrays.toString(doubles));
-        }
-        System.out.println();
-        System.out.println();
         return W;
     }
 
 
-    // Flip eigenvectors' sign to enforce deterministic output
-    // Use reference to understand: https://prod-ng.sandia.gov/techlib-noauth/access-control.cgi/2007/076422.pdf
-    private double[][][] svdFlip(double[][] U, double[][] V) {
-        double[][] U_new = UtilMethods.absoluteArray(U);
-        int[] max_abs_cols = new int[U[0].length];
-        double[] signs = new double[U[0].length];
+    public void fit() {
+        double n_samples = this.signal.length;
+        double[][] sigT = UtilMethods.transpose(this.signal);
+        double[][] X1;
+        double[][] K = new double[0][];
 
-        for (int j=0; j<U_new[0].length; j++) {
-            double[] column_vals = new double[U_new.length];
-            for(int i=0; i<U_new.length; i++) {
-                column_vals[i] = U_new[i][j];
+        if (!this.whiten.isEmpty()) {
+            this.zm_signal = UtilMethods.transpose(this.signal);
+            this.mean_ = new double[sigT.length];
+            for (int i=0; i<sigT.length; i++) {
+                this.mean_[i] = StatUtils.mean(sigT[i]);
+                this.zm_signal[i] = UtilMethods.zeroCenter(sigT[i]);
             }
-            max_abs_cols[j] = UtilMethods.argmax(column_vals, false);
+
+            RealMatrix m = MatrixUtils.createRealMatrix(this.zm_signal);
+            SingularValueDecomposition svdM = new SingularValueDecomposition(m);
+
+            double[][] U = svdM.getU().getData();
+            double[][] S = svdM.getS().getData();
+//            double[][] V = svdM.getVT().getData();
+
+            double[] signs = UtilMethods.sign(U[0]);
+            for (int i=0; i<U.length; i++) {
+                U[i] = MathArrays.ebeMultiply(U[i], signs);
+            }
+
+            for (int i=0; i<S.length; i++) {
+                for (int j=0; j<S.length; j++) {
+                    S[i][j] = S[j][j];
+                }
+            }
+
+            K = UtilMethods.ebeDivide(MatrixUtils.createRealMatrix(U), MatrixUtils.createRealMatrix(S)).getData();
+            K = UtilMethods.transpose(K);
+            X1 = UtilMethods.matrixMultiply(K, this.zm_signal);
+            for (int i=0; i<X1.length; i++) {
+                X1[i] = UtilMethods.scalarArithmetic(X1[i], Math.sqrt(n_samples), "mul");
+            }
+        }
+        else {
+            X1 = sigT;
+        }
+        double[][] W = this.icaDef(X1, this.func, this.max_iter, this.w_init);
+        double[][] S2;
+
+        if (!this.whiten.isEmpty()) {
+            S2 = UtilMethods.matrixMultiply(K, this.zm_signal);
+            S2 = UtilMethods.matrixMultiply(W, S2);
+        } else {
+            S2 = UtilMethods.matrixMultiply(W, this.zm_signal);
         }
 
-        for (int i=0; i< max_abs_cols.length; i++) {
-            signs[i] = Math.signum(U[max_abs_cols[i]][i]);
+        double[] S2_std;
+        if (!this.whiten.isEmpty()) {
+            if (this.whiten.equals("unit-variance")) {
+
+                S2_std = new double[S2.length];
+                for (int i=0; i<S2.length; i++) {
+                    S2_std[i] = 1 / Math.sqrt(StatUtils.variance(S2[i]) * (S2[i].length-1)/S2[i].length); //Convert from population to sample standard deviation
+                }
+
+                S2 = UtilMethods.transpose(S2);
+                for (int i=0; i<S2.length; i++) {
+                    S2[i] = MathArrays.ebeMultiply(S2[i], S2_std);
+                }
+
+                W = UtilMethods.transpose(W);
+                for (int i=0; i<W.length; i++) {
+                    W[i] = MathArrays.ebeMultiply(W[i], S2_std);
+                }
+                W = UtilMethods.transpose(W);
+
+            }
+            this.whiteningMatrix = K;
+            this.componentMatrix = UtilMethods.matrixMultiply(W, K);
+        }
+        else {
+            this.componentMatrix = W;
         }
 
-        for (int i=0; i<U.length; i++) {
-            U[i] = MathArrays.ebeMultiply(U[i], signs);
-        }
-
-        V = UtilMethods.transpose(V);
-        for (int i=0; i<V.length; i++) {
-            V[i] = MathArrays.ebeMultiply(V[i], signs);
-        }
-        V = UtilMethods.transpose(V);
-
-        double[][][] out = {U, V};
-        return out;
+        this.mixingMatrix = UtilMethods.pseudoInverse(this.componentMatrix);
+        this.unmixingMatrix = W;
+        this.sources = S2;
     }
 
+    public double[][] transform() {
+        return this.sources;
+    }
+
+    public double[][] transform(double[][] signal) {
+        if (signal[0].length != this.components) {
+            throw new IllegalArgumentException("Input signal components must be same as original signal");
+        }
+        if (!this.whiten.isEmpty()) {
+            signal = UtilMethods.transpose(signal);
+            for (int i = 0; i<signal.length; i++) {
+                signal[i] = UtilMethods.scalarArithmetic(signal[i], this.mean_[i], "sub");
+            }
+            signal = UtilMethods.transpose(signal);
+        }
+        return UtilMethods.matrixMultiply(signal, UtilMethods.transpose(this.componentMatrix));
+    }
 }
