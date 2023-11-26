@@ -272,6 +272,18 @@ public class ICA {
      * This constructor initialises the prerequisites required to use ICA.
      * @param signal Multi-dimensional signal to be transformed. Dimension 1: Samples, Dimension 2: Channels
      */
+    public ICA(double[][] signal, long seed) {
+        this.signal = signal;
+        this.components = this.signal[0].length;
+        this.seed = seed;
+        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
+        this.w_init = r1.randomNormal2D();
+    }
+
+    /**
+     * This constructor initialises the prerequisites required to use ICA.
+     * @param signal Multi-dimensional signal to be transformed. Dimension 1: Samples, Dimension 2: Channels
+     */
     public ICA(double[][] signal) {
         this.signal = signal;
         this.components = this.signal[0].length;
