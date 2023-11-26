@@ -622,7 +622,7 @@ public class UtilMethods {
     }
 
     /**
-     * Evenly rounds the the elements of a double array to the given number of decimals
+     * Evenly rounds the elements of a double array to the given number of decimals
      * @param arr Value to be rounded
      * @param decimals Number of decimal places to round to
      * @return double The rounded double array
@@ -841,9 +841,7 @@ public class UtilMethods {
     public static double[][] absoluteArray(double[][] m) {
         double[][] out = new double [m.length][m[0].length];
         for (int i=0; i<m.length; i++) {
-            for (int j=0; j<m[0].length; j++) {
-                out[i][j] = Math.abs(m[i][j]);
-            }
+            out[i] = UtilMethods.absoluteArray(m[i]);
         }
         return out;
     }
@@ -854,11 +852,7 @@ public class UtilMethods {
      * @return double[] The absolute value of the array
      */
     public static double[] absoluteArray(double[] m) {
-        double[] out = new double [m.length];
-        for (int i=0; i<m.length; i++) {
-            out[i] = Math.abs(m[i]);
-        }
-        return out;
+        return Arrays.stream(m).map(Math::abs).toArray();
     }
 
     /**
@@ -967,6 +961,31 @@ public class UtilMethods {
         RealMatrix m2= MatrixUtils.createRealMatrix(b);
         RealMatrix m = m1.multiply(m2);
         return m.getData();
+    }
+
+    /**
+     * Element by Element division of 2 matrices
+     * @param a Dividend Matrix
+     * @param b Divisor Matrix
+     * @return RealMatrix ebeDivision of the 2 matrices (m1/m2)
+     */
+    public static double[][] matrixDivide(double[][] a, double[][] b) {
+        RealMatrix m1 = MatrixUtils.createRealMatrix(a);
+        RealMatrix m2= MatrixUtils.createRealMatrix(b);
+
+        int rowDim = m1.getRowDimension();
+        int colDim = m1.getColumnDimension();
+        if (rowDim != m2.getRowDimension() || colDim != m2.getColumnDimension()) {
+            throw new IllegalArgumentException("Dimensions of m1 and m2 matrices must be the same");
+        }
+
+        RealMatrix out = MatrixUtils.createRealMatrix(rowDim, colDim);
+        for (int i=0; i<rowDim; i++) {
+            for (int j=0; j<colDim; j++) {
+                out.setEntry(i, j, m1.getEntry(i, j) / m2.getEntry(i, j));
+            }
+        }
+        return out.getData();
     }
 
     /**
@@ -1913,5 +1932,120 @@ public class UtilMethods {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns the sign of the input value
+     * @param value Number whose sign is to be returned
+     * @return double The sign of the input
+     */
+
+    public static double sign(double value) {
+        if (value == 0) {
+            return 0;
+        } else if (value > 0) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     * Returns the sign of the input value
+     * @param list List of numbers whose sign is to be returned
+     * @return double The sign of the input
+     */
+
+    public static double[] sign(double[] list) {
+        double[] out = new double[list.length];
+        for (int i=0; i<out.length; i++) {
+            if (list[i] == 0) {
+                out[i] = 0;
+            } else if (list[i] > 0) {
+                out[i] = 1;
+            } else {
+                out[i] = -1;
+            }
+        }
+        return out;
+    }
+
+    /**
+     * Returns the sign of the input value
+     * @param value Number whose sign is to be returned
+     * @return int The sign of the input
+     */
+
+    public static int sign(int value) {
+        if (value == 0) {
+            return 0;
+        } else if (value > 0) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     * Returns the sign of the input value
+     * @param list List of numbers whose sign is to be returned
+     * @return int[] The sign of the input
+     */
+
+    public static int[] sign(int[] list) {
+        int[] out = new int[list.length];
+        for (int i=0; i<out.length; i++) {
+            if (list[i] == 0) {
+                out[i] = 0;
+            } else if (list[i] > 0) {
+                out[i] = 1;
+            } else {
+                out[i] = -1;
+            }
+        }
+        return out;
+    }
+
+    /**
+     * Returns the subarray based on start and stop of row and column
+     * @param arr 2D array whose subarray is required
+     * @param row_start index of row to start at. If less than 0, set to 0.
+     * @param row_stop index of row to stop at. If greater than total columns, set to the maximum value.
+     * @param col_start index of col to start at. If less than 0, set to 0.
+     * @param col_stop index of col to stop at. If greater than total columns, set to the maximum value.
+     * @return double[][] Subarray based on the row and column indices provided
+     */
+    public static double[][] subarray(double[][] arr, int row_start, int row_stop, int col_start, int col_stop) {
+        row_start = Math.max(row_start, 0);
+        row_stop = Math.min(row_stop, arr.length);
+        col_start = Math.max(col_start, 0);
+        col_stop = Math.min(col_stop, arr[0].length);
+
+        double[][] out = new double[row_stop-row_start][col_stop-col_start];
+        for (int i=row_start; i<row_stop; i++) {
+            if (col_stop - col_start >= 0)
+                System.arraycopy(arr[i], col_start, out[i - row_start], 0, col_stop - col_start);
+        }
+        return out;
+    }
+
+    /**
+     * Returns the subarray based on start and stop of row and column
+     * @param arr 2D array whose subarray is required
+     * @param row_stop index of row to stop at. If greater than total columns, set to the maximum value.
+     * @param col_stop index of col to stop at. If greater than total columns, set to the maximum value.
+     * @return double[][] Subarray based on the row and column indices provided
+     */
+    public static double[][] subarray(double[][] arr, int row_stop, int col_stop) {
+        int row_start = 0;
+        row_stop = Math.min(row_stop, arr.length);
+        int col_start = 0;
+        col_stop = Math.min(col_stop, arr[0].length);
+
+        double[][] out = new double[row_stop-row_start][col_stop-col_start];
+        for (int i=row_start; i<row_stop; i++) {
+                System.arraycopy(arr[i], col_start, out[i - row_start], 0, col_stop - col_start);
+        }
+        return out;
     }
 }
