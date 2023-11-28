@@ -18,6 +18,15 @@ import org.apache.commons.math3.fitting.WeightedObservedPoint;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * <h1>Polynomial Module</h1>
+ * The Polynomial class is used to compute coefficients from an array of X and Y coordinates using a least squares polynomial fit.
+ * It also allows computation of the derivatives of the polynomial coefficients and evaluation of the polynomial at specific values.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class Polynomial {
 
     /**
