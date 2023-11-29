@@ -11,8 +11,8 @@
 package com.github.psambit9791.jdsp.transform;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
-import org.apache.commons.math3.analysis.function.Atan2;
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.util.FastMath;
 
 import java.util.Arrays;
 
@@ -190,9 +190,8 @@ public class Hilbert {
             throw new ExceptionInInitializerError("Execute hilbert_transform() function before returning result");
         }
         double[] sig = new double[this.output.length];
-        Atan2 ang = new Atan2();
         for (int i=0; i<sig.length; i++) {
-            sig[i] = ang.value(this.output[i].getImaginary(), this.output[i].getReal());
+            sig[i] = FastMath.atan2(this.output[i].getImaginary(), this.output[i].getReal());
         }
         return UtilMethods.unwrap(sig);
     }
