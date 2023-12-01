@@ -10,6 +10,7 @@
 
 package com.github.psambit9791.jdsp;
 
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.signal.Generate;
 import com.github.psambit9791.jdsp.transform.Hilbert;
 import org.junit.jupiter.api.Assertions;
@@ -143,6 +144,7 @@ public class TestHilbert {
 
         Hilbert h = new Hilbert(this.signal1);
         h.transform();
+
         double[] out = h.getInstantaneousPhase();
         Assertions.assertArrayEquals(result, out, 0.001);
     }
@@ -172,6 +174,9 @@ public class TestHilbert {
         Hilbert h = new Hilbert(this.signal2);
         h.transform();
         double[] out = h.getInstantaneousPhase();
+        /// First item removed because atan2 evaluates to undefined
+        out = UtilMethods.splitByIndex(out, 1, out.length);
+        result = UtilMethods.splitByIndex(result, 1, result.length);
         Assertions.assertArrayEquals(result, out, 0.001);
     }
 
@@ -201,7 +206,7 @@ public class TestHilbert {
         Hilbert h = new Hilbert(this.signal1);
         h.transform();
         double[] out = h.getInstantaneousFrequency(Fs);
-        Assertions.assertArrayEquals(result, out, 0.05);
+        Assertions.assertArrayEquals(result, out, 0.025);
     }
 
     @Test
@@ -236,7 +241,10 @@ public class TestHilbert {
         Hilbert h = new Hilbert(this.signal2);
         h.transform();
         double[] out = h.getInstantaneousFrequency(Fs);
-        Assertions.assertArrayEquals(result, out, 0.05);
+        /// First item removed because atan2 evaluates to undefined
+        out = UtilMethods.splitByIndex(out, 1, out.length);
+        result = UtilMethods.splitByIndex(result, 1, result.length);
+        Assertions.assertArrayEquals(result, out, 0.025);
     }
 
     @Test

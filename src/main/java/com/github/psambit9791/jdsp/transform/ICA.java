@@ -20,9 +20,18 @@ import org.apache.commons.math3.linear.SingularValueDecomposition;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.MathArrays;
-
 import java.util.Arrays;
 
+/**
+ * <h1>Independent Component Analysis (ICA)</h1>
+ * The ICA class is used to estimate source given noisy measurements.
+ * For a NxM input signal which is a linear mixture N signals calculated on N sources, ICA can be used to estimate the original N signals from the input signal.
+ * The unmixing signal thus generated, can then be used to estimate any signal captured from the N sources.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class ICA {
 
     private double[][] signal;
@@ -41,11 +50,11 @@ public class ICA {
     private int components;
     private int n_iter = -1;
 
-    public double[][] mixingMatrix;
-    public double[][] unmixingMatrix;
-    public double[][] whiteningMatrix;
-    private double[][] componentMatrix;
-    private double[][] sources;
+    public double[][] mixingMatrix = null;
+    public double[][] unmixingMatrix = null;
+    public double[][] whiteningMatrix = null;
+    private double[][] componentMatrix = null;
+    private double[][] sources = null;
 
 
     private void logcosh_(double[] x) {
@@ -361,7 +370,9 @@ public class ICA {
         return W;
     }
 
-
+    /**
+     * Performs ICA and fits the model with the input signals. This generates the unmixing matrix.
+     */
     public void fit() {
         double n_samples = this.signal.length;
         double[][] sigT = UtilMethods.transpose(this.signal);
@@ -450,13 +461,31 @@ public class ICA {
         this.sources = S2;
     }
 
-    public double[][] transform() {
+    /**
+     * Applies the unmixing matrix on the original signal
+     * @throws java.lang.ExceptionInInitializerError if called before executing fit()
+     * @return double[][] The signal with reduced dimensions
+     */
+    public double[][] transform() throws ExceptionInInitializerError{
+        if (this.unmixingMatrix == null) {
+            throw new ExceptionInInitializerError("Execute fit() before calling this function");
+        }
         return this.sources;
     }
 
-    public double[][] transform(double[][] signal) {
+    /**
+     * Applies dimensionality reduction on the input signal
+     * @param signal The signal to be processed
+     * @throws java.lang.ExceptionInInitializerError if called before executing fit()
+     * @throws java.lang.ArithmeticException if number of components in input signal is different from the original signal
+     * @return double[][] The estimated sources of the input signal
+     */
+    public double[][] transform(double[][] signal) throws ExceptionInInitializerError, ArithmeticException {
+        if (this.unmixingMatrix == null) {
+            throw new ExceptionInInitializerError("Execute fit() before calling this function");
+        }
         if (signal[0].length != this.components) {
-            throw new IllegalArgumentException("Input signal components must be same as original signal");
+            throw new ArithmeticException("Number of components has to be same as original signal");
         }
         if (!this.whiten.isEmpty()) {
             signal = UtilMethods.transpose(signal);
