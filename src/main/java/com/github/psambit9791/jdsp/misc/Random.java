@@ -25,7 +25,6 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 public class Random {
 
     private long seed;
-    private int[] shape;
     private double mean = 0.0;
     private double sd = 1.0;
 
@@ -33,38 +32,11 @@ public class Random {
     private java.util.Random rd = new java.util.Random();
 
     /**
-     * Random constructor for creating the generator object with custom prerequisites
-     * @param seed Number used to initialize a pseudorandom number generator
-     * @param shape The dimension of the array to be returned
-     */
-    public Random(long seed, int[] shape) {
-        if (shape.length > 3) {
-            throw new IllegalArgumentException("The maximum allowed dimension is 3");
-        }
-        this.seed = seed;
-        this.shape = shape;
-        this.nd.reseedRandomGenerator(this.seed);
-        this.rd.setSeed(this.seed);
-    }
-
-    /**
      * Random constructor for creating the generator object with custom seed and shape set to 0
      * @param seed Number used to initialize a pseudorandom number generator
      */
     public Random(long seed) {
         this.seed = seed;
-        this.shape = new int[0];
-        this.nd.reseedRandomGenerator(this.seed);
-        this.rd.setSeed(this.seed);
-    }
-
-    /**
-     * Random constructor for creating the generator object with seed set to 42 and a custom shape
-     * @param shape The dimension of the array to be returned
-     */
-    public Random(int[] shape) {
-        this.seed = 42;
-        this.shape = shape;
         this.nd.reseedRandomGenerator(this.seed);
         this.rd.setSeed(this.seed);
     }
@@ -74,7 +46,6 @@ public class Random {
      */
     public Random() {
         this.seed = 42;
-        this.shape = new int[0];
         this.nd.reseedRandomGenerator(this.seed);
         this.rd.setSeed(this.seed);
     }
@@ -105,9 +76,6 @@ public class Random {
      * @return double Random sample from the normal distribution
      */
     public double randomNormalSample() {
-        if (this.shape.length != 0) {
-            throw new IllegalArgumentException("Shape must have no items. Currently set to " + this.shape.length + ".");
-        }
         return this.nd.sample();
     }
 
@@ -115,9 +83,9 @@ public class Random {
      * Generate a 1D array of random samples from the normal distribution
      * @return double[] 1D array of random samples from the normal distribution
      */
-    public double[] randomNormal1D() {
-        if (this.shape.length != 1) {
-            throw new IllegalArgumentException("Shape must have exactly 1 item. Currently set to " + this.shape.length + ".");
+    public double[] randomNormal1D(int[] shape) {
+        if (shape.length != 1) {
+            throw new IllegalArgumentException("Shape must have exactly 1 item. Currently set to " + shape.length + ".");
         }
         double[] matrix = new double[shape[0]];
         for (int i=0; i<shape[0]; i++) {
@@ -130,9 +98,9 @@ public class Random {
      * Generate a 2D array of random samples from the normal distribution
      * @return double[][] 2D array of random samples from the normal distribution
      */
-    public double[][] randomNormal2D() {
-        if (this.shape.length != 2) {
-            throw new IllegalArgumentException("Shape must have exactly 2 items. Currently set to " + this.shape.length + ".");
+    public double[][] randomNormal2D(int[] shape) {
+        if (shape.length != 2) {
+            throw new IllegalArgumentException("Shape must have exactly 2 items. Currently set to " + shape.length + ".");
         }
         double[][] matrix = new double[shape[0]][shape[1]];
         for (int i=0; i<shape[0]; i++) {
@@ -147,9 +115,9 @@ public class Random {
      * Generate a 3D array of random samples from the normal distribution
      * @return double[][][] 3D array of random samples from the normal distribution
      */
-    public double[][][] randomNormal3D() {
-        if (this.shape.length != 3) {
-            throw new IllegalArgumentException("Shape must have exactly 3 items. Currently set to " + this.shape.length + ".");
+    public double[][][] randomNormal3D(int[] shape) {
+        if (shape.length != 3) {
+            throw new IllegalArgumentException("Shape must have exactly 3 items. Currently set to " + shape.length + ".");
         }
         double[][][] matrix = new double[shape[0]][shape[1]][shape[2]];
         for (int i=0; i<shape[0]; i++) {
@@ -167,9 +135,6 @@ public class Random {
      * @return double Random decimal
      */
     public double randomDoubleSample() {
-        if (this.shape.length != 0) {
-            throw new IllegalArgumentException("Shape must have no items. Currently set to " + this.shape.length + ".");
-        }
         return this.rd.nextDouble();
     }
 
@@ -177,9 +142,9 @@ public class Random {
      * Generate a 1D array of random samples between 0.0 and 1.0
      * @return double[] 1D array of random decimals
      */
-    public double[] randomDouble1D() {
-        if (this.shape.length != 1) {
-            throw new IllegalArgumentException("Shape must have exactly 1 item. Currently set to " + this.shape.length + ".");
+    public double[] randomDouble1D(int[] shape) {
+        if (shape.length != 1) {
+            throw new IllegalArgumentException("Shape must have exactly 1 item. Currently set to " + shape.length + ".");
         }
         double[] matrix = new double[shape[0]];
         for (int i=0; i<shape[0]; i++) {
@@ -192,9 +157,9 @@ public class Random {
      * Generate a 2D array of random samples between 0.0 and 1.0
      * @return double[][] 2D array of random decimals
      */
-    public double[][] randomDouble2D() {
-        if (this.shape.length != 2) {
-            throw new IllegalArgumentException("Shape must have exactly 2 items. Currently set to " + this.shape.length + ".");
+    public double[][] randomDouble2D(int[] shape) {
+        if (shape.length != 2) {
+            throw new IllegalArgumentException("Shape must have exactly 2 items. Currently set to " + shape.length + ".");
         }
         double[][] matrix = new double[shape[0]][shape[1]];
         for (int i=0; i<shape[0]; i++) {
@@ -209,9 +174,9 @@ public class Random {
      * Generate a 3D array of random samples between 0.0 and 1.0
      * @return double[][][] 3D array of random decimals
      */
-    public double[][][] randomDouble3D() {
-        if (this.shape.length != 3) {
-            throw new IllegalArgumentException("Shape must have exactly 3 items. Currently set to " + this.shape.length + ".");
+    public double[][][] randomDouble3D(int[] shape) {
+        if (shape.length != 3) {
+            throw new IllegalArgumentException("Shape must have exactly 3 items. Currently set to " + shape.length + ".");
         }
         double[][][] matrix = new double[shape[0]][shape[1]][shape[2]];
         for (int i=0; i<shape[0]; i++) {
@@ -230,9 +195,6 @@ public class Random {
      * @return int Random integer
      */
     public int randomIntSample(int upper_bound) {
-        if (this.shape.length != 0) {
-            throw new IllegalArgumentException("Shape must have no items. Currently set to " + this.shape.length + ".");
-        }
         upper_bound++;
         return this.rd.nextInt(upper_bound);
     }
@@ -244,8 +206,8 @@ public class Random {
      * @return int Random integer
      */
     public int randomIntSample(int lower_bound, int upper_bound) {
-        if (this.shape.length != 0) {
-            throw new IllegalArgumentException("Shape must have no items. Currently set to " + this.shape.length + ".");
+        if (lower_bound >= upper_bound) {
+            throw new IllegalArgumentException("Upper bound must be less than lower bound");
         }
         upper_bound++;
         return this.rd.nextInt(upper_bound - lower_bound) + lower_bound;
@@ -256,9 +218,9 @@ public class Random {
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[] 1D array of random integers
      */
-    public int[] randomInt1D(int upper_bound) {
-        if (this.shape.length != 1) {
-            throw new IllegalArgumentException("Shape must have exactly 1 item. Currently set to " + this.shape.length + ".");
+    public int[] randomInt1D(int[] shape, int upper_bound) {
+        if (shape.length != 1) {
+            throw new IllegalArgumentException("Shape must have exactly 1 item. Currently set to " + shape.length + ".");
         }
         upper_bound++;
         int[] matrix = new int[shape[0]];
@@ -274,9 +236,9 @@ public class Random {
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[] 1D array of random integers
      */
-    public int[] randomInt1D(int lower_bound, int upper_bound) {
-        if (this.shape.length != 1) {
-            throw new IllegalArgumentException("Shape must have exactly 1 item. Currently set to " + this.shape.length + ".");
+    public int[] randomInt1D(int[] shape, int lower_bound, int upper_bound) {
+        if (shape.length != 1) {
+            throw new IllegalArgumentException("Shape must have exactly 1 item. Currently set to " + shape.length + ".");
         }
         if (lower_bound >= upper_bound) {
             throw new IllegalArgumentException("Upper bound must be less than lower bound");
@@ -294,9 +256,9 @@ public class Random {
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[][] 2D array of random integers
      */
-    public int[][] randomInt2D(int upper_bound) {
-        if (this.shape.length != 2) {
-            throw new IllegalArgumentException("Shape must have exactly 2 items. Currently set to " + this.shape.length + ".");
+    public int[][] randomInt2D(int[] shape, int upper_bound) {
+        if (shape.length != 2) {
+            throw new IllegalArgumentException("Shape must have exactly 2 items. Currently set to " + shape.length + ".");
         }
         upper_bound++;
         int[][] matrix = new int[shape[0]][shape[1]];
@@ -314,9 +276,9 @@ public class Random {
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[][] 2D array of random integers
      */
-    public int[][] randomInt2D(int lower_bound, int upper_bound) {
-        if (this.shape.length != 2) {
-            throw new IllegalArgumentException("Shape must have exactly 2 items. Currently set to " + this.shape.length + ".");
+    public int[][] randomInt2D(int[] shape, int lower_bound, int upper_bound) {
+        if (shape.length != 2) {
+            throw new IllegalArgumentException("Shape must have exactly 2 items. Currently set to " + shape.length + ".");
         }
         if (lower_bound >= upper_bound) {
             throw new IllegalArgumentException("Upper bound must be less than lower bound");
@@ -336,9 +298,9 @@ public class Random {
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[][][] 3D array of random integers
      */
-    public int[][][] randomInt3D(int upper_bound) {
-        if (this.shape.length != 3) {
-            throw new IllegalArgumentException("Shape must have exactly 3 items. Currently set to " + this.shape.length + ".");
+    public int[][][] randomInt3D(int[] shape, int upper_bound) {
+        if (shape.length != 3) {
+            throw new IllegalArgumentException("Shape must have exactly 3 items. Currently set to " + shape.length + ".");
         }
         upper_bound++;
         int[][][] matrix = new int[shape[0]][shape[1]][shape[2]];
@@ -358,9 +320,9 @@ public class Random {
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[][][] 3D array of random integers
      */
-    public int[][][] randomInt3D(int lower_bound, int upper_bound) {
-        if (this.shape.length != 3) {
-            throw new IllegalArgumentException("Shape must have exactly 3 items. Currently set to " + this.shape.length + ".");
+    public int[][][] randomInt3D(int[] shape, int lower_bound, int upper_bound) {
+        if (shape.length != 3) {
+            throw new IllegalArgumentException("Shape must have exactly 3 items. Currently set to " + shape.length + ".");
         }
         if (lower_bound >= upper_bound) {
             throw new IllegalArgumentException("Upper bound must be less than lower bound");

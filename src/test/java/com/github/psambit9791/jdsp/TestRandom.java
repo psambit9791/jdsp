@@ -45,8 +45,8 @@ public class TestRandom {
 
     @Test
     public void RandomNormal1DTest1() {
-        Random r1 = new Random(new int[]{4});
-        double[] x = r1.randomNormal1D();
+        Random r1 = new Random();
+        double[] x = r1.randomNormal1D(new int[]{4});
         double[] result = {-0.19138793,  0.78346759,  1.18426079, -2.29774864};
 //        System.out.println(Arrays.toString(x));
         Assertions.assertArrayEquals(x, result, 0.0001);
@@ -54,16 +54,16 @@ public class TestRandom {
 
     @Test
     public void RandomNormal1DTest2() {
-        Random r1 = new Random(110, new int[]{4});
-        double[] x = r1.randomNormal1D();
+        Random r1 = new Random(110);
+        double[] x = r1.randomNormal1D(new int[]{4});
         double[] result = {0.446936  ,  0.38804182, -0.59835451,  0.65971754};
         Assertions.assertArrayEquals(x, result, 0.0001);
     }
 
     @Test
     public void RandomNormal2DTest1() {
-        Random r1 = new Random(new int[]{2,2});
-        double[][] x = r1.randomNormal2D();
+        Random r1 = new Random();
+        double[][] x = r1.randomNormal2D(new int[]{2,2});
         double[][] result = {{-0.19138793,  0.78346759},  {1.18426079, -2.29774864}};
         for (int i=0; i<2; i++) {
             Assertions.assertArrayEquals(x[i], result[i], 0.0001);
@@ -72,8 +72,8 @@ public class TestRandom {
 
     @Test
     public void RandomNormal2DTest2() {
-        Random r1 = new Random(110, new int[]{2,2});
-        double[][] x = r1.randomNormal2D();
+        Random r1 = new Random(110);
+        double[][] x = r1.randomNormal2D(new int[]{2,2});
         double[][] result = {{0.446936  ,  0.38804182}, {-0.59835451,  0.65971754}};
         for (int i=0; i<2; i++) {
             Assertions.assertArrayEquals(x[i], result[i], 0.0001);
@@ -82,8 +82,8 @@ public class TestRandom {
 
     @Test
     public void RandomNormal3DTest1() {
-        Random r1 = new Random(new int[]{2,2,2});
-        double[][][] x = r1.randomNormal3D();
+        Random r1 = new Random();
+        double[][][] x = r1.randomNormal3D(new int[]{2,2,2});
         double[][][] result = {{{-0.19138793,  0.78346759},  {1.18426079, -2.29774864}}, {{0.21612532,  -0.187860745},  {-0.90168376, -0.86411062}}};
         for (int i=0; i<2; i++) {
             for (int j=0; j<2; j++) {
@@ -94,8 +94,8 @@ public class TestRandom {
 
     @Test
     public void RandomNormal3DTest2() {
-        Random r1 = new Random(110, new int[]{2,2,2});
-        double[][][] x = r1.randomNormal3D();
+        Random r1 = new Random(110);
+        double[][][] x = r1.randomNormal3D(new int[]{2,2,2});
         double[][][] result = {{{0.446936  ,  0.38804182}, {-0.59835451,  0.65971754}}, {{1.01605335  ,  0.411612084}, {0.05522813,  0.109814776}}};
         for (int i=0; i<2; i++) {
             for (int j=0; j<2; j++) {
@@ -115,8 +115,8 @@ public class TestRandom {
 
     @Test
     public void RandomDouble1DTest1() {
-        Random r1 = new Random(new int[]{10});
-        double[] x = r1.randomDouble1D();
+        Random r1 = new Random();
+        double[] x = r1.randomDouble1D(new int[]{10});
         for (int i=0; i<10; i++){
             Assertions.assertTrue(x[i] <= 1.0 && x[i] >= 0.0);
         }
@@ -124,8 +124,8 @@ public class TestRandom {
 
     @Test
     public void RandomDouble2DTest1() {
-        Random r1 = new Random(new int[]{5,5});
-        double[][] x = r1.randomDouble2D();
+        Random r1 = new Random();
+        double[][] x = r1.randomDouble2D(new int[]{5,5});
         for (int i=0; i<5; i++) {
             for (int j=0; j<5; j++){
                 Assertions.assertTrue(x[i][j] <= 1.0 && x[i][j]>=0.0);
@@ -135,8 +135,8 @@ public class TestRandom {
 
     @Test
     public void RandomDouble3DTest1() {
-        Random r1 = new Random(new int[]{4,4,4});
-        double[][][] x = r1.randomDouble3D();
+        Random r1 = new Random();
+        double[][][] x = r1.randomDouble3D(new int[]{4,4,4});
         for (int i=0; i<4; i++) {
             for (int j=0; j<4; j++){
                 for (int k=0; k<4; k++) {
@@ -177,8 +177,8 @@ public class TestRandom {
 
     @Test
     public void RandomInt1DTest1() {
-        Random r1 = new Random(new int[]{10});
-        int[] x = r1.randomInt1D(10);
+        Random r1 = new Random();
+        int[] x = r1.randomInt1D(new int[]{10}, 10);
         for (int i=0; i<10; i++){
             Assertions.assertTrue(x[i] <= 10 && x[i]>=0);
         }
@@ -186,8 +186,8 @@ public class TestRandom {
 
     @Test
     public void RandomInt1DTest2() {
-        Random r1 = new Random(new int[]{10});
-        int[] x = r1.randomInt1D(5, 15);
+        Random r1 = new Random();
+        int[] x = r1.randomInt1D(new int[]{10}, 5, 15);
         for (int i=0; i<10; i++){
             Assertions.assertTrue(x[i] <= 15 && x[i]>=5);
         }
@@ -195,8 +195,8 @@ public class TestRandom {
 
     @Test
     public void RandomInt2DTest1() {
-        Random r1 = new Random(new int[]{5,5});
-        int[][] x = r1.randomInt2D(10);
+        Random r1 = new Random();
+        int[][] x = r1.randomInt2D(new int[]{5,5}, 10);
         for (int i=0; i<5; i++) {
             for (int j=0; j<5; j++){
                 Assertions.assertTrue(x[i][j] <= 10 && x[i][j]>=0);
@@ -206,8 +206,8 @@ public class TestRandom {
 
     @Test
     public void RandomInt2DTest2() {
-        Random r1 = new Random(new int[]{5,5});
-        int[][] x = r1.randomInt2D(5, 15);
+        Random r1 = new Random();
+        int[][] x = r1.randomInt2D(new int[]{5,5}, 5, 15);
         for (int i=0; i<5; i++) {
             for (int j=0; j<5; j++){
                 Assertions.assertTrue(x[i][j] <= 15 && x[i][j]>=5);
@@ -217,8 +217,8 @@ public class TestRandom {
 
     @Test
     public void RandomInt3DTest1() {
-        Random r1 = new Random(new int[]{4,4,4});
-        int[][][] x = r1.randomInt3D(10);
+        Random r1 = new Random();
+        int[][][] x = r1.randomInt3D(new int[]{4,4,4}, 10);
         for (int i=0; i<4; i++) {
             for (int j=0; j<4; j++){
                 for (int k=0; k<4; k++) {
@@ -230,8 +230,8 @@ public class TestRandom {
 
     @Test
     public void RandomInt3DTest2() {
-        Random r1 = new Random(new int[]{4,4,4});
-        int[][][] x = r1.randomInt3D(5, 15);
+        Random r1 = new Random();
+        int[][][] x = r1.randomInt3D(new int[]{4,4,4}, 5, 15);
         for (int i=0; i<4; i++) {
             for (int j=0; j<4; j++){
                 for (int k=0; k<4; k++) {
