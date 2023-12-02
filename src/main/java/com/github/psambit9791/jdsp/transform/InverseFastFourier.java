@@ -22,7 +22,9 @@ import org.apache.commons.math3.transform.TransformType;
  * <h1>Inverse Fast Fourier Transform</h1>
  * The InverseFastFourier class applies the inverse fast fourier transform on the input sequence (real/complex) and
  * provides different representations of the reconstructed signal to be returned (real signal, complex signal, ...).
- * This should be used for signals transformed using FFT.
+ * This should be used for signals transformed using FastFourier.
+ * This can be considered a wrapper on top of the Apache Math3 FastFourierTransformer [INVERSE] which pre-processes the signal before
+ * the operation.
  * <p>
  *
  * @author  Sambit Paul
@@ -52,6 +54,13 @@ public class InverseFastFourier implements _InverseFourier {
         return out;
     }
 
+    /**
+     * This constructor initialises the prerequisites required to use InverseFastFourier.
+     * @param fftOutput Sequence to be transformed (complex). [The FFT output is complex]
+     *            Dimension 1: Length, Dimension 2: Real part, complex part
+     * @param onlyPositive Only the first half of the FFT output is provided. Used for real signals where the last half
+     *                     are complex conjugates of the first half.
+     */
     public InverseFastFourier(double[][] fftOutput, boolean onlyPositive) {
         Complex[] temp = UtilMethods.matToComplex(fftOutput);
         if (onlyPositive) {
@@ -63,6 +72,12 @@ public class InverseFastFourier implements _InverseFourier {
         this.ft = new FastFourierTransformer(DftNormalization.STANDARD);
     }
 
+    /**
+     * This constructor initialises the prerequisites required to use InverseFastFourier.
+     * @param fftOutput Sequence to be transformed (array of Complex type). [The FFT output is complex]
+     * @param onlyPositive Only the first half of the FFT output is provided. Used for real signals where the last half
+     *                     are complex conjugates of the first half.
+     */
     public InverseFastFourier(Complex[] fftOutput, boolean onlyPositive) {
         if (onlyPositive) {
             this.sequence = this.toFullSequence(fftOutput);
@@ -73,6 +88,13 @@ public class InverseFastFourier implements _InverseFourier {
         this.ft = new FastFourierTransformer(DftNormalization.STANDARD);
     }
 
+    /**
+     * This constructor initialises the prerequisites required to use InverseFastFourier.
+     * @param fftOutput Sequence to be transformed (array of Complex type). [The FFT output is complex]
+     * @param onlyPositive Only the first half of the FFT output is provided. Used for real signals where the last half
+     *                     are complex conjugates of the first half.
+     * @param norm The normalization option to be used the Inverse Fast Fourier transform.
+     */
     public InverseFastFourier(Complex[] fftOutput, boolean onlyPositive, DftNormalization norm) {
         if (onlyPositive) {
             this.sequence = this.toFullSequence(fftOutput);
@@ -83,6 +105,9 @@ public class InverseFastFourier implements _InverseFourier {
         this.ft = new FastFourierTransformer(norm);
     }
 
+    /**
+     * Performs the inverse fourier transformation on the input signal.
+     */
     public void transform() {
         this.signal = this.ft.transform(this.sequence, TransformType.INVERSE);
     }

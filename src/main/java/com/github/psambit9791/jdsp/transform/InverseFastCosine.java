@@ -17,6 +17,18 @@ import org.apache.commons.math3.transform.DctNormalization;
 import org.apache.commons.math3.transform.FastCosineTransformer;
 import org.apache.commons.math3.transform.TransformType;
 
+/**
+ * <h1>Inverse Fast Cosine Transform</h1>
+ * The InverseFastCosine class applies the inverse fast cosine transform on the input sequence and
+ * returns the original signal.
+ * This should be used for signals transformed using FastCosine.
+ * This can be considered a wrapper on top of the Apache Math3 FastCosine [INVERSE] which pre-processes the signal before
+ * the operation.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class InverseFastCosine implements _InverseSineCosine {
 
     private double[] signal;
@@ -32,16 +44,23 @@ public class InverseFastCosine implements _InverseSineCosine {
         }
     }
 
-    public int getSignalLength() {
-        return this.signal.length;
-    }
-
+    /**
+     * This constructor initialises the prerequisites required to use InverseFastCosine.
+     *
+     * @param signal The input signal to be transformed.
+     */
     public InverseFastCosine(double[] signal) {
         this.signal = signal;
         this.extendSignal();
         this.fct = new FastCosineTransformer(DctNormalization.STANDARD_DCT_I);
     }
 
+    /**
+     * This constructor initialises the prerequisites required to use InverseFastCosine.
+     *
+     * @param signal The input signal to be transformed.
+     * @param norm   The normalization option (STANDARD or ORTHOGONAL).
+     */
     public InverseFastCosine(double[] signal, Normalization norm) {
         this.signal = signal;
         this.extendSignal();
@@ -53,14 +72,32 @@ public class InverseFastCosine implements _InverseSineCosine {
         }
     }
 
+    /**
+     * Performs the inverse cosine transformation on the input signal.
+     */
     public void transform() {
         this.output = this.fct.transform(this.signal, TransformType.INVERSE);
     }
 
+    /**
+     * Returns the output of the transformation.
+     *
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
+     * @return double[] The transformed signal.
+     */
     public double[] getMagnitude() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute transform() function before returning result");
         }
         return this.output;
+    }
+
+    /**
+     * Gets the length of the input signal after preprocessing for InverseFastSine (padded to nearest power of 2).
+     *
+     * @return int The updated length of the input signal.
+     */
+    public int getSignalLength() {
+        return this.signal.length;
     }
 }
