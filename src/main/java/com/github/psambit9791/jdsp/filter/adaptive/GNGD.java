@@ -1,6 +1,6 @@
 /*
  *
- *  * Copyright (c) 2020 Sambit Paul
+ *  * Copyright (c) 2023 Sambit Paul
  *  *
  *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *  *
@@ -21,7 +21,6 @@ import java.util.Arrays;
  * The GNGD adaptive filter is an extension of the normalised least mean squares (NLMS) adaptive filter. It adds an
  * additional gradient adaptive term in the denominator of the learning rate term, which allows it to adapt its learning
  * rate according to the dynamics of the input signal.
- *
  * Cite: Mandic, D. P. (2004). A generalized normalized gradient descent algorithm. IEEE signal processing letters, 11(2), 115-118.
  *
  * @author Sambit Paul
