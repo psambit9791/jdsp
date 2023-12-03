@@ -1,6 +1,6 @@
 /*
  *
- *  * Copyright (c) 2020 Sambit Paul
+ *  * Copyright (c) 2023 Sambit Paul
  *  *
  *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *  *
@@ -25,7 +25,6 @@ import java.util.Arrays;
  *  * instead of the actual error and signal values.
  * Additionally, you can use a Leaky NSSLMS filter by setting the leakage factor in the NSSLMS constructor.
  * A leakage factor of less than 1 results in improved stability and tracking of the filter.
- *
  * It is very similar to the LMS-filter, with the difference that the learning rate gets automatically adjusted according
  * to the input signal's power.
  *

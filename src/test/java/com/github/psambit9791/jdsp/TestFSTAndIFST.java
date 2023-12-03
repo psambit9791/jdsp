@@ -13,10 +13,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
-import com.github.psambit9791.jdsp.transform.FastCosine;
-import com.github.psambit9791.jdsp.transform.FastSine;
-import com.github.psambit9791.jdsp.transform.InverseFastCosine;
-import com.github.psambit9791.jdsp.transform.InverseFastSine;
+import com.github.psambit9791.jdsp.transform.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -51,7 +48,7 @@ public class TestFSTAndIFST {
     }
 
     @Test
-    public void testFCTWithIFCT1() {
+    public void testFSTWithIFST1() {
         FastSine f1 = new FastSine(this.signal1);
         f1.transform();
         double[] out = f1.getMagnitude();
@@ -65,7 +62,21 @@ public class TestFSTAndIFST {
     }
 
     @Test
-    public void testFCTWithIFCT2() {
+    public void testFSTWithIFST1_withNorm() {
+        FastSine f1 = new FastSine(this.signal1, FastSine.Normalization.STANDARD);
+        f1.transform();
+        double[] out = f1.getMagnitude();
+
+        InverseFastSine f2 = new InverseFastSine(out, InverseFastSine.Normalization.STANDARD);
+        f2.transform();
+        double[] reconstructed = f2.getMagnitude();
+
+        Assertions.assertArrayEquals(this.extendSignal(this.signal1), reconstructed, 0.001);
+
+    }
+
+    @Test
+    public void testFSTWithIFST2() {
         FastSine f1 = new FastSine(this.signal2);
         f1.transform();
         double[] out = f1.getMagnitude();

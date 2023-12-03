@@ -1,6 +1,6 @@
 /*
  *
- *  * Copyright (c) 2020 Sambit Paul
+ *  * Copyright (c) 2023 Sambit Paul
  *  *
  *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *  *
@@ -12,12 +12,19 @@
 
 package com.github.psambit9791.jdsp.transform;
 
+/**
+ * <h1>Inverse Discrete Sine Transform</h1>
+ * The InverseDiscreteSine class applies the inverse sine transform on the input sequence and returns the output signal.
+ * This should be used for signals transformed using DiscreteSine with the specific transform type.
+ * <p>
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public class InverseDiscreteSine implements _SineCosine {
 
     private double[] signal;
     private double[] output = null;
-    private int type;
-
     private Normalization norm;
 
     private int inferType(int t) {
@@ -34,49 +41,69 @@ public class InverseDiscreteSine implements _SineCosine {
         return inf;
     }
 
-    public InverseDiscreteSine(double[] s, int type, Normalization norm) throws IllegalArgumentException {
-        if ((type <= 0) || (type > 4)) {
-            throw new IllegalArgumentException("Type must be between 1 and 4");
-        }
-        this.signal = s;
-        this.type = this.inferType(type);
-        this.norm = norm;
-
-    }
-
-    public InverseDiscreteSine(double[] s, Normalization norm) {
-        this.signal = s;
-        this.type = this.inferType(2);
+    /**
+     * This constructor initialises the prerequisites required to use InverseDiscreteSiine
+     * @param signal The signal to be transformed
+     * @param norm The normalization option (STANDARD or ORTHOGONAL).
+     */
+    public InverseDiscreteSine(double[] signal, Normalization norm) {
+        this.signal = signal;
         this.norm = norm;
     }
 
-    public InverseDiscreteSine(double[] s, int type) throws IllegalArgumentException {
+    /**
+     * This constructor initialises the prerequisites required to use DiscreteSine, normalization is set to STANDARD
+     * @param signal The signal to be transformed
+     */
+    public InverseDiscreteSine(double[] signal) {
+        this.signal = signal;
+        this.norm = Normalization.STANDARD;
+    }
+
+    /**
+     * This function performs the inverse discrete sine transform on the input signal
+     * @param type Type of transform that was applied during the forward transform
+     * @throws java.lang.IllegalArgumentException If type is not between 1 and 4
+     */
+    public void transform(int type) throws IllegalArgumentException {
         if ((type <= 0) || (type > 4)) {
             throw new IllegalArgumentException("Type must be between 1 and 4");
         }
-        this.signal = s;
-        this.type = this.inferType(type);
-        this.norm = Normalization.STANDARD;
-    }
-
-    public InverseDiscreteSine(double[] s) {
-        this.signal = s;
-        this.type = this.inferType(2);
-        this.norm = Normalization.STANDARD;
-    }
-
-    public void transform() {
+        type = this.inferType(type);
         DiscreteSine dst;
         if (this.norm == Normalization.STANDARD) {
-            dst = new DiscreteSine(this.signal, this.type, _SineCosine.Normalization.STANDARD);
+            dst = new DiscreteSine(this.signal, _SineCosine.Normalization.STANDARD);
         }
         else {
-            dst = new DiscreteSine(this.signal, this.type, _SineCosine.Normalization.ORTHOGONAL);
+            dst = new DiscreteSine(this.signal, _SineCosine.Normalization.ORTHOGONAL);
         }
-        dst.transform();
+        dst.transform(type);
         this.output = dst.getMagnitude();
     }
 
+    /**
+     * This function performs the inverse discrete sine transform on the input signal. Original transform type is set to 2.
+     * @throws java.lang.IllegalArgumentException If type is not between 1 and 4
+     */
+    public void transform() {
+        int type = this.inferType(2);
+        DiscreteSine dst;
+        if (this.norm == Normalization.STANDARD) {
+            dst = new DiscreteSine(this.signal, _SineCosine.Normalization.STANDARD);
+        }
+        else {
+            dst = new DiscreteSine(this.signal, _SineCosine.Normalization.ORTHOGONAL);
+        }
+        dst.transform(type);
+        this.output = dst.getMagnitude();
+    }
+
+    /**
+     * Returns the output of the transformation.
+     *
+     * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
+     * @return double[] The transformed signal.
+     */
     public double[] getMagnitude() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute transform() function before returning result");
@@ -84,6 +111,11 @@ public class InverseDiscreteSine implements _SineCosine {
         return this.output;
     }
 
+    /**
+     * Gets the length of the input signal.
+     *
+     * @return int The updated length of the input signal.
+     */
     public int getSignalLength() {
         return this.signal.length;
     }

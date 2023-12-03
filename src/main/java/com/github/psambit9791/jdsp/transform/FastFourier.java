@@ -1,6 +1,6 @@
 /*
  *
- *  * Copyright (c) 2020 Sambit Paul
+ *  * Copyright (c) 2023 Sambit Paul
  *  *
  *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *  *
@@ -24,7 +24,7 @@ import java.util.Arrays;
  * <h1>Fast Fourier Transform</h1>
  * The FastFourier class performs discrete fourier transform on the input signal using the FFT algorithm and
  * provides different representations of the output to be returned and if the output should be mirrored or not-mirrored.
- * This can be considered a wrapper on top of the Apache Math3 FastFourierTransformer which pre-processes the signal before
+ * This can be considered a wrapper on top of the Apache Math3 FastFourierTransformer [FORWARD] which pre-processes the signal before
  * the operation.
  * Reference <a href="https://mathworld.wolfram.com/FastFourierTransform.html">article</a> for more information on fast fourier transform.
  * <p>
@@ -101,6 +101,9 @@ public class FastFourier implements _Fourier {
         this.ft = new FastFourierTransformer(norm);
     }
 
+    /**
+     * Performs the fourier transformation on the input signal.
+     */
     public void transform() {
         this.output = this.ft.transform(this.signal, TransformType.FORWARD);
     }

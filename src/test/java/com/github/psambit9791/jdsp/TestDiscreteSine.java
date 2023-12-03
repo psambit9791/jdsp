@@ -50,8 +50,8 @@ public class TestDiscreteSine {
                 -0.505,   0.   ,  -0.446,  -0.   ,  -0.377,  -0.   ,  -0.314,
                 0.   ,  -0.25 ,   0.   ,  -0.199,   0.   ,  -0.139,  -0.   ,
                 -0.084,   0.   ,  -0.021};
-        DiscreteSine dct1 = new DiscreteSine(this.signal1, 1);
-        dct1.transform();
+        DiscreteSine dct1 = new DiscreteSine(this.signal1);
+        dct1.transform(1);
         double[] output1 = dct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -67,8 +67,8 @@ public class TestDiscreteSine {
                 -0.9  ,  -0.   ,  -0.766,  -0.   ,  -0.642,  -0.   ,  -0.537,
                 -0.   ,  -0.427,  -0.   ,  -0.335,   0.   ,  -0.228,  -0.   ,
                 -0.14 ,   0.   ,  -0.033};
-        DiscreteSine dct2 = new DiscreteSine(this.signal2, 1);
-        dct2.transform();
+        DiscreteSine dct2 = new DiscreteSine(this.signal2);
+        dct2.transform(1);
         double[] output2 = dct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
@@ -85,7 +85,7 @@ public class TestDiscreteSine {
                 0.   , -0.821,  0.   , -0.793,  0.   , -0.791,  0.   , -0.775,
                 0.   , -0.772,  0.   , -0.76 ,  0.   , -0.75 ,  0.   , -0.737,
                 0.   , -0.736,  0.   , -0.731,  0.   , -0.732,  0.   , -0.72};
-        DiscreteSine dct1 = new DiscreteSine(this.signal1, 2);
+        DiscreteSine dct1 = new DiscreteSine(this.signal1);
         dct1.transform();
         double[] output1 = dct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
@@ -102,7 +102,7 @@ public class TestDiscreteSine {
                 -1.37 ,   0.   ,  -1.318,   0.   ,  -1.272,   0.   ,  -1.247,
                 0.   ,  -1.217,   0.   ,  -1.208,   0.   ,  -1.188,   0.   ,
                 -1.188,   0.   ,  -1.164};
-        DiscreteSine dct2 = new DiscreteSine(this.signal2, 2);
+        DiscreteSine dct2 = new DiscreteSine(this.signal2);
         dct2.transform();
         double[] output2 = dct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
@@ -122,8 +122,8 @@ public class TestDiscreteSine {
                 -0.658,   0.172,  -0.621,   0.198,  -0.575,   0.221,  -0.535,
                 0.245,  -0.494,   0.265,  -0.465,   0.292,  -0.431,   0.317,
                 -0.401,   0.346,  -0.366};
-        DiscreteSine dct1 = new DiscreteSine(this.signal1, 3);
-        dct1.transform();
+        DiscreteSine dct1 = new DiscreteSine(this.signal1);
+        dct1.transform(3);
         double[] output1 = dct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -139,8 +139,8 @@ public class TestDiscreteSine {
                 -1.17 ,   0.305,  -1.065,   0.336,  -0.972,   0.364,  -0.899,
                 0.401,  -0.824,   0.433,  -0.767,   0.476,  -0.702,   0.512,
                 -0.653,   0.562,  -0.591};
-        DiscreteSine dct2 = new DiscreteSine(this.signal2, 3);
-        dct2.transform();
+        DiscreteSine dct2 = new DiscreteSine(this.signal2);
+        dct2.transform(3);
         double[] output2 = dct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
@@ -159,8 +159,8 @@ public class TestDiscreteSine {
                 -0.52 ,  -0.263,  -0.5  ,  -0.282,  -0.474,  -0.294,  -0.452,
                 -0.307,  -0.429,  -0.314,  -0.415,  -0.329,  -0.397,  -0.341,
                 -0.383,  -0.357,  -0.362};
-        DiscreteSine dct1 = new DiscreteSine(this.signal1, 4);
-        dct1.transform();
+        DiscreteSine dct1 = new DiscreteSine(this.signal1);
+        dct1.transform(4);
         double[] output1 = dct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -176,8 +176,8 @@ public class TestDiscreteSine {
                 -0.924,  -0.466,  -0.859,  -0.477,  -0.801,  -0.485,  -0.76 ,
                 -0.503,  -0.715,  -0.513,  -0.685,  -0.538,  -0.647,  -0.551,
                 -0.624,  -0.58 ,  -0.585};
-        DiscreteSine dct2 = new DiscreteSine(this.signal2, 4);
-        dct2.transform();
+        DiscreteSine dct2 = new DiscreteSine(this.signal2);
+        dct2.transform(4);
         double[] output2 = dct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
@@ -194,8 +194,8 @@ public class TestDiscreteSine {
                 -0.   , -0.056, -0.   , -0.05 , -0.   , -0.045, -0.   , -0.04 ,
                 0.   , -0.035, -0.   , -0.03 , -0.   , -0.025,  0.   , -0.02 ,
                 0.   , -0.016,  0.   , -0.011, -0.   , -0.007,  0.   , -0.002};
-        DiscreteSine dct1 = new DiscreteSine(this.signal1, 1, DiscreteSine.Normalization.ORTHOGONAL);
-        dct1.transform();
+        DiscreteSine dct1 = new DiscreteSine(this.signal1, DiscreteSine.Normalization.ORTHOGONAL);
+        dct1.transform(1);
         double[] output1 = dct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -209,8 +209,8 @@ public class TestDiscreteSine {
                 0.   , -0.113,  0.   , -0.096,  0.   , -0.082, -0.   , -0.071,
                 -0.   , -0.06 , -0.   , -0.05 , -0.   , -0.042, -0.   , -0.034,
                 -0.   , -0.026,  0.   , -0.018, -0.   , -0.011,  0.   , -0.003};
-        DiscreteSine dct2 = new DiscreteSine(this.signal2, 1, DiscreteSine.Normalization.ORTHOGONAL);
-        dct2.transform();
+        DiscreteSine dct2 = new DiscreteSine(this.signal2, DiscreteSine.Normalization.ORTHOGONAL);
+        dct2.transform(1);
         double[] output2 = dct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
@@ -227,8 +227,8 @@ public class TestDiscreteSine {
                 0.   , -0.065,  0.   , -0.063,  0.   , -0.063,  0.   , -0.061,
                 0.   , -0.061,  0.   , -0.06 ,  0.   , -0.059,  0.   , -0.058,
                 0.   , -0.058,  0.   , -0.058,  0.   , -0.058,  0.   , -0.057};
-        DiscreteSine dct1 = new DiscreteSine(this.signal1, 2, DiscreteSine.Normalization.ORTHOGONAL);
-        dct1.transform();
+        DiscreteSine dct1 = new DiscreteSine(this.signal1, DiscreteSine.Normalization.ORTHOGONAL);
+        dct1.transform(2);
         double[] output1 = dct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -242,8 +242,8 @@ public class TestDiscreteSine {
                 0.   , -0.129,  0.   , -0.12 ,  0.   , -0.113,  0.   , -0.108,
                 0.   , -0.104,  0.   , -0.101,  0.   , -0.099,  0.   , -0.096,
                 0.   , -0.096,  0.   , -0.094,  0.   , -0.094,  0.   , -0.092};
-        DiscreteSine dct2 = new DiscreteSine(this.signal2, 2, DiscreteSine.Normalization.ORTHOGONAL);
-        dct2.transform();
+        DiscreteSine dct2 = new DiscreteSine(this.signal2, DiscreteSine.Normalization.ORTHOGONAL);
+        dct2.transform(2);
         double[] output2 = dct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
@@ -260,8 +260,8 @@ public class TestDiscreteSine {
                 0.008, -0.064,  0.009, -0.059,  0.01 , -0.056,  0.012, -0.052,
                 0.014, -0.049,  0.016, -0.045,  0.017, -0.042,  0.019, -0.039,
                 0.021, -0.037,  0.023, -0.034,  0.025, -0.032,  0.027, -0.029};
-        DiscreteSine dct1 = new DiscreteSine(this.signal1, 3, DiscreteSine.Normalization.ORTHOGONAL);
-        dct1.transform();
+        DiscreteSine dct1 = new DiscreteSine(this.signal1, DiscreteSine.Normalization.ORTHOGONAL);
+        dct1.transform(3);
         double[] output1 = dct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -275,8 +275,8 @@ public class TestDiscreteSine {
                 0.015, -0.128,  0.018, -0.114,  0.02 , -0.102,  0.022, -0.092,
                 0.024, -0.084,  0.027, -0.077,  0.029, -0.071,  0.032, -0.065,
                 0.034, -0.061,  0.038, -0.055,  0.04 , -0.052,  0.044, -0.047};
-        DiscreteSine dct2 = new DiscreteSine(this.signal2, 3, DiscreteSine.Normalization.ORTHOGONAL);
-        dct2.transform();
+        DiscreteSine dct2 = new DiscreteSine(this.signal2, DiscreteSine.Normalization.ORTHOGONAL);
+        dct2.transform(3);
         double[] output2 = dct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
@@ -293,8 +293,8 @@ public class TestDiscreteSine {
                 -0.017, -0.048, -0.018, -0.045, -0.018, -0.043, -0.02 , -0.041,
                 -0.021, -0.04 , -0.022, -0.038, -0.023, -0.036, -0.024, -0.034,
                 -0.025, -0.033, -0.026, -0.031, -0.027, -0.03 , -0.028, -0.029};
-        DiscreteSine dct1 = new DiscreteSine(this.signal1, 4, DiscreteSine.Normalization.ORTHOGONAL);
-        dct1.transform();
+        DiscreteSine dct1 = new DiscreteSine(this.signal1, DiscreteSine.Normalization.ORTHOGONAL);
+        dct1.transform(4);
         double[] output1 = dct1.getMagnitude();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -308,8 +308,8 @@ public class TestDiscreteSine {
                 -0.034, -0.096, -0.035, -0.087, -0.036, -0.079, -0.036, -0.073,
                 -0.037, -0.068, -0.038, -0.063, -0.038, -0.06 , -0.04 , -0.057,
                 -0.041, -0.054, -0.042, -0.051, -0.044, -0.049, -0.046, -0.046};
-        DiscreteSine dct2 = new DiscreteSine(this.signal2, 4, DiscreteSine.Normalization.ORTHOGONAL);
-        dct2.transform();
+        DiscreteSine dct2 = new DiscreteSine(this.signal2, DiscreteSine.Normalization.ORTHOGONAL);
+        dct2.transform(4);
         double[] output2 = dct2.getMagnitude();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }

@@ -1,6 +1,6 @@
 /*
  *
- *  * Copyright (c) 2020 Sambit Paul
+ *  * Copyright (c) 2023 Sambit Paul
  *  *
  *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *  *
@@ -155,8 +155,8 @@ public class ICA {
         this.seed = random_state;
         this.max_iter = max_iter;
         this.tol = tol;
-        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
-        this.w_init = r1.randomNormal2D();
+        Random r1 = new Random(this.seed);
+        this.w_init = r1.randomNormal2D(new int[] {this.components, this.components});
     }
 
     /**
@@ -181,8 +181,8 @@ public class ICA {
         this.func = func;
         this.seed = random_state;
         this.max_iter = max_iter;
-        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
-        this.w_init = r1.randomNormal2D();
+        Random r1 = new Random(this.seed);
+        this.w_init = r1.randomNormal2D(new int[] {this.components, this.components});
     }
 
     /**
@@ -232,8 +232,8 @@ public class ICA {
         this.func = func;
         this.alpha = alpha;
         this.seed = random_state;
-        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
-        this.w_init = r1.randomNormal2D();
+        Random r1 = new Random(this.seed);
+        this.w_init = r1.randomNormal2D(new int[] {this.components, this.components});
     }
 
     /**
@@ -255,8 +255,8 @@ public class ICA {
         }
         this.func = func;
         this.alpha = alpha;
-        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
-        this.w_init = r1.randomNormal2D();
+        Random r1 = new Random(this.seed);
+        this.w_init = r1.randomNormal2D(new int[] {this.components, this.components});
     }
 
     /**
@@ -273,8 +273,8 @@ public class ICA {
         this.gx = new double[this.signal.length];
         this.g_x = 0;
         this.func = func;
-        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
-        this.w_init = r1.randomNormal2D();
+        Random r1 = new Random(this.seed);
+        this.w_init = r1.randomNormal2D(new int[] {this.components, this.components});
     }
 
     /**
@@ -285,8 +285,8 @@ public class ICA {
         this.signal = signal;
         this.components = this.signal[0].length;
         this.seed = seed;
-        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
-        this.w_init = r1.randomNormal2D();
+        Random r1 = new Random(this.seed);
+        this.w_init = r1.randomNormal2D(new int[] {this.components, this.components});
     }
 
     /**
@@ -296,8 +296,8 @@ public class ICA {
     public ICA(double[][] signal) {
         this.signal = signal;
         this.components = this.signal[0].length;
-        Random r1 = new Random(this.seed, new int[] {this.components, this.components});
-        this.w_init = r1.randomNormal2D();
+        Random r1 = new Random(this.seed);
+        this.w_init = r1.randomNormal2D(new int[] {this.components, this.components});
     }
 
     /**

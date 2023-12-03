@@ -15,6 +15,7 @@ package com.github.psambit9791.jdsp;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.transform.FastCosine;
 import com.github.psambit9791.jdsp.transform.InverseFastCosine;
+import com.github.psambit9791.jdsp.transform._SineCosine;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -55,6 +56,20 @@ public class TestFCTAndIFCT {
         double[] out = f1.getMagnitude();
 
         InverseFastCosine f2 = new InverseFastCosine(out);
+        f2.transform();
+        double[] reconstructed = f2.getMagnitude();
+
+        Assertions.assertArrayEquals(this.extendSignal(this.signal1), reconstructed, 0.001);
+
+    }
+
+    @Test
+    public void testFCTWithIFCT1_withNorm() {
+        FastCosine f1 = new FastCosine(this.signal1, FastCosine.Normalization.STANDARD);
+        f1.transform();
+        double[] out = f1.getMagnitude();
+
+        InverseFastCosine f2 = new InverseFastCosine(out, InverseFastCosine.Normalization.STANDARD);
         f2.transform();
         double[] reconstructed = f2.getMagnitude();
 
