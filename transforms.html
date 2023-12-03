@@ -122,6 +122,7 @@
             <li><a href="#hilbert">Hilbert Transform</a> </li>
             <li><a href="#wavelet">Continuous Wavelet Transforms</a> </li>
             <li><a href="#pca">Principal Component Analysis</a> </li>
+            <li><a href="#ica">Independent Component Analysis</a> </li>
           </ul>
 
           <div id="fourier">
@@ -477,6 +478,46 @@ double[][] newSignal = p1.transform(signal); //Returns the reduced signal
                     <div class="container" style="padding-bottom:50px;"></div>
                 </div>
                 <!-- END OF PCA TRANSFORM-->
+
+            </div>
+
+
+            <div id="ica">
+
+                <!--  START OF ICA TRANSFORM  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Independent Component Analysis</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <img src="res/signal/transforms/ica/source_signal.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <h5>Source Signal and its transformation (input)</h5>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/transforms/ica/recoverd.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <h5>Signals recovered after PCA</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+ICA i1 = new ICA(signal, "logcosh", 1.0); //function can be "logcosh", "exp" or "cube"
+i1.fit();
+double[][] newSignal = i1.transform();
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF ICA TRANSFORM-->
 
             </div>
         </div>

@@ -680,6 +680,23 @@ double[] out = mf.filter(signal); //get the result after filtering
                   <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
                       <img src="res/signal/filters/savgol/savgol.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
                   </div>
+                  <div class="d-flex align-items-center justify-content-center">
+                      <h4>Interp Mode</h4>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+String mode = "interp"
+int windowSize = 5; //can be anything less than length of signal
+int polyOrder = 2; //Order of the polynomial used to generate coefficients
+int deriv = 0; // Order of derivative
+int delta = 1; // Spacing of samples to which filter is applied
+Savgol s1 = new Savgol(windowSize, polyOrder, deriv, delta);
+// ALSO: Savgol s1 = new Savgol(windowSize, polyOrder) set deriv=0, delta=1 by DEFAULT
+double[] out = s1.filter(signal, mode); //get the result after filtering
+                    </code>
+                  </pre>
+                  </div>
                   <div class="row">
                       <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                           <h4>Mirror Mode</h4>
@@ -690,7 +707,7 @@ double[] out = mf.filter(signal); //get the result after filtering
                       <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-String mode = "mirror" //can be any of the operating modes described above
+String mode = "mirror"
 int windowSize = 5; //can be anything less than length of signal
 int polyOrder = 2; //Order of the polynomial used to generate coefficients
 int deriv = 0; // Order of derivative

@@ -119,8 +119,9 @@
         <div id="tabs">
           <ul>
             <li><a href="#plotting">Plotting</a> </li>
-            <li><a href="#linspace">Linspace</a> </li>
-            <li><a href="#arange">Arange</a> </li>
+            <li><a href="#polynomial">Polynomial</a> </li>
+            <li><a href="#random">Random</a> </li>
+            <li><a href="#arraycreate">Array Creation</a> </li>
             <li><a href="#arrayop">Array Operations</a> </li>
             <li><a href="#matrixop">Matrix Operation</a> </li>
             <li><a href="#argsop">Args Operations</a> </li>
@@ -226,7 +227,266 @@ fig.saveAsPng(outputFileName);
               <!-- END OF PLOTTING-->
           </div>
 
-          <div id="linspace">
+          <div id="polynomial">
+
+                <!--  START OF POLYFIT  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Polyfit</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] x = {0.0, 1.0, 2.0, 3.0,  4.0,  5.0};
+double[] y = {0.0, 0.8, 0.9, 0.1, -0.8, -1.0};
+double[] out = Polynomial.polyfit(x, y, 3);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[0.087, -0.8135,  1.6931, -0.0397] ⇨ 0.087x<sup>3</sup> - 0.8135x<sup>2</sup> + 1.6931x - 0.0387
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF POLYFIT-->
+
+
+                <!--  START OF POLYVAL  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Polyval</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] coeffs = {3.0, 0.0, 1.0}; // 3x<sup>2</sup> + 1
+double x_val = 5.0;
+double out_val = Polynomial.polyval(coeffs, x_val);
+double[] x_arr = {5.0, 3.2, 1.2};
+double[] out_arr = Polynomial.polyval(coeffs, x_arr);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+out_val ⇨ 76.0
+out_arr ⇨ [76.0  , 31.72,  5.32]
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF POLYVAL-->
+
+                <!--  START OF POLYDER  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Polyder</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] coeffs = {6, 3, 1, 1}; // 6x<sup>3</sup> + 3x<sup>2</sup> + x + 1
+int m2 = 2; //Order of derivative
+double[] out2 = Polynomial.polyder(coeffs, m2);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[18, 6, 1] ⇨ 18x<sup>2</sup> + 6x + 1
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF POLYSER-->
+
+            </div>
+
+          <div id="random">
+
+                <!--  START OF SAMPLE  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Generate a Random Sample</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] x = {0.0, 1.0, 2.0, 3.0,  4.0,  5.0};
+double[] y = {0.0, 0.8, 0.9, 0.1, -0.8, -1.0};
+double[] out = Polynomial.polyfit(x, y, 3);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF SAMPLE-->
+
+
+                <!--  START OF 1D ARRAY  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Generate a Random 1D Array</h2>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] coeffs = {3.0, 0.0, 1.0}; // 3x<sup>2</sup> + 1
+double x_val = 5.0;
+double out_val = Polynomial.polyval(coeffs, x_val);
+double[] x_arr = {5.0, 3.2, 1.2};
+double[] out_arr = Polynomial.polyval(coeffs, x_arr);
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF 1D ARRAY-->
+
+              <!--  START OF 2D ARRAY  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Generate a Random 2D Array</h2>
+                      </div>
+                  </div>
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Code</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+Random r1 = new Random();
+r1.setSeed(42);
+double x1 = r1.randomNormalSample();
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF 2D ARRAY-->
+
+
+              <!--  START OF 3D ARRAY  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Generate a Random 3D Array</h2>
+                      </div>
+                  </div>
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Code</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] coeffs = {3.0, 0.0, 1.0}; // 3x<sup>2</sup> + 1
+double x_val = 5.0;
+double out_val = Polynomial.polyval(coeffs, x_val);
+double[] x_arr = {5.0, 3.2, 1.2};
+double[] out_arr = Polynomial.polyval(coeffs, x_arr);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF 3D ARRAY-->
+
+          </div>
+
+          <div id="arraycreate">
 
               <!--  START OF LINSPACE 1  -->
               <div class="bg-white" style="padding-top:30px;">
@@ -319,9 +579,6 @@ double[] out = UtilMethods.linspace(start, stop, samples, repeats);
               </div>
               <!-- END OF LINSPACE 2-->
 
-          </div>
-
-          <div id="arange">
               <!--  START OF ARANGE  -->
               <div class="bg-white" style="padding-top:30px;">
                   <div class="row mb-5">
@@ -365,6 +622,7 @@ double[] out = UtilMethods.arange(start, stop, step);
                   <div class="container" style="padding-bottom:50px;"></div>
               </div>
               <!-- END OF ARANGE-->
+
           </div>
 
             <div id="arrayop">

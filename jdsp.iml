@@ -1,44 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6">
-    <output url="file://$MODULE_DIR$/target/classes" />
-    <output-test url="file://$MODULE_DIR$/target/test-classes" />
-    <content url="file://$MODULE_DIR$">
+  <component name="AdditionalModuleElements">
+    <content url="file://$MODULE_DIR$" dumb="true">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="inheritedJdk" />
-    <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.0.3" level="project" />
-    <orderEntry type="library" name="Maven: org.apiguardian:apiguardian-api:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-engine:1.0.3" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-surefire-provider:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-launcher:1.0.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.maven.surefire:surefire-api:2.19.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.maven.surefire:common-java5:2.19.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.6.2" level="project" />
-    <orderEntry type="library" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-commons:1.6.2" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.0.3" level="project" />
-    <orderEntry type="library" name="Maven: org.apiguardian:apiguardian-api:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-engine:1.0.3" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-surefire-provider:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-launcher:1.0.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.maven.surefire:surefire-api:2.19.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.maven.surefire:common-java5:2.19.1" level="project" />
-    <orderEntry type="library" name="Maven: org.knowm.xchart:xchart:3.6.2" level="project" />
-    <orderEntry type="library" name="Maven: de.erichseifert.vectorgraphics2d:VectorGraphics2D:0.13" level="project" />
-    <orderEntry type="library" name="Maven: de.rototor.pdfbox:graphics2d:0.25" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.pdfbox:pdfbox:2.0.17" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.pdfbox:fontbox:2.0.17" level="project" />
-    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
-    <orderEntry type="library" name="Maven: com.madgag:animated-gif-lib:1.4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.6.2" level="project" />
-    <orderEntry type="library" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-commons:1.6.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-math3:3.6.1" level="project" />
-    <orderEntry type="library" name="Maven: uk.me.berndporr:iirj:1.1" level="project" />
   </component>
 </module>
