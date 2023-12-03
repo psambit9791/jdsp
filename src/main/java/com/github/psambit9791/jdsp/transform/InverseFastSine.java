@@ -17,9 +17,8 @@ import org.apache.commons.math3.transform.*;
 
 /**
  * <h1>Inverse Fast Sine Transform</h1>
- * The InverseFastSine class applies the inverse fast sine transform on the input sequence and
- * returns the original signal.
- * This should be used for signals transformed using FastSine.
+ * The InverseFastSine class applies the inverse fast sine transform on the input sequence and returns the output signal.
+ * This should be used for signals transformed using FastSine (Type 1).
  * This can be considered a wrapper on top of the Apache Math3 FastSine [INVERSE] which pre-processes the signal before
  * the operation.
  * <p>
@@ -91,11 +90,11 @@ public class InverseFastSine implements _SineCosine {
         return this.output;
     }
 
-        /**
-         * Gets the length of the input signal after preprocessing for InverseFastSine (padded to nearest power of 2).
-         *
-         * @return int The updated length of the input signal.
-         */
+    /**
+     * Gets the length of the input signal after preprocessing for InverseFastSine (padded to nearest power of 2).
+     *
+     * @return int The updated length of the input signal.
+     */
     public int getSignalLength() {
         return this.signal.length;
     }

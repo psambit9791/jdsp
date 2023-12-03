@@ -77,3 +77,6 @@ test_outputs/
 
 # POM Backup
 pom.xml.versionsBackup
+
+# MAC Specific
+**/.DS_Store

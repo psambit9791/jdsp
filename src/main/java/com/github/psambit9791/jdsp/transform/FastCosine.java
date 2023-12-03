@@ -17,7 +17,8 @@ import org.apache.commons.math3.transform.*;
 
 /**
  * <h1>Fast Cosine Transform</h1>
- * The FastCosine class computes the real part of the Fast Fourier Transform
+ * The FastCosine class decomposes a finite sequence of data points in terms of a sum of cosine functions of different frequencies.
+ * This class implements only Type 1 transform.
  * This can be considered a wrapper on top of the Apache Math3 FastCosineTransformer [FORWARD] which pre-processes the signal before
  * the operation.
  * <p>
