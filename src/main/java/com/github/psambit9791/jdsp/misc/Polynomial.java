@@ -102,4 +102,55 @@ public class Polynomial {
         }
         return p_holder;
     }
+
+    /**
+     * Returns the anti-derivative of the specified order of a polynomial. Constants are set to 0.
+     * @param p Polynomial Coefficients with the highest power first
+     * @param m Order of anti-derivative
+     * @return double[] Derivative of the polynomial coefficients
+     */
+    public static double[] polyint(double[] p, int m) {
+        if (m > p.length || m < 0) {
+            throw new IllegalArgumentException("m should be greater than 0 and less than number of polynomial coefficients");
+        }
+        double[] p_holder = p;
+        double[] integral;
+        for (int i=0; i<m; i++) {
+            integral = new double[p_holder.length+1];
+            for (int j=0; j<p_holder.length; j++) {
+                integral[j] = p_holder[j] / (p_holder.length-j);
+            }
+            integral[integral.length - 1] = 0;
+            p_holder = integral;
+        }
+        return p_holder;
+    }
+
+    /**
+     * Returns the anti-derivative of the specified order of a polynomial. Constants are set to 0.
+     * @param p Polynomial Coefficients with the highest power first
+     * @param m Order of anti-derivative
+     * @param constants Integration constants; those corresponding to highest-order terms come first
+     * @return double[] Derivative of the polynomial coefficients
+     */
+    public static double[] polyint(double[] p, int m, double[] constants) {
+        if (m > p.length || m < 0) {
+            throw new IllegalArgumentException("m should be greater than 0 and less than number of polynomial coefficients");
+        }
+        if (constants.length < m) {
+            throw new IllegalArgumentException("Number of integration constants should be at least equal to the degree of anti-derivative");
+        }
+
+        double[] p_holder = p;
+        double[] integral;
+        for (int i=0; i<m; i++) {
+            integral = new double[p_holder.length+1];
+            for (int j=0; j<p_holder.length; j++) {
+                integral[j] = p_holder[j] / (p_holder.length-j);
+            }
+            integral[integral.length - 1] = constants[i];
+            p_holder = integral;
+        }
+        return p_holder;
+    }
 }

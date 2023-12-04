@@ -93,4 +93,45 @@ public class TestPolynomial {
         double[] result3 = {8.4};
         Assertions.assertArrayEquals(result3, out3, 0.00001);
     }
+
+    @Test
+    public void polyintTest1() {
+        double[] coeffs = {60, 30, 10, 10};
+
+        int m1 = 1;
+        double[] out1 = Polynomial.polyint(coeffs, m1);
+        double[] result1 = {15, 10,  5, 10,  0.};
+        Assertions.assertArrayEquals(result1, out1, 0.00001);
+
+        int m2 = 2;
+        double[] out2 = Polynomial.polyint(coeffs, m2);
+        double[] result2 = {3, 2.5, 1.66667, 5, 0, 0};
+        Assertions.assertArrayEquals(result2, out2, 0.00001);
+
+        int m3 = 3;
+        double[] out3 = Polynomial.polyint(coeffs, m3);
+        double[] result3 = {0.5, 0.5, 0.416667, 1.66667, 0, 0, 0};
+        Assertions.assertArrayEquals(result3, out3, 0.00001);
+    }
+
+    @Test
+    public void polyintTest2() {
+        double[] coeffs = {140, 390, 80, 110};
+        double[] constants = {17, 34, 51};
+
+        int m1 = 1;
+        double[] out1 = Polynomial.polyint(coeffs, m1, constants);
+        double[] result1 = {35.0, 130.0,  40.0, 110.0,  17.0};
+        Assertions.assertArrayEquals(result1, out1, 0.00001);
+
+        int m2 = 2;
+        double[] out2 = Polynomial.polyint(coeffs, m2, constants);
+        double[] result2 = {7.0, 32.5, 13.33333, 55, 17, 34};
+        Assertions.assertArrayEquals(result2, out2, 0.00001);
+
+        int m3 = 3;
+        double[] out3 = Polynomial.polyint(coeffs, m3, constants);
+        double[] result3 = {1.166667, 6.5, 3.333333, 18.333333, 8.5, 34, 51};
+        Assertions.assertArrayEquals(result3, out3, 0.00001);
+    }
 }
