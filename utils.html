@@ -362,6 +362,51 @@ double[] out2 = Polynomial.polyder(coeffs, m2);
                 </div>
                 <!-- END OF POLYDER-->
 
+              <!--  START OF POLYINT  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Anti-Derivative of a Polynomial Function</h2>
+                      </div>
+                  </div>
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Code</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+double[] coeffs = {140, 390, 80, 110}; // 140x<sup>3</sup> + 390x<sup>2</sup> + 80x + 110
+double[] constants = {17, 34};
+int order = 2; //Order of anti-derivative
+double[] out2 = Polynomial.polyint(coeffs, m2, constants);
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h4>Output</h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+[7.0, 32.5, 13.33, 55, 17, 34] ⇨ 7x<sup>5</sup> + 32.5x<sup>4</sup> + 13.33x<sup>3</sup> + 55x<sup>2</sup> + 17x + 34
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF POLYINT-->
+
+
             </div>
 
           <div id="random">
