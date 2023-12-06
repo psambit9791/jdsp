@@ -488,9 +488,9 @@ int[] xInt = randomInt1D(new int[]{5}, 2, 10); //Generates an array of 5 samples
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
 Random r1 = new Random(110); //Set seed to 110
-double[][] xNorm = r1.randomNormal1D(new int[]{5,5}); //Generates a 2D matrix of 5x5 samples from a Normal Distribution
-double[][] xDouble = r1.randomDouble1D(new int[]{5,5}); //Generates a 2D matrix of 5x5 samples between 0.0 and 1.0
-int[][] xInt = randomInt1D(new int[]{5,5}, 2, 10); //Generates a 2D matrix of 5x5 samples between 2 and 10
+double[][] xNorm = r1.randomNormal2D(new int[]{5,5}); //Generates a 2D matrix of 5x5 samples from a Normal Distribution
+double[][] xDouble = r1.randomDouble2D(new int[]{5,5}); //Generates a 2D matrix of 5x5 samples between 0.0 and 1.0
+int[][] xInt = randomInt2D(new int[]{5,5}, 2, 10); //Generates a 2D matrix of 5x5 samples between 2 and 10
                     </code>
                   </pre>
                       </div>
@@ -518,9 +518,9 @@ int[][] xInt = randomInt1D(new int[]{5,5}, 2, 10); //Generates a 2D matrix of 5x
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
 Random r1 = new Random();
-double[][][] xNorm = r1.randomNormal1D(new int[]{5,5,5}); //Generates a 3D matrix of 5x5x5 samples from a Normal Distribution
-double[][][] xDouble = r1.randomDouble1D(new int[]{5,5,5}); //Generates a 3D matrix of 5x5x5 samples between 0.0 and 1.0
-int[][][] xInt = randomInt1D(new int[]{5,5,5}, 2, 10); //Generates a 3D matrix of 5x5x5 samples between 2 and 10
+double[][][] xNorm = r1.randomNormal3D(new int[]{5,5,5}); //Generates a 3D matrix of 5x5x5 samples from a Normal Distribution
+double[][][] xDouble = r1.randomDouble3D(new int[]{5,5,5}); //Generates a 3D matrix of 5x5x5 samples between 0.0 and 1.0
+int[][][] xInt = randomInt3D(new int[]{5,5,5}, 2, 10); //Generates a 3D matrix of 5x5x5 samples between 2 and 10
                     </code>
                   </pre>
                       </div>
