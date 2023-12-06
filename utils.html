@@ -427,9 +427,11 @@ double[] out2 = Polynomial.polyint(coeffs, m2, constants);
                         <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-double[] x = {0.0, 1.0, 2.0, 3.0,  4.0,  5.0};
-double[] y = {0.0, 0.8, 0.9, 0.1, -0.8, -1.0};
-double[] out = Polynomial.polyfit(x, y, 3);
+Random r1 = new Random();
+r1.setSeed(42); //OPTIONAL
+double xNorm = r1.randomNormalSample(); //Generates a Sample from a Normal Distribution
+double xDouble = r1.randomDoubleSample(); //Generates a Sample between 0.0 and 1.0
+int xInt = randomIntSample(5); //Generates a Sample between 0 and 5
                     </code>
                   </pre>
                         </div>
@@ -456,11 +458,10 @@ double[] out = Polynomial.polyfit(x, y, 3);
                         <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-double[] coeffs = {3.0, 0.0, 1.0}; // 3x<sup>2</sup> + 1
-double x_val = 5.0;
-double out_val = Polynomial.polyval(coeffs, x_val);
-double[] x_arr = {5.0, 3.2, 1.2};
-double[] out_arr = Polynomial.polyval(coeffs, x_arr);
+Random r1 = new Random(110); //Set seed to 110
+double[] xNorm = r1.randomNormal1D(new int[]{5}); //Generates an array of 5 samples from a Normal Distribution
+double[] xDouble = r1.randomDouble1D(new int[]{5}); //Generates an array of 5 samples between 0.0 and 1.0
+int[] xInt = randomInt1D(new int[]{5}, 2, 10); //Generates an array of 5 samples between 2 and 10
                     </code>
                   </pre>
                         </div>
@@ -486,9 +487,10 @@ double[] out_arr = Polynomial.polyval(coeffs, x_arr);
                       <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-Random r1 = new Random();
-r1.setSeed(42);
-double x1 = r1.randomNormalSample();
+Random r1 = new Random(110); //Set seed to 110
+double[][] xNorm = r1.randomNormal1D(new int[]{5,5}); //Generates a 2D matrix of 5x5 samples from a Normal Distribution
+double[][] xDouble = r1.randomDouble1D(new int[]{5,5}); //Generates a 2D matrix of 5x5 samples between 0.0 and 1.0
+int[][] xInt = randomInt1D(new int[]{5,5}, 2, 10); //Generates a 2D matrix of 5x5 samples between 2 and 10
                     </code>
                   </pre>
                       </div>
@@ -515,11 +517,10 @@ double x1 = r1.randomNormalSample();
                       <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
                     <code class="container align-text-left">
-double[] coeffs = {3.0, 0.0, 1.0}; // 3x<sup>2</sup> + 1
-double x_val = 5.0;
-double out_val = Polynomial.polyval(coeffs, x_val);
-double[] x_arr = {5.0, 3.2, 1.2};
-double[] out_arr = Polynomial.polyval(coeffs, x_arr);
+Random r1 = new Random();
+double[][][] xNorm = r1.randomNormal1D(new int[]{5,5,5}); //Generates a 3D matrix of 5x5x5 samples from a Normal Distribution
+double[][][] xDouble = r1.randomDouble1D(new int[]{5,5,5}); //Generates a 3D matrix of 5x5x5 samples between 0.0 and 1.0
+int[][][] xInt = randomInt1D(new int[]{5,5,5}, 2, 10); //Generates a 3D matrix of 5x5x5 samples between 2 and 10
                     </code>
                   </pre>
                       </div>
