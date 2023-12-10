@@ -62,12 +62,26 @@ public class TestFSTAndIFST {
     }
 
     @Test
-    public void testFSTWithIFST1_withNorm() {
+    public void testFSTWithIFST1_withStandardNorm() {
         FastSine f1 = new FastSine(this.signal1, FastSine.Normalization.STANDARD);
         f1.transform();
         double[] out = f1.getMagnitude();
 
         InverseFastSine f2 = new InverseFastSine(out, InverseFastSine.Normalization.STANDARD);
+        f2.transform();
+        double[] reconstructed = f2.getMagnitude();
+
+        Assertions.assertArrayEquals(this.extendSignal(this.signal1), reconstructed, 0.001);
+
+    }
+
+    @Test
+    public void testFSTWithIFST1_withOrthoNorm() {
+        FastSine f1 = new FastSine(this.signal1, FastSine.Normalization.ORTHOGONAL);
+        f1.transform();
+        double[] out = f1.getMagnitude();
+
+        InverseFastSine f2 = new InverseFastSine(out, InverseFastSine.Normalization.ORTHOGONAL);
         f2.transform();
         double[] reconstructed = f2.getMagnitude();
 

@@ -64,7 +64,7 @@ public class TestFCTAndIFCT {
     }
 
     @Test
-    public void testFCTWithIFCT1_withNorm() {
+    public void testFCTWithIFCT1_withStandardNorm() {
         FastCosine f1 = new FastCosine(this.signal1, FastCosine.Normalization.STANDARD);
         f1.transform();
         double[] out = f1.getMagnitude();
@@ -77,6 +77,19 @@ public class TestFCTAndIFCT {
 
     }
 
+    @Test
+    public void testFCTWithIFCT1_withOrthoNorm() {
+        FastCosine f1 = new FastCosine(this.signal1, FastCosine.Normalization.ORTHOGONAL);
+        f1.transform();
+        double[] out = f1.getMagnitude();
+
+        InverseFastCosine f2 = new InverseFastCosine(out, InverseFastCosine.Normalization.ORTHOGONAL);
+        f2.transform();
+        double[] reconstructed = f2.getMagnitude();
+
+        Assertions.assertArrayEquals(this.extendSignal(this.signal1), reconstructed, 0.001);
+
+    }
     @Test
     public void testFCTWithIFCT2() {
         FastCosine f1 = new FastCosine(this.signal2);
