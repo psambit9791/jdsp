@@ -73,6 +73,7 @@ fabric.properties
 
 # Test Images
 test_outputs/
+**/.DS_Store
 
 # POM Backup
 pom.xml.versionsBackup

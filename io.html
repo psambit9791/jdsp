@@ -131,6 +131,11 @@
                             <h2 class="heading-29190">Reading from a WAV File</h2>
                         </div>
                     </div>
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Code</h4>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
                 <pre class="d-flex align-items-center">
@@ -143,6 +148,22 @@ double[][] signal = objRead1.getData("int"); // Can be 'int', 'long' 'double'
                   </pre>
                         </div>
                     </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h4>Output</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-center">
+System.out.println(objRead1.getProperties());
+OUTPUT: {Channels=2, Frames=268237, ValidBits=16, BlockAlign=4, SampleRate=8000, BytesPerSample=2}                    </code>
+                  </pre>
+                        </div>
+                    </div>
+
                     <div class="container" style="padding-bottom:50px;"></div>
                 </div>
                 <!-- END OF READ-->

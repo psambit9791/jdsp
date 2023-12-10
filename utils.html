@@ -128,7 +128,6 @@
             <li><a href="#featscale">Feature Scaling</a> </li>
             <li><a href="#ecg">Sample ECG Data</a> </li>
             <li><a href="#helper">Helper Functions</a> </li>
-            <li><a href="#io">Input/Output</a> </li>
           </ul>
 
           <div id="plotting">
@@ -2217,58 +2216,58 @@ double[][] output = UtilMethods.toeplitz(c);
 
             </div>
 
-            <div id="io">
+<!--            <div id="io">-->
 
-                <!--  START OF WAV  -->
-                <div class="bg-white" style="padding-top:30px;">
-                    <div class="row mb-5">
-                        <div class="col-md-7 mx-auto text-center">
-                            <h2 class="heading-29190">WAV File Read/Write</h2>
-                        </div>
-                    </div>
+<!--                &lt;!&ndash;  START OF WAV  &ndash;&gt;-->
+<!--                <div class="bg-white" style="padding-top:30px;">-->
+<!--                    <div class="row mb-5">-->
+<!--                        <div class="col-md-7 mx-auto text-center">-->
+<!--                            <h2 class="heading-29190">WAV File Read/Write</h2>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="row">
-                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
-                            <h4 class="text-dark" style="text-align: left; padding-right:20px">Reading from a File</h4>
-                            <pre class="d-flex align-items-center">
-                    <code class="container align-text-left bg-light">
-inputFilename = "sample.wav";
-Wav objRead1 = new Wav();
-objRead1.readWav(inputFilename);
-Hashtable< String, Long> propsOut = objRead1.getProperties(); // Gets the WAV file properties
-double[][] signal = objRead1.getData("int"); // Can be 'int', 'long' 'double'
-                    </code>
-                  </pre>
-                        </div>
+<!--                    <div class="row">-->
+<!--                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">-->
+<!--                            <h4 class="text-dark" style="text-align: left; padding-right:20px">Reading from a File</h4>-->
+<!--                            <pre class="d-flex align-items-center">-->
+<!--                    <code class="container align-text-left bg-light">-->
+<!--inputFilename = "sample.wav";-->
+<!--Wav objRead1 = new Wav();-->
+<!--objRead1.readWav(inputFilename);-->
+<!--Hashtable< String, Long> propsOut = objRead1.getProperties(); // Gets the WAV file properties-->
+<!--double[][] signal = objRead1.getData("int"); // Can be 'int', 'long' 'double'-->
+<!--                    </code>-->
+<!--                  </pre>-->
+<!--                        </div>-->
 
-                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
-                            <h4 class="text-dark" style="text-align: left; padding-right:20px">Sample File Properties</h4>
-                            <pre class="d-flex align-items-center">
-                    <code class="container align-text-left bg-light">
-System.out.println(objRead1.getProperties());
-OUTPUT: {Channels=2, Frames=268237, ValidBits=16, BlockAlign=4, SampleRate=8000, BytesPerSample=2}
-                    </code>
-                  </pre>
-                        </div>
+<!--                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">-->
+<!--                            <h4 class="text-dark" style="text-align: left; padding-right:20px">Sample File Properties</h4>-->
+<!--                            <pre class="d-flex align-items-center">-->
+<!--                    <code class="container align-text-left bg-light">-->
+<!--System.out.println(objRead1.getProperties());-->
+<!--OUTPUT: {Channels=2, Frames=268237, ValidBits=16, BlockAlign=4, SampleRate=8000, BytesPerSample=2}-->
+<!--                    </code>-->
+<!--                  </pre>-->
+<!--                        </div>-->
 
-                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
-                            <h4 class="text-dark" style="text-align: left; padding-right:20px">Writing to a File</h4>
-                            <pre class="d-flex align-items-center">
-                    <code class="container align-text-left bg-light">
-outputFilename = "sample.wav";
-Wav objWrite = new Wav();
-int channels = 2;
-objWrite.putData(signal, channels, "int", outputFileName);
-// Can be "int", "long" or "double' depending on the content of signal
-                    </code>
-                  </pre>
-                        </div>
+<!--                        <div class="col-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-center">-->
+<!--                            <h4 class="text-dark" style="text-align: left; padding-right:20px">Writing to a File</h4>-->
+<!--                            <pre class="d-flex align-items-center">-->
+<!--                    <code class="container align-text-left bg-light">-->
+<!--outputFilename = "sample.wav";-->
+<!--Wav objWrite = new Wav();-->
+<!--int channels = 2;-->
+<!--objWrite.putData(signal, channels, "int", outputFileName);-->
+<!--// Can be "int", "long" or "double' depending on the content of signal-->
+<!--                    </code>-->
+<!--                  </pre>-->
+<!--                        </div>-->
 
-                    </div>
-                    <div class="container" style="padding-bottom:50px;"></div>
-                </div>
-                <!-- END OF WAV-->
-            </div>
+<!--                    </div>-->
+<!--                    <div class="container" style="padding-bottom:50px;"></div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; END OF WAV&ndash;&gt;-->
+<!--            </div>-->
         </div>
         
     </div>
