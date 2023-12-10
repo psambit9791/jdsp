@@ -13,6 +13,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.misc.Random;
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -58,6 +59,19 @@ public class TestRandom {
         double[] x = r1.randomNormal1D(new int[]{4});
         double[] result = {0.446936  ,  0.38804182, -0.59835451,  0.65971754};
         Assertions.assertArrayEquals(x, result, 0.0001);
+    }
+
+    @Test
+    public void RandomNormal1DCustomMeanAndSDTest() {
+        for ( int i=0; i<25; i++) {
+            Random r1 = new Random(i);
+            r1.setMeanAndSD(10.0, 1.0);
+            double[] x = r1.randomNormal1D(new int[]{4});
+            for (double v : x) {
+                double temp = UtilMethods.round(v, 0);
+                Assertions.assertTrue((temp <= 13) && (temp >= 3)); //99.7% data stays within 3 SD
+            }
+        }
     }
 
     @Test
