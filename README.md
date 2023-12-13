@@ -166,7 +166,7 @@ You can also show your appreciation on <a href="https://ko-fi.com/sambitpaul">Ko
 
 <a href="https://patreon.com/sambitpaul" target="_blank"><img src="https://github.com/psambit9791/jdsp/blob/master/res/button/patron-button.png" alt="Become a Patron" /> </a>
 &emsp;
-<a href="https://paypal.me/psambit9791" target="_blank"><img src="https://github.com/psambit9791/jdsp/blob/master/res/button/paypal-button.png" alt="Donate on Paypal" /> </a>
+<a href="https://paypal.me/psambit1412?country.x=GB&locale.x=en_GB" target="_blank"><img src="https://github.com/psambit9791/jdsp/blob/master/res/button/paypal-button.png" alt="Donate on Paypal" /> </a>
 &emsp;
 <a href="https://ko-fi.com/sambitpaul" target="_blank"><img src="https://github.com/psambit9791/jdsp/blob/master/res/button/kofi-button.png" alt="Support on Kofi" /> </a>
 
