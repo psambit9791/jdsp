@@ -18,11 +18,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <h1>Finite Impulse Response Filter Class using Least Squares Minimization</h1>
+ * <h2>Finite Impulse Response Filter Class using Least Squares Minimization</h2>
  * The FIRLS Filter class is used to compute the best coefficients of the linear phase FIR filter using least squares minimization
  * for the specified band and their desired gains.
  * This class extends to the abstract class _FIRFilter which also allows for computing the filter output for an input signal.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

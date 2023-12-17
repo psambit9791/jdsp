@@ -11,9 +11,9 @@
 package com.github.psambit9791.jdsp.windows;
 
 /**
- * <h1>Nuttall Window</h1>
+ * <h2>Nuttall Window</h2>
  * Generates a minimum 4-term Blackman-Harris window according to Nuttall.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

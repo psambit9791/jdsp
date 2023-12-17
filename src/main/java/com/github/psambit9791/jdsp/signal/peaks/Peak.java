@@ -15,10 +15,10 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import java.util.*;
 
 /**
- * <h1>PeakObject</h1>
+ * <h2>PeakObject</h2>
  * Calculates Peak Properties and allows filtering based on the properties.
  * This is used by the FindPeak class in the detect() method.
- * <p>
+ *  
  *
  * @author  Sambit Paul and Alfredo Zamora
  * @version 1.2

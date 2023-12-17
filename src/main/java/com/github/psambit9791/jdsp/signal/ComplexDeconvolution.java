@@ -16,7 +16,7 @@ import org.apache.commons.math3.complex.Complex;
 import java.security.InvalidParameterException;
 
 /**
- * <h1>Complex Deconvolution</h1>
+ * <h2>Complex Deconvolution</h2>
  * The ComplexDeconvolution class implements methods to recover signals which are convolved with a kernel. This function only
  * works if the output of the convolution is a complex signal and if the original signal has been convolved in 'same' mode
  * or 'full' mode. Given the convolved signal, the convolutional kernel used and the mode of convolution; the process
@@ -25,7 +25,7 @@ import java.security.InvalidParameterException;
  * For 'full' mode, FFT-based deconvolution is used.
  * For 'same' mode, the overlap-and-add based deconvolution is used.
  * NOTE: Outputs may vary from the *scipy.signal.deconvolve* implementation which uses inverse filtering.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

@@ -17,13 +17,13 @@ import org.apache.commons.math3.transform.FastFourierTransformer;
 import org.apache.commons.math3.transform.TransformType;
 
 /**
- * <h1>Inverse Fast Fourier Transform</h1>
+ * <h2>Inverse Fast Fourier Transform</h2>
  * The InverseFastFourier class applies the inverse fast fourier transform on the input sequence (real/complex) and
  * provides different representations of the reconstructed signal to be returned (real signal, complex signal, ...).
  * This should be used for signals transformed using FastFourier.
  * This can be considered a wrapper on top of the Apache Math3 FastFourierTransformer [INVERSE] which pre-processes the signal before
  * the operation.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.1

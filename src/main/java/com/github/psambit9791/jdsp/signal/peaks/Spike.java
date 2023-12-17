@@ -15,10 +15,10 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import java.util.*;
 
 /**
- * <h1>SpikeObject</h1>
+ * <h2>SpikeObject</h2>
  * Calculates Spike Properties and allows filtering based on the properties.
  * This is used by the FindPeak class in the get_spike() method.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.1

@@ -21,11 +21,11 @@ import org.apache.commons.math3.util.MathArrays;
 import java.util.Arrays;
 
 /**
- * <h1>Independent Component Analysis (ICA)</h1>
+ * <h2>Independent Component Analysis (ICA)</h2>
  * The ICA class is used to estimate source given noisy measurements.
  * For a NxM input signal which is a linear mixture N signals calculated on N sources, ICA can be used to estimate the original N signals from the input signal.
  * The unmixing signal thus generated, can then be used to estimate any signal captured from the N sources.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

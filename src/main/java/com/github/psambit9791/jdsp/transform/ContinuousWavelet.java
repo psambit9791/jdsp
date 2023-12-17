@@ -17,10 +17,10 @@ import com.github.psambit9791.jdsp.signal.Generate;
 import org.apache.commons.math3.complex.Complex;
 
 /**
- * <h1>Continuous Wavelet Transform</h1>
+ * <h2>Continuous Wavelet Transform</h2>
  * The ContinuousWavelet class applies the wavelet transform on the input signal using different wavelet functions. This class
  * works with 3 wavelets - Ricker, Morlet and Paul.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Hashtable;
 
 /**
- * <h1>Read and Write WAV Files</h1>
+ * <h2>Read and Write WAV Files</h2>
  * This class provides methods; to read WAV files including their properties and their content as a 2-D matrix;
  * and to write 2-D matrices into WAV files. For all the matrices, the first dimension is considered the number of frames
  * and the second dimension is considered the number of channels.
@@ -29,7 +29,7 @@ import java.util.Hashtable;
  * channels and 16000 frames. At a sampling rate of 8kHz, this interprets to 2 seconds of stereo sound.
  *
  * This class is supported largely by the classes provided <a href="http://www.labbookpages.co.uk/audio/javaWavFiles.html">here</a>.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

@@ -13,11 +13,11 @@ package com.github.psambit9791.jdsp.signal;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 
 /**
- * <h1>Cross-Correlation</h1>
+ * <h2>Cross-Correlation</h2>
  * The Cross-Correlation class implements
  * correlation as provided in numpy <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.correlate.html">correlate()</a>
  * function.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.1

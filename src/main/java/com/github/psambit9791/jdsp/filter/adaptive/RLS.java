@@ -16,7 +16,7 @@ import org.apache.commons.math3.util.MathArrays;
 import java.util.Arrays;
 
 /**
- * <h1>Reduced Least-Squares (RLS) adaptive filter</h1>
+ * <h2>Reduced Least-Squares (RLS) adaptive filter</h2>
  * The RLS adaptive filter is a filter that adapts its filter weights to get an input signal x to match a desired output
  * signal (= the output of the filter) by recursively reducing the least squares error with respect to the weights.
  *

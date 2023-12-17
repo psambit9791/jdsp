@@ -11,10 +11,10 @@
 package com.github.psambit9791.jdsp.windows;
 
 /**
- * <h1>Hamming Window</h1>
+ * <h2>Hamming Window</h2>
  * The Hamming window is a taper formed by using a raised cosine with non-zero endpoints,
  * optimized to minimize the nearest side lobe.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

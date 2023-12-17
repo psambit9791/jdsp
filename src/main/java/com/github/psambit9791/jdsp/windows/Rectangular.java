@@ -13,9 +13,9 @@ package com.github.psambit9791.jdsp.windows;
 import java.util.Arrays;
 
 /**
- * <h1>Rectangular Window</h1>
+ * <h2>Rectangular Window</h2>
  * Also known as a Boxcar window or Dirichlet window, this is equivalent to no window at all.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

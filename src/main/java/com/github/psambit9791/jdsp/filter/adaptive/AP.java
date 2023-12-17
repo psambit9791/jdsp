@@ -17,7 +17,7 @@ import org.apache.commons.math3.util.MathArrays;
 import java.util.Arrays;
 
 /**
- * <h1>Affine Projection (AP) adaptive filter</h1>
+ * <h2>Affine Projection (AP) adaptive filter</h2>
  * The AP adaptive filter uses affine projection algorithm to improve the performance of LMS-based adaptive filters.
  * This filter is useful when the input data is highly correlated.
  * AP uses multiple input vectors for each sample where the number of input vectors depends on the projection order.

@@ -11,9 +11,9 @@
 package com.github.psambit9791.jdsp.splines;
 
 /**
- * <h1>Quadratic Spline</h1>
+ * <h2>Quadratic Spline</h2>
  * An extension of the BSpline class for degree 2.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

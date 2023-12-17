@@ -13,9 +13,9 @@ package com.github.psambit9791.jdsp.windows;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 
 /**
- * <h1>Kaiser Window</h1>
+ * <h2>Kaiser Window</h2>
  * The Kaiser window is a taper formed by using a Bessel function.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

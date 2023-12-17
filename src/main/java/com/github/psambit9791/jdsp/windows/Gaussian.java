@@ -13,9 +13,9 @@ package com.github.psambit9791.jdsp.windows;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 
 /**
- * <h1>Gaussian Window</h1>
+ * <h2>Gaussian Window</h2>
  * Generates a Gaussian window.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

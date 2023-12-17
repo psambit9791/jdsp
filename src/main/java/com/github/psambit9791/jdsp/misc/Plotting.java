@@ -19,9 +19,9 @@ import org.knowm.xchart.style.markers.SeriesMarkers;
 import java.io.IOException;
 
 /**
- * <h1>Line Plot</h1>
- * The LinePlot class provides method to plot curves on a chart and then either display it or save it as a .png file
- * <p>
+ * <h2>Plotting</h2>
+ * The Plotting class provides method to plot curves on a chart and then either display it or save it as a .png file
+ *  
  *
  * @author  Sambit Paul
  * @version 1.1

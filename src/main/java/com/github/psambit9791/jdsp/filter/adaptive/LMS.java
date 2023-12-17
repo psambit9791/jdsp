@@ -15,7 +15,7 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import java.util.Arrays;
 
 /**
- * <h1>Least-mean-squares (LMS) adaptive filter</h1>
+ * <h2>Least-mean-squares (LMS) adaptive filter</h2>
  * The LMS adaptive filter is a filter that adapts its filter weights to get an input signal x to match a desired output
  * signal (= the output of the filter). It does this by trying to minimize the squared error between the desired signal
  * and the filter output signal.

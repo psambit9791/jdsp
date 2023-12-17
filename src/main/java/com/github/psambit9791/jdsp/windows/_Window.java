@@ -14,9 +14,9 @@ package com.github.psambit9791.jdsp.windows;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 
 /**
- * <h1>_Window Class</h1>
+ * <h2>_Window Class</h2>
  * This is an abstract class providing specific methods and abstract methods required to build any Window object.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

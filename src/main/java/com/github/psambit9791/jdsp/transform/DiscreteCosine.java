@@ -11,11 +11,11 @@
 package com.github.psambit9791.jdsp.transform;
 
 /**
- * <h1>Discrete Cosine Transform</h1>
+ * <h2>Discrete Cosine Transform</h2>
  * The Discrete Cosine class decomposes a finite sequence of data points in terms of a sum of cosine functions of different frequencies.
  * Of the 8 types of DCT, this class incorporates Types 1 to 4.
  * For details about DCT Types, refer to this <a href="https://en.wikipedia.org/wiki/Discrete_cosine_transform#Formal_definition">article</a>
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

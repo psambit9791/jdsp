@@ -21,13 +21,13 @@ import java.util.Hashtable;
 
 
 /**
- * <h1>Silence Detection</h1>
+ * <h2>Silence Detection</h2>
  * The Silence class accepts a WAV object and detects the regions where silence is detected.
  * The start and stop points of silence can be returned as indices or timestamps (in milliseconds). The  indices of the
  * non-silent regions can also be returned.
  * The audio can also be split multiple audio chunks by splitting at the points of silence.
  * This class reflects functionalities from  <a href="https://github.com/jiaaro/pydub/blob/master/pydub/silence.py">Pydub's silence module</a>.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

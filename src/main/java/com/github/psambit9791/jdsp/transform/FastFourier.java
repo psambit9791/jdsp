@@ -19,13 +19,13 @@ import org.apache.commons.math3.transform.TransformType;
 import java.util.Arrays;
 
 /**
- * <h1>Fast Fourier Transform</h1>
+ * <h2>Fast Fourier Transform</h2>
  * The FastFourier class performs discrete fourier transform on the input signal using the FFT algorithm and
  * provides different representations of the output to be returned and if the output should be mirrored or not-mirrored.
  * This can be considered a wrapper on top of the Apache Math3 FastFourierTransformer [FORWARD] which pre-processes the signal before
  * the operation.
  * Reference <a href="https://mathworld.wolfram.com/FastFourierTransform.html">article</a> for more information on fast fourier transform.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.2

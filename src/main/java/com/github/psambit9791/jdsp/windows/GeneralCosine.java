@@ -15,9 +15,9 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import java.util.Arrays;
 
 /**
- * <h1>General Cosine Window</h1>
+ * <h2>General Cosine Window</h2>
  * Generic weighted sum of cosine terms window.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

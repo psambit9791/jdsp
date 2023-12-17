@@ -16,11 +16,11 @@ import org.apache.commons.math3.stat.StatUtils;
 import java.util.Arrays;
 
 /**
- * <h1>Median Filter</h1>
+ * <h2>Median Filter</h2>
  * The Median class implements median filter which can be applied on the input signal using a window based on the kernel size.
  * Use: Unlike an averaging filter, the median filter can preserve sharp edges while completely suppressing isolated out-of-range noise.
  * Reference <a href="http://fourier.eng.hmc.edu/e161/lectures/smooth_sharpen/node2.html">article</a> for more information on 1-D Median Filter.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 2.0

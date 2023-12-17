@@ -15,11 +15,11 @@ import org.apache.commons.math3.complex.Complex;
 import java.util.Arrays;
 
 /**
- * <h1>Inverse Discrete Fourier Transform</h1>
+ * <h2>Inverse Discrete Fourier Transform</h2>
  * The InverseDiscreteFourier class applies the inverse discrete fourier transform on the input sequence (real/complex) and
  * provides different representations of the reconstructed signal to be returned (real signal, complex signal, ...).
  * This should be used for signals transformed using DFT.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

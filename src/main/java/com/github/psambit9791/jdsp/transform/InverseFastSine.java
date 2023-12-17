@@ -14,12 +14,12 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.apache.commons.math3.transform.*;
 
 /**
- * <h1>Inverse Fast Sine Transform</h1>
+ * <h2>Inverse Fast Sine Transform</h2>
  * The InverseFastSine class applies the inverse fast sine transform on the input sequence and returns the output signal.
  * This should be used for signals transformed using FastSine (Type 1).
  * This can be considered a wrapper on top of the Apache Math3 FastSine [INVERSE] which pre-processes the signal before
  * the operation.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

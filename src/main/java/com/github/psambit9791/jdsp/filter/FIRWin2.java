@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <h1>Finite Impulse Response Windowed Filter 1 Class</h1>
+ * <h2>Finite Impulse Response Windowed Filter 1 Class</h2>
  * The FIRWin2 Filter class is used to compute the coefficients of the linear phase FIR filter given the cutoff frequencies,
  * their corresponding gains and the number of filter coefficients.
  * This class extends to the abstract class _FIRFilter which also allows for computing the filter output for an input signal.
@@ -37,7 +37,7 @@ import java.util.Set;
  * - Type 2: 'numTaps' is even and 'antisymmetric' is false
  * - Type 3: 'numTaps' is odd and 'antisymmetric' is true
  * - Type 4: 'numTaps' is even and 'antisymmetric' is true
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

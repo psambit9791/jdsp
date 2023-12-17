@@ -16,7 +16,7 @@ import org.apache.commons.math3.stat.StatUtils;
 import java.util.Arrays;
 
 /**
- * <h1>Normalized Sign-Sign Least-mean-squares (NSSLMS) adaptive filter</h1>
+ * <h2>Normalized Sign-Sign Least-mean-squares (NSSLMS) adaptive filter</h2>
  * The NSSLMS adaptive filter is a filter that adapts its filter weights to get an input signal to match a desired output
  * signal (= the output of the filter). It does this by trying to minimize the squared error between the desired signal
  * and the filter output signal. Unlike the NLMS, the weights are updated based on only the sign of the error and the signal

@@ -16,11 +16,11 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * <h1>Read and Write CSV Files</h1>
+ * <h2>Read and Write CSV Files</h2>
  * This class provides methods; to read the content of CSV files into a HashMap; and to write a HashMap into a CSV file.
  * The HashMap keys are the column names (auto-filled if no column name specified) and the ArrayList is the contents of
  * the column
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

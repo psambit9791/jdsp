@@ -16,12 +16,12 @@ import org.apache.commons.math3.transform.FastCosineTransformer;
 import org.apache.commons.math3.transform.TransformType;
 
 /**
- * <h1>Inverse Fast Cosine Transform</h1>
+ * <h2>Inverse Fast Cosine Transform</h2>
  * The InverseFastCosine class applies the inverse fast cosine transform on the input sequence and returns the output signal.
  * This should be used for signals transformed using FastCosine (Type 1).
  * This can be considered a wrapper on top of the Apache Math3 FastCosine [INVERSE] which pre-processes the signal before
  * the operation.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

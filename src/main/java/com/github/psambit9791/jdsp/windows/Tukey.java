@@ -14,9 +14,9 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import java.util.Arrays;
 
 /**
- * <h1>Tukey Window</h1>
+ * <h2>Tukey Window</h2>
  * Generates a Tukey window, also known as a tapered cosine window.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

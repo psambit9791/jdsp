@@ -11,11 +11,11 @@
 package com.github.psambit9791.jdsp.windows;
 
 /**
- * <h1>Flat Top Window</h1>
+ * <h2>Flat Top Window</h2>
  * The Flat top window is used for taking accurate measurements of signal amplitude in the frequency domain, with
  * minimal scalloping error from the center of a frequency bin to its edges, compared to others. This is a 5th-order
  * cosine window, with the 5 terms optimized to make the main lobe maximally flat.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

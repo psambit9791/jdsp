@@ -15,7 +15,7 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import java.util.Arrays;
 
 /**
- * <h1>Generalized Normalized Gradient Descent (GNGD) adaptive filter</h1>
+ * <h2>Generalized Normalized Gradient Descent (GNGD) adaptive filter</h2>
  * The GNGD adaptive filter is an extension of the normalised least mean squares (NLMS) adaptive filter. It adds an
  * additional gradient adaptive term in the denominator of the learning rate term, which allows it to adapt its learning
  * rate according to the dynamics of the input signal.

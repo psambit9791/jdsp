@@ -17,11 +17,11 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 /**
- * <h1>FindPeak</h1>
+ * <h2>FindPeak</h2>
  * Detect peaks and extremas (minimas and maximas) in a signal.
  * Reference <a href="https://docs.scipy.org/doc/scipy/reference/signal.html#peak-finding">Scipy Docs on Peak Detection</a> for few of the functionalities provided here.
  * This class provides functions regarding spikes and also allows filtering by those properties.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.1

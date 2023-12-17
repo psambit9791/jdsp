@@ -13,9 +13,9 @@ package com.github.psambit9791.jdsp.windows;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 
 /**
- * <h1>Bartlett-Hann Window</h1>
+ * <h2>Bartlett-Hann Window</h2>
  * Generates a modified Bartlett-Hann window
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

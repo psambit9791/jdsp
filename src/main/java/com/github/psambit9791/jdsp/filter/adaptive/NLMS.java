@@ -16,7 +16,7 @@ import org.apache.commons.math3.stat.StatUtils;
 import java.util.Arrays;
 
 /**
- * <h1>Normalized Least-mean-squares (NLMS) adaptive filter</h1>
+ * <h2>Normalized Least-mean-squares (NLMS) adaptive filter</h2>
  * The NLMS adaptive filter is a filter that adapts its filter weights to get an input signal x to match a desired output
  * signal (= the output of the filter). It does this by trying to minimize the squared error between the desired signal
  * and the filter output signal.

@@ -11,10 +11,10 @@
 package com.github.psambit9791.jdsp.transform;
 
 /**
- * <h1>Inverse Discrete Cosine Transform</h1>
+ * <h2>Inverse Discrete Cosine Transform</h2>
  * The InverseDiscreteCosine class applies the inverse cosine transform on the input sequence and returns the output signal.
  * This should be used for signals transformed using DiscreteCosine with the specific transform type.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

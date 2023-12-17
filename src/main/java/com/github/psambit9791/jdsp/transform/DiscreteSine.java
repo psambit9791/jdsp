@@ -11,11 +11,11 @@
 package com.github.psambit9791.jdsp.transform;
 
 /**
- * <h1>Discrete Sine Transform</h1>
+ * <h2>Discrete Sine Transform</h2>
  * The Discrete Sine class decomposes a finite sequence of data points in terms of a sum of sine functions of different frequencies.
  * Of the 8 types of DST, this class incorporates Types 1 to 4.
  * For details about DST Types, refer to this <a href="https://en.wikipedia.org/wiki/Discrete_sine_transform#Definition">article</a>
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

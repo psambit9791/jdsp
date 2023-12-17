@@ -15,11 +15,11 @@ import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
 import static com.github.psambit9791.jdsp.misc.UtilMethods.isSorted;
 
 /**
- * <h1>Akima Spline</h1>
+ * <h2>Akima Spline</h2>
  * The AkimaSpline class implements the Akima spline interpolation method. The Akima spline fits piecewise cubic
  * polynomials to the original signal. The interpolation method is a continuously differentiable sub-spline built from
  * the piecewise polynomials.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

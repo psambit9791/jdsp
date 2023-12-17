@@ -11,11 +11,11 @@
 package com.github.psambit9791.jdsp.filter;
 
 /**
- * <h1>Kernel Filter Interface</h1>
+ * <h2>Kernel Filter Interface</h2>
  * The Kernel Filter interface is implemented by all kernel-based filter classes - Median, Savgol and Wiener.
  * The user of this interface has control over implementing the filter function for a specific class.
  * For this interface, SAVGOL Filter ONLY RETURNS OUTPUT FOR "nearest" MODE
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 2.0

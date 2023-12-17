@@ -18,10 +18,10 @@ import org.apache.commons.math3.complex.Complex;
 import java.util.Arrays;
 
 /**
- * <h1>Inverse Short Time Fourier Transform</h1>
+ * <h2>Inverse Short Time Fourier Transform</h2>
  * The InverseShortTimeFourier class applies the inverse short time fourier transform on an input sequence and
  * provides different representations of the reconstructed signal to be returned (real signal, complex signal, ...).
- * <p>
+ *  
  *
  * @author  Sibo Van Gool
  * @version 1.0

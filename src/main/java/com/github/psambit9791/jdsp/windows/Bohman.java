@@ -15,9 +15,9 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import java.util.Arrays;
 
 /**
- * <h1>Bohman Window</h1>
+ * <h2>Bohman Window</h2>
  * Generates a Bohman window.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

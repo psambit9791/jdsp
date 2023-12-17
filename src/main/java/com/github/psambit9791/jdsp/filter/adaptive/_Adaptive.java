@@ -11,9 +11,9 @@
 package com.github.psambit9791.jdsp.filter.adaptive;
 
 /**
- * <h1>Adaptive Filter Class (Interface)</h1>
+ * <h2>Adaptive Filter Class (Interface)</h2>
  * The Adaptive Filter class is a super class for all Adaptive filters - AP, GNGD, LMS. NLMS, NSSLMS, SSLMS and RLS.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

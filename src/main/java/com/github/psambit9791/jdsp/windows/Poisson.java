@@ -13,9 +13,9 @@ package com.github.psambit9791.jdsp.windows;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 
 /**
- * <h1>Poisson Window</h1>
+ * <h2>Poisson Window</h2>
  * Generates an Poisson (or exponential) window.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

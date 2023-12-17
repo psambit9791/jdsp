@@ -11,9 +11,9 @@
 package com.github.psambit9791.jdsp.windows;
 
 /**
- * <h1>Hanning Window</h1>
+ * <h2>Hanning Window</h2>
  * The Hanning window is a taper formed by using a raised cosine or sine-squared with ends that touch zero.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

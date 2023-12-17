@@ -24,9 +24,9 @@ import java.util.*;
 
 
 /**
- * <h1>Utility Methods</h1>
+ * <h2>Utility Methods</h2>
  * The UtilMethods class implements different utility functions to help with mathematical operations
- * <p>
+ *  
  *
  * @author  Sambit Paul
  */

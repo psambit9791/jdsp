@@ -17,12 +17,12 @@ import org.apache.commons.math3.util.FastMath;
 import java.util.Arrays;
 
 /**
- * <h1>Hilbert Transform</h1>
+ * <h2>Hilbert Transform</h2>
  * The Hilbert class applies the Hilbert transform on the input signal and produces an analytical signal.
  * The analytical signal can be used for finding the amplitude envelope, instantaneous phase and instantaneous frequency of the original signal.
  * Reference <a href="https://en.wikipedia.org/wiki/Hilbert_transform">article</a> for more information on Hilbert transform.
  * Reference <a href="https://tomroelandts.com/articles/what-is-an-analytic-signal">article</a> for more information on analytical signals.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

@@ -17,12 +17,12 @@ import java.util.Arrays;
 
 
 /**
- * <h1>Discrete Fourier Transform</h1>
+ * <h2>Discrete Fourier Transform</h2>
  * The DiscreteFourier class applies the discrete fourier transform on the input signal and
  * provides different representations of the output to be returned (absolute values or complex values)
  * and if the output should be mirrored or not-mirrored
  * Reference <a href="https://mathworld.wolfram.com/DiscreteFourierTransform.html">article</a> for more information on discrete fourier transform.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.2

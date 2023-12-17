@@ -11,10 +11,10 @@
 package com.github.psambit9791.jdsp.windows;
 
 /**
- * <h1>Blackman-Harris Window</h1>
+ * <h2>Blackman-Harris Window</h2>
  * The Blackman-Harris window is a taper formed by using the first three terms of a summation of cosines. It was designed
  * to have close to the minimal leakage possible.  It is close to optimal, only slightly worse than a Kaiser window.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

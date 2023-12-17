@@ -14,11 +14,11 @@ import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 
 /**
- * <h1>Detrend</h1>
+ * <h2>Detrend</h2>
  * The Detrend class implements different methods to remove trends in a signal and is based on
  * numpy <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.convolve.html">detrend()</a> function
  * but extends to additionally provide polynomial detrending.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

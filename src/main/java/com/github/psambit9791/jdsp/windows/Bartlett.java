@@ -13,10 +13,10 @@ package com.github.psambit9791.jdsp.windows;
 import com.github.psambit9791.jdsp.misc.UtilMethods;
 
 /**
- * <h1>Bartlett Window</h1>
+ * <h2>Bartlett Window</h2>
  * The Bartlett window is very similar to a triangular window, except that the end points are at zero. It is often
  * used in signal processing for tapering a signal, without generating too much ripple in the frequency domain.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

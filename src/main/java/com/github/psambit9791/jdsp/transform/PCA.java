@@ -19,11 +19,11 @@ import org.apache.commons.math3.util.MathArrays;
 
 
 /**
- * <h1>Principal Component Analysis (PCA)</h1>
+ * <h2>Principal Component Analysis (PCA)</h2>
  * The PCA class reduces the dimensionality of the input multi-channel input and
  * provide a signal with reduced dimensions by transforming the input to a new set of
  * variables called Principal Components.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

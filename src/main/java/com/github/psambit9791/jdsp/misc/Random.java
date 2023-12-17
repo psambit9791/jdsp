@@ -12,10 +12,10 @@ package com.github.psambit9791.jdsp.misc;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 /**
- * <h1>Random Module</h1>
+ * <h2>Random Module</h2>
  * The Random class is used to generate pseudorandom numbers as samples or in different array dimensions.
  * The class can generate random numbers as integers in a range, doubles between 0.0 and 1.0 and numbers from a normal distribution.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

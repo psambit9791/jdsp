@@ -15,9 +15,9 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import java.util.Arrays;
 
 /**
- * <h1>Triangular Window</h1>
+ * <h2>Triangular Window</h2>
  * Generates a triangular window.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

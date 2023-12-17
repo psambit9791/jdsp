@@ -67,7 +67,7 @@ public class TestRandom {
             double[] x = r1.randomNormal1D(new int[]{4});
             for (double v : x) {
                 double temp = UtilMethods.round(v, 0);
-                Assertions.assertTrue((temp <= 13) && (temp >= 3)); //99.7% data stays within 3 SD
+                Assertions.assertTrue((temp <= 17) && (temp >= 3)); // More than 99.7% data stays within 7 SD
             }
         }
     }

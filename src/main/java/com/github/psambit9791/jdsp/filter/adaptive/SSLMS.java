@@ -15,7 +15,7 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import java.util.Arrays;
 
 /**
- * <h1>Sign-Sign Least-mean-squares (SSLMS) adaptive filter</h1>
+ * <h2>Sign-Sign Least-mean-squares (SSLMS) adaptive filter</h2>
  * The SSLMS adaptive filter is a filter that adapts its filter weights to get an input signal to match a desired output
  * signal (= the output of the filter). It does this by trying to minimize the squared error between the desired signal
  * and the filter output signal. Unlike the LMS, the weights are updated based on only the sign of the error and the signal

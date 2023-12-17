@@ -11,10 +11,10 @@
 package com.github.psambit9791.jdsp.transform;
 
 /**
- * <h1>Inverse Discrete Sine Transform</h1>
+ * <h2>Inverse Discrete Sine Transform</h2>
  * The InverseDiscreteSine class applies the inverse sine transform on the input sequence and returns the output signal.
  * This should be used for signals transformed using DiscreteSine with the specific transform type.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

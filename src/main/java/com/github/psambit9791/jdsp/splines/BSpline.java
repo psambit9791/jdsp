@@ -13,10 +13,10 @@ package com.github.psambit9791.jdsp.splines;
 import static com.github.psambit9791.jdsp.misc.UtilMethods.isSorted;
 
 /**
- * <h1>B-Spline</h1>
+ * <h2>B-Spline</h2>
  * The BSpline class implements the B-spline interpolation method. The B-spline creates a piecewise polynomial function
  * of degree n-1 which is then used to fit with the original signal using the control points.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0
