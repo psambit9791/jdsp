@@ -11,6 +11,7 @@
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.transform.InverseDiscreteSine;
+import com.github.psambit9791.jdsp.transform._InverseSineCosine;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -50,7 +51,7 @@ public class TestInverseDiscreteSine {
                 -0.084,   0.   ,  -0.021};
         InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1);
         idct1.transform(1);
-        double[] output1 = idct1.getMagnitude();
+        double[] output1 = idct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
         double[] result2 = {-0.   ,   2.63 ,   0.   ,  79.807,  -0.   ,  -4.867,   0.   ,
@@ -67,7 +68,7 @@ public class TestInverseDiscreteSine {
                 -0.14 ,   0.   ,  -0.033};
         InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2);
         idct2.transform(1);
-        double[] output2 = idct2.getMagnitude();
+        double[] output2 = idct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
 
@@ -87,7 +88,7 @@ public class TestInverseDiscreteSine {
                 -0.401,   0.346,  -0.366};
         InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1);
         idct1.transform();
-        double[] output1 = idct1.getMagnitude();
+        double[] output1 = idct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
         double[] result2 = {-12.971,  15.921, -18.737,  56.945,  43.861, -17.521,   5.609,
@@ -104,7 +105,7 @@ public class TestInverseDiscreteSine {
                 -0.653,   0.562,  -0.591};
         InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2);
         idct2.transform();
-        double[] output2 = idct2.getMagnitude();
+        double[] output2 = idct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
 
@@ -122,7 +123,7 @@ public class TestInverseDiscreteSine {
                 0.   , -0.736,  0.   , -0.731,  0.   , -0.732,  0.   , -0.72};
         InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1);
         idct1.transform(3);
-        double[] output1 = idct1.getMagnitude();
+        double[] output1 = idct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
         double[] result2 = {0.   ,   1.344,   0.   ,  79.484,   0.   ,  -2.364,   0.   ,
@@ -139,7 +140,7 @@ public class TestInverseDiscreteSine {
                 -1.188,   0.   ,  -1.164};
         InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2);
         idct2.transform(3);
-        double[] output2 = idct2.getMagnitude();
+        double[] output2 = idct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
 
@@ -159,7 +160,7 @@ public class TestInverseDiscreteSine {
                 -0.383,  -0.357,  -0.362};
         InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1);
         idct1.transform(4);
-        double[] output1 = idct1.getMagnitude();
+        double[] output1 = idct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
         double[] result2 = {-13.1  ,  15.472, -19.729,  53.404,  48.313, -15.9  ,   6.487,
@@ -176,7 +177,7 @@ public class TestInverseDiscreteSine {
                 -0.624,  -0.58 ,  -0.585};
         InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2);
         idct2.transform(4);
-        double[] output2 = idct2.getMagnitude();
+        double[] output2 = idct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
 
@@ -192,9 +193,9 @@ public class TestInverseDiscreteSine {
                 -0.   , -0.056, -0.   , -0.05 , -0.   , -0.045, -0.   , -0.04 ,
                 0.   , -0.035, -0.   , -0.03 , -0.   , -0.025,  0.   , -0.02 ,
                 0.   , -0.016,  0.   , -0.011, -0.   , -0.007,  0.   , -0.002};
-        InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1, InverseDiscreteSine.Normalization.ORTHOGONAL);
+        InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1, _InverseSineCosine.Normalization.ORTHOGONAL);
         idct1.transform(1);
-        double[] output1 = idct1.getMagnitude();
+        double[] output1 = idct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
         double[] result2 = {-0.   ,  0.207,  0.   ,  6.27 , -0.   , -0.382,  0.   , -0.192,
@@ -207,9 +208,9 @@ public class TestInverseDiscreteSine {
                 0.   , -0.113,  0.   , -0.096,  0.   , -0.082, -0.   , -0.071,
                 -0.   , -0.06 , -0.   , -0.05 , -0.   , -0.042, -0.   , -0.034,
                 -0.   , -0.026,  0.   , -0.018, -0.   , -0.011,  0.   , -0.003};
-        InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2, InverseDiscreteSine.Normalization.ORTHOGONAL);
+        InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2, _InverseSineCosine.Normalization.ORTHOGONAL);
         idct2.transform(1);
-        double[] output2 = idct2.getMagnitude();
+        double[] output2 = idct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
 
@@ -225,9 +226,9 @@ public class TestInverseDiscreteSine {
                 0.008, -0.064,  0.009, -0.059,  0.01 , -0.056,  0.012, -0.052,
                 0.014, -0.049,  0.016, -0.045,  0.017, -0.042,  0.019, -0.039,
                 0.021, -0.037,  0.023, -0.034,  0.025, -0.032,  0.027, -0.029};
-        InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1, InverseDiscreteSine.Normalization.ORTHOGONAL);
+        InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1, _InverseSineCosine.Normalization.ORTHOGONAL);
         idct1.transform(2);
-        double[] output1 = idct1.getMagnitude();
+        double[] output1 = idct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
         double[] result2 = {-1.025,  1.259, -1.481,  4.502,  3.468, -1.385,  0.443, -0.479,
@@ -240,9 +241,9 @@ public class TestInverseDiscreteSine {
                 0.015, -0.128,  0.018, -0.114,  0.02 , -0.102,  0.022, -0.092,
                 0.024, -0.084,  0.027, -0.077,  0.029, -0.071,  0.032, -0.065,
                 0.034, -0.061,  0.038, -0.055,  0.04 , -0.052,  0.044, -0.047};
-        InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2, InverseDiscreteSine.Normalization.ORTHOGONAL);
+        InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2, _InverseSineCosine.Normalization.ORTHOGONAL);
         idct2.transform(2);
-        double[] output2 = idct2.getMagnitude();
+        double[] output2 = idct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
 
@@ -258,9 +259,9 @@ public class TestInverseDiscreteSine {
                 0.   , -0.065,  0.   , -0.063,  0.   , -0.063,  0.   , -0.061,
                 0.   , -0.061,  0.   , -0.06 ,  0.   , -0.059,  0.   , -0.058,
                 0.   , -0.058,  0.   , -0.058,  0.   , -0.058,  0.   , -0.057};
-        InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1, InverseDiscreteSine.Normalization.ORTHOGONAL);
+        InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1, _InverseSineCosine.Normalization.ORTHOGONAL);
         idct1.transform(3);
-        double[] output1 = idct1.getMagnitude();
+        double[] output1 = idct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
         double[] result2 = {0.   ,  0.106,  0.   ,  6.284,  0.   , -0.187,  0.   , -0.095,
@@ -273,9 +274,9 @@ public class TestInverseDiscreteSine {
                 0.   , -0.129,  0.   , -0.12 ,  0.   , -0.113,  0.   , -0.108,
                 0.   , -0.104,  0.   , -0.101,  0.   , -0.099,  0.   , -0.096,
                 0.   , -0.096,  0.   , -0.094,  0.   , -0.094,  0.   , -0.092};
-        InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2, InverseDiscreteSine.Normalization.ORTHOGONAL);
+        InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2, _InverseSineCosine.Normalization.ORTHOGONAL);
         idct2.transform(3);
-        double[] output2 = idct2.getMagnitude();
+        double[] output2 = idct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
 
@@ -291,9 +292,9 @@ public class TestInverseDiscreteSine {
                 -0.017, -0.048, -0.018, -0.045, -0.018, -0.043, -0.02 , -0.041,
                 -0.021, -0.04 , -0.022, -0.038, -0.023, -0.036, -0.024, -0.034,
                 -0.025, -0.033, -0.026, -0.031, -0.027, -0.03 , -0.028, -0.029};
-        InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1, InverseDiscreteSine.Normalization.ORTHOGONAL);
+        InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1, _InverseSineCosine.Normalization.ORTHOGONAL);
         idct1.transform(4);
-        double[] output1 = idct1.getMagnitude();
+        double[] output1 = idct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
         double[] result2 = {-1.036,  1.223, -1.56 ,  4.222,  3.819, -1.257,  0.513, -0.422,
@@ -306,9 +307,9 @@ public class TestInverseDiscreteSine {
                 -0.034, -0.096, -0.035, -0.087, -0.036, -0.079, -0.036, -0.073,
                 -0.037, -0.068, -0.038, -0.063, -0.038, -0.06 , -0.04 , -0.057,
                 -0.041, -0.054, -0.042, -0.051, -0.044, -0.049, -0.046, -0.046};
-        InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2, InverseDiscreteSine.Normalization.ORTHOGONAL);
+        InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2, _InverseSineCosine.Normalization.ORTHOGONAL);
         idct2.transform(4);
-        double[] output2 = idct2.getMagnitude();
+        double[] output2 = idct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
 }

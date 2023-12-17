@@ -197,7 +197,7 @@ public class DiscreteCosine implements _SineCosine {
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The transformed signal.
      */
-    public double[] getMagnitude() throws ExceptionInInitializerError {
+    public double[] getOutput() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute transform() function before returning result");
         }

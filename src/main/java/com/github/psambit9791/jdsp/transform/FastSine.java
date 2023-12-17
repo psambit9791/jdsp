@@ -73,6 +73,20 @@ public class FastSine implements _SineCosine{
 
     /**
      * Performs the sine transformation on the input signal.
+     * @param type Only accepts the value 1.
+     * @throws java.lang.IllegalArgumentException If type is not 1
+     */
+    public void transform(int type) throws IllegalArgumentException {
+        if (type != 1) {
+            throw new IllegalArgumentException("FastSine only has type 1 implementation");
+        }
+        else {
+            this.output = this.fst.transform(this.signal, TransformType.FORWARD);
+        }
+    }
+
+    /**
+     * Performs the sine transformation on the input signal.
      */
     public void transform() {
         this.output = this.fst.transform(this.signal, TransformType.FORWARD);
@@ -84,7 +98,7 @@ public class FastSine implements _SineCosine{
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The transformed signal.
      */
-    public double[] getMagnitude() throws ExceptionInInitializerError {
+    public double[] getOutput() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute transform() function before returning result");
         }

@@ -70,6 +70,20 @@ public class InverseFastCosine implements _InverseSineCosine {
     }
 
     /**
+     * Performs the cosine transformation on the input signal.
+     * @param type Only accepts the value 1.
+     * @throws java.lang.IllegalArgumentException If type is not 1
+     */
+    public void transform(int type) throws IllegalArgumentException {
+        if (type != 1) {
+            throw new IllegalArgumentException("InverseFastCosine only has type 1 implementation");
+        }
+        else {
+            this.output = this.fct.transform(this.signal, TransformType.INVERSE);
+        }
+    }
+
+    /**
      * Performs the inverse cosine transformation on the input signal.
      */
     public void transform() {
@@ -82,7 +96,7 @@ public class InverseFastCosine implements _InverseSineCosine {
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The transformed signal.
      */
-    public double[] getMagnitude() throws ExceptionInInitializerError {
+    public double[] getOutput() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute transform() function before returning result");
         }

@@ -49,11 +49,11 @@ public class TestFSTAndIFST {
     public void testFSTWithIFST1() {
         FastSine f1 = new FastSine(this.signal1);
         f1.transform();
-        double[] out = f1.getMagnitude();
+        double[] out = f1.getOutput();
 
         InverseFastSine f2 = new InverseFastSine(out);
         f2.transform();
-        double[] reconstructed = f2.getMagnitude();
+        double[] reconstructed = f2.getOutput();
 
         Assertions.assertArrayEquals(this.extendSignal(this.signal1), reconstructed, 0.001);
 
@@ -63,11 +63,11 @@ public class TestFSTAndIFST {
     public void testFSTWithIFST1_withStandardNorm() {
         FastSine f1 = new FastSine(this.signal1, FastSine.Normalization.STANDARD);
         f1.transform();
-        double[] out = f1.getMagnitude();
+        double[] out = f1.getOutput();
 
         InverseFastSine f2 = new InverseFastSine(out, InverseFastSine.Normalization.STANDARD);
         f2.transform();
-        double[] reconstructed = f2.getMagnitude();
+        double[] reconstructed = f2.getOutput();
 
         Assertions.assertArrayEquals(this.extendSignal(this.signal1), reconstructed, 0.001);
 
@@ -77,11 +77,11 @@ public class TestFSTAndIFST {
     public void testFSTWithIFST1_withOrthoNorm() {
         FastSine f1 = new FastSine(this.signal1, FastSine.Normalization.ORTHOGONAL);
         f1.transform();
-        double[] out = f1.getMagnitude();
+        double[] out = f1.getOutput();
 
-        InverseFastSine f2 = new InverseFastSine(out, InverseFastSine.Normalization.ORTHOGONAL);
+        _InverseSineCosine f2 = new InverseFastSine(out, InverseFastSine.Normalization.ORTHOGONAL);
         f2.transform();
-        double[] reconstructed = f2.getMagnitude();
+        double[] reconstructed = f2.getOutput();
 
         Assertions.assertArrayEquals(this.extendSignal(this.signal1), reconstructed, 0.001);
 
@@ -90,12 +90,12 @@ public class TestFSTAndIFST {
     @Test
     public void testFSTWithIFST2() {
         FastSine f1 = new FastSine(this.signal2);
-        f1.transform();
-        double[] out = f1.getMagnitude();
+        f1.transform(1);
+        double[] out = f1.getOutput();
 
         InverseFastSine f2 = new InverseFastSine(out);
-        f2.transform();
-        double[] reconstructed = f2.getMagnitude();
+        f2.transform(1);
+        double[] reconstructed = f2.getOutput();
 
         Assertions.assertArrayEquals(this.extendSignal(this.signal2), reconstructed, 0.001);
     }

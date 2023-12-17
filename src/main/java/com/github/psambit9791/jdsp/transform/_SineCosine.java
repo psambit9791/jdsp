@@ -19,6 +19,7 @@ public interface _SineCosine {
     }
 
     void transform();
-    double[] getMagnitude();
+    void transform(int type);
+    double[] getOutput();
     int getSignalLength();
 }

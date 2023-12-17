@@ -76,7 +76,7 @@ public class InverseDiscreteCosine implements _InverseSineCosine {
             dct = new DiscreteCosine(this.signal, _SineCosine.Normalization.ORTHOGONAL);
         }
         dct.transform(type);
-        this.output = dct.getMagnitude();
+        this.output = dct.getOutput();
     }
 
     /**
@@ -93,7 +93,7 @@ public class InverseDiscreteCosine implements _InverseSineCosine {
             dct = new DiscreteCosine(this.signal, _SineCosine.Normalization.ORTHOGONAL);
         }
         dct.transform(type);
-        this.output = dct.getMagnitude();
+        this.output = dct.getOutput();
     }
 
     /**
@@ -102,7 +102,7 @@ public class InverseDiscreteCosine implements _InverseSineCosine {
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The transformed signal.
      */
-    public double[] getMagnitude() throws ExceptionInInitializerError {
+    public double[] getOutput() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute transform() function before returning result");
         }

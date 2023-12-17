@@ -24,7 +24,7 @@ import org.apache.commons.math3.transform.*;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class InverseFastSine implements _SineCosine {
+public class InverseFastSine implements _InverseSineCosine {
 
     private double[] signal;
     private double[] output;
@@ -57,14 +57,28 @@ public class InverseFastSine implements _SineCosine {
      * @param signal The input signal to be transformed.
      * @param norm   The normalization option (STANDARD or ORTHOGONAL).
      */
-    public InverseFastSine(double[] signal, FastSine.Normalization norm) {
+    public InverseFastSine(double[] signal, Normalization norm) {
         this.signal = signal;
         this.extendSignal();
-        if (norm == FastSine.Normalization.ORTHOGONAL) {
+        if (norm == Normalization.ORTHOGONAL) {
             this.fst = new FastSineTransformer(DstNormalization.ORTHOGONAL_DST_I);
         }
         else {
             this.fst = new FastSineTransformer(DstNormalization.STANDARD_DST_I);
+        }
+    }
+
+    /**
+     * Performs the cosine transformation on the input signal.
+     * @param type Only accepts the value 1.
+     * @throws java.lang.IllegalArgumentException If type is not 1
+     */
+    public void transform(int type) throws IllegalArgumentException {
+        if (type != 1) {
+            throw new IllegalArgumentException("InverseFastSine only has type 1 implementation");
+        }
+        else {
+            this.output = this.fst.transform(this.signal, TransformType.INVERSE);
         }
     }
 
@@ -81,7 +95,7 @@ public class InverseFastSine implements _SineCosine {
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The transformed signal.
      */
-    public double[] getMagnitude() throws ExceptionInInitializerError {
+    public double[] getOutput() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute transform() function before returning result");
         }

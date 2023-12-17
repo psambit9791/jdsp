@@ -19,7 +19,7 @@ package com.github.psambit9791.jdsp.transform;
  * @author  Sambit Paul
  * @version 1.0
  */
-public class InverseDiscreteSine implements _SineCosine {
+public class InverseDiscreteSine implements _InverseSineCosine {
 
     private double[] signal;
     private double[] output = null;
@@ -76,7 +76,7 @@ public class InverseDiscreteSine implements _SineCosine {
             dst = new DiscreteSine(this.signal, _SineCosine.Normalization.ORTHOGONAL);
         }
         dst.transform(type);
-        this.output = dst.getMagnitude();
+        this.output = dst.getOutput();
     }
 
     /**
@@ -93,7 +93,7 @@ public class InverseDiscreteSine implements _SineCosine {
             dst = new DiscreteSine(this.signal, _SineCosine.Normalization.ORTHOGONAL);
         }
         dst.transform(type);
-        this.output = dst.getMagnitude();
+        this.output = dst.getOutput();
     }
 
     /**
@@ -102,7 +102,7 @@ public class InverseDiscreteSine implements _SineCosine {
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The transformed signal.
      */
-    public double[] getMagnitude() throws ExceptionInInitializerError {
+    public double[] getOutput() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute transform() function before returning result");
         }
