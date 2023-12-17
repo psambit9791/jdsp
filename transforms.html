@@ -118,6 +118,8 @@
         <div id="tabs">
           <ul>
             <li><a href="#fourier">Fourier Transforms</a> </li>
+            <li><a href="#sine">Sine Transforms</a> </li>
+            <li><a href="#cosine">Cosine Transforms</a> </li>
             <li><a href="#stft">Short-Time Fourier Transforms</a> </li>
             <li><a href="#hilbert">Hilbert Transform</a> </li>
             <li><a href="#wavelet">Continuous Wavelet Transforms</a> </li>
@@ -158,7 +160,7 @@ _Fourier ft = new DiscreteFourier(signal);
 _Fourier ft = new FastFourier(signal);
 ft.transform();
 boolean onlyPositive = true;
-double[] out = ft.getMagnitude(onlyPositive); //Positive Absolute
+double[] out = ft.getOutput(onlyPositive); //Positive Absolute
                     </code>
                   </pre>
                 </div>
@@ -188,7 +190,7 @@ _Fourier ft = new DiscreteFourier(signal);
 _Fourier ft = new FastFourier(signal);
 ft.dft();
 boolean onlyPositive = false;
-double[] out = ft.getMagnitude(onlyPositive); //Full Absolute
+double[] out = ft.getOutput(onlyPositive); //Full Absolute
                     </code>
                   </pre>
                 </div>
@@ -234,7 +236,7 @@ _InverseFourier ift = new InverseDiscreteFourier(complexSequence); //If transfor
 _InverseFourier ift = new InverseFastFourier(complexSequence); //If transformed using FFT
 ift.transform();
 double[] outReal = ift.getReal(); //To get only the real component
-double[] outAbsolute = ift.getMagnitude(); //To get the absolute value of the complex signal
+double[] outAbsolute = ift.getOutput(); //To get the absolute value of the complex signal
 double[][] out = ift.getComplex2D(); // To get the complex signal
                     </code>
                   </pre>
@@ -243,7 +245,606 @@ double[][] out = ift.getComplex2D(); // To get the complex signal
               <div class="container" style="padding-bottom:50px;"></div>
             </div>
             <!-- END OF IDFT-->
+          </div>
 
+
+          <div id="sine">
+
+              <!--  START OF Standard DST  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Forward Sine Transform (Standard)</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                      <img src="res/signal/transforms/dst/signal.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <h5>Signal Used for this Demo</h5>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                      <img src="res/signal/transforms/dst/dst_standard.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 1</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 2</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteSine f1 = new DiscreteSine(signal);
+f1.transform(1);
+// OR
+FastSine f1 = new FastSine(signal);
+f1.transform();
+
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteSine f1 = new DiscreteSine(signal)
+f1.transform(2);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 3</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 4</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteSine f1 = new DiscreteSine(signal)
+f1.transform(3);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteSine f1 = new DiscreteSine(signal)
+f1.transform(4);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF Standard DST-->
+
+              <!--  START OF Standard IDST  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Inverse Sine Transform (Standard)</h2>
+                      </div>
+                  </div>
+<!--                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">-->
+<!--                      <img src="res/signal/transforms/dft/signal.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">-->
+<!--                  </div>-->
+<!--                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">-->
+<!--                      <h5>Signal Used for this Demo</h5>-->
+<!--                  </div>-->
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                      <img src="res/signal/transforms/idst/idst_standard.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 1</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 2</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteSine if1 = new InverseDiscreteSine(transformOutput);
+if1.transform(1);
+// OR
+InverseFastSine if1 = new InverseFastSine(transformOutput);
+if1.transform();
+
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteSine if1 = new InverseDiscreteSine(transformOutput);
+if1.transform(2);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 3</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 4</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteSine if1 = new InverseDiscreteSine(transformOutput);
+if1.transform(3);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteSine if1 = new InverseDiscreteSine(transformOutput);
+if1.transform(4);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF Standard IDST-->
+
+              <!--  START OF Orthogonal DST  -->
+              <div class="bg-white" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Forward Sine Transform (Orthogonal)</h2>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                      <img src="res/signal/transforms/dst/signal.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                      <h5>Signal Used for this Demo</h5>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                      <img src="res/signal/transforms/dst/dst_ortho.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 1</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 2</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteSine f1 = new DiscreteSine(signal, DiscreteSine.Normalization.ORTHOGONAL);
+f1.transform(1);
+// OR
+FastSine f1 = new FastSine(signal, FastSine.Normalization.ORTHOGONAL);
+f1.transform();
+
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteSine f1 = new DiscreteSine(signal, DiscreteSine.Normalization.ORTHOGONAL)
+f1.transform(2);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 3</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 4</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteSine f1 = new DiscreteSine(signal, DiscreteSine.Normalization.ORTHOGONAL)
+f1.transform(3);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteSine f1 = new DiscreteSine(signal, DiscreteSine.Normalization.ORTHOGONAL)
+f1.transform(4);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF Orthogonal DST-->
+
+              <!--  START OF Orthogonal IDST  -->
+              <div class="bg-light" style="padding-top:30px;">
+                  <div class="row mb-5">
+                      <div class="col-md-7 mx-auto text-center">
+                          <h2 class="heading-29190">Inverse Sine Transform (Orthogonal)</h2>
+                      </div>
+                  </div>
+                  <!--                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">-->
+                  <!--                      <img src="res/signal/transforms/dft/signal.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">-->
+                  <!--                  </div>-->
+                  <!--                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">-->
+                  <!--                      <h5>Signal Used for this Demo</h5>-->
+                  <!--                  </div>-->
+                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                      <img src="res/signal/transforms/idst/idst_ortho.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                  </div>
+                  <div class="row">
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 1</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 2</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteSine if1 = new InverseDiscreteSine(transformOutput, InverseDiscreteSine.Normalization.ORTHOGONAL);
+if1.transform(1);
+// OR
+InverseFastSine if1 = new InverseFastSine(transformOutput);
+if1.transform();
+
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteSine if1 = new InverseDiscreteSine(transformOutput, InverseDiscreteSine.Normalization.ORTHOGONAL);
+if1.transform(2);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 3</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                          <h4>Type 4</h4>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteSine if1 = new InverseDiscreteSine(transformOutput, InverseDiscreteSine.Normalization.ORTHOGONAL);
+if1.transform(3);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                      <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteSine if1 = new InverseDiscreteSine(transformOutput, InverseDiscreteSine.Normalization.ORTHOGONAL);
+if1.transform(4);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                      </div>
+                  </div>
+                  <div class="container" style="padding-bottom:50px;"></div>
+              </div>
+              <!-- END OF Orthogonal IDST-->
+          </div>
+
+
+            <div id="cosine">
+
+                <!--  START OF Standard DCT  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Forward Cosine Transform (Standard)</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/transforms/dct/signal.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <h5>Signal Used for this Demo</h5>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/transforms/dct/dct_standard.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 1</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 2</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteCosine f1 = new DiscreteCosine(signal);
+f1.transform(1);
+// OR
+FastCosine f1 = new FastCosine(signal);
+f1.transform();
+
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteCosine f1 = new DiscreteCosine(signal)
+f1.transform(2);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 3</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 4</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteCosine f1 = new DiscreteCosine(signal)
+f1.transform(3);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteCosine f1 = new DiscreteCosine(signal)
+f1.transform(4);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF Standard DCT-->
+
+                <!--  START OF Standard IDCT  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Inverse Cosine Transform (Standard)</h2>
+                        </div>
+                    </div>
+                    <!--                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">-->
+                    <!--                      <img src="res/signal/transforms/dft/signal.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">-->
+                    <!--                  </div>-->
+                    <!--                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">-->
+                    <!--                      <h5>Signal Used for this Demo</h5>-->
+                    <!--                  </div>-->
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/transforms/idct/idct_standard.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 1</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 2</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteCosine if1 = new InverseDiscreteCosine(transformOutput);
+if1.transform(1);
+// OR
+InverseFastCosine if1 = new InverseFastCosine(transformOutput);
+if1.transform();
+
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteCosine if1 = new InverseDiscreteCosine(transformOutput);
+if1.transform(2);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 3</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 4</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteCosine if1 = new InverseDiscreteCosine(transformOutput);
+if1.transform(3);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteCosine if1 = new InverseDiscreteCosine(transformOutput);
+if1.transform(4);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF Standard IDCT-->
+
+                <!--  START OF Orthogonal DCT  -->
+                <div class="bg-white" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Forward Cosine Transform (Orthogonal)</h2>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/transforms/dct/signal.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">
+                        <h5>Signal Used for this Demo</h5>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/transforms/dct/dct_ortho.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 1</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 2</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteCosine f1 = new DiscreteCosine(signal, DiscreteCosine.Normalization.ORTHOGONAL);
+f1.transform(1);
+// OR
+FastCosine f1 = new FastCosine(signal, FastCosine.Normalization.ORTHOGONAL);
+f1.transform();
+
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteCosine f1 = new DiscreteCosine(signal, DiscreteCosine.Normalization.ORTHOGONAL)
+f1.transform(2);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 3</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 4</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteCosine f1 = new DiscreteCosine(signal, DiscreteCosine.Normalization.ORTHOGONAL)
+f1.transform(3);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+DiscreteCosine f1 = new DiscreteCosine(signal, DiscreteCosine.Normalization.ORTHOGONAL)
+f1.transform(4);
+double[] output = f1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF Orthogonal DCT-->
+
+                <!--  START OF Orthogonal IDCT  -->
+                <div class="bg-light" style="padding-top:30px;">
+                    <div class="row mb-5">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h2 class="heading-29190">Inverse Cosine Transform (Orthogonal)</h2>
+                        </div>
+                    </div>
+                    <!--                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">-->
+                    <!--                      <img src="res/signal/transforms/dft/signal.png" alt="Image" class="img-fluid" style="width: auto; height: 256px;">-->
+                    <!--                  </div>-->
+                    <!--                  <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 50px">-->
+                    <!--                      <h5>Signal Used for this Demo</h5>-->
+                    <!--                  </div>-->
+                    <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 10px">
+                        <img src="res/signal/transforms/idct/idct_ortho.png" alt="Image" class="img-fluid" style="width: auto; height: 576px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 1</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 2</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteCosine if1 = new InverseDiscreteCosine(transformOutput, InverseDiscreteCosine.Normalization.ORTHOGONAL);
+if1.transform(1);
+// OR
+InverseFastCosine if1 = new InverseFastCosine(transformOutput);
+if1.transform();
+
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteCosine if1 = new InverseDiscreteCosine(transformOutput, InverseDiscreteCosine.Normalization.ORTHOGONAL);
+if1.transform(2);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 3</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                            <h4>Type 4</h4>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteCosine if1 = new InverseDiscreteCosine(transformOutput, InverseDiscreteCosine.Normalization.ORTHOGONAL);
+if1.transform(3);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="d-flex align-items-center">
+                    <code class="container align-text-left">
+InverseDiscreteCosine if1 = new InverseDiscreteCosine(transformOutput, InverseDiscreteCosine.Normalization.ORTHOGONAL);
+if1.transform(4);
+double[] output = if1.getOutput();
+                    </code>
+                  </pre>
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:50px;"></div>
+                </div>
+                <!-- END OF Orthogonal IDCT-->
           </div>
 
 
@@ -539,7 +1140,7 @@ double[][] newSignal = i1.transform();
                     <a href="https://www.patreon.com/sambitpaul" target="_blank"><img src="res/logos/patreon.png" alt="Image" class="img-fluid support-image-1"></a>
                 </div>
                 <div class="col-4 col-md-4 col-lg-4 align-text-center">
-                    <a href="https://paypal.me/psambit9791" target="_blank"><img src="res/logos/paypal.png" alt="Image" class="img-fluid support-image-2"></a>
+                    <a href="https://paypal.me/psambit1412?country.x=GB&locale.x=en_GB" target="_blank"><img src="res/logos/paypal.png" alt="Image" class="img-fluid support-image-2"></a>
                 </div>
                 <div class="col-4 col-md-4 col-lg-4 align-text-center">
                     <a href="https://www.ko-fi.com/sambitpaul" target="_blank"><img src="res/logos/kofi.png" alt="Image" class="img-fluid support-image-2"></a>
