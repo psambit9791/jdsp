@@ -160,10 +160,10 @@ public class DiscreteSine implements _SineCosine {
     }
 
     /**
-     * This function performs the discrete sine transform (type 2) on the input signal.
+     * This function performs the discrete sine transform (type 1) on the input signal.
      */
     public void transform() {
-        this.output = this.type2();
+        this.output = this.type1();
     }
 
     /**

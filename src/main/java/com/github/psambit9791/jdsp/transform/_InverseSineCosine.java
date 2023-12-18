@@ -19,6 +19,7 @@ public interface _InverseSineCosine {
     }
 
     void transform();
+    void transform(int type);
     double[] getOutput();
     int getSignalLength();
 }

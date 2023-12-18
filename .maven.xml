@@ -6,6 +6,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
+                <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
                 <gpg.executable>${env.GPG_EXECUTABLE}</gpg.executable>
                 <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
             </properties>
@@ -16,6 +17,10 @@
             <id>ossrh</id>
             <username>${env.SONATYPE_USERNAME}</username>
             <password>${env.SONATYPE_PASSWORD}</password>
+        </server>
+        <server>
+            <id>${env.GPG_KEYNAME}</id>
+            <passphrase>${env.GPG_PASSPHRASE}</passphrase>
         </server>
     </servers>
 </settings>

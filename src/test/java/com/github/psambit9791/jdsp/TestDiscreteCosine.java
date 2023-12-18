@@ -49,7 +49,7 @@ public class TestDiscreteCosine {
                 -0.   ,  -0.746,   0.   ,  -0.742,  -0.   ,  -0.734,   0.   ,
                 -0.732,   0.   ,  -0.72};
         DiscreteCosine dct1 = new DiscreteCosine(this.signal1);
-        dct1.transform(1);
+        dct1.transform();
         double[] output1 = dct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -66,7 +66,7 @@ public class TestDiscreteCosine {
                 -0.   ,  -1.234,  -0.   ,  -1.218,   0.   ,  -1.192,   0.   ,
                 -1.189,   0.   ,  -1.164};
         DiscreteCosine dct2 = new DiscreteCosine(this.signal2);
-        dct2.transform(1);
+        dct2.transform();
         double[] output2 = dct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
@@ -86,7 +86,7 @@ public class TestDiscreteCosine {
                 0.   ,  -0.125,   0.   ,  -0.101,   0.   ,  -0.069,   0.   ,
                 -0.042,   0.   ,  -0.007};
         DiscreteCosine dct1 = new DiscreteCosine(this.signal1);
-        dct1.transform();
+        dct1.transform(2);
         double[] output1 = dct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -103,7 +103,7 @@ public class TestDiscreteCosine {
                 0.   ,  -0.219,   0.   ,  -0.174,   0.   ,  -0.114,   0.   ,
                 -0.072,   0.   ,  -0.011};
         DiscreteCosine dct2 = new DiscreteCosine(this.signal2);
-        dct2.transform();
+        dct2.transform(2);
         double[] output2 = dct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
