@@ -22,6 +22,7 @@ import java.io.IOException;
  * <h2>Plotting</h2>
  * The Plotting class provides method to plot curves on a chart and then either display it or save it as a .png file
  *
+ *
  * @author  Sambit Paul
  * @version 1.1
  */
