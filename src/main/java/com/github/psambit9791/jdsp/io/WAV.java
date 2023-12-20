@@ -227,6 +227,12 @@ public class WAV {
         }
     }
 
+    /**
+     * Return data in provided datatype
+     * @param type Datatype provided. Must be one of int, long or double
+     * @return double[][] WAV data as a 2D array
+     * @throws java.lang.IllegalArgumentException if type is not one of int, long or double
+     */
     public double[][] getData(String type) throws IllegalArgumentException {
         if (type.equals("int")) {
             return this.dataInt;

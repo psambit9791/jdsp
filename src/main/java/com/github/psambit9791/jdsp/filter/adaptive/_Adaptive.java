@@ -25,7 +25,7 @@ public interface _Adaptive {
      *      RANDOM: filter weights get an initial random value ranging from 0 to 1
      *      ZEROS: filter weights get initial value 0
      */
-    public enum WeightsFillMethod {
+    enum WeightsFillMethod {
         RANDOM,
         ZEROS
     }
@@ -36,5 +36,5 @@ public interface _Adaptive {
      * @param desired desired signal that you want after filtering of x
      * @param x input signal that you want to filter with the LMS adaptive filter to achieve the desired signal
      */
-    public void filter(double[] desired, double[] x);
+    void filter(double[] desired, double[] x);
 }

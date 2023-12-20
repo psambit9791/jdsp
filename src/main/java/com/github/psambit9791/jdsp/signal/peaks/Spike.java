@@ -34,6 +34,13 @@ public class Spike {
     private double[] max_spike;
     private double[] min_spike;
 
+    /**
+     * This constructor initialises the prerequisites required to use Peak class.
+     * @param signal The signal to be processed
+     * @param peaks The detected peaks
+     * @param left The troughs on the left (corresponding to the peak indices)
+     * @param right The troughs on the right (corresponding to the peak indices)
+     */
     public Spike(double[] signal, int[] peaks, int[] left, int[] right) {
         this.signal = signal;
         this.peaks = peaks;

@@ -79,6 +79,7 @@ public class Random {
 
     /**
      * Generate a 1D array of random samples from the normal distribution
+     * @param shape The dimension of the 1D array to generate. Must have only 1 value.
      * @return double[] 1D array of random samples from the normal distribution
      */
     public double[] randomNormal1D(int[] shape) {
@@ -94,6 +95,7 @@ public class Random {
 
     /**
      * Generate a 2D array of random samples from the normal distribution
+     * @param shape The dimension of the 2D array to generate. Must have only 2 values.
      * @return double[][] 2D array of random samples from the normal distribution
      */
     public double[][] randomNormal2D(int[] shape) {
@@ -111,6 +113,7 @@ public class Random {
 
     /**
      * Generate a 3D array of random samples from the normal distribution
+     * @param shape The dimension of the 3D array to generate. Must have only 3 values.
      * @return double[][][] 3D array of random samples from the normal distribution
      */
     public double[][][] randomNormal3D(int[] shape) {
@@ -138,6 +141,7 @@ public class Random {
 
     /**
      * Generate a 1D array of random samples between 0.0 and 1.0
+     * @param shape The dimension of the 1D array to generate. Must have only 1 value.
      * @return double[] 1D array of random decimals
      */
     public double[] randomDouble1D(int[] shape) {
@@ -153,6 +157,7 @@ public class Random {
 
     /**
      * Generate a 2D array of random samples between 0.0 and 1.0
+     * @param shape The dimension of the 2D array to generate. Must have only 2 values.
      * @return double[][] 2D array of random decimals
      */
     public double[][] randomDouble2D(int[] shape) {
@@ -170,6 +175,7 @@ public class Random {
 
     /**
      * Generate a 3D array of random samples between 0.0 and 1.0
+     * @param shape The dimension of the 3D array to generate. Must have only 3 values.
      * @return double[][][] 3D array of random decimals
      */
     public double[][][] randomDouble3D(int[] shape) {
@@ -213,6 +219,7 @@ public class Random {
 
     /**
      * Generate a 1D array of random integer between 0 and the upper bound
+     * @param shape The dimension of the 1D array to generate. Must have only 1 value.
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[] 1D array of random integers
      */
@@ -230,6 +237,7 @@ public class Random {
 
     /**
      * Generate a 1D array of random integer between the lower bound and the upper bound
+     * @param shape The dimension of the 1D array to generate. Must have only 1 value.
      * @param lower_bound The minimum number from which the integers can be generated
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[] 1D array of random integers
@@ -251,6 +259,7 @@ public class Random {
 
     /**
      * Generate a 2D array of random integer between 0 and the upper bound
+     * @param shape The dimension of the 2D array to generate. Must have only 2 values.
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[][] 2D array of random integers
      */
@@ -270,6 +279,7 @@ public class Random {
 
     /**
      * Generate a 2D array of random integer between the lower bound and the upper bound
+     * @param shape The dimension of the 2D array to generate. Must have only 2 values.
      * @param lower_bound The minimum number from which the integers can be generated
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[][] 2D array of random integers
@@ -293,6 +303,7 @@ public class Random {
 
     /**
      * Generate a 3D array of random integer between 0 and the upper bound
+     * @param shape The dimension of the 3D array to generate. Must have only 3 values.
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[][][] 3D array of random integers
      */
@@ -314,6 +325,7 @@ public class Random {
 
     /**
      * Generate a 3D array of random integer between the lower bound and the upper bound
+     * @param shape The dimension of the 3D array to generate. Must have only 3 values.
      * @param lower_bound The minimum number from which the integers can be generated
      * @param upper_bound The maximum number up to which the integers can be generated
      * @return int[][][] 3D array of random integers

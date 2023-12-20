@@ -113,7 +113,7 @@ public class InverseFastFourier implements _InverseFourier {
     /**
      * This method returns the complex value of the generated signal as a Complex array.
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
-     * @return Complex[] The signal (complex)
+     * @return Complex[] The generated signal (complex)
      */
     public Complex[] getComplex() throws ExceptionInInitializerError {
         this.checkOutput();
@@ -123,7 +123,7 @@ public class InverseFastFourier implements _InverseFourier {
     /**
      * This method returns the complex value of the generated signal as a 2D matrix.
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
-     * @return double[][] The signal (complex)
+     * @return double[][] The generated signal (complex as 2D array)
      */
     public double[][] getComplex2D() throws ExceptionInInitializerError {
         checkOutput();

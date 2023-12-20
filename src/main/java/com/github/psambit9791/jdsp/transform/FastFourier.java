@@ -49,7 +49,8 @@ public class FastFourier implements _Fourier {
     }
 
     /**
-     * Return the length of the modified signal (padded length)
+     * Returns the length of the modified signal (padded length)
+     * @return int The modified length of the input signal
      */
     public int getSignalLength() {
         return this.signal.length;

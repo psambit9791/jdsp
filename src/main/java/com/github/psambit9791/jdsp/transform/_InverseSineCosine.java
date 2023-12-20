@@ -11,15 +11,48 @@
 
 package com.github.psambit9791.jdsp.transform;
 
+/**
+ * <h2>Interface for Inverse Sine and Cosine Transform</h2>
+ *
+ * The _InverseSineCosine interface is implemented by all Inverse Sine and Cosine Transforms.
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public interface _InverseSineCosine {
 
-    public enum Normalization {
+    /**
+     * Dictates the normalization mode used in the transform.
+     *      STANDARD: No normalization is applied
+     *      ORTHOGONAL: The forward and inverse transforms are scaled by the same overall factor
+     */
+    enum Normalization {
         STANDARD,
         ORTHOGONAL
     }
 
+    /**
+     * This method implements the transform corresponding to Type 1 forward transform
+     */
     void transform();
+
+    /**
+     * This method implements the transform corresponding to forward transform of the provided type
+     * @param type The type of transform to be applied
+     */
     void transform(int type);
+
+    /**
+     * Returns the output of the transformation.
+     *
+     * @return double[] The transformed signal.
+     */
     double[] getOutput();
+
+    /**
+     * Returns the length of the input signal.
+     *
+     * @return int The updated length of the input signal.
+     */
     int getSignalLength();
 }

@@ -28,7 +28,7 @@ public interface _IIRFilter {
      * @param cutoffFreq The cutoff frequency for the filter
      * @return double[] Filtered signal
      */
-    public double[] lowPassFilter(double[] signal, int order, double cutoffFreq);
+    double[] lowPassFilter(double[] signal, int order, double cutoffFreq);
 
     /**
      * This method implements a high pass filter with given parameters, filters the signal and returns it.
@@ -37,7 +37,7 @@ public interface _IIRFilter {
      * @param cutoffFreq The cutoff frequency for the filter
      * @return double[] Filtered signal
      */
-    public double[] highPassFilter(double[] signal, int order, double cutoffFreq);
+    double[] highPassFilter(double[] signal, int order, double cutoffFreq);
 
     /**
      * This method implements a band pass filter with given parameters, filters the signal and returns it.
@@ -47,7 +47,7 @@ public interface _IIRFilter {
      * @param highCutoff The upper cutoff frequency for the filter
      * @return double[] Filtered signal
      */
-    public double[] bandPassFilter(double[] signal, int order, double lowCutoff, double highCutoff);
+    double[] bandPassFilter(double[] signal, int order, double lowCutoff, double highCutoff);
 
     /**
      * This method implements a band stop filter with given parameters, filters the signal and returns it.
@@ -57,6 +57,6 @@ public interface _IIRFilter {
      * @param highCutoff The upper cutoff frequency for the filter
      * @return double[] Filtered signal
      */
-    public double[] bandStopFilter(double[] signal, int order, double lowCutoff, double highCutoff);
+    double[] bandStopFilter(double[] signal, int order, double lowCutoff, double highCutoff);
 
 }

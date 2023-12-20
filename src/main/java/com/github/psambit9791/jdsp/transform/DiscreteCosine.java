@@ -183,7 +183,7 @@ public class DiscreteCosine implements _SineCosine {
     }
 
     /**
-     * Gets the length of the input signal.
+     * Returns the length of the input signal.
      *
      * @return int The updated length of the input signal.
      */

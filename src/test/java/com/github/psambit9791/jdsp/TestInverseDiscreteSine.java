@@ -50,7 +50,7 @@ public class TestInverseDiscreteSine {
                 0.   ,  -0.25 ,   0.   ,  -0.199,   0.   ,  -0.139,  -0.   ,
                 -0.084,   0.   ,  -0.021};
         InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1);
-        idct1.transform(1);
+        idct1.transform();
         double[] output1 = idct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -67,7 +67,7 @@ public class TestInverseDiscreteSine {
                 -0.   ,  -0.427,  -0.   ,  -0.335,   0.   ,  -0.228,  -0.   ,
                 -0.14 ,   0.   ,  -0.033};
         InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2);
-        idct2.transform(1);
+        idct2.transform();
         double[] output2 = idct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
@@ -87,7 +87,7 @@ public class TestInverseDiscreteSine {
                 0.245,  -0.494,   0.265,  -0.465,   0.292,  -0.431,   0.317,
                 -0.401,   0.346,  -0.366};
         InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1);
-        idct1.transform();
+        idct1.transform(2);
         double[] output1 = idct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -104,7 +104,7 @@ public class TestInverseDiscreteSine {
                 0.401,  -0.824,   0.433,  -0.767,   0.476,  -0.702,   0.512,
                 -0.653,   0.562,  -0.591};
         InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2);
-        idct2.transform();
+        idct2.transform(2);
         double[] output2 = idct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }
@@ -194,7 +194,7 @@ public class TestInverseDiscreteSine {
                 0.   , -0.035, -0.   , -0.03 , -0.   , -0.025,  0.   , -0.02 ,
                 0.   , -0.016,  0.   , -0.011, -0.   , -0.007,  0.   , -0.002};
         InverseDiscreteSine idct1 = new InverseDiscreteSine(this.signal1, _InverseSineCosine.Normalization.ORTHOGONAL);
-        idct1.transform(1);
+        idct1.transform();
         double[] output1 = idct1.getOutput();
         Assertions.assertArrayEquals(result1, output1, 0.001);
 
@@ -209,7 +209,7 @@ public class TestInverseDiscreteSine {
                 -0.   , -0.06 , -0.   , -0.05 , -0.   , -0.042, -0.   , -0.034,
                 -0.   , -0.026,  0.   , -0.018, -0.   , -0.011,  0.   , -0.003};
         InverseDiscreteSine idct2 = new InverseDiscreteSine(this.signal2, _InverseSineCosine.Normalization.ORTHOGONAL);
-        idct2.transform(1);
+        idct2.transform();
         double[] output2 = idct2.getOutput();
         Assertions.assertArrayEquals(result2, output2, 0.001);
     }

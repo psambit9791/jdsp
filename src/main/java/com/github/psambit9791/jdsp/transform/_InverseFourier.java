@@ -12,13 +12,54 @@ package com.github.psambit9791.jdsp.transform;
 
 import org.apache.commons.math3.complex.Complex;
 
+/**
+ * <h2>Interface for Inverse Fourier Transform</h2>
+ *
+ * The _InverseFourier interface is implemented by all Inverse Fourier Transforms.
+ *
+ * @author  Sambit Paul
+ * @version 1.0
+ */
 public interface _InverseFourier {
 
+    /**
+     * This function performs the inverse fourier transform on the input signal
+     */
     void transform();
-    Complex[] getComplex();
-    double[][] getComplex2D();
+
+    /**
+     * This method returns the real part of the IDFT result.
+     * @return double[] The signal (real part only)
+     */
     double[] getReal();
+
+    /**
+     * This method returns the imaginary part of the IDFT result.
+     * @return double[] The signal (imaginary part only)
+     */
     double[] getImaginary();
+
+    /**
+     * This method returns the magnitude of the IDFT result.
+     * @return double[] The magnitude of the signal
+     */
     double[] getMagnitude();
+
+    /**
+     * This method returns the phase (in radians) of the IDFT result.
+     * @return double[] The phase of the signal (in radians)
+     */
     double[] getPhase();
+
+    /**
+     * This method returns the IDFT result as a Complex array.
+     * @return double[][] The generated signal (complex as 2D)
+     */
+    double[][] getComplex2D();
+
+    /**
+     * This method returns the IDFT result as a Complex array.
+     * @return Complex[] The generated signal (complex)
+     */
+    Complex[] getComplex();
 }

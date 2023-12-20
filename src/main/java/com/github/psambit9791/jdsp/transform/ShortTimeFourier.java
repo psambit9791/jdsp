@@ -246,6 +246,10 @@ public class ShortTimeFourier {
         return result;
     }
 
+    /**
+     * Returns the output of the Short Time Fourier Transform
+     * @return _Fourier[] Array of Fourier objects
+     */
     public _Fourier[] getOutput() {
         checkOutput();
         return output;

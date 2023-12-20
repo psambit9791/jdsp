@@ -26,5 +26,5 @@ public interface _KernelFilter {
      * @param signal Signal to be filtered
      * @return double[] Filtered signal
      */
-    public double[] filter(double[] signal);
+    double[] filter(double[] signal);
 }

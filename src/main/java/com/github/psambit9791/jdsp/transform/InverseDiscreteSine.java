@@ -80,11 +80,11 @@ public class InverseDiscreteSine implements _InverseSineCosine {
     }
 
     /**
-     * This function performs the inverse discrete sine transform on the input signal. Original transform type is set to 2.
+     * This function performs the inverse discrete sine transform on the input signal. Original transform type is set to 1.
      * @throws java.lang.IllegalArgumentException If type is not between 1 and 4
      */
     public void transform() {
-        int type = this.inferType(2);
+        int type = this.inferType(1);
         DiscreteSine dst;
         if (this.norm == Normalization.STANDARD) {
             dst = new DiscreteSine(this.signal, _SineCosine.Normalization.STANDARD);
@@ -110,7 +110,7 @@ public class InverseDiscreteSine implements _InverseSineCosine {
     }
 
     /**
-     * Gets the length of the input signal.
+     * Returns the length of the input signal.
      *
      * @return int The updated length of the input signal.
      */

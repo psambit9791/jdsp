@@ -104,7 +104,7 @@ public class InverseFastCosine implements _InverseSineCosine {
     }
 
     /**
-     * Gets the length of the input signal after preprocessing for InverseFastSine (padded to nearest power of 2).
+     * Returns the length of the input signal after preprocessing for InverseFastSine (padded to nearest power of 2).
      *
      * @return int The updated length of the input signal.
      */

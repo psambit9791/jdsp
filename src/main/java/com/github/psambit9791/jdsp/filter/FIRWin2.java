@@ -144,6 +144,10 @@ public class FIRWin2 extends _FIRFilter {
         }
     }
 
+    /**
+     * Returns the filter type determined from numTaps
+     * @return int the filter type
+     */
     public int getFilterType() {
         return this.ftype;
     }

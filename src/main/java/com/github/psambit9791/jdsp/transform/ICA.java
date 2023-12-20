@@ -131,6 +131,7 @@ public class ICA {
      * @param func The functional form of the G function used in the approximation to neg-entropy. Can be "logcosh", "exp" or "cube".
      * @param whiten Specifies the whitening strategy. Can be one of "unit-variance", "arbitrary-variance" or empty string.
      * @param max_iter Maximum number of iterations during fit.
+     * @param tol A positive scalar giving the tolerance at which the un-mixing matrix is considered to have converged. Defaults to 1E-4.
      * @param alpha G Function argument - only used in case of logcosh.
      * @param random_state Random seed to initialise w_init.
      */
@@ -278,11 +279,12 @@ public class ICA {
     /**
      * This constructor initialises the prerequisites required to use ICA.
      * @param signal Multi-dimensional signal to be transformed. Dimension 1: Samples, Dimension 2: Channels
+     * @param random_state Random seed to initialise w_init.
      */
-    public ICA(double[][] signal, long seed) {
+    public ICA(double[][] signal, long random_state) {
         this.signal = signal;
         this.components = this.signal[0].length;
-        this.seed = seed;
+        this.seed = random_state;
         Random r1 = new Random(this.seed);
         this.w_init = r1.randomNormal2D(new int[] {this.components, this.components});
     }

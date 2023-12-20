@@ -31,6 +31,12 @@ import java.util.*;
  * @author  Sambit Paul
  */
 
+/**
+ * A collection of utilities
+ *
+ * @author Sambit Paul
+ * @version 1.0
+ */
 public class UtilMethods {
 
     /**

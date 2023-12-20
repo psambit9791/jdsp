@@ -80,9 +80,9 @@ public class InverseDiscreteFourier implements _InverseFourier {
     }
 
     /**
-     * This method returns the complex value of the generated signal as a Complex array.
+     * This method returns the complex value of the IDFT result as a Complex array.
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
-     * @return Complex[] The signal (complex)
+     * @return Complex[] The generated signal (complex)
      */
     public Complex[] getComplex() throws ExceptionInInitializerError {
         checkOutput();
@@ -90,9 +90,9 @@ public class InverseDiscreteFourier implements _InverseFourier {
     }
 
     /**
-     * This method returns the complex value of the generated signal as a 2D matrix.
+     * This method returns the complex value of the IDFT result as a 2D matrix.
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
-     * @return double[][] The signal (complex)
+     * @return double[][] The generated signal (complex)
      */
     public double[][] getComplex2D() throws ExceptionInInitializerError {
         checkOutput();
@@ -105,7 +105,7 @@ public class InverseDiscreteFourier implements _InverseFourier {
     }
 
     /**
-     * This method returns the real part of the generated signal.
+     * This method returns the real part of the IDFT result.
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The signal (real part)
      */
@@ -119,7 +119,7 @@ public class InverseDiscreteFourier implements _InverseFourier {
     }
 
     /**
-     * This method returns the imaginary part of the generated signal.
+     * This method returns the imaginary part of the IDFT result.
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The signal (imaginary part)
      */
@@ -147,9 +147,9 @@ public class InverseDiscreteFourier implements _InverseFourier {
     }
 
     /**
-     * This method returns the phase value of the IDFT result.
+     * This method returns the phase value (in radians) of the IDFT result.
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
-     * @return double[] phase of the signal
+     * @return double[] phase of the signal (in radians)
      */
     public double[] getPhase() throws ExceptionInInitializerError {
         checkOutput();
