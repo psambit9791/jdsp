@@ -55,6 +55,26 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 
 <br/>
 
+## Citation
+
+If you are using this software in your research, please use the following citation:
+
+```
+@software{sambit_paul_2023_7675362,
+  author       = {Sambit Paul and
+                  Sibo Van Gool},
+  title        = {psambit9791/jdsp: v2.0.1 (February 24, 2023)},
+  month        = feb,
+  year         = 2023,
+  publisher    = {Zenodo},
+  version      = {v2.0.1},
+  doi          = {10.5281/zenodo.7675362},
+  url          = {https://doi.org/10.5281/zenodo.7675362}
+}
+```
+
+<br/>
+
 ## Usage
 
 | **Class** 		                                                                                                                                                                                               | **Type**		                                                                                                                                      | **Description**	                                                                                                        |
@@ -142,23 +162,6 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/misc/Random.html">com.github.psambit9791.jdsp.misc.Random</a>                                               | <a href="https://github.com/psambit9791/jdsp/wiki/Random"><strong>Miscellaneous</strong></a>                                                    | Provides methods to create random numbers as samples or multi-dimensional arrays                                        |
 <br/>
 
-## Citation
-
-If you are using this software in your research, please use the following citation:
-
-```
-@software{sambit_paul_2023_7675362,
-  author       = {Sambit Paul and
-                  Sibo Van Gool},
-  title        = {psambit9791/jdsp: v2.0.1 (February 24, 2023)},
-  month        = feb,
-  year         = 2023,
-  publisher    = {Zenodo},
-  version      = {v2.0.1},
-  doi          = {10.5281/zenodo.7675362},
-  url          = {https://doi.org/10.5281/zenodo.7675362}
-}
-```
 ## Supporting JDSP
 
 JDSP is an open source project. <br/> You can help by becoming a sponsor on <a href="https://patreon.com/sambitpaul">Patreon</a> or doing a one time donation on <a href="https://paypal.me/psambit9791">PayPal</a>. <br />
