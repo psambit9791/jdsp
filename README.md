@@ -22,7 +22,7 @@ To get the latest stable release of JDSP:
 
 ### Gradle
 ```
-implementation 'com.github.psambit9791:jdsp:2.0.1'
+implementation 'com.github.psambit9791:jdsp:3.0.0'
 ```
 
 ### Maven
@@ -30,7 +30,7 @@ implementation 'com.github.psambit9791:jdsp:2.0.1'
 <dependency>
   <groupId>com.github.psambit9791</groupId>
   <artifactId>jdsp</artifactId>
-  <version>2.0.1</version>
+  <version>3.0.0</version>
 </dependency>
 ```
 
@@ -60,16 +60,15 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 If you are using this software in your research, please use the following citation:
 
 ```
-@software{sambit_paul_2023_7675362,
-  author       = {Sambit Paul and
-                  Sibo Van Gool},
-  title        = {psambit9791/jdsp: v2.0.1 (February 24, 2023)},
-  month        = feb,
-  year         = 2023,
+@software{sambit_paul_2024_10448582,
+  author       = {Sambit Paul},
+  title        = {psambit9791/jdsp: v3.0.0 (January 1, 2024)},
+  month        = jan,
+  year         = 2024,
   publisher    = {Zenodo},
-  version      = {v2.0.1},
-  doi          = {10.5281/zenodo.7675362},
-  url          = {https://doi.org/10.5281/zenodo.7675362}
+  version      = {v3.0.0},
+  doi          = {10.5281/zenodo.10448582},
+  url          = {https://doi.org/10.5281/zenodo.10448582}
 }
 ```
 
