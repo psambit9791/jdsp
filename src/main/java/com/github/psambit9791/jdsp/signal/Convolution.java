@@ -11,7 +11,17 @@
 package com.github.psambit9791.jdsp.signal;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
+import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.transform.DftNormalization;
+import org.apache.commons.math3.transform.FastFourierTransformer;
+import org.apache.commons.math3.transform.TransformType;
 import org.apache.commons.math3.util.MathArrays;
+
+import java.util.Arrays;
+
+import static com.github.psambit9791.jdsp.misc.UtilMethods.nextPowerOfTwo;
+import static com.github.psambit9791.jdsp.transform.FastFourier.fft;
+import static com.github.psambit9791.jdsp.transform.FastFourier.ifft;
 
 /**
  * <h2>Convolution</h2>
@@ -81,6 +91,66 @@ public class Convolution {
             throw new IllegalArgumentException("convolve modes can only be full, same or valid");
         }
         return this.output;
+    }
+
+    /**
+     * Performs fast convolution of the signal and kernel using the FFT method with the default mode 'full'.
+     *
+     * @return double[] Result of convolution.
+     */
+    public double[] fastConvolve() {
+        return fastConvolve("full");
+    }
+
+    /**
+     * Performs fast convolution of the signal and kernel using the FFT method in the specified mode.
+     *
+     * @param mode Mode in which convolution will work. Can be 'full', 'same' or 'valid'.
+     * @throws IllegalArgumentException if mode is not 'full', 'same', or 'valid'.
+     * @return double[] Result of convolution.
+     */
+    public double[] fastConvolve(String mode) {
+        int maxLength = Math.max(this.signal.length, this.kernel.length);
+        int newSize = (int) nextPowerOfTwo(2 * maxLength - 1);
+
+        // Pad signals to the new size
+        double[] xPadded = new double[newSize];
+        double[] yPadded = new double[newSize];
+        System.arraycopy(this.signal, 0, xPadded, 0, this.signal.length);
+        System.arraycopy(this.kernel, 0, yPadded, 0, this.kernel.length);
+
+        Complex[] fftX = fft(xPadded);
+        Complex[] fftY = fft(yPadded);
+
+        Complex[] convolutionBuffer = new Complex[newSize];
+        for (int i = 0; i < newSize; i++) {
+            convolutionBuffer[i] = fftX[i].multiply(fftY[i]);
+        }
+
+        // Extract the relevant part of the convolution
+        convolutionBuffer = ifft(convolutionBuffer);
+        int convolutionLength = this.signal.length + this.kernel.length - 1;
+        Complex[] convolution = new Complex[convolutionLength];
+        System.arraycopy(convolutionBuffer, 0, convolution, 0, convolutionLength);
+
+        double[] result = Arrays.stream(convolution)
+                .map(Complex::getReal)
+                .mapToDouble(Double::doubleValue).toArray();
+
+        // Adjust result based on the mode
+        double[] output;
+        if ("full".equalsIgnoreCase(mode)) {
+            output = result;
+        } else if ("same".equalsIgnoreCase(mode)) {
+            int start = Math.abs(result.length - this.signal.length) / 2;
+            output = Arrays.copyOfRange(result, start, start + this.signal.length);
+        } else if ("valid".equalsIgnoreCase(mode)) {
+            output = Arrays.copyOfRange(result, this.kernel.length - 1, this.signal.length);
+        } else {
+            throw new IllegalArgumentException("Convolve modes can only be 'full', 'same' or 'valid'.");
+        }
+
+        return output;
     }
 
     private double[] convolve(double[] sig, double[] w) {

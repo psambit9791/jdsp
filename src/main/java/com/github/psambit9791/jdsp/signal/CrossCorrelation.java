@@ -78,4 +78,26 @@ public class CrossCorrelation {
         this.output = c1.convolve(mode);
         return this.output;
     }
+
+    /**
+     * Performs fast cross-correlation of the signal and kernel using the FFT method with the default mode 'full'.
+     *
+     * @return double[] Result of cross-correlation.
+     */
+    public double[] fastCrossCorrelate() {
+        return fastCrossCorrelate("full");
+    }
+
+    /**
+     * Performs fast cross-correlation of the signal and kernel using the FFT method in the specified mode.
+     *
+     * @param mode Mode in which cross-correlation will work. Can be 'full', 'same' or 'valid'.
+     * @return double[] Result of cross-correlation.
+     */
+    public double[] fastCrossCorrelate(String mode) {
+        this.kernel = UtilMethods.reverse(this.kernel);
+        Convolution c1 = new Convolution(this.signal, this.kernel);
+        this.output = c1.fastConvolve(mode);
+        return this.output;
+    }
 }
