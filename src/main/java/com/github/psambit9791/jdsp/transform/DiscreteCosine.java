@@ -1,23 +1,21 @@
 /*
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
- *  * Copyright (c) 2023 Sambit Paul
- *  *
- *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *  *
- *  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *  *
- *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.github.psambit9791.jdsp.transform;
 
 /**
- * <h1>Discrete Cosine Transform</h1>
+ * <h2>Discrete Cosine Transform</h2>
  * The Discrete Cosine class decomposes a finite sequence of data points in terms of a sum of cosine functions of different frequencies.
  * Of the 8 types of DCT, this class incorporates Types 1 to 4.
  * For details about DCT Types, refer to this <a href="https://en.wikipedia.org/wiki/Discrete_cosine_transform#Formal_definition">article</a>
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0
@@ -178,14 +176,14 @@ public class DiscreteCosine implements _SineCosine {
     }
 
     /**
-     * This function performs the discrete cosine transform (type 2) on the input signal.
+     * This function performs the discrete cosine transform (type 1) on the input signal.
      */
     public void transform() {
-        this.output = this.type2();
+        this.output = this.type1();
     }
 
     /**
-     * Gets the length of the input signal.
+     * Returns the length of the input signal.
      *
      * @return int The updated length of the input signal.
      */
@@ -199,7 +197,7 @@ public class DiscreteCosine implements _SineCosine {
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The transformed signal.
      */
-    public double[] getMagnitude() throws ExceptionInInitializerError {
+    public double[] getOutput() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute transform() function before returning result");
         }

@@ -1,13 +1,11 @@
 /*
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
- *  * Copyright (c) 2023 Sambit Paul
- *  *
- *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *  *
- *  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *  *
- *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.github.psambit9791.jdsp.transform;
@@ -19,13 +17,13 @@ import org.apache.commons.math3.transform.FastFourierTransformer;
 import org.apache.commons.math3.transform.TransformType;
 
 /**
- * <h1>Inverse Fast Fourier Transform</h1>
+ * <h2>Inverse Fast Fourier Transform</h2>
  * The InverseFastFourier class applies the inverse fast fourier transform on the input sequence (real/complex) and
  * provides different representations of the reconstructed signal to be returned (real signal, complex signal, ...).
  * This should be used for signals transformed using FastFourier.
  * This can be considered a wrapper on top of the Apache Math3 FastFourierTransformer [INVERSE] which pre-processes the signal before
  * the operation.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.1
@@ -115,7 +113,7 @@ public class InverseFastFourier implements _InverseFourier {
     /**
      * This method returns the complex value of the generated signal as a Complex array.
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
-     * @return Complex[] The signal (complex)
+     * @return Complex[] The generated signal (complex)
      */
     public Complex[] getComplex() throws ExceptionInInitializerError {
         this.checkOutput();
@@ -125,7 +123,7 @@ public class InverseFastFourier implements _InverseFourier {
     /**
      * This method returns the complex value of the generated signal as a 2D matrix.
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
-     * @return double[][] The signal (complex)
+     * @return double[][] The generated signal (complex as 2D array)
      */
     public double[][] getComplex2D() throws ExceptionInInitializerError {
         checkOutput();

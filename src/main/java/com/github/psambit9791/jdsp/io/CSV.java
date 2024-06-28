@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -16,11 +16,11 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * <h1>Read and Write CSV Files</h1>
+ * <h2>Read and Write CSV Files</h2>
  * This class provides methods; to read the content of CSV files into a HashMap; and to write a HashMap into a CSV file.
  * The HashMap keys are the column names (auto-filled if no column name specified) and the ArrayList is the contents of
  * the column
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

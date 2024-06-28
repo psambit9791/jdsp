@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -11,10 +11,10 @@
 package com.github.psambit9791.jdsp.filter;
 
 /**
- * <h1>Infinite Impulse Response Filter Interface</h1>
+ * <h2>Infinite Impulse Response Filter Interface</h2>
  * The IIR Filter interface is implemented by all frequency-based filter classes - Bessel, Butterworth and Chebyshev.
  * The user of this interface has control over implementing the low pass, high pass, band pass and band stop filter for a specific filter class.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 2.0
@@ -28,7 +28,7 @@ public interface _IIRFilter {
      * @param cutoffFreq The cutoff frequency for the filter
      * @return double[] Filtered signal
      */
-    public double[] lowPassFilter(double[] signal, int order, double cutoffFreq);
+    double[] lowPassFilter(double[] signal, int order, double cutoffFreq);
 
     /**
      * This method implements a high pass filter with given parameters, filters the signal and returns it.
@@ -37,7 +37,7 @@ public interface _IIRFilter {
      * @param cutoffFreq The cutoff frequency for the filter
      * @return double[] Filtered signal
      */
-    public double[] highPassFilter(double[] signal, int order, double cutoffFreq);
+    double[] highPassFilter(double[] signal, int order, double cutoffFreq);
 
     /**
      * This method implements a band pass filter with given parameters, filters the signal and returns it.
@@ -47,7 +47,7 @@ public interface _IIRFilter {
      * @param highCutoff The upper cutoff frequency for the filter
      * @return double[] Filtered signal
      */
-    public double[] bandPassFilter(double[] signal, int order, double lowCutoff, double highCutoff);
+    double[] bandPassFilter(double[] signal, int order, double lowCutoff, double highCutoff);
 
     /**
      * This method implements a band stop filter with given parameters, filters the signal and returns it.
@@ -57,6 +57,6 @@ public interface _IIRFilter {
      * @param highCutoff The upper cutoff frequency for the filter
      * @return double[] Filtered signal
      */
-    public double[] bandStopFilter(double[] signal, int order, double lowCutoff, double highCutoff);
+    double[] bandStopFilter(double[] signal, int order, double lowCutoff, double highCutoff);
 
 }

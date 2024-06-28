@@ -1,13 +1,11 @@
 /*
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
- *  * Copyright (c) 2023 Sambit Paul
- *  *
- *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *  *
- *  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *  *
- *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.github.psambit9791.jdsp.misc;
@@ -19,10 +17,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * <h1>Polynomial Module</h1>
+ * <h2>Polynomial Module</h2>
  * The Polynomial class is used to compute coefficients from an array of X and Y coordinates using a least squares polynomial fit.
  * It also allows computation of the derivatives of the polynomial coefficients and evaluation of the polynomial at specific values.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0
@@ -99,6 +97,57 @@ public class Polynomial {
                 der[j] = p_holder[j] * (p_holder.length-j-1);
             }
             p_holder = der;
+        }
+        return p_holder;
+    }
+
+    /**
+     * Returns the anti-derivative of the specified order of a polynomial. Constants are set to 0.
+     * @param p Polynomial Coefficients with the highest power first
+     * @param m Order of anti-derivative
+     * @return double[] Derivative of the polynomial coefficients
+     */
+    public static double[] polyint(double[] p, int m) {
+        if (m > p.length || m < 0) {
+            throw new IllegalArgumentException("m should be greater than 0 and less than number of polynomial coefficients");
+        }
+        double[] p_holder = p;
+        double[] integral;
+        for (int i=0; i<m; i++) {
+            integral = new double[p_holder.length+1];
+            for (int j=0; j<p_holder.length; j++) {
+                integral[j] = p_holder[j] / (p_holder.length-j);
+            }
+            integral[integral.length - 1] = 0;
+            p_holder = integral;
+        }
+        return p_holder;
+    }
+
+    /**
+     * Returns the anti-derivative of the specified order of a polynomial. Constants are set to 0.
+     * @param p Polynomial Coefficients with the highest power first
+     * @param m Order of anti-derivative
+     * @param constants Integration constants; those corresponding to highest-order terms come first
+     * @return double[] Derivative of the polynomial coefficients
+     */
+    public static double[] polyint(double[] p, int m, double[] constants) {
+        if (m > p.length || m < 0) {
+            throw new IllegalArgumentException("m should be greater than 0 and less than number of polynomial coefficients");
+        }
+        if (constants.length < m) {
+            throw new IllegalArgumentException("Number of integration constants should be at least equal to the degree of anti-derivative");
+        }
+
+        double[] p_holder = p;
+        double[] integral;
+        for (int i=0; i<m; i++) {
+            integral = new double[p_holder.length+1];
+            for (int j=0; j<p_holder.length; j++) {
+                integral[j] = p_holder[j] / (p_holder.length-j);
+            }
+            integral[integral.length - 1] = constants[i];
+            p_holder = integral;
         }
         return p_holder;
     }

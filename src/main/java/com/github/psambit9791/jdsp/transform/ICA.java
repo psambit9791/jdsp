@@ -1,13 +1,11 @@
 /*
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
- *  * Copyright (c) 2023 Sambit Paul
- *  *
- *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *  *
- *  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *  *
- *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.github.psambit9791.jdsp.transform;
@@ -23,11 +21,11 @@ import org.apache.commons.math3.util.MathArrays;
 import java.util.Arrays;
 
 /**
- * <h1>Independent Component Analysis (ICA)</h1>
+ * <h2>Independent Component Analysis (ICA)</h2>
  * The ICA class is used to estimate source given noisy measurements.
  * For a NxM input signal which is a linear mixture N signals calculated on N sources, ICA can be used to estimate the original N signals from the input signal.
  * The unmixing signal thus generated, can then be used to estimate any signal captured from the N sources.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0
@@ -133,6 +131,7 @@ public class ICA {
      * @param func The functional form of the G function used in the approximation to neg-entropy. Can be "logcosh", "exp" or "cube".
      * @param whiten Specifies the whitening strategy. Can be one of "unit-variance", "arbitrary-variance" or empty string.
      * @param max_iter Maximum number of iterations during fit.
+     * @param tol A positive scalar giving the tolerance at which the un-mixing matrix is considered to have converged. Defaults to 1E-4.
      * @param alpha G Function argument - only used in case of logcosh.
      * @param random_state Random seed to initialise w_init.
      */
@@ -280,11 +279,12 @@ public class ICA {
     /**
      * This constructor initialises the prerequisites required to use ICA.
      * @param signal Multi-dimensional signal to be transformed. Dimension 1: Samples, Dimension 2: Channels
+     * @param random_state Random seed to initialise w_init.
      */
-    public ICA(double[][] signal, long seed) {
+    public ICA(double[][] signal, long random_state) {
         this.signal = signal;
         this.components = this.signal[0].length;
-        this.seed = seed;
+        this.seed = random_state;
         Random r1 = new Random(this.seed);
         this.w_init = r1.randomNormal2D(new int[] {this.components, this.components});
     }

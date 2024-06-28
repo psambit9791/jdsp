@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -17,11 +17,11 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 /**
- * <h1>FindPeak</h1>
+ * <h2>FindPeak</h2>
  * Detect peaks and extremas (minimas and maximas) in a signal.
  * Reference <a href="https://docs.scipy.org/doc/scipy/reference/signal.html#peak-finding">Scipy Docs on Peak Detection</a> for few of the functionalities provided here.
  * This class provides functions regarding spikes and also allows filtering by those properties.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.1

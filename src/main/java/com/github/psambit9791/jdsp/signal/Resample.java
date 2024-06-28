@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -23,7 +23,7 @@ import org.apache.commons.math3.util.MathArrays;
 import java.util.Arrays;
 
 /**
- * <h1>Resample</h1>
+ * <h2>Resample</h2>
  * The Resample class samples the signal again with a new number of samples. Resampling works in two modes - using the
  * Fourier transform and the Polyphase filtering.
  * For the Fourier transform method; the new spacing equals the number of previous samples divided by the new number of samples
@@ -31,7 +31,7 @@ import java.util.Arrays;
  * For the Polyphase filtering method; the signal is upsampled by 'up' factor, filtered using a zero-phase low-pass FIR filter
  * (FIRWin1), and downsampled by 'down' factor.
  * Resampling works only for real signals.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.1

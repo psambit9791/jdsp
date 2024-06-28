@@ -1,22 +1,20 @@
 /*
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
- *  * Copyright (c) 2023 Sambit Paul
- *  *
- *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *  *
- *  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *  *
- *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.github.psambit9791.jdsp.transform;
 
 /**
- * <h1>Inverse Discrete Cosine Transform</h1>
+ * <h2>Inverse Discrete Cosine Transform</h2>
  * The InverseDiscreteCosine class applies the inverse cosine transform on the input sequence and returns the output signal.
  * This should be used for signals transformed using DiscreteCosine with the specific transform type.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0
@@ -78,15 +76,15 @@ public class InverseDiscreteCosine implements _InverseSineCosine {
             dct = new DiscreteCosine(this.signal, _SineCosine.Normalization.ORTHOGONAL);
         }
         dct.transform(type);
-        this.output = dct.getMagnitude();
+        this.output = dct.getOutput();
     }
 
     /**
-     * This function performs the inverse discrete cosine transform on the input signal. Original transform type is set to 2.
+     * This function performs the inverse discrete cosine transform on the input signal. Original transform type is set to 1.
      * @throws java.lang.IllegalArgumentException If type is not between 1 and 4
      */
     public void transform() {
-        int type = this.inferType(2);
+        int type = this.inferType(1);
         DiscreteCosine dct;
         if (this.norm == Normalization.STANDARD) {
             dct = new DiscreteCosine(this.signal, _SineCosine.Normalization.STANDARD);
@@ -95,7 +93,7 @@ public class InverseDiscreteCosine implements _InverseSineCosine {
             dct = new DiscreteCosine(this.signal, _SineCosine.Normalization.ORTHOGONAL);
         }
         dct.transform(type);
-        this.output = dct.getMagnitude();
+        this.output = dct.getOutput();
     }
 
     /**
@@ -104,7 +102,7 @@ public class InverseDiscreteCosine implements _InverseSineCosine {
      * @throws java.lang.ExceptionInInitializerError if called before executing transform() method
      * @return double[] The transformed signal.
      */
-    public double[] getMagnitude() throws ExceptionInInitializerError {
+    public double[] getOutput() throws ExceptionInInitializerError {
         if (this.output == null) {
             throw new ExceptionInInitializerError("Execute transform() function before returning result");
         }
@@ -112,7 +110,7 @@ public class InverseDiscreteCosine implements _InverseSineCosine {
     }
 
     /**
-     * Gets the length of the input signal.
+     * Returns the length of the input signal.
      *
      * @return int The updated length of the input signal.
      */

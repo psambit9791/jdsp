@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -19,9 +19,9 @@ import org.knowm.xchart.style.markers.SeriesMarkers;
 import java.io.IOException;
 
 /**
- * <h1>Line Plot</h1>
- * The LinePlot class provides method to plot curves on a chart and then either display it or save it as a .png file
- * <p>
+ * <h2>Plotting</h2>
+ * The Plotting class provides method to plot curves on a chart and then either display it or save it as a .png file
+ *
  *
  * @author  Sambit Paul
  * @version 1.1

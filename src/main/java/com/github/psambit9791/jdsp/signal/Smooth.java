@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -16,11 +16,11 @@ import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.MathArrays;
 
 /**
- * <h1>Smooth</h1>
+ * <h2>Smooth</h2>
  * The Smooth class implements moving average method of smoothing.
  * Reference <a href="http://www.reproducibility.org/RSF/book/gee/ajt/paper_html/node15.html">article</a> for more information on smoothing.
  * The triangular smooth is like the rectangular smooth except that it implements a weighted smoothing function.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.1

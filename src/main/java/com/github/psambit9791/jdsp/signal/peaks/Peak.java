@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -15,10 +15,10 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import java.util.*;
 
 /**
- * <h1>PeakObject</h1>
+ * <h2>Peak Class</h2>
  * Calculates Peak Properties and allows filtering based on the properties.
  * This is used by the FindPeak class in the detect() method.
- * <p>
+ *  
  *
  * @author  Sambit Paul and Alfredo Zamora
  * @version 1.2
@@ -39,9 +39,21 @@ public class Peak {
 
     private double relative_height;
 
-    public Peak(double[] s, int[] m, int[] l, int[] r, String mode) {
+    /**
+     * This constructor initialises the prerequisites required to use Peak class. relative_height is set to 0.5 by default.
+     * @param signal The signal to be processed
+     * @param m List of midpoints
+     * @param l List of left edges
+     * @param r List of right edges
+     * @param mode mode can be one of 'peak' or 'trough'
+     * @throws java.lang.IllegalArgumentException if mode is not peak or trough
+     */
+    public Peak(double[] signal, int[] m, int[] l, int[] r, String mode) throws IllegalArgumentException {
+        if (!mode.equals("peak") && !mode.equals("trough")) {
+            throw new IllegalArgumentException("mode must be peak or trough");
+        }
 
-        this.signal = s;
+        this.signal = signal;
 
         // Peak Information
         this.midpoints = m;
@@ -54,10 +66,10 @@ public class Peak {
 
         for (int i=0; i<m.length; i++) {
             if (mode.equals("peak")) {
-                this.height[i] = s[this.midpoints[i]];
+                this.height[i] = signal[this.midpoints[i]];
             }
-            else if (mode.equals("trough")) {
-                this.height[i] = 0 - s[this.midpoints[i]];
+            else {
+                this.height[i] = 0 - signal[this.midpoints[i]];
             }
             this.plateau_size[i] = Math.abs(r[i] - l[i] + 1);
         }
@@ -81,9 +93,26 @@ public class Peak {
         this.width = widthData[0];
     }
 
-    public Peak(double[] s, int[] m, int[] l, int[] r, double rel_height, String mode) {
+    /**
+     * This constructor initialises the prerequisites required to use Peak class.
+     * @param signal The signal to be processed
+     * @param m List of midpoints
+     * @param l List of left edges
+     * @param r List of right edges
+     * @param rel_height relative height at which the peak width is measured as a percentage of its prominence.
+     * @param mode mode can be one of 'peak' or 'trough'
+     * @throws java.lang.IllegalArgumentException if mode is not peak or trough
+     * @throws java.lang.IllegalArgumentException if rel_height is not between 0.0 and 1.0
+     */
+    public Peak(double[] signal, int[] m, int[] l, int[] r, double rel_height, String mode) throws IllegalArgumentException {
+        if (!mode.equals("peak") && !mode.equals("trough")) {
+            throw new IllegalArgumentException("mode must be peak or trough");
+        }
+        if ((rel_height < 0) || (rel_height>1)) {
+            throw new IllegalArgumentException("rel_height should be between 0.0 and 1.0");
+        }
 
-        this.signal = s;
+        this.signal = signal;
 
         // Peak Information
         this.midpoints = m;
@@ -96,10 +125,10 @@ public class Peak {
 
         for (int i=0; i<m.length; i++) {
             if (mode.equals("peak")) {
-                this.height[i] = s[this.midpoints[i]];
+                this.height[i] = signal[this.midpoints[i]];
             }
             else if (mode.equals("trough")) {
-                this.height[i] = 0 - s[this.midpoints[i]];
+                this.height[i] = 0 - signal[this.midpoints[i]];
             }
             this.plateau_size[i] = Math.abs(r[i] - l[i] + 1);
         }
@@ -118,7 +147,7 @@ public class Peak {
 
         // Peak Width Information (Equivalent to scipy.signal.find_peaks() width parameter)
         // Refer to https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.peak_widths.html
-        this.relative_height = 0.5;
+        this.relative_height = rel_height;
         this.widthData = this.findPeakWidth(this.midpoints, this.relative_height);
         this.width = widthData[0];
     }

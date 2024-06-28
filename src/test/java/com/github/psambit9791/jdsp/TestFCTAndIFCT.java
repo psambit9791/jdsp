@@ -1,21 +1,17 @@
 /*
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
- *  * Copyright (c) 2020 Sambit Paul
- *  *
- *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *  *
- *  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *  *
- *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.github.psambit9791.jdsp;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
-import com.github.psambit9791.jdsp.transform.FastCosine;
-import com.github.psambit9791.jdsp.transform.InverseFastCosine;
-import com.github.psambit9791.jdsp.transform._SineCosine;
+import com.github.psambit9791.jdsp.transform.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -53,39 +49,52 @@ public class TestFCTAndIFCT {
     public void testFCTWithIFCT1() {
         FastCosine f1 = new FastCosine(this.signal1);
         f1.transform();
-        double[] out = f1.getMagnitude();
+        double[] out = f1.getOutput();
 
         InverseFastCosine f2 = new InverseFastCosine(out);
         f2.transform();
-        double[] reconstructed = f2.getMagnitude();
+        double[] reconstructed = f2.getOutput();
 
         Assertions.assertArrayEquals(this.extendSignal(this.signal1), reconstructed, 0.001);
 
     }
 
     @Test
-    public void testFCTWithIFCT1_withNorm() {
+    public void testFCTWithIFCT1_withStandardNorm() {
         FastCosine f1 = new FastCosine(this.signal1, FastCosine.Normalization.STANDARD);
         f1.transform();
-        double[] out = f1.getMagnitude();
+        double[] out = f1.getOutput();
 
         InverseFastCosine f2 = new InverseFastCosine(out, InverseFastCosine.Normalization.STANDARD);
         f2.transform();
-        double[] reconstructed = f2.getMagnitude();
+        double[] reconstructed = f2.getOutput();
 
         Assertions.assertArrayEquals(this.extendSignal(this.signal1), reconstructed, 0.001);
 
     }
 
     @Test
+    public void testFCTWithIFCT1_withOrthoNorm() {
+        FastCosine f1 = new FastCosine(this.signal1, FastCosine.Normalization.ORTHOGONAL);
+        f1.transform();
+        double[] out = f1.getOutput();
+
+        InverseFastCosine f2 = new InverseFastCosine(out, InverseFastCosine.Normalization.ORTHOGONAL);
+        f2.transform();
+        double[] reconstructed = f2.getOutput();
+
+        Assertions.assertArrayEquals(this.extendSignal(this.signal1), reconstructed, 0.001);
+
+    }
+    @Test
     public void testFCTWithIFCT2() {
         FastCosine f1 = new FastCosine(this.signal2);
-        f1.transform();
-        double[] out = f1.getMagnitude();
+        f1.transform(1);
+        double[] out = f1.getOutput();
 
         InverseFastCosine f2 = new InverseFastCosine(out);
-        f2.transform();
-        double[] reconstructed = f2.getMagnitude();
+        f2.transform(1);
+        double[] reconstructed = f2.getOutput();
 
         Assertions.assertArrayEquals(this.extendSignal(this.signal2), reconstructed, 0.001);
     }

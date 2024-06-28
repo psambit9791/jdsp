@@ -22,7 +22,7 @@ To get the latest stable release of JDSP:
 
 ### Gradle
 ```
-implementation 'com.github.psambit9791:jdsp:2.0.1'
+implementation 'com.github.psambit9791:jdsp:3.0.0'
 ```
 
 ### Maven
@@ -30,7 +30,7 @@ implementation 'com.github.psambit9791:jdsp:2.0.1'
 <dependency>
   <groupId>com.github.psambit9791</groupId>
   <artifactId>jdsp</artifactId>
-  <version>2.0.1</version>
+  <version>3.0.0</version>
 </dependency>
 ```
 
@@ -52,6 +52,25 @@ You can use **JitPack** to use the development version on your application; use 
 See the [**Wiki**](https://github.com/psambit9791/jdsp/wiki) for an introduction to the general use of JDSP.
 
 See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for more detailed documentation.
+
+<br/>
+
+## Citation
+
+If you are using this software in your research, please use the following citation:
+
+```
+@software{sambit_paul_2024_10448582,
+  author       = {Sambit Paul},
+  title        = {psambit9791/jdsp: v3.0.0 (January 1, 2024)},
+  month        = jan,
+  year         = 2024,
+  publisher    = {Zenodo},
+  version      = {v3.0.0},
+  doi          = {10.5281/zenodo.10448582},
+  url          = {https://doi.org/10.5281/zenodo.10448582}
+}
+```
 
 <br/>
 
@@ -142,23 +161,6 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 | <a href="https://javadoc.io/doc/com.github.psambit9791/jdsp/latest/com/github/psambit9791/jdsp/misc/Random.html">com.github.psambit9791.jdsp.misc.Random</a>                                               | <a href="https://github.com/psambit9791/jdsp/wiki/Random"><strong>Miscellaneous</strong></a>                                                    | Provides methods to create random numbers as samples or multi-dimensional arrays                                        |
 <br/>
 
-## Citation
-
-If you are using this software in your research, please use the following citation:
-
-```
-@software{sambit_paul_2023_7675362,
-  author       = {Sambit Paul and
-                  Sibo Van Gool},
-  title        = {psambit9791/jdsp: v2.0.1 (February 24, 2023)},
-  month        = feb,
-  year         = 2023,
-  publisher    = {Zenodo},
-  version      = {v2.0.1},
-  doi          = {10.5281/zenodo.7675362},
-  url          = {https://doi.org/10.5281/zenodo.7675362}
-}
-```
 ## Supporting JDSP
 
 JDSP is an open source project. <br/> You can help by becoming a sponsor on <a href="https://patreon.com/sambitpaul">Patreon</a> or doing a one time donation on <a href="https://paypal.me/psambit9791">PayPal</a>. <br />
@@ -166,7 +168,7 @@ You can also show your appreciation on <a href="https://ko-fi.com/sambitpaul">Ko
 
 <a href="https://patreon.com/sambitpaul" target="_blank"><img src="https://github.com/psambit9791/jdsp/blob/master/res/button/patron-button.png" alt="Become a Patron" /> </a>
 &emsp;
-<a href="https://paypal.me/psambit9791" target="_blank"><img src="https://github.com/psambit9791/jdsp/blob/master/res/button/paypal-button.png" alt="Donate on Paypal" /> </a>
+<a href="https://paypal.me/psambit1412?country.x=GB&locale.x=en_GB" target="_blank"><img src="https://github.com/psambit9791/jdsp/blob/master/res/button/paypal-button.png" alt="Donate on Paypal" /> </a>
 &emsp;
 <a href="https://ko-fi.com/sambitpaul" target="_blank"><img src="https://github.com/psambit9791/jdsp/blob/master/res/button/kofi-button.png" alt="Support on Kofi" /> </a>
 

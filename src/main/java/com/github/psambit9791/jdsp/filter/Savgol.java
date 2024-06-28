@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -18,10 +18,10 @@ import org.apache.commons.math3.util.CombinatoricsUtils;
 import java.util.Arrays;
 
 /**
- * <h1>Savitzky–Golay Filter</h1>
+ * <h2>Savitzky–Golay Filter</h2>
  * The Savgol class implements the Savitzky–Golay filter in 5 modes of operation: 'nearest', 'constant', 'mirror', 'wrap' and 'interp'.
  * Reference <a href="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter">article</a> for more information on Savitzky–Golay Filters.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 3.0

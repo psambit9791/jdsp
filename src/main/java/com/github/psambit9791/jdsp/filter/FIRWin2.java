@@ -1,13 +1,11 @@
 /*
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
- *  * Copyright (c) 2023 Sambit Paul
- *  *
- *  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *  *
- *  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *  *
- *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.github.psambit9791.jdsp.filter;
@@ -24,7 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <h1>Finite Impulse Response Windowed Filter 1 Class</h1>
+ * <h2>Finite Impulse Response Windowed Filter 2 Class</h2>
  * The FIRWin2 Filter class is used to compute the coefficients of the linear phase FIR filter given the cutoff frequencies,
  * their corresponding gains and the number of filter coefficients.
  * This class extends to the abstract class _FIRFilter which also allows for computing the filter output for an input signal.
@@ -39,7 +37,7 @@ import java.util.Set;
  * - Type 2: 'numTaps' is even and 'antisymmetric' is false
  * - Type 3: 'numTaps' is odd and 'antisymmetric' is true
  * - Type 4: 'numTaps' is even and 'antisymmetric' is true
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0
@@ -146,6 +144,10 @@ public class FIRWin2 extends _FIRFilter {
         }
     }
 
+    /**
+     * Returns the filter type determined from numTaps
+     * @return int the filter type
+     */
     public int getFilterType() {
         return this.ftype;
     }

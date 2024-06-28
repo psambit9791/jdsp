@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Hashtable;
 
 /**
- * <h1>Read and Write WAV Files</h1>
+ * <h2>Read and Write WAV Files</h2>
  * This class provides methods; to read WAV files including their properties and their content as a 2-D matrix;
  * and to write 2-D matrices into WAV files. For all the matrices, the first dimension is considered the number of frames
  * and the second dimension is considered the number of channels.
@@ -29,7 +29,7 @@ import java.util.Hashtable;
  * channels and 16000 frames. At a sampling rate of 8kHz, this interprets to 2 seconds of stereo sound.
  *
  * This class is supported largely by the classes provided <a href="http://www.labbookpages.co.uk/audio/javaWavFiles.html">here</a>.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0
@@ -227,6 +227,12 @@ public class WAV {
         }
     }
 
+    /**
+     * Return data in provided datatype
+     * @param type Datatype provided. Must be one of int, long or double
+     * @return double[][] WAV data as a 2D array
+     * @throws java.lang.IllegalArgumentException if type is not one of int, long or double
+     */
     public double[][] getData(String type) throws IllegalArgumentException {
         if (type.equals("int")) {
             return this.dataInt;

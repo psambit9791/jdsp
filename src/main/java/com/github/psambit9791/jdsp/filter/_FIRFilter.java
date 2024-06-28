@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -14,9 +14,9 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import com.github.psambit9791.jdsp.signal.Convolution;
 
 /**
- * <h1>Finite Impulse Response Filter Class (Abstract)</h1>
+ * <h2>Finite Impulse Response Filter Class (Abstract)</h2>
  * The FIR Filter class is a super class for all FIR filters - firWin1, firWin2 and firLS.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.2

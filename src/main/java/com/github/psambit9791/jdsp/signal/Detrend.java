@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -14,11 +14,11 @@ import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 
 /**
- * <h1>Detrend</h1>
+ * <h2>Detrend</h2>
  * The Detrend class implements different methods to remove trends in a signal and is based on
  * numpy <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.convolve.html">detrend()</a> function
  * but extends to additionally provide polynomial detrending.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

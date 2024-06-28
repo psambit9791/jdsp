@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -18,12 +18,12 @@ import org.apache.commons.math3.util.MathArrays;
 import java.util.Arrays;
 
 /**
- * <h1>Generate Periodic Signal</h1>
+ * <h2>Generate Periodic Signal</h2>
  * The GeneratePeriodic class implements methods to generate various waves and wavelets based on different characteristic
  * properties.
  * Provides generate functions for the following waves: Sine, Cosine, Square, Gaussian Pulse, Unit Impulse, Sawtooth, Chirp
  * Provides generate functions for the following wavelets: Ricker, Morlet, Paul and Morlet-CWT
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.0

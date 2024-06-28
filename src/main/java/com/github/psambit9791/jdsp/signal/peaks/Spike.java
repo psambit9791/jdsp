@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -15,10 +15,10 @@ import com.github.psambit9791.jdsp.misc.UtilMethods;
 import java.util.*;
 
 /**
- * <h1>SpikeObject</h1>
+ * <h2>Spike Class</h2>
  * Calculates Spike Properties and allows filtering based on the properties.
  * This is used by the FindPeak class in the get_spike() method.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 1.1
@@ -34,6 +34,13 @@ public class Spike {
     private double[] max_spike;
     private double[] min_spike;
 
+    /**
+     * This constructor initialises the prerequisites required to use Peak class.
+     * @param signal The signal to be processed
+     * @param peaks The detected peaks
+     * @param left The troughs on the left (corresponding to the peak indices)
+     * @param right The troughs on the right (corresponding to the peak indices)
+     */
     public Spike(double[] signal, int[] peaks, int[] left, int[] right) {
         this.signal = signal;
         this.peaks = peaks;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Sambit Paul
+ * Copyright (c) 2019 - 2023  Sambit Paul
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
@@ -18,10 +18,10 @@ import org.apache.commons.math3.util.MathArrays;
 import java.util.Arrays;
 
 /**
- * <h1>Wiener Filter</h1>
+ * <h2>Wiener Filter</h2>
  * The Wiener class implements the Wiener filter which is usually used as a sharpening filter.
  * Reference <a href="http://www.owlnet.rice.edu/~elec539/Projects99/BACH/proj2/wiener.html">article</a> for more information on Wiener Filters.
- * <p>
+ *  
  *
  * @author  Sambit Paul
  * @version 2.0
