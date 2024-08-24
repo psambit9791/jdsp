@@ -26,6 +26,14 @@ public class TestPeakFilterPiping {
     }
 
     @Test
+    public void PeakFlatlineTest() {
+        double[] flatSignal = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+        FindPeak fp = new FindPeak(flatSignal);
+        Peak out = fp.detectPeaks();
+        int[] peaks = out.getPeaks();
+    }
+
+    @Test
     public void PeakPipelineTest1() {
         double[] ecgPart = UtilMethods.splitByIndex(this.ecg, 17000, 18000);
         FindPeak fp = new FindPeak(ecgPart);

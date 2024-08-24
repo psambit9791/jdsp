@@ -551,6 +551,9 @@ public class UtilMethods {
      * @return double[] The discrete difference array
      */
     public static double[] diff(double[] arr) {
+        if (arr.length == 0) {
+            return new double[]{};
+        }
         double[] sig = new double[arr.length-1];
         for (int i=0; i<sig.length; i++) {
             sig[i] = (arr[i+1] - arr[i]);
@@ -565,6 +568,9 @@ public class UtilMethods {
      * @return int[] The discrete difference array
      */
     public static int[] diff(int[] arr) {
+        if (arr.length == 0) {
+            return new int[]{};
+        }
         int[] sig = new int[arr.length-1];
         for (int i=0; i<sig.length; i++) {
             sig[i] = (arr[i+1] - arr[i]);

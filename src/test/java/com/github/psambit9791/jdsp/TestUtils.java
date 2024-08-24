@@ -201,6 +201,14 @@ public class TestUtils {
     }
 
     @Test
+    public void diffTestEmptyArray() {
+        double[] seq = {};
+        double[] result = {};
+        double[] out = UtilMethods.diff(seq);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void unwrapTest() {
         double[] seq1 = {0.0 , 0.78539816, 1.57079633, 5.49778714, 6.28318531};
         double[] seq2 = {-0.5836157665365642, 0.9228635199201507, 1.7407486118278503, 2.570531442761638, -2.710817667585861, -1.8187666240910918};
