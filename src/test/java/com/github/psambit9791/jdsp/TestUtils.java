@@ -201,6 +201,14 @@ public class TestUtils {
     }
 
     @Test
+    public void diffTestEmptyArray() {
+        double[] seq = {};
+        double[] result = {};
+        double[] out = UtilMethods.diff(seq);
+        Assertions.assertArrayEquals(result, out, 0.001);
+    }
+
+    @Test
     public void unwrapTest() {
         double[] seq1 = {0.0 , 0.78539816, 1.57079633, 5.49778714, 6.28318531};
         double[] seq2 = {-0.5836157665365642, 0.9228635199201507, 1.7407486118278503, 2.570531442761638, -2.710817667585861, -1.8187666240910918};
@@ -922,5 +930,28 @@ public class TestUtils {
         for (int i=0; i<row_indices[1] - row_indices[0]; i++) {
             Assertions.assertArrayEquals(subArr3[i], resArr3[i], 0.0001);
         }
+    }
+
+    @Test
+    public void testNextPowerOfTwo() {
+        // Basic tests
+        Assertions.assertEquals(1, UtilMethods.nextPowerOfTwo(1));
+        Assertions.assertEquals(2, UtilMethods.nextPowerOfTwo(2));
+        Assertions.assertEquals(4, UtilMethods.nextPowerOfTwo(3));
+        Assertions.assertEquals(4, UtilMethods.nextPowerOfTwo(4));
+        Assertions.assertEquals(8, UtilMethods.nextPowerOfTwo(5));
+        Assertions.assertEquals(32, UtilMethods.nextPowerOfTwo(17));
+        Assertions.assertEquals(1024, UtilMethods.nextPowerOfTwo(1024));
+
+        // Edge case tests
+        Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.nextPowerOfTwo(0));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.nextPowerOfTwo(-1));
+    }
+
+    @Test
+    public void testNextPowerOfTwoLargeNumbers() {
+        // Large numbers test
+        Assertions.assertEquals(1073741824, UtilMethods.nextPowerOfTwo(1000000000));
+        Assertions.assertEquals(2147483648L, UtilMethods.nextPowerOfTwo(2000000000));
     }
 }

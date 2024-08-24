@@ -551,6 +551,9 @@ public class UtilMethods {
      * @return double[] The discrete difference array
      */
     public static double[] diff(double[] arr) {
+        if (arr.length == 0) {
+            return new double[]{};
+        }
         double[] sig = new double[arr.length-1];
         for (int i=0; i<sig.length; i++) {
             sig[i] = (arr[i+1] - arr[i]);
@@ -565,6 +568,9 @@ public class UtilMethods {
      * @return int[] The discrete difference array
      */
     public static int[] diff(int[] arr) {
+        if (arr.length == 0) {
+            return new int[]{};
+        }
         int[] sig = new int[arr.length-1];
         for (int i=0; i<sig.length; i++) {
             sig[i] = (arr[i+1] - arr[i]);
@@ -2053,5 +2059,38 @@ public class UtilMethods {
                 System.arraycopy(arr[i], col_start, out[i - row_start], 0, col_stop - col_start);
         }
         return out;
+    }
+
+    /**
+     * Returns the next power of two greater than or equal to the given number.
+     *
+     * @param n the number to find the next power of two for
+     * @return the next power of two greater than or equal to n
+     * @throws IllegalArgumentException if n is less than or equal to 0
+     */
+    public static long nextPowerOfTwo(int n) {
+        if (n <= 0) {
+            throw new IllegalArgumentException("Input must be a positive integer.");
+        }
+
+        // Convert to long to handle larger values
+        long v = n;
+
+        // If v is already a power of two, return v
+        if ((v & (v - 1)) == 0) {
+            return v;
+        }
+
+        // Find the next power of two using bitwise operations
+        v--;
+        v |= v >> 1;
+        v |= v >> 2;
+        v |= v >> 4;
+        v |= v >> 8;
+        v |= v >> 16;
+        v |= v >> 32; // Extra step for handling larger numbers
+        v++;
+
+        return v;
     }
 }
