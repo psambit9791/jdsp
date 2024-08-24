@@ -45,6 +45,25 @@ public class TestConvolution {
     }
 
     @Test
+    public void fullFastConvolutionTest() {
+        final double[] result1 = {1.0, 2.0, 4.0, 6.5, 9.0, 5.5, 7.0, 2.5};
+        final double[] result2 = {2, 14, 26, 18, 37, 16, 49, 39, 36, 27,  0};
+        final double[] result3 = {1.01,   4.35,  12.25,  28.04,  54.92,  90.19, 132.12, 160.47, 167.39, 148.06, 105.75,  40.35,  13.96};
+
+        Convolution con1 = new Convolution(this.signal1, this.kernel1);
+        double[] out = con1.fastConvolve("full");
+        Assertions.assertArrayEquals(result1, out, 0.001);
+
+        Convolution con2 = new Convolution(this.signal2, this.kernel2);
+        out = con2.fastConvolve();
+        Assertions.assertArrayEquals(result2, out, 0.001);
+
+        Convolution con3 = new Convolution(this.signal3, this.kernel3);
+        out = con3.fastConvolve();
+        Assertions.assertArrayEquals(result3, out, 0.001);
+    }
+
+    @Test
     public void sameConvolutionTest() {
         final double[] result1 = {2.0, 4.0, 6.5, 9.0, 5.5};
         final double[] result2 = {14, 26, 18, 37, 16, 49, 39, 36};
@@ -64,6 +83,25 @@ public class TestConvolution {
     }
 
     @Test
+    public void sameFastConvolutionTest() {
+        final double[] result1 = {2.0, 4.0, 6.5, 9.0, 5.5};
+        final double[] result2 = {14, 26, 18, 37, 16, 49, 39, 36};
+        final double[] result3 = {28.04,  54.92,  90.19, 132.12, 160.47, 167.39, 148.06};
+
+        Convolution con1 = new Convolution(this.signal1, this.kernel1);
+        double[] out = con1.fastConvolve("same");
+        Assertions.assertArrayEquals(result1, out, 0.001);
+
+        Convolution con2 = new Convolution(this.signal2, this.kernel2);
+        out = con2.fastConvolve("same");
+        Assertions.assertArrayEquals(result2, out, 0.001);
+
+        Convolution con3 = new Convolution(this.signal3, this.kernel3);
+        out = con3.fastConvolve("same");
+        Assertions.assertArrayEquals(result3, out, 0.001);
+    }
+
+    @Test
     public void validConvolutionTest() {
         final double[] result1 = {6.5, 9.0};
         final double[] result2 = {18, 37, 16, 49, 39};
@@ -79,6 +117,25 @@ public class TestConvolution {
 
         Convolution con3 = new Convolution(this.signal3, this.kernel3);
         out = con3.convolve("valid");
+        Assertions.assertArrayEquals(result3, out, 0.001);
+    }
+
+    @Test
+    public void validFastConvolutionTest() {
+        final double[] result1 = {6.5, 9.0};
+        final double[] result2 = {18, 37, 16, 49, 39};
+        final double[] result3 = {132.12};
+
+        Convolution con1 = new Convolution(this.signal1, this.kernel1);
+        double[] out = con1.fastConvolve("valid");
+        Assertions.assertArrayEquals(result1, out, 0.001);
+
+        Convolution con2 = new Convolution(this.signal2, this.kernel2);
+        out = con2.fastConvolve("valid");
+        Assertions.assertArrayEquals(result2, out, 0.001);
+
+        Convolution con3 = new Convolution(this.signal3, this.kernel3);
+        out = con3.fastConvolve("valid");
         Assertions.assertArrayEquals(result3, out, 0.001);
     }
 

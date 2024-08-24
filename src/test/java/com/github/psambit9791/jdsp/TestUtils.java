@@ -923,4 +923,27 @@ public class TestUtils {
             Assertions.assertArrayEquals(subArr3[i], resArr3[i], 0.0001);
         }
     }
+
+    @Test
+    public void testNextPowerOfTwo() {
+        // Basic tests
+        Assertions.assertEquals(1, UtilMethods.nextPowerOfTwo(1));
+        Assertions.assertEquals(2, UtilMethods.nextPowerOfTwo(2));
+        Assertions.assertEquals(4, UtilMethods.nextPowerOfTwo(3));
+        Assertions.assertEquals(4, UtilMethods.nextPowerOfTwo(4));
+        Assertions.assertEquals(8, UtilMethods.nextPowerOfTwo(5));
+        Assertions.assertEquals(32, UtilMethods.nextPowerOfTwo(17));
+        Assertions.assertEquals(1024, UtilMethods.nextPowerOfTwo(1024));
+
+        // Edge case tests
+        Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.nextPowerOfTwo(0));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> UtilMethods.nextPowerOfTwo(-1));
+    }
+
+    @Test
+    public void testNextPowerOfTwoLargeNumbers() {
+        // Large numbers test
+        Assertions.assertEquals(1073741824, UtilMethods.nextPowerOfTwo(1000000000));
+        Assertions.assertEquals(2147483648L, UtilMethods.nextPowerOfTwo(2000000000));
+    }
 }
