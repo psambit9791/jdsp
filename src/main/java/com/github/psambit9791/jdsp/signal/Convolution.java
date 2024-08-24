@@ -11,17 +11,12 @@
 package com.github.psambit9791.jdsp.signal;
 
 import com.github.psambit9791.jdsp.misc.UtilMethods;
+import com.github.psambit9791.jdsp.transform.FastFourier;
+import com.github.psambit9791.jdsp.transform.InverseFastFourier;
 import org.apache.commons.math3.complex.Complex;
-import org.apache.commons.math3.transform.DftNormalization;
-import org.apache.commons.math3.transform.FastFourierTransformer;
-import org.apache.commons.math3.transform.TransformType;
 import org.apache.commons.math3.util.MathArrays;
 
 import java.util.Arrays;
-
-import static com.github.psambit9791.jdsp.misc.UtilMethods.nextPowerOfTwo;
-import static com.github.psambit9791.jdsp.transform.FastFourier.fft;
-import static com.github.psambit9791.jdsp.transform.FastFourier.ifft;
 
 /**
  * <h2>Convolution</h2>
@@ -31,7 +26,7 @@ import static com.github.psambit9791.jdsp.transform.FastFourier.ifft;
  *  
  *
  * @author  Sambit Paul
- * @version 1.1
+ * @version 1.2
  */
 
 public class Convolution {
@@ -111,7 +106,7 @@ public class Convolution {
      */
     public double[] fastConvolve(String mode) {
         int maxLength = Math.max(this.signal.length, this.kernel.length);
-        int newSize = (int) nextPowerOfTwo(2 * maxLength - 1);
+        int newSize = (int) UtilMethods.nextPowerOfTwo(2 * maxLength - 1);
 
         // Pad signals to the new size
         double[] xPadded = new double[newSize];
@@ -119,8 +114,13 @@ public class Convolution {
         System.arraycopy(this.signal, 0, xPadded, 0, this.signal.length);
         System.arraycopy(this.kernel, 0, yPadded, 0, this.kernel.length);
 
-        Complex[] fftX = fft(xPadded);
-        Complex[] fftY = fft(yPadded);
+        FastFourier fft1 = new FastFourier(xPadded);
+        fft1.transform();
+        Complex[] fftX = fft1.getComplex(false);
+
+        FastFourier fft2 = new FastFourier(yPadded);
+        fft2.transform();
+        Complex[] fftY = fft2.getComplex(false);
 
         Complex[] convolutionBuffer = new Complex[newSize];
         for (int i = 0; i < newSize; i++) {
@@ -128,7 +128,10 @@ public class Convolution {
         }
 
         // Extract the relevant part of the convolution
-        convolutionBuffer = ifft(convolutionBuffer);
+        InverseFastFourier ifft1 = new InverseFastFourier(convolutionBuffer, false);
+        ifft1.transform();
+        convolutionBuffer = ifft1.getComplex();
+
         int convolutionLength = this.signal.length + this.kernel.length - 1;
         Complex[] convolution = new Complex[convolutionLength];
         System.arraycopy(convolutionBuffer, 0, convolution, 0, convolutionLength);

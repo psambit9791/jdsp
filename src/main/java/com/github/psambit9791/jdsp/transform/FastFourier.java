@@ -211,34 +211,4 @@ public class FastFourier implements _Fourier {
         System.arraycopy(this.output, 0, dftout, 0, dftout.length);
         return dftout;
     }
-
-    /**
-     * Performs the Fast Fourier Transform (FFT) on a given real-valued signal.
-     *
-     * @param signal the input signal (real-valued)
-     * @return the transformed signal in the complex domain
-     * @throws IllegalArgumentException if the signal is null or empty
-     */
-    public static Complex[] fft(double[] signal) {
-        if (signal == null || signal.length == 0) {
-            throw new IllegalArgumentException("Input signal must not be null or empty.");
-        }
-        FastFourierTransformer transformer = new FastFourierTransformer(DftNormalization.STANDARD);
-        return transformer.transform(signal, TransformType.FORWARD);
-    }
-
-    /**
-     * Performs the Inverse Fast Fourier Transform (IFFT) on a given complex-valued signal.
-     *
-     * @param signal the input signal (complex-valued)
-     * @return the transformed signal in the complex domain
-     * @throws IllegalArgumentException if the signal is null or empty
-     */
-    public static Complex[] ifft(Complex[] signal) {
-        if (signal == null || signal.length == 0) {
-            throw new IllegalArgumentException("Input signal must not be null or empty.");
-        }
-        FastFourierTransformer transformer = new FastFourierTransformer(DftNormalization.STANDARD);
-        return transformer.transform(signal, TransformType.INVERSE);
-    }
 }
