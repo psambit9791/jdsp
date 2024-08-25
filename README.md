@@ -2,7 +2,7 @@
 ![Logo](https://github.com/psambit9791/jdsp/blob/master/res/img/JDSP-Logo.png#gh-light-mode-only)
 
 
-[![Build Status](https://travis-ci.com/psambit9791/jdsp.svg?branch=master)](https://app.travis-ci.com/psambit9791/jdsp)
+[![Build Status](https://github.com/psambit9791/jdsp/actions/workflows/maven.yml/badge.svg)](https://github.com/psambit9791/jdsp/actions/workflows/maven.yml)
 [![codecov](https://codecov.io/gh/psambit9791/jdsp/branch/master/graph/badge.svg)](https://codecov.io/gh/psambit9791/jdsp)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.psambit9791/jdsp.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.psambit9791%22%20AND%20a:%22jdsp%22)
 [![javadoc](https://javadoc.io/badge2/com.github.psambit9791/jdsp/javadoc.svg)](https://javadoc.io/doc/com.github.psambit9791/jdsp)
