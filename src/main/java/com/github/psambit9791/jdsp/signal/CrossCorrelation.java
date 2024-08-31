@@ -56,15 +56,12 @@ public class CrossCorrelation {
      * @return double[] The result of correlation.
      */
     public double[] crossCorrelate() {
-        //Works in "valid" mode
+        //Works in "valid"/"full" mode depending on auto-correlation state
         String mode = "valid";
         if (autocorr) {
             mode = "full";
         }
-        this.kernel = UtilMethods.reverse(this.kernel);
-        Convolution c1 = new Convolution(this.signal, this.kernel);
-        this.output = c1.convolve(mode);
-        return this.output;
+        return this.crossCorrelate(mode);
     }
 
     /**
@@ -85,7 +82,12 @@ public class CrossCorrelation {
      * @return double[] Result of cross-correlation.
      */
     public double[] fastCrossCorrelate() {
-        return fastCrossCorrelate("full");
+        //Works in "valid"/"full" mode depending on auto-correlation state
+        String mode = "valid";
+        if (autocorr) {
+            mode = "full";
+        }
+        return this.fastCrossCorrelate(mode);
     }
 
     /**
