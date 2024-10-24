@@ -179,7 +179,7 @@ public class TestCrossCorrelation {
         Assertions.assertArrayEquals(result1, out, 0.001);
 
         CrossCorrelation cc2 = new CrossCorrelation(this.signal2, this.kernel2);
-        out = cc2.fastCrossCorrelate("valid");
+        out = cc2.fastCrossCorrelate();
         Assertions.assertArrayEquals(result2, out, 0.001);
     }
 }
