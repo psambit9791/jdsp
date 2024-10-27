@@ -6,7 +6,7 @@
 
     <groupId>com.github.psambit9791</groupId>
     <artifactId>jdsp</artifactId>
-    <version>3.1.0-SNAPSHOT</version>
+    <version>3.1.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

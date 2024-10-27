@@ -22,7 +22,7 @@ To get the latest stable release of JDSP:
 
 ### Gradle
 ```
-implementation 'com.github.psambit9791:jdsp:3.0.0'
+implementation 'com.github.psambit9791:jdsp:3.1.0'
 ```
 
 ### Maven
@@ -30,7 +30,7 @@ implementation 'com.github.psambit9791:jdsp:3.0.0'
 <dependency>
   <groupId>com.github.psambit9791</groupId>
   <artifactId>jdsp</artifactId>
-  <version>3.0.0</version>
+  <version>3.1.0</version>
 </dependency>
 ```
 
