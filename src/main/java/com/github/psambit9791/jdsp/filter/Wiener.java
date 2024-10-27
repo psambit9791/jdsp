@@ -64,7 +64,7 @@ public class Wiener implements _KernelFilter {
 
         // Estimating the local mean
         Convolution c1 = new Convolution(signal, cons);
-        localMean = c1.convolve("same");
+        localMean = c1.fastConvolve("same");
         localMean = MathArrays.scale((1.0/this.windowSize), localMean);
 
         // Estimating the local variance

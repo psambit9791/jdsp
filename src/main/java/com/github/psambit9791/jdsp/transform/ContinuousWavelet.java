@@ -54,7 +54,7 @@ public class ContinuousWavelet {
      */
     private Complex[] ricker_cwt(double[] data, double[] wavelet) {
         Convolution c = new Convolution(data, wavelet);
-        return UtilMethods.matToComplex(c.convolve("same"));
+        return UtilMethods.matToComplex(c.fastConvolve("same"));
     }
 
     /**
