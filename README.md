@@ -60,15 +60,15 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 If you are using this software in your research, please use the following citation:
 
 ```
-@software{sambit_paul_2024_10448582,
+@software{sambit_paul_2024_13998103,
   author       = {Sambit Paul},
-  title        = {psambit9791/jdsp: v3.0.0 (January 1, 2024)},
-  month        = jan,
+  title        = {psambit9791/jdsp: v3.1.0 (October 27, 2024)},
+  month        = oct,
   year         = 2024,
   publisher    = {Zenodo},
-  version      = {v3.0.0},
-  doi          = {10.5281/zenodo.10448582},
-  url          = {https://doi.org/10.5281/zenodo.10448582}
+  version      = {v3.1.0},
+  doi          = {10.5281/zenodo.13998103},
+  url          = {https://doi.org/10.5281/zenodo.13998103}
 }
 ```
 
