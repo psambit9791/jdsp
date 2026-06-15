@@ -6,7 +6,7 @@
 
     <groupId>com.github.psambit9791</groupId>
     <artifactId>jdsp</artifactId>
-    <version>3.1.0</version>
+    <version>3.1.1</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -231,7 +231,7 @@
         <dependency>
             <groupId>com.github.psambit9791</groupId>
             <artifactId>wavfile</artifactId>
-            <version>0.1</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
