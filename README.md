@@ -22,7 +22,7 @@ To get the latest stable release of JDSP:
 
 ### Gradle
 ```
-implementation 'com.github.psambit9791:jdsp:3.1.0'
+implementation 'com.github.psambit9791:jdsp:3.1.1'
 ```
 
 ### Maven
@@ -30,7 +30,7 @@ implementation 'com.github.psambit9791:jdsp:3.1.0'
 <dependency>
   <groupId>com.github.psambit9791</groupId>
   <artifactId>jdsp</artifactId>
-  <version>3.1.0</version>
+  <version>3.1.1</version>
 </dependency>
 ```
 
@@ -60,15 +60,21 @@ See the [**javadocs**](https://javadoc.io/doc/com.github.psambit9791/jdsp) for m
 If you are using this software in your research, please use the following citation:
 
 ```
-@software{sambit_paul_2024_13998103,
+@software{sambit_paul_2026_20709545,
   author       = {Sambit Paul},
-  title        = {psambit9791/jdsp: v3.1.0 (October 27, 2024)},
-  month        = oct,
-  year         = 2024,
+  title        = {psambit9791/jdsp: v3.1.1 (June 16, 2026)},
+  month        = jun,
+  year         = 2026,
   publisher    = {Zenodo},
-  version      = {v3.1.0},
-  doi          = {10.5281/zenodo.13998103},
-  url          = {https://doi.org/10.5281/zenodo.13998103}
+  version      = {v3.1.1},
+  doi          = {10.5281/zenodo.20709545},
+  url          = {https://doi.org/10.5281/zenodo.20709545},
+  swhid        = {swh:1:dir:0e980b39ee535e698f76df20b655d0fa36ca738a
+                   ;origin=https://doi.org/10.5281/zenodo.3903921;vis
+                   it=swh:1:snp:67f18aa02a058adeacc9228b288466d41b226
+                   b22;anchor=swh:1:rel:9ffe4378ae6b1fb34333acc4df1d2
+                   002e29cc0e0;path=psambit9791-jdsp-30e6938
+                  },
 }
 ```
 
